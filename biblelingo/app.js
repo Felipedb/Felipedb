@@ -260,6 +260,23 @@ function makeOptions(box, options, cols, onSelect) {
   return wrap;
 }
 
+// Personagem com balão de fala (estilo Duolingo)
+function characterRow(bubbleContent) {
+  const ch = pickCharacter(session.lesson.unit.id);
+  const row = document.createElement("div");
+  row.className = "char-row";
+  const fig = document.createElement("div");
+  fig.className = "char-fig";
+  fig.innerHTML = `${ch.svg}<span class="char-name">${ch.name}</span>`;
+  const bubble = document.createElement("div");
+  bubble.className = "bubble";
+  if (typeof bubbleContent === "string") bubble.innerHTML = bubbleContent;
+  else bubble.appendChild(bubbleContent);
+  row.appendChild(fig);
+  row.appendChild(bubble);
+  return row;
+}
+
 function audioButton(text, big = false) {
   const b = document.createElement("button");
   b.className = "btn-audio" + (big ? " big" : "");
@@ -270,11 +287,11 @@ function audioButton(text, big = false) {
 
 function renderChoiceEnPt(ex, box) {
   box.innerHTML = `<div class="ex-title">O que significa esta palavra?</div>`;
-  const prompt = document.createElement("div");
-  prompt.className = "ex-prompt";
-  prompt.appendChild(audioButton(ex.word.en));
-  prompt.insertAdjacentHTML("beforeend", `<span class="ex-word">${ex.word.en}</span>`);
-  box.appendChild(prompt);
+  const bubble = document.createElement("div");
+  bubble.className = "bubble-inner";
+  bubble.appendChild(audioButton(ex.word.en));
+  bubble.insertAdjacentHTML("beforeend", `<span class="ex-word">${ex.word.en}</span>`);
+  box.appendChild(characterRow(bubble));
   makeOptions(box, ex.options, 1);
   speak(ex.word.en);
   ex.correct = ex.word.pt;
@@ -282,8 +299,8 @@ function renderChoiceEnPt(ex, box) {
 }
 
 function renderChoicePtEn(ex, box) {
-  box.innerHTML = `<div class="ex-title">Como se diz em inglês?</div>
-    <div class="ex-prompt"><span class="ex-word">${ex.word.pt}</span></div>`;
+  box.innerHTML = `<div class="ex-title">Como se diz em inglês?</div>`;
+  box.appendChild(characterRow(`<span class="ex-word">${ex.word.pt}</span>`));
   makeOptions(box, ex.options, 1, (opt) => speak(opt));
   ex.correct = ex.word.en;
   ex.explain = `${ex.word.pt} = ${ex.word.en}`;
@@ -291,7 +308,11 @@ function renderChoicePtEn(ex, box) {
 
 function renderListen(ex, box) {
   box.innerHTML = `<div class="ex-title">O que você ouviu?</div>`;
-  box.appendChild(audioButton(ex.word.en, true));
+  const bubble = document.createElement("div");
+  bubble.className = "bubble-inner";
+  bubble.appendChild(audioButton(ex.word.en));
+  bubble.insertAdjacentHTML("beforeend", `<span class="ex-word ex-muted">Toque para ouvir</span>`);
+  box.appendChild(characterRow(bubble));
   makeOptions(box, ex.options, 2);
   speak(ex.word.en);
   ex.correct = ex.word.en;
@@ -314,11 +335,11 @@ function renderVerse(ex, box) {
 
 function renderBuild(ex, box) {
   box.innerHTML = `<div class="ex-title">Escreva em inglês</div>`;
-  const prompt = document.createElement("div");
-  prompt.className = "ex-prompt";
-  prompt.appendChild(audioButton(ex.sentence.en));
-  prompt.insertAdjacentHTML("beforeend", `<span class="ex-word">${ex.sentence.pt}</span>`);
-  box.appendChild(prompt);
+  const bubble = document.createElement("div");
+  bubble.className = "bubble-inner";
+  bubble.appendChild(audioButton(ex.sentence.en));
+  bubble.insertAdjacentHTML("beforeend", `<span class="ex-word">${ex.sentence.pt}</span>`);
+  box.appendChild(characterRow(bubble));
 
   const zone = document.createElement("div");
   zone.className = "answer-zone";

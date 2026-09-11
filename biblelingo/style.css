@@ -145,6 +145,51 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   margin-bottom: 22px;
 }
 .ex-word { font-size: 22px; font-weight: 800; color: var(--text); }
+.ex-muted { color: var(--text-soft); font-size: 16px; }
+
+/* Personagem + balão de fala */
+.char-row {
+  display: flex; align-items: flex-end; gap: 10px;
+  margin-bottom: 24px;
+}
+.char-fig {
+  flex: none; width: 104px;
+  display: flex; flex-direction: column; align-items: center;
+  animation: char-in 0.35s ease;
+}
+.char-fig svg { width: 100%; height: auto; display: block; }
+.char-name {
+  font-size: 12px; font-weight: 800; color: var(--text-soft);
+  background: var(--card); border: 2px solid var(--line);
+  border-radius: 10px; padding: 1px 8px; margin-top: 2px;
+}
+@keyframes char-in {
+  from { transform: translateY(8px); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .char-fig, .node .pulse { animation: none; }
+}
+.bubble {
+  position: relative;
+  background: var(--card);
+  border: 2px solid var(--line);
+  border-radius: 16px;
+  padding: 14px 16px;
+  margin-bottom: 34px;
+  min-height: 52px;
+  display: flex; align-items: center;
+}
+.bubble::before {
+  content: "";
+  position: absolute; left: -10px; bottom: 16px;
+  width: 16px; height: 16px;
+  background: var(--card);
+  border-left: 2px solid var(--line);
+  border-bottom: 2px solid var(--line);
+  transform: rotate(45deg);
+}
+.bubble-inner { display: flex; align-items: center; gap: 12px; }
 
 .btn-audio {
   width: 52px; height: 52px; flex: none;
