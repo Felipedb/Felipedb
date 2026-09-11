@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#58cc02" />
+  <meta name="description" content="Aprenda inglês com contexto bíblico — trilha de lições estilo Duolingo, otimizada para celular." />
+  <title>BibleLingo — Inglês com a Bíblia</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== Tela inicial: trilha ===== -->
+  <section id="screen-home" class="screen active">
+    <header class="topbar">
+      <span class="brand">📖 BibleLingo</span>
+      <div style="display:flex; gap:14px;">
+        <span class="stat streak"><span class="emoji">🔥</span><span id="stat-streak">0</span></span>
+        <span class="stat xp"><span class="emoji">⚡</span><span id="stat-xp">0</span></span>
+        <span class="stat hearts"><span class="emoji">❤️</span><span id="stat-hearts">5</span></span>
+      </div>
+    </header>
+    <main id="trail" class="trail"></main>
+  </section>
+
+  <!-- ===== Tela de lição ===== -->
+  <section id="screen-lesson" class="screen">
+    <div class="lesson-top">
+      <button id="btn-quit" class="btn-close" aria-label="Sair da lição">✕</button>
+      <div class="progress-track"><div id="progress-fill" class="progress-fill"></div></div>
+      <span id="lesson-hearts" class="lesson-hearts">❤️ 5</span>
+    </div>
+    <main id="exercise-body" class="exercise"></main>
+    <footer id="footer" class="footer">
+      <div class="feedback ok">
+        <div class="fb-title">Muito bem! ✅</div>
+        <div class="fb-detail" id="fb-ok-detail"></div>
+      </div>
+      <div class="feedback bad">
+        <div class="fb-title">Resposta correta:</div>
+        <div class="fb-detail" id="fb-bad-detail"></div>
+      </div>
+      <button id="btn-check" class="btn-main" disabled>Verificar</button>
+    </footer>
+  </section>
+
+  <!-- ===== Tela de resultado ===== -->
+  <section id="screen-result" class="screen">
+    <main class="result">
+      <div id="result-emoji" class="big-emoji">🎉</div>
+      <h2 id="result-title">Lição concluída!</h2>
+      <p id="result-sub">Você avançou na trilha.</p>
+      <div class="result-cards">
+        <div class="result-card gold">
+          <div class="rc-label">XP</div>
+          <div class="rc-value" id="result-xp">+10</div>
+        </div>
+        <div class="result-card blue">
+          <div class="rc-label">Ofensiva</div>
+          <div class="rc-value" id="result-streak">1</div>
+        </div>
+        <div class="result-card green">
+          <div class="rc-label">Precisão</div>
+          <div class="rc-value" id="result-acc">100%</div>
+        </div>
+      </div>
+      <div id="result-verse" class="verse-blessing"></div>
+      <button id="btn-result-continue" class="btn-main">Continuar</button>
+    </main>
+  </section>
+
+  <!-- ===== Modal: sem corações ===== -->
+  <div id="modal-hearts" class="modal-backdrop">
+    <div class="modal">
+      <div class="big-emoji">💔</div>
+      <h3>Você ficou sem corações!</h3>
+      <p>Pratique uma lição já concluída para recuperar um coração, ou volte amanhã — eles se renovam todo dia.</p>
+      <button id="btn-modal-practice" class="btn-main blue">Praticar para recuperar</button>
+      <button id="btn-modal-close" class="btn-ghost">Fechar</button>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
