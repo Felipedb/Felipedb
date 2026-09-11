@@ -14,12 +14,14 @@ const COURSE = [
     lessons: [
       {
         id: "u1l1",
+        dialogue: {"line": "Look! God created the light.", "pt": "Olha! Deus criou a luz.", "options": ["It is good!", "It is night.", "Where is the ark?"], "answer": "It is good!", "answerPt": "É bom!"},
+        quiz: {"q": "In the beginning, who created the heaven and the earth?", "options": ["God", "Noah", "The king"], "answer": "God", "explain": "Gênesis 1:1: no princípio, Deus criou o céu e a terra."},
         title: "Céu e terra",
         vocab: [
-          { en: "God", pt: "Deus" },
-          { en: "heaven", pt: "céu" },
-          { en: "earth", pt: "terra" },
-          { en: "light", pt: "luz" },
+          { en: "God", pt: "Deus", icon: "🙏" },
+          { en: "heaven", pt: "céu", icon: "🌤️" },
+          { en: "earth", pt: "terra", icon: "🌍" },
+          { en: "light", pt: "luz", icon: "💡" },
         ],
         sentences: [
           { en: "God created the heaven and the earth", pt: "Deus criou o céu e a terra" },
@@ -34,12 +36,14 @@ const COURSE = [
       },
       {
         id: "u1l2",
+        dialogue: {"line": "Good night, my friend.", "pt": "Boa noite, meu amigo.", "options": ["Good night! The darkness is here.", "Good morning! The sun is hot.", "Let my people go."], "answer": "Good night! The darkness is here.", "answerPt": "Boa noite! As trevas chegaram."},
+        quiz: {"q": "What did God call the light?", "options": ["Day", "Night", "Sea"], "answer": "Day", "explain": "Deus chamou a luz de Dia e as trevas de Noite."},
         title: "Luz e trevas",
         vocab: [
-          { en: "darkness", pt: "trevas" },
-          { en: "day", pt: "dia" },
-          { en: "night", pt: "noite" },
-          { en: "good", pt: "bom" },
+          { en: "darkness", pt: "trevas", icon: "🌑" },
+          { en: "day", pt: "dia", icon: "☀️" },
+          { en: "night", pt: "noite", icon: "🌙" },
+          { en: "good", pt: "bom", icon: "👍" },
         ],
         sentences: [
           { en: "God called the light Day", pt: "Deus chamou a luz de Dia" },
@@ -55,12 +59,14 @@ const COURSE = [
       },
       {
         id: "u1l3",
+        dialogue: {"line": "Come and see the garden!", "pt": "Vem ver o jardim!", "options": ["The tree of life is beautiful.", "The sea is dry.", "I have five stones."], "answer": "The tree of life is beautiful.", "answerPt": "A árvore da vida é linda."},
+        quiz: {"q": "Where did God plant a garden?", "options": ["In Eden", "In Egypt", "In the sea"], "answer": "In Eden", "explain": "Deus plantou um jardim no Éden (Gênesis 2:8)."},
         title: "O jardim",
         vocab: [
-          { en: "garden", pt: "jardim" },
-          { en: "tree", pt: "árvore" },
-          { en: "life", pt: "vida" },
-          { en: "man", pt: "homem" },
+          { en: "garden", pt: "jardim", icon: "🌳" },
+          { en: "tree", pt: "árvore", icon: "🌲" },
+          { en: "life", pt: "vida", icon: "🌱" },
+          { en: "man", pt: "homem", icon: "🧔" },
         ],
         sentences: [
           { en: "the tree of life", pt: "a árvore da vida" },
@@ -87,12 +93,14 @@ const COURSE = [
     lessons: [
       {
         id: "u2l1",
+        dialogue: {"line": "Noah, what are you making?", "pt": "Noé, o que você está fazendo?", "options": ["An ark of wood.", "A song.", "A crown."], "answer": "An ark of wood.", "answerPt": "Uma arca de madeira."},
+        quiz: {"q": "What did Noah make?", "options": ["An ark of wood", "A house of stone", "A garden"], "answer": "An ark of wood", "explain": "Noé fez uma arca de madeira de gofer."},
         title: "A arca",
         vocab: [
-          { en: "ark", pt: "arca" },
-          { en: "rain", pt: "chuva" },
-          { en: "animals", pt: "animais" },
-          { en: "door", pt: "porta" },
+          { en: "ark", pt: "arca", icon: "🚢" },
+          { en: "rain", pt: "chuva", icon: "🌧️" },
+          { en: "animals", pt: "animais", icon: "🐘" },
+          { en: "door", pt: "porta", icon: "🚪" },
         ],
         sentences: [
           { en: "Noah made an ark of wood", pt: "Noé fez uma arca de madeira" },
@@ -107,12 +115,14 @@ const COURSE = [
       },
       {
         id: "u2l2",
+        dialogue: {"line": "It is raining a lot!", "pt": "Está chovendo muito!", "options": ["Let us go into the ark.", "Let us go to the desert.", "The battle is the Lord's."], "answer": "Let us go into the ark.", "answerPt": "Vamos entrar na arca."},
+        quiz: {"q": "How many days did it rain?", "options": ["Forty days", "Seven days", "Three days"], "answer": "Forty days", "explain": "Choveu quarenta dias e quarenta noites."},
         title: "O dilúvio",
         vocab: [
-          { en: "flood", pt: "dilúvio" },
-          { en: "forty", pt: "quarenta" },
-          { en: "water", pt: "água" },
-          { en: "window", pt: "janela" },
+          { en: "flood", pt: "dilúvio", icon: "⛈️" },
+          { en: "forty", pt: "quarenta", icon: "🔢" },
+          { en: "water", pt: "água", icon: "💧" },
+          { en: "window", pt: "janela", icon: "🪟" },
         ],
         sentences: [
           { en: "the rain was upon the earth", pt: "a chuva caiu sobre a terra" },
@@ -128,12 +138,14 @@ const COURSE = [
       },
       {
         id: "u2l3",
+        dialogue: {"line": "Look at the cloud!", "pt": "Olha a nuvem!", "options": ["I see a rainbow!", "I see a giant!", "I see a harp!"], "answer": "I see a rainbow!", "answerPt": "Eu vejo um arco-íris!"},
+        quiz: {"q": "What did God set in the cloud?", "options": ["A rainbow", "A dove", "A star"], "answer": "A rainbow", "explain": "Deus pôs o arco-íris na nuvem como sinal da promessa."},
         title: "A promessa",
         vocab: [
-          { en: "dove", pt: "pomba" },
-          { en: "rainbow", pt: "arco-íris" },
-          { en: "promise", pt: "promessa" },
-          { en: "cloud", pt: "nuvem" },
+          { en: "dove", pt: "pomba", icon: "🕊️" },
+          { en: "rainbow", pt: "arco-íris", icon: "🌈" },
+          { en: "promise", pt: "promessa", icon: "✍️" },
+          { en: "cloud", pt: "nuvem", icon: "☁️" },
         ],
         sentences: [
           { en: "the dove came back to him", pt: "a pomba voltou para ele" },
@@ -159,12 +171,14 @@ const COURSE = [
     lessons: [
       {
         id: "u3l1",
+        dialogue: {"line": "Moses, take off your shoes.", "pt": "Moisés, tira as sandálias.", "options": ["Yes, this is holy ground.", "No, the sea is dry.", "Here is my harp."], "answer": "Yes, this is holy ground.", "answerPt": "Sim, este é chão santo."},
+        quiz: {"q": "What did Moses see in the desert?", "options": ["A burning bush", "A big river", "A golden calf"], "answer": "A burning bush", "explain": "Moisés viu a sarça que ardia sem se consumir."},
         title: "A sarça ardente",
         vocab: [
-          { en: "fire", pt: "fogo" },
-          { en: "holy", pt: "santo" },
-          { en: "ground", pt: "chão" },
-          { en: "to see", pt: "ver" },
+          { en: "fire", pt: "fogo", icon: "🔥" },
+          { en: "holy", pt: "santo", icon: "✨" },
+          { en: "ground", pt: "chão", icon: "🟫" },
+          { en: "to see", pt: "ver", icon: "👀" },
         ],
         sentences: [
           { en: "the bush burned with fire", pt: "a sarça ardia no fogo" },
@@ -179,12 +193,14 @@ const COURSE = [
       },
       {
         id: "u3l2",
+        dialogue: {"line": "Who are you?", "pt": "Quem é você?", "options": ["I am Moses. Let my people go.", "I am the ark.", "I am a rainbow."], "answer": "I am Moses. Let my people go.", "answerPt": "Eu sou Moisés. Deixa ir o meu povo."},
+        quiz: {"q": "What did Moses say to the king?", "options": ["Let my people go", "Give me gold", "Build a city"], "answer": "Let my people go", "explain": "\"Deixa ir o meu povo\" (Êxodo 5:1)."},
         title: "Deixa o meu povo ir",
         vocab: [
-          { en: "people", pt: "povo" },
-          { en: "free", pt: "livre" },
-          { en: "king", pt: "rei" },
-          { en: "to go", pt: "ir" },
+          { en: "people", pt: "povo", icon: "👥" },
+          { en: "free", pt: "livre", icon: "🔓" },
+          { en: "king", pt: "rei", icon: "👑" },
+          { en: "to go", pt: "ir", icon: "🚶" },
         ],
         sentences: [
           { en: "let my people go", pt: "deixa ir o meu povo" },
@@ -199,12 +215,14 @@ const COURSE = [
       },
       {
         id: "u3l3",
+        dialogue: {"line": "Moses, the sea is in front of us!", "pt": "Moisés, o mar está na nossa frente!", "options": ["Stretch out your hand!", "Sing a song!", "Build an ark!"], "answer": "Stretch out your hand!", "answerPt": "Estende a tua mão!"},
+        quiz: {"q": "What happened to the sea?", "options": ["The waters were divided", "The sea became fire", "The sea was silent"], "answer": "The waters were divided", "explain": "As águas foram divididas e o povo passou em terra seca."},
         title: "O mar se abre",
         vocab: [
-          { en: "sea", pt: "mar" },
-          { en: "dry", pt: "seco" },
-          { en: "hand", pt: "mão" },
-          { en: "wind", pt: "vento" },
+          { en: "sea", pt: "mar", icon: "🌊" },
+          { en: "dry", pt: "seco", icon: "🏜️" },
+          { en: "hand", pt: "mão", icon: "✋" },
+          { en: "wind", pt: "vento", icon: "💨" },
         ],
         sentences: [
           { en: "the waters were divided", pt: "as águas foram divididas" },
@@ -231,12 +249,14 @@ const COURSE = [
     lessons: [
       {
         id: "u4l1",
+        dialogue: {"line": "David, where are the sheep?", "pt": "Davi, onde estão as ovelhas?", "options": ["They are in the field.", "They are in the ark.", "They are in the cloud."], "answer": "They are in the field.", "answerPt": "Elas estão no campo."},
+        quiz: {"q": "Where does the Lord look?", "options": ["On the heart", "On the face", "On the hands"], "answer": "On the heart", "explain": "O Senhor olha para o coração (1 Samuel 16:7)."},
         title: "O pastorzinho",
         vocab: [
-          { en: "shepherd", pt: "pastor" },
-          { en: "sheep", pt: "ovelha" },
-          { en: "harp", pt: "harpa" },
-          { en: "heart", pt: "coração" },
+          { en: "shepherd", pt: "pastor", icon: "🧑‍🌾" },
+          { en: "sheep", pt: "ovelha", icon: "🐑" },
+          { en: "harp", pt: "harpa", icon: "🎶" },
+          { en: "heart", pt: "coração", icon: "❤️" },
         ],
         sentences: [
           { en: "David kept the sheep", pt: "Davi cuidava das ovelhas" },
@@ -251,12 +271,14 @@ const COURSE = [
       },
       {
         id: "u4l2",
+        dialogue: {"line": "The giant is coming!", "pt": "O gigante está vindo!", "options": ["The battle is the Lord's!", "Good night!", "I see a rainbow!"], "answer": "The battle is the Lord's!", "answerPt": "A batalha é do Senhor!"},
+        quiz: {"q": "What did David take to the battle?", "options": ["Five stones", "A sword", "A crown"], "answer": "Five stones", "explain": "Davi escolheu cinco pedras lisas do ribeiro."},
         title: "Davi e Golias",
         vocab: [
-          { en: "stone", pt: "pedra" },
-          { en: "giant", pt: "gigante" },
-          { en: "sling", pt: "funda" },
-          { en: "battle", pt: "batalha" },
+          { en: "stone", pt: "pedra", icon: "🪨" },
+          { en: "giant", pt: "gigante", icon: "🗿" },
+          { en: "sling", pt: "funda", icon: "🎯" },
+          { en: "battle", pt: "batalha", icon: "⚔️" },
         ],
         sentences: [
           { en: "the battle is the Lord's", pt: "a batalha é do Senhor" },
@@ -272,12 +294,14 @@ const COURSE = [
       },
       {
         id: "u4l3",
+        dialogue: {"line": "David, sing for us!", "pt": "Davi, cante para nós!", "options": ["The Lord is my rock!", "The sea is dry!", "Take off your shoes!"], "answer": "The Lord is my rock!", "answerPt": "O Senhor é a minha rocha!"},
+        quiz: {"q": "Who is my rock, said David?", "options": ["The Lord", "The king", "The giant"], "answer": "The Lord", "explain": "\"O Senhor é o meu rochedo\" (2 Samuel 22:2)."},
         title: "O rei cantor",
         vocab: [
-          { en: "song", pt: "cântico" },
-          { en: "to sing", pt: "cantar" },
-          { en: "rock", pt: "rocha" },
-          { en: "strong", pt: "forte" },
+          { en: "song", pt: "cântico", icon: "🎵" },
+          { en: "to sing", pt: "cantar", icon: "🎤" },
+          { en: "rock", pt: "rocha", icon: "⛰️" },
+          { en: "strong", pt: "forte", icon: "💪" },
         ],
         sentences: [
           { en: "David sang unto the Lord", pt: "Davi cantou ao Senhor" },
@@ -303,12 +327,14 @@ const COURSE = [
     lessons: [
       {
         id: "u5l1",
+        dialogue: {"line": "Whom shall I send?", "pt": "A quem enviarei?", "options": ["Here am I; send me.", "Send the sheep.", "Let there be light."], "answer": "Here am I; send me.", "answerPt": "Eis-me aqui, envia-me a mim."},
+        quiz: {"q": "What did Isaiah answer to God?", "options": ["Here am I; send me", "I cannot go", "Send my brother"], "answer": "Here am I; send me", "explain": "\"Eis-me aqui, envia-me a mim\" (Isaías 6:8)."},
         title: "Eis-me aqui",
         vocab: [
-          { en: "prophet", pt: "profeta" },
-          { en: "voice", pt: "voz" },
-          { en: "to send", pt: "enviar" },
-          { en: "to hear", pt: "ouvir" },
+          { en: "prophet", pt: "profeta", icon: "📜" },
+          { en: "voice", pt: "voz", icon: "🗣️" },
+          { en: "to send", pt: "enviar", icon: "📨" },
+          { en: "to hear", pt: "ouvir", icon: "👂" },
         ],
         sentences: [
           { en: "here am I; send me", pt: "eis-me aqui, envia-me a mim" },
@@ -323,12 +349,14 @@ const COURSE = [
       },
       {
         id: "u5l2",
+        dialogue: {"line": "What is the name of the child?", "pt": "Qual é o nome do menino?", "options": ["Immanuel: God with us.", "Goliath the giant.", "Noah of the ark."], "answer": "Immanuel: God with us.", "answerPt": "Emanuel: Deus conosco."},
+        quiz: {"q": "What does Immanuel mean?", "options": ["God with us", "God is far", "King of Egypt"], "answer": "God with us", "explain": "Emanuel significa \"Deus conosco\"."},
         title: "Emanuel",
         vocab: [
-          { en: "sign", pt: "sinal" },
-          { en: "child", pt: "menino" },
-          { en: "name", pt: "nome" },
-          { en: "with us", pt: "conosco" },
+          { en: "sign", pt: "sinal", icon: "⭐" },
+          { en: "child", pt: "menino", icon: "👶" },
+          { en: "name", pt: "nome", icon: "🏷️" },
+          { en: "with us", pt: "conosco", icon: "👫" },
         ],
         sentences: [
           { en: "God with us", pt: "Deus conosco" },
@@ -343,12 +371,14 @@ const COURSE = [
       },
       {
         id: "u5l3",
+        dialogue: {"line": "Who is coming?", "pt": "Quem está vindo?", "options": ["The Prince of Peace!", "The king of Egypt!", "A big river!"], "answer": "The Prince of Peace!", "answerPt": "O Príncipe da Paz!"},
+        quiz: {"q": "Who is called the Prince of Peace?", "options": ["The Son", "The king of Egypt", "The prophet"], "answer": "The Son", "explain": "Isaías 9:6 anuncia o Filho, o Príncipe da Paz."},
         title: "O Príncipe da Paz",
         vocab: [
-          { en: "peace", pt: "paz" },
-          { en: "prince", pt: "príncipe" },
-          { en: "wonderful", pt: "maravilhoso" },
-          { en: "counsellor", pt: "conselheiro" },
+          { en: "peace", pt: "paz", icon: "☮️" },
+          { en: "prince", pt: "príncipe", icon: "🤴" },
+          { en: "wonderful", pt: "maravilhoso", icon: "🌟" },
+          { en: "counsellor", pt: "conselheiro", icon: "🧠" },
         ],
         sentences: [
           { en: "the Prince of Peace", pt: "o Príncipe da Paz" },

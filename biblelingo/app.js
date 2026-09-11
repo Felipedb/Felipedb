@@ -87,7 +87,7 @@ function speak(text, opts = {}) {
     : (session && session.voiceChar && session.voiceChar.voice) || null;
   const u = new SpeechSynthesisUtterance(text);
   u.lang = "en-US";
-  u.rate = profile ? profile.rate : 0.95;
+  u.rate = (profile ? profile.rate : 0.95) * (opts.slow ? 0.6 : 1);
   u.pitch = profile ? profile.pitch : 1;
   const voice = profile
     ? (_voices[profile.gender] || _voices.any)
@@ -252,49 +252,106 @@ function drawTrailPath(nodesEl, color) {
   });
 }
 
+// ---------- Efeitos sonoros e feedback tátil ----------
+let _audioCtx = null;
+function tone(freq, dur, type = "sine", when = 0, gain = 0.16) {
+  try {
+    _audioCtx = _audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    const ctx = _audioCtx;
+    if (ctx.state === "suspended") ctx.resume();
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = type;
+    o.frequency.value = freq;
+    const t0 = ctx.currentTime + when;
+    g.gain.setValueAtTime(0.0001, t0);
+    g.gain.exponentialRampToValueAtTime(gain, t0 + 0.012);
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    o.connect(g).connect(ctx.destination);
+    o.start(t0);
+    o.stop(t0 + dur + 0.05);
+  } catch (e) { /* sem áudio: segue silencioso */ }
+}
+const SFX = {
+  tap: () => tone(620, 0.05, "triangle", 0, 0.06),
+  correct: () => { tone(660, 0.12); tone(880, 0.2, "sine", 0.1); },
+  wrong: () => { tone(220, 0.22, "sawtooth", 0, 0.1); tone(175, 0.3, "sawtooth", 0.14, 0.09); },
+  combo: () => { tone(784, 0.1); tone(988, 0.1, "sine", 0.09); tone(1175, 0.18, "sine", 0.18); },
+  finish: () => [523, 659, 784, 1047].forEach((f, i) => tone(f, 0.22, "sine", i * 0.12)),
+};
+function buzz(pattern) {
+  try { if (navigator.vibrate) navigator.vibrate(pattern); } catch (e) {}
+}
+
+function toast(text, cls = "") {
+  let el = $("#toast");
+  if (!el) {
+    el = document.createElement("div");
+    el.id = "toast";
+    el.className = "toast";
+    document.body.appendChild(el);
+  }
+  el.textContent = text;
+  el.className = `toast show ${cls}`;
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.classList.remove("show"), 1400);
+}
+
 // ---------- Geração de exercícios ----------
+const SPEECH_OK = "SpeechRecognition" in window || "webkitSpeechRecognition" in window;
+
 function buildExercises(lesson, unit) {
   const ex = [];
   const pool = allVocab();
+  const lessons = lesson.review ? unit.lessons.filter((l) => !l.review) : [lesson];
 
   const vocab = lesson.review ? shuffle(unitVocab(unit)).slice(0, 6) : lesson.vocab;
   const sentences = lesson.review
-    ? shuffle(unit.lessons.flatMap((l) => l.sentences || [])).slice(0, 2)
+    ? shuffle(lessons.flatMap((l) => l.sentences || [])).slice(0, 2)
     : lesson.sentences || [];
-  const verses = lesson.review
-    ? unit.lessons.filter((l) => l.verse).map((l) => l.verse)
-    : lesson.verse ? [lesson.verse] : [];
+  const verses = lesson.review ? lessons.map((l) => l.verse).filter(Boolean) : lesson.verse ? [lesson.verse] : [];
+  const dialogues = lesson.review
+    ? shuffle(lessons.map((l) => l.dialogue).filter(Boolean)).slice(0, 2)
+    : lesson.dialogue ? [lesson.dialogue] : [];
+  const quizzes = lesson.review
+    ? shuffle(lessons.map((l) => l.quiz).filter(Boolean)).slice(0, 2)
+    : lesson.quiz ? [lesson.quiz] : [];
+
+  const distract = (v, key, n = 3) =>
+    shuffle(pool.filter((p) => p[key] !== v[key] && p.icon !== v.icon)).slice(0, n);
 
   vocab.forEach((v, i) => {
-    const distract = (key) =>
-      shuffle(pool.filter((p) => p[key] !== v[key])).slice(0, 3).map((p) => p[key]);
-    if (i % 3 === 0) {
-      ex.push({ type: "choice-en-pt", word: v, options: shuffle([v.pt, ...distract("pt")]) });
-    } else if (i % 3 === 1) {
-      ex.push({ type: "choice-pt-en", word: v, options: shuffle([v.en, ...distract("en")]) });
-    } else {
-      ex.push({ type: "listen", word: v, options: shuffle([v.en, ...distract("en")]) });
-    }
+    const kind = i % 4;
+    if (kind === 0) ex.push({ type: "image-choice", word: v, options: shuffle([v, ...distract(v, "en")]) });
+    else if (kind === 1) ex.push({ type: "choice-en-pt", word: v, options: shuffle([v.pt, ...distract(v, "pt").map((p) => p.pt)]) });
+    else if (kind === 2) ex.push({ type: "listen", word: v, options: shuffle([v.en, ...distract(v, "en").map((p) => p.en)]) });
+    else ex.push({ type: "type", word: v });
   });
 
-  // Pareamento com o vocabulário da lição
-  if (vocab.length >= 4) {
-    ex.push({ type: "match", pairs: shuffle(vocab).slice(0, 4) });
-  }
+  if (vocab.length >= 4) ex.push({ type: "match", pairs: shuffle(vocab).slice(0, 4) });
 
-  sentences.forEach((s) => {
+  const makeBank = (s) => {
     const words = s.en.split(" ");
     const extra = shuffle(pool.map((p) => p.en.replace("to ", "")))
       .filter((w) => !words.includes(w))
       .slice(0, 2);
-    ex.push({ type: "build", sentence: s, bank: shuffle([...words, ...extra]) });
+    return shuffle([...words, ...extra]);
+  };
+  sentences.forEach((s, i) => {
+    ex.push({ type: i === 0 ? "build" : "listen-build", sentence: s, bank: makeBank(s) });
   });
+  if (sentences.length === 1) ex.push({ type: "listen-build", sentence: sentences[0], bank: makeBank(sentences[0]) });
+  if (SPEECH_OK && sentences.length) ex.push({ type: "speak", sentence: sentences[0] });
 
-  verses.forEach((v) => {
-    ex.push({ type: "verse", verse: v, options: shuffle(v.options) });
-  });
+  verses.forEach((v) => ex.push({ type: "verse", verse: v, options: shuffle(v.options) }));
+  dialogues.forEach((d) => ex.push({ type: "dialogue", dialogue: d, options: shuffle(d.options) }));
+  quizzes.forEach((q) => ex.push({ type: "quiz", quiz: q, options: shuffle(q.options) }));
 
-  return shuffle(ex);
+  // Embaralha, mas nunca começa a lição por fala ou digitação
+  let list = shuffle(ex);
+  const first = list.findIndex((e) => e.type !== "speak" && e.type !== "type");
+  if (first > 0) [list[0], list[first]] = [list[first], list[0]];
+  return list;
 }
 
 // ---------- Fluxo da lição ----------
@@ -317,9 +374,13 @@ function startLesson(lessonId) {
     exercises: buildExercises(lesson, lesson.unit),
     index: 0,
     mistakes: 0,
+    combo: 0,
+    bestCombo: 0,
+    bonus: 0,
     practice: !!state.completed[lessonId], // refazer lição não perde coração e recupera 1
     checked: false,
     answer: null,
+    startedAt: Date.now(),
   };
   showScreen("lesson");
   renderExercise();
@@ -336,8 +397,13 @@ function renderExercise() {
   session.checked = false;
   session.answer = null;
   session.voiceChar = null;
+  session.recognizer = null;
 
-  $("#progress-fill").style.width = `${(session.index / session.exercises.length) * 100}%`;
+  const fill = $("#progress-fill");
+  fill.style.width = `${(session.index / session.exercises.length) * 100}%`;
+  fill.classList.remove("shine");
+  void fill.offsetWidth;
+  fill.classList.add("shine");
   $("#lesson-hearts").textContent = session.practice ? "💪 prática" : `❤️ ${state.hearts}`;
 
   const footer = $("#footer");
@@ -351,30 +417,44 @@ function renderExercise() {
   box.innerHTML = "";
 
   const render = {
+    "image-choice": renderImageChoice,
     "choice-en-pt": renderChoiceEnPt,
-    "choice-pt-en": renderChoicePtEn,
     "listen": renderListen,
+    "type": renderType,
     "match": renderMatch,
     "build": renderBuild,
+    "listen-build": renderListenBuild,
+    "speak": renderSpeak,
     "verse": renderVerse,
+    "dialogue": renderDialogue,
+    "quiz": renderQuiz,
   }[ex.type];
   render(ex, box);
 }
 
+// Opções: string ou { value, html }
 function makeOptions(box, options, cols, onSelect) {
   const wrap = document.createElement("div");
   wrap.className = "options" + (cols === 2 ? " grid2" : "");
   options.forEach((opt) => {
     const b = document.createElement("button");
     b.className = "opt";
-    b.textContent = opt;
+    if (typeof opt === "string") {
+      b.textContent = opt;
+      b.dataset.value = opt;
+    } else {
+      b.innerHTML = opt.html;
+      b.dataset.value = opt.value;
+      if (opt.cls) b.classList.add(opt.cls);
+    }
     b.addEventListener("click", () => {
       if (session.checked) return;
+      SFX.tap();
       wrap.querySelectorAll(".opt").forEach((o) => o.classList.remove("selected"));
       b.classList.add("selected");
-      session.answer = opt;
+      session.answer = b.dataset.value;
       $("#btn-check").disabled = false;
-      if (onSelect) onSelect(opt);
+      if (onSelect) onSelect(b.dataset.value);
     });
     wrap.appendChild(b);
   });
@@ -383,14 +463,14 @@ function makeOptions(box, options, cols, onSelect) {
 }
 
 // Personagem com balão de fala (estilo Duolingo)
-function characterRow(bubbleContent) {
-  const ch = pickCharacter(session.lesson.unit.id);
+function characterRow(bubbleContent, charKey) {
+  const ch = charKey ? { key: charKey, ...CHARACTERS[charKey] } : pickCharacter(session.lesson.unit.id);
   session.voiceChar = ch;
   const row = document.createElement("div");
   row.className = "char-row";
   const fig = document.createElement("div");
   fig.className = "char-fig";
-  fig.innerHTML = `${charFace(ch)}<span class="char-name">${ch.name}</span>`;
+  fig.innerHTML = `${charFace(ch)}<span class="react"></span><span class="char-name">${ch.name}</span>`;
   const bubble = document.createElement("div");
   bubble.className = "bubble";
   if (typeof bubbleContent === "string") bubble.innerHTML = bubbleContent;
@@ -400,12 +480,72 @@ function characterRow(bubbleContent) {
   return row;
 }
 
-function audioButton(text, big = false) {
+function reactCharacter(ok) {
+  const fig = document.querySelector(".char-fig");
+  if (!fig) return;
+  const badge = fig.querySelector(".react");
+  if (badge) badge.textContent = ok ? ["😊", "🙌", "👏", "✨"][Math.floor(Math.random() * 4)] : "😕";
+  fig.classList.remove("happy", "sad");
+  void fig.offsetWidth;
+  fig.classList.add(ok ? "happy" : "sad");
+}
+
+function audioButton(text, opts = {}) {
   const b = document.createElement("button");
-  b.className = "btn-audio" + (big ? " big" : "");
-  b.textContent = "🔊";
-  b.addEventListener("click", () => speak(text));
+  b.className = "btn-audio" + (opts.big ? " big" : "") + (opts.slow ? " slow" : "");
+  b.textContent = opts.slow ? "🐢" : "🔊";
+  b.title = opts.slow ? "Ouvir devagar" : "Ouvir";
+  b.addEventListener("click", () => speak(text, opts.slow ? { slow: true } : {}));
   return b;
+}
+
+function audioPair(text) {
+  const wrap = document.createElement("div");
+  wrap.className = "audio-pair";
+  wrap.appendChild(audioButton(text));
+  wrap.appendChild(audioButton(text, { slow: true }));
+  return wrap;
+}
+
+// Dicas: toque numa palavra em português para ver o inglês
+const HINTS = (() => {
+  const m = {};
+  allVocab().forEach((v) => { m[normalize(v.pt)] = v.en; });
+  return m;
+})();
+function hintedText(pt) {
+  return pt.split(" ").map((w) => {
+    const key = normalize(w);
+    return HINTS[key] ? `<span class="hint-word" data-hint="${HINTS[key]}">${w}</span>` : w;
+  }).join(" ");
+}
+document.addEventListener("click", (e) => {
+  document.querySelectorAll(".hint-pop").forEach((p) => p.remove());
+  const w = e.target.closest(".hint-word");
+  if (!w) return;
+  const pop = document.createElement("span");
+  pop.className = "hint-pop";
+  pop.textContent = w.dataset.hint;
+  w.appendChild(pop);
+  speak(w.dataset.hint);
+});
+
+// ---------- Renderizadores ----------
+function renderImageChoice(ex, box) {
+  box.innerHTML = `<div class="ex-title">Selecione a palavra correta</div>`;
+  const bubble = document.createElement("div");
+  bubble.className = "bubble-inner";
+  bubble.appendChild(audioButton(ex.word.en));
+  bubble.insertAdjacentHTML("beforeend", `<span class="ex-word">${ex.word.en}</span>`);
+  box.appendChild(characterRow(bubble));
+  makeOptions(box, ex.options.map((o) => ({
+    value: o.pt,
+    cls: "img-opt",
+    html: `<span class="opt-icon">${o.icon}</span><span>${o.pt}</span>`,
+  })), 2);
+  speak(ex.word.en);
+  ex.correct = ex.word.pt;
+  ex.explain = `${ex.word.en} = ${ex.word.pt}`;
 }
 
 function renderChoiceEnPt(ex, box) {
@@ -421,25 +561,47 @@ function renderChoiceEnPt(ex, box) {
   ex.explain = `${ex.word.en} = ${ex.word.pt}`;
 }
 
-function renderChoicePtEn(ex, box) {
-  box.innerHTML = `<div class="ex-title">Como se diz em inglês?</div>`;
-  box.appendChild(characterRow(`<span class="ex-word">${ex.word.pt}</span>`));
-  makeOptions(box, ex.options, 1, (opt) => speak(opt));
-  ex.correct = ex.word.en;
-  ex.explain = `${ex.word.pt} = ${ex.word.en}`;
-}
-
 function renderListen(ex, box) {
   box.innerHTML = `<div class="ex-title">O que você ouviu?</div>`;
   const bubble = document.createElement("div");
   bubble.className = "bubble-inner";
-  bubble.appendChild(audioButton(ex.word.en));
+  bubble.appendChild(audioPair(ex.word.en));
   bubble.insertAdjacentHTML("beforeend", `<span class="ex-word ex-muted">Toque para ouvir</span>`);
   box.appendChild(characterRow(bubble));
   makeOptions(box, ex.options, 2);
   speak(ex.word.en);
   ex.correct = ex.word.en;
   ex.explain = `Você ouviu: ${ex.word.en} (${ex.word.pt})`;
+}
+
+function textInput(placeholder) {
+  const inp = document.createElement("input");
+  inp.type = "text";
+  inp.className = "type-input";
+  inp.placeholder = placeholder;
+  inp.autocomplete = "off";
+  inp.autocapitalize = "off";
+  inp.spellcheck = false;
+  inp.id = "answer-input";
+  inp.addEventListener("input", () => {
+    session.answer = inp.value;
+    $("#btn-check").disabled = inp.value.trim() === "";
+  });
+  inp.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !$("#btn-check").disabled) checkAnswer();
+  });
+  return inp;
+}
+
+function renderType(ex, box) {
+  box.innerHTML = `<div class="ex-title">Digite em inglês</div>`;
+  box.appendChild(characterRow(`<span class="ex-word">${ex.word.icon || ""} ${ex.word.pt}</span>`));
+  const inp = textInput("Escreva em inglês...");
+  box.appendChild(inp);
+  setTimeout(() => inp.focus(), 50);
+  ex.correct = ex.word.en;
+  ex.accept = [ex.word.en, ex.word.en.replace(/^to /, "")];
+  ex.explain = `${ex.word.pt} = ${ex.word.en}`;
 }
 
 function renderVerse(ex, box) {
@@ -456,23 +618,56 @@ function renderVerse(ex, box) {
   ex.explain = `"${v.text}" — ${v.ref}`;
 }
 
-function renderBuild(ex, box) {
-  box.innerHTML = `<div class="ex-title">Escreva em inglês</div>`;
+function renderDialogue(ex, box) {
+  const d = ex.dialogue;
+  box.innerHTML = `<div class="ex-title">Complete a conversa</div>`;
+  const bubble = document.createElement("div");
+  bubble.className = "bubble-inner bubble-col";
+  const top = document.createElement("div");
+  top.className = "bubble-inner";
+  top.appendChild(audioButton(d.line));
+  top.insertAdjacentHTML("beforeend", `<span class="ex-word">${d.line}</span>`);
+  bubble.appendChild(top);
+  bubble.insertAdjacentHTML("beforeend", `<span class="ex-muted dialog-pt">${d.pt}</span>`);
+  box.appendChild(characterRow(bubble));
+  box.insertAdjacentHTML("beforeend", `<div class="reply-label">Sua resposta:</div>`);
+  makeOptions(box, ex.options, 1, (opt) => speak(opt));
+  speak(d.line);
+  ex.correct = d.answer;
+  ex.explain = `${d.answer} = ${d.answerPt}`;
+}
+
+function renderQuiz(ex, box) {
+  const q = ex.quiz;
+  box.innerHTML = `<div class="ex-title">Responda sobre a história</div>`;
   const bubble = document.createElement("div");
   bubble.className = "bubble-inner";
-  bubble.appendChild(audioButton(ex.sentence.en));
-  bubble.insertAdjacentHTML("beforeend", `<span class="ex-word">${ex.sentence.pt}</span>`);
+  bubble.appendChild(audioButton(q.q));
+  bubble.insertAdjacentHTML("beforeend", `<span class="ex-word ex-q">${q.q}</span>`);
   box.appendChild(characterRow(bubble));
+  makeOptions(box, ex.options, 1, (opt) => speak(opt));
+  speak(q.q);
+  ex.correct = q.answer;
+  ex.explain = q.explain;
+}
 
+// Banco de palavras com animação, dicas e teclado
+function wordBankUI(ex, box, correctSentence) {
   const zone = document.createElement("div");
   zone.className = "answer-zone";
   const bank = document.createElement("div");
   bank.className = "word-bank";
+  const toggle = document.createElement("button");
+  toggle.className = "btn-link";
+  toggle.textContent = "⌨️ Usar teclado";
   box.appendChild(zone);
   box.appendChild(bank);
+  box.appendChild(toggle);
 
   const chosen = [];
+  let keyboard = false;
   function sync() {
+    if (keyboard) return;
     session.answer = chosen.map((c) => c.word).join(" ");
     $("#btn-check").disabled = chosen.length === 0;
   }
@@ -484,7 +679,9 @@ function renderBuild(ex, box) {
     t.dataset.i = i;
     t.addEventListener("click", () => {
       if (session.checked) return;
+      SFX.tap();
       speak(word);
+      const from = t.getBoundingClientRect();
       t.classList.add("ghost");
       const placed = document.createElement("button");
       placed.className = "tile";
@@ -493,19 +690,149 @@ function renderBuild(ex, box) {
       chosen.push(entry);
       placed.addEventListener("click", () => {
         if (session.checked) return;
+        SFX.tap();
         chosen.splice(chosen.indexOf(entry), 1);
         placed.remove();
         t.classList.remove("ghost");
         sync();
       });
       zone.appendChild(placed);
+      // Animação FLIP: a peça "voa" do banco para a resposta
+      const to = placed.getBoundingClientRect();
+      placed.style.transition = "none";
+      placed.style.transform = `translate(${from.left - to.left}px, ${from.top - to.top}px)`;
+      requestAnimationFrame(() => {
+        placed.style.transition = "transform 0.22s ease";
+        placed.style.transform = "";
+      });
       sync();
     });
     bank.appendChild(t);
   });
 
+  toggle.addEventListener("click", () => {
+    keyboard = !keyboard;
+    if (keyboard) {
+      zone.hidden = true;
+      bank.hidden = true;
+      const inp = textInput("Digite a frase em inglês...");
+      inp.value = chosen.map((c) => c.word).join(" ");
+      session.answer = inp.value;
+      $("#btn-check").disabled = inp.value.trim() === "";
+      toggle.before(inp);
+      inp.focus();
+      toggle.textContent = "🧩 Usar banco de palavras";
+    } else {
+      const inp = $("#answer-input");
+      if (inp) inp.remove();
+      zone.hidden = false;
+      bank.hidden = false;
+      toggle.textContent = "⌨️ Usar teclado";
+      sync();
+    }
+  });
+
+  ex.correct = correctSentence;
+  ex.explain = `Resposta: "${correctSentence}"`;
+}
+
+function renderBuild(ex, box) {
+  box.innerHTML = `<div class="ex-title">Escreva em inglês</div>`;
+  const bubble = document.createElement("div");
+  bubble.className = "bubble-inner";
+  bubble.appendChild(audioButton(ex.sentence.en));
+  bubble.insertAdjacentHTML("beforeend", `<span class="ex-word">${hintedText(ex.sentence.pt)}</span>`);
+  box.appendChild(characterRow(bubble));
+  box.insertAdjacentHTML("beforeend", `<div class="tip-line">Toque numa palavra sublinhada para ver a dica</div>`);
+  wordBankUI(ex, box, ex.sentence.en);
+}
+
+function renderListenBuild(ex, box) {
+  box.innerHTML = `<div class="ex-title">Ouça e monte a frase</div>`;
+  const bubble = document.createElement("div");
+  bubble.className = "bubble-inner";
+  bubble.appendChild(audioPair(ex.sentence.en));
+  bubble.insertAdjacentHTML("beforeend", `<span class="ex-word ex-muted">Toque para ouvir</span>`);
+  box.appendChild(characterRow(bubble));
+  wordBankUI(ex, box, ex.sentence.en);
+  speak(ex.sentence.en);
+}
+
+// Fale a frase (reconhecimento de voz do navegador)
+function renderSpeak(ex, box) {
+  box.innerHTML = `<div class="ex-title">Fale esta frase</div>`;
+  const bubble = document.createElement("div");
+  bubble.className = "bubble-inner bubble-col";
+  const top = document.createElement("div");
+  top.className = "bubble-inner";
+  top.appendChild(audioPair(ex.sentence.en));
+  top.insertAdjacentHTML("beforeend", `<span class="ex-word">${ex.sentence.en}</span>`);
+  bubble.appendChild(top);
+  bubble.insertAdjacentHTML("beforeend", `<span class="ex-muted dialog-pt">${ex.sentence.pt}</span>`);
+  box.appendChild(characterRow(bubble));
+
+  const mic = document.createElement("button");
+  mic.className = "mic-btn";
+  mic.innerHTML = `🎤<span>Toque para falar</span>`;
+  const status = document.createElement("div");
+  status.className = "mic-status";
+  const skip = document.createElement("button");
+  skip.className = "btn-link";
+  skip.textContent = "Não posso falar agora";
+  box.appendChild(mic);
+  box.appendChild(status);
+  box.appendChild(skip);
+  speak(ex.sentence.en);
+
+  const target = normalize(ex.sentence.en).split(" ");
+  const Rec = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  mic.addEventListener("click", () => {
+    if (session.checked) return;
+    if (session.recognizer) { session.recognizer.stop(); return; }
+    let rec;
+    try { rec = new Rec(); } catch (e) { status.textContent = "Reconhecimento de voz indisponível neste navegador."; return; }
+    rec.lang = "en-US";
+    rec.interimResults = false;
+    rec.maxAlternatives = 3;
+    session.recognizer = rec;
+    mic.classList.add("listening");
+    mic.innerHTML = `🎙️<span>Ouvindo...</span>`;
+    status.textContent = "";
+    rec.onresult = (e) => {
+      const alts = [...e.results[0]].map((r) => r.transcript);
+      let best = 0, bestText = alts[0] || "";
+      alts.forEach((t) => {
+        const words = normalize(t).split(" ");
+        const hit = target.filter((w) => words.includes(w)).length / target.length;
+        if (hit > best) { best = hit; bestText = t; }
+      });
+      status.textContent = `Você disse: "${bestText}"`;
+      session.answer = best >= 0.6 ? ex.sentence.en : bestText;
+      $("#btn-check").disabled = false;
+      checkAnswer();
+    };
+    rec.onerror = () => {
+      status.textContent = "Não consegui ouvir. Tente de novo ou pule.";
+    };
+    rec.onend = () => {
+      session.recognizer = null;
+      mic.classList.remove("listening");
+      mic.innerHTML = `🎤<span>Toque para falar</span>`;
+    };
+    rec.start();
+  });
+
+  skip.addEventListener("click", () => {
+    if (session.checked) return;
+    ex.skipped = true;
+    session.answer = ex.sentence.en;
+    $("#btn-check").disabled = false;
+    checkAnswer();
+  });
+
   ex.correct = ex.sentence.en;
-  ex.explain = `Resposta: "${ex.sentence.en}"`;
+  ex.explain = `"${ex.sentence.en}" — ${ex.sentence.pt}`;
 }
 
 function renderMatch(ex, box) {
@@ -525,6 +852,7 @@ function renderMatch(ex, box) {
     b.textContent = item.label;
     b.addEventListener("click", () => {
       if (b.classList.contains("matched")) return;
+      SFX.tap();
       if (item.side === "en") speak(item.label);
       if (!selected) {
         selected = { item, el: b };
@@ -537,8 +865,9 @@ function renderMatch(ex, box) {
         return;
       }
       if (selected.item.key === item.key && selected.item.side !== item.side) {
-        [selected.el, b].forEach((el) => { el.classList.remove("selected"); el.classList.add("matched"); });
+        [selected.el, b].forEach((el) => { el.classList.remove("selected"); el.classList.add("matched", "pop"); });
         matched++;
+        tone(720 + matched * 80, 0.1, "sine", 0, 0.08);
         if (matched === ex.pairs.length) {
           session.answer = "__matched__";
           $("#btn-check").disabled = false;
@@ -548,6 +877,7 @@ function renderMatch(ex, box) {
         [selected.el, b].forEach((el) => el.classList.add("wrong"));
         const els = [selected.el, b];
         setTimeout(() => els.forEach((el) => el.classList.remove("wrong", "selected")), 600);
+        buzz(60);
         registerMistakeSoft();
       }
       selected = null;
@@ -557,9 +887,7 @@ function renderMatch(ex, box) {
 
   const colA = document.createElement("div");
   const colB = document.createElement("div");
-  colA.style.display = colB.style.display = "flex";
-  colA.style.flexDirection = colB.style.flexDirection = "column";
-  colA.style.gap = colB.style.gap = "10px";
+  colA.className = colB.className = "match-col";
   left.forEach((i) => colA.appendChild(cell(i)));
   right.forEach((i) => colB.appendChild(cell(i)));
   grid.appendChild(colA);
@@ -572,11 +900,12 @@ function renderMatch(ex, box) {
 // Erro em pareamento não trava o exercício, mas conta para o bônus perfeito
 function registerMistakeSoft() {
   session.mistakes++;
+  session.combo = 0;
 }
 
 // ---------- Checagem ----------
 function normalize(s) {
-  return s.toLowerCase().replace(/[.,;:!?]/g, "").replace(/\s+/g, " ").trim();
+  return String(s).toLowerCase().replace(/[.,;:!?'"]/g, "").replace(/\s+/g, " ").trim();
 }
 
 function checkAnswer() {
@@ -585,7 +914,9 @@ function checkAnswer() {
 
   if (!session.checked) {
     session.checked = true;
-    const ok = normalize(String(session.answer)) === normalize(String(ex.correct));
+    if (session.recognizer) { try { session.recognizer.abort(); } catch (e) {} }
+    const accepts = ex.accept || [ex.correct];
+    const ok = accepts.some((a) => normalize(session.answer) === normalize(a));
     const footer = $("#footer");
     footer.classList.add(ok ? "correct" : "wrong");
     $("#fb-ok-detail").textContent = ex.explain || "";
@@ -593,16 +924,38 @@ function checkAnswer() {
 
     // Destaca opções
     document.querySelectorAll(".opt").forEach((o) => {
-      if (normalize(o.textContent) === normalize(String(ex.correct))) o.classList.add("correct");
+      const val = o.dataset.value != null ? o.dataset.value : o.textContent;
+      if (normalize(val) === normalize(String(ex.correct))) o.classList.add("correct");
       else if (o.classList.contains("selected") && !ok) o.classList.add("wrong");
       else o.classList.add("faded");
     });
+    const inp = $("#answer-input");
+    if (inp) { inp.disabled = true; inp.classList.add(ok ? "ok" : "bad"); }
+
+    reactCharacter(ok);
 
     if (ok) {
-      speak(typeof ex.correct === "string" && ex.correct !== "__matched__" ? ex.correct : "Great job");
-      btn.textContent = "Continuar";
+      if (ex.skipped) {
+        btn.textContent = "Continuar";
+      } else {
+        session.combo++;
+        session.bestCombo = Math.max(session.bestCombo, session.combo);
+        if (session.combo >= 3) {
+          SFX.combo();
+          if (session.bonus < 5) session.bonus++;
+          toast(`🔥 ${session.combo} seguidas! +1 XP`, "combo");
+        } else {
+          SFX.correct();
+        }
+        buzz(25);
+        speak(ex.correct !== "__matched__" ? ex.correct : "Great job");
+        btn.textContent = "Continuar";
+      }
     } else {
       session.mistakes++;
+      session.combo = 0;
+      SFX.wrong();
+      buzz([60, 40, 60]);
       if (!session.practice) {
         state.hearts = Math.max(0, state.hearts - 1);
         save();
@@ -635,6 +988,7 @@ function finishLesson() {
   const first = !state.completed[session.lesson.id];
   let gained = session.practice ? 5 : XP_PER_LESSON;
   if (perfect) gained += XP_PERFECT_BONUS;
+  gained += session.bonus;
 
   state.xp += gained;
   state.completed[session.lesson.id] = true;
@@ -649,7 +1003,7 @@ function finishLesson() {
   // Ofensiva
   const t = today();
   if (state.lastStudy !== t) {
-    state.streak = state.lastStudy && daysBetween(state.lastStudy, t) === 1 ? state.streak + 1 : Math.max(1, state.lastStudy ? 1 : 1);
+    state.streak = state.lastStudy && daysBetween(state.lastStudy, t) === 1 ? state.streak + 1 : 1;
     state.lastStudy = t;
   }
   save();
@@ -658,15 +1012,20 @@ function finishLesson() {
   const ch = pickCharacter(session.lesson.unit.id);
   $("#result-char").innerHTML = charFace(ch);
   $("#result-emoji").style.display = "none";
+  SFX.finish();
+  buzz([40, 30, 40, 30, 80]);
   if (typeof confetti === "function") {
     confetti({ particleCount: 90, spread: 75, origin: { y: 0.35 }, ticks: 180 });
     if (perfect) setTimeout(() => confetti({ particleCount: 60, spread: 100, origin: { y: 0.3 } }), 350);
   }
 
+  const secs = Math.round((Date.now() - session.startedAt) / 1000);
+  const mm = Math.floor(secs / 60), ss = String(secs % 60).padStart(2, "0");
   $("#result-stars").innerHTML = starsHTML(earned, "");
   $("#result-emoji").textContent = perfect ? "🌟" : "🎉";
   $("#result-title").textContent = perfect ? "Lição perfeita!" : "Lição concluída!";
-  $("#result-sub").textContent = first ? "Você avançou na trilha." : "Ótima prática!";
+  $("#result-sub").textContent = (first ? "Você avançou na trilha." : "Ótima prática!")
+    + ` ⏱️ ${mm}:${ss}` + (session.bonus ? ` · 🔥 combo +${session.bonus} XP` : "");
   $("#result-xp").textContent = `+${gained}`;
   $("#result-streak").textContent = state.streak;
   $("#result-acc").textContent = `${Math.max(0, Math.round((1 - session.mistakes / Math.max(1, session.exercises.length)) * 100))}%`;
