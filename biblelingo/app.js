@@ -239,6 +239,7 @@ function renderHome() {
 
   trail.appendChild(nodes);
   drawTrailPath(nodes, "#9db97a");
+  renderCharacterStrip();
 }
 
 // Desenha o caminho tracejado ligando os nós de uma unidade
@@ -421,7 +422,7 @@ function buildExercises(lesson, unit) {
 // ---------- Fluxo da lição ----------
 let session = null;
 
-function startLesson(lessonId) {
+function startLesson(lessonId, narrator) {
   if (state.hearts <= 0) {
     const isRedo = !!state.completed[lessonId];
     if (!isRedo) {
@@ -445,7 +446,7 @@ function startLesson(lessonId) {
     checked: false,
     answer: null,
     startedAt: Date.now(),
-    narrator: pickCharacter(lesson.unit.id),
+    narrator: narrator || pickCharacter(lesson.unit.id),
     reviewQueue: [],
     reviewing: false,
     hardAdded: false,

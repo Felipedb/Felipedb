@@ -795,3 +795,33 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .quest.ok .q-fill { background: var(--green-bright); }
 .quest .q-reward { font-size: 12px; font-weight: 900; color: #b89232; min-width: 26px; text-align: right; }
 .quest.ok .q-reward { color: var(--green); }
+
+/* ---------- Galeria de personagens e ficha ---------- */
+.char-strip { padding: 10px 18px 6px; }
+.strip-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+.strip-head h2 { font-family: "Baloo 2", "Nunito", sans-serif; font-size: 20px; color: #274156; }
+.strip-head p { font-size: 13px; font-weight: 700; color: var(--text-soft); }
+.strip-tag { font-size: 12.5px; font-style: italic; font-weight: 700; color: var(--text-soft); }
+.strip-row { display: flex; gap: 12px; overflow-x: auto; padding: 6px 2px 12px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+.strip-row::-webkit-scrollbar { height: 6px; }
+.strip-row::-webkit-scrollbar-thumb { background: var(--line); border-radius: 6px; }
+.strip-item { flex: none; width: 76px; display: flex; flex-direction: column; align-items: center; gap: 6px; scroll-snap-align: start; }
+.strip-face { width: 66px; height: 66px; border-radius: 50%; overflow: hidden; border: 3px solid #cfe6ae; box-shadow: 0 3px 0 #b5d18a; background: #fff; transition: transform 0.12s; }
+.strip-item:active .strip-face { transform: scale(0.95); }
+.strip-face img, .strip-face svg { width: 100%; height: 100%; object-fit: cover; }
+.strip-name { font-size: 12px; font-weight: 800; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 76px; }
+.char-modal { padding: 0; overflow: hidden; text-align: left; max-height: 92dvh; overflow-y: auto; }
+.cs-hero { width: 100%; aspect-ratio: 16 / 9; overflow: hidden; background: #dfe9f5; }
+.cs-hero img, .cs-hero svg { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+.cs-body { padding: 16px 20px calc(18px + env(safe-area-inset-bottom)); }
+.cs-body h3 { font-family: "Baloo 2", "Nunito", sans-serif; font-size: 26px; margin: 0; color: #274156; }
+.cs-title { font-size: 14.5px; font-weight: 800; color: var(--text-soft); margin: 0 0 10px; }
+.cs-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+.cs-virtue { font-size: 12.5px; font-weight: 900; color: #7a42c2; background: #f1e8fb; border: 2px solid #dccbf2; border-radius: 10px; padding: 3px 10px; }
+.cs-ref { font-size: 12.5px; font-weight: 800; color: #a97e0a; background: var(--gold-soft); border: 2px solid #f0dfae; border-radius: 10px; padding: 3px 10px; }
+.cs-desc { font-size: 15px; font-weight: 700; line-height: 1.5; color: var(--text); margin: 0 0 14px; }
+.cs-lessons h4 { font-size: 13px; text-transform: uppercase; letter-spacing: .5px; color: var(--text-soft); margin: 0 0 8px; }
+.cs-lesson { display: flex; align-items: center; gap: 10px; font-size: 14.5px; font-weight: 800; padding: 8px 10px; background: var(--cream); border: 2px solid var(--line); border-radius: 12px; margin-bottom: 6px; }
+.cs-lesson span { width: 28px; height: 28px; border-radius: 8px; background: var(--green-soft); display: inline-flex; align-items: center; justify-content: center; }
+.cs-actions { display: flex; gap: 10px; align-items: center; margin-top: 14px; }
+.cs-actions .btn-main { margin: 0; flex: 1; }

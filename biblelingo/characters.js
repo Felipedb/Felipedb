@@ -57,6 +57,9 @@ function _personSVG(p) {
 const CHARACTERS = {
   jesus: {
     img: "chars/jesus.jpg",
+    title: "Amor que transforma", virtue: "Amor", ref: "Mateus 1–28",
+    desc: "Jesus ensinou com amor, curou os doentes e deu a vida por nós. Ele é o caminho, a verdade e a vida.",
+    lessons: ["Amar a Deus e ao próximo", "Perdoar sempre", "Servir com humildade", "Confiar no Pai"],
     voice: { gender: "male", pitch: 0.9, rate: 1.0 },
     name: "Jesus",
     svg: _personSVG({
@@ -77,6 +80,9 @@ const CHARACTERS = {
   },
   moises: {
     img: "chars/moises.jpg",
+    title: "Um líder que obedeceu a Deus", virtue: "Libertação", ref: "Êxodo 2–34",
+    desc: "Moisés foi escolhido por Deus para tirar o seu povo do Egito. Ele nos ensina sobre fé, obediência e coragem.",
+    lessons: ["Ouvir a Deus", "Coragem", "Confiar no plano de Deus", "Liderar com humildade"],
     voice: { gender: "male", pitch: 0.78, rate: 0.95 },
     name: "Moisés",
     svg: _personSVG({
@@ -98,6 +104,9 @@ const CHARACTERS = {
   },
   davi: {
     img: "chars/davi.jpg",
+    title: "Um coração segundo Deus", virtue: "Adoração", ref: "1 Samuel 16–31",
+    desc: "Davi foi pastor, músico e rei. Ele nos ensina que Deus olha para o coração.",
+    lessons: ["Um coração de adoração", "Coragem nas dificuldades", "Arrependimento", "Confiar no tempo de Deus"],
     voice: { gender: "male", pitch: 1.12, rate: 1.05 },
     name: "Davi",
     svg: _personSVG({
@@ -117,6 +126,9 @@ const CHARACTERS = {
   },
   ester: {
     img: "chars/ester.jpg",
+    title: "Coragem para fazer a diferença", virtue: "Coragem", ref: "Ester 1–10",
+    desc: "Ester foi uma mulher de coragem que confiou em Deus e ajudou a salvar o seu povo.",
+    lessons: ["Coragem", "Fé nas situações difíceis", "Usar os seus dons", "Fazer a diferença"],
     voice: { gender: "female", pitch: 1.08, rate: 1.02 },
     name: "Ester",
     svg: _personSVG({
@@ -136,6 +148,9 @@ const CHARACTERS = {
   },
   noe: {
     img: "chars/noe.jpg",
+    title: "Obediência em meio à tempestade", virtue: "Obediência", ref: "Gênesis 6–9",
+    desc: "Noé obedeceu a Deus e construiu a arca mesmo sem ver a chuva. Deus cumpriu a sua promessa.",
+    lessons: ["Obedecer mesmo sem entender", "Perseverança", "Confiar nas promessas de Deus"],
     voice: { gender: "male", pitch: 0.8, rate: 0.95 },
     name: "Noé",
     svg: _personSVG({
@@ -160,6 +175,9 @@ const CHARACTERS = {
   },
   maria: {
     img: "chars/maria.jpg",
+    title: "Um coração humilde", virtue: "Humildade", ref: "Lucas 1:26–56",
+    desc: "Maria disse sim a Deus com humildade e se tornou a mãe de Jesus.",
+    lessons: ["Dizer sim a Deus", "Humildade", "Guardar a Palavra no coração"],
     voice: { gender: "female", pitch: 1.02, rate: 1.0 },
     name: "Maria",
     svg: _personSVG({
@@ -180,6 +198,9 @@ const CHARACTERS = {
   },
   pedro: {
     img: "chars/pedro.jpg",
+    title: "De pescador a líder", virtue: "Liderança", ref: "Mateus 14–28",
+    desc: "Pedro era pescador, seguiu Jesus e se tornou um líder da igreja, mesmo depois de errar.",
+    lessons: ["Seguir a Jesus", "Levantar depois da queda", "Liderar com fé"],
     voice: { gender: "male", pitch: 0.85, rate: 1.0 },
     name: "Pedro",
     svg: _personSVG({
@@ -202,6 +223,9 @@ const CHARACTERS = {
   },
   isaias: {
     img: "chars/isaias.jpg",
+    title: "Eis-me aqui, envia-me", virtue: "Profecia", ref: "Isaías 1–12",
+    desc: "Isaías viu o Senhor no trono e respondeu ao chamado. Ele anunciou o Príncipe da Paz.",
+    lessons: ["Responder ao chamado", "Falar a verdade", "Esperança no Messias"],
     voice: { gender: "male", pitch: 0.8, rate: 0.95 },
     name: "Isaías",
     svg: _personSVG({
@@ -220,14 +244,64 @@ const CHARACTERS = {
   },
 };
 
+// Personagens do inventário (retratos recortados do pôster)
+Object.assign(CHARACTERS, {
+  adao: { img: "chars/adao.jpg", name: "Adão", title: "O primeiro homem", virtue: "Primeiro homem", ref: "Gênesis 1–3", voice: { gender: "male", pitch: 0.95, rate: 1.0 }, desc: "Adão foi criado por Deus e cuidou do jardim. A sua história mostra o começo de tudo.", lessons: ["Cuidar da criação", "Andar com Deus", "As consequências das escolhas"] },
+  eva: { img: "chars/eva.jpg", name: "Eva", title: "A primeira mulher", virtue: "Primeira mulher", ref: "Gênesis 2–3", voice: { gender: "female", pitch: 1.05, rate: 1.0 }, desc: "Eva foi criada como companheira de Adão. A sua história fala de escolhas e do cuidado de Deus.", lessons: ["Companheirismo", "Escolhas e responsabilidade", "A graça de Deus"] },
+  abraao: { img: "chars/abraao.jpg", name: "Abraão", title: "O pai da fé", virtue: "Fé", ref: "Gênesis 12–22", voice: { gender: "male", pitch: 0.8, rate: 0.95 }, desc: "Abraão saiu da sua terra porque confiou em Deus, e recebeu a promessa de uma grande nação.", lessons: ["Fé para obedecer", "Confiar sem ver", "Paciência nas promessas"] },
+  sara: { img: "chars/sara.jpg", name: "Sara", title: "A promessa cumprida", virtue: "Promessa", ref: "Gênesis 17–21", voice: { gender: "female", pitch: 1.0, rate: 0.98 }, desc: "Sara riu da promessa, mas Deus a cumpriu: ela foi mãe de Isaque na velhice.", lessons: ["Nada é impossível para Deus", "Esperar com fé", "Alegria na promessa"] },
+  isaac: { img: "chars/isaac.jpg", name: "Isaac", title: "Filho da promessa", virtue: "Obediência", ref: "Gênesis 21–26", voice: { gender: "male", pitch: 0.95, rate: 1.0 }, desc: "Isaque foi o filho prometido a Abraão e Sara e aprendeu a confiar em Deus desde cedo.", lessons: ["Obediência", "Confiança no pai", "Paz com os vizinhos"] },
+  jaco: { img: "chars/jaco.jpg", name: "Jacó", title: "Perseverança que transforma", virtue: "Perseverança", ref: "Gênesis 25–35", voice: { gender: "male", pitch: 0.9, rate: 1.0 }, desc: "Jacó lutou, errou e perseverou. Deus mudou o seu nome para Israel.", lessons: ["Perseverar", "Reconciliação", "Deus transforma vidas"] },
+  rebeca: { img: "chars/rebeca.jpg", name: "Rebeca", title: "Sabedoria e generosidade", virtue: "Sabedoria", ref: "Gênesis 24", voice: { gender: "female", pitch: 1.05, rate: 1.0 }, desc: "Rebeca serviu água a um estranho e aos seus camelos, e se tornou esposa de Isaque.", lessons: ["Generosidade", "Sabedoria nas decisões", "Servir com alegria"] },
+  jose: { img: "chars/jose.jpg", name: "José", title: "Sonhos e perdão", virtue: "Sonhos", ref: "Gênesis 37–50", voice: { gender: "male", pitch: 1.05, rate: 1.02 }, desc: "José foi vendido pelos irmãos, mas Deus o levantou no Egito, e ele perdoou a sua família.", lessons: ["Fidelidade nas provações", "Perdoar", "Deus usa tudo para o bem"] },
+  arao: { img: "chars/arao.jpg", name: "Arão", title: "Servo e porta-voz", virtue: "Serviço", ref: "Êxodo 4–40", voice: { gender: "male", pitch: 0.85, rate: 0.97 }, desc: "Arão foi o porta-voz de Moisés e o primeiro sacerdote de Israel.", lessons: ["Servir ao lado do líder", "Falar em nome de Deus", "Fidelidade no serviço"] },
+  josue: { img: "chars/josue.jpg", name: "Josué", title: "Forte e corajoso", virtue: "Liderança", ref: "Josué 1–24", voice: { gender: "male", pitch: 0.88, rate: 1.0 }, desc: "Josué liderou o povo na terra prometida. Deus lhe disse: sê forte e corajoso.", lessons: ["Coragem", "Obedecer à Palavra", "Liderar pelo exemplo"] },
+  calebe: { img: "chars/calebe.jpg", name: "Calebe", title: "Um espírito diferente", virtue: "Coragem", ref: "Números 13–14", voice: { gender: "male", pitch: 0.9, rate: 1.0 }, desc: "Calebe acreditou que Deus daria a terra, quando os outros tiveram medo.", lessons: ["Fé contra a maioria", "Coragem", "Fidelidade por toda a vida"] },
+  debora: { img: "chars/debora.jpg", name: "Débora", title: "Justiça e liderança", virtue: "Justiça", ref: "Juízes 4–5", voice: { gender: "female", pitch: 1.0, rate: 0.98 }, desc: "Débora foi juíza e profetisa; liderou Israel com sabedoria e justiça.", lessons: ["Justiça", "Sabedoria para julgar", "Liderar com fé"] },
+  gideao: { img: "chars/gideao.jpg", name: "Gideão", title: "Valente com poucos", virtue: "Fé", ref: "Juízes 6–8", voice: { gender: "male", pitch: 0.95, rate: 1.0 }, desc: "Gideão venceu um grande exército com apenas 300 homens, porque Deus estava com ele.", lessons: ["Deus usa os pequenos", "Confiar mais em Deus que em números", "Obedecer passo a passo"] },
+  sansao: { img: "chars/sansao.jpg", name: "Sansão", title: "Força que vem de Deus", virtue: "Força", ref: "Juízes 13–16", voice: { gender: "male", pitch: 0.75, rate: 0.98 }, desc: "Sansão recebeu força de Deus e aprendeu, no fim, de onde ela vinha.", lessons: ["A força vem de Deus", "Cuidado com as escolhas", "Deus responde ao arrependimento"] },
+  rute: { img: "chars/rute.jpg", name: "Rute", title: "Lealdade que Deus honra", virtue: "Lealdade", ref: "Rute 1–4", voice: { gender: "female", pitch: 1.05, rate: 1.0 }, desc: "Rute ficou ao lado de Noemi e disse: o teu Deus será o meu Deus. Deus a abençoou.", lessons: ["Lealdade", "Trabalhar com humildade", "Deus cuida dos fiéis"] },
+  samuel: { img: "chars/samuel.jpg", name: "Samuel", title: "Fala, que o teu servo ouve", virtue: "Oração", ref: "1 Samuel 1–3", voice: { gender: "male", pitch: 1.08, rate: 1.02 }, desc: "Samuel ouviu a voz de Deus ainda menino e se tornou profeta e juiz.", lessons: ["Ouvir a Deus", "Oração", "Obedecer desde cedo"] },
+  salomao: { img: "chars/salomao.jpg", name: "Salomão", title: "O rei sábio", virtue: "Sabedoria", ref: "1 Reis 3–11", voice: { gender: "male", pitch: 0.85, rate: 0.98 }, desc: "Salomão pediu sabedoria a Deus e construiu o templo em Jerusalém.", lessons: ["Pedir sabedoria", "Usar os dons para Deus", "Guardar o coração"] },
+  elias: { img: "chars/elias.jpg", name: "Elias", title: "Zelo pelo Senhor", virtue: "Zelo", ref: "1 Reis 17–19", voice: { gender: "male", pitch: 0.78, rate: 0.95 }, desc: "Elias enfrentou os profetas de Baal e viu o fogo de Deus descer do céu.", lessons: ["Zelo por Deus", "Coragem diante da oposição", "Ouvir a voz mansa de Deus"] },
+  eliseu: { img: "chars/eliseu.jpg", name: "Eliseu", title: "Servo fiel do profeta", virtue: "Serviço", ref: "2 Reis 2–13", voice: { gender: "male", pitch: 0.85, rate: 0.97 }, desc: "Eliseu serviu Elias e recebeu porção dobrada do seu espírito.", lessons: ["Servir antes de liderar", "Fidelidade", "Milagres de cuidado"] },
+  daniel: { img: "chars/daniel.jpg", name: "Daniel", title: "Fiel na cova dos leões", virtue: "Fidelidade", ref: "Daniel 1–12", voice: { gender: "male", pitch: 0.9, rate: 1.0 }, desc: "Daniel orou a Deus mesmo proibido, e Deus fechou a boca dos leões.", lessons: ["Fidelidade em terra estranha", "Oração constante", "Confiar em Deus diante do perigo"] },
+  neemias: { img: "chars/neemias.jpg", name: "Neemias", title: "Reconstruindo os muros", virtue: "Reconstrução", ref: "Neemias 1–13", voice: { gender: "male", pitch: 0.88, rate: 1.0 }, desc: "Neemias orou, planejou e reconstruiu os muros de Jerusalém em 52 dias.", lessons: ["Orar e agir", "Trabalho em equipe", "Persistir diante da oposição"] },
+  ezequiel: { img: "chars/ezequiel.jpg", name: "Ezequiel", title: "Visões de esperança", virtue: "Visão", ref: "Ezequiel 1–48", voice: { gender: "male", pitch: 0.8, rate: 0.95 }, desc: "Ezequiel viu ossos secos voltarem à vida: Deus restaura o seu povo.", lessons: ["Esperança na restauração", "Falar o que Deus manda", "Deus dá vida nova"] },
+  jonas: { img: "chars/jonas.jpg", name: "Jonas", title: "Obediência em segunda chance", virtue: "Obediência", ref: "Jonas 1–4", voice: { gender: "male", pitch: 0.9, rate: 1.0 }, desc: "Jonas fugiu, foi engolido por um grande peixe e depois obedeceu: Nínive se arrependeu.", lessons: ["Não fugir do chamado", "Deus dá segunda chance", "Misericórdia para todos"] },
+  marta: { img: "chars/marta.jpg", name: "Marta", title: "Serviço com o coração", virtue: "Serviço", ref: "Lucas 10:38–42", voice: { gender: "female", pitch: 1.0, rate: 1.0 }, desc: "Marta serviu a Jesus com dedicação e aprendeu a escolher a melhor parte.", lessons: ["Servir com amor", "Equilibrar serviço e escuta", "Confiar em Jesus"] },
+  josepai: { img: "chars/josepai.jpg", name: "José (pai de Jesus)", title: "Justo e obediente", virtue: "Justiça", ref: "Mateus 1–2", voice: { gender: "male", pitch: 0.85, rate: 0.97 }, desc: "José obedeceu ao anjo, cuidou de Maria e protegeu o menino Jesus.", lessons: ["Obedecer a Deus", "Proteger a família", "Justiça com bondade"] },
+  joaobatista: { img: "chars/joaobatista.jpg", name: "João Batista", title: "Preparai o caminho", virtue: "Preparação", ref: "Mateus 3:1–12", voice: { gender: "male", pitch: 0.8, rate: 1.0 }, desc: "João Batista preparou o caminho para Jesus e batizou o Senhor no Jordão.", lessons: ["Preparar o coração", "Humildade: Ele deve crescer", "Falar a verdade"] },
+  paulo: { img: "chars/paulo.jpg", name: "Paulo", title: "De perseguidor a missionário", virtue: "Missão", ref: "Atos 9–28", voice: { gender: "male", pitch: 0.85, rate: 1.02 }, desc: "Paulo encontrou Jesus no caminho de Damasco e levou o evangelho a muitas nações.", lessons: ["Deus transforma", "Missão", "Perseverar nas dificuldades"] },
+  barnabe: { img: "chars/barnabe.jpg", name: "Barnabé", title: "Filho da consolação", virtue: "Incentivo", ref: "Atos 4:36–37", voice: { gender: "male", pitch: 0.9, rate: 1.0 }, desc: "Barnabé incentivou Paulo e Marcos e foi generoso com a igreja.", lessons: ["Incentivar os outros", "Generosidade", "Dar segunda chance"] },
+  timoteo: { img: "chars/timoteo.jpg", name: "Timóteo", title: "Jovem e fiel", virtue: "Companheirismo", ref: "2 Timóteo 1–4", voice: { gender: "male", pitch: 1.1, rate: 1.03 }, desc: "Timóteo foi discípulo de Paulo e liderou a igreja ainda jovem.", lessons: ["Ninguém despreze a tua mocidade", "Fidelidade", "Aprender com um mentor"] },
+  lidia: { img: "chars/lidia.jpg", name: "Lídia", title: "Hospitalidade", virtue: "Hospitalidade", ref: "Atos 16:11–15", voice: { gender: "female", pitch: 1.02, rate: 1.0 }, desc: "Lídia abriu o coração e a casa para Paulo, e a igreja nasceu em Filipos.", lessons: ["Hospitalidade", "Abrir o coração à Palavra", "Generosidade"] },
+  filipe: { img: "chars/filipe.jpg", name: "Filipe", title: "Evangelista no deserto", virtue: "Evangelização", ref: "Atos 8:26–40", voice: { gender: "male", pitch: 0.95, rate: 1.02 }, desc: "Filipe explicou as Escrituras ao etíope e o batizou no caminho.", lessons: ["Compartilhar a Palavra", "Obedecer à direção de Deus", "Explicar com paciência"] },
+  natanael: { img: "chars/natanael.jpg", name: "Natanael", title: "Um homem sem engano", virtue: "Integridade", ref: "João 1:43–51", voice: { gender: "male", pitch: 0.95, rate: 1.0 }, desc: "Jesus viu Natanael debaixo da figueira e o chamou de israelita sem engano.", lessons: ["Integridade", "Vem e vê", "Jesus nos conhece"] },
+  tome: { img: "chars/tome.jpg", name: "Tomé", title: "Da dúvida à fé", virtue: "Dúvida e fé", ref: "João 20:24–29", voice: { gender: "male", pitch: 0.9, rate: 1.0 }, desc: "Tomé duvidou, mas ao ver Jesus disse: Senhor meu e Deus meu.", lessons: ["Trazer as dúvidas a Jesus", "Fé que confessa", "Bem-aventurados os que creem"] },
+  zaqueu: { img: "chars/zaqueu.jpg", name: "Zaqueu", title: "Transformado por Jesus", virtue: "Transformação", ref: "Lucas 19:1–10", voice: { gender: "male", pitch: 1.0, rate: 1.02 }, desc: "Zaqueu subiu na árvore para ver Jesus e a sua vida mudou completamente.", lessons: ["Buscar a Jesus", "Restituir e reparar", "Alegria na salvação"] },
+  bartimeu: { img: "chars/bartimeu.jpg", name: "Bartimeu", title: "Clamor que Jesus ouve", virtue: "Clamor", ref: "Marcos 10:46–52", voice: { gender: "male", pitch: 0.9, rate: 1.0 }, desc: "Bartimeu, cego, clamou por Jesus e recebeu a visão.", lessons: ["Clamar com fé", "Persistir", "Seguir a Jesus"] },
+  madalena: { img: "chars/madalena.jpg", name: "Maria Madalena", title: "Gratidão e fidelidade", virtue: "Gratidão", ref: "João 20:1–18", voice: { gender: "female", pitch: 1.02, rate: 1.0 }, desc: "Maria Madalena seguiu Jesus com gratidão e foi a primeira a vê-lo ressuscitado.", lessons: ["Gratidão", "Fidelidade até o fim", "Anunciar a boa notícia"] },
+});
+Object.keys(CHARACTERS).forEach((k) => { CHARACTERS[k].key = k; });
+
+// Ordem da galeria (como na faixa "Bible Characters" da referência)
+const CHARACTER_ORDER = ["jesus", "noe", "abraao", "sara", "jose", "moises", "davi", "ester", "daniel", "jonas", "paulo",
+  "adao", "eva", "isaac", "jaco", "rebeca", "arao", "josue", "calebe", "debora", "gideao", "sansao", "rute", "samuel", "salomao",
+  "elias", "eliseu", "isaias", "neemias", "ezequiel", "marta", "maria", "josepai", "joaobatista", "pedro", "barnabe", "timoteo",
+  "lidia", "filipe", "natanael", "tome", "zaqueu", "bartimeu", "madalena"];
+
 // Elenco por unidade: personagem principal + convidados
 const UNIT_CAST = {
-  u1: ["jesus", "moises", "noe"],
-  u2: ["noe", "maria"],
-  u3: ["moises", "ester"],
-  u4: ["davi", "pedro"],
-  u5: ["isaias", "jesus", "maria"],
+  u1: ["jesus", "adao", "eva"],
+  u2: ["noe", "jaco", "rebeca"],
+  u3: ["moises", "arao", "josue"],
+  u4: ["davi", "samuel", "salomao"],
+  u5: ["isaias", "jonas", "daniel", "elias"],
 };
+// Unidade ligada a cada personagem (para "Iniciar lições")
+const CHARACTER_UNIT = { jesus: "u1", adao: "u1", eva: "u1", noe: "u2", jaco: "u2", rebeca: "u2", moises: "u3", arao: "u3", josue: "u3",
+  davi: "u4", samuel: "u4", salomao: "u4", isaias: "u5", jonas: "u5", daniel: "u5", elias: "u5" };
 
 function pickCharacter(unitId) {
   const cast = UNIT_CAST[unitId] || Object.keys(CHARACTERS);

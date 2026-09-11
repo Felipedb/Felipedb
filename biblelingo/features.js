@@ -168,3 +168,61 @@ function registerServiceWorker() {
   if (!/^https?:$/.test(location.protocol)) return;
   navigator.serviceWorker.register("sw.js").catch(() => {});
 }
+
+
+// ---------- 2.3 Galeria de personagens e ficha ----------
+function renderCharacterStrip() {
+  const wrap = $("#char-strip");
+  if (!wrap) return;
+  wrap.innerHTML = `
+    <div class="strip-head">
+      <div><h2>Personagens bíblicos</h2><p>Conheça pessoas incríveis e suas histórias</p></div>
+      <span class="strip-tag">Histórias diferentes. O mesmo Deus fiel.</span>
+    </div>
+    <div class="strip-row">
+      ${CHARACTER_ORDER.filter((k) => CHARACTERS[k]).map((k) => `
+        <button class="strip-item" data-char="${k}">
+          <span class="strip-face">${charFace(CHARACTERS[k])}</span>
+          <span class="strip-name">${CHARACTERS[k].name.split(" (")[0]}</span>
+        </button>`).join("")}
+    </div>`;
+  wrap.querySelectorAll(".strip-item").forEach((b) => b.addEventListener("click", () => openCharacter(b.dataset.char)));
+}
+
+function openCharacter(key) {
+  const ch = CHARACTERS[key];
+  if (!ch) return;
+  const unit = CHARACTER_UNIT[key] ? COURSE.find((u) => u.id === CHARACTER_UNIT[key]) : null;
+  const icons = ["🕊️", "🛡️", "🙏", "🌟", "❤️", "📖"];
+  $("#char-sheet").innerHTML = `
+    <div class="cs-hero">${charFace(ch)}</div>
+    <div class="cs-body">
+      <h3>${ch.name}</h3>
+      <p class="cs-title">${ch.title || ""}</p>
+      <div class="cs-tags"><span class="cs-virtue">✦ ${ch.virtue || ""}</span><span class="cs-ref">${ch.ref || ""}</span></div>
+      <p class="cs-desc">${ch.desc || ""}</p>
+      ${ch.lessons ? `<div class="cs-lessons"><h4>Lições-chave</h4>${ch.lessons.map((l, i) => `<div class="cs-lesson"><span>${icons[i % icons.length]}</span>${l}</div>`).join("")}</div>` : ""}
+      <div class="cs-actions">
+        <button class="btn-audio" id="cs-say" title="Ouvir nome">🔊</button>
+        ${unit ? `<button class="btn-main" id="cs-start">Iniciar lições</button>` : `<button class="btn-main blue" id="cs-practice">Praticar com ${ch.name.split(" ")[0]}</button>`}
+      </div>
+      <button class="btn-ghost modal-close">Fechar</button>
+    </div>`;
+  const modal = $("#modal-char");
+  modal.classList.add("open");
+  $("#cs-say").addEventListener("click", () => speak(ch.name.split(" (")[0], { char: ch }));
+  modal.querySelector(".modal-close").addEventListener("click", () => modal.classList.remove("open"));
+  const start = $("#cs-start");
+  if (start) start.addEventListener("click", () => {
+    modal.classList.remove("open");
+    const next = unit.lessons.find((l) => !state.completed[l.id]) || unit.lessons[unit.lessons.length - 1];
+    if (unit.lessons.every((l) => state.completed[l.id])) startLevelUp(unit); else startLesson(next.id);
+  });
+  const prac = $("#cs-practice");
+  if (prac) prac.addEventListener("click", () => {
+    modal.classList.remove("open");
+    const u = COURSE[Math.floor(Math.random() * COURSE.length)];
+    const review = u.lessons.find((l) => l.review);
+    startLesson(review.id, ch);
+  });
+}
