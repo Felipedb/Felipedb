@@ -57,17 +57,44 @@ function shuffle(arr) {
   return a;
 }
 
-function speak(text, rate = 0.95) {
+// ---------- Vozes por personagem ----------
+// Cada personagem tem um perfil (gênero, tom, velocidade). A voz base vem
+// das vozes en-* instaladas no aparelho; tom e velocidade caracterizam
+// o personagem mesmo quando só há uma voz disponível.
+const FEMALE_HINTS = /female|samantha|victoria|karen|moira|tessa|zira|jenny|aria|serena|allison|ava|susan|catherine|joana|luciana/i;
+const MALE_HINTS = /male|daniel|alex\b|fred|david|mark|guy|arthur|oliver|thomas|james|george|rishi/i;
+
+let _voices = { all: [], male: null, female: null, any: null };
+function refreshVoices() {
+  if (!("speechSynthesis" in window)) return;
+  const en = speechSynthesis.getVoices().filter((v) => v.lang && v.lang.toLowerCase().startsWith("en"));
+  if (!en.length) return;
+  _voices.all = en;
+  const prefer = (list) => list.find((v) => v.lang.toLowerCase().startsWith("en-us")) || list[0] || null;
+  _voices.female = prefer(en.filter((v) => FEMALE_HINTS.test(v.name)));
+  _voices.male = prefer(en.filter((v) => MALE_HINTS.test(v.name) && !FEMALE_HINTS.test(v.name)));
+  _voices.any = prefer(en);
+}
+if ("speechSynthesis" in window) {
+  refreshVoices();
+  speechSynthesis.onvoiceschanged = refreshVoices;
+}
+
+function speak(text, opts = {}) {
   if (!("speechSynthesis" in window)) return;
   speechSynthesis.cancel();
+  const profile = opts.char && opts.char.voice ? opts.char.voice
+    : (session && session.voiceChar && session.voiceChar.voice) || null;
   const u = new SpeechSynthesisUtterance(text);
   u.lang = "en-US";
-  u.rate = rate;
-  const voice = speechSynthesis.getVoices().find((v) => v.lang.startsWith("en"));
+  u.rate = profile ? profile.rate : 0.95;
+  u.pitch = profile ? profile.pitch : 1;
+  const voice = profile
+    ? (_voices[profile.gender] || _voices.any)
+    : _voices.any;
   if (voice) u.voice = voice;
   speechSynthesis.speak(u);
 }
-if ("speechSynthesis" in window) speechSynthesis.getVoices();
 
 function allVocab() {
   return COURSE.flatMap((u) => u.lessons.flatMap((l) => l.vocab || []));
@@ -308,6 +335,7 @@ function renderExercise() {
   const ex = session.exercises[session.index];
   session.checked = false;
   session.answer = null;
+  session.voiceChar = null;
 
   $("#progress-fill").style.width = `${(session.index / session.exercises.length) * 100}%`;
   $("#lesson-hearts").textContent = session.practice ? "💪 prática" : `❤️ ${state.hearts}`;
@@ -357,6 +385,7 @@ function makeOptions(box, options, cols, onSelect) {
 // Personagem com balão de fala (estilo Duolingo)
 function characterRow(bubbleContent) {
   const ch = pickCharacter(session.lesson.unit.id);
+  session.voiceChar = ch;
   const row = document.createElement("div");
   row.className = "char-row";
   const fig = document.createElement("div");
@@ -704,7 +733,7 @@ $("#btn-reset").addEventListener("click", () => {
 });
 $("#card-verse").addEventListener("click", () => {
   const v = verseOfDay();
-  speak(v.text);
+  speak(v.text, { char: CHARACTERS.jesus });
 });
 
 renderHome();

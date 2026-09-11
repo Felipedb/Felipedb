@@ -57,6 +57,7 @@ function _personSVG(p) {
 const CHARACTERS = {
   jesus: {
     img: "chars/jesus.jpg",
+    voice: { gender: "male", pitch: 0.85, rate: 0.88 },
     name: "Jesus",
     svg: _personSVG({
       prefix: "je",
@@ -76,6 +77,7 @@ const CHARACTERS = {
   },
   moises: {
     img: "chars/moises.jpg",
+    voice: { gender: "male", pitch: 0.62, rate: 0.8 },
     name: "Moisés",
     svg: _personSVG({
       prefix: "mo",
@@ -96,6 +98,7 @@ const CHARACTERS = {
   },
   davi: {
     img: "chars/davi.jpg",
+    voice: { gender: "male", pitch: 1.18, rate: 1.0 },
     name: "Davi",
     svg: _personSVG({
       prefix: "da",
@@ -114,6 +117,7 @@ const CHARACTERS = {
   },
   ester: {
     img: "chars/ester.jpg",
+    voice: { gender: "female", pitch: 1.12, rate: 0.95 },
     name: "Ester",
     svg: _personSVG({
       prefix: "es",
@@ -132,6 +136,7 @@ const CHARACTERS = {
   },
   noe: {
     img: "chars/noe.jpg",
+    voice: { gender: "male", pitch: 0.68, rate: 0.78 },
     name: "Noé",
     svg: _personSVG({
       prefix: "no",
@@ -155,6 +160,7 @@ const CHARACTERS = {
   },
   maria: {
     img: "chars/maria.jpg",
+    voice: { gender: "female", pitch: 1.02, rate: 0.9 },
     name: "Maria",
     svg: _personSVG({
       prefix: "ma",
@@ -174,6 +180,7 @@ const CHARACTERS = {
   },
   pedro: {
     img: "chars/pedro.jpg",
+    voice: { gender: "male", pitch: 0.78, rate: 0.92 },
     name: "Pedro",
     svg: _personSVG({
       prefix: "pe",
@@ -195,6 +202,7 @@ const CHARACTERS = {
   },
   isaias: {
     img: "chars/isaias.jpg",
+    voice: { gender: "male", pitch: 0.66, rate: 0.76 },
     name: "Isaías",
     svg: _personSVG({
       prefix: "is",
