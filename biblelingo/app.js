@@ -106,8 +106,8 @@ function renderHome() {
   COURSE.forEach((unit) => {
     const header = document.createElement("div");
     header.className = "unit-header";
-    header.style.background = unit.color;
-    header.innerHTML = `<h2>${unit.icon} ${unit.title}</h2><p>${unit.subtitle}</p>`;
+    header.style.setProperty("--uc", unit.color);
+    header.innerHTML = `<h2>${unit.icon} ${unit.title}</h2><p>${unit.subtitle}</p><span class="watermark">${unit.icon}</span>`;
     trail.appendChild(header);
 
     const nodes = document.createElement("div");
@@ -122,12 +122,42 @@ function renderHome() {
       const btn = document.createElement("button");
       btn.className = "node" + (done ? " done" : isCurrent ? " current" : unlocked ? "" : " locked");
       const icon = done ? "✓" : lesson.review ? "🏆" : unlocked ? "★" : "🔒";
-      btn.innerHTML = `${isCurrent ? '<span class="pulse"></span>' : ""}${icon}<span class="label">${lesson.title}</span>`;
+      const tip = isCurrent ? '<span class="start-tip">COMEÇAR</span>' : "";
+      btn.innerHTML = `${isCurrent ? '<span class="pulse"></span>' : ""}${tip}${icon}<span class="label">${lesson.title}</span>`;
       btn.addEventListener("click", () => startLesson(lesson.id));
       row.appendChild(btn);
       nodes.appendChild(row);
     });
     trail.appendChild(nodes);
+    drawTrailPath(nodes, unit.color);
+  });
+}
+
+// Desenha o caminho tracejado ligando os nós de uma unidade
+function drawTrailPath(nodesEl, color) {
+  requestAnimationFrame(() => {
+    const old = nodesEl.querySelector(".trail-path");
+    if (old) old.remove();
+    const nodes = [...nodesEl.querySelectorAll(".node")];
+    if (nodes.length < 2) return;
+    const box = nodesEl.getBoundingClientRect();
+    if (!box.height) return;
+    const centers = nodes.map((n) => {
+      const r = n.getBoundingClientRect();
+      return { x: r.left - box.left + r.width / 2, y: r.top - box.top + r.height / 2 };
+    });
+    let d = `M ${centers[0].x} ${centers[0].y}`;
+    for (let i = 1; i < centers.length; i++) {
+      const a = centers[i - 1], b = centers[i];
+      const my = (a.y + b.y) / 2;
+      d += ` C ${a.x} ${my}, ${b.x} ${my}, ${b.x} ${b.y}`;
+    }
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("class", "trail-path");
+    svg.setAttribute("viewBox", `0 0 ${box.width} ${box.height}`);
+    svg.setAttribute("preserveAspectRatio", "none");
+    svg.innerHTML = `<path d="${d}" fill="none" stroke="${color}" stroke-opacity="0.25" stroke-width="12" stroke-linecap="round" stroke-dasharray="0.1 22"/>`;
+    nodesEl.prepend(svg);
   });
 }
 
@@ -526,6 +556,15 @@ function finishLesson() {
     state.lastStudy = t;
   }
   save();
+
+  // Personagem comemorando + confete
+  const ch = pickCharacter(session.lesson.unit.id);
+  $("#result-char").innerHTML = ch.svg;
+  $("#result-emoji").style.display = "none";
+  if (typeof confetti === "function") {
+    confetti({ particleCount: 90, spread: 75, origin: { y: 0.35 }, ticks: 180 });
+    if (perfect) setTimeout(() => confetti({ particleCount: 60, spread: 100, origin: { y: 0.3 } }), 350);
+  }
 
   $("#result-emoji").textContent = perfect ? "🌟" : "🎉";
   $("#result-title").textContent = perfect ? "Lição perfeita!" : "Lição concluída!";
