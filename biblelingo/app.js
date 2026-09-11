@@ -15,11 +15,13 @@ function load() {
     hearts: MAX_HEARTS,
     heartsDay: today(),
     completed: {}, // lessonId -> true
+    stars: {}, // lessonId -> 1..3 (melhor resultado)
   };
   try {
     const raw = localStorage.getItem("biblelingo");
     if (raw) Object.assign(base, JSON.parse(raw));
   } catch (e) { /* armazenamento indisponível: segue em memória */ }
+  if (!base.stars) base.stars = {};
   // Corações renovam a cada novo dia
   if (base.heartsDay !== today()) {
     base.hearts = MAX_HEARTS;
@@ -93,6 +95,22 @@ function currentLessonId() {
   return next ? next.id : null;
 }
 
+function charFace(ch) {
+  return ch.img ? `<img src="${ch.img}" alt="${ch.name}">` : ch.svg;
+}
+
+function starsHTML(n, cls = "stars") {
+  let s = "";
+  for (let i = 1; i <= 3; i++) s += `<span class="${i <= n ? "on" : "off"}">★</span>`;
+  return `<span class="${cls}">${s}</span>`;
+}
+
+function verseOfDay() {
+  const verses = COURSE.flatMap((u) => u.lessons.filter((l) => l.verse).map((l) => l.verse));
+  const day = Math.floor(Date.now() / 86400000);
+  return verses[day % verses.length];
+}
+
 function renderHome() {
   $("#stat-streak").textContent = state.streak;
   $("#stat-xp").textContent = state.xp;
@@ -101,36 +119,79 @@ function renderHome() {
   const trail = $("#trail");
   trail.innerHTML = "";
   const currentId = currentLessonId();
-  const offsets = ["", "offset-l", "", "offset-r", ""];
+  const indents = ["", "indent-1", "indent-2", "indent-1", ""];
+
+  // Boas-vindas
+  const guide = CHARACTERS.jesus || CHARACTERS.moises;
+  const welcome = document.createElement("div");
+  welcome.className = "welcome";
+  welcome.innerHTML = `
+    <div class="char">${charFace(guide)}</div>
+    <div class="welcome-bubble">
+      <h2>Seja bem-vindo!</h2>
+      <p>Vamos aprender juntos a Palavra de Deus em inglês?</p>
+    </div>`;
+  trail.appendChild(welcome);
+
+  // Versículo do dia
+  const v = verseOfDay();
+  const vd = document.createElement("div");
+  vd.className = "verse-day";
+  vd.innerHTML = `
+    <div class="vd-title">📖 Versículo do dia</div>
+    <div class="vd-text">"${v.text}"</div>
+    <div class="vd-ref">${v.ref} — ${v.pt}</div>`;
+  trail.appendChild(vd);
 
   COURSE.forEach((unit) => {
     const header = document.createElement("div");
     header.className = "unit-header";
     header.style.setProperty("--uc", unit.color);
-    header.innerHTML = `<h2>${unit.icon} ${unit.title}</h2><p>${unit.subtitle}</p><span class="watermark">${unit.icon}</span>`;
+    header.innerHTML = `<span class="uicon">${unit.icon}</span><div><h2>${unit.title}</h2><p>${unit.subtitle}</p></div>`;
     trail.appendChild(header);
 
     const nodes = document.createElement("div");
     nodes.className = "nodes";
+    const cast = UNIT_CAST[unit.id] || Object.keys(CHARACTERS);
+
     unit.lessons.forEach((lesson, i) => {
       const row = document.createElement("div");
-      row.className = `node-row ${offsets[i % offsets.length]}`;
+      row.className = `lesson-row ${indents[i % indents.length]}`;
       const done = !!state.completed[lesson.id];
       const isCurrent = lesson.id === currentId;
       const unlocked = lessonUnlocked(lesson.id);
+      const stars = state.stars[lesson.id] || 0;
 
       const btn = document.createElement("button");
-      btn.className = "node" + (done ? " done" : isCurrent ? " current" : unlocked ? "" : " locked");
-      const icon = done ? "✓" : lesson.review ? "🏆" : unlocked ? "★" : "🔒";
+      btn.className = "portrait" + (unlocked || done ? "" : " locked");
+      btn.style.setProperty("--pc", unit.color);
+      const ch = CHARACTERS[cast[i % cast.length]];
+      const face = lesson.review
+        ? `<span class="picon">🏆</span>`
+        : charFace(ch);
+      const badge = done
+        ? `<span class="badge">✓</span>`
+        : unlocked ? "" : `<span class="badge lock">🔒</span>`;
       const tip = isCurrent ? '<span class="start-tip">COMEÇAR</span>' : "";
-      btn.innerHTML = `${isCurrent ? '<span class="pulse"></span>' : ""}${tip}${icon}<span class="label">${lesson.title}</span>`;
+      btn.innerHTML = `${isCurrent ? '<span class="pulse"></span>' : ""}${tip}<span class="face">${face}</span>${badge}`;
       btn.addEventListener("click", () => startLesson(lesson.id));
+
+      const ref = lesson.verse ? lesson.verse.ref : unit.subtitle;
+      const info = document.createElement("div");
+      info.className = "lesson-info";
+      info.innerHTML = `<h3>${i + 1}. ${lesson.title}</h3><div class="lref">${ref}</div>${done ? starsHTML(stars) : ""}`;
+
       row.appendChild(btn);
+      row.appendChild(info);
       nodes.appendChild(row);
     });
     trail.appendChild(nodes);
     drawTrailPath(nodes, unit.color);
   });
+
+  const scenery = document.createElement("div");
+  scenery.className = "scenery";
+  trail.appendChild(scenery);
 }
 
 // Desenha o caminho tracejado ligando os nós de uma unidade
@@ -138,7 +199,7 @@ function drawTrailPath(nodesEl, color) {
   requestAnimationFrame(() => {
     const old = nodesEl.querySelector(".trail-path");
     if (old) old.remove();
-    const nodes = [...nodesEl.querySelectorAll(".node")];
+    const nodes = [...nodesEl.querySelectorAll(".portrait")];
     if (nodes.length < 2) return;
     const box = nodesEl.getBoundingClientRect();
     if (!box.height) return;
@@ -297,7 +358,7 @@ function characterRow(bubbleContent) {
   row.className = "char-row";
   const fig = document.createElement("div");
   fig.className = "char-fig";
-  fig.innerHTML = `${ch.svg}<span class="char-name">${ch.name}</span>`;
+  fig.innerHTML = `${charFace(ch)}<span class="char-name">${ch.name}</span>`;
   const bubble = document.createElement("div");
   bubble.className = "bubble";
   if (typeof bubbleContent === "string") bubble.innerHTML = bubbleContent;
@@ -546,6 +607,10 @@ function finishLesson() {
   state.xp += gained;
   state.completed[session.lesson.id] = true;
 
+  // Estrelas: 3 = perfeita, 2 = até 2 erros, 1 = concluída
+  const earned = perfect ? 3 : session.mistakes <= 2 ? 2 : 1;
+  state.stars[session.lesson.id] = Math.max(state.stars[session.lesson.id] || 0, earned);
+
   // Prática recupera 1 coração
   if (session.practice && state.hearts < MAX_HEARTS) state.hearts++;
 
@@ -559,13 +624,14 @@ function finishLesson() {
 
   // Personagem comemorando + confete
   const ch = pickCharacter(session.lesson.unit.id);
-  $("#result-char").innerHTML = ch.svg;
+  $("#result-char").innerHTML = charFace(ch);
   $("#result-emoji").style.display = "none";
   if (typeof confetti === "function") {
     confetti({ particleCount: 90, spread: 75, origin: { y: 0.35 }, ticks: 180 });
     if (perfect) setTimeout(() => confetti({ particleCount: 60, spread: 100, origin: { y: 0.3 } }), 350);
   }
 
+  $("#result-stars").innerHTML = starsHTML(earned, "");
   $("#result-emoji").textContent = perfect ? "🌟" : "🎉";
   $("#result-title").textContent = perfect ? "Lição perfeita!" : "Lição concluída!";
   $("#result-sub").textContent = first ? "Você avançou na trilha." : "Ótima prática!";

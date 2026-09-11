@@ -55,6 +55,24 @@ function _personSVG(p) {
 }
 
 const CHARACTERS = {
+  jesus: {
+    name: "Jesus",
+    svg: _personSVG({
+      prefix: "je",
+      skinLight: "#ffdcb4", skinDark: "#e7a878",
+      robeLight: "#fdfcf7", robeDark: "#e4ddca",
+      browColor: "#5d4037",
+      hair: `<path d="M38 54 Q33 12 70 12 Q107 12 102 54 L103 84 Q97 94 92 82 L91 44 Q70 28 49 44 L48 82 Q43 94 37 84 Z" fill="#6d4c41"/>
+             <path d="M44 30 Q56 18 70 18" stroke="#8d6e63" stroke-width="4" stroke-linecap="round" fill="none"/>
+             <path d="M70 14 L70 26" stroke="#5d4037" stroke-width="3" stroke-linecap="round"/>`,
+      beard: `<path d="M50 62 Q52 84 70 86 Q88 84 90 62 Q80 70 70 70 Q60 70 50 62 Z" fill="#6d4c41"/>
+              <path d="M60 80 Q70 86 80 80" stroke="#5d4037" stroke-width="2" stroke-linecap="round" fill="none"/>`,
+      mouth: `<path d="M63 68 Q70 74 77 68" stroke="#a1554a" stroke-width="3" stroke-linecap="round" fill="none"/>`,
+      robeExtra: `<path d="M50 88 Q70 80 76 90 L64 140 Q50 138 42 132 Z" fill="#c62828"/>
+                  <path d="M52 92 Q66 86 72 94" stroke="#e05a5a" stroke-width="3" stroke-linecap="round" fill="none"/>`,
+      extra: `<path d="M96 100 Q104 92 112 100 M100 96 L100 118 Q100 124 94 124" stroke="#e8b62f" stroke-width="0" fill="none"/>`,
+    }),
+  },
   moises: {
     name: "Moisés",
     svg: _personSVG({
@@ -172,11 +190,11 @@ const CHARACTERS = {
 
 // Elenco por unidade: personagem principal + convidados
 const UNIT_CAST = {
-  u1: ["noe", "moises"],
-  u2: ["moises", "ester"],
-  u3: ["pedro", "maria"],
-  u4: ["davi", "noe"],
-  u5: ["maria", "pedro", "davi", "ester"],
+  u1: ["noe", "moises", "davi"],
+  u2: ["moises", "ester", "maria"],
+  u3: ["jesus", "pedro", "maria"],
+  u4: ["davi", "noe", "ester"],
+  u5: ["jesus", "maria", "pedro", "davi"],
 };
 
 function pickCharacter(unitId) {
