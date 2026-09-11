@@ -16,12 +16,15 @@ function load() {
     heartsDay: today(),
     completed: {}, // lessonId -> true
     stars: {}, // lessonId -> 1..3 (melhor resultado)
+    errors: {}, // palavra EN -> vezes errada (para "Praticar erros")
+    speakMutedUntil: 0,
   };
   try {
     const raw = localStorage.getItem("biblelingo");
     if (raw) Object.assign(base, JSON.parse(raw));
   } catch (e) { /* armazenamento indisponível: segue em memória */ }
   if (!base.stars) base.stars = {};
+  if (!base.errors) base.errors = {};
   // Corações renovam a cada novo dia
   if (base.heartsDay !== today()) {
     base.hearts = MAX_HEARTS;
@@ -158,6 +161,11 @@ function renderHome() {
   const doneUnits = COURSE.filter(unitDone).length;
   $("#pbar-fill").style.width = `${(doneUnits / COURSE.length) * 100}%`;
   $("#progress-label").textContent = `${doneUnits} de ${COURSE.length} lições concluídas`;
+  const errBtn = $("#btn-practice-errors");
+  const nErr = Object.keys(state.errors || {}).length;
+  errBtn.hidden = nErr === 0;
+  errBtn.textContent = `🔁 Praticar erros (${nErr})`;
+  errBtn.onclick = startErrorPractice;
 
   // Conquistas
   const badgeDefs = [
@@ -305,10 +313,13 @@ function buildExercises(lesson, unit) {
   const ex = [];
   const pool = allVocab();
   const lessons = lesson.review ? unit.lessons.filter((l) => !l.review) : [lesson];
+  const speakMuted = state.speakMutedUntil && Date.now() < state.speakMutedUntil;
+  const canSpeak = SPEECH_OK && !speakMuted;
+  const firstTime = !state.completed[lesson.id];
 
   const vocab = lesson.review ? shuffle(unitVocab(unit)).slice(0, 6) : lesson.vocab;
   const sentences = lesson.review
-    ? shuffle(lessons.flatMap((l) => l.sentences || [])).slice(0, 2)
+    ? shuffle(lessons.flatMap((l) => l.sentences || [])).slice(0, 3)
     : lesson.sentences || [];
   const verses = lesson.review ? lessons.map((l) => l.verse).filter(Boolean) : lesson.verse ? [lesson.verse] : [];
   const dialogues = lesson.review
@@ -317,42 +328,85 @@ function buildExercises(lesson, unit) {
   const quizzes = lesson.review
     ? shuffle(lessons.map((l) => l.quiz).filter(Boolean)).slice(0, 2)
     : lesson.quiz ? [lesson.quiz] : [];
+  const readings = lesson.review
+    ? shuffle(lessons.map((l) => l.reading).filter(Boolean)).slice(0, 1)
+    : lesson.reading ? [lesson.reading] : [];
 
   const distract = (v, key, n = 3) =>
     shuffle(pool.filter((p) => p[key] !== v[key] && p.icon !== v.icon)).slice(0, n);
 
+  // Cada palavra em 3 formatos: palavra nova (ver) -> reconhecer -> ouvir ou produzir
   vocab.forEach((v, i) => {
-    const kind = i % 4;
-    if (kind === 0) ex.push({ type: "image-choice", word: v, options: shuffle([v, ...distract(v, "en")]) });
-    else if (kind === 1) ex.push({ type: "choice-en-pt", word: v, options: shuffle([v.pt, ...distract(v, "pt").map((p) => p.pt)]) });
-    else if (kind === 2) ex.push({ type: "listen", word: v, options: shuffle([v.en, ...distract(v, "en").map((p) => p.en)]) });
+    if (firstTime && !lesson.review) {
+      const example = (lesson.sentences || []).find((s) => normalize(s.en).includes(normalize(v.en.replace(/^to /, ""))));
+      ex.push({ type: "intro", word: v, example });
+    }
+    if (i % 2 === 0) ex.push({ type: "image-choice", word: v, options: shuffle([v, ...distract(v, "en")]) });
+    else ex.push({ type: "choice-en-pt", word: v, options: shuffle([v.pt, ...distract(v, "pt").map((p) => p.pt)]) });
+    if (i % 2 === 0) ex.push({ type: "listen", word: v, options: shuffle([v.en, ...distract(v, "en").map((p) => p.en)]) });
     else ex.push({ type: "type", word: v });
   });
 
   if (vocab.length >= 4) ex.push({ type: "match", pairs: shuffle(vocab).slice(0, 4) });
 
-  const makeBank = (s) => {
-    const words = s.en.split(" ");
-    const extra = shuffle(pool.map((p) => p.en.replace("to ", "")))
+  const makeBank = (s, lang = "en") => {
+    const words = s[lang].split(" ");
+    const extra = shuffle(pool.map((p) => p[lang].replace("to ", "")))
       .filter((w) => !words.includes(w))
       .slice(0, 2);
     return shuffle([...words, ...extra]);
   };
+  // Palavra da frase que pode virar lacuna (vocabulário conhecido)
+  const blankOf = (s) => {
+    const words = s.en.split(" ");
+    const cands = words.filter((w) => pool.some((p) => normalize(p.en.replace(/^to /, "")) === normalize(w)) && w.length > 2);
+    return cands.length ? cands[Math.floor(Math.random() * cands.length)] : null;
+  };
+
   sentences.forEach((s, i) => {
-    ex.push({ type: i === 0 ? "build" : "listen-build", sentence: s, bank: makeBank(s) });
+    const kind = i % 4;
+    if (kind === 0) ex.push({ type: "build", sentence: s, bank: makeBank(s) });
+    else if (kind === 1) ex.push({ type: "translate-en-pt", sentence: s, bank: makeBank(s, "pt") });
+    else if (kind === 2) ex.push({ type: "listen-build", sentence: s, bank: makeBank(s) });
+    else ex.push({ type: "listen-type", sentence: s });
+    const blank = blankOf(s);
+    if (blank) {
+      if (i % 2 === 0) ex.push({ type: "missing-word", sentence: s, blank, options: shuffle([blank, ...shuffle(pool.map((p) => p.en.replace(/^to /, ""))).filter((w) => normalize(w) !== normalize(blank)).slice(0, 2)]) });
+      else ex.push({ type: "complete-translation", sentence: s, blank });
+    }
   });
-  if (sentences.length === 1) ex.push({ type: "listen-build", sentence: sentences[0], bank: makeBank(sentences[0]) });
-  if (SPEECH_OK && sentences.length) ex.push({ type: "speak", sentence: sentences[0] });
+  if (sentences.length === 1) {
+    ex.push({ type: "listen-build", sentence: sentences[0], bank: makeBank(sentences[0]) });
+    ex.push({ type: "listen-type", sentence: sentences[0] });
+  }
+  if (canSpeak && sentences.length) ex.push({ type: "speak", sentence: sentences[0] });
 
   verses.forEach((v) => ex.push({ type: "verse", verse: v, options: shuffle(v.options) }));
-  dialogues.forEach((d) => ex.push({ type: "dialogue", dialogue: d, options: shuffle(d.options) }));
+  readings.forEach((r) => ex.push({ type: "read", reading: r, options: shuffle(r.options) }));
+  dialogues.forEach((dd) => ex.push({ type: "dialogue", dialogue: dd, options: shuffle(dd.options) }));
   quizzes.forEach((q) => ex.push({ type: "quiz", quiz: q, options: shuffle(q.options) }));
 
-  // Embaralha, mas nunca começa a lição por fala ou digitação
-  let list = shuffle(ex);
-  const first = list.findIndex((e) => e.type !== "speak" && e.type !== "type");
-  if (first > 0) [list[0], list[first]] = [list[first], list[0]];
-  return list;
+  // Rampa de dificuldade (como no Duolingo): palavra nova -> reconhecimento -> escuta -> lacuna -> produção -> fala -> leitura/conversa
+  const RANK = { "intro": -1, "image-choice": 0, "choice-en-pt": 1, "match": 2, "listen": 3, "listen-build": 4, "missing-word": 5, "verse": 5, "translate-en-pt": 6, "build": 6, "complete-translation": 7, "listen-type": 7, "type": 7, "speak": 8, "read": 9, "dialogue": 9, "quiz": 10 };
+  const ordered = ex
+    .map((e, idx) => ({ e, k: RANK[e.type] * 100 + Math.random() * 60, idx }))
+    .sort((x, y) => x.k - y.k)
+    .map((x) => x.e);
+  // Palavra nova sempre antes da primeira cobrança da mesma palavra
+  const intros = ordered.filter((e) => e.type === "intro");
+  const final = ordered.filter((e) => e.type !== "intro");
+  intros.reverse().forEach((it) => {
+    const j = final.findIndex((e) => e.word && e.word.en === it.word.en);
+    final.splice(j >= 0 ? j : 0, 0, it);
+  });
+  // Reserva 1-2 exercícios "mais difíceis" para o fim, liberados só se a lição estiver sem erros
+  const hard = [];
+  const takeHard = (t) => { const j = final.findIndex((e) => e.type === t); if (j > 0) hard.push(...final.splice(j, 1)); };
+  takeHard("listen-type");
+  if (canSpeak) takeHard("speak");
+  if (!hard.length) takeHard("type");
+  final.hard = hard;
+  return final;
 }
 
 // ---------- Fluxo da lição ----------
@@ -383,7 +437,11 @@ function startLesson(lessonId) {
     answer: null,
     startedAt: Date.now(),
     narrator: pickCharacter(lesson.unit.id),
+    reviewQueue: [],
+    reviewing: false,
+    hardAdded: false,
   };
+  session.hard = session.exercises.hard || [];
   showScreen("lesson");
   renderExercise();
 }
@@ -423,7 +481,13 @@ function renderExercise() {
   updateCombo();
 
   const render = {
+    "intro": renderIntro,
     "image-choice": renderImageChoice,
+    "translate-en-pt": renderTranslateEnPt,
+    "listen-type": renderListenType,
+    "missing-word": renderMissingWord,
+    "complete-translation": renderCompleteTranslation,
+    "read": renderRead,
     "choice-en-pt": renderChoiceEnPt,
     "listen": renderListen,
     "type": renderType,
@@ -436,6 +500,10 @@ function renderExercise() {
     "quiz": renderQuiz,
   }[ex.type];
   render(ex, box);
+  if (ex.isReview) {
+    const t = box.querySelector(".ex-title");
+    if (t) t.insertAdjacentHTML("afterbegin", '<span class="review-tag">Revisão</span> ');
+  }
   session.practiceRec = null;
   if (ex.type !== "speak" && ex.audioText) box.appendChild(practiceBar(ex));
 }
@@ -633,6 +701,121 @@ function practiceBar(ex) {
 }
 
 // ---------- Renderizadores ----------
+// 1.3 Palavra nova: card de introdução (sem verificação)
+function renderIntro(ex, box) {
+  const w = ex.word;
+  box.innerHTML = `<div class="ex-title"><span class="new-tag">Palavra nova</span></div>`;
+  const card = document.createElement("div");
+  card.className = "intro-card";
+  card.innerHTML = `
+    <div class="intro-icon">${w.icon || "📖"}</div>
+    <div class="intro-en">${sayable(w.en)}</div>
+    <div class="intro-pt">${w.pt}</div>
+    ${ex.example ? `<div class="intro-example">${sayable(ex.example.en)}<small>${ex.example.pt}</small></div>` : ""}`;
+  box.appendChild(card);
+  const row = document.createElement("div");
+  row.className = "big-audio";
+  row.appendChild(audioButton(w.en, { big: true }));
+  row.appendChild(audioButton(w.en, { slow: true }));
+  box.appendChild(row);
+  speak(w.en);
+  session.answer = "__intro__";
+  ex.correct = "__intro__";
+  ex.skipped = true;
+  ex.explain = `${w.en} = ${w.pt}`;
+  ex.audioText = w.en;
+  const btn = $("#btn-check");
+  btn.disabled = false;
+  btn.textContent = "Continuar";
+}
+
+// 1.5 Traduzir EN -> PT com banco de palavras em português
+function renderTranslateEnPt(ex, box) {
+  box.innerHTML = `<div class="ex-title">Traduza para o português</div>`;
+  const bubble = document.createElement("div");
+  bubble.className = "bubble-inner";
+  bubble.appendChild(audioButton(ex.sentence.en));
+  bubble.insertAdjacentHTML("beforeend", `<span class="ex-word">${sayable(ex.sentence.en)}</span>`);
+  box.appendChild(characterRow(bubble));
+  wordBankUI(ex, box, ex.sentence.pt, "pt");
+  ex.accept = [ex.sentence.pt];
+  ex.explain = `"${ex.sentence.en}" = "${ex.sentence.pt}"`;
+  ex.audioText = ex.sentence.en;
+  speak(ex.sentence.en);
+}
+
+// 1.5 Digite o que você ouviu
+function renderListenType(ex, box) {
+  box.innerHTML = `<div class="ex-title">Digite o que você ouviu</div>`;
+  box.appendChild(bigAudio(ex.sentence.en));
+  const inp = textInput("Digite em inglês...");
+  box.appendChild(inp);
+  setTimeout(() => inp.focus(), 50);
+  speak(ex.sentence.en);
+  ex.correct = ex.sentence.en;
+  ex.fuzzy = true;
+  ex.explain = `"${ex.sentence.en}" — ${ex.sentence.pt}`;
+  ex.audioText = ex.sentence.en;
+}
+
+function gappedSentence(en, blank) {
+  const re = new RegExp(`(^|\\s)${blank.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(?=\\s|$|[.,;:!?])`);
+  return en.replace(re, `$1<span class="gap" id="sent-gap">&nbsp;</span>`);
+}
+
+// 1.5 Selecione a palavra que falta (frase com lacuna e 3 opções)
+function renderMissingWord(ex, box) {
+  box.innerHTML = `<div class="ex-title">Selecione a palavra que falta</div>
+    <div class="verse-box">${gappedSentence(ex.sentence.en, ex.blank)}</div>
+    <div class="verse-ref">${ex.sentence.pt}</div>`;
+  makeOptions(box, ex.options, 2, (opt) => {
+    const g = $("#sent-gap");
+    if (g) g.textContent = opt;
+    speak(opt);
+  });
+  ex.correct = ex.blank;
+  ex.explain = `"${ex.sentence.en}"`;
+  ex.audioText = ex.sentence.en.replace(ex.blank, "blank");
+  ex.audioAfter = ex.sentence.en;
+}
+
+// 1.5 Complete a tradução (digite a palavra que falta)
+function renderCompleteTranslation(ex, box) {
+  box.innerHTML = `<div class="ex-title">Complete a tradução</div>`;
+  box.appendChild(characterRow(`<span class="ex-word">${ex.sentence.pt}</span>`));
+  box.insertAdjacentHTML("beforeend", `<div class="verse-box">${gappedSentence(ex.sentence.en, ex.blank)}</div>`);
+  const inp = textInput("Palavra que falta...");
+  inp.addEventListener("input", () => { const g = $("#sent-gap"); if (g) g.textContent = inp.value || "\u00a0"; });
+  box.appendChild(inp);
+  setTimeout(() => inp.focus(), 50);
+  ex.correct = ex.blank;
+  ex.fuzzy = true;
+  ex.explain = `"${ex.sentence.en}"`;
+  ex.audioText = ex.sentence.en.replace(ex.blank, "blank");
+  ex.audioAfter = ex.sentence.en;
+}
+
+// 1.5 Leia e responda
+function renderRead(ex, box) {
+  const r = ex.reading;
+  box.innerHTML = `<div class="ex-title">Leia e responda</div>
+    <div class="read-box">
+      <div class="read-en">${sayable(r.text)}</div>
+      <button class="btn-link read-toggle">Ver em português</button>
+      <div class="read-pt" hidden>${r.pt}</div>
+    </div>
+    <div class="read-q">${sayable(r.q)}</div>`;
+  box.querySelector(".read-toggle").addEventListener("click", (e) => {
+    const pt = box.querySelector(".read-pt");
+    pt.hidden = !pt.hidden;
+    e.target.textContent = pt.hidden ? "Ver em português" : "Esconder português";
+  });
+  makeOptions(box, ex.options, 1, (opt) => speak(opt));
+  ex.correct = r.answer;
+  ex.explain = r.q + " → " + r.answer;
+  ex.audioText = r.text;
+}
+
 function renderImageChoice(ex, box) {
   box.innerHTML = `<div class="ex-title">Selecione a palavra correta</div>`;
   const bubble = document.createElement("div");
@@ -767,7 +950,7 @@ function renderQuiz(ex, box) {
 }
 
 // Banco de palavras com animação, dicas e teclado
-function wordBankUI(ex, box, correctSentence) {
+function wordBankUI(ex, box, correctSentence, lang = "en") {
   const zone = document.createElement("div");
   zone.className = "answer-zone";
   const bank = document.createElement("div");
@@ -795,7 +978,7 @@ function wordBankUI(ex, box, correctSentence) {
     t.addEventListener("click", () => {
       if (session.checked) return;
       SFX.tap();
-      speak(word);
+      if (lang === "en") speak(word);
       const from = t.getBoundingClientRect();
       t.classList.add("ghost");
       const placed = document.createElement("button");
@@ -806,7 +989,7 @@ function wordBankUI(ex, box, correctSentence) {
       placed.addEventListener("click", () => {
         if (session.checked) return;
         SFX.tap();
-        speak(word);
+        if (lang === "en") speak(word);
         chosen.splice(chosen.indexOf(entry), 1);
         placed.remove();
         t.classList.remove("ghost");
@@ -831,7 +1014,7 @@ function wordBankUI(ex, box, correctSentence) {
     if (keyboard) {
       zone.hidden = true;
       bank.hidden = true;
-      const inp = textInput("Digite a frase em inglês...");
+      const inp = textInput(lang === "en" ? "Digite a frase em inglês..." : "Digite a frase em português...");
       inp.value = chosen.map((c) => c.word).join(" ");
       session.answer = inp.value;
       $("#btn-check").disabled = inp.value.trim() === "";
@@ -918,6 +1101,11 @@ function renderSpeak(ex, box) {
 
   skip.addEventListener("click", () => {
     if (session.checked) return;
+    state.speakMutedUntil = Date.now() + 15 * 60 * 1000;
+    save();
+    session.exercises = session.exercises.filter((e, i) => i <= session.index || e.type !== "speak");
+    session.hard = session.hard.filter((e) => e.type !== "speak");
+    toast("🔇 Exercícios de fala pausados por 15 min");
     ex.skipped = true;
     session.answer = ex.sentence.en;
     $("#btn-check").disabled = false;
@@ -1002,6 +1190,25 @@ function normalize(s) {
   return String(s).toLowerCase().replace(/[.,;:!?'"]/g, "").replace(/\s+/g, " ").trim();
 }
 
+function editDistance(x, y) {
+  const m = x.length, n = y.length;
+  if (!m) return n; if (!n) return m;
+  let prev = Array.from({ length: n + 1 }, (_, j) => j);
+  for (let i = 1; i <= m; i++) {
+    const cur = [i];
+    for (let j = 1; j <= n; j++) {
+      cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (x[i - 1] === y[j - 1] ? 0 : 1));
+    }
+    prev = cur;
+  }
+  return prev[n];
+}
+function fuzzyEqual(answer, target) {
+  const a = normalize(answer).split(" "), t = normalize(target).split(" ");
+  if (a.length !== t.length) return false;
+  return t.every((w, i) => a[i] === w || (w.length >= 4 && editDistance(a[i], w) <= 1));
+}
+
 function checkAnswer() {
   const ex = session.exercises[session.index];
   const btn = $("#btn-check");
@@ -1011,12 +1218,14 @@ function checkAnswer() {
     if (session.recognizer) { try { session.recognizer.abort(); } catch (e) {} }
     if (session.practiceRec) { try { session.practiceRec.abort(); } catch (e) {} }
     const accepts = ex.accept || [ex.correct];
-    const ok = accepts.some((a) => normalize(session.answer) === normalize(a));
+    const ok = accepts.some((c) => normalize(session.answer) === normalize(c))
+      || ((ex.fuzzy || ex.type === "build" || ex.type === "listen-build") && accepts.some((c) => fuzzyEqual(session.answer, c)));
+    if (ok && !accepts.some((c) => normalize(session.answer) === normalize(c))) ex.typo = true;
     const footer = $("#footer");
     footer.classList.add(ok ? "correct" : "wrong", "up");
     if (ok) {
       $("#fb-ok-title").textContent = ex.skipped ? "Tudo bem, seguimos!" : PRAISES[Math.floor(Math.random() * PRAISES.length)];
-      $("#fb-ok-detail").textContent = ex.explain ? `Significado: ${ex.explain}` : "";
+      $("#fb-ok-detail").textContent = (ex.typo ? "Atenção à ortografia. " : "") + (ex.explain ? `Significado: ${ex.explain}` : "");
     } else {
       $("#fb-bad-title").textContent = "Resposta correta:";
       $("#fb-bad-detail").textContent = ex.correct === "__matched__" ? "" : (ex.correctLabel || ex.correct);
@@ -1036,6 +1245,11 @@ function checkAnswer() {
     reactCharacter(ok);
 
     if (ok) {
+      if (ex.word && state.errors[ex.word.en] && session.lesson.practiceErrors) {
+        state.errors[ex.word.en] = Math.max(0, state.errors[ex.word.en] - 1);
+        if (!state.errors[ex.word.en]) delete state.errors[ex.word.en];
+        save();
+      }
       if (ex.skipped) {
         btn.textContent = "Continuar";
       } else {
@@ -1056,6 +1270,8 @@ function checkAnswer() {
       session.mistakes++;
       session.combo = 0;
       updateCombo();
+      if (!session.reviewing) session.reviewQueue.push(cloneExercise(ex));
+      if (ex.word) { state.errors = state.errors || {}; state.errors[ex.word.en] = (state.errors[ex.word.en] || 0) + 1; }
       SFX.wrong();
       buzz([60, 40, 60]);
       if (!session.practice) {
@@ -1079,10 +1295,37 @@ function checkAnswer() {
   // Avança
   session.index++;
   if (session.index >= session.exercises.length) {
+    // Sem erros: libera os exercícios mais difíceis reservados
+    if (!session.hardAdded && session.mistakes === 0 && session.hard.length) {
+      session.hardAdded = true;
+      session.exercises.push(...session.hard.slice(0, 2));
+      toast("💪 Mandou bem! Um desafio extra");
+      renderExercise();
+      return;
+    }
+    // Com erros: revisa os erros no fim da lição
+    if (!session.reviewing && session.reviewQueue.length) {
+      session.reviewing = true;
+      session.exercises.push(...session.reviewQueue);
+      session.reviewQueue = [];
+      toast("🔁 Vamos revisar seus erros");
+      renderExercise();
+      return;
+    }
     finishLesson();
   } else {
     renderExercise();
   }
+}
+
+// Cópia limpa de um exercício para a revisão (novo embaralhamento das opções)
+function cloneExercise(ex) {
+  const c = { ...ex };
+  delete c.correct; delete c.explain; delete c.accept; delete c.audioText; delete c.audioAfter; delete c.skipped;
+  if (Array.isArray(ex.options)) c.options = shuffle(ex.options);
+  if (Array.isArray(ex.bank)) c.bank = shuffle(ex.bank);
+  c.isReview = true;
+  return c;
 }
 
 function finishLesson() {
@@ -1093,11 +1336,11 @@ function finishLesson() {
   gained += session.bonus;
 
   state.xp += gained;
-  state.completed[session.lesson.id] = true;
+  if (!session.lesson.practiceErrors) state.completed[session.lesson.id] = true;
 
   // Estrelas: 3 = perfeita, 2 = até 2 erros, 1 = concluída
   const earned = perfect ? 3 : session.mistakes <= 2 ? 2 : 1;
-  state.stars[session.lesson.id] = Math.max(state.stars[session.lesson.id] || 0, earned);
+  if (!session.lesson.practiceErrors) state.stars[session.lesson.id] = Math.max(state.stars[session.lesson.id] || 0, earned);
 
   // Prática recupera 1 coração
   if (session.practice && state.hearts < MAX_HEARTS) state.hearts++;
@@ -1130,7 +1373,8 @@ function finishLesson() {
     + ` ⏱️ ${mm}:${ss}` + (session.bonus ? ` · 🔥 combo +${session.bonus} XP` : "");
   $("#result-xp").textContent = `+${gained}`;
   $("#result-streak").textContent = state.streak;
-  $("#result-acc").textContent = `${Math.max(0, Math.round((1 - session.mistakes / Math.max(1, session.exercises.length)) * 100))}%`;
+  const firstPass = session.exercises.filter((e) => !e.isReview).length;
+  $("#result-acc").textContent = `${Math.max(0, Math.round((1 - session.mistakes / Math.max(1, firstPass)) * 100))}%`;
 
   const blessings = [
     { t: "I can do all things through Christ which strengtheneth me.", r: "Filipenses 4:13" },
@@ -1142,7 +1386,47 @@ function finishLesson() {
   $("#result-verse").innerHTML = `"${b.t}"<br><b>${b.r}</b>`;
 
   $("#progress-fill").style.width = "100%";
+  const chest = $("#chest");
+  chest.className = "chest";
+  chest.disabled = false;
+  chest.innerHTML = `🎁<span>Abrir baú</span>`;
+  chest.onclick = () => {
+    if (chest.classList.contains("open")) return;
+    const bonus = [1, 2, 3, 5][Math.floor(Math.random() * 4)];
+    state.xp += bonus;
+    save();
+    chest.classList.add("open");
+    chest.innerHTML = `✨<span>+${bonus} XP</span>`;
+    SFX.combo();
+    if (typeof confetti === "function") confetti({ particleCount: 40, spread: 60, origin: { y: 0.6 } });
+    $("#result-xp").textContent = `+${gained + bonus}`;
+  };
   showScreen("result");
+}
+
+// 1.8 Praticar erros: lição montada com as palavras erradas
+function startErrorPractice() {
+  const words = Object.keys(state.errors || {});
+  if (!words.length) return;
+  const pool = allVocab();
+  const vocab = shuffle(pool.filter((p) => words.includes(p.en))).slice(0, 6);
+  const unit = COURSE[0];
+  const lesson = { id: "practice-errors", title: "Praticar erros", vocab, sentences: [], unit, practiceErrors: true };
+  const distract = (v, key) => shuffle(pool.filter((p) => p[key] !== v[key] && p.icon !== v.icon)).slice(0, 3);
+  const ex = [];
+  vocab.forEach((v, i) => {
+    ex.push({ type: "image-choice", word: v, options: shuffle([v, ...distract(v, "en")]) });
+    ex.push(i % 2 === 0 ? { type: "listen", word: v, options: shuffle([v.en, ...distract(v, "en").map((p) => p.en)]) } : { type: "type", word: v });
+  });
+  if (vocab.length >= 4) ex.push({ type: "match", pairs: vocab.slice(0, 4) });
+  ex.hard = [];
+  session = {
+    lesson, exercises: ex, index: 0, mistakes: 0, combo: 0, bestCombo: 0, bonus: 0,
+    practice: true, checked: false, answer: null, startedAt: Date.now(),
+    narrator: pickCharacter(unit.id), reviewQueue: [], reviewing: false, hardAdded: true, hard: [],
+  };
+  showScreen("lesson");
+  renderExercise();
 }
 
 // ---------- Eventos globais ----------

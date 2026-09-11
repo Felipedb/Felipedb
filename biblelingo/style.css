@@ -752,3 +752,25 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .say-word { cursor: pointer; border-radius: 6px; padding: 0 1px; transition: background 0.12s; }
 .say-word:active { background: #dcefff; color: #1899d6; }
+
+.review-tag { display: inline-block; font-size: 11px; font-weight: 900; letter-spacing: .5px; text-transform: uppercase; color: #a97e0a; background: var(--gold-soft); border: 2px solid #f0dfae; border-radius: 8px; padding: 2px 8px; vertical-align: middle; margin-right: 4px; }
+
+/* ---------- Fase 1: palavra nova, leitura, lacuna em frase, baú, praticar erros ---------- */
+.new-tag { display: inline-block; font-size: 12px; font-weight: 900; letter-spacing: .5px; text-transform: uppercase; color: #7a42c2; background: #f1e8fb; border: 2px solid #dccbf2; border-radius: 8px; padding: 3px 10px; }
+.intro-card { background: var(--card); border: 2px solid var(--line); border-radius: 22px; padding: 26px 20px 20px; text-align: center; box-shadow: 0 4px 0 var(--line); margin-bottom: 18px; animation: pop 0.35s ease; }
+.intro-icon { font-size: 74px; line-height: 1; margin-bottom: 10px; }
+.intro-en { font-family: "Baloo 2", "Nunito", sans-serif; font-size: 34px; font-weight: 800; color: #274156; }
+.intro-pt { font-size: 18px; font-weight: 800; color: var(--text-soft); margin-top: 2px; }
+.intro-example { margin-top: 16px; padding-top: 14px; border-top: 2px dashed var(--line); font-size: 17px; font-weight: 800; }
+.intro-example small { display: block; font-size: 13.5px; font-weight: 700; color: var(--text-soft); margin-top: 4px; }
+.read-box { background: var(--card); border: 2px solid var(--line); border-radius: 18px; padding: 16px; margin-bottom: 14px; }
+.read-en { font-size: 17.5px; line-height: 1.6; font-weight: 700; }
+.read-pt { font-size: 14.5px; line-height: 1.5; color: var(--text-soft); font-weight: 700; margin-top: 8px; padding-top: 8px; border-top: 2px dashed var(--line); }
+.read-toggle { padding: 8px 0 0; }
+.read-q { font-size: 18px; font-weight: 900; margin-bottom: 12px; }
+.chest { display: flex; flex-direction: column; align-items: center; gap: 2px; margin: 0 auto 16px; padding: 12px 26px; border-radius: 18px; background: linear-gradient(180deg, #ffd166, #f5b915); color: #5a3e00; font-size: 30px; box-shadow: 0 5px 0 #c9920c; animation: chest-wiggle 1.6s ease-in-out infinite; }
+.chest span { font-size: 13px; font-weight: 900; letter-spacing: .4px; text-transform: uppercase; }
+.chest.open { animation: none; background: linear-gradient(180deg, #d7ffb8, #9be36a); box-shadow: 0 5px 0 #58a700; color: #2f5d0a; }
+@keyframes chest-wiggle { 0%, 100% { transform: rotate(0); } 10% { transform: rotate(-4deg) scale(1.04); } 20% { transform: rotate(4deg) scale(1.04); } 30% { transform: rotate(0); } }
+.btn-mini { margin-top: 10px; padding: 8px 12px; border-radius: 12px; background: var(--gold-soft); border: 2px solid #f0dfae; color: #8a6d1d; font-size: 13.5px; font-weight: 900; width: 100%; }
+@media (prefers-reduced-motion: reduce) { .chest, .intro-card { animation: none; } }
