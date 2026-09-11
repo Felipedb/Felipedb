@@ -298,10 +298,14 @@ const UNIT_CAST = {
   u3: ["moises", "arao", "josue"],
   u4: ["davi", "samuel", "salomao"],
   u5: ["isaias", "jonas", "daniel", "elias"],
+  u6: ["jose", "jaco", "rebeca"],
+  u7: ["daniel", "ezequiel", "neemias"],
+  u8: ["jesus", "pedro", "maria", "madalena"],
 };
 // Unidade ligada a cada personagem (para "Iniciar lições")
 const CHARACTER_UNIT = { jesus: "u1", adao: "u1", eva: "u1", noe: "u2", jaco: "u2", rebeca: "u2", moises: "u3", arao: "u3", josue: "u3",
-  davi: "u4", samuel: "u4", salomao: "u4", isaias: "u5", jonas: "u5", daniel: "u5", elias: "u5" };
+  davi: "u4", samuel: "u4", salomao: "u4", isaias: "u5", jonas: "u5", elias: "u5", jose: "u6", daniel: "u7", ezequiel: "u7", neemias: "u7",
+  pedro: "u8", madalena: "u8", marta: "u8", tome: "u8", zaqueu: "u8", bartimeu: "u8" };
 
 function pickCharacter(unitId) {
   const cast = UNIT_CAST[unitId] || Object.keys(CHARACTERS);

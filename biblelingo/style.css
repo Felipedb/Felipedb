@@ -172,7 +172,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .gold-card .vd-text { font-style: italic; color: #6e5a1e; line-height: 1.5; }
 .gold-card .vd-ref { margin-top: 4px; color: #b89232; font-weight: 800; font-size: 12.5px; }
 
-.badges { display: flex; gap: 10px; }
+.badges { display: flex; gap: 10px; flex-wrap: wrap; }
 .badge-hex {
   width: 46px; height: 46px;
   display: flex; align-items: center; justify-content: center;

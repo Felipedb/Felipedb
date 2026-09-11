@@ -409,4 +409,769 @@ const COURSE = [
       { id: "u5r", title: "Revisão", review: true },
     ],
   },
+{
+  "id": "u6",
+  "title": "José no Egito",
+  "subtitle": "Gênesis 37–50",
+  "icon": "🌾",
+  "face": "jose",
+  "color": "#2e9d8a",
+  "lessons": [
+    {
+      "id": "u6l1",
+      "title": "Os sonhos de José",
+      "vocab": [
+        {
+          "en": "dream",
+          "pt": "sonho",
+          "icon": "💭"
+        },
+        {
+          "en": "brother",
+          "pt": "irmão",
+          "icon": "👬"
+        },
+        {
+          "en": "coat",
+          "pt": "túnica",
+          "icon": "🧥"
+        },
+        {
+          "en": "to sell",
+          "pt": "vender",
+          "icon": "💰"
+        }
+      ],
+      "sentences": [
+        {
+          "en": "Joseph had a dream",
+          "pt": "José teve um sonho"
+        },
+        {
+          "en": "his brothers sold him",
+          "pt": "os irmãos dele o venderam"
+        }
+      ],
+      "verse": {
+        "text": "And Joseph dreamed a dream, and he told it his brethren.",
+        "pt": "E José teve um sonho e o contou aos seus irmãos.",
+        "ref": "Gênesis 37:5",
+        "blank": "dream",
+        "options": [
+          "dream",
+          "coat",
+          "stone",
+          "song"
+        ]
+      },
+      "dialogue": {
+        "line": "Joseph, tell us your dream!",
+        "pt": "José, conte-nos o seu sonho!",
+        "options": [
+          "The sun and the moon bowed to me.",
+          "The sea is dry.",
+          "I see a rainbow!"
+        ],
+        "answer": "The sun and the moon bowed to me.",
+        "answerPt": "O sol e a lua se curvaram diante de mim."
+      },
+      "quiz": {
+        "q": "What did Joseph's father give him?",
+        "options": [
+          "A coat of many colors",
+          "A crown",
+          "A harp"
+        ],
+        "answer": "A coat of many colors",
+        "explain": "Jacó deu a José uma túnica de muitas cores."
+      },
+      "reading": {
+        "text": "Joseph was the son Jacob loved. His father gave him a coat of many colors. His brothers were jealous and sold him to Egypt.",
+        "pt": "José era o filho que Jacó amava. O pai lhe deu uma túnica de muitas cores. Os irmãos tiveram inveja e o venderam para o Egito.",
+        "q": "Why did the brothers sell Joseph?",
+        "options": [
+          "They were jealous",
+          "They needed a boat",
+          "They were afraid of lions"
+        ],
+        "answer": "They were jealous"
+      }
+    },
+    {
+      "id": "u6l2",
+      "title": "Na casa do rei",
+      "vocab": [
+        {
+          "en": "prison",
+          "pt": "prisão",
+          "icon": "⛓️"
+        },
+        {
+          "en": "to interpret",
+          "pt": "interpretar",
+          "icon": "🔎"
+        },
+        {
+          "en": "seven",
+          "pt": "sete",
+          "icon": "7️⃣"
+        },
+        {
+          "en": "bread",
+          "pt": "pão",
+          "icon": "🍞"
+        }
+      ],
+      "sentences": [
+        {
+          "en": "God is with Joseph",
+          "pt": "Deus está com José"
+        },
+        {
+          "en": "seven years of plenty",
+          "pt": "sete anos de fartura"
+        }
+      ],
+      "verse": {
+        "text": "But the LORD was with Joseph, and shewed him mercy.",
+        "pt": "Mas o Senhor era com José e lhe mostrou misericórdia.",
+        "ref": "Gênesis 39:21",
+        "blank": "with",
+        "options": [
+          "with",
+          "far",
+          "after",
+          "under"
+        ]
+      },
+      "dialogue": {
+        "line": "Can you interpret my dream?",
+        "pt": "Você pode interpretar o meu sonho?",
+        "options": [
+          "God will give the answer.",
+          "I have five stones.",
+          "Let there be light."
+        ],
+        "answer": "God will give the answer.",
+        "answerPt": "Deus dará a resposta."
+      },
+      "quiz": {
+        "q": "How many years of plenty did Joseph announce?",
+        "options": [
+          "Seven",
+          "Forty",
+          "Three"
+        ],
+        "answer": "Seven",
+        "explain": "Sete anos de fartura e sete de fome."
+      },
+      "reading": {
+        "text": "In prison, Joseph interpreted dreams. Then the king had a dream. Joseph said: seven years of plenty, then seven years of famine. The king made Joseph a ruler of Egypt.",
+        "pt": "Na prisão, José interpretou sonhos. Então o rei teve um sonho. José disse: sete anos de fartura, depois sete anos de fome. O rei fez de José governador do Egito.",
+        "q": "What did the king make Joseph?",
+        "options": [
+          "A ruler of Egypt",
+          "A shepherd",
+          "A prisoner"
+        ],
+        "answer": "A ruler of Egypt"
+      }
+    },
+    {
+      "id": "u6l3",
+      "title": "O perdão",
+      "vocab": [
+        {
+          "en": "to forgive",
+          "pt": "perdoar",
+          "icon": "🤲"
+        },
+        {
+          "en": "family",
+          "pt": "família",
+          "icon": "👨‍👩‍👧‍👦"
+        },
+        {
+          "en": "famine",
+          "pt": "fome",
+          "icon": "🌵"
+        },
+        {
+          "en": "to weep",
+          "pt": "chorar",
+          "icon": "😢"
+        }
+      ],
+      "sentences": [
+        {
+          "en": "Joseph forgave his brothers",
+          "pt": "José perdoou os seus irmãos"
+        },
+        {
+          "en": "God meant it for good",
+          "pt": "Deus o tornou em bem"
+        }
+      ],
+      "verse": {
+        "text": "Ye thought evil against me; but God meant it unto good.",
+        "pt": "Vós pensastes o mal contra mim, mas Deus o tornou em bem.",
+        "ref": "Gênesis 50:20",
+        "blank": "good",
+        "options": [
+          "good",
+          "gold",
+          "night",
+          "water"
+        ]
+      },
+      "dialogue": {
+        "line": "We are your brothers. Forgive us!",
+        "pt": "Somos seus irmãos. Perdoe-nos!",
+        "options": [
+          "Do not be afraid. God meant it for good.",
+          "Go to the desert.",
+          "I see a giant!"
+        ],
+        "answer": "Do not be afraid. God meant it for good.",
+        "answerPt": "Não tenham medo. Deus o tornou em bem."
+      },
+      "quiz": {
+        "q": "What did Joseph do when he saw his brothers?",
+        "options": [
+          "He forgave them",
+          "He sold them",
+          "He hid from them"
+        ],
+        "answer": "He forgave them",
+        "explain": "José chorou e perdoou os irmãos."
+      },
+      "reading": {
+        "text": "The famine came, and the brothers went to Egypt for bread. They did not know Joseph. Joseph wept and said: I am Joseph, your brother. God sent me here to save you.",
+        "pt": "Veio a fome, e os irmãos foram ao Egito buscar pão. Eles não reconheceram José. José chorou e disse: Eu sou José, o irmão de vocês. Deus me enviou aqui para salvar vocês.",
+        "q": "Why did God send Joseph to Egypt?",
+        "options": [
+          "To save his family",
+          "To build an ark",
+          "To fight a giant"
+        ],
+        "answer": "To save his family"
+      }
+    },
+    {
+      "id": "u6r",
+      "title": "Revisão",
+      "review": true
+    }
+  ]
+},
+{
+  "id": "u7",
+  "title": "Daniel na cova dos leões",
+  "subtitle": "Daniel 1–6",
+  "icon": "🦁",
+  "face": "daniel",
+  "color": "#c0392b",
+  "lessons": [
+    {
+      "id": "u7l1",
+      "title": "Fiel em Babilônia",
+      "vocab": [
+        {
+          "en": "lion",
+          "pt": "leão",
+          "icon": "🦁"
+        },
+        {
+          "en": "to pray",
+          "pt": "orar",
+          "icon": "🙏"
+        },
+        {
+          "en": "faithful",
+          "pt": "fiel",
+          "icon": "💎"
+        },
+        {
+          "en": "law",
+          "pt": "lei",
+          "icon": "📜"
+        }
+      ],
+      "sentences": [
+        {
+          "en": "Daniel prayed three times a day",
+          "pt": "Daniel orava três vezes ao dia"
+        },
+        {
+          "en": "Daniel was faithful to God",
+          "pt": "Daniel era fiel a Deus"
+        }
+      ],
+      "verse": {
+        "text": "He kneeled upon his knees three times a day, and prayed.",
+        "pt": "Ele se punha de joelhos três vezes ao dia e orava.",
+        "ref": "Daniel 6:10",
+        "blank": "prayed",
+        "options": [
+          "prayed",
+          "sang",
+          "ran",
+          "slept"
+        ]
+      },
+      "dialogue": {
+        "line": "Daniel, the king made a new law!",
+        "pt": "Daniel, o rei fez uma nova lei!",
+        "options": [
+          "I will pray to my God anyway.",
+          "Let us go into the ark.",
+          "The sea is dry."
+        ],
+        "answer": "I will pray to my God anyway.",
+        "answerPt": "Vou orar ao meu Deus mesmo assim."
+      },
+      "quiz": {
+        "q": "How many times a day did Daniel pray?",
+        "options": [
+          "Three",
+          "Seven",
+          "Once"
+        ],
+        "answer": "Three",
+        "explain": "Daniel orava três vezes ao dia, com a janela aberta."
+      },
+      "reading": {
+        "text": "Daniel lived in Babylon, far from his home. He loved God and prayed three times a day. The king made a law: pray only to the king. But Daniel prayed to God.",
+        "pt": "Daniel vivia na Babilônia, longe de casa. Ele amava a Deus e orava três vezes ao dia. O rei fez uma lei: orar só ao rei. Mas Daniel orou a Deus.",
+        "q": "What did the law say?",
+        "options": [
+          "Pray only to the king",
+          "Build a temple",
+          "Go to Egypt"
+        ],
+        "answer": "Pray only to the king"
+      }
+    },
+    {
+      "id": "u7l2",
+      "title": "A cova dos leões",
+      "vocab": [
+        {
+          "en": "angel",
+          "pt": "anjo",
+          "icon": "👼"
+        },
+        {
+          "en": "mouth",
+          "pt": "boca",
+          "icon": "👄"
+        },
+        {
+          "en": "to close",
+          "pt": "fechar",
+          "icon": "🔒"
+        },
+        {
+          "en": "morning",
+          "pt": "manhã",
+          "icon": "🌅"
+        }
+      ],
+      "sentences": [
+        {
+          "en": "God sent his angel",
+          "pt": "Deus enviou o seu anjo"
+        },
+        {
+          "en": "the angel shut the lions' mouths",
+          "pt": "o anjo fechou a boca dos leões"
+        }
+      ],
+      "verse": {
+        "text": "My God hath sent his angel, and hath shut the lions' mouths.",
+        "pt": "O meu Deus enviou o seu anjo e fechou a boca dos leões.",
+        "ref": "Daniel 6:22",
+        "blank": "angel",
+        "options": [
+          "angel",
+          "king",
+          "brother",
+          "stone"
+        ]
+      },
+      "dialogue": {
+        "line": "Daniel, is your God able to save you?",
+        "pt": "Daniel, o seu Deus pode salvá-lo?",
+        "options": [
+          "Yes! God sent his angel.",
+          "No, the sea is dry.",
+          "I have a harp."
+        ],
+        "answer": "Yes! God sent his angel.",
+        "answerPt": "Sim! Deus enviou o seu anjo."
+      },
+      "quiz": {
+        "q": "Who shut the lions' mouths?",
+        "options": [
+          "An angel of God",
+          "The king",
+          "Daniel's brother"
+        ],
+        "answer": "An angel of God",
+        "explain": "Deus enviou o seu anjo e fechou a boca dos leões."
+      },
+      "reading": {
+        "text": "They threw Daniel into the lions' den. In the morning, the king ran to the den. Daniel said: My God sent his angel and shut the lions' mouths. The king was very happy.",
+        "pt": "Jogaram Daniel na cova dos leões. De manhã, o rei correu até a cova. Daniel disse: O meu Deus enviou o seu anjo e fechou a boca dos leões. O rei ficou muito feliz.",
+        "q": "When did the king run to the den?",
+        "options": [
+          "In the morning",
+          "At night",
+          "After seven days"
+        ],
+        "answer": "In the morning"
+      }
+    },
+    {
+      "id": "u7l3",
+      "title": "O Deus vivo",
+      "vocab": [
+        {
+          "en": "kingdom",
+          "pt": "reino",
+          "icon": "🏰"
+        },
+        {
+          "en": "forever",
+          "pt": "para sempre",
+          "icon": "♾️"
+        },
+        {
+          "en": "to save",
+          "pt": "salvar",
+          "icon": "🛟"
+        },
+        {
+          "en": "living",
+          "pt": "vivo",
+          "icon": "💚"
+        }
+      ],
+      "sentences": [
+        {
+          "en": "he is the living God",
+          "pt": "ele é o Deus vivo"
+        },
+        {
+          "en": "his kingdom is forever",
+          "pt": "o seu reino é para sempre"
+        }
+      ],
+      "verse": {
+        "text": "He is the living God, and stedfast for ever.",
+        "pt": "Ele é o Deus vivo e permanece para sempre.",
+        "ref": "Daniel 6:26",
+        "blank": "living",
+        "options": [
+          "living",
+          "little",
+          "cold",
+          "dry"
+        ]
+      },
+      "dialogue": {
+        "line": "People of Babylon, listen!",
+        "pt": "Povo da Babilônia, ouçam!",
+        "options": [
+          "The God of Daniel is the living God.",
+          "The rain is coming.",
+          "Take off your shoes."
+        ],
+        "answer": "The God of Daniel is the living God.",
+        "answerPt": "O Deus de Daniel é o Deus vivo."
+      },
+      "quiz": {
+        "q": "What did the king say about God?",
+        "options": [
+          "He is the living God",
+          "He is far away",
+          "He is a king of Egypt"
+        ],
+        "answer": "He is the living God",
+        "explain": "O rei escreveu: o Deus de Daniel é o Deus vivo."
+      },
+      "reading": {
+        "text": "The king wrote to all the people: The God of Daniel is the living God. His kingdom is forever. He saves and he delivers. Daniel was faithful, and God was faithful to him.",
+        "pt": "O rei escreveu a todo o povo: O Deus de Daniel é o Deus vivo. O seu reino é para sempre. Ele salva e livra. Daniel foi fiel, e Deus foi fiel a ele.",
+        "q": "How long is God's kingdom?",
+        "options": [
+          "Forever",
+          "Seven years",
+          "One day"
+        ],
+        "answer": "Forever"
+      }
+    },
+    {
+      "id": "u7r",
+      "title": "Revisão",
+      "review": true
+    }
+  ]
+},
+{
+  "id": "u8",
+  "title": "Jesus e os discípulos",
+  "subtitle": "Mateus 4–14",
+  "icon": "🐟",
+  "face": "jesus",
+  "color": "#3f7fd6",
+  "lessons": [
+    {
+      "id": "u8l1",
+      "title": "Vinde após mim",
+      "vocab": [
+        {
+          "en": "fisherman",
+          "pt": "pescador",
+          "icon": "🎣"
+        },
+        {
+          "en": "net",
+          "pt": "rede",
+          "icon": "🕸️"
+        },
+        {
+          "en": "to follow",
+          "pt": "seguir",
+          "icon": "👣"
+        },
+        {
+          "en": "disciple",
+          "pt": "discípulo",
+          "icon": "🧑‍🤝‍🧑"
+        }
+      ],
+      "sentences": [
+        {
+          "en": "follow me",
+          "pt": "segue-me"
+        },
+        {
+          "en": "they left their nets and followed him",
+          "pt": "eles deixaram as redes e o seguiram"
+        }
+      ],
+      "verse": {
+        "text": "Follow me, and I will make you fishers of men.",
+        "pt": "Vinde após mim, e eu vos farei pescadores de homens.",
+        "ref": "Mateus 4:19",
+        "blank": "Follow",
+        "options": [
+          "Follow",
+          "Leave",
+          "Send",
+          "Build"
+        ]
+      },
+      "dialogue": {
+        "line": "Peter, leave your nets and follow me.",
+        "pt": "Pedro, deixe as redes e siga-me.",
+        "options": [
+          "Yes, Lord! I will follow you.",
+          "No, the sea is dry.",
+          "I have five stones."
+        ],
+        "answer": "Yes, Lord! I will follow you.",
+        "answerPt": "Sim, Senhor! Eu te seguirei."
+      },
+      "quiz": {
+        "q": "What were Peter and Andrew doing?",
+        "options": [
+          "Fishing",
+          "Building an ark",
+          "Singing"
+        ],
+        "answer": "Fishing",
+        "explain": "Pedro e André eram pescadores e lançavam as redes ao mar."
+      },
+      "reading": {
+        "text": "Jesus walked by the sea. He saw Peter and Andrew, two fishermen. He said: Follow me, and I will make you fishers of men. They left their nets and followed him.",
+        "pt": "Jesus andava à beira do mar. Viu Pedro e André, dois pescadores. Disse: Vinde após mim, e eu vos farei pescadores de homens. Eles deixaram as redes e o seguiram.",
+        "q": "What did Peter and Andrew leave?",
+        "options": [
+          "Their nets",
+          "Their crowns",
+          "Their harps"
+        ],
+        "answer": "Their nets"
+      }
+    },
+    {
+      "id": "u8l2",
+      "title": "O Pai Nosso",
+      "vocab": [
+        {
+          "en": "father",
+          "pt": "pai",
+          "icon": "👨"
+        },
+        {
+          "en": "bread",
+          "pt": "pão",
+          "icon": "🍞"
+        },
+        {
+          "en": "to forgive",
+          "pt": "perdoar",
+          "icon": "🤲"
+        },
+        {
+          "en": "daily",
+          "pt": "diário",
+          "icon": "📅"
+        }
+      ],
+      "sentences": [
+        {
+          "en": "give us this day our daily bread",
+          "pt": "o pão nosso de cada dia nos dá hoje"
+        },
+        {
+          "en": "forgive us our debts",
+          "pt": "perdoa-nos as nossas dívidas"
+        }
+      ],
+      "verse": {
+        "text": "Our Father which art in heaven, Hallowed be thy name.",
+        "pt": "Pai nosso que estás nos céus, santificado seja o teu nome.",
+        "ref": "Mateus 6:9",
+        "blank": "Father",
+        "options": [
+          "Father",
+          "Brother",
+          "King",
+          "Servant"
+        ]
+      },
+      "dialogue": {
+        "line": "Lord, teach us to pray.",
+        "pt": "Senhor, ensina-nos a orar.",
+        "options": [
+          "Our Father which art in heaven...",
+          "Let my people go.",
+          "I see a rainbow!"
+        ],
+        "answer": "Our Father which art in heaven...",
+        "answerPt": "Pai nosso que estás nos céus..."
+      },
+      "quiz": {
+        "q": "How does the prayer begin?",
+        "options": [
+          "Our Father which art in heaven",
+          "In the beginning",
+          "Follow me"
+        ],
+        "answer": "Our Father which art in heaven",
+        "explain": "Jesus ensinou a orar começando por 'Pai nosso'."
+      },
+      "reading": {
+        "text": "Jesus taught his disciples to pray: Our Father in heaven, your kingdom come. Give us this day our daily bread. Forgive us, as we forgive others.",
+        "pt": "Jesus ensinou os discípulos a orar: Pai nosso que estás nos céus, venha o teu reino. O pão nosso de cada dia nos dá hoje. Perdoa-nos, como nós perdoamos.",
+        "q": "What do we ask for each day?",
+        "options": [
+          "Our daily bread",
+          "A new coat",
+          "Five stones"
+        ],
+        "answer": "Our daily bread"
+      }
+    },
+    {
+      "id": "u8l3",
+      "title": "Pães e peixes",
+      "vocab": [
+        {
+          "en": "fish",
+          "pt": "peixe",
+          "icon": "🐟"
+        },
+        {
+          "en": "five",
+          "pt": "cinco",
+          "icon": "5️⃣"
+        },
+        {
+          "en": "crowd",
+          "pt": "multidão",
+          "icon": "👥"
+        },
+        {
+          "en": "to bless",
+          "pt": "abençoar",
+          "icon": "🙌"
+        }
+      ],
+      "sentences": [
+        {
+          "en": "five loaves and two fishes",
+          "pt": "cinco pães e dois peixes"
+        },
+        {
+          "en": "they did all eat and were filled",
+          "pt": "todos comeram e ficaram satisfeitos"
+        }
+      ],
+      "verse": {
+        "text": "And he took the five loaves, and the two fishes, and blessed.",
+        "pt": "E tomou os cinco pães e os dois peixes e abençoou.",
+        "ref": "Mateus 14:19",
+        "blank": "blessed",
+        "options": [
+          "blessed",
+          "sold",
+          "hid",
+          "cut"
+        ]
+      },
+      "dialogue": {
+        "line": "Lord, we have only five loaves and two fishes.",
+        "pt": "Senhor, temos só cinco pães e dois peixes.",
+        "options": [
+          "Bring them to me.",
+          "Go to Egypt.",
+          "Close the door."
+        ],
+        "answer": "Bring them to me.",
+        "answerPt": "Tragam-nos a mim."
+      },
+      "quiz": {
+        "q": "How many loaves did the boy have?",
+        "options": [
+          "Five",
+          "Forty",
+          "Twelve"
+        ],
+        "answer": "Five",
+        "explain": "Cinco pães e dois peixes alimentaram a multidão."
+      },
+      "reading": {
+        "text": "A great crowd followed Jesus. A boy had five loaves and two fishes. Jesus blessed the bread and the fish, and everyone ate. Twelve baskets were left over.",
+        "pt": "Uma grande multidão seguia Jesus. Um menino tinha cinco pães e dois peixes. Jesus abençoou o pão e o peixe, e todos comeram. Sobraram doze cestos.",
+        "q": "How many baskets were left?",
+        "options": [
+          "Twelve",
+          "Two",
+          "Five"
+        ],
+        "answer": "Twelve"
+      }
+    },
+    {
+      "id": "u8r",
+      "title": "Revisão",
+      "review": true
+    }
+  ]
+}
 ];

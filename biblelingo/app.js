@@ -180,6 +180,9 @@ function renderHome() {
     { icon: "🚢", color: "#7e57c2", unit: "u2" },
     { icon: "👑", color: "#e6a817", unit: "u4" },
     { icon: "📜", color: "#1cb0f6", unit: "u5" },
+    { icon: "🌾", color: "#2e9d8a", unit: "u6" },
+    { icon: "🦁", color: "#c0392b", unit: "u7" },
+    { icon: "🐟", color: "#3f7fd6", unit: "u8" },
   ];
   $("#badges").innerHTML = badgeDefs.map((b) => {
     const done = unitDone(COURSE.find((u) => u.id === b.unit));
@@ -190,7 +193,7 @@ function renderHome() {
   const trail = $("#trail");
   trail.innerHTML = "";
   const currentId = currentLessonId();
-  const indents = ["", "indent-1", "indent-2", "indent-1", ""];
+  const indents = ["", "indent-1", "indent-2", "indent-1", "", "indent-1", "indent-2", "indent-1"];
   const nodes = document.createElement("div");
   nodes.className = "nodes";
 
