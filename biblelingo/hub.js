@@ -109,7 +109,6 @@ function madnessRound() {
     b.textContent = item.label;
     b.addEventListener("click", () => {
       if (b.classList.contains("matched")) return;
-      SFX.tap();
       if (item.side === "en") speak(item.label);
       const sel = madness.selected;
       if (!sel) { madness.selected = { item, el: b }; b.classList.add("selected"); return; }
@@ -119,7 +118,7 @@ function madnessRound() {
         madness.score++;
         madness.pending--;
         $("#md-score").textContent = madness.score;
-        tone(700 + (madness.score % 8) * 60, 0.08, "triangle", 0, 0.08);
+        SFX.pop(madness.score % 8);
         if (madness.pending === 0) setTimeout(madnessRound, 250);
       } else {
         [sel.el, b].forEach((el) => el.classList.add("wrong"));
@@ -212,7 +211,6 @@ function storyOptions(box, options, answer, onPick) {
     o.addEventListener("click", () => {
       if (story.answered) return;
       story.answered = true;
-      SFX.tap();
       if (onPick) onPick(opt);
       const ok = opt === answer;
       wrap.querySelectorAll(".opt").forEach((x) => {

@@ -18,6 +18,7 @@ function load() {
     stars: {}, // lessonId -> 1..3 (melhor resultado)
     errors: {}, // palavra EN -> vezes errada (para "Praticar erros")
     speakMutedUntil: 0,
+    sound: true, // efeitos sonoros
     crowns: {}, // unitId -> 0..5
     daily: null, // meta diária e missões do dia
     dailyGoal: 20,
@@ -273,34 +274,7 @@ function drawTrailPath(nodesEl, color) {
   });
 }
 
-// ---------- Efeitos sonoros e feedback tátil ----------
-let _audioCtx = null;
-function tone(freq, dur, type = "sine", when = 0, gain = 0.16) {
-  try {
-    _audioCtx = _audioCtx || new (window.AudioContext || window.webkitAudioContext)();
-    const ctx = _audioCtx;
-    if (ctx.state === "suspended") ctx.resume();
-    const o = ctx.createOscillator();
-    const g = ctx.createGain();
-    o.type = type;
-    o.frequency.value = freq;
-    const t0 = ctx.currentTime + when;
-    g.gain.setValueAtTime(0.0001, t0);
-    g.gain.exponentialRampToValueAtTime(gain, t0 + 0.012);
-    g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
-    o.connect(g).connect(ctx.destination);
-    o.start(t0);
-    o.stop(t0 + dur + 0.05);
-  } catch (e) { /* sem áudio: segue silencioso */ }
-}
-const SFX = {
-  tap: () => tone(620, 0.05, "triangle", 0, 0.05),
-  // "tok" de acerto: dois toques curtos ascendentes
-  correct: () => { tone(880, 0.09, "triangle", 0, 0.14); tone(1318, 0.16, "triangle", 0.09, 0.14); },
-  wrong: () => { tone(196, 0.16, "square", 0, 0.07); tone(147, 0.26, "square", 0.14, 0.06); },
-  combo: () => { tone(880, 0.08, "triangle", 0, 0.12); tone(1108, 0.08, "triangle", 0.08, 0.12); tone(1318, 0.18, "triangle", 0.16, 0.12); },
-  finish: () => [523, 659, 784, 1047].forEach((f, i) => tone(f, 0.22, "sine", i * 0.12)),
-};
+// ---------- Feedback tátil (os efeitos sonoros estão em sfx.js) ----------
 function buzz(pattern) {
   try { if (navigator.vibrate) navigator.vibrate(pattern); } catch (e) {}
 }
@@ -456,6 +430,7 @@ function startLesson(lessonId, narrator) {
   };
   session.hard = session.exercises.hard || [];
   showScreen("lesson");
+  SFX.start();
   renderExercise();
 }
 
@@ -541,7 +516,6 @@ function makeOptions(box, options, cols, onSelect) {
     }
     b.addEventListener("click", () => {
       if (session.checked) return;
-      SFX.tap();
       wrap.querySelectorAll(".opt").forEach((o) => o.classList.remove("selected"));
       b.classList.add("selected");
       session.answer = b.dataset.value;
@@ -993,7 +967,6 @@ function wordBankUI(ex, box, correctSentence, lang = "en") {
     t.dataset.i = i;
     t.addEventListener("click", () => {
       if (session.checked) return;
-      SFX.tap();
       if (lang === "en") speak(word);
       const from = t.getBoundingClientRect();
       t.classList.add("ghost");
@@ -1004,7 +977,6 @@ function wordBankUI(ex, box, correctSentence, lang = "en") {
       chosen.push(entry);
       placed.addEventListener("click", () => {
         if (session.checked) return;
-        SFX.tap();
         if (lang === "en") speak(word);
         chosen.splice(chosen.indexOf(entry), 1);
         placed.remove();
@@ -1149,7 +1121,6 @@ function renderMatch(ex, box) {
     b.textContent = item.label;
     b.addEventListener("click", () => {
       if (b.classList.contains("matched")) return;
-      SFX.tap();
       if (item.side === "en") speak(item.label);
       if (!selected) {
         selected = { item, el: b };
@@ -1164,7 +1135,7 @@ function renderMatch(ex, box) {
       if (selected.item.key === item.key && selected.item.side !== item.side) {
         [selected.el, b].forEach((el) => { el.classList.remove("selected"); el.classList.add("matched", "pop"); });
         matched++;
-        tone(720 + matched * 80, 0.1, "sine", 0, 0.08);
+        SFX.pop(matched);
         if (matched === ex.pairs.length) {
           session.answer = "__matched__";
           $("#btn-check").disabled = false;
@@ -1420,7 +1391,7 @@ function finishLesson() {
     save();
     chest.classList.add("open");
     chest.innerHTML = `✨<span>+${bonus} XP</span>`;
-    SFX.combo();
+    SFX.sparkle();
     if (typeof confetti === "function") confetti({ particleCount: 40, spread: 60, origin: { y: 0.6 } });
     $("#result-xp").textContent = `+${gained + bonus}`;
   };
@@ -1508,11 +1479,20 @@ document.querySelectorAll(".nav-item").forEach((b) => {
         <p>❤️ <b>${state.hearts}</b> corações hoje</p>`;
       $("#modal-stats").classList.add("open");
     }
-    if (nav === "config") $("#modal-config").classList.add("open");
+    if (nav === "config") {
+      const t = $("#toggle-sound");
+      if (t) t.checked = state.sound !== false;
+      $("#modal-config").classList.add("open");
+    }
   });
 });
 document.querySelectorAll(".modal-close").forEach((b) =>
   b.addEventListener("click", () => b.closest(".modal-backdrop").classList.remove("open")));
+$("#toggle-sound").addEventListener("change", (e) => {
+  state.sound = e.target.checked;
+  save();
+  if (state.sound) SFX.correct();
+});
 $("#btn-reset").addEventListener("click", () => {
   if (!confirm("Apagar todo o progresso deste aparelho?")) return;
   try { localStorage.removeItem("biblelingo"); } catch (e) {}
