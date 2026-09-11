@@ -273,10 +273,11 @@ function tone(freq, dur, type = "sine", when = 0, gain = 0.16) {
   } catch (e) { /* sem áudio: segue silencioso */ }
 }
 const SFX = {
-  tap: () => tone(620, 0.05, "triangle", 0, 0.06),
-  correct: () => { tone(660, 0.12); tone(880, 0.2, "sine", 0.1); },
-  wrong: () => { tone(220, 0.22, "sawtooth", 0, 0.1); tone(175, 0.3, "sawtooth", 0.14, 0.09); },
-  combo: () => { tone(784, 0.1); tone(988, 0.1, "sine", 0.09); tone(1175, 0.18, "sine", 0.18); },
+  tap: () => tone(620, 0.05, "triangle", 0, 0.05),
+  // "tok" de acerto: dois toques curtos ascendentes
+  correct: () => { tone(880, 0.09, "triangle", 0, 0.14); tone(1318, 0.16, "triangle", 0.09, 0.14); },
+  wrong: () => { tone(196, 0.16, "square", 0, 0.07); tone(147, 0.26, "square", 0.14, 0.06); },
+  combo: () => { tone(880, 0.08, "triangle", 0, 0.12); tone(1108, 0.08, "triangle", 0.08, 0.12); tone(1318, 0.18, "triangle", 0.16, 0.12); },
   finish: () => [523, 659, 784, 1047].forEach((f, i) => tone(f, 0.22, "sine", i * 0.12)),
 };
 function buzz(pattern) {
@@ -415,6 +416,10 @@ function renderExercise() {
 
   const box = $("#exercise-body");
   box.innerHTML = "";
+  box.classList.remove("slide-in");
+  void box.offsetWidth;
+  box.classList.add("slide-in");
+  updateCombo();
 
   const render = {
     "image-choice": renderImageChoice,
@@ -479,6 +484,17 @@ function characterRow(bubbleContent, charKey) {
   row.appendChild(bubble);
   return row;
 }
+
+function updateCombo() {
+  const chip = $("#combo-chip");
+  if (chip) {
+    chip.textContent = `🔥 ${session.combo}`;
+    chip.classList.toggle("show", session.combo >= 3);
+  }
+  $("#progress-fill").classList.toggle("hot", session.combo >= 5);
+}
+
+const PRAISES = ["Excelente!", "Muito bem!", "Incrível!", "Perfeito!", "Isso aí!", "Boa!", "Amém!"];
 
 function reactCharacter(ok) {
   const fig = document.querySelector(".char-fig");
@@ -561,17 +577,21 @@ function renderChoiceEnPt(ex, box) {
   ex.explain = `${ex.word.en} = ${ex.word.pt}`;
 }
 
+function bigAudio(text) {
+  const wrap = document.createElement("div");
+  wrap.className = "big-audio";
+  wrap.appendChild(audioButton(text, { big: true }));
+  wrap.appendChild(audioButton(text, { slow: true }));
+  return wrap;
+}
+
 function renderListen(ex, box) {
-  box.innerHTML = `<div class="ex-title">O que você ouviu?</div>`;
-  const bubble = document.createElement("div");
-  bubble.className = "bubble-inner";
-  bubble.appendChild(audioPair(ex.word.en));
-  bubble.insertAdjacentHTML("beforeend", `<span class="ex-word ex-muted">Toque para ouvir</span>`);
-  box.appendChild(characterRow(bubble));
+  box.innerHTML = `<div class="ex-title">Toque no que você ouviu</div>`;
+  box.appendChild(bigAudio(ex.word.en));
   makeOptions(box, ex.options, 2);
   speak(ex.word.en);
   ex.correct = ex.word.en;
-  ex.explain = `Você ouviu: ${ex.word.en} (${ex.word.pt})`;
+  ex.explain = `${ex.word.en} = ${ex.word.pt}`;
 }
 
 function textInput(placeholder) {
@@ -612,7 +632,6 @@ function renderVerse(ex, box) {
     <div class="verse-ref">${v.ref} — "${v.pt}"</div>`;
   makeOptions(box, ex.options, 2, (opt) => {
     $("#verse-gap").textContent = opt;
-    speak(opt);
   });
   ex.correct = v.blank;
   ex.explain = `"${v.text}" — ${v.ref}`;
@@ -631,7 +650,7 @@ function renderDialogue(ex, box) {
   bubble.insertAdjacentHTML("beforeend", `<span class="ex-muted dialog-pt">${d.pt}</span>`);
   box.appendChild(characterRow(bubble));
   box.insertAdjacentHTML("beforeend", `<div class="reply-label">Sua resposta:</div>`);
-  makeOptions(box, ex.options, 1, (opt) => speak(opt));
+  makeOptions(box, ex.options, 1);
   speak(d.line);
   ex.correct = d.answer;
   ex.explain = `${d.answer} = ${d.answerPt}`;
@@ -645,7 +664,7 @@ function renderQuiz(ex, box) {
   bubble.appendChild(audioButton(q.q));
   bubble.insertAdjacentHTML("beforeend", `<span class="ex-word ex-q">${q.q}</span>`);
   box.appendChild(characterRow(bubble));
-  makeOptions(box, ex.options, 1, (opt) => speak(opt));
+  makeOptions(box, ex.options, 1);
   speak(q.q);
   ex.correct = q.answer;
   ex.explain = q.explain;
@@ -680,7 +699,6 @@ function wordBankUI(ex, box, correctSentence) {
     t.addEventListener("click", () => {
       if (session.checked) return;
       SFX.tap();
-      speak(word);
       const from = t.getBoundingClientRect();
       t.classList.add("ghost");
       const placed = document.createElement("button");
@@ -748,12 +766,8 @@ function renderBuild(ex, box) {
 }
 
 function renderListenBuild(ex, box) {
-  box.innerHTML = `<div class="ex-title">Ouça e monte a frase</div>`;
-  const bubble = document.createElement("div");
-  bubble.className = "bubble-inner";
-  bubble.appendChild(audioPair(ex.sentence.en));
-  bubble.insertAdjacentHTML("beforeend", `<span class="ex-word ex-muted">Toque para ouvir</span>`);
-  box.appendChild(characterRow(bubble));
+  box.innerHTML = `<div class="ex-title">Toque no que você ouviu</div>`;
+  box.appendChild(bigAudio(ex.sentence.en));
   wordBankUI(ex, box, ex.sentence.en);
   speak(ex.sentence.en);
 }
@@ -918,9 +932,15 @@ function checkAnswer() {
     const accepts = ex.accept || [ex.correct];
     const ok = accepts.some((a) => normalize(session.answer) === normalize(a));
     const footer = $("#footer");
-    footer.classList.add(ok ? "correct" : "wrong");
-    $("#fb-ok-detail").textContent = ex.explain || "";
-    $("#fb-bad-detail").textContent = ex.explain || "";
+    footer.classList.add(ok ? "correct" : "wrong", "up");
+    if (ok) {
+      $("#fb-ok-title").textContent = ex.skipped ? "Tudo bem, seguimos!" : PRAISES[Math.floor(Math.random() * PRAISES.length)];
+      $("#fb-ok-detail").textContent = ex.explain ? `Significado: ${ex.explain}` : "";
+    } else {
+      $("#fb-bad-title").textContent = "Resposta correta:";
+      $("#fb-bad-detail").textContent = ex.correct === "__matched__" ? "" : (ex.correctLabel || ex.correct);
+      $("#fb-bad-extra").textContent = ex.explain && ex.explain !== ex.correct ? ex.explain : "";
+    }
 
     // Destaca opções
     document.querySelectorAll(".opt").forEach((o) => {
@@ -940,6 +960,7 @@ function checkAnswer() {
       } else {
         session.combo++;
         session.bestCombo = Math.max(session.bestCombo, session.combo);
+        updateCombo();
         if (session.combo >= 3) {
           SFX.combo();
           if (session.bonus < 5) session.bonus++;
@@ -948,12 +969,12 @@ function checkAnswer() {
           SFX.correct();
         }
         buzz(25);
-        speak(ex.correct !== "__matched__" ? ex.correct : "Great job");
         btn.textContent = "Continuar";
       }
     } else {
       session.mistakes++;
       session.combo = 0;
+      updateCombo();
       SFX.wrong();
       buzz([60, 40, 60]);
       if (!session.practice) {
@@ -961,7 +982,7 @@ function checkAnswer() {
         save();
         $("#lesson-hearts").textContent = `❤️ ${state.hearts}`;
       }
-      btn.textContent = "Entendi";
+      btn.textContent = "Continuar";
       btn.classList.add("red");
       if (!session.practice && state.hearts <= 0) {
         setTimeout(() => {
@@ -1056,6 +1077,18 @@ $("#btn-modal-practice").addEventListener("click", () => {
   // Abre a última lição concluída como prática para recuperar coração
   const doneIds = flatLessons().filter((l) => state.completed[l.id]).map((l) => l.id);
   if (doneIds.length) startLesson(doneIds[doneIds.length - 1]);
+});
+
+// Atalhos de teclado na lição (desktop)
+document.addEventListener("keydown", (e) => {
+  if (!session || !$("#screen-lesson").classList.contains("active")) return;
+  const inInput = e.target && e.target.tagName === "INPUT";
+  if (e.key === "Enter" && !inInput && !$("#btn-check").disabled) { e.preventDefault(); checkAnswer(); return; }
+  if (!inInput && !session.checked && /^[1-9]$/.test(e.key)) {
+    const opts = document.querySelectorAll(".options .opt");
+    const o = opts[Number(e.key) - 1];
+    if (o) o.click();
+  }
 });
 
 // Navegação (sidebar/rodapé)
