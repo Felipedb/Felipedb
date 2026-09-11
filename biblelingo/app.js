@@ -382,6 +382,7 @@ function startLesson(lessonId) {
     checked: false,
     answer: null,
     startedAt: Date.now(),
+    narrator: pickCharacter(lesson.unit.id),
   };
   showScreen("lesson");
   renderExercise();
@@ -435,6 +436,8 @@ function renderExercise() {
     "quiz": renderQuiz,
   }[ex.type];
   render(ex, box);
+  session.practiceRec = null;
+  if (ex.type !== "speak" && ex.audioText) box.appendChild(practiceBar(ex));
 }
 
 // Opções: string ou { value, html }
@@ -469,7 +472,7 @@ function makeOptions(box, options, cols, onSelect) {
 
 // Personagem com balão de fala (estilo Duolingo)
 function characterRow(bubbleContent, charKey) {
-  const ch = charKey ? { key: charKey, ...CHARACTERS[charKey] } : pickCharacter(session.lesson.unit.id);
+  const ch = charKey ? { key: charKey, ...CHARACTERS[charKey] } : session.narrator;
   session.voiceChar = ch;
   const row = document.createElement("div");
   row.className = "char-row";
@@ -546,6 +549,83 @@ document.addEventListener("click", (e) => {
   speak(w.dataset.hint);
 });
 
+
+// ---------- Prática de pronúncia (reutilizável) ----------
+function recognizeOnce(target, { onStart, onEnd, onResult, onError } = {}) {
+  const Rec = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!Rec) { onError && onError("unsupported"); return null; }
+  let rec;
+  try { rec = new Rec(); } catch (e) { onError && onError("unsupported"); return null; }
+  rec.lang = "en-US";
+  rec.interimResults = false;
+  rec.maxAlternatives = 3;
+  const targetWords = normalize(target).split(" ");
+  rec.onstart = () => onStart && onStart();
+  rec.onresult = (e) => {
+    const alts = [...e.results[0]].map((r) => r.transcript);
+    let best = 0, bestText = alts[0] || "";
+    alts.forEach((t) => {
+      const words = normalize(t).split(" ");
+      const hit = targetWords.filter((w) => words.includes(w)).length / targetWords.length;
+      if (hit > best) { best = hit; bestText = t; }
+    });
+    onResult && onResult({ score: best, text: bestText, ok: best >= 0.6 });
+  };
+  rec.onerror = (e) => onError && onError(e.error || "error");
+  rec.onend = () => onEnd && onEnd();
+  rec.start();
+  return rec;
+}
+
+function practiceBar(ex) {
+  const bar = document.createElement("div");
+  bar.className = "practice-bar";
+  const getTarget = () => (session.checked && ex.audioAfter) ? ex.audioAfter : ex.audioText;
+
+  const listen = document.createElement("button");
+  listen.className = "pbtn";
+  listen.innerHTML = "🔊 <span>Ouvir</span>";
+  listen.addEventListener("click", () => speak(getTarget()));
+
+  const slow = document.createElement("button");
+  slow.className = "pbtn";
+  slow.innerHTML = "🐢";
+  slow.title = "Ouvir devagar";
+  slow.addEventListener("click", () => speak(getTarget(), { slow: true }));
+
+  const mic = document.createElement("button");
+  mic.className = "pbtn mic";
+  mic.innerHTML = "🎤 <span>Falar</span>";
+  const status = document.createElement("div");
+  status.className = "practice-status";
+  mic.addEventListener("click", () => {
+    if (session.practiceRec) { try { session.practiceRec.stop(); } catch (e) {} return; }
+    const target = getTarget();
+    session.practiceRec = recognizeOnce(target, {
+      onStart: () => { mic.classList.add("listening"); mic.innerHTML = "🎙️ <span>Ouvindo...</span>"; status.textContent = `Diga: "${target}"`; },
+      onResult: (r) => {
+        if (r.ok) { SFX.correct(); buzz(25); status.textContent = `✅ Boa pronúncia! (${Math.round(r.score * 100)}%)`; }
+        else { buzz(60); status.textContent = `🙂 Quase. Você disse: "${r.text}". Tente de novo!`; }
+      },
+      onError: (err) => {
+        status.textContent = err === "unsupported"
+          ? "Reconhecimento de voz indisponível neste navegador."
+          : err === "not-allowed" ? "Permita o uso do microfone para praticar." : "Não consegui ouvir. Tente de novo.";
+      },
+      onEnd: () => { session.practiceRec = null; mic.classList.remove("listening"); mic.innerHTML = "🎤 <span>Falar</span>"; },
+    });
+  });
+
+  bar.appendChild(listen);
+  bar.appendChild(slow);
+  bar.appendChild(mic);
+  const wrap = document.createElement("div");
+  wrap.className = "practice-wrap";
+  wrap.appendChild(bar);
+  wrap.appendChild(status);
+  return wrap;
+}
+
 // ---------- Renderizadores ----------
 function renderImageChoice(ex, box) {
   box.innerHTML = `<div class="ex-title">Selecione a palavra correta</div>`;
@@ -559,9 +639,9 @@ function renderImageChoice(ex, box) {
     cls: "img-opt",
     html: `<span class="opt-icon">${o.icon}</span><span>${o.pt}</span>`,
   })), 2);
-  speak(ex.word.en);
   ex.correct = ex.word.pt;
   ex.explain = `${ex.word.en} = ${ex.word.pt}`;
+  ex.audioText = ex.word.en;
 }
 
 function renderChoiceEnPt(ex, box) {
@@ -572,9 +652,9 @@ function renderChoiceEnPt(ex, box) {
   bubble.insertAdjacentHTML("beforeend", `<span class="ex-word">${ex.word.en}</span>`);
   box.appendChild(characterRow(bubble));
   makeOptions(box, ex.options, 1);
-  speak(ex.word.en);
   ex.correct = ex.word.pt;
   ex.explain = `${ex.word.en} = ${ex.word.pt}`;
+  ex.audioText = ex.word.en;
 }
 
 function bigAudio(text) {
@@ -592,6 +672,7 @@ function renderListen(ex, box) {
   speak(ex.word.en);
   ex.correct = ex.word.en;
   ex.explain = `${ex.word.en} = ${ex.word.pt}`;
+  ex.audioText = ex.word.en;
 }
 
 function textInput(placeholder) {
@@ -622,6 +703,7 @@ function renderType(ex, box) {
   ex.correct = ex.word.en;
   ex.accept = [ex.word.en, ex.word.en.replace(/^to /, "")];
   ex.explain = `${ex.word.pt} = ${ex.word.en}`;
+  ex.audioText = ex.word.en;
 }
 
 function renderVerse(ex, box) {
@@ -635,6 +717,8 @@ function renderVerse(ex, box) {
   });
   ex.correct = v.blank;
   ex.explain = `"${v.text}" — ${v.ref}`;
+  ex.audioText = v.text.replace(v.blank, "blank");
+  ex.audioAfter = v.text;
 }
 
 function renderDialogue(ex, box) {
@@ -654,6 +738,8 @@ function renderDialogue(ex, box) {
   speak(d.line);
   ex.correct = d.answer;
   ex.explain = `${d.answer} = ${d.answerPt}`;
+  ex.audioText = d.line;
+  ex.audioAfter = d.answer;
 }
 
 function renderQuiz(ex, box) {
@@ -668,6 +754,8 @@ function renderQuiz(ex, box) {
   speak(q.q);
   ex.correct = q.answer;
   ex.explain = q.explain;
+  ex.audioText = q.q;
+  ex.audioAfter = q.answer;
 }
 
 // Banco de palavras com animação, dicas e teclado
@@ -752,6 +840,7 @@ function wordBankUI(ex, box, correctSentence) {
 
   ex.correct = correctSentence;
   ex.explain = `Resposta: "${correctSentence}"`;
+  ex.audioText = correctSentence;
 }
 
 function renderBuild(ex, box) {
@@ -798,43 +887,23 @@ function renderSpeak(ex, box) {
   box.appendChild(skip);
   speak(ex.sentence.en);
 
-  const target = normalize(ex.sentence.en).split(" ");
-  const Rec = window.SpeechRecognition || window.webkitSpeechRecognition;
-
   mic.addEventListener("click", () => {
     if (session.checked) return;
-    if (session.recognizer) { session.recognizer.stop(); return; }
-    let rec;
-    try { rec = new Rec(); } catch (e) { status.textContent = "Reconhecimento de voz indisponível neste navegador."; return; }
-    rec.lang = "en-US";
-    rec.interimResults = false;
-    rec.maxAlternatives = 3;
-    session.recognizer = rec;
-    mic.classList.add("listening");
-    mic.innerHTML = `🎙️<span>Ouvindo...</span>`;
-    status.textContent = "";
-    rec.onresult = (e) => {
-      const alts = [...e.results[0]].map((r) => r.transcript);
-      let best = 0, bestText = alts[0] || "";
-      alts.forEach((t) => {
-        const words = normalize(t).split(" ");
-        const hit = target.filter((w) => words.includes(w)).length / target.length;
-        if (hit > best) { best = hit; bestText = t; }
-      });
-      status.textContent = `Você disse: "${bestText}"`;
-      session.answer = best >= 0.6 ? ex.sentence.en : bestText;
-      $("#btn-check").disabled = false;
-      checkAnswer();
-    };
-    rec.onerror = () => {
-      status.textContent = "Não consegui ouvir. Tente de novo ou pule.";
-    };
-    rec.onend = () => {
-      session.recognizer = null;
-      mic.classList.remove("listening");
-      mic.innerHTML = `🎤<span>Toque para falar</span>`;
-    };
-    rec.start();
+    if (session.recognizer) { try { session.recognizer.stop(); } catch (e) {} return; }
+    session.recognizer = recognizeOnce(ex.sentence.en, {
+      onStart: () => { mic.classList.add("listening"); mic.innerHTML = `🎙️<span>Ouvindo...</span>`; status.textContent = ""; },
+      onResult: (r) => {
+        status.textContent = `Você disse: "${r.text}"`;
+        session.answer = r.ok ? ex.sentence.en : r.text;
+        $("#btn-check").disabled = false;
+        checkAnswer();
+      },
+      onError: (err) => {
+        status.textContent = err === "unsupported" ? "Reconhecimento de voz indisponível neste navegador."
+          : err === "not-allowed" ? "Permita o uso do microfone ou pule este exercício." : "Não consegui ouvir. Tente de novo ou pule.";
+      },
+      onEnd: () => { session.recognizer = null; mic.classList.remove("listening"); mic.innerHTML = `🎤<span>Toque para falar</span>`; },
+    });
   });
 
   skip.addEventListener("click", () => {
@@ -909,6 +978,7 @@ function renderMatch(ex, box) {
 
   ex.correct = "__matched__";
   ex.explain = "Pares corretos!";
+  ex.audioText = ex.pairs.map((p) => p.en).join(", ");
 }
 
 // Erro em pareamento não trava o exercício, mas conta para o bônus perfeito
@@ -929,6 +999,7 @@ function checkAnswer() {
   if (!session.checked) {
     session.checked = true;
     if (session.recognizer) { try { session.recognizer.abort(); } catch (e) {} }
+    if (session.practiceRec) { try { session.practiceRec.abort(); } catch (e) {} }
     const accepts = ex.accept || [ex.correct];
     const ok = accepts.some((a) => normalize(session.answer) === normalize(a));
     const footer = $("#footer");
@@ -950,7 +1021,7 @@ function checkAnswer() {
       else o.classList.add("faded");
     });
     const inp = $("#answer-input");
-    if (inp) { inp.disabled = true; inp.classList.add(ok ? "ok" : "bad"); }
+    if (inp) { inp.disabled = true; inp.classList.add(ok ? "ok" : "bad"); inp.blur(); }
 
     reactCharacter(ok);
 
@@ -1083,7 +1154,7 @@ $("#btn-modal-practice").addEventListener("click", () => {
 document.addEventListener("keydown", (e) => {
   if (!session || !$("#screen-lesson").classList.contains("active")) return;
   const inInput = e.target && e.target.tagName === "INPUT";
-  if (e.key === "Enter" && !inInput && !$("#btn-check").disabled) { e.preventDefault(); checkAnswer(); return; }
+  if ((e.key === "Enter" || (e.key === " " && session.checked)) && !inInput && !$("#btn-check").disabled) { e.preventDefault(); checkAnswer(); return; }
   if (!inInput && !session.checked && /^[1-9]$/.test(e.key)) {
     const opts = document.querySelectorAll(".options .opt");
     const o = opts[Number(e.key) - 1];
