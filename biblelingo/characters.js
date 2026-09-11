@@ -1,124 +1,172 @@
-// BibleLingo — personagens (arte SVG original, estilo flat)
-// Cada personagem fala com o aluno nos exercícios, como no Duolingo.
+// BibleLingo — personagens (arte SVG original, estilo 3D fofinho inspirado em animação)
+// Construídos por template para manter proporções e iluminação consistentes.
+
+function _personSVG(p) {
+  const id = p.prefix;
+  const beard = p.beard || "";
+  const hair = p.hair || "";
+  const extra = p.extra || "";
+  const mouth = p.mouth ||
+    `<path d="M62 64 Q70 71 78 64" stroke="${p.mouthColor || "#b3573a"}" stroke-width="3" stroke-linecap="round" fill="none"/>`;
+  return `<svg viewBox="0 0 140 152" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="${id}-skin" cx="38%" cy="28%" r="80%">
+        <stop offset="0%" stop-color="${p.skinLight}"/>
+        <stop offset="100%" stop-color="${p.skinDark}"/>
+      </radialGradient>
+      <linearGradient id="${id}-robe" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="${p.robeLight}"/>
+        <stop offset="100%" stop-color="${p.robeDark}"/>
+      </linearGradient>
+      <radialGradient id="${id}-iris" cx="40%" cy="35%" r="70%">
+        <stop offset="0%" stop-color="${p.irisLight || "#8d6e63"}"/>
+        <stop offset="100%" stop-color="${p.irisDark || "#4e342e"}"/>
+      </radialGradient>
+    </defs>
+    <ellipse cx="70" cy="145" rx="36" ry="6" fill="#1a2b40" opacity="0.14"/>
+    <path d="M42 86 Q70 74 98 86 L106 138 Q70 150 34 138 Z" fill="url(#${id}-robe)"/>
+    <path d="M46 90 Q70 82 94 90" stroke="#ffffff" stroke-opacity="0.25" stroke-width="4" stroke-linecap="round" fill="none"/>
+    ${p.robeExtra || ""}
+    <circle cx="41" cy="56" r="6" fill="${p.skinDark}"/>
+    <circle cx="99" cy="56" r="6" fill="${p.skinDark}"/>
+    <circle cx="70" cy="52" r="31" fill="url(#${id}-skin)"/>
+    ${hair}
+    ${beard}
+    <ellipse cx="52" cy="63" rx="6" ry="4" fill="#ff7d6b" opacity="0.30"/>
+    <ellipse cx="88" cy="63" rx="6" ry="4" fill="#ff7d6b" opacity="0.30"/>
+    <g>
+      <ellipse cx="58" cy="50" rx="8.2" ry="10" fill="#fff"/>
+      <ellipse cx="82" cy="50" rx="8.2" ry="10" fill="#fff"/>
+      <circle cx="59.5" cy="52" r="4.6" fill="url(#${id}-iris)"/>
+      <circle cx="80.5" cy="52" r="4.6" fill="url(#${id}-iris)"/>
+      <circle cx="59.5" cy="52" r="2.1" fill="#20140f"/>
+      <circle cx="80.5" cy="52" r="2.1" fill="#20140f"/>
+      <circle cx="61" cy="50" r="1.5" fill="#fff"/>
+      <circle cx="82" cy="50" r="1.5" fill="#fff"/>
+      <circle cx="58" cy="54" r="0.8" fill="#fff" opacity="0.85"/>
+      <circle cx="79" cy="54" r="0.8" fill="#fff" opacity="0.85"/>
+    </g>
+    <path d="M50 40 Q58 36 64 40" stroke="${p.browColor}" stroke-width="3.6" stroke-linecap="round" fill="none"/>
+    <path d="M76 40 Q82 36 90 40" stroke="${p.browColor}" stroke-width="3.6" stroke-linecap="round" fill="none"/>
+    <path d="M68 56 Q70 60 72 56 Q71 59 70 59 Q69 59 68 56 Z" fill="${p.skinDark}" opacity="0.85"/>
+    ${mouth}
+    ${extra}
+  </svg>`;
+}
 
 const CHARACTERS = {
   moises: {
     name: "Moisés",
-    svg: `<svg viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg">
-      <path d="M96 52 L100 128" stroke="#a1704a" stroke-width="6" stroke-linecap="round"/>
-      <path d="M96 52 Q106 44 104 34" stroke="#a1704a" stroke-width="6" stroke-linecap="round" fill="none"/>
-      <path d="M34 74 Q60 62 86 74 L94 128 Q60 140 26 128 Z" fill="#8d6e63"/>
-      <path d="M52 76 L60 92 L68 76 Z" fill="#6d4c41"/>
-      <circle cx="60" cy="46" r="27" fill="#f2c79c"/>
-      <path d="M33 46 Q33 16 60 16 Q87 16 87 46 L87 36 Q60 24 33 36 Z" fill="#cfd8dc"/>
-      <path d="M36 52 Q36 88 60 88 Q84 88 84 52 Q74 63 60 63 Q46 63 36 52 Z" fill="#eceff1"/>
-      <ellipse cx="50" cy="45" rx="6.5" ry="8" fill="#fff"/>
-      <ellipse cx="70" cy="45" rx="6.5" ry="8" fill="#fff"/>
-      <circle cx="51.5" cy="46.5" r="3.2" fill="#4e342e"/>
-      <circle cx="68.5" cy="46.5" r="3.2" fill="#4e342e"/>
-      <path d="M43 34 Q50 30 56 34" stroke="#b0bec5" stroke-width="3" stroke-linecap="round" fill="none"/>
-      <path d="M64 34 Q70 30 77 34" stroke="#b0bec5" stroke-width="3" stroke-linecap="round" fill="none"/>
-      <path d="M56 55 Q60 58 64 55" stroke="#c98b60" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-      <rect x="16" y="86" width="24" height="30" rx="5" fill="#e0c9a6" stroke="#c9a86e" stroke-width="2.5"/>
-      <path d="M22 94 h12 M22 100 h12 M22 106 h12" stroke="#c9a86e" stroke-width="2" stroke-linecap="round"/>
-    </svg>`,
+    svg: _personSVG({
+      prefix: "mo",
+      skinLight: "#ffd9ae", skinDark: "#e8ab74",
+      robeLight: "#a1887f", robeDark: "#6d4c41",
+      browColor: "#b0bec5",
+      hair: `<path d="M39 52 Q36 18 70 16 Q104 18 101 52 L101 40 Q70 26 39 40 Z" fill="#e3e8eb"/>
+             <path d="M42 34 Q56 24 70 24" stroke="#ffffff" stroke-opacity="0.6" stroke-width="3" stroke-linecap="round" fill="none"/>`,
+      beard: `<path d="M42 58 Q40 96 70 98 Q100 96 98 58 Q86 72 70 72 Q54 72 42 58 Z" fill="#eef2f4"/>
+              <path d="M52 78 Q60 84 70 84 Q80 84 88 78" stroke="#cfd8dc" stroke-width="2" stroke-linecap="round" fill="none"/>`,
+      mouth: `<path d="M63 70 Q70 76 77 70" stroke="#a1554a" stroke-width="3" stroke-linecap="round" fill="none"/>`,
+      extra: `<path d="M112 60 L116 136" stroke="#8a5a35" stroke-width="7" stroke-linecap="round"/>
+              <path d="M112 60 Q124 50 121 38" stroke="#8a5a35" stroke-width="7" stroke-linecap="round" fill="none"/>
+              <path d="M112 60 L116 136" stroke="#ffffff" stroke-opacity="0.2" stroke-width="2.5" stroke-linecap="round"/>
+              <rect x="14" y="96" width="26" height="34" rx="6" fill="#efd9b1" stroke="#cfa96a" stroke-width="2.5"/>
+              <path d="M21 105 h12 M21 112 h12 M21 119 h12" stroke="#c39b55" stroke-width="2.2" stroke-linecap="round"/>`,
+    }),
   },
   davi: {
     name: "Davi",
-    svg: `<svg viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg">
-      <path d="M36 76 Q60 66 84 76 L90 128 Q60 138 30 128 Z" fill="#42a5f5"/>
-      <path d="M36 76 L48 82 L48 128 L34 126 Z" fill="#8d6e63"/>
-      <circle cx="60" cy="46" r="26" fill="#f8cfa5"/>
-      <path d="M34 44 Q32 14 60 16 Q90 18 86 44 Q84 30 74 28 Q78 34 72 36 Q60 22 44 34 Q38 36 34 44 Z" fill="#c1642c"/>
-      <ellipse cx="51" cy="46" rx="6.5" ry="8" fill="#fff"/>
-      <ellipse cx="70" cy="46" rx="6.5" ry="8" fill="#fff"/>
-      <circle cx="52.5" cy="47.5" r="3.2" fill="#3e2723"/>
-      <circle cx="68.5" cy="47.5" r="3.2" fill="#3e2723"/>
-      <path d="M44 35 Q50 32 55 35" stroke="#8d4a1f" stroke-width="3" stroke-linecap="round" fill="none"/>
-      <path d="M65 35 Q70 32 76 35" stroke="#8d4a1f" stroke-width="3" stroke-linecap="round" fill="none"/>
-      <path d="M52 60 Q60 67 68 60" stroke="#b26a3c" stroke-width="3" stroke-linecap="round" fill="none"/>
-      <path d="M92 88 Q112 84 108 108 Q104 126 92 122 Q86 104 92 88 Z" fill="#f6b93b"/>
-      <path d="M94 92 L104 116 M98 90 L107 111 M92 98 L101 119" stroke="#c98b1e" stroke-width="2" stroke-linecap="round"/>
-    </svg>`,
+    svg: _personSVG({
+      prefix: "da",
+      skinLight: "#ffe0b8", skinDark: "#eab07c",
+      robeLight: "#64b5f6", robeDark: "#1e6db8",
+      browColor: "#9b501f",
+      irisLight: "#7cb1e0", irisDark: "#2d5f96",
+      hair: `<path d="M40 48 Q34 16 70 16 Q106 16 100 48 Q98 32 86 28 Q92 36 82 38 Q70 22 52 36 Q46 38 40 48 Z" fill="#d3712f"/>
+             <path d="M52 24 Q62 18 74 20" stroke="#eb9350" stroke-width="4" stroke-linecap="round" fill="none"/>`,
+      robeExtra: `<path d="M42 92 L56 98 L56 140 L38 136 Z" fill="#8d6e63"/>
+                  <path d="M46 100 L52 102 L52 130 L46 128 Z" fill="#a1887f"/>`,
+      extra: `<path d="M104 96 Q126 92 122 118 Q118 138 104 132 Q98 112 104 96 Z" fill="#ffd166"/>
+              <path d="M106 100 L117 126 M111 98 L120 121 M104 107 L114 129" stroke="#d99a26" stroke-width="2.2" stroke-linecap="round"/>
+              <path d="M104 96 Q112 94 118 100" stroke="#ffe6a3" stroke-width="3" stroke-linecap="round" fill="none"/>`,
+    }),
   },
   ester: {
     name: "Ester",
-    svg: `<svg viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg">
-      <path d="M34 76 Q60 64 86 76 L94 130 Q60 140 26 130 Z" fill="#ab47bc"/>
-      <path d="M46 80 Q60 88 74 80 L74 96 Q60 102 46 96 Z" fill="#8e24aa"/>
-      <circle cx="60" cy="46" r="26" fill="#eebd8e"/>
-      <path d="M34 46 Q30 14 60 14 Q90 14 86 46 L86 70 Q80 76 76 68 L76 44 Q60 30 44 44 L44 68 Q40 76 34 70 Z" fill="#4e342e"/>
-      <path d="M42 22 L48 12 L54 20 L60 10 L66 20 L72 12 L78 22 Z" fill="#ffc107"/>
-      <circle cx="48" cy="16" r="2" fill="#e91e63"/><circle cx="60" cy="14" r="2" fill="#00bcd4"/><circle cx="72" cy="16" r="2" fill="#e91e63"/>
-      <ellipse cx="51" cy="47" rx="6" ry="7.5" fill="#fff"/>
-      <ellipse cx="69" cy="47" rx="6" ry="7.5" fill="#fff"/>
-      <circle cx="52.5" cy="48.5" r="3" fill="#3e2723"/>
-      <circle cx="67.5" cy="48.5" r="3" fill="#3e2723"/>
-      <path d="M44 37 Q50 34 55 37" stroke="#3e2723" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-      <path d="M65 37 Q70 34 76 37" stroke="#3e2723" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-      <path d="M53 60 Q60 66 67 60" stroke="#c2185b" stroke-width="3" stroke-linecap="round" fill="none"/>
-      <circle cx="60" cy="104" r="6" fill="#ffc107"/>
-    </svg>`,
+    svg: _personSVG({
+      prefix: "es",
+      skinLight: "#ffdfc0", skinDark: "#e8ad80",
+      robeLight: "#ce93d8", robeDark: "#8e24aa",
+      browColor: "#4e342e",
+      irisLight: "#a1887f", irisDark: "#3e2723",
+      hair: `<path d="M39 50 Q34 14 70 14 Q106 14 101 50 L102 84 Q95 92 90 82 L90 46 Q70 30 50 46 L50 82 Q45 92 38 84 Z" fill="#4e342e"/>
+             <path d="M46 28 Q58 20 72 22" stroke="#6d4c41" stroke-width="4" stroke-linecap="round" fill="none"/>`,
+      mouth: `<path d="M62 64 Q70 72 78 64" stroke="#c2185b" stroke-width="3" stroke-linecap="round" fill="none"/>`,
+      robeExtra: `<circle cx="70" cy="112" r="7" fill="#ffd166"/><circle cx="70" cy="112" r="3" fill="#fff3c4"/>`,
+      extra: `<path d="M48 22 L55 10 L62 19 L70 8 L78 19 L85 10 L92 22 Q70 14 48 22 Z" fill="#ffd166"/>
+              <path d="M48 22 Q70 15 92 22" stroke="#e8b62f" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <circle cx="55" cy="15" r="2.2" fill="#ef5da8"/><circle cx="70" cy="12" r="2.2" fill="#4dd0e1"/><circle cx="85" cy="15" r="2.2" fill="#ef5da8"/>`,
+    }),
   },
   noe: {
     name: "Noé",
-    svg: `<svg viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20 30 Q60 2 100 30" stroke="#ef5350" stroke-width="5" fill="none" stroke-linecap="round"/>
-      <path d="M24 36 Q60 10 96 36" stroke="#ffa726" stroke-width="5" fill="none" stroke-linecap="round"/>
-      <path d="M28 42 Q60 18 92 42" stroke="#66bb6a" stroke-width="5" fill="none" stroke-linecap="round"/>
-      <path d="M36 80 Q60 70 84 80 L90 126 Q60 136 30 126 Z" fill="#5c6bc0"/>
-      <circle cx="60" cy="56" r="24" fill="#f2c79c"/>
-      <path d="M38 54 Q38 30 60 30 Q82 30 82 54 L82 48 Q60 38 38 48 Z" fill="#fafafa"/>
-      <path d="M40 60 Q40 92 60 92 Q80 92 80 60 Q70 70 60 70 Q50 70 40 60 Z" fill="#fafafa"/>
-      <ellipse cx="52" cy="55" rx="5.5" ry="7" fill="#fff" stroke="#e0e0e0" stroke-width="1"/>
-      <ellipse cx="69" cy="55" rx="5.5" ry="7" fill="#fff" stroke="#e0e0e0" stroke-width="1"/>
-      <circle cx="53" cy="56.5" r="3" fill="#4e342e"/>
-      <circle cx="68" cy="56.5" r="3" fill="#4e342e"/>
-      <path d="M46 45 Q52 42 57 45" stroke="#e0e0e0" stroke-width="3" stroke-linecap="round" fill="none"/>
-      <path d="M64 45 Q69 42 75 45" stroke="#e0e0e0" stroke-width="3" stroke-linecap="round" fill="none"/>
-      <path d="M14 108 L38 108 L34 120 L18 120 Z" fill="#a1704a"/>
-      <rect x="22" y="98" width="8" height="10" rx="2" fill="#8d6e63"/>
-      <circle cx="26" cy="94" r="5" fill="#eceff1"/>
-      <path d="M26 94 L34 90" stroke="#eceff1" stroke-width="2.5" stroke-linecap="round"/>
-    </svg>`,
+    svg: _personSVG({
+      prefix: "no",
+      skinLight: "#ffd9ae", skinDark: "#e5a877",
+      robeLight: "#7986cb", robeDark: "#3f51a5",
+      browColor: "#e3e8eb",
+      hair: `<path d="M41 48 Q40 22 70 22 Q100 22 99 48 L99 40 Q70 30 41 40 Z" fill="#f4f7f8"/>`,
+      beard: `<path d="M44 58 Q42 94 70 96 Q98 94 96 58 Q84 72 70 72 Q56 72 44 58 Z" fill="#f4f7f8"/>
+              <path d="M54 78 Q62 84 70 84 Q78 84 86 78" stroke="#d9e2e6" stroke-width="2" stroke-linecap="round" fill="none"/>`,
+      mouth: `<path d="M63 70 Q70 76 77 70" stroke="#a1554a" stroke-width="3" stroke-linecap="round" fill="none"/>`,
+      extra: `<path d="M18 30 Q70 -6 122 30" stroke="#ef5350" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.9"/>
+              <path d="M23 37 Q70 4 117 37" stroke="#ffa726" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.9"/>
+              <path d="M28 44 Q70 14 112 44" stroke="#66bb6a" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.9"/>
+              <path d="M12 112 L42 112 L37 128 L17 128 Z" fill="#b07a4e"/>
+              <path d="M12 112 L42 112 L41 117 L13 117 Z" fill="#c98f5f"/>
+              <rect x="22" y="100" width="10" height="12" rx="2.5" fill="#8d6e63"/>
+              <circle cx="27" cy="94" r="5.5" fill="#ffffff"/>
+              <path d="M27 94 L37 89" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+              <path d="M31 92 l4 -1" stroke="#ffb74d" stroke-width="2" stroke-linecap="round"/>`,
+    }),
   },
   maria: {
     name: "Maria",
-    svg: `<svg viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg">
-      <path d="M34 78 Q60 66 86 78 L92 130 Q60 140 28 130 Z" fill="#64b5f6"/>
-      <path d="M32 50 Q28 12 60 12 Q92 12 88 50 L90 92 Q84 100 78 92 L78 48 Q60 32 42 48 L42 92 Q36 100 30 92 Z" fill="#1e88e5"/>
-      <circle cx="60" cy="48" r="23" fill="#f8cfa5"/>
-      <path d="M40 44 Q42 26 60 26 Q78 26 80 44 L80 40 Q60 30 40 40 Z" fill="#5d4037"/>
-      <ellipse cx="52" cy="48" rx="5.5" ry="7" fill="#fff"/>
-      <ellipse cx="69" cy="48" rx="5.5" ry="7" fill="#fff"/>
-      <circle cx="53.5" cy="49.5" r="2.9" fill="#3e2723"/>
-      <circle cx="67.5" cy="49.5" r="2.9" fill="#3e2723"/>
-      <path d="M46 39 Q51 36 56 39" stroke="#5d4037" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-      <path d="M65 39 Q70 36 75 39" stroke="#5d4037" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-      <path d="M53 60 Q60 66 67 60" stroke="#c2185b" stroke-width="3" stroke-linecap="round" fill="none"/>
-      <path d="M52 96 Q60 90 68 96 Q68 108 60 112 Q52 108 52 96 Z" fill="#fff59d"/>
-    </svg>`,
+    svg: _personSVG({
+      prefix: "ma",
+      skinLight: "#ffe3c4", skinDark: "#e9af82",
+      robeLight: "#90caf9", robeDark: "#3d7cc9",
+      browColor: "#5d4037",
+      irisLight: "#a1887f", irisDark: "#3e2723",
+      hair: `<path d="M38 54 Q32 12 70 12 Q108 12 102 54 L104 96 Q97 106 91 94 L90 48 Q70 30 50 48 L49 94 Q43 106 36 96 Z" fill="#2f74c0"/>
+             <path d="M38 54 Q32 12 70 12 Q108 12 102 54 L101 44 Q70 26 39 44 Z" fill="#1f5fa8"/>
+             <path d="M44 30 Q56 18 70 18" stroke="#5b9bd8" stroke-width="4" stroke-linecap="round" fill="none"/>
+             <path d="M46 46 Q48 36 56 32 L56 40 Q50 42 46 46 Z" fill="#6d4c41"/>
+             <path d="M94 46 Q92 36 84 32 L84 40 Q90 42 94 46 Z" fill="#6d4c41"/>`,
+      mouth: `<path d="M62 64 Q70 71 78 64" stroke="#c2185b" stroke-width="3" stroke-linecap="round" fill="none"/>`,
+      robeExtra: `<path d="M60 104 Q70 96 80 104 Q80 120 70 124 Q60 120 60 104 Z" fill="#fff2b8"/>
+                  <path d="M64 106 Q70 101 76 106" stroke="#f4d879" stroke-width="2.5" stroke-linecap="round" fill="none"/>`,
+    }),
   },
   pedro: {
     name: "Pedro",
-    svg: `<svg viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg">
-      <path d="M36 76 Q60 66 84 76 L90 128 Q60 138 30 128 Z" fill="#26a69a"/>
-      <path d="M36 90 L84 90 L86 100 L34 100 Z" fill="#00897b"/>
-      <circle cx="60" cy="46" r="26" fill="#e8b482"/>
-      <path d="M34 44 Q34 16 60 16 Q86 16 86 44 L86 36 Q60 26 34 36 Z" fill="#4e342e"/>
-      <path d="M38 52 Q38 80 60 80 Q82 80 82 52 Q72 62 60 62 Q48 62 38 52 Z" fill="#5d4037"/>
-      <ellipse cx="51" cy="45" rx="6" ry="7.5" fill="#fff"/>
-      <ellipse cx="70" cy="45" rx="6" ry="7.5" fill="#fff"/>
-      <circle cx="52.5" cy="46.5" r="3" fill="#3e2723"/>
-      <circle cx="68.5" cy="46.5" r="3" fill="#3e2723"/>
-      <path d="M44 35 Q50 31 55 35" stroke="#4e342e" stroke-width="3" stroke-linecap="round" fill="none"/>
-      <path d="M65 35 Q70 31 76 35" stroke="#4e342e" stroke-width="3" stroke-linecap="round" fill="none"/>
-      <path d="M92 92 Q108 96 106 116 M92 104 Q102 106 101 120" stroke="#80cbc4" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <path d="M92 92 L92 122 M98 96 L98 120 M104 102 L104 118" stroke="#80cbc4" stroke-width="2.5" stroke-linecap="round"/>
-      <path d="M14 100 q6 -8 12 0 q-6 8 -12 0 Z" fill="#4dd0e1"/>
-      <circle cx="18" cy="99" r="1.4" fill="#00363a"/>
-      <path d="M26 100 l6 -4 l0 8 Z" fill="#4dd0e1"/>
-    </svg>`,
+    svg: _personSVG({
+      prefix: "pe",
+      skinLight: "#f6cf9e", skinDark: "#d99a66",
+      robeLight: "#4db6ac", robeDark: "#00796b",
+      browColor: "#4e342e",
+      hair: `<path d="M40 48 Q40 18 70 18 Q100 18 100 48 L100 38 Q70 28 40 38 Z" fill="#5d4037"/>`,
+      beard: `<path d="M44 56 Q44 86 70 88 Q96 86 96 56 Q84 68 70 68 Q56 68 44 56 Z" fill="#6d4c41"/>
+              <path d="M54 74 Q62 80 70 80 Q78 80 86 74" stroke="#5d4037" stroke-width="2" stroke-linecap="round" fill="none"/>`,
+      mouth: `<path d="M63 68 Q70 74 77 68" stroke="#9c4a3f" stroke-width="3" stroke-linecap="round" fill="none"/>`,
+      robeExtra: `<path d="M46 96 L94 96 L96 104 L44 104 Z" fill="#00695c" opacity="0.7"/>`,
+      extra: `<path d="M104 100 Q122 104 120 126 M104 112 Q114 114 113 130" stroke="#9fdcd4" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+              <path d="M104 100 L104 132 M110 103 L110 130 M116 108 L116 128" stroke="#9fdcd4" stroke-width="2.6" stroke-linecap="round"/>
+              <path d="M14 108 q7 -9 14 0 q-7 9 -14 0 Z" fill="#4dd0e1"/>
+              <path d="M15 106 q6 -5 11 1" stroke="#a2ecf5" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+              <circle cx="19" cy="107" r="1.5" fill="#00363a"/>
+              <path d="M28 108 l7 -4.5 l0 9 Z" fill="#26c6da"/>`,
+    }),
   },
 };
 
