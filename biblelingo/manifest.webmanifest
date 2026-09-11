@@ -1,11 +1,11 @@
 {
-  "name": "BibleLingo — Inglês com a Bíblia",
-  "short_name": "BibleLingo",
+  "name": "BíbliaLearn — Inglês com a Bíblia",
+  "short_name": "BíbliaLearn",
   "description": "Aprenda inglês com contexto bíblico, em uma trilha de lições estilo Duolingo.",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#f7f7fb",
-  "theme_color": "#58cc02",
+  "theme_color": "#58a700",
   "lang": "pt-BR",
   "icons": [
     {

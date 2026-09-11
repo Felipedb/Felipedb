@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#58cc02" />
-  <meta name="description" content="Aprenda inglês com contexto bíblico — trilha de lições estilo Duolingo, otimizada para celular." />
-  <title>BibleLingo — Inglês com a Bíblia</title>
+  <meta name="theme-color" content="#58a700" />
+  <meta name="description" content="Aprenda inglês com a Bíblia — trilha de lições estilo Duolingo, otimizada para celular." />
+  <title>BíbliaLearn</title>
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%2358a700'/><text x='50' y='72' font-size='58' text-anchor='middle' fill='white'>✝</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
@@ -15,17 +15,87 @@
 </head>
 <body>
 
-  <!-- ===== Tela inicial: trilha ===== -->
+  <!-- ===== Tela inicial ===== -->
   <section id="screen-home" class="screen active">
-    <header class="topbar">
-      <span class="brand">📖 Bible<span class="brand-alt">Lingo</span></span>
-      <div style="display:flex; gap:14px;">
-        <span class="stat streak"><span class="emoji">🔥</span><span id="stat-streak">0</span></span>
-        <span class="stat xp"><span class="emoji">⚡</span><span id="stat-xp">0</span></span>
-        <span class="stat hearts"><span class="emoji">❤️</span><span id="stat-hearts">5</span></span>
-      </div>
-    </header>
-    <main id="trail" class="trail"></main>
+    <div class="shell">
+
+      <!-- Sidebar (desktop) / topo (mobile) -->
+      <aside class="sidebar">
+        <div class="logo">
+          <span class="logo-mark">✝</span>
+          <span class="logo-text">Bíblia<b>Learn</b></span>
+        </div>
+        <nav class="nav">
+          <button class="nav-item active" data-nav="inicio">🏠 <span>Início</span></button>
+          <button class="nav-item" data-nav="licoes">📖 <span>Lições</span></button>
+          <button class="nav-item" data-nav="conquistas">⭐ <span>Conquistas</span></button>
+          <button class="nav-item" data-nav="estatisticas">📊 <span>Estatísticas</span></button>
+          <button class="nav-item" data-nav="config">⚙️ <span>Configurações</span></button>
+        </nav>
+      </aside>
+
+      <!-- Coluna central -->
+      <main class="center">
+        <div class="hero">
+          <div class="hero-char" id="hero-char"></div>
+          <div class="hero-bubble">
+            <h2>Seja bem-vindo!</h2>
+            <p>Vamos aprender juntos a Palavra de Deus?</p>
+          </div>
+        </div>
+        <div id="trail" class="trail"></div>
+        <div class="scenery"></div>
+      </main>
+
+      <!-- Rail direito -->
+      <aside class="rail">
+        <div class="rail-top">
+          <div class="streak-chip">
+            <span class="flame">🔥</span>
+            <div><b id="stat-streak">0</b><small>Dias de sequência</small></div>
+          </div>
+          <div class="avatar" id="avatar"></div>
+        </div>
+
+        <div class="card" id="card-progresso">
+          <h3>Seu progresso</h3>
+          <div class="pbar"><div class="pbar-fill" id="pbar-fill"></div></div>
+          <p id="progress-label">0 de 5 lições concluídas</p>
+          <p class="hearts-line">❤️ <b id="stat-hearts">5</b> corações &nbsp;·&nbsp; ⚡ <b id="stat-xp">0</b> XP</p>
+        </div>
+
+        <button class="card gold-card" id="card-verse">
+          <h3>📖 Versículo do dia <span class="chev">›</span></h3>
+          <p class="vd-text" id="vd-text"></p>
+          <p class="vd-ref" id="vd-ref"></p>
+        </button>
+
+        <div class="card" id="card-sequencia">
+          <h3>🔥 Sua sequência</h3>
+          <p class="big-num"><span id="streak-days">0</span> dias</p>
+          <p class="muted">Continue firme!</p>
+        </div>
+
+        <div class="card" id="card-conquistas">
+          <h3>🏆 Conquistas</h3>
+          <div class="badges" id="badges"></div>
+        </div>
+
+        <div class="promo" id="promo">
+          <p>Grandes coisas acontecem quando você permanece na Palavra!</p>
+          <div class="promo-char" id="promo-char"></div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Navegação inferior (mobile) -->
+    <nav class="bottom-nav">
+      <button class="nav-item active" data-nav="inicio">🏠<span>Início</span></button>
+      <button class="nav-item" data-nav="licoes">📖<span>Lições</span></button>
+      <button class="nav-item" data-nav="conquistas">⭐<span>Conquistas</span></button>
+      <button class="nav-item" data-nav="estatisticas">📊<span>Estatíst.</span></button>
+      <button class="nav-item" data-nav="config">⚙️<span>Config.</span></button>
+    </nav>
   </section>
 
   <!-- ===== Tela de lição ===== -->
@@ -63,7 +133,7 @@
           <div class="rc-value" id="result-xp">+10</div>
         </div>
         <div class="result-card blue">
-          <div class="rc-label">Ofensiva</div>
+          <div class="rc-label">Sequência</div>
           <div class="rc-value" id="result-streak">1</div>
         </div>
         <div class="result-card green">
@@ -84,6 +154,27 @@
       <p>Pratique uma lição já concluída para recuperar um coração, ou volte amanhã — eles se renovam todo dia.</p>
       <button id="btn-modal-practice" class="btn-main blue">Praticar para recuperar</button>
       <button id="btn-modal-close" class="btn-ghost">Fechar</button>
+    </div>
+  </div>
+
+  <!-- ===== Modal: estatísticas ===== -->
+  <div id="modal-stats" class="modal-backdrop">
+    <div class="modal">
+      <div class="big-emoji">📊</div>
+      <h3>Estatísticas</h3>
+      <div id="stats-body" class="stats-body"></div>
+      <button class="btn-ghost modal-close">Fechar</button>
+    </div>
+  </div>
+
+  <!-- ===== Modal: configurações ===== -->
+  <div id="modal-config" class="modal-backdrop">
+    <div class="modal">
+      <div class="big-emoji">⚙️</div>
+      <h3>Configurações</h3>
+      <p>Seu progresso fica salvo neste aparelho.</p>
+      <button id="btn-reset" class="btn-main red">Apagar progresso</button>
+      <button class="btn-ghost modal-close">Fechar</button>
     </div>
   </div>
 

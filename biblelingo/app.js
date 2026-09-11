@@ -113,85 +113,90 @@ function verseOfDay() {
 
 function renderHome() {
   $("#stat-streak").textContent = state.streak;
+  $("#streak-days").textContent = state.streak;
   $("#stat-xp").textContent = state.xp;
   $("#stat-hearts").textContent = state.hearts;
 
+  // Hero, avatar e promo
+  const guide = CHARACTERS.jesus;
+  $("#hero-char").innerHTML = charFace(guide);
+  $("#avatar").innerHTML = charFace(guide);
+  $("#promo-char").innerHTML = charFace(CHARACTERS.davi);
+
+  // Versículo do dia
+  const v = verseOfDay();
+  $("#vd-text").textContent = `"${v.text}"`;
+  $("#vd-ref").textContent = `${v.ref} — ${v.pt}`;
+
+  // Progresso: unidades totalmente concluídas
+  const unitDone = (u) => u.lessons.every((l) => state.completed[l.id]);
+  const doneUnits = COURSE.filter(unitDone).length;
+  $("#pbar-fill").style.width = `${(doneUnits / COURSE.length) * 100}%`;
+  $("#progress-label").textContent = `${doneUnits} de ${COURSE.length} lições concluídas`;
+
+  // Conquistas
+  const badgeDefs = [
+    { icon: "📖", color: "#58a700", unit: "u1" },
+    { icon: "🚢", color: "#7e57c2", unit: "u2" },
+    { icon: "👑", color: "#e6a817", unit: "u4" },
+    { icon: "📜", color: "#1cb0f6", unit: "u5" },
+  ];
+  $("#badges").innerHTML = badgeDefs.map((b) => {
+    const done = unitDone(COURSE.find((u) => u.id === b.unit));
+    return `<span class="badge-hex${done ? "" : " locked"}" style="background:${b.color}">${b.icon}</span>`;
+  }).join("");
+
+  // Trilha: um nó por grande lição (unidade), como na referência
   const trail = $("#trail");
   trail.innerHTML = "";
   const currentId = currentLessonId();
   const indents = ["", "indent-1", "indent-2", "indent-1", ""];
+  const nodes = document.createElement("div");
+  nodes.className = "nodes";
 
-  // Boas-vindas
-  const guide = CHARACTERS.jesus || CHARACTERS.moises;
-  const welcome = document.createElement("div");
-  welcome.className = "welcome";
-  welcome.innerHTML = `
-    <div class="char">${charFace(guide)}</div>
-    <div class="welcome-bubble">
-      <h2>Seja bem-vindo!</h2>
-      <p>Vamos aprender juntos a Palavra de Deus em inglês?</p>
-    </div>`;
-  trail.appendChild(welcome);
+  COURSE.forEach((unit, i) => {
+    const row = document.createElement("div");
+    row.className = `lesson-row ${indents[i % indents.length]}`;
 
-  // Versículo do dia
-  const v = verseOfDay();
-  const vd = document.createElement("div");
-  vd.className = "verse-day";
-  vd.innerHTML = `
-    <div class="vd-title">📖 Versículo do dia</div>
-    <div class="vd-text">"${v.text}"</div>
-    <div class="vd-ref">${v.ref} — ${v.pt}</div>`;
-  trail.appendChild(vd);
+    const doneCount = unit.lessons.filter((l) => state.completed[l.id]).length;
+    const total = unit.lessons.length;
+    const done = doneCount === total;
+    const hasCurrent = unit.lessons.some((l) => l.id === currentId);
+    const unlocked = lessonUnlocked(unit.lessons[0].id);
 
-  COURSE.forEach((unit) => {
-    const header = document.createElement("div");
-    header.className = "unit-header";
-    header.style.setProperty("--uc", unit.color);
-    header.innerHTML = `<span class="uicon">${unit.icon}</span><div><h2>${unit.title}</h2><p>${unit.subtitle}</p></div>`;
-    trail.appendChild(header);
+    // Estrelas da unidade: média das estrelas das lições concluídas
+    const starVals = unit.lessons.filter((l) => !l.review).map((l) => state.stars[l.id] || 0);
+    const unitStars = done ? Math.round(starVals.reduce((s, x) => s + x, 0) / starVals.length) : (doneCount ? Math.max(1, Math.min(...starVals.filter(Boolean))) : 0);
 
-    const nodes = document.createElement("div");
-    nodes.className = "nodes";
-    const cast = UNIT_CAST[unit.id] || Object.keys(CHARACTERS);
-
-    unit.lessons.forEach((lesson, i) => {
-      const row = document.createElement("div");
-      row.className = `lesson-row ${indents[i % indents.length]}`;
-      const done = !!state.completed[lesson.id];
-      const isCurrent = lesson.id === currentId;
-      const unlocked = lessonUnlocked(lesson.id);
-      const stars = state.stars[lesson.id] || 0;
-
-      const btn = document.createElement("button");
-      btn.className = "portrait" + (unlocked || done ? "" : " locked");
-      btn.style.setProperty("--pc", unit.color);
-      const ch = CHARACTERS[cast[i % cast.length]];
-      const face = lesson.review
-        ? `<span class="picon">🏆</span>`
-        : charFace(ch);
-      const badge = done
-        ? `<span class="badge">✓</span>`
-        : unlocked ? "" : `<span class="badge lock">🔒</span>`;
-      const tip = isCurrent ? '<span class="start-tip">COMEÇAR</span>' : "";
-      btn.innerHTML = `${isCurrent ? '<span class="pulse"></span>' : ""}${tip}<span class="face">${face}</span>${badge}`;
-      btn.addEventListener("click", () => startLesson(lesson.id));
-
-      const ref = lesson.verse ? lesson.verse.ref : unit.subtitle;
-      const info = document.createElement("div");
-      info.className = "lesson-info";
-      info.innerHTML = `<h3>${i + 1}. ${lesson.title}</h3><div class="lref">${ref}</div>${done ? starsHTML(stars) : ""}`;
-
-      row.appendChild(btn);
-      row.appendChild(info);
-      nodes.appendChild(row);
+    const btn = document.createElement("button");
+    btn.className = "portrait" + (unlocked ? "" : " locked");
+    btn.style.setProperty("--pc", unit.color);
+    const face = unit.face === "book"
+      ? `<span class="picon">📖</span>`
+      : charFace(CHARACTERS[unit.face]);
+    const badge = done
+      ? `<span class="badge">✓</span>`
+      : unlocked ? "" : `<span class="badge lock">🔒</span>`;
+    const tip = hasCurrent ? '<span class="start-tip">COMEÇAR</span>' : "";
+    btn.innerHTML = `${hasCurrent ? '<span class="pulse"></span>' : ""}${tip}<span class="face">${face}</span>${badge}`;
+    btn.addEventListener("click", () => {
+      const next = unit.lessons.find((l) => !state.completed[l.id]) || unit.lessons[unit.lessons.length - 1];
+      startLesson(next.id);
     });
-    trail.appendChild(nodes);
-    drawTrailPath(nodes, unit.color);
+
+    const info = document.createElement("div");
+    info.className = "lesson-info";
+    info.innerHTML = `<h3>${i + 1}. ${unit.title}</h3>
+      <div class="lref">${unit.subtitle}${doneCount && !done ? ` · ${doneCount}/${total} etapas` : ""}</div>
+      ${starsHTML(unitStars)}`;
+
+    row.appendChild(btn);
+    row.appendChild(info);
+    nodes.appendChild(row);
   });
 
-  const scenery = document.createElement("div");
-  scenery.className = "scenery";
-  trail.appendChild(scenery);
+  trail.appendChild(nodes);
+  drawTrailPath(nodes, "#9db97a");
 }
 
 // Desenha o caminho tracejado ligando os nós de uma unidade
@@ -667,5 +672,49 @@ $("#btn-modal-practice").addEventListener("click", () => {
   if (doneIds.length) startLesson(doneIds[doneIds.length - 1]);
 });
 
+// Navegação (sidebar/rodapé)
+function setNav(name) {
+  document.querySelectorAll(".nav-item").forEach((b) => b.classList.toggle("active", b.dataset.nav === name));
+}
+document.querySelectorAll(".nav-item").forEach((b) => {
+  b.addEventListener("click", () => {
+    const nav = b.dataset.nav;
+    setNav(nav === "estatisticas" || nav === "config" ? "inicio" : nav);
+    if (nav === "inicio") window.scrollTo({ top: 0, behavior: "smooth" });
+    if (nav === "licoes") $("#trail").scrollIntoView({ behavior: "smooth", block: "start" });
+    if (nav === "conquistas") $("#card-conquistas").scrollIntoView({ behavior: "smooth", block: "center" });
+    if (nav === "estatisticas") {
+      const totalStars = Object.values(state.stars).reduce((s, x) => s + x, 0);
+      const doneLessons = Object.keys(state.completed).length;
+      $("#stats-body").innerHTML = `
+        <p>⚡ <b>${state.xp}</b> XP acumulado</p>
+        <p>🔥 <b>${state.streak}</b> dias de sequência</p>
+        <p>✅ <b>${doneLessons}</b> etapas concluídas</p>
+        <p>⭐ <b>${totalStars}</b> estrelas conquistadas</p>
+        <p>❤️ <b>${state.hearts}</b> corações hoje</p>`;
+      $("#modal-stats").classList.add("open");
+    }
+    if (nav === "config") $("#modal-config").classList.add("open");
+  });
+});
+document.querySelectorAll(".modal-close").forEach((b) =>
+  b.addEventListener("click", () => b.closest(".modal-backdrop").classList.remove("open")));
+$("#btn-reset").addEventListener("click", () => {
+  if (!confirm("Apagar todo o progresso deste aparelho?")) return;
+  try { localStorage.removeItem("biblelingo"); } catch (e) {}
+  location.reload();
+});
+$("#card-verse").addEventListener("click", () => {
+  const v = verseOfDay();
+  speak(v.text);
+});
+
 renderHome();
 showScreen("home");
+// Redesenha o caminho quando fontes carregam ou a janela muda de tamanho
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => renderHome());
+let _rz;
+window.addEventListener("resize", () => {
+  clearTimeout(_rz);
+  _rz = setTimeout(() => { if ($("#screen-home").classList.contains("active")) renderHome(); }, 200);
+});

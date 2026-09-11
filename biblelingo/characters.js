@@ -186,15 +186,31 @@ const CHARACTERS = {
               <path d="M28 108 l7 -4.5 l0 9 Z" fill="#26c6da"/>`,
     }),
   },
+  isaias: {
+    name: "Isaías",
+    svg: _personSVG({
+      prefix: "is",
+      skinLight: "#f7d3a6", skinDark: "#dfa270",
+      robeLight: "#a8a884", robeDark: "#75755a",
+      browColor: "#cfd2cd",
+      hair: `<path d="M40 50 Q38 20 70 20 Q102 20 100 50 L100 40 Q70 30 40 40 Z" fill="#d8dcd9"/>`,
+      beard: `<path d="M43 58 Q41 92 70 94 Q99 92 97 58 Q85 71 70 71 Q55 71 43 58 Z" fill="#e6eae7"/>
+              <path d="M53 78 Q61 84 70 84 Q79 84 87 78" stroke="#c6ccc8" stroke-width="2" stroke-linecap="round" fill="none"/>`,
+      mouth: `<path d="M63 69 Q70 75 77 69" stroke="#a1554a" stroke-width="3" stroke-linecap="round" fill="none"/>`,
+      extra: `<rect x="12" y="94" width="30" height="38" rx="4" fill="#f3e6c4" stroke="#d3bb85" stroke-width="2.5"/>
+              <path d="M12 98 q-6 4 0 8 M42 120 q6 4 0 8" stroke="#d3bb85" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <path d="M19 104 h16 M19 111 h16 M19 118 h10" stroke="#c7ab6c" stroke-width="2" stroke-linecap="round"/>`,
+    }),
+  },
 };
 
 // Elenco por unidade: personagem principal + convidados
 const UNIT_CAST = {
-  u1: ["noe", "moises", "davi"],
-  u2: ["moises", "ester", "maria"],
-  u3: ["jesus", "pedro", "maria"],
-  u4: ["davi", "noe", "ester"],
-  u5: ["jesus", "maria", "pedro", "davi"],
+  u1: ["jesus", "moises", "noe"],
+  u2: ["noe", "maria"],
+  u3: ["moises", "ester"],
+  u4: ["davi", "pedro"],
+  u5: ["isaias", "jesus", "maria"],
 };
 
 function pickCharacter(unitId) {
