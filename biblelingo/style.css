@@ -867,3 +867,5 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .switch-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 14px; margin-bottom: 14px; background: var(--cream); border: 2px solid var(--line); border-radius: 14px; font-weight: 800; font-size: 15px; }
 .switch-row input { width: 44px; height: 24px; accent-color: var(--green-bright); }
+
+.new-word-tag { margin: -6px 0 10px; }

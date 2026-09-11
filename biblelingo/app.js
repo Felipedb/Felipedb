@@ -324,10 +324,6 @@ function buildExercises(lesson, unit) {
 
   // Cada palavra em 3 formatos: palavra nova (ver) -> reconhecer -> ouvir ou produzir
   vocab.forEach((v, i) => {
-    if (firstTime && !lesson.review) {
-      const example = (lesson.sentences || []).find((s) => normalize(s.en).includes(normalize(v.en.replace(/^to /, ""))));
-      ex.push({ type: "intro", word: v, example });
-    }
     if (i % 2 === 0) ex.push({ type: "image-choice", word: v, options: shuffle([v, ...distract(v, "en")]) });
     else ex.push({ type: "choice-en-pt", word: v, options: shuffle([v.pt, ...distract(v, "pt").map((p) => p.pt)]) });
     if (i % 2 === 0) ex.push({ type: "listen", word: v, options: shuffle([v.en, ...distract(v, "en").map((p) => p.en)]) });
@@ -374,18 +370,19 @@ function buildExercises(lesson, unit) {
   quizzes.forEach((q) => ex.push({ type: "quiz", quiz: q, options: shuffle(q.options) }));
 
   // Rampa de dificuldade (como no Duolingo): palavra nova -> reconhecimento -> escuta -> lacuna -> produção -> fala -> leitura/conversa
-  const RANK = { "intro": -1, "image-choice": 0, "choice-en-pt": 1, "match": 2, "listen": 3, "listen-build": 4, "missing-word": 5, "verse": 5, "translate-en-pt": 6, "build": 6, "complete-translation": 7, "listen-type": 7, "type": 7, "speak": 8, "read": 9, "dialogue": 9, "quiz": 10 };
+  const RANK = { "image-choice": 0, "choice-en-pt": 1, "match": 2, "listen": 3, "listen-build": 4, "missing-word": 5, "verse": 5, "translate-en-pt": 6, "build": 6, "complete-translation": 7, "listen-type": 7, "type": 7, "speak": 8, "read": 9, "dialogue": 9, "quiz": 10 };
   const ordered = ex
     .map((e, idx) => ({ e, k: RANK[e.type] * 100 + Math.random() * 60, idx }))
     .sort((x, y) => x.k - y.k)
     .map((x) => x.e);
-  // Palavra nova sempre antes da primeira cobrança da mesma palavra
-  const intros = ordered.filter((e) => e.type === "intro");
-  const final = ordered.filter((e) => e.type !== "intro");
-  intros.reverse().forEach((it) => {
-    const j = final.findIndex((e) => e.word && e.word.en === it.word.en);
-    final.splice(j >= 0 ? j : 0, 0, it);
-  });
+  // Etiqueta "Nova palavra" na primeira cobrança de cada palavra (como no Duolingo)
+  const final = ordered;
+  if (firstTime && !lesson.review) {
+    const seen = new Set();
+    final.forEach((e) => {
+      if (e.word && !seen.has(e.word.en)) { seen.add(e.word.en); e.newWord = true; }
+    });
+  }
   // Reserva 1-2 exercícios "mais difíceis" para o fim, liberados só se a lição estiver sem erros
   const hard = [];
   const takeHard = (t) => { const j = final.findIndex((e) => e.type === t); if (j > 0) hard.push(...final.splice(j, 1)); };
@@ -472,7 +469,6 @@ function renderExercise() {
   updateCombo();
 
   const render = {
-    "intro": renderIntro,
     "image-choice": renderImageChoice,
     "translate-en-pt": renderTranslateEnPt,
     "listen-type": renderListenType,
@@ -495,8 +491,12 @@ function renderExercise() {
     const t = box.querySelector(".ex-title");
     if (t) t.insertAdjacentHTML("afterbegin", '<span class="review-tag">Revisão</span> ');
   }
+  if (ex.newWord) {
+    const t = box.querySelector(".ex-title");
+    if (t) t.insertAdjacentHTML("beforebegin", '<div class="new-word-tag"><span class="new-tag">✦ Nova palavra</span></div>');
+  }
   session.practiceRec = null;
-  if (ex.type !== "speak" && ex.audioText) box.appendChild(practiceBar(ex));
+  if (ex.type !== "speak" && ex.audioText && ex.audioText.trim().split(/\s+/).length >= 3) box.appendChild(practiceBar(ex));
 }
 
 // Opções: string ou { value, html }
