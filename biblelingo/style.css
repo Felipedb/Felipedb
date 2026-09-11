@@ -825,3 +825,42 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .cs-lesson span { width: 28px; height: 28px; border-radius: 8px; background: var(--green-soft); display: inline-flex; align-items: center; justify-content: center; }
 .cs-actions { display: flex; gap: 10px; align-items: center; margin-top: 14px; }
 .cs-actions .btn-main { margin: 0; flex: 1; }
+
+/* ---------- Hub de prática, Match Madness e histórias ---------- */
+.hub-top-title { font-family: "Baloo 2", "Nunito", sans-serif; font-size: 20px; font-weight: 800; color: #274156; margin-left: auto; margin-right: auto; }
+.hub-top-title.small { font-size: 15px; margin: 0; white-space: nowrap; max-width: 40%; overflow: hidden; text-overflow: ellipsis; }
+.hub-title { font-family: "Baloo 2", "Nunito", sans-serif; font-size: 26px; color: #274156; }
+.hub-sub { font-size: 14px; font-weight: 700; color: var(--text-soft); margin-bottom: 16px; }
+.hub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.hub-card { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 16px 14px; background: var(--card); border: 2px solid var(--line); border-bottom-width: 4px; border-radius: 18px; text-align: left; }
+.hub-card:active { transform: translateY(2px); border-bottom-width: 2px; margin-bottom: 2px; }
+.hub-card.locked { opacity: 0.55; }
+.hub-card .hub-icon { font-size: 30px; }
+.hub-card b { font-size: 16px; }
+.hub-card small { font-size: 12.5px; font-weight: 700; color: var(--text-soft); }
+.hub-h3 { font-family: "Baloo 2", "Nunito", sans-serif; font-size: 20px; color: #274156; margin: 22px 0 10px; }
+.story-list { display: flex; flex-direction: column; gap: 10px; }
+.story-card { display: flex; align-items: center; gap: 12px; padding: 10px 12px; background: var(--card); border: 2px solid var(--line); border-bottom-width: 4px; border-radius: 16px; text-align: left; }
+.story-card.locked { opacity: 0.6; }
+.story-face { width: 52px; height: 52px; border-radius: 50%; overflow: hidden; flex: none; border: 3px solid #cfe6ae; display: flex; align-items: center; justify-content: center; background: #fff; }
+.story-face img, .story-face svg { width: 100%; height: 100%; object-fit: cover; }
+.story-info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.story-info b { font-size: 15.5px; }
+.story-info small { font-size: 12.5px; font-weight: 700; color: var(--text-soft); }
+.story-xp { font-size: 12.5px; font-weight: 900; color: #b89232; }
+.md-stat { font-weight: 900; font-size: 18px; color: #b89232; }
+.md-stat.time { margin-left: auto; color: var(--text); background: var(--card); border: 2px solid var(--line); border-radius: 12px; padding: 2px 12px; font-variant-numeric: tabular-nums; }
+.md-stat.time.urgent { color: var(--red); border-color: #ffb3b3; animation: pop 0.5s ease infinite; }
+.md-end { grid-column: 1 / -1; text-align: center; padding: 20px 0; }
+.md-end h3 { font-family: "Baloo 2", "Nunito", sans-serif; font-size: 26px; color: #d9a406; margin: 6px 0; }
+.md-end p { font-weight: 700; color: var(--text); margin-bottom: 8px; }
+.md-end .btn-main { margin-top: 14px; }
+.story-line { display: flex; align-items: flex-end; gap: 10px; margin: 10px 0 20px; }
+.story-line .story-face { width: 84px; height: 84px; flex-direction: column; position: relative; }
+.story-line .story-face small { position: absolute; bottom: -22px; font-size: 11px; font-weight: 800; color: var(--text-soft); white-space: nowrap; }
+.story-line .story-face.narr { font-size: 34px; background: var(--gold-soft); border-color: #f0dfae; }
+.story-face.big { width: 140px; height: 140px; margin: 0 auto 10px; }
+.story-bubble { position: relative; flex: 1; background: var(--card); border: 2px solid var(--line); border-radius: 18px; padding: 14px 16px; font-size: 19px; font-weight: 800; line-height: 1.4; box-shadow: 0 6px 16px rgba(90,70,30,0.09); }
+.story-bubble::before { content: ""; position: absolute; left: -10px; bottom: 18px; width: 16px; height: 16px; background: var(--card); border-left: 2px solid var(--line); border-bottom: 2px solid var(--line); transform: rotate(45deg); }
+.story-pt { font-size: 13.5px; font-weight: 700; color: var(--text-soft); margin-top: 6px; }
+.story-q { font-family: "Baloo 2", "Nunito", sans-serif; font-size: 22px; margin-bottom: 16px; color: #274156; }

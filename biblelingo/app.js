@@ -460,6 +460,7 @@ function showScreen(name) {
   document.querySelectorAll(".screen").forEach((s) => s.classList.remove("active"));
   $(`#screen-${name}`).classList.add("active");
   if (name === "home") renderHome();
+  if (name === "hub") renderHub();
 }
 
 function renderExercise() {
@@ -1475,6 +1476,13 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
+document.querySelectorAll(".hub-back").forEach((b) => b.addEventListener("click", () => {
+  if (typeof madness !== "undefined" && madness && madness.timer) clearInterval(madness.timer);
+  if ("speechSynthesis" in window) speechSynthesis.cancel();
+  showScreen($("#screen-hub").classList.contains("active") ? "home" : "hub");
+}));
+$("#story-next").addEventListener("click", () => { if (story && story.done) showScreen("hub"); else nextBeat(); });
+
 // Navegação (sidebar/rodapé)
 function setNav(name) {
   document.querySelectorAll(".nav-item").forEach((b) => b.classList.toggle("active", b.dataset.nav === name));
@@ -1482,9 +1490,9 @@ function setNav(name) {
 document.querySelectorAll(".nav-item").forEach((b) => {
   b.addEventListener("click", () => {
     const nav = b.dataset.nav;
-    setNav(nav === "estatisticas" || nav === "config" ? "inicio" : nav);
+    setNav(nav === "estatisticas" || nav === "config" || nav === "praticar" ? "inicio" : nav);
     if (nav === "inicio") window.scrollTo({ top: 0, behavior: "smooth" });
-    if (nav === "licoes") $("#trail").scrollIntoView({ behavior: "smooth", block: "start" });
+    if (nav === "praticar") { showScreen("hub"); return; }
     if (nav === "conquistas") $("#card-conquistas").scrollIntoView({ behavior: "smooth", block: "center" });
     if (nav === "estatisticas") {
       const totalStars = Object.values(state.stars).reduce((s, x) => s + x, 0);

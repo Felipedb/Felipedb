@@ -27,7 +27,7 @@
         </div>
         <nav class="nav">
           <button class="nav-item active" data-nav="inicio">🏠 <span>Início</span></button>
-          <button class="nav-item" data-nav="licoes">📖 <span>Lições</span></button>
+          <button class="nav-item" data-nav="praticar">🏋️ <span>Praticar</span></button>
           <button class="nav-item" data-nav="conquistas">⭐ <span>Conquistas</span></button>
           <button class="nav-item" data-nav="estatisticas">📊 <span>Estatísticas</span></button>
           <button class="nav-item" data-nav="config">⚙️ <span>Configurações</span></button>
@@ -91,11 +91,41 @@
     <!-- Navegação inferior (mobile) -->
     <nav class="bottom-nav">
       <button class="nav-item active" data-nav="inicio">🏠<span>Início</span></button>
-      <button class="nav-item" data-nav="licoes">📖<span>Lições</span></button>
+      <button class="nav-item" data-nav="praticar">🏋️<span>Praticar</span></button>
       <button class="nav-item" data-nav="conquistas">⭐<span>Conquistas</span></button>
       <button class="nav-item" data-nav="estatisticas">📊<span>Estatíst.</span></button>
       <button class="nav-item" data-nav="config">⚙️<span>Config.</span></button>
     </nav>
+  </section>
+
+  <!-- ===== Hub de prática ===== -->
+  <section id="screen-hub" class="screen">
+    <div class="lesson-top">
+      <button class="btn-close hub-back" aria-label="Voltar">✕</button>
+      <span class="hub-top-title">Praticar</span>
+    </div>
+    <main id="hub-body" class="exercise hub"></main>
+  </section>
+
+  <!-- ===== Match Madness ===== -->
+  <section id="screen-madness" class="screen">
+    <div class="lesson-top">
+      <button class="btn-close hub-back" aria-label="Sair">✕</button>
+      <span class="md-stat">⚡ <b id="md-score">0</b></span>
+      <span class="md-stat time" id="md-time">60</span>
+    </div>
+    <main class="exercise"><div class="ex-title">Toque nos pares</div><div id="md-grid" class="match-cols"></div></main>
+  </section>
+
+  <!-- ===== História ===== -->
+  <section id="screen-story" class="screen">
+    <div class="lesson-top">
+      <button class="btn-close hub-back" aria-label="Sair">✕</button>
+      <div class="progress-track"><div id="story-fill" class="progress-fill"></div></div>
+      <span class="hub-top-title small" id="story-title"></span>
+    </div>
+    <main id="story-body" class="exercise"></main>
+    <footer class="footer"><button id="story-next" class="btn-main">Continuar</button></footer>
   </section>
 
   <!-- ===== Tela de lição ===== -->
@@ -195,6 +225,8 @@
 
   <script src="characters.js"></script>
   <script src="data.js"></script>
+  <script src="stories.js"></script>
+  <script src="hub.js"></script>
   <script src="features.js"></script>
   <script src="app.js"></script>
 </body>
