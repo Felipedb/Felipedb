@@ -532,6 +532,10 @@ const HINTS = (() => {
   allVocab().forEach((v) => { m[normalize(v.pt)] = v.en; });
   return m;
 })();
+function sayable(en) {
+  return en.split(" ").map((w) => `<span class="say-word">${w}</span>`).join(" ");
+}
+
 function hintedText(pt) {
   return pt.split(" ").map((w) => {
     const key = normalize(w);
@@ -540,6 +544,8 @@ function hintedText(pt) {
 }
 document.addEventListener("click", (e) => {
   document.querySelectorAll(".hint-pop").forEach((p) => p.remove());
+  const sw = e.target.closest(".say-word");
+  if (sw) { speak(sw.textContent.replace(/[.,;:!?'"]/g, "")); return; }
   const w = e.target.closest(".hint-word");
   if (!w) return;
   const pop = document.createElement("span");
@@ -632,7 +638,7 @@ function renderImageChoice(ex, box) {
   const bubble = document.createElement("div");
   bubble.className = "bubble-inner";
   bubble.appendChild(audioButton(ex.word.en));
-  bubble.insertAdjacentHTML("beforeend", `<span class="ex-word">${ex.word.en}</span>`);
+  bubble.insertAdjacentHTML("beforeend", `<span class="ex-word">${sayable(ex.word.en)}</span>`);
   box.appendChild(characterRow(bubble));
   makeOptions(box, ex.options.map((o) => ({
     value: o.pt,
@@ -649,7 +655,7 @@ function renderChoiceEnPt(ex, box) {
   const bubble = document.createElement("div");
   bubble.className = "bubble-inner";
   bubble.appendChild(audioButton(ex.word.en));
-  bubble.insertAdjacentHTML("beforeend", `<span class="ex-word">${ex.word.en}</span>`);
+  bubble.insertAdjacentHTML("beforeend", `<span class="ex-word">${sayable(ex.word.en)}</span>`);
   box.appendChild(characterRow(bubble));
   makeOptions(box, ex.options, 1);
   ex.correct = ex.word.pt;
@@ -668,7 +674,7 @@ function bigAudio(text) {
 function renderListen(ex, box) {
   box.innerHTML = `<div class="ex-title">Toque no que você ouviu</div>`;
   box.appendChild(bigAudio(ex.word.en));
-  makeOptions(box, ex.options, 2);
+  makeOptions(box, ex.options, 2, (opt) => speak(opt));
   speak(ex.word.en);
   ex.correct = ex.word.en;
   ex.explain = `${ex.word.en} = ${ex.word.pt}`;
@@ -708,12 +714,14 @@ function renderType(ex, box) {
 
 function renderVerse(ex, box) {
   const v = ex.verse;
-  const gapped = v.text.replace(v.blank, `<span class="gap" id="verse-gap">&nbsp;</span>`);
+  const gapped = sayable(v.text).replace(`<span class="say-word">${v.blank}</span>`, `<span class="gap" id="verse-gap">&nbsp;</span>`)
+    .replace(new RegExp(`<span class="say-word">${v.blank}([.,;:!?])</span>`), `<span class="gap" id="verse-gap">&nbsp;</span>$1`);
   box.innerHTML = `<div class="ex-title">Complete o versículo</div>
     <div class="verse-box">${gapped}</div>
     <div class="verse-ref">${v.ref} — "${v.pt}"</div>`;
   makeOptions(box, ex.options, 2, (opt) => {
     $("#verse-gap").textContent = opt;
+    speak(opt);
   });
   ex.correct = v.blank;
   ex.explain = `"${v.text}" — ${v.ref}`;
@@ -729,12 +737,12 @@ function renderDialogue(ex, box) {
   const top = document.createElement("div");
   top.className = "bubble-inner";
   top.appendChild(audioButton(d.line));
-  top.insertAdjacentHTML("beforeend", `<span class="ex-word">${d.line}</span>`);
+  top.insertAdjacentHTML("beforeend", `<span class="ex-word">${sayable(d.line)}</span>`);
   bubble.appendChild(top);
   bubble.insertAdjacentHTML("beforeend", `<span class="ex-muted dialog-pt">${d.pt}</span>`);
   box.appendChild(characterRow(bubble));
   box.insertAdjacentHTML("beforeend", `<div class="reply-label">Sua resposta:</div>`);
-  makeOptions(box, ex.options, 1);
+  makeOptions(box, ex.options, 1, (opt) => speak(opt));
   speak(d.line);
   ex.correct = d.answer;
   ex.explain = `${d.answer} = ${d.answerPt}`;
@@ -748,9 +756,9 @@ function renderQuiz(ex, box) {
   const bubble = document.createElement("div");
   bubble.className = "bubble-inner";
   bubble.appendChild(audioButton(q.q));
-  bubble.insertAdjacentHTML("beforeend", `<span class="ex-word ex-q">${q.q}</span>`);
+  bubble.insertAdjacentHTML("beforeend", `<span class="ex-word ex-q">${sayable(q.q)}</span>`);
   box.appendChild(characterRow(bubble));
-  makeOptions(box, ex.options, 1);
+  makeOptions(box, ex.options, 1, (opt) => speak(opt));
   speak(q.q);
   ex.correct = q.answer;
   ex.explain = q.explain;
@@ -787,6 +795,7 @@ function wordBankUI(ex, box, correctSentence) {
     t.addEventListener("click", () => {
       if (session.checked) return;
       SFX.tap();
+      speak(word);
       const from = t.getBoundingClientRect();
       t.classList.add("ghost");
       const placed = document.createElement("button");
@@ -797,6 +806,7 @@ function wordBankUI(ex, box, correctSentence) {
       placed.addEventListener("click", () => {
         if (session.checked) return;
         SFX.tap();
+        speak(word);
         chosen.splice(chosen.indexOf(entry), 1);
         placed.remove();
         t.classList.remove("ghost");
@@ -869,7 +879,7 @@ function renderSpeak(ex, box) {
   const top = document.createElement("div");
   top.className = "bubble-inner";
   top.appendChild(audioPair(ex.sentence.en));
-  top.insertAdjacentHTML("beforeend", `<span class="ex-word">${ex.sentence.en}</span>`);
+  top.insertAdjacentHTML("beforeend", `<span class="ex-word">${sayable(ex.sentence.en)}</span>`);
   bubble.appendChild(top);
   bubble.insertAdjacentHTML("beforeend", `<span class="ex-muted dialog-pt">${ex.sentence.pt}</span>`);
   box.appendChild(characterRow(bubble));
