@@ -18,6 +18,9 @@ function load() {
     stars: {}, // lessonId -> 1..3 (melhor resultado)
     errors: {}, // palavra EN -> vezes errada (para "Praticar erros")
     speakMutedUntil: 0,
+    crowns: {}, // unitId -> 0..5
+    daily: null, // meta diária e missões do dia
+    dailyGoal: 20,
   };
   try {
     const raw = localStorage.getItem("biblelingo");
@@ -25,6 +28,7 @@ function load() {
   } catch (e) { /* armazenamento indisponível: segue em memória */ }
   if (!base.stars) base.stars = {};
   if (!base.errors) base.errors = {};
+  if (!base.crowns) base.crowns = {};
   // Corações renovam a cada novo dia
   if (base.heartsDay !== today()) {
     base.hearts = MAX_HEARTS;
@@ -84,10 +88,11 @@ if ("speechSynthesis" in window) {
 }
 
 function speak(text, opts = {}) {
+  const ch = opts.char || (session && session.voiceChar) || null;
+  if (playClip(text, ch && ch.key, opts.slow)) { if ("speechSynthesis" in window) speechSynthesis.cancel(); return; }
   if (!("speechSynthesis" in window)) return;
   speechSynthesis.cancel();
-  const profile = opts.char && opts.char.voice ? opts.char.voice
-    : (session && session.voiceChar && session.voiceChar.voice) || null;
+  const profile = ch && ch.voice ? ch.voice : null;
   const u = new SpeechSynthesisUtterance(text);
   u.lang = "en-US";
   u.rate = (profile ? profile.rate : 0.95) * (opts.slow ? 0.6 : 1);
@@ -167,6 +172,8 @@ function renderHome() {
   errBtn.textContent = `🔁 Praticar erros (${nErr})`;
   errBtn.onclick = startErrorPractice;
 
+  renderDailyCard();
+
   // Conquistas
   const badgeDefs = [
     { icon: "📖", color: "#58a700", unit: "u1" },
@@ -211,8 +218,10 @@ function renderHome() {
       ? `<span class="badge">✓</span>`
       : unlocked ? "" : `<span class="badge lock">🔒</span>`;
     const tip = hasCurrent ? '<span class="start-tip">COMEÇAR</span>' : "";
-    btn.innerHTML = `${hasCurrent ? '<span class="pulse"></span>' : ""}${tip}<span class="face">${face}</span>${badge}`;
+    if (done && unitCrowns(unit.id) >= MAX_CROWN) btn.classList.add("legendary");
+    btn.innerHTML = `${hasCurrent ? '<span class="pulse"></span>' : ""}${tip}<span class="face">${face}</span>${badge}${crownBadge(unit, done)}`;
     btn.addEventListener("click", () => {
+      if (done) { startLevelUp(unit); return; }
       const next = unit.lessons.find((l) => !state.completed[l.id]) || unit.lessons[unit.lessons.length - 1];
       startLesson(next.id);
     });
@@ -220,7 +229,7 @@ function renderHome() {
     const info = document.createElement("div");
     info.className = "lesson-info";
     info.innerHTML = `<h3>${i + 1}. ${unit.title}</h3>
-      <div class="lref">${unit.subtitle}${doneCount && !done ? ` · ${doneCount}/${total} etapas` : ""}</div>
+      <div class="lref">${unit.subtitle}${doneCount && !done ? ` · ${doneCount}/${total} etapas` : ""}${done && unitCrowns(unit.id) < MAX_CROWN ? " · toque para subir de nível" : ""}${done && unitCrowns(unit.id) >= MAX_CROWN ? " · Lendária" : ""}</div>
       ${starsHTML(unitStars)}`;
 
     row.appendChild(btn);
@@ -465,6 +474,8 @@ function renderExercise() {
   void fill.offsetWidth;
   fill.classList.add("shine");
   $("#lesson-hearts").textContent = session.practice ? "💪 prática" : `❤️ ${state.hearts}`;
+  const lvl = $("#level-chip");
+  if (lvl) { lvl.hidden = !session.levelUp; lvl.textContent = session.legendary ? "👑 Lendária" : `👑 Nível ${unitCrowns(session.lesson.unit.id) + 1}`; }
 
   const footer = $("#footer");
   footer.className = "footer";
@@ -1336,11 +1347,15 @@ function finishLesson() {
   gained += session.bonus;
 
   state.xp += gained;
-  if (!session.lesson.practiceErrors) state.completed[session.lesson.id] = true;
+  if (!session.lesson.practiceErrors && !session.levelUp) state.completed[session.lesson.id] = true;
+  if (session.levelUp) {
+    const uid = session.lesson.unit.id;
+    state.crowns[uid] = Math.min(MAX_CROWN, unitCrowns(uid) + 1);
+  }
 
   // Estrelas: 3 = perfeita, 2 = até 2 erros, 1 = concluída
   const earned = perfect ? 3 : session.mistakes <= 2 ? 2 : 1;
-  if (!session.lesson.practiceErrors) state.stars[session.lesson.id] = Math.max(state.stars[session.lesson.id] || 0, earned);
+  if (!session.lesson.practiceErrors && !session.levelUp) state.stars[session.lesson.id] = Math.max(state.stars[session.lesson.id] || 0, earned);
 
   // Prática recupera 1 coração
   if (session.practice && state.hearts < MAX_HEARTS) state.hearts++;
@@ -1368,7 +1383,10 @@ function finishLesson() {
   const mm = Math.floor(secs / 60), ss = String(secs % 60).padStart(2, "0");
   $("#result-stars").innerHTML = starsHTML(earned, "");
   $("#result-emoji").textContent = perfect ? "🌟" : "🎉";
-  $("#result-title").textContent = perfect ? "Lição perfeita!" : "Lição concluída!";
+  $("#result-title").textContent = session.levelUp
+    ? (session.legendary ? "Nível Lendário!" : `Coroa ${unitCrowns(session.lesson.unit.id)} conquistada!`)
+    : perfect ? "Lição perfeita!" : "Lição concluída!";
+  recordLesson({ gained, perfect, bestCombo: session.bestCombo });
   $("#result-sub").textContent = (first ? "Você avançou na trilha." : "Ótima prática!")
     + ` ⏱️ ${mm}:${ss}` + (session.bonus ? ` · 🔥 combo +${session.bonus} XP` : "");
   $("#result-xp").textContent = `+${gained}`;
@@ -1493,6 +1511,8 @@ $("#card-verse").addEventListener("click", () => {
   speak(v.text, { char: CHARACTERS.jesus });
 });
 
+loadAudioManifest();
+registerServiceWorker();
 renderHome();
 showScreen("home");
 // Redesenha o caminho quando fontes carregam ou a janela muda de tamanho

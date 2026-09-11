@@ -61,6 +61,8 @@
           <button id="btn-practice-errors" class="btn-mini" hidden>🔁 Praticar erros</button>
         </div>
 
+        <div class="card" id="card-daily"></div>
+
         <button class="card gold-card" id="card-verse">
           <h3>📖 Versículo do dia <span class="chev">›</span></h3>
           <p class="vd-text" id="vd-text"></p>
@@ -100,6 +102,7 @@
     <div class="lesson-top">
       <button id="btn-quit" class="btn-close" aria-label="Sair da lição">✕</button>
       <div class="progress-track"><div id="progress-fill" class="progress-fill"></div></div>
+      <span id="level-chip" class="combo-chip level-chip" hidden>👑</span>
       <span id="combo-chip" class="combo-chip">🔥 0</span>
       <span id="lesson-hearts" class="lesson-hearts">❤️ 5</span>
     </div>
@@ -186,6 +189,7 @@
 
   <script src="characters.js"></script>
   <script src="data.js"></script>
+  <script src="features.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
