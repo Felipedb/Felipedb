@@ -56,6 +56,7 @@ function _personSVG(p) {
 
 const CHARACTERS = {
   jesus: {
+    img: "chars/jesus.jpg",
     name: "Jesus",
     svg: _personSVG({
       prefix: "je",
@@ -74,6 +75,7 @@ const CHARACTERS = {
     }),
   },
   moises: {
+    img: "chars/moises.jpg",
     name: "Moisés",
     svg: _personSVG({
       prefix: "mo",
@@ -93,6 +95,7 @@ const CHARACTERS = {
     }),
   },
   davi: {
+    img: "chars/davi.jpg",
     name: "Davi",
     svg: _personSVG({
       prefix: "da",
@@ -110,6 +113,7 @@ const CHARACTERS = {
     }),
   },
   ester: {
+    img: "chars/ester.jpg",
     name: "Ester",
     svg: _personSVG({
       prefix: "es",
@@ -127,6 +131,7 @@ const CHARACTERS = {
     }),
   },
   noe: {
+    img: "chars/noe.jpg",
     name: "Noé",
     svg: _personSVG({
       prefix: "no",
@@ -149,6 +154,7 @@ const CHARACTERS = {
     }),
   },
   maria: {
+    img: "chars/maria.jpg",
     name: "Maria",
     svg: _personSVG({
       prefix: "ma",
@@ -167,6 +173,7 @@ const CHARACTERS = {
     }),
   },
   pedro: {
+    img: "chars/pedro.jpg",
     name: "Pedro",
     svg: _personSVG({
       prefix: "pe",
@@ -187,6 +194,7 @@ const CHARACTERS = {
     }),
   },
   isaias: {
+    img: "chars/isaias.jpg",
     name: "Isaías",
     svg: _personSVG({
       prefix: "is",

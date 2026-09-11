@@ -117,11 +117,9 @@ function renderHome() {
   $("#stat-xp").textContent = state.xp;
   $("#stat-hearts").textContent = state.hearts;
 
-  // Hero, avatar e promo
-  const guide = CHARACTERS.jesus;
-  $("#hero-char").innerHTML = charFace(guide);
-  $("#avatar").innerHTML = charFace(guide);
-  $("#promo-char").innerHTML = charFace(CHARACTERS.davi);
+  // Avatar e promo
+  $("#avatar").innerHTML = charFace(CHARACTERS.jesus);
+  $("#promo-char").innerHTML = '<img src="chars/promo.jpg" alt="">';
 
   // Versículo do dia
   const v = verseOfDay();
