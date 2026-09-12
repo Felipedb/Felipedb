@@ -23,6 +23,7 @@ function load() {
     crowns: {}, // unitId -> 0..5
     daily: null, // meta diária e missões do dia
     dailyGoal: 20,
+    theme: "auto", // "light" | "dark" | "auto"
   };
   try {
     const raw = localStorage.getItem("biblelingo");
@@ -40,6 +41,18 @@ function load() {
   if (base.lastStudy && daysBetween(base.lastStudy, today()) > 1) base.streak = 0;
   return base;
 }
+
+// ---------- Tema (claro / escuro / automático) ----------
+const _darkQuery = window.matchMedia ? matchMedia("(prefers-color-scheme: dark)") : null;
+function applyTheme() {
+  const dark = state.theme === "dark" || (state.theme !== "light" && _darkQuery && _darkQuery.matches);
+  document.documentElement.dataset.theme = dark ? "dark" : "light";
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.content = dark ? "#17140f" : "#58a700";
+  document.querySelectorAll("[data-theme-opt]").forEach((b) =>
+    b.setAttribute("aria-pressed", b.dataset.themeOpt === (state.theme || "auto")));
+}
+if (_darkQuery) _darkQuery.addEventListener("change", () => { if (state.theme !== "light" && state.theme !== "dark") applyTheme(); });
 
 function save() {
   try { localStorage.setItem("biblelingo", JSON.stringify(state)); } catch (e) {}
@@ -1709,6 +1722,7 @@ document.querySelectorAll(".nav-item").forEach((b) => {
     if (nav === "config") {
       const t = $("#toggle-sound");
       if (t) t.checked = state.sound !== false;
+      applyTheme();
       $("#modal-config").classList.add("open");
     }
   });
@@ -1720,6 +1734,12 @@ $("#toggle-sound").addEventListener("change", (e) => {
   save();
   if (state.sound) SFX.correct();
 });
+document.querySelectorAll("[data-theme-opt]").forEach((b) => b.addEventListener("click", () => {
+  state.theme = b.dataset.themeOpt;
+  save();
+  applyTheme();
+  SFX.tap();
+}));
 $("#btn-reset").addEventListener("click", () => {
   if (!confirm("Apagar todo o progresso deste aparelho?")) return;
   try { localStorage.removeItem("biblelingo"); } catch (e) {}
@@ -1731,6 +1751,7 @@ $("#card-verse").addEventListener("click", () => {
 });
 
 document.querySelectorAll("i.nav-ico[data-ico]").forEach((i) => { i.innerHTML = ICONS[i.dataset.ico] || ""; });
+applyTheme();
 loadAudioManifest();
 registerServiceWorker();
 renderHome();

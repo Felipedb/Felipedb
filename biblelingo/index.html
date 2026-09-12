@@ -12,6 +12,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.9.3/confetti.browser.min.js"></script>
+  <script>
+    // Aplica o tema antes da primeira pintura (evita piscar claro no modo escuro)
+    (function () {
+      var pref = "auto";
+      try { pref = (JSON.parse(localStorage.getItem("biblelingo") || "{}").theme) || "auto"; } catch (e) {}
+      var dark = pref === "dark" || (pref === "auto" && window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches);
+      document.documentElement.dataset.theme = dark ? "dark" : "light";
+      var m = document.querySelector('meta[name="theme-color"]');
+      if (m) m.content = dark ? "#17140f" : "#58a700";
+    })();
+  </script>
 </head>
 <body>
 
@@ -219,6 +230,11 @@
       <div class="big-emoji">⚙️</div>
       <h3>Configurações</h3>
       <p>Seu progresso fica salvo neste aparelho.</p>
+      <div class="theme-row" role="group" aria-label="Tema">
+        <button class="theme-opt" data-theme-opt="light"><i class="nav-ico" data-ico="sun"></i><span>Claro</span></button>
+        <button class="theme-opt" data-theme-opt="dark"><i class="nav-ico" data-ico="moon"></i><span>Escuro</span></button>
+        <button class="theme-opt" data-theme-opt="auto"><i class="nav-ico" data-ico="auto"></i><span>Automático</span></button>
+      </div>
       <label class="switch-row"><span>🔊 Efeitos sonoros</span><input type="checkbox" id="toggle-sound" checked /></label>
       <button id="btn-reset" class="btn-main red">Apagar progresso</button>
       <button class="btn-ghost modal-close">Fechar</button>
