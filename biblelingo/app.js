@@ -24,6 +24,8 @@ function load() {
     daily: null, // meta diária e missões do dia
     dailyGoal: 20,
     theme: "auto", // "light" | "dark" | "auto"
+    days: {}, // "YYYY-MM-DD" -> XP do dia (meta semanal)
+    chests: {}, // unitId -> true (baú da unidade aberto)
   };
   try {
     const raw = localStorage.getItem("biblelingo");
@@ -32,6 +34,8 @@ function load() {
   if (!base.stars) base.stars = {};
   if (!base.errors) base.errors = {};
   if (!base.crowns) base.crowns = {};
+  if (!base.days) base.days = {};
+  if (!base.chests) base.chests = {};
   // Corações renovam a cada novo dia
   if (base.heartsDay !== today()) {
     base.hearts = MAX_HEARTS;
@@ -174,14 +178,28 @@ function renderHome() {
   $("#stat-xp").textContent = state.xp;
   $("#stat-hearts").textContent = state.hearts;
 
+  $("#hud-streak").textContent = state.streak;
+  $("#hud-xp").textContent = state.xp;
+  $("#hud-hearts").textContent = state.hearts;
+
   // Avatar e promo
+  $("#hud-avatar").innerHTML = charFace(CHARACTERS.jesus);
   $("#avatar").innerHTML = charFace(CHARACTERS.jesus);
   $("#promo-char").innerHTML = '<img src="chars/promo.jpg" alt="">';
 
-  // Versículo do dia
+  // Versículo bilíngue do dia: inglês na frente, tradução e dicas sob demanda
   const v = verseOfDay();
-  $("#vd-text").textContent = `"${v.text}"`;
-  $("#vd-ref").textContent = `${v.ref} — ${v.pt}`;
+  $("#vd-text").innerHTML = `“${sayable(v.text)}”`;
+  $("#vd-ref").textContent = `${v.ref} (KJV)`;
+  $("#vd-pt").textContent = `“${v.pt}”`;
+  const pool = allVocab();
+  const hints = v.text.replace(/[.,;:!?"']/g, "").split(" ")
+    .map((w) => pool.find((p) => normalize(p.en.replace(/^to /, "")) === normalize(w)))
+    .filter((p, i, arr) => p && arr.indexOf(p) === i).slice(0, 3);
+  $("#vd-hints").innerHTML = hints.length
+    ? "Dica: " + hints.map((p) => `<b>${p.en}</b> = ${p.pt}`).join(" · ")
+    : "";
+  renderWeek();
 
   // Progresso: unidades totalmente concluídas
   const unitDone = (u) => u.lessons.every((l) => state.completed[l.id]);
@@ -211,60 +229,137 @@ function renderHome() {
     return `<span class="badge-hex${done ? "" : " locked"}" style="background:${b.color}">${b.icon}</span>`;
   }).join("");
 
-  // Trilha: um nó por grande lição (unidade), como na referência
+  // Trilha: um capítulo por unidade, um nó por lição e o baú no fim (referência do projeto)
   const trail = $("#trail");
   trail.innerHTML = "";
   const currentId = currentLessonId();
-  const indents = ["", "indent-1", "indent-2", "indent-1", "", "indent-1", "indent-2", "indent-1"];
-  const nodes = document.createElement("div");
-  nodes.className = "nodes";
+  const indents = ["", "indent-1", "indent-2", "indent-1", ""];
 
-  COURSE.forEach((unit, i) => {
-    const row = document.createElement("div");
-    row.className = `lesson-row ${indents[i % indents.length]}`;
+  COURSE.forEach((unit, ui) => {
+    const lessons = unit.lessons;
+    const doneCount = lessons.filter((l) => state.completed[l.id]).length;
+    const unitDoneAll = doneCount === lessons.length;
+    const starsGot = lessons.reduce((s, l) => s + (state.stars[l.id] || 0), 0);
 
-    const doneCount = unit.lessons.filter((l) => state.completed[l.id]).length;
-    const total = unit.lessons.length;
-    const done = doneCount === total;
-    const hasCurrent = unit.lessons.some((l) => l.id === currentId);
-    const unlocked = lessonUnlocked(unit.lessons[0].id);
+    // Cabeçalho do capítulo
+    const head = document.createElement("div");
+    head.className = "chapter";
+    head.innerHTML = `<div class="ch-left">
+        <span class="ch-ico">${unit.face === "book" || !CHARACTERS[unit.face] ? "📖" : charFace(CHARACTERS[unit.face])}</span>
+        <div><span class="ch-eyebrow">Capítulo ${ui + 1}${unitDoneAll ? " · concluído" : ""}</span>
+        <h3>${unit.title}</h3></div>
+      </div>
+      <span class="ch-stars">⭐ <b>${starsGot}</b>/${lessons.length * 3}</span>`;
+    trail.appendChild(head);
 
-    // Estrelas da unidade: média das estrelas das lições concluídas
-    const starVals = unit.lessons.filter((l) => !l.review).map((l) => state.stars[l.id] || 0);
-    const unitStars = done ? Math.round(starVals.reduce((s, x) => s + x, 0) / starVals.length) : (doneCount ? Math.max(1, Math.min(...starVals.filter(Boolean))) : 0);
+    const nodes = document.createElement("div");
+    nodes.className = "nodes";
 
-    const btn = document.createElement("button");
-    btn.className = "portrait" + (unlocked ? "" : " locked");
-    btn.style.setProperty("--pc", unit.color);
-    const face = unit.face === "book"
-      ? `<span class="picon">📖</span>`
-      : charFace(CHARACTERS[unit.face]);
-    const badge = done
-      ? `<span class="badge">✓</span>`
-      : unlocked ? "" : `<span class="badge lock">🔒</span>`;
-    const tip = hasCurrent ? '<span class="start-tip">COMEÇAR</span>' : "";
-    if (done && unitCrowns(unit.id) >= MAX_CROWN) btn.classList.add("legendary");
-    btn.innerHTML = `${hasCurrent ? '<span class="pulse"></span>' : ""}${tip}<span class="face">${face}</span>${badge}${crownBadge(unit, done)}`;
-    btn.addEventListener("click", () => {
-      if (done) { startLevelUp(unit); return; }
-      const next = unit.lessons.find((l) => !state.completed[l.id]) || unit.lessons[unit.lessons.length - 1];
-      startLesson(next.id);
+    lessons.forEach((lesson, li) => {
+      const done = !!state.completed[lesson.id];
+      const unlocked = lessonUnlocked(lesson.id);
+      const isCurrent = lesson.id === currentId;
+      const stars = state.stars[lesson.id] || 0;
+
+      const row = document.createElement("div");
+      row.className = `lesson-row ${indents[li % indents.length]}` +
+        (isCurrent ? " current" : done ? " done" : unlocked ? "" : " locked");
+
+      const btn = document.createElement("button");
+      btn.className = "portrait" + (isCurrent ? "" : " sm") + (unlocked ? "" : " locked");
+      btn.style.setProperty("--pc", unit.color);
+      const face = !unlocked ? '<span class="picon picon-lock">🔒</span>'
+        : lesson.review ? '<span class="picon">🏅</span>'
+        : charFace(CHARACTERS[unit.face] || CHARACTERS.jesus);
+      const badge = done ? '<span class="badge">✓</span>' : "";
+      const tip = isCurrent ? '<span class="start-tip">COMEÇAR</span>' : "";
+      if (done && unitCrowns(unit.id) >= MAX_CROWN) btn.classList.add("legendary");
+      btn.innerHTML = `${isCurrent ? '<span class="pulse"></span>' : ""}${tip}<span class="face">${face}</span>${badge}` +
+        (li === 0 ? crownBadge(unit, unitDoneAll) : "") +
+        starsHTML(stars, "node-stars");
+      btn.disabled = !unlocked;
+      btn.addEventListener("click", () => {
+        if (!unlocked) { toast("🔒 Conclua a etapa anterior"); return; }
+        if (done && unitDoneAll && unitCrowns(unit.id) < MAX_CROWN) { startLevelUp(unit); return; }
+        startLesson(lesson.id);
+      });
+
+      const estado = isCurrent ? "Em andamento" : done ? "Concluída" : unlocked ? "Disponível" : "Bloqueada";
+      const palavras = (lesson.vocab || []).slice(0, 3).map((w) => w.en).join(", ");
+      const info = document.createElement("div");
+      info.className = "lesson-info";
+      info.innerHTML = `<span class="step">Etapa ${li + 1} · ${estado}</span>
+        <h3>${lesson.title}</h3>
+        <div class="lref">${lesson.review ? "Revisão de toda a unidade" : palavras || unit.subtitle}</div>`;
+
+      row.appendChild(btn);
+      row.appendChild(info);
+      nodes.appendChild(row);
     });
 
-    const info = document.createElement("div");
-    info.className = "lesson-info";
-    info.innerHTML = `<h3>${i + 1}. ${unit.title}</h3>
-      <div class="lref">${unit.subtitle}${doneCount && !done ? ` · ${doneCount}/${total} etapas` : ""}${done && unitCrowns(unit.id) < MAX_CROWN ? " · toque para subir de nível" : ""}${done && unitCrowns(unit.id) >= MAX_CROWN ? " · Lendária" : ""}</div>
-      ${starsHTML(unitStars)}`;
+    trail.appendChild(nodes);
+    drawTrailPath(nodes, "#9db97a");
 
-    row.appendChild(btn);
-    row.appendChild(info);
-    nodes.appendChild(row);
+    // Baú do capítulo
+    const taken = !!(state.chests || {})[unit.id];
+    const chest = document.createElement("button");
+    chest.className = "unit-chest" + (taken ? " taken" : unitDoneAll ? "" : " locked");
+    chest.innerHTML = `<span class="uc-emoji">${taken ? "✅" : unitDoneAll ? "🎁" : "🔒"}</span>
+      <span>Baú do capítulo ${ui + 1}</span>
+      <small>${taken ? "recompensa recebida" : unitDoneAll ? "toque para abrir · +20 XP" : `conclua as ${lessons.length} etapas`}</small>`;
+    chest.addEventListener("click", () => {
+      if (taken || !unitDoneAll) { SFX.tap(); return; }
+      state.chests[unit.id] = true;
+      state.xp += 20;
+      save();
+      SFX.sparkle();
+      if (window.confetti) confetti({ particleCount: 70, spread: 65, origin: { y: 0.7 } });
+      toast("🎁 Baú aberto! +20 XP", "combo");
+      renderHome();
+    });
+    trail.appendChild(chest);
   });
 
-  trail.appendChild(nodes);
-  drawTrailPath(nodes, "#9db97a");
+  renderContinueCTA(currentId);
   renderCharacterStrip();
+}
+
+// Faixa dos 7 dias da semana (segunda a domingo), como a meta de fidelidade da referência
+function renderWeek() {
+  const strip = $("#week-strip");
+  if (!strip) return;
+  const labels = ["S", "T", "Q", "Q", "S", "S", "D"];
+  const now = new Date();
+  const monday = new Date(now);
+  monday.setDate(now.getDate() - ((now.getDay() + 6) % 7));
+  const hoje = today();
+  let feitos = 0;
+  strip.innerHTML = labels.map((lb, i) => {
+    const d = new Date(monday);
+    d.setDate(monday.getDate() + i);
+    const iso = d.toISOString().slice(0, 10);
+    const studied = (state.days || {})[iso] > 0;
+    if (studied) feitos++;
+    const isToday = iso === hoje;
+    const future = iso > hoje;
+    const cls = studied ? "done" : isToday ? "today" : future ? "future" : "";
+    const mark = studied ? "✓" : isToday ? "★" : future ? "🔒" : "·";
+    return `<span class="week-day ${cls}"><i>${mark}</i><span>${lb}</span></span>`;
+  }).join("");
+  const wc = $("#week-count");
+  if (wc) wc.textContent = `${feitos} de 7`;
+}
+
+// Botão fixo "Continuar" com a próxima etapa
+function renderContinueCTA(currentId) {
+  const cta = $("#cta-continue");
+  if (!cta) return;
+  const lesson = flatLessons().find((l) => l.id === currentId);
+  if (!lesson) { cta.hidden = true; return; }
+  cta.hidden = false;
+  cta.innerHTML = `${ICONS.play || ""}<span>Continuar: ${lesson.title} (+${XP_PER_LESSON} XP)</span>`;
+  cta.style.bottom = matchMedia("(min-width: 980px)").matches ? "18px" : "calc(72px + env(safe-area-inset-bottom))";
+  cta.onclick = () => startLesson(lesson.id);
 }
 
 // Desenha o caminho tracejado ligando os nós de uma unidade
@@ -1745,9 +1840,23 @@ $("#btn-reset").addEventListener("click", () => {
   try { localStorage.removeItem("biblelingo"); } catch (e) {}
   location.reload();
 });
-$("#card-verse").addEventListener("click", () => {
-  const v = verseOfDay();
-  speak(v.text, { char: CHARACTERS.jesus });
+$("#vd-audio").addEventListener("click", (e) => {
+  e.stopPropagation();
+  const b = e.currentTarget;
+  b.classList.add("playing");
+  setTimeout(() => b.classList.remove("playing"), 1400);
+  speak(verseOfDay().text, { char: CHARACTERS.jesus });
+});
+$("#vd-toggle").addEventListener("click", () => {
+  const box = $("#vd-trans");
+  const open = box.hidden;
+  box.hidden = !open;
+  $("#vd-toggle").textContent = open ? "Ocultar ▴" : "Ver tradução ▾";
+  $("#vd-toggle").setAttribute("aria-expanded", String(open));
+});
+$("#hud-avatar").addEventListener("click", () => {
+  const strip = $("#char-strip");
+  if (strip) strip.scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
 document.querySelectorAll("i.nav-ico[data-ico]").forEach((i) => { i.innerHTML = ICONS[i.dataset.ico] || ""; });

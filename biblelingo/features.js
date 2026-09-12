@@ -102,6 +102,9 @@ function ensureDaily() {
 
 function recordLesson({ gained, perfect, bestCombo }) {
   const d = ensureDaily();
+  // Dia marcado na meta semanal de fidelidade
+  state.days = state.days || {};
+  state.days[today()] = (state.days[today()] || 0) + gained;
   d.xp += gained;
   d.lessons += 1;
   if (perfect) d.perfect += 1;

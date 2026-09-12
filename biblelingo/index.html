@@ -35,6 +35,12 @@
         <div class="logo">
           <span class="logo-mark">✝</span>
           <span class="logo-text">Bíblia<b>Learn</b></span>
+          <div class="hud">
+            <span class="hud-chip flame"><i class="nav-ico" data-ico="flame"></i><b id="hud-streak">0</b></span>
+            <span class="hud-chip xp"><i class="nav-ico" data-ico="star"></i><b id="hud-xp">0</b></span>
+            <span class="hud-chip heart">❤️<b id="hud-hearts">5</b></span>
+            <button class="hud-avatar" id="hud-avatar" aria-label="Personagens"></button>
+          </div>
         </div>
         <nav class="nav">
           <button class="nav-item active" data-nav="inicio"><i class="nav-ico" data-ico="home"></i> <span>Início</span></button>
@@ -51,6 +57,7 @@
           <img class="hero-img" src="chars/hero.jpg" alt="Seja bem-vindo! Vamos aprender juntos a Palavra de Deus?" />
         </div>
         <div id="trail" class="trail"></div>
+        <button id="cta-continue" class="cta-continue" hidden></button>
         <section id="char-strip" class="char-strip"></section>
         <div class="scenery"></div>
       </main>
@@ -75,16 +82,23 @@
 
         <div class="card" id="card-daily"></div>
 
-        <button class="card gold-card" id="card-verse">
-          <h3>📖 Versículo do dia <span class="chev">›</span></h3>
+        <div class="card gold-card" id="card-verse">
+          <h3><span>📖 Versículo bilíngue do dia</span><button class="vd-audio" id="vd-audio" aria-label="Ouvir em inglês"><i class="nav-ico" data-ico="speaker"></i></button></h3>
           <p class="vd-text" id="vd-text"></p>
-          <p class="vd-ref" id="vd-ref"></p>
-        </button>
+          <div class="vd-foot">
+            <span class="vd-ref" id="vd-ref"></span>
+            <button class="vd-toggle" id="vd-toggle" aria-expanded="false">Ver tradução ▾</button>
+          </div>
+          <div class="vd-trans" id="vd-trans" hidden>
+            <p class="vd-pt" id="vd-pt"></p>
+            <p class="vd-hints" id="vd-hints"></p>
+          </div>
+        </div>
 
         <div class="card" id="card-sequencia">
-          <h3>🔥 Sua sequência</h3>
-          <p class="big-num"><span id="streak-days">0</span> dias</p>
-          <p class="muted">Continue firme!</p>
+          <h3><span>🔥 Meta semanal de fidelidade</span><b class="week-count" id="week-count">0 de 7</b></h3>
+          <div class="week-strip" id="week-strip"></div>
+          <p class="muted"><span id="streak-days">0</span> dias de sequência. Continue firme!</p>
         </div>
 
         <div class="card" id="card-conquistas">
