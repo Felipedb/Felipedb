@@ -18,6 +18,7 @@ function load() {
     stars: {}, // lessonId -> 1..3 (melhor resultado)
     errors: {}, // palavra EN -> vezes errada (para "Praticar erros")
     speakMutedUntil: 0,
+    listenMutedUntil: 0,
     sound: true, // efeitos sonoros
     crowns: {}, // unitId -> 0..5
     daily: null, // meta diária e missões do dia
@@ -305,7 +306,7 @@ const SPEECH_OK = "SpeechRecognition" in window || "webkitSpeechRecognition" in 
 
 // Montador de lição inspirado no "session generator" do Duolingo:
 // muitos candidatos por item -> seleção com cobertura + teto por tipo -> rampa de dificuldade -> sem repetição vizinha.
-const EX_RANK = { "image-choice": 0, "choice-en-pt": 1, "choice-pt-en": 2, "match": 2, "listen": 3, "listen-choice": 4, "listen-build": 4, "missing-word": 5, "verse": 5, "translate-en-pt": 6, "build": 6, "complete-translation": 7, "listen-type": 7, "type": 7, "speak": 8, "read": 9, "dialogue": 9, "quiz": 10 };
+const EX_RANK = { "image-choice": 0, "choice-en-pt": 1, "choice-pt-en": 2, "match": 2, "listen-match": 3, "listen": 3, "listen-choice": 4, "listen-build": 4, "missing-word": 5, "verse": 5, "translate-en-pt": 6, "build": 6, "complete-translation": 7, "listen-type": 7, "type": 7, "speak": 8, "read": 9, "dialogue": 9, "quiz": 10 };
 const LESSON_SIZE = 15;      // como no Duolingo (combo máximo 15)
 const MAX_PER_TYPE = 2;      // nenhum formato domina a lição
 const TYPE_CAP = { "image-choice": 3, "choice-en-pt": 3 }; // formatos de apresentação de palavra nova podem aparecer 3x
@@ -359,7 +360,17 @@ const EX_MAKE = {
   "missing-word": (s, blank) => ({ type: "missing-word", sentence: s, blank, options: shuffle([blank, ...exNearWords(blank, 2)]) }),
   "complete-translation": (s, blank) => ({ type: "complete-translation", sentence: s, blank }),
   "speak": (s) => ({ type: "speak", sentence: s }),
+  "match": (pairs) => ({ type: "match", pairs }),
+  "listen-match": (pairs) => ({ type: "listen-match", pairs }),
 };
+const LISTEN_TYPES = ["listen", "listen-choice", "listen-build", "listen-type", "listen-match"];
+const listenMuted = () => state.listenMutedUntil && Date.now() < state.listenMutedUntil;
+// Troca os exercícios de escuta que ainda vêm por equivalentes sem áudio ("Não posso ouvir agora")
+function replaceUpcomingListening() {
+  const map = { "listen": (e) => EX_MAKE["choice-pt-en"](e.word), "listen-choice": (e) => EX_MAKE["translate-en-pt"](e.sentence), "listen-build": (e) => EX_MAKE.build(e.sentence), "listen-type": (e) => EX_MAKE.build(e.sentence), "listen-match": (e) => EX_MAKE.match(e.pairs) };
+  session.exercises = session.exercises.map((e, i) => (i > session.index && map[e.type]) ? Object.assign(map[e.type](e), { isReview: e.isReview }) : e);
+  session.hard = session.hard.filter((e) => !LISTEN_TYPES.includes(e.type));
+}
 
 function buildExercises(lesson, unit) {
   _distractUnit = unit;
@@ -392,27 +403,28 @@ function buildExercises(lesson, unit) {
   };
 
   // 1) Cobertura obrigatória: cada palavra é apresentada de forma receptiva (com dica), alternando o formato
-  const introTypes = firstTime ? ["image-choice", "choice-en-pt"] : ["image-choice", "choice-en-pt", "listen", "choice-pt-en"];
+  const noListen = (arr) => listenMuted() ? arr.filter((t) => !LISTEN_TYPES.includes(t)) : arr;
+  const introTypes = noListen(firstTime ? ["image-choice", "choice-en-pt"] : ["image-choice", "choice-en-pt", "listen", "choice-pt-en"]);
   vocab.forEach((w, i) => {
     const rot = introTypes.slice(i % introTypes.length).concat(introTypes.slice(0, i % introTypes.length));
     pick(rot.concat(["listen", "choice-pt-en"]), w);
   });
   // 2) Cada frase em um formato diferente (rotação), no máximo 2 do mesmo tipo
-  const sentTypes = firstTime
+  const sentTypes = noListen(firstTime
     ? ["build", "listen-choice", "listen-build", "translate-en-pt", "listen-type"]
-    : ["listen-type", "translate-en-pt", "listen-build", "build", "listen-choice"];
+    : ["listen-type", "translate-en-pt", "listen-build", "build", "listen-choice"]);
   sentences.forEach((s, i) => {
     const rot = sentTypes.slice(i % sentTypes.length).concat(sentTypes.slice(0, i % sentTypes.length));
     pick(rot, s, unit.id);
   });
-  if (vocab.length >= 4) take({ type: "match", pairs: shuffle(vocab).slice(0, 4) });
+  if (vocab.length >= 4) take(EX_MAKE[(firstTime || listenMuted() || Math.random() < 0.5) ? "match" : "listen-match"](shuffle(vocab).slice(0, 4)));
   verses.forEach((v) => take({ type: "verse", verse: v, options: shuffle(v.options) }));
 
   // 3) Complementos até fechar o tamanho da lição: recordação da palavra (formato diferente), lacunas, história, fala
   const optional = [];
   vocab.forEach((w, i) => {
     const already = chosen.filter((e) => e.word === w).map((e) => e.type);
-    const order = i % 2 === 0 ? ["listen", "type", "choice-pt-en", "choice-en-pt"] : ["type", "choice-pt-en", "listen", "image-choice"];
+    const order = noListen(i % 2 === 0 ? ["listen", "type", "choice-pt-en", "choice-en-pt"] : ["type", "choice-pt-en", "listen", "image-choice"]);
     const t = order.find((x) => !already.includes(x));
     if (t) optional.push({ pri: 1, mk: () => make[t](w), type: t });
   });
@@ -545,6 +557,8 @@ function renderExercise() {
   footer.className = "footer";
   const btn = $("#btn-check");
   btn.textContent = "Verificar";
+  const exp0 = $("#btn-explain"); if (exp0) exp0.hidden = true;
+  const expp = $("#fb-explain"); if (expp) { expp.hidden = true; expp.textContent = ""; }
   btn.disabled = true;
   btn.classList.remove("red", "blue");
 
@@ -568,6 +582,7 @@ function renderExercise() {
     "choice-pt-en": renderChoicePtEn,
     "type": renderType,
     "match": renderMatch,
+    "listen-match": renderMatch,
     "build": renderBuild,
     "listen-build": renderListenBuild,
     "speak": renderSpeak,
@@ -583,6 +598,23 @@ function renderExercise() {
   if (ex.newWord) {
     const t = box.querySelector(".ex-title");
     if (t) t.insertAdjacentHTML("beforebegin", '<div class="new-word-tag"><span class="new-tag">✦ Nova palavra</span></div>');
+  }
+  if (LISTEN_TYPES.includes(ex.type)) {
+    const sk = document.createElement("button");
+    sk.className = "btn-link muted skip-listen";
+    sk.textContent = "Não posso ouvir agora";
+    sk.addEventListener("click", () => {
+      if (session.checked) return;
+      state.listenMutedUntil = Date.now() + 15 * 60 * 1000; save();
+      replaceUpcomingListening();
+      ex.skipped = true;
+      session.answer = ex.type === "listen-match" ? "__matched__" : (ex.correct || (ex.accept && ex.accept[0]) || "");
+      if (ex.type === "listen-match") ex.correct = "__matched__";
+      toast("🔇 Exercícios de escuta pausados por 15 min");
+      $("#btn-check").disabled = false;
+      checkAnswer();
+    });
+    box.appendChild(sk);
   }
   session.practiceRec = null;
   const barTypes = ["build", "translate-en-pt", "type", "missing-word", "complete-translation", "verse", "read", "dialogue", "quiz", "listen-build", "listen-type", "listen-choice"];
@@ -662,8 +694,8 @@ function charTitle(box, title) {
 function updateCombo() {
   const chip = $("#combo-chip");
   if (chip) {
-    chip.textContent = `🔥 ${session.combo}`;
-    chip.classList.toggle("show", session.combo >= 3);
+    chip.textContent = `COMBO x${session.combo}`;
+    chip.classList.toggle("show", session.combo >= 2);
   }
   $("#progress-fill").classList.toggle("hot", session.combo >= 5);
 }
@@ -711,7 +743,7 @@ function sayable(en) {
 function hintedText(pt) {
   return pt.split(" ").map((w) => {
     const key = normalize(w);
-    return HINTS[key] ? `<span class="hint-word" data-hint="${HINTS[key]}">${w}</span>` : w;
+    return HINTS[key] ? `<span class="hint-word" data-hint="${HINTS[key]}">${w}</span>` : `<span class="plain-word">${w}</span>`;
   }).join(" ");
 }
 document.addEventListener("click", (e) => {
@@ -834,7 +866,7 @@ function renderIntro(ex, box) {
 
 // 1.5 Traduzir EN -> PT com banco de palavras em português
 function renderTranslateEnPt(ex, box) {
-  box.innerHTML = `<div class="ex-title">Traduza para o português</div>`;
+  box.innerHTML = `<div class="ex-title">Traduza para o português:</div>`;
   const bubble = document.createElement("div");
   bubble.className = "bubble-inner";
   bubble.appendChild(audioButton(ex.sentence.en));
@@ -849,7 +881,7 @@ function renderTranslateEnPt(ex, box) {
 
 // 1.5 Digite o que você ouviu
 function renderListenType(ex, box) {
-  box.innerHTML = `<div class="ex-title"><span class="title-ico">${ICONS.speaker}</span>Digite o que você ouviu</div>`;
+  box.innerHTML = `<div class="ex-title"><span class="title-ico">${ICONS.speaker}</span>Digite o que você ouviu:</div>`;
   const bubble = document.createElement("div");
   bubble.className = "bubble-inner";
   bubble.appendChild(audioPair(ex.sentence.en));
@@ -873,7 +905,7 @@ function gappedSentence(en, blank) {
 // 1.5 Selecione a palavra que falta (frase com lacuna e 3 opções)
 function renderMissingWord(ex, box) {
   box.innerHTML = "";
-  charTitle(box, "Selecione a palavra que falta");
+  charTitle(box, "Selecione a palavra que falta:");
   box.insertAdjacentHTML("beforeend", `<div class="verse-box">${gappedSentence(ex.sentence.en, ex.blank)}</div>
     <div class="verse-ref">${ex.sentence.pt}</div>`);
   makeOptions(box, ex.options, 2, (opt) => {
@@ -889,12 +921,13 @@ function renderMissingWord(ex, box) {
 
 // 1.5 Complete a tradução (digite a palavra que falta)
 function renderCompleteTranslation(ex, box) {
-  box.innerHTML = `<div class="ex-title">Complete a tradução</div>`;
+  box.innerHTML = `<div class="ex-title">Complete a tradução:</div>`;
   box.appendChild(characterRow(`<span class="ex-word">${ex.sentence.pt}</span>`));
-  box.insertAdjacentHTML("beforeend", `<div class="verse-box">${gappedSentence(ex.sentence.en, ex.blank)}</div>`);
-  const inp = textInput("Palavra que falta...");
-  inp.addEventListener("input", () => { const g = $("#sent-gap"); if (g) g.textContent = inp.value || "\u00a0"; });
-  box.appendChild(inp);
+  box.insertAdjacentHTML("beforeend", `<div class="verse-box gap-box">${gappedSentence(ex.sentence.en, ex.blank)}</div>`);
+  const inp = textInput("");
+  inp.classList.add("gap-input");
+  inp.style.width = Math.max(5, ex.blank.length + 2) + "ch";
+  $("#sent-gap").replaceWith(inp);
   setTimeout(() => inp.focus(), 50);
   ex.correct = ex.blank;
   ex.fuzzy = true;
@@ -907,7 +940,7 @@ function renderCompleteTranslation(ex, box) {
 function renderRead(ex, box) {
   const r = ex.reading;
   box.innerHTML = "";
-  charTitle(box, "Leia e responda");
+  charTitle(box, "Leia e responda:");
   box.insertAdjacentHTML("beforeend", `<div class="read-box">
       <div class="read-en">${sayable(r.text)}</div>
       <button class="btn-link read-toggle">Ver em português</button>
@@ -926,7 +959,7 @@ function renderRead(ex, box) {
 }
 
 function renderImageChoice(ex, box) {
-  box.innerHTML = `<div class="ex-title">Selecione a palavra correta</div>`;
+  box.innerHTML = `<div class="ex-title">Selecione a palavra correta:</div>`;
   const bubble = document.createElement("div");
   bubble.className = "bubble-inner";
   bubble.appendChild(audioButton(ex.word.en));
@@ -964,7 +997,7 @@ function bigAudio(text) {
 }
 
 function renderListen(ex, box) {
-  box.innerHTML = `<div class="ex-title"><span class="title-ico">${ICONS.speaker}</span>Ouça e escolha a resposta certa</div>`;
+  box.innerHTML = `<div class="ex-title"><span class="title-ico">${ICONS.speaker}</span>Ouça e escolha a resposta certa:</div>`;
   const bubble = document.createElement("div");
   bubble.className = "bubble-inner";
   bubble.appendChild(audioPair(ex.word.en));
@@ -979,7 +1012,7 @@ function renderListen(ex, box) {
 
 // Ouça a frase e escolha a tradução (como "O que você ouviu?" com frases)
 function renderListenChoice(ex, box) {
-  box.innerHTML = `<div class="ex-title"><span class="title-ico">${ICONS.speaker}</span>Ouça e escolha a tradução</div>`;
+  box.innerHTML = `<div class="ex-title"><span class="title-ico">${ICONS.speaker}</span>Ouça e escolha a tradução:</div>`;
   const bubble = document.createElement("div");
   bubble.className = "bubble-inner";
   bubble.appendChild(audioPair(ex.sentence.en));
@@ -1022,7 +1055,7 @@ function textInput(placeholder) {
 }
 
 function renderType(ex, box) {
-  box.innerHTML = `<div class="ex-title">Digite em inglês</div>`;
+  box.innerHTML = `<div class="ex-title">Digite em inglês:</div>`;
   box.appendChild(characterRow(`<span class="ex-word">${ex.word.icon || ""} ${ex.word.pt}</span>`));
   const inp = textInput("Escreva em inglês...");
   box.appendChild(inp);
@@ -1038,7 +1071,7 @@ function renderVerse(ex, box) {
   const gapped = sayable(v.text).replace(`<span class="say-word">${v.blank}</span>`, `<span class="gap" id="verse-gap">&nbsp;</span>`)
     .replace(new RegExp(`<span class="say-word">${v.blank}([.,;:!?])</span>`), `<span class="gap" id="verse-gap">&nbsp;</span>$1`);
   box.innerHTML = "";
-  charTitle(box, "Complete o versículo");
+  charTitle(box, "Complete o versículo:");
   box.insertAdjacentHTML("beforeend", `<div class="verse-box">${gapped}</div>
     <div class="verse-ref">${v.ref} — "${v.pt}"</div>`);
   makeOptions(box, ex.options, 2, (opt) => {
@@ -1053,7 +1086,7 @@ function renderVerse(ex, box) {
 
 function renderDialogue(ex, box) {
   const d = ex.dialogue;
-  box.innerHTML = `<div class="ex-title">Complete a conversa</div>`;
+  box.innerHTML = `<div class="ex-title">Complete a conversa:</div>`;
   const bubble = document.createElement("div");
   bubble.className = "bubble-inner bubble-col";
   const top = document.createElement("div");
@@ -1074,7 +1107,7 @@ function renderDialogue(ex, box) {
 
 function renderQuiz(ex, box) {
   const q = ex.quiz;
-  box.innerHTML = `<div class="ex-title">Responda sobre a história</div>`;
+  box.innerHTML = `<div class="ex-title">Responda sobre a história:</div>`;
   const bubble = document.createElement("div");
   bubble.className = "bubble-inner";
   bubble.appendChild(audioButton(q.q));
@@ -1174,7 +1207,7 @@ function wordBankUI(ex, box, correctSentence, lang = "en") {
 }
 
 function renderBuild(ex, box) {
-  box.innerHTML = `<div class="ex-title">Escreva em inglês</div>`;
+  box.innerHTML = `<div class="ex-title">Escreva em inglês:</div>`;
   const bubble = document.createElement("div");
   bubble.className = "bubble-inner";
   bubble.appendChild(audioButton(ex.sentence.en));
@@ -1185,7 +1218,7 @@ function renderBuild(ex, box) {
 }
 
 function renderListenBuild(ex, box) {
-  box.innerHTML = `<div class="ex-title"><span class="title-ico">${ICONS.speaker}</span>Toque no que você ouviu</div>`;
+  box.innerHTML = `<div class="ex-title"><span class="title-ico">${ICONS.speaker}</span>Toque no que você ouviu:</div>`;
   const bubble = document.createElement("div");
   bubble.className = "bubble-inner";
   bubble.appendChild(audioPair(ex.sentence.en));
@@ -1197,7 +1230,8 @@ function renderListenBuild(ex, box) {
 
 // Fale a frase (reconhecimento de voz do navegador)
 function renderSpeak(ex, box) {
-  box.innerHTML = `<div class="ex-title">Fale esta frase</div>`;
+  const who = currentChar();
+  box.innerHTML = `<div class="ex-title">Repita o que ${who ? who.name.split(" (")[0] : "o personagem"} disse:</div>`;
   const bubble = document.createElement("div");
   bubble.className = "bubble-inner bubble-col";
   const top = document.createElement("div");
@@ -1210,11 +1244,12 @@ function renderSpeak(ex, box) {
 
   const mic = document.createElement("button");
   mic.className = "mic-btn";
-  mic.innerHTML = `${ICONS.mic}<span>Toque para falar</span>`;
+  mic.innerHTML = `${ICONS.mic}`;
+  mic.setAttribute("aria-label", "Toque para falar");
   const status = document.createElement("div");
   status.className = "mic-status";
   const skip = document.createElement("button");
-  skip.className = "btn-link";
+  skip.className = "btn-link muted";
   skip.textContent = "Não posso falar agora";
   box.appendChild(mic);
   box.appendChild(status);
@@ -1259,11 +1294,12 @@ function renderSpeak(ex, box) {
 
 function renderMatch(ex, box) {
   box.innerHTML = "";
-  charTitle(box, "Toque nos pares correspondentes");
+  charTitle(box, ex.type === "listen-match" ? "Toque no que você ouviu e no par:" : "Combine os pares:");
   const grid = document.createElement("div");
   grid.className = "match-cols";
   box.appendChild(grid);
 
+  const audioLeft = ex.type === "listen-match";
   const left = shuffle(ex.pairs.map((p) => ({ key: p.en, side: "en", label: p.en })));
   const right = shuffle(ex.pairs.map((p) => ({ key: p.en, side: "pt", label: p.pt })));
   let selected = null;
@@ -1271,8 +1307,10 @@ function renderMatch(ex, box) {
 
   function cell(item) {
     const b = document.createElement("button");
-    b.className = "opt";
-    b.textContent = item.label;
+    b.className = "opt" + (audioLeft && item.side === "en" ? " opt-audio" : "");
+    b.dataset.key = item.key; b.dataset.side = item.side;
+    if (audioLeft && item.side === "en") b.innerHTML = `${ICONS.speaker}<span class="wave">${"<i></i>".repeat(12)}</span>`;
+    else b.textContent = item.label;
     b.addEventListener("click", () => {
       if (b.classList.contains("matched")) return;
       if (item.side === "en") speak(item.label);
@@ -1331,6 +1369,13 @@ function normalize(s) {
   return String(s).toLowerCase().replace(/[.,;:!?'"]/g, "").replace(/\s+/g, " ").trim();
 }
 
+// Resposta correta com as palavras que o aluno errou em destaque (como no Duolingo)
+function highlightDiff(correct, given) {
+  const have = new Set(normalize(given).split(" "));
+  const esc = (t) => t.replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+  return correct.split(" ").map((w) => have.has(normalize(w)) ? esc(w) : `<b class="diff">${esc(w)}</b>`).join(" ");
+}
+
 function editDistance(x, y) {
   const m = x.length, n = y.length;
   if (!m) return n; if (!n) return m;
@@ -1366,11 +1411,17 @@ function checkAnswer() {
     footer.classList.add(ok ? "correct" : "wrong", "up");
     if (ok) {
       $("#fb-ok-title").textContent = ex.skipped ? "Tudo bem, seguimos!" : PRAISES[Math.floor(Math.random() * PRAISES.length)];
-      $("#fb-ok-detail").textContent = (ex.typo ? "Atenção à ortografia. " : "") + (ex.explain ? `Significado: ${ex.explain}` : "");
+      $("#fb-ok-detail").textContent = ex.typo ? `Atenção à ortografia: ${ex.correctLabel || ex.correct}` : "";
     } else {
-      $("#fb-bad-title").textContent = "Resposta correta:";
-      $("#fb-bad-detail").textContent = ex.correct === "__matched__" ? "" : (ex.correctLabel || ex.correct);
-      $("#fb-bad-extra").textContent = ex.explain && ex.explain !== ex.correct ? ex.explain : "";
+      $("#fb-bad-title").textContent = "Incorreto";
+      $("#fb-bad-detail").innerHTML = ex.correct === "__matched__" ? "" : highlightDiff(String(ex.correctLabel || ex.correct), String(session.answer || ""));
+      $("#fb-bad-extra").textContent = "";
+    }
+    const exp = $("#btn-explain");
+    if (exp) {
+      exp.hidden = !ex.explain;
+      exp.textContent = ok ? "Explique minha resposta" : "Explique meu erro";
+      exp.onclick = () => { const p = $("#fb-explain"); p.textContent = ex.explain; p.hidden = !p.hidden; };
     }
 
     // Destaca opções
@@ -1422,7 +1473,7 @@ function checkAnswer() {
         save();
         $("#lesson-hearts").textContent = `❤️ ${state.hearts}`;
       }
-      btn.textContent = "Continuar";
+      btn.textContent = "OK!";
       btn.classList.add("red");
       if (!session.practice && state.hearts <= 0) {
         setTimeout(() => {

@@ -929,3 +929,32 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 @keyframes talk { from { transform: scale(1) rotate(-0.6deg); } to { transform: scale(1.03) rotate(0.6deg); } }
 .combo-pill { display: inline-block; background: linear-gradient(135deg, #ff9600, #ff4b4b); color: #fff; font-weight: 900; font-size: 12px; border-radius: 999px; padding: 3px 10px; margin-right: 6px; vertical-align: middle; }
 @media (prefers-reduced-motion: reduce) { .char-fig.talking img { animation: none; } }
+
+/* ===== Padrão Duolingo: combo acima da barra, lacuna inline, microfone largo, explicar, pares com áudio ===== */
+.lesson-top { padding-top: calc(22px + env(safe-area-inset-top)); }
+.progress-wrap { flex: 1; position: relative; }
+.combo-label { display: none; position: absolute; left: 0; right: 0; top: -17px; text-align: center; font-size: 11px; font-weight: 900; letter-spacing: 0.08em; color: var(--green); text-transform: uppercase; }
+.combo-label.show { display: block; animation: pop 0.3s ease; }
+.gap-box { font-size: 18px; line-height: 2; }
+.gap-input { display: inline-block; width: 6ch; min-width: 70px; border: 0; border-bottom: 3px solid var(--blue); background: transparent; font: inherit; font-weight: 800; color: var(--ink); padding: 0 6px; margin: 0 2px; outline: none; text-align: center; }
+.gap-input.ok { border-bottom-color: var(--green-bright); color: var(--green); }
+.gap-input.bad { border-bottom-color: var(--red); color: var(--red); }
+.bubble .say-word, .bubble .hint-word, .bubble .plain-word { border-bottom: 2px dotted #c9c1ac; padding-bottom: 1px; }
+.bubble .hint-word { border-bottom-color: var(--blue); }
+.answer-zone .tile { border-color: #b7dd8f; color: var(--green); }
+.mic-btn { width: 200px; height: 84px; border-radius: 22px; font-size: 0; }
+.mic-btn svg { width: 36px; height: 36px; }
+.btn-link.muted { color: #b3ab97; text-transform: uppercase; letter-spacing: 0.06em; font-size: 13px; margin-top: auto; }
+.skip-listen { align-self: center; }
+.btn-explain { display: block; width: 100%; margin-bottom: 10px; padding: 13px; border-radius: 14px; font: 900 14px "Nunito", sans-serif; letter-spacing: 0.06em; text-transform: uppercase; background: transparent; border: 2px solid; box-shadow: 0 3px 0 currentColor; cursor: pointer; }
+.btn-explain[hidden] { display: none; }
+.footer.correct .btn-explain { color: var(--green); border-color: var(--green-bright); }
+.footer.wrong .btn-explain { color: var(--red); border-color: var(--red); }
+.fb-explain { font-size: 14px; font-weight: 700; margin: 0 0 10px; padding: 10px 12px; border-radius: 12px; background: rgba(255,255,255,0.55); }
+.fb-explain[hidden] { display: none; }
+.fb-detail .diff { font-weight: 900; text-decoration: underline; text-underline-offset: 3px; }
+.opt.opt-audio { display: flex; align-items: center; gap: 10px; color: var(--blue); }
+.opt.opt-audio svg { width: 22px; height: 22px; flex: 0 0 22px; }
+.opt.opt-audio .wave { display: flex; align-items: center; gap: 3px; height: 26px; }
+.opt.opt-audio .wave i { display: block; width: 3px; border-radius: 2px; background: var(--blue); height: 8px; }
+.opt.opt-audio .wave i:nth-child(3n) { height: 20px; } .opt.opt-audio .wave i:nth-child(3n+1) { height: 14px; } .opt.opt-audio .wave i:nth-child(5n) { height: 24px; }
