@@ -415,6 +415,12 @@ function buildExercises(lesson, unit) {
     take(o.mk());
   });
 
+  // "Dificuldade desejável": 1 exercício mais difícil fica reservado para o fim, liberado se a lição estiver sem erros
+  const hard = [];
+  const reserve = (t) => { const j = chosen.findIndex((e) => e.type === t); if (j >= 0) hard.push(...chosen.splice(j, 1)); };
+  reserve("listen-type");
+  if (!hard.length) reserve("type");
+
   // 4) Rampa de dificuldade com variação + regras de vizinhança:
   //    nunca o mesmo formato nem o mesmo item em sequência; a apresentação da palavra vem antes da cobrança.
   const isIntro = (e) => e.type === "image-choice" || e.type === "choice-en-pt";
@@ -446,11 +452,6 @@ function buildExercises(lesson, unit) {
     const seen = new Set();
     ordered.forEach((e) => { if (e.word && !e.isReview && !seen.has(e.word.en)) { seen.add(e.word.en); e.newWord = true; } });
   }
-  // "Dificuldade desejável": 1-2 exercícios mais difíceis ficam reservados para o fim, liberados se a lição estiver sem erros
-  const hard = [];
-  const takeHard = (t) => { const j = ordered.findIndex((e) => e.type === t); if (j > 0) hard.push(...ordered.splice(j, 1)); };
-  takeHard("listen-type");
-  if (!hard.length) takeHard("type");
   ordered.hard = hard;
   return ordered;
 }
