@@ -1175,3 +1175,206 @@ const COURSE = [
   ]
 }
 ];
+
+// ---------- Conteúdo extra por lição (mais frases e palavras: evita repetição do mesmo item) ----------
+// Frases curtas, com vocabulário da própria lição + palavras já vistas (princípio "i+1" do Duolingo).
+const EXTRA_CONTENT = {
+  u1l1: {
+    vocab: [{ en: "beginning", pt: "princípio", icon: "🌅" }, { en: "to create", pt: "criar", icon: "✨" }],
+    sentences: [
+      { en: "In the beginning God created the light", pt: "No princípio Deus criou a luz" },
+      { en: "The light is good", pt: "A luz é boa" },
+      { en: "God created the earth", pt: "Deus criou a terra" },
+    ],
+  },
+  u1l2: {
+    vocab: [{ en: "first", pt: "primeiro", icon: "1️⃣" }, { en: "evening", pt: "tarde", icon: "🌇" }],
+    sentences: [
+      { en: "The day and the night", pt: "O dia e a noite" },
+      { en: "God saw the light that it was good", pt: "Deus viu a luz que era boa" },
+      { en: "The evening and the morning were the first day", pt: "A tarde e a manhã foram o primeiro dia" },
+    ],
+  },
+  u1l3: {
+    vocab: [{ en: "woman", pt: "mulher", icon: "👩" }, { en: "fruit", pt: "fruto", icon: "🍎" }],
+    sentences: [
+      { en: "God planted a garden", pt: "Deus plantou um jardim" },
+      { en: "The man and the woman lived in the garden", pt: "O homem e a mulher viviam no jardim" },
+      { en: "The tree of life is in the garden", pt: "A árvore da vida está no jardim" },
+    ],
+  },
+  u2l1: {
+    vocab: [{ en: "wood", pt: "madeira", icon: "🪵" }, { en: "to make", pt: "fazer", icon: "🔨" }],
+    sentences: [
+      { en: "The animals came into the ark", pt: "Os animais entraram na arca" },
+      { en: "God shut the door of the ark", pt: "Deus fechou a porta da arca" },
+      { en: "The rain came upon the earth", pt: "A chuva veio sobre a terra" },
+    ],
+  },
+  u2l2: {
+    vocab: [{ en: "mountain", pt: "montanha", icon: "⛰️" }, { en: "to open", pt: "abrir", icon: "🔓" }],
+    sentences: [
+      { en: "The water covered the mountains", pt: "A água cobriu as montanhas" },
+      { en: "Noah opened the window of the ark", pt: "Noé abriu a janela da arca" },
+      { en: "The flood was upon the earth", pt: "O dilúvio estava sobre a terra" },
+    ],
+  },
+  u2l3: {
+    vocab: [{ en: "leaf", pt: "folha", icon: "🍃" }, { en: "to remember", pt: "lembrar", icon: "💭" }],
+    sentences: [
+      { en: "Noah sent a dove", pt: "Noé enviou uma pomba" },
+      { en: "I set my rainbow in the cloud", pt: "Eu ponho o meu arco-íris na nuvem" },
+      { en: "I will remember my promise", pt: "Eu lembrarei da minha promessa" },
+    ],
+  },
+  u3l1: {
+    vocab: [{ en: "bush", pt: "sarça", icon: "🌿" }, { en: "shoes", pt: "sapatos", icon: "👞" }],
+    sentences: [
+      { en: "Moses saw the fire", pt: "Moisés viu o fogo" },
+      { en: "Take off your shoes", pt: "Tira os teus sapatos" },
+      { en: "This is holy ground", pt: "Este é chão santo" },
+    ],
+  },
+  u3l2: {
+    vocab: [{ en: "Egypt", pt: "Egito", icon: "🏜️" }, { en: "to say", pt: "dizer", icon: "💬" }],
+    sentences: [
+      { en: "Moses went to the king", pt: "Moisés foi ao rei" },
+      { en: "The king said no", pt: "O rei disse não" },
+      { en: "My people will be free", pt: "O meu povo será livre" },
+    ],
+  },
+  u3l3: {
+    vocab: [{ en: "to walk", pt: "andar", icon: "🚶" }, { en: "to divide", pt: "dividir", icon: "✂️" }],
+    sentences: [
+      { en: "The people walked on dry ground", pt: "O povo andou em chão seco" },
+      { en: "A strong wind divided the sea", pt: "Um vento forte dividiu o mar" },
+      { en: "The sea was dry", pt: "O mar estava seco" },
+    ],
+  },
+  u4l1: {
+    vocab: [{ en: "to play", pt: "tocar", icon: "🎶" }, { en: "young", pt: "jovem", icon: "🧒" }],
+    sentences: [
+      { en: "David played the harp", pt: "Davi tocava a harpa" },
+      { en: "The Lord looks on the heart", pt: "O Senhor olha para o coração" },
+      { en: "David was a young shepherd", pt: "Davi era um jovem pastor" },
+    ],
+  },
+  u4l2: {
+    vocab: [{ en: "to fall", pt: "cair", icon: "🍂" }, { en: "to fear", pt: "temer", icon: "😨" }],
+    sentences: [
+      { en: "The giant fell to the ground", pt: "O gigante caiu no chão" },
+      { en: "Do not fear the giant", pt: "Não temas o gigante" },
+      { en: "David had a sling and a stone", pt: "Davi tinha uma funda e uma pedra" },
+    ],
+  },
+  u4l3: {
+    vocab: [{ en: "fortress", pt: "fortaleza", icon: "🏰" }, { en: "to trust", pt: "confiar", icon: "🤝" }],
+    sentences: [
+      { en: "The Lord is my rock", pt: "O Senhor é a minha rocha" },
+      { en: "I trust in the Lord", pt: "Eu confio no Senhor" },
+      { en: "Sing a new song", pt: "Cantai um cântico novo" },
+    ],
+  },
+  u5l1: {
+    vocab: [{ en: "throne", pt: "trono", icon: "🪑" }, { en: "to call", pt: "chamar", icon: "📣" }],
+    sentences: [
+      { en: "I heard the voice of the Lord", pt: "Eu ouvi a voz do Senhor" },
+      { en: "Isaiah was a prophet", pt: "Isaías era um profeta" },
+      { en: "Whom shall I send", pt: "A quem enviarei" },
+    ],
+  },
+  u5l2: {
+    vocab: [{ en: "son", pt: "filho", icon: "👦" }, { en: "mother", pt: "mãe", icon: "👩‍🍼" }],
+    sentences: [
+      { en: "His name is Immanuel", pt: "O seu nome é Emanuel" },
+      { en: "The Lord will give you a sign", pt: "O Senhor vos dará um sinal" },
+      { en: "A child is born", pt: "Um menino nasceu" },
+    ],
+  },
+  u5l3: {
+    vocab: [{ en: "mighty", pt: "poderoso", icon: "💪" }, { en: "everlasting", pt: "eterno", icon: "♾️" }],
+    sentences: [
+      { en: "His name is Wonderful", pt: "O seu nome é Maravilhoso" },
+      { en: "The mighty God", pt: "O Deus poderoso" },
+      { en: "He brings peace", pt: "Ele traz paz" },
+    ],
+  },
+  u6l1: {
+    vocab: [{ en: "colors", pt: "cores", icon: "🎨" }, { en: "to love", pt: "amar", icon: "❤️" }],
+    sentences: [
+      { en: "Jacob loved Joseph", pt: "Jacó amava José" },
+      { en: "A coat of many colors", pt: "Uma túnica de muitas cores" },
+      { en: "The brothers sold Joseph", pt: "Os irmãos venderam José" },
+    ],
+  },
+  u6l2: {
+    vocab: [{ en: "years", pt: "anos", icon: "📅" }, { en: "plenty", pt: "fartura", icon: "🌾" }],
+    sentences: [
+      { en: "Joseph was in prison", pt: "José estava na prisão" },
+      { en: "Joseph interpreted the dream", pt: "José interpretou o sonho" },
+      { en: "The king had a dream", pt: "O rei teve um sonho" },
+    ],
+  },
+  u6l3: {
+    vocab: [{ en: "evil", pt: "mal", icon: "🌑" }, { en: "silver", pt: "prata", icon: "🪙" }],
+    sentences: [
+      { en: "Joseph wept", pt: "José chorou" },
+      { en: "I am Joseph your brother", pt: "Eu sou José o vosso irmão" },
+      { en: "The famine came", pt: "A fome veio" },
+    ],
+  },
+  u7l1: {
+    vocab: [{ en: "three", pt: "três", icon: "3️⃣" }, { en: "home", pt: "lar", icon: "🏠" }],
+    sentences: [
+      { en: "Daniel loved God", pt: "Daniel amava a Deus" },
+      { en: "The king made a law", pt: "O rei fez uma lei" },
+      { en: "Daniel prayed to God", pt: "Daniel orava a Deus" },
+    ],
+  },
+  u7l2: {
+    vocab: [{ en: "den", pt: "cova", icon: "🕳️" }, { en: "to throw", pt: "lançar", icon: "🤾" }],
+    sentences: [
+      { en: "They threw Daniel into the den", pt: "Eles lançaram Daniel na cova" },
+      { en: "In the morning the king ran to the den", pt: "De manhã o rei correu para a cova" },
+      { en: "The angel closed the mouth of the lion", pt: "O anjo fechou a boca do leão" },
+    ],
+  },
+  u7l3: {
+    vocab: [{ en: "to deliver", pt: "livrar", icon: "🛡️" }, { en: "to write", pt: "escrever", icon: "✍️" }],
+    sentences: [
+      { en: "The king wrote to all the people", pt: "O rei escreveu a todo o povo" },
+      { en: "The God of Daniel saves", pt: "O Deus de Daniel salva" },
+      { en: "He is the living God forever", pt: "Ele é o Deus vivo para sempre" },
+    ],
+  },
+  u8l1: {
+    vocab: [{ en: "boat", pt: "barco", icon: "⛵" }, { en: "to leave", pt: "deixar", icon: "🚪" }],
+    sentences: [
+      { en: "Jesus walked by the sea", pt: "Jesus andava junto ao mar" },
+      { en: "Peter was a fisherman", pt: "Pedro era um pescador" },
+      { en: "The disciples followed Jesus", pt: "Os discípulos seguiram Jesus" },
+    ],
+  },
+  u8l2: {
+    vocab: [{ en: "debts", pt: "dívidas", icon: "📜" }, { en: "will", pt: "vontade", icon: "🙌" }],
+    sentences: [
+      { en: "Our Father in heaven", pt: "Pai nosso que estás no céu" },
+      { en: "Your kingdom come", pt: "Venha o teu reino" },
+      { en: "Jesus taught his disciples to pray", pt: "Jesus ensinou os seus discípulos a orar" },
+    ],
+  },
+  u8l3: {
+    vocab: [{ en: "basket", pt: "cesto", icon: "🧺" }, { en: "two", pt: "dois", icon: "2️⃣" }],
+    sentences: [
+      { en: "A great crowd followed Jesus", pt: "Uma grande multidão seguiu Jesus" },
+      { en: "Jesus blessed the bread and the fish", pt: "Jesus abençoou o pão e o peixe" },
+      { en: "They had two fishes", pt: "Eles tinham dois peixes" },
+    ],
+  },
+};
+COURSE.forEach((u) => u.lessons.forEach((l) => {
+  const x = EXTRA_CONTENT[l.id];
+  if (!x) return;
+  l.vocab = [...(l.vocab || []), ...x.vocab];
+  l.sentences = [...(l.sentences || []), ...x.sentences];
+}));

@@ -296,101 +296,163 @@ function toast(text, cls = "") {
 // ---------- Geração de exercícios ----------
 const SPEECH_OK = "SpeechRecognition" in window || "webkitSpeechRecognition" in window;
 
+// Montador de lição inspirado no "session generator" do Duolingo:
+// muitos candidatos por item -> seleção com cobertura + teto por tipo -> rampa de dificuldade -> sem repetição vizinha.
+const EX_RANK = { "image-choice": 0, "choice-en-pt": 1, "choice-pt-en": 2, "match": 2, "listen": 3, "listen-choice": 4, "listen-build": 4, "missing-word": 5, "verse": 5, "translate-en-pt": 6, "build": 6, "complete-translation": 7, "listen-type": 7, "type": 7, "speak": 8, "read": 9, "dialogue": 9, "quiz": 10 };
+const LESSON_SIZE = 15;      // como no Duolingo (combo máximo 15)
+const MAX_PER_TYPE = 2;      // nenhum formato domina a lição
+const TYPE_CAP = { "image-choice": 3, "choice-en-pt": 3 }; // formatos de apresentação de palavra nova podem aparecer 3x
+const capOf = (t) => TYPE_CAP[t] || MAX_PER_TYPE;
+
+function allSentences() {
+  return COURSE.flatMap((u) => u.lessons.flatMap((l) => (l.sentences || []).map((s) => ({ ...s, unit: u.id }))));
+}
+function exKey(e) {
+  return e.word ? "w:" + e.word.en : e.sentence ? "s:" + e.sentence.en : e.type;
+}
+
 function buildExercises(lesson, unit) {
-  const ex = [];
   const pool = allVocab();
+  const sentPool = allSentences();
   const lessons = lesson.review ? unit.lessons.filter((l) => !l.review) : [lesson];
   const speakMuted = state.speakMutedUntil && Date.now() < state.speakMutedUntil;
   const canSpeak = SPEECH_OK && !speakMuted;
   const firstTime = !state.completed[lesson.id];
 
-  const vocab = lesson.review ? shuffle(unitVocab(unit)).slice(0, 6) : lesson.vocab;
+  // 4 palavras por lição (como no Duolingo): na 1ª vez, as palavras-base; ao refazer, sorteia entre todas
+  const vocab = lesson.review ? shuffle(unitVocab(unit)).slice(0, 4)
+    : firstTime ? (lesson.vocab || []).slice(0, 4) : shuffle(lesson.vocab || []).slice(0, 4);
   const sentences = lesson.review
     ? shuffle(lessons.flatMap((l) => l.sentences || [])).slice(0, 3)
-    : lesson.sentences || [];
-  const verses = lesson.review ? lessons.map((l) => l.verse).filter(Boolean) : lesson.verse ? [lesson.verse] : [];
-  const dialogues = lesson.review
-    ? shuffle(lessons.map((l) => l.dialogue).filter(Boolean)).slice(0, 2)
-    : lesson.dialogue ? [lesson.dialogue] : [];
-  const quizzes = lesson.review
-    ? shuffle(lessons.map((l) => l.quiz).filter(Boolean)).slice(0, 2)
-    : lesson.quiz ? [lesson.quiz] : [];
-  const readings = lesson.review
-    ? shuffle(lessons.map((l) => l.reading).filter(Boolean)).slice(0, 1)
-    : lesson.reading ? [lesson.reading] : [];
+    : shuffle(lesson.sentences || []).slice(0, 3);
+  const verses = lesson.review ? shuffle(lessons.map((l) => l.verse).filter(Boolean)).slice(0, 1) : lesson.verse ? [lesson.verse] : [];
+  const stories = shuffle([
+    ...lessons.map((l) => l.reading && { type: "read", reading: l.reading, options: shuffle(l.reading.options) }),
+    ...lessons.map((l) => l.dialogue && { type: "dialogue", dialogue: l.dialogue, options: shuffle(l.dialogue.options) }),
+    ...lessons.map((l) => l.quiz && { type: "quiz", quiz: l.quiz, options: shuffle(l.quiz.options) }),
+  ].filter(Boolean));
 
   const distract = (v, key, n = 3) =>
     shuffle(pool.filter((p) => p[key] !== v[key] && p.icon !== v.icon)).slice(0, n);
-
-  // Cada palavra em 3 formatos: palavra nova (ver) -> reconhecer -> ouvir ou produzir
-  vocab.forEach((v, i) => {
-    if (i % 2 === 0) ex.push({ type: "image-choice", word: v, options: shuffle([v, ...distract(v, "en")]) });
-    else ex.push({ type: "choice-en-pt", word: v, options: shuffle([v.pt, ...distract(v, "pt").map((p) => p.pt)]) });
-    if (i % 2 === 0) ex.push({ type: "listen", word: v, options: shuffle([v.en, ...distract(v, "en").map((p) => p.en)]) });
-    else ex.push({ type: "type", word: v });
-  });
-
-  if (vocab.length >= 4) ex.push({ type: "match", pairs: shuffle(vocab).slice(0, 4) });
-
   const makeBank = (s, lang = "en") => {
     const words = s[lang].split(" ");
-    const extra = shuffle(pool.map((p) => p[lang].replace("to ", "")))
-      .filter((w) => !words.includes(w))
-      .slice(0, 2);
+    const extra = shuffle(pool.map((p) => p[lang].replace("to ", ""))).filter((w) => !words.includes(w)).slice(0, 2);
     return shuffle([...words, ...extra]);
   };
-  // Palavra da frase que pode virar lacuna (vocabulário conhecido)
   const blankOf = (s) => {
     const words = s.en.split(" ");
     const cands = words.filter((w) => pool.some((p) => normalize(p.en.replace(/^to /, "")) === normalize(w)) && w.length > 2);
     return cands.length ? cands[Math.floor(Math.random() * cands.length)] : null;
   };
+  const ptDistractors = (s) => shuffle(sentPool.filter((o) => o.pt !== s.pt)).sort((a, b) => (b.unit === unit.id) - (a.unit === unit.id)).slice(0, 2).map((o) => o.pt);
 
-  sentences.forEach((s, i) => {
-    const kind = i % 4;
-    if (kind === 0) ex.push({ type: "build", sentence: s, bank: makeBank(s) });
-    else if (kind === 1) ex.push({ type: "translate-en-pt", sentence: s, bank: makeBank(s, "pt") });
-    else if (kind === 2) ex.push({ type: "listen-build", sentence: s, bank: makeBank(s) });
-    else ex.push({ type: "listen-type", sentence: s });
-    const blank = blankOf(s);
-    if (blank) {
-      if (i % 2 === 0) ex.push({ type: "missing-word", sentence: s, blank, options: shuffle([blank, ...shuffle(pool.map((p) => p.en.replace(/^to /, ""))).filter((w) => normalize(w) !== normalize(blank)).slice(0, 2)]) });
-      else ex.push({ type: "complete-translation", sentence: s, blank });
-    }
+  // Fábrica de candidatos por tipo
+  const make = {
+    "image-choice": (w) => ({ type: "image-choice", word: w, options: shuffle([w, ...distract(w, "en")]) }),
+    "choice-en-pt": (w) => ({ type: "choice-en-pt", word: w, options: shuffle([w.pt, ...distract(w, "pt").map((p) => p.pt)]) }),
+    "choice-pt-en": (w) => ({ type: "choice-pt-en", word: w, options: shuffle([w.en, ...distract(w, "en").map((p) => p.en)]) }),
+    "listen": (w) => ({ type: "listen", word: w, options: shuffle([w.en, ...distract(w, "en").map((p) => p.en)]) }),
+    "type": (w) => ({ type: "type", word: w }),
+    "build": (s) => ({ type: "build", sentence: s, bank: makeBank(s) }),
+    "translate-en-pt": (s) => ({ type: "translate-en-pt", sentence: s, bank: makeBank(s, "pt") }),
+    "listen-build": (s) => ({ type: "listen-build", sentence: s, bank: makeBank(s) }),
+    "listen-type": (s) => ({ type: "listen-type", sentence: s }),
+    "listen-choice": (s) => ({ type: "listen-choice", sentence: s, options: shuffle([s.pt, ...ptDistractors(s)]) }),
+    "missing-word": (s, blank) => ({ type: "missing-word", sentence: s, blank, options: shuffle([blank, ...shuffle(pool.map((p) => p.en.replace(/^to /, ""))).filter((w) => normalize(w) !== normalize(blank)).slice(0, 2)]) }),
+    "complete-translation": (s, blank) => ({ type: "complete-translation", sentence: s, blank }),
+  };
+
+  const count = {};
+  const chosen = [];
+  const take = (e) => { if (!e) return false; count[e.type] = (count[e.type] || 0) + 1; chosen.push(e); return true; };
+  const pick = (types, item, extra) => {
+    for (const t of types) if ((count[t] || 0) < capOf(t)) return take(make[t](item, extra));
+    return false;
+  };
+
+  // 1) Cobertura obrigatória: cada palavra é apresentada de forma receptiva (com dica), alternando o formato
+  const introTypes = firstTime ? ["image-choice", "choice-en-pt"] : ["image-choice", "choice-en-pt", "listen", "choice-pt-en"];
+  vocab.forEach((w, i) => {
+    const rot = introTypes.slice(i % introTypes.length).concat(introTypes.slice(0, i % introTypes.length));
+    pick(rot.concat(["listen", "choice-pt-en"]), w);
   });
-  if (sentences.length === 1) {
-    ex.push({ type: "listen-build", sentence: sentences[0], bank: makeBank(sentences[0]) });
-    ex.push({ type: "listen-type", sentence: sentences[0] });
+  // 2) Cada frase em um formato diferente (rotação), no máximo 2 do mesmo tipo
+  const sentTypes = firstTime
+    ? ["build", "listen-choice", "listen-build", "translate-en-pt", "listen-type"]
+    : ["listen-type", "translate-en-pt", "listen-build", "build", "listen-choice"];
+  sentences.forEach((s, i) => {
+    const rot = sentTypes.slice(i % sentTypes.length).concat(sentTypes.slice(0, i % sentTypes.length));
+    pick(rot, s);
+  });
+  if (vocab.length >= 4) take({ type: "match", pairs: shuffle(vocab).slice(0, 4) });
+  verses.forEach((v) => take({ type: "verse", verse: v, options: shuffle(v.options) }));
+
+  // 3) Complementos até fechar o tamanho da lição: recordação da palavra (formato diferente), lacunas, história, fala
+  const optional = [];
+  vocab.forEach((w, i) => {
+    const already = chosen.filter((e) => e.word === w).map((e) => e.type);
+    const order = i % 2 === 0 ? ["listen", "type", "choice-pt-en", "choice-en-pt"] : ["type", "choice-pt-en", "listen", "image-choice"];
+    const t = order.find((x) => !already.includes(x));
+    if (t) optional.push({ pri: 1, mk: () => make[t](w), type: t });
+  });
+  sentences.forEach((s, i) => {
+    const blank = blankOf(s);
+    if (blank) optional.push({ pri: 2, mk: () => make[i % 2 ? "complete-translation" : "missing-word"](s, blank), type: i % 2 ? "complete-translation" : "missing-word" });
+  });
+  stories.slice(0, lesson.review ? 2 : 1).forEach((st) => optional.push({ pri: 1, mk: () => st, type: st.type }));
+  stories.slice(lesson.review ? 2 : 1, lesson.review ? 3 : 2).forEach((st) => optional.push({ pri: 3, mk: () => st, type: st.type }));
+  if (canSpeak && sentences.length) optional.push({ pri: 1, mk: () => ({ type: "speak", sentence: sentences[0] }), type: "speak" });
+  // Exercício de revisão de lição anterior (como o "review exercise" do Duolingo)
+  const earlier = flatLessons().filter((l) => !l.review && state.completed[l.id] && l.id !== lesson.id).flatMap((l) => l.vocab || []);
+  if (earlier.length && !lesson.review) {
+    const w = earlier[Math.floor(Math.random() * earlier.length)];
+    optional.push({ pri: 2, mk: () => ({ ...make[Math.random() < 0.5 ? "listen" : "choice-pt-en"](w), isReview: true }), type: "review" });
   }
-  if (canSpeak && sentences.length) ex.push({ type: "speak", sentence: sentences[0] });
+  const target = LESSON_SIZE + 1; // +1 reservado como desafio final
+  shuffle(optional).sort((a, b) => a.pri - b.pri).forEach((o) => {
+    if (chosen.length >= target) return;
+    if (o.type !== "review" && (count[o.type] || 0) >= capOf(o.type)) return;
+    take(o.mk());
+  });
 
-  verses.forEach((v) => ex.push({ type: "verse", verse: v, options: shuffle(v.options) }));
-  readings.forEach((r) => ex.push({ type: "read", reading: r, options: shuffle(r.options) }));
-  dialogues.forEach((dd) => ex.push({ type: "dialogue", dialogue: dd, options: shuffle(dd.options) }));
-  quizzes.forEach((q) => ex.push({ type: "quiz", quiz: q, options: shuffle(q.options) }));
-
-  // Rampa de dificuldade (como no Duolingo): palavra nova -> reconhecimento -> escuta -> lacuna -> produção -> fala -> leitura/conversa
-  const RANK = { "image-choice": 0, "choice-en-pt": 1, "match": 2, "listen": 3, "listen-build": 4, "missing-word": 5, "verse": 5, "translate-en-pt": 6, "build": 6, "complete-translation": 7, "listen-type": 7, "type": 7, "speak": 8, "read": 9, "dialogue": 9, "quiz": 10 };
-  const ordered = ex
-    .map((e, idx) => ({ e, k: RANK[e.type] * 100 + Math.random() * 60, idx }))
-    .sort((x, y) => x.k - y.k)
-    .map((x) => x.e);
-  // Etiqueta "Nova palavra" na primeira cobrança de cada palavra (como no Duolingo)
-  const final = ordered;
+  // 4) Rampa de dificuldade com variação + regras de vizinhança:
+  //    nunca o mesmo formato nem o mesmo item em sequência; a apresentação da palavra vem antes da cobrança.
+  const isIntro = (e) => e.type === "image-choice" || e.type === "choice-en-pt";
+  const cands = chosen.map((e) => ({ e, k: isIntro(e) ? Math.random() * 420 : EX_RANK[e.type] * 100 + Math.random() * 160 })).sort((x, y) => x.k - y.k).map((x) => x.e);
+  const introOf = {};
+  cands.forEach((e) => { if (e.word && introOf[e.word.en] == null) introOf[e.word.en] = e; });
+  const placed = new Set();
+  const ordered = [];
+  while (cands.length) {
+    const prev = ordered[ordered.length - 1];
+    const ok = (e) => (!e.word || introOf[e.word.en] === e || placed.has(introOf[e.word.en]));
+    const differs = (a, b) => !a || !b || (a.type !== b.type && exKey(a) !== exKey(b));
+    let j = cands.findIndex((e) => ok(e) && differs(e, prev));
+    if (j >= 0) { const e = cands.splice(j, 1)[0]; placed.add(e); ordered.push(e); continue; }
+    // Sobrou só candidato parecido com o anterior: encaixa mais cedo, onde não repete vizinho
+    j = cands.findIndex(ok); if (j < 0) j = 0;
+    const e = cands.splice(j, 1)[0];
+    let p = ordered.length;
+    for (let q = ordered.length - 1; q > 0; q--) {
+      const introIdx = e.word && introOf[e.word.en] !== e ? ordered.indexOf(introOf[e.word.en]) : -1;
+      if (q <= introIdx) break;
+      if (differs(e, ordered[q - 1]) && differs(e, ordered[q])) { p = q; break; }
+    }
+    placed.add(e);
+    ordered.splice(p, 0, e);
+  }
+  // Etiqueta "Nova palavra" na primeira cobrança de cada palavra
   if (firstTime && !lesson.review) {
     const seen = new Set();
-    final.forEach((e) => {
-      if (e.word && !seen.has(e.word.en)) { seen.add(e.word.en); e.newWord = true; }
-    });
+    ordered.forEach((e) => { if (e.word && !e.isReview && !seen.has(e.word.en)) { seen.add(e.word.en); e.newWord = true; } });
   }
-  // Reserva 1-2 exercícios "mais difíceis" para o fim, liberados só se a lição estiver sem erros
+  // "Dificuldade desejável": 1-2 exercícios mais difíceis ficam reservados para o fim, liberados se a lição estiver sem erros
   const hard = [];
-  const takeHard = (t) => { const j = final.findIndex((e) => e.type === t); if (j > 0) hard.push(...final.splice(j, 1)); };
+  const takeHard = (t) => { const j = ordered.findIndex((e) => e.type === t); if (j > 0) hard.push(...ordered.splice(j, 1)); };
   takeHard("listen-type");
-  if (canSpeak) takeHard("speak");
   if (!hard.length) takeHard("type");
-  final.hard = hard;
-  return final;
+  ordered.hard = hard;
+  return ordered;
 }
 
 // ---------- Fluxo da lição ----------
@@ -477,6 +539,8 @@ function renderExercise() {
     "read": renderRead,
     "choice-en-pt": renderChoiceEnPt,
     "listen": renderListen,
+    "listen-choice": renderListenChoice,
+    "choice-pt-en": renderChoicePtEn,
     "type": renderType,
     "match": renderMatch,
     "build": renderBuild,
@@ -496,7 +560,7 @@ function renderExercise() {
     if (t) t.insertAdjacentHTML("beforebegin", '<div class="new-word-tag"><span class="new-tag">✦ Nova palavra</span></div>');
   }
   session.practiceRec = null;
-  const barTypes = ["build", "translate-en-pt", "type", "missing-word", "complete-translation", "verse", "read", "dialogue", "quiz", "listen-build", "listen-type"];
+  const barTypes = ["build", "translate-en-pt", "type", "missing-word", "complete-translation", "verse", "read", "dialogue", "quiz", "listen-build", "listen-type", "listen-choice"];
   if (barTypes.includes(ex.type) && ex.audioText && ex.audioText.trim().split(/\s+/).length >= 3) box.appendChild(practiceBar(ex, !!box.querySelector(".btn-audio")));
 }
 
@@ -872,6 +936,31 @@ function renderListen(ex, box) {
   speak(ex.word.en);
   ex.correct = ex.word.en;
   ex.explain = `${ex.word.en} = ${ex.word.pt}`;
+  ex.audioText = ex.word.en;
+}
+
+// Ouça a frase e escolha a tradução (como "O que você ouviu?" com frases)
+function renderListenChoice(ex, box) {
+  box.innerHTML = `<div class="ex-title"><span class="title-ico">${ICONS.speaker}</span>Ouça e escolha a tradução</div>`;
+  const bubble = document.createElement("div");
+  bubble.className = "bubble-inner";
+  bubble.appendChild(audioPair(ex.sentence.en));
+  bubble.insertAdjacentHTML("beforeend", `<span class="ex-word ex-muted">Toque para ouvir</span>`);
+  box.appendChild(characterRow(bubble));
+  makeOptions(box, ex.options, 1);
+  speak(ex.sentence.en);
+  ex.correct = ex.sentence.pt;
+  ex.explain = `"${ex.sentence.en}" = "${ex.sentence.pt}"`;
+  ex.audioText = ex.sentence.en;
+}
+
+// Português -> inglês por escolha (recordação sem digitar)
+function renderChoicePtEn(ex, box) {
+  box.innerHTML = `<div class="ex-title">Qual destas significa "${ex.word.pt}"?</div>`;
+  box.appendChild(characterRow(`<span class="ex-word">${ex.word.icon || ""} ${ex.word.pt}</span>`));
+  makeOptions(box, ex.options, 2, (opt) => speak(opt));
+  ex.correct = ex.word.en;
+  ex.explain = `${ex.word.pt} = ${ex.word.en}`;
   ex.audioText = ex.word.en;
 }
 
