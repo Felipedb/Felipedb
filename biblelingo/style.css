@@ -915,3 +915,17 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .mic-btn span { font-size: 11px; }
 .opt { border-radius: 14px; padding: 13px 16px; font-size: 16.5px; }
 .tile { border-radius: 12px; padding: 9px 13px; font-size: 16px; }
+
+/* ===== Cartão do personagem lado a lado (retrato à esquerda, balão à direita) ===== */
+.char-card { flex-direction: row; align-items: flex-end; gap: 10px; margin-bottom: 18px; }
+.char-card .char-fig { width: 104px; flex: 0 0 104px; margin-bottom: 14px; }
+.char-card .char-fig img { border-radius: 14px; }
+.char-card .char-name { bottom: -12px; font-size: 11px; }
+.char-card .react { top: -10px; right: -10px; font-size: 22px; }
+.char-card .bubble { margin: 0 0 14px; flex: 1; min-width: 0; padding: 12px 14px; }
+.char-card .bubble::before { left: -9px; top: auto; bottom: 22px; transform: rotate(45deg); }
+.char-card .bubble-inner { flex-wrap: wrap; }
+.char-fig.talking img { animation: talk 0.32s ease-in-out infinite alternate; transform-origin: 50% 90%; }
+@keyframes talk { from { transform: scale(1) rotate(-0.6deg); } to { transform: scale(1.03) rotate(0.6deg); } }
+.combo-pill { display: inline-block; background: linear-gradient(135deg, #ff9600, #ff4b4b); color: #fff; font-weight: 900; font-size: 12px; border-radius: 999px; padding: 3px 10px; margin-right: 6px; vertical-align: middle; }
+@media (prefers-reduced-motion: reduce) { .char-fig.talking img { animation: none; } }

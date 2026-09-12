@@ -90,7 +90,12 @@ if ("speechSynthesis" in window) {
 
 function speak(text, opts = {}) {
   const ch = opts.char || (session && session.voiceChar) || null;
-  if (playClip(text, ch && ch.key, opts.slow)) { if ("speechSynthesis" in window) speechSynthesis.cancel(); return; }
+  if (playClip(text, ch && ch.key, opts.slow)) {
+    if ("speechSynthesis" in window) speechSynthesis.cancel();
+    const fig = document.querySelector(".char-card .char-fig");
+    if (fig) { fig.classList.add("talking"); setTimeout(() => fig.classList.remove("talking"), Math.min(4000, 400 + text.length * 70)); }
+    return;
+  }
   if (!("speechSynthesis" in window)) return;
   speechSynthesis.cancel();
   const profile = ch && ch.voice ? ch.voice : null;
@@ -102,6 +107,8 @@ function speak(text, opts = {}) {
     ? (_voices[profile.gender] || _voices.any)
     : _voices.any;
   if (voice) u.voice = voice;
+  const fig = document.querySelector(".char-card .char-fig");
+  if (fig) { u.onstart = () => fig.classList.add("talking"); u.onend = u.onerror = () => fig.classList.remove("talking"); }
   speechSynthesis.speak(u);
 }
 
@@ -312,8 +319,19 @@ function exKey(e) {
 }
 
 // Fábrica de exercícios por formato (usada pelo montador e pela adaptação durante a lição)
-const exDistract = (v, key, n = 3) =>
-  shuffle(allVocab().filter((p) => p[key] !== v[key] && p.icon !== v.icon)).slice(0, n);
+let _distractUnit = null; // unidade da lição em montagem (distratores da mesma unidade primeiro)
+const exDistract = (v, key, n = 3) => {
+  const pool = allVocab().filter((p) => p[key] !== v[key] && p.icon !== v.icon && p.pt !== v.pt);
+  const unitWords = _distractUnit ? shuffle(unitVocab(_distractUnit).filter((p) => pool.includes(p))) : [];
+  const rest = shuffle(pool.filter((p) => !unitWords.includes(p)));
+  return [...unitWords, ...rest].slice(0, n);
+};
+// Palavras próximas (distância de edição) para lacunas: "heaven" ao lado de "seven", não de "fish"
+const exNearWords = (target, n = 2) => {
+  const words = [...new Set(allVocab().map((p) => p.en.replace(/^to /, "")))].filter((w) => normalize(w) !== normalize(target));
+  const ranked = words.map((w) => ({ w, d: editDistance(w.toLowerCase(), target.toLowerCase()) + Math.random() * 1.5 })).sort((a, b) => a.d - b.d);
+  return ranked.slice(0, n).map((x) => x.w);
+};
 const exBank = (s, lang = "en") => {
   const words = s[lang].split(" ");
   const extra = shuffle(allVocab().map((p) => p[lang].replace("to ", ""))).filter((w) => !words.includes(w)).slice(0, 2);
@@ -338,12 +356,13 @@ const EX_MAKE = {
   "listen-build": (s) => ({ type: "listen-build", sentence: s, bank: exBank(s) }),
   "listen-type": (s) => ({ type: "listen-type", sentence: s }),
   "listen-choice": (s, unitId) => ({ type: "listen-choice", sentence: s, options: shuffle([s.pt, ...exPtDistractors(s, unitId)]) }),
-  "missing-word": (s, blank) => ({ type: "missing-word", sentence: s, blank, options: shuffle([blank, ...shuffle(allVocab().map((p) => p.en.replace(/^to /, ""))).filter((w) => normalize(w) !== normalize(blank)).slice(0, 2)]) }),
+  "missing-word": (s, blank) => ({ type: "missing-word", sentence: s, blank, options: shuffle([blank, ...exNearWords(blank, 2)]) }),
   "complete-translation": (s, blank) => ({ type: "complete-translation", sentence: s, blank }),
   "speak": (s) => ({ type: "speak", sentence: s }),
 };
 
 function buildExercises(lesson, unit) {
+  _distractUnit = unit;
   const lessons = lesson.review ? unit.lessons.filter((l) => !l.review) : [lesson];
   const speakMuted = state.speakMutedUntil && Date.now() < state.speakMutedUntil;
   const canSpeak = SPEECH_OK && !speakMuted;
@@ -486,11 +505,14 @@ function startLesson(lessonId, narrator) {
     answer: null,
     startedAt: Date.now(),
     narrator: narrator || pickCharacter(lesson.unit.id),
+    fixedNarrator: !!narrator,
     reviewQueue: [],
     reviewing: false,
     hardAdded: false,
   };
   session.hard = session.exercises.hard || [];
+  session.cast = buildCast(lesson.unit.id, session.narrator);
+  session.cast.forEach((c) => { if (c.img) { const im = new Image(); im.src = c.img; } }); // pré-carrega os retratos
   showScreen("lesson");
   SFX.start();
   renderExercise();
@@ -597,8 +619,21 @@ function makeOptions(box, options, cols, onSelect) {
 }
 
 // Personagem em card com balão embaixo (layout da referência: retrato + pergunta)
+// Personagem do exercício atual: alterna entre o elenco da unidade (fixo quando o usuário escolheu "Praticar com")
+function currentChar() {
+  if (!session) return null;
+  if (session.fixedNarrator || !session.cast || !session.cast.length) return session.narrator;
+  return session.cast[session.index % session.cast.length];
+}
+function buildCast(unitId, narrator) {
+  const keys = (UNIT_CAST[unitId] || Object.keys(CHARACTERS)).filter((k) => CHARACTERS[k]);
+  const order = shuffle(keys.filter((k) => k !== narrator.key));
+  const list = [narrator, ...order.map((k) => ({ key: k, ...CHARACTERS[k] }))];
+  return list;
+}
+
 function characterRow(bubbleContent, charKey) {
-  const ch = charKey ? { key: charKey, ...CHARACTERS[charKey] } : session.narrator;
+  const ch = charKey ? { key: charKey, ...CHARACTERS[charKey] } : currentChar();
   session.voiceChar = ch;
   const wrap = document.createElement("div");
   wrap.className = "char-card";
@@ -616,7 +651,7 @@ function characterRow(bubbleContent, charKey) {
 
 // Cabeçalho compacto com avatar para exercícios sem balão (pareamento, lacuna, leitura)
 function charTitle(box, title) {
-  const ch = session.narrator;
+  const ch = currentChar();
   session.voiceChar = ch;
   const row = document.createElement("div");
   row.className = "ex-title with-avatar";
@@ -1134,7 +1169,7 @@ function wordBankUI(ex, box, correctSentence, lang = "en") {
   });
 
   ex.correct = correctSentence;
-  ex.explain = `Resposta: "${correctSentence}"`;
+  ex.explain = lang === "en" ? `"${ex.sentence.en}" = "${ex.sentence.pt}"` : `"${ex.sentence.pt}" = "${ex.sentence.en}"`;
   ex.audioText = correctSentence;
 }
 
@@ -1363,9 +1398,11 @@ function checkAnswer() {
         session.bestCombo = Math.max(session.bestCombo, session.combo);
         updateCombo();
         if (session.combo >= 3) {
-          SFX.combo();
           if (session.bonus < 5) session.bonus++;
-          toast(`🔥 ${session.combo} seguidas! +1 XP`, "combo");
+          if (session.combo % 5 === 0) {
+            SFX.combo();
+            $("#fb-ok-detail").insertAdjacentHTML("afterbegin", `<span class="combo-pill">🔥 ${session.combo} seguidas · +${Math.min(session.combo / 5, 5) | 0} XP</span> `);
+          } else SFX.correct();
         } else {
           SFX.correct();
         }
@@ -1440,7 +1477,8 @@ function adaptNext() {
   } else if (session.mistakes >= 2 && nxt.sentence && (nxt.type === "listen-type" || nxt.type === "build")) {
     swap = EX_MAKE["listen-choice"](nxt.sentence, session.lesson.unit.id);
   }
-  if (swap && !sameNeighbor(swap)) { swap.adapted = true; session.exercises[session.index] = swap; }
+  const used = swap ? session.exercises.filter((e) => e.type === swap.type).length : 0;
+  if (swap && !sameNeighbor(swap) && used < capOf(swap.type)) { swap.adapted = true; session.exercises[session.index] = swap; }
 }
 
 // Cópia limpa de um exercício para a revisão (novo embaralhamento das opções)
