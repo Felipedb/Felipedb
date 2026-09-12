@@ -447,8 +447,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   border-radius: 10px; padding: 1px 8px; margin-top: 2px;
 }
 @keyframes char-in {
-  from { transform: translateY(8px); opacity: 0; }
-  to { transform: none; opacity: 1; }
+  from { transform: translateY(8px) scale(0.98); }
+  to { transform: none; }
 }
 .bubble {
   position: relative;
@@ -1019,78 +1019,78 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .opt.opt-audio .wave i:nth-child(3n) { height: 20px; } .opt.opt-audio .wave i:nth-child(3n+1) { height: 14px; } .opt.opt-audio .wave i:nth-child(5n) { height: 24px; }
 
 /* ===================== TEMA ESCURO ===================== */
-/* Paleta quente (a luz de vela do tema claro vira noite), verde e azul da marca preservados */
+/* Noite azul-esverdeada da referência: fundo profundo, cartões em ardósia, verde e dourado vivos */
 :root[data-theme="dark"] {
-  --bg: #17140f;
-  --bg-top: #1d1913;
-  --card: #241f18;
-  --card-2: #201b15;
-  --cream: #1f1a14;
-  --text: #f2ebdd;
-  --text-soft: #a4977f;
-  --line: #3a3227;
-  --locked: #4a4235;
-  --scrim: rgba(0, 0, 0, 0.62);
+  --bg: #0e1a24;
+  --bg-top: #122029;
+  --card: #17242e;
+  --card-2: #152029;
+  --cream: #15222b;
+  --text: #eef5f9;
+  --text-soft: #93a8b6;
+  --line: #273945;
+  --locked: #3a4c58;
+  --scrim: rgba(0, 0, 0, 0.68);
 
-  --green: #7dd321;
-  --green-soft: #24331a;
-  --green-dark: #8ade34;
+  --green: #4ade80;
+  --green-soft: #12301f;
+  --green-dark: #6ee7a0;
   --red-dark: #ff8a8a;
-  --gold-soft: #2e2513;
+  --gold-soft: #2a2413;
 
-  --glass: rgba(36, 31, 24, 0.96);
-  --glass-soft: rgba(31, 26, 20, 0.96);
+  --glass: rgba(23, 36, 46, 0.96);
+  --glass-soft: rgba(18, 32, 41, 0.96);
   --glass-thin: rgba(255, 255, 255, 0.06);
   --shine: rgba(255, 255, 255, 0.16);
-  --hover: #2a241c;
-  --track: #2e2820;
-  --ghost: #2b251e;
-  --head: #cfe3f0;
+  --hover: #1d2c37;
+  --track: #23333e;
+  --ghost: #1c2b35;
+  --head: #dbe9f2;
   --head-soft: #9fc0d4;
-  --head-bg: #22303a;
-  --logo-ink: #b7e36a;
-  --flame: #ffa640;
-  --icon-muted: #8a8070;
-  --star-off: #4a4235;
-  --dot: #5b5344;
-  --tip-bg: #55493a;
-  --tip-fg: #fff8ea;
+  --head-bg: #1b2c38;
+  --logo-ink: #4ade80;
+  --flame: #ff9f45;
+  --icon-muted: #7d93a2;
+  --star-off: #3a4c58;
+  --dot: #4a606e;
+  --tip-bg: #2c3f4c;
+  --tip-fg: #eef5f9;
 
-  --ok-bg: #23331a;
-  --ok-soft: #22301a;
-  --ok-fg: #8ade34;
-  --ok-line: #4c7a1f;
-  --bad-bg: #3a1e1e;
-  --bad-soft: #3a1e1e;
+  --ok-bg: #12301f;
+  --ok-soft: #14331f;
+  --ok-fg: #6ee7a0;
+  --ok-line: #2f6b43;
+  --bad-bg: #35191c;
+  --bad-soft: #35191c;
   --bad-fg: #ff8a8a;
-  --bad-line: #7a3434;
-  --sel-bg: #16323f;
-  --blue-fg: #4cc3fa;
-  --blue-soft: #16303c;
-  --blue-line: #2c5a6e;
-  --blue-chip: #16303c;
-  --blue-chip-line: #2c5a6e;
-  --disabled-bg: #2b251e;
-  --disabled-fg: #7f7664;
-  --disabled-shadow: #221d17;
+  --bad-line: #71353a;
+  --sel-bg: #123243;
+  --blue-fg: #56c8f5;
+  --blue-soft: #12303f;
+  --blue-line: #2a5a72;
+  --blue-chip: #12303f;
+  --blue-chip-line: #2a5a72;
+  --disabled-bg: #1c2b35;
+  --disabled-fg: #6d8391;
+  --disabled-shadow: #16222b;
 
-  --gold-line: #4a3c1c;
-  --gold-fg: #e9c46a;
-  --gold-ink: #ddcba2;
-  --gold-ref: #c9a94e;
-  --gold-deep: #f0b63c;
+  --gold-line: #4a3f1c;
+  --gold-fg: #fbbf24;
+  --gold-ink: #e8d9a8;
+  --gold-ref: #d3b357;
+  --gold-deep: #fbbf24;
   --purple: #c9a6f5;
-  --purple-bg: #2c2238;
-  --purple-line: #493a5c;
-  --face-line: #4e6b31;
-  --face-shadow: #35491f;
-  --streak-bg: #2c3a1c;
-  --promo-a: #1e3442;
-  --promo-b: #172a36;
+  --purple-bg: #262038;
+  --purple-line: #443a5c;
+  --face-line: #2f6b43;
+  --face-shadow: #1e4a2d;
+  --streak-bg: #1b3326;
+  --promo-a: #16303d;
+  --promo-b: #112631;
   --promo-ink: #a7cfe6;
   --combo-bg: #3a2a14;
   --combo-line: #5e441c;
-  --combo-fg: #ffa640;
+  --combo-fg: #ff9f45;
 }
 /* Sombras de relevo ficam escuras (no claro são marrom translúcido) */
 :root[data-theme="dark"] .card,
@@ -1271,3 +1271,85 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .lesson-row.locked .node-stars { opacity: 0.6; }
 .portrait.locked { --pc: var(--line) !important; }
+
+/* ===================== Home: saudação e cartões de status (referência BibleLearn) ===================== */
+.home-head { padding: 14px 18px 4px; display: flex; flex-direction: column; gap: 12px; }
+@media (min-width: 980px) { .home-head { display: none; } }
+.greet { display: flex; align-items: center; gap: 12px; }
+.greet-avatar {
+  width: 52px; height: 52px; flex: none; border-radius: 50%; overflow: hidden; padding: 0;
+  border: 2px solid var(--green-bright); background: var(--streak-bg);
+}
+.greet-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.greet-text { min-width: 0; flex: 1; }
+.greet-text h2 { font-family: "Baloo 2", "Nunito", sans-serif; font-size: 22px; font-weight: 800; line-height: 1.15; }
+.greet-text p { font-size: 13px; font-weight: 700; color: var(--text-soft); }
+.greet-bell {
+  width: 42px; height: 42px; flex: none; border-radius: 50%; font-size: 19px;
+  background: var(--cream); border: 2px solid var(--line);
+}
+.stat-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.stat-card {
+  display: flex; flex-direction: column; align-items: center; gap: 1px;
+  padding: 10px 6px; border-radius: 16px;
+  background: var(--card); border: 2px solid var(--line); border-bottom-width: 4px;
+}
+.stat-card .sc-ico { font-size: 20px; line-height: 1.1; }
+.stat-card b { font-family: "Baloo 2", "Nunito", sans-serif; font-size: 19px; font-weight: 800; }
+.stat-card small { font-size: 10.5px; font-weight: 800; color: var(--text-soft); text-align: center; }
+.stat-card:nth-child(1) b { color: var(--flame); }
+.stat-card:nth-child(2) b { color: var(--gold); }
+.stat-card:nth-child(3) b { color: var(--red); }
+
+/* Divisor de testamento na trilha */
+.testament {
+  display: flex; align-items: center; gap: 10px;
+  margin: 26px 0 2px; font-family: "Baloo 2", "Nunito", sans-serif;
+  font-size: 19px; font-weight: 800; color: var(--head);
+}
+.testament::after { content: ""; flex: 1; height: 2px; background: var(--line); border-radius: 2px; }
+.testament:first-child { margin-top: 6px; }
+
+.name-row input {
+  flex: 1; min-width: 0; max-width: 190px; text-align: right;
+  border: 2px solid var(--line); border-radius: 12px; padding: 8px 10px;
+  font: 800 14px "Nunito", sans-serif; background: var(--card); color: var(--text);
+}
+
+/* ===================== Cena grande do exercício (referência BibleLearn) ===================== */
+.scene { margin: 6px 0 20px; display: flex; flex-direction: column; align-items: center; }
+.scene .scene-img {
+  width: 100%; max-width: 440px; aspect-ratio: 4 / 3; position: relative;
+  border-radius: 20px; overflow: hidden; border: 2px solid var(--line);
+  background: var(--head-bg); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
+  animation: char-in 0.3s ease;
+}
+.scene .scene-img img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; transform: scale(1.24); transform-origin: center 40%; }
+.scene .scene-img svg { width: 100%; height: 100%; }
+.scene .scene-img .react { top: 10px; right: 10px; font-size: 26px; }
+.scene .scene-prompt {
+  width: min(92%, 400px); margin-top: -34px; z-index: 2;
+  background: var(--card); border: 2px solid var(--line); border-radius: 16px;
+  padding: 12px 14px; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16);
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  font-size: 17px; font-weight: 800; text-align: center;
+}
+.scene .scene-prompt .bubble-inner { justify-content: center; flex-wrap: wrap; }
+.scene .scene-prompt .ex-word { text-align: center; }
+.scene-img.talking img { animation: talk 0.32s ease-in-out infinite alternate; }
+@media (prefers-reduced-motion: reduce) { .scene-img.talking img { animation: none; } }
+
+/* Título com o alto-falante grande, como na referência */
+.ex-title .title-ico { width: 46px; height: 46px; padding: 11px; border-radius: 50%; box-shadow: 0 3px 0 #1899d6; }
+
+/* Opção escolhida preenchida de verde */
+.opt.selected { background: linear-gradient(180deg, #63d80d, var(--green-bright)); border-color: var(--green-dark); color: #fff; box-shadow: 0 3px 0 var(--green-shadow); }
+.opt.correct { background: linear-gradient(180deg, #63d80d, var(--green-bright)); border-color: var(--green-dark); color: #fff; box-shadow: 0 3px 0 var(--green-shadow); }
+.opt.wrong { background: linear-gradient(180deg, #ff6b6b, var(--red)); border-color: var(--red-dark); color: #fff; box-shadow: 0 3px 0 var(--red-dark); }
+.opt.selected .opt-icon, .opt.correct .opt-icon, .opt.wrong .opt-icon { filter: brightness(1.15); }
+
+/* Tela de resultado no formato da referência: título verde, ilustração maior */
+.result h2 { color: var(--green); font-size: 30px; }
+.result-char { width: 210px; }
+.result .big-emoji { font-size: 40px; margin-bottom: -2px; }
+.verse-blessing { background: var(--gold-soft); border-color: var(--gold-line); }

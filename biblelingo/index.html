@@ -53,6 +53,21 @@
 
       <!-- Coluna central -->
       <main class="center">
+        <section class="home-head" id="home-head">
+          <div class="greet">
+            <button class="greet-avatar" id="greet-avatar" aria-label="Personagens"></button>
+            <div class="greet-text">
+              <h2 id="greet-title">Olá!</h2>
+              <p id="greet-sub">Continue aprendendo a Palavra de Deus</p>
+            </div>
+            <button class="greet-bell" id="greet-bell" aria-label="Missões de hoje">🔔</button>
+          </div>
+          <div class="stat-cards">
+            <div class="stat-card"><span class="sc-ico">🔥</span><b id="sc-streak">0</b><small>dias seguidos</small></div>
+            <div class="stat-card"><span class="sc-ico">👑</span><b id="sc-lessons">0</b><small>lições</small></div>
+            <div class="stat-card"><span class="sc-ico">❤️</span><b id="sc-lives">5</b><small>vidas</small></div>
+          </div>
+        </section>
         <div class="hero has-img">
           <img class="hero-img" src="chars/hero.jpg" alt="Seja bem-vindo! Vamos aprender juntos a Palavra de Deus?" />
         </div>
@@ -249,6 +264,7 @@
         <button class="theme-opt" data-theme-opt="dark"><i class="nav-ico" data-ico="moon"></i><span>Escuro</span></button>
         <button class="theme-opt" data-theme-opt="auto"><i class="nav-ico" data-ico="auto"></i><span>Automático</span></button>
       </div>
+      <label class="switch-row name-row"><span>🙋 Seu nome</span><input type="text" id="input-name" maxlength="18" placeholder="Como te chamamos?" /></label>
       <label class="switch-row"><span>🔊 Efeitos sonoros</span><input type="checkbox" id="toggle-sound" checked /></label>
       <button id="btn-reset" class="btn-main red">Apagar progresso</button>
       <button class="btn-ghost modal-close">Fechar</button>

@@ -24,6 +24,7 @@ function load() {
     daily: null, // meta diária e missões do dia
     dailyGoal: 20,
     theme: "auto", // "light" | "dark" | "auto"
+    name: "", // como o app te chama na saudação
     days: {}, // "YYYY-MM-DD" -> XP do dia (meta semanal)
     chests: {}, // unitId -> true (baú da unidade aberto)
   };
@@ -110,7 +111,7 @@ function speak(text, opts = {}) {
   const ch = opts.char || (session && session.voiceChar) || null;
   if (playClip(text, ch && ch.key, opts.slow)) {
     if ("speechSynthesis" in window) speechSynthesis.cancel();
-    const fig = document.querySelector(".char-card .char-fig");
+    const fig = document.querySelector(".scene-img, .char-card .char-fig");
     if (fig) { fig.classList.add("talking"); setTimeout(() => fig.classList.remove("talking"), Math.min(4000, 400 + text.length * 70)); }
     return;
   }
@@ -125,7 +126,7 @@ function speak(text, opts = {}) {
     ? (_voices[profile.gender] || _voices.any)
     : _voices.any;
   if (voice) u.voice = voice;
-  const fig = document.querySelector(".char-card .char-fig");
+  const fig = document.querySelector(".scene-img, .char-card .char-fig");
   if (fig) { u.onstart = () => fig.classList.add("talking"); u.onend = u.onerror = () => fig.classList.remove("talking"); }
   speechSynthesis.speak(u);
 }
@@ -177,6 +178,17 @@ function renderHome() {
   $("#streak-days").textContent = state.streak;
   $("#stat-xp").textContent = state.xp;
   $("#stat-hearts").textContent = state.hearts;
+
+  // Saudação e cartões de status (referência BibleLearn)
+  const doneLessons = Object.keys(state.completed).length;
+  $("#greet-title").textContent = state.name ? `Olá, ${state.name}!` : "Olá!";
+  $("#greet-sub").textContent = state.streak > 0
+    ? `${state.streak} ${state.streak === 1 ? "dia" : "dias"} seguidos na Palavra. Continue!`
+    : "Continue aprendendo a Palavra de Deus";
+  $("#greet-avatar").innerHTML = charFace(CHARACTERS.jesus);
+  $("#sc-streak").textContent = state.streak;
+  $("#sc-lessons").textContent = doneLessons;
+  $("#sc-lives").textContent = state.hearts;
 
   $("#hud-streak").textContent = state.streak;
   $("#hud-xp").textContent = state.xp;
@@ -235,7 +247,16 @@ function renderHome() {
   const currentId = currentLessonId();
   const indents = ["", "indent-1", "indent-2", "indent-1", ""];
 
+  let testamentoAtual = "";
   COURSE.forEach((unit, ui) => {
+    const testamento = unit.testament || (ui < 7 ? "Antigo Testamento" : "Novo Testamento");
+    if (testamento !== testamentoAtual) {
+      testamentoAtual = testamento;
+      const sep = document.createElement("div");
+      sep.className = "testament";
+      sep.innerHTML = `<span>${testamento}</span>`;
+      trail.appendChild(sep);
+    }
     const lessons = unit.lessons;
     const doneCount = lessons.filter((l) => state.completed[l.id]).length;
     const unitDoneAll = doneCount === lessons.length;
@@ -772,6 +793,24 @@ function buildCast(unitId, narrator) {
   return list;
 }
 
+// Cena: retrato grande em cartão largo com o enunciado em caixa sobreposta
+function characterScene(promptContent, charKey) {
+  const ch = charKey ? { key: charKey, ...CHARACTERS[charKey] } : currentChar();
+  session.voiceChar = ch;
+  const wrap = document.createElement("div");
+  wrap.className = "scene";
+  const fig = document.createElement("div");
+  fig.className = "char-fig scene-img";
+  fig.innerHTML = `${charFace(ch)}<span class="react"></span>`;
+  const box = document.createElement("div");
+  box.className = "scene-prompt";
+  if (typeof promptContent === "string") box.innerHTML = promptContent;
+  else box.appendChild(promptContent);
+  wrap.appendChild(fig);
+  wrap.appendChild(box);
+  return wrap;
+}
+
 function characterRow(bubbleContent, charKey) {
   const ch = charKey ? { key: charKey, ...CHARACTERS[charKey] } : currentChar();
   session.voiceChar = ch;
@@ -811,7 +850,7 @@ function updateCombo() {
 const PRAISES = ["Excelente!", "Muito bem!", "Incrível!", "Perfeito!", "Isso aí!", "Boa!", "Amém!"];
 
 function reactCharacter(ok) {
-  const fig = document.querySelector(".char-fig");
+  const fig = document.querySelector(".scene-img") || document.querySelector(".char-fig");
   if (!fig) return;
   const badge = fig.querySelector(".react");
   if (badge) badge.textContent = ok ? ["😊", "🙌", "👏", "✨"][Math.floor(Math.random() * 4)] : "😕";
@@ -1072,7 +1111,7 @@ function renderImageChoice(ex, box) {
   bubble.className = "bubble-inner";
   bubble.appendChild(audioButton(ex.word.en));
   bubble.insertAdjacentHTML("beforeend", `<span class="ex-word">${sayable(ex.word.en)}</span>`);
-  box.appendChild(characterRow(bubble));
+  box.appendChild(characterScene(bubble));
   makeOptions(box, ex.options.map((o) => ({
     value: o.pt,
     cls: "img-opt",
@@ -1089,7 +1128,7 @@ function renderChoiceEnPt(ex, box) {
   bubble.className = "bubble-inner";
   bubble.appendChild(audioButton(ex.word.en));
   bubble.insertAdjacentHTML("beforeend", `<span class="ex-word">${sayable(ex.word.en)}</span>`);
-  box.appendChild(characterRow(bubble));
+  box.appendChild(characterScene(bubble));
   makeOptions(box, ex.options, 1);
   ex.correct = ex.word.pt;
   ex.explain = `${ex.word.en} = ${ex.word.pt}`;
@@ -1110,7 +1149,7 @@ function renderListen(ex, box) {
   bubble.className = "bubble-inner";
   bubble.appendChild(audioPair(ex.word.en));
   bubble.insertAdjacentHTML("beforeend", `<span class="ex-word ex-muted">Toque para ouvir</span>`);
-  box.appendChild(characterRow(bubble));
+  box.appendChild(characterScene(bubble));
   makeOptions(box, ex.options, 2, (opt) => speak(opt));
   speak(ex.word.en);
   ex.correct = ex.word.en;
@@ -1125,7 +1164,7 @@ function renderListenChoice(ex, box) {
   bubble.className = "bubble-inner";
   bubble.appendChild(audioPair(ex.sentence.en));
   bubble.insertAdjacentHTML("beforeend", `<span class="ex-word ex-muted">Toque para ouvir</span>`);
-  box.appendChild(characterRow(bubble));
+  box.appendChild(characterScene(bubble));
   makeOptions(box, ex.options, 1);
   speak(ex.sentence.en);
   ex.correct = ex.sentence.pt;
@@ -1136,7 +1175,7 @@ function renderListenChoice(ex, box) {
 // Português -> inglês por escolha (recordação sem digitar)
 function renderChoicePtEn(ex, box) {
   box.innerHTML = `<div class="ex-title">Qual destas significa "${ex.word.pt}"?</div>`;
-  box.appendChild(characterRow(`<span class="ex-word">${ex.word.icon || ""} ${ex.word.pt}</span>`));
+  box.appendChild(characterScene(`<span class="ex-word">${ex.word.icon || ""} ${ex.word.pt}</span>`));
   makeOptions(box, ex.options, 2, (opt) => speak(opt));
   ex.correct = ex.word.en;
   ex.explain = `${ex.word.pt} = ${ex.word.en}`;
@@ -1203,7 +1242,7 @@ function renderDialogue(ex, box) {
   top.insertAdjacentHTML("beforeend", `<span class="ex-word">${sayable(d.line)}</span>`);
   bubble.appendChild(top);
   bubble.insertAdjacentHTML("beforeend", `<span class="ex-muted dialog-pt">${d.pt}</span>`);
-  box.appendChild(characterRow(bubble));
+  box.appendChild(characterScene(bubble));
   box.insertAdjacentHTML("beforeend", `<div class="reply-label">Sua resposta:</div>`);
   makeOptions(box, ex.options, 1, (opt) => speak(opt));
   speak(d.line);
@@ -1220,7 +1259,7 @@ function renderQuiz(ex, box) {
   bubble.className = "bubble-inner";
   bubble.appendChild(audioButton(q.q));
   bubble.insertAdjacentHTML("beforeend", `<span class="ex-word ex-q">${sayable(q.q)}</span>`);
-  box.appendChild(characterRow(bubble));
+  box.appendChild(characterScene(bubble));
   makeOptions(box, ex.options, 1, (opt) => speak(opt));
   speak(q.q);
   ex.correct = q.answer;
@@ -1817,6 +1856,8 @@ document.querySelectorAll(".nav-item").forEach((b) => {
     if (nav === "config") {
       const t = $("#toggle-sound");
       if (t) t.checked = state.sound !== false;
+      const nm = $("#input-name");
+      if (nm) nm.value = state.name || "";
       applyTheme();
       $("#modal-config").classList.add("open");
     }
@@ -1853,6 +1894,20 @@ $("#vd-toggle").addEventListener("click", () => {
   box.hidden = !open;
   $("#vd-toggle").textContent = open ? "Ocultar ▴" : "Ver tradução ▾";
   $("#vd-toggle").setAttribute("aria-expanded", String(open));
+});
+$("#greet-bell").addEventListener("click", () => {
+  const card = $("#card-daily");
+  if (card) card.scrollIntoView({ behavior: "smooth", block: "center" });
+  SFX.tap();
+});
+$("#greet-avatar").addEventListener("click", () => {
+  const strip = $("#char-strip");
+  if (strip) strip.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+$("#input-name").addEventListener("input", (e) => {
+  state.name = e.target.value.trim().slice(0, 18);
+  save();
+  $("#greet-title").textContent = state.name ? `Olá, ${state.name}!` : "Olá!";
 });
 $("#hud-avatar").addEventListener("click", () => {
   const strip = $("#char-strip");
