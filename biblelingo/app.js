@@ -496,7 +496,8 @@ function renderExercise() {
     if (t) t.insertAdjacentHTML("beforebegin", '<div class="new-word-tag"><span class="new-tag">✦ Nova palavra</span></div>');
   }
   session.practiceRec = null;
-  if (ex.type !== "speak" && ex.audioText && ex.audioText.trim().split(/\s+/).length >= 3) box.appendChild(practiceBar(ex));
+  const barTypes = ["build", "translate-en-pt", "type", "missing-word", "complete-translation", "verse", "read", "dialogue", "quiz", "listen-build", "listen-type"];
+  if (barTypes.includes(ex.type) && ex.audioText && ex.audioText.trim().split(/\s+/).length >= 3) box.appendChild(practiceBar(ex, !!box.querySelector(".btn-audio")));
 }
 
 // Opções: string ou { value, html }
@@ -528,22 +529,32 @@ function makeOptions(box, options, cols, onSelect) {
   return wrap;
 }
 
-// Personagem com balão de fala (estilo Duolingo)
+// Personagem em card com balão embaixo (layout da referência: retrato + pergunta)
 function characterRow(bubbleContent, charKey) {
   const ch = charKey ? { key: charKey, ...CHARACTERS[charKey] } : session.narrator;
   session.voiceChar = ch;
-  const row = document.createElement("div");
-  row.className = "char-row";
+  const wrap = document.createElement("div");
+  wrap.className = "char-card";
   const fig = document.createElement("div");
   fig.className = "char-fig";
-  fig.innerHTML = `${charFace(ch)}<span class="react"></span><span class="char-name">${ch.name}</span>`;
+  fig.innerHTML = `${charFace(ch)}<span class="react"></span><span class="char-name">${ch.name.split(" (")[0]}</span>`;
   const bubble = document.createElement("div");
   bubble.className = "bubble";
   if (typeof bubbleContent === "string") bubble.innerHTML = bubbleContent;
   else bubble.appendChild(bubbleContent);
-  row.appendChild(fig);
-  row.appendChild(bubble);
-  return row;
+  wrap.appendChild(fig);
+  wrap.appendChild(bubble);
+  return wrap;
+}
+
+// Cabeçalho compacto com avatar para exercícios sem balão (pareamento, lacuna, leitura)
+function charTitle(box, title) {
+  const ch = session.narrator;
+  session.voiceChar = ch;
+  const row = document.createElement("div");
+  row.className = "ex-title with-avatar";
+  row.innerHTML = `<span class="mini-avatar char-fig">${charFace(ch)}<span class="react"></span></span><span>${title}</span>`;
+  box.appendChild(row);
 }
 
 function updateCombo() {
@@ -570,8 +581,9 @@ function reactCharacter(ok) {
 function audioButton(text, opts = {}) {
   const b = document.createElement("button");
   b.className = "btn-audio" + (opts.big ? " big" : "") + (opts.slow ? " slow" : "");
-  b.textContent = opts.slow ? "🐢" : "🔊";
+  b.innerHTML = opts.slow ? ICONS.turtle : ICONS.speaker;
   b.title = opts.slow ? "Ouvir devagar" : "Ouvir";
+  b.setAttribute("aria-label", b.title);
   b.addEventListener("click", () => speak(text, opts.slow ? { slow: true } : {}));
   return b;
 }
@@ -641,32 +653,32 @@ function recognizeOnce(target, { onStart, onEnd, onResult, onError } = {}) {
   return rec;
 }
 
-function practiceBar(ex) {
+function practiceBar(ex, micOnly) {
   const bar = document.createElement("div");
   bar.className = "practice-bar";
   const getTarget = () => (session.checked && ex.audioAfter) ? ex.audioAfter : ex.audioText;
 
   const listen = document.createElement("button");
   listen.className = "pbtn";
-  listen.innerHTML = "🔊 <span>Ouvir</span>";
+  listen.innerHTML = `${ICONS.speaker}<span>Ouvir</span>`;
   listen.addEventListener("click", () => speak(getTarget()));
 
   const slow = document.createElement("button");
   slow.className = "pbtn";
-  slow.innerHTML = "🐢";
+  slow.innerHTML = ICONS.turtle;
   slow.title = "Ouvir devagar";
   slow.addEventListener("click", () => speak(getTarget(), { slow: true }));
 
   const mic = document.createElement("button");
   mic.className = "pbtn mic";
-  mic.innerHTML = "🎤 <span>Falar</span>";
+  mic.innerHTML = `${ICONS.mic}<span>Falar</span>`;
   const status = document.createElement("div");
   status.className = "practice-status";
   mic.addEventListener("click", () => {
     if (session.practiceRec) { try { session.practiceRec.stop(); } catch (e) {} return; }
     const target = getTarget();
     session.practiceRec = recognizeOnce(target, {
-      onStart: () => { mic.classList.add("listening"); mic.innerHTML = "🎙️ <span>Ouvindo...</span>"; status.textContent = `Diga: "${target}"`; },
+      onStart: () => { mic.classList.add("listening"); mic.innerHTML = `${ICONS.mic}<span>Ouvindo...</span>`; status.textContent = `Diga: "${target}"`; },
       onResult: (r) => {
         if (r.ok) { SFX.correct(); buzz(25); status.textContent = `✅ Boa pronúncia! (${Math.round(r.score * 100)}%)`; }
         else { buzz(60); status.textContent = `🙂 Quase. Você disse: "${r.text}". Tente de novo!`; }
@@ -676,12 +688,11 @@ function practiceBar(ex) {
           ? "Reconhecimento de voz indisponível neste navegador."
           : err === "not-allowed" ? "Permita o uso do microfone para praticar." : "Não consegui ouvir. Tente de novo.";
       },
-      onEnd: () => { session.practiceRec = null; mic.classList.remove("listening"); mic.innerHTML = "🎤 <span>Falar</span>"; },
+      onEnd: () => { session.practiceRec = null; mic.classList.remove("listening"); mic.innerHTML = `${ICONS.mic}<span>Falar</span>`; },
     });
   });
 
-  bar.appendChild(listen);
-  bar.appendChild(slow);
+  if (!micOnly) { bar.appendChild(listen); bar.appendChild(slow); }
   bar.appendChild(mic);
   const wrap = document.createElement("div");
   wrap.className = "practice-wrap";
@@ -736,8 +747,12 @@ function renderTranslateEnPt(ex, box) {
 
 // 1.5 Digite o que você ouviu
 function renderListenType(ex, box) {
-  box.innerHTML = `<div class="ex-title">Digite o que você ouviu</div>`;
-  box.appendChild(bigAudio(ex.sentence.en));
+  box.innerHTML = `<div class="ex-title"><span class="title-ico">${ICONS.speaker}</span>Digite o que você ouviu</div>`;
+  const bubble = document.createElement("div");
+  bubble.className = "bubble-inner";
+  bubble.appendChild(audioPair(ex.sentence.en));
+  bubble.insertAdjacentHTML("beforeend", `<span class="ex-word ex-muted">Toque para ouvir</span>`);
+  box.appendChild(characterRow(bubble));
   const inp = textInput("Digite em inglês...");
   box.appendChild(inp);
   setTimeout(() => inp.focus(), 50);
@@ -755,9 +770,10 @@ function gappedSentence(en, blank) {
 
 // 1.5 Selecione a palavra que falta (frase com lacuna e 3 opções)
 function renderMissingWord(ex, box) {
-  box.innerHTML = `<div class="ex-title">Selecione a palavra que falta</div>
-    <div class="verse-box">${gappedSentence(ex.sentence.en, ex.blank)}</div>
-    <div class="verse-ref">${ex.sentence.pt}</div>`;
+  box.innerHTML = "";
+  charTitle(box, "Selecione a palavra que falta");
+  box.insertAdjacentHTML("beforeend", `<div class="verse-box">${gappedSentence(ex.sentence.en, ex.blank)}</div>
+    <div class="verse-ref">${ex.sentence.pt}</div>`);
   makeOptions(box, ex.options, 2, (opt) => {
     const g = $("#sent-gap");
     if (g) g.textContent = opt;
@@ -788,13 +804,14 @@ function renderCompleteTranslation(ex, box) {
 // 1.5 Leia e responda
 function renderRead(ex, box) {
   const r = ex.reading;
-  box.innerHTML = `<div class="ex-title">Leia e responda</div>
-    <div class="read-box">
+  box.innerHTML = "";
+  charTitle(box, "Leia e responda");
+  box.insertAdjacentHTML("beforeend", `<div class="read-box">
       <div class="read-en">${sayable(r.text)}</div>
       <button class="btn-link read-toggle">Ver em português</button>
       <div class="read-pt" hidden>${r.pt}</div>
     </div>
-    <div class="read-q">${sayable(r.q)}</div>`;
+    <div class="read-q">${sayable(r.q)}</div>`);
   box.querySelector(".read-toggle").addEventListener("click", (e) => {
     const pt = box.querySelector(".read-pt");
     pt.hidden = !pt.hidden;
@@ -845,8 +862,12 @@ function bigAudio(text) {
 }
 
 function renderListen(ex, box) {
-  box.innerHTML = `<div class="ex-title">Toque no que você ouviu</div>`;
-  box.appendChild(bigAudio(ex.word.en));
+  box.innerHTML = `<div class="ex-title"><span class="title-ico">${ICONS.speaker}</span>Ouça e escolha a resposta certa</div>`;
+  const bubble = document.createElement("div");
+  bubble.className = "bubble-inner";
+  bubble.appendChild(audioPair(ex.word.en));
+  bubble.insertAdjacentHTML("beforeend", `<span class="ex-word ex-muted">Toque para ouvir</span>`);
+  box.appendChild(characterRow(bubble));
   makeOptions(box, ex.options, 2, (opt) => speak(opt));
   speak(ex.word.en);
   ex.correct = ex.word.en;
@@ -889,9 +910,10 @@ function renderVerse(ex, box) {
   const v = ex.verse;
   const gapped = sayable(v.text).replace(`<span class="say-word">${v.blank}</span>`, `<span class="gap" id="verse-gap">&nbsp;</span>`)
     .replace(new RegExp(`<span class="say-word">${v.blank}([.,;:!?])</span>`), `<span class="gap" id="verse-gap">&nbsp;</span>$1`);
-  box.innerHTML = `<div class="ex-title">Complete o versículo</div>
-    <div class="verse-box">${gapped}</div>
-    <div class="verse-ref">${v.ref} — "${v.pt}"</div>`;
+  box.innerHTML = "";
+  charTitle(box, "Complete o versículo");
+  box.insertAdjacentHTML("beforeend", `<div class="verse-box">${gapped}</div>
+    <div class="verse-ref">${v.ref} — "${v.pt}"</div>`);
   makeOptions(box, ex.options, 2, (opt) => {
     $("#verse-gap").textContent = opt;
     speak(opt);
@@ -1036,8 +1058,12 @@ function renderBuild(ex, box) {
 }
 
 function renderListenBuild(ex, box) {
-  box.innerHTML = `<div class="ex-title">Toque no que você ouviu</div>`;
-  box.appendChild(bigAudio(ex.sentence.en));
+  box.innerHTML = `<div class="ex-title"><span class="title-ico">${ICONS.speaker}</span>Toque no que você ouviu</div>`;
+  const bubble = document.createElement("div");
+  bubble.className = "bubble-inner";
+  bubble.appendChild(audioPair(ex.sentence.en));
+  bubble.insertAdjacentHTML("beforeend", `<span class="ex-word ex-muted">Toque para ouvir</span>`);
+  box.appendChild(characterRow(bubble));
   wordBankUI(ex, box, ex.sentence.en);
   speak(ex.sentence.en);
 }
@@ -1057,7 +1083,7 @@ function renderSpeak(ex, box) {
 
   const mic = document.createElement("button");
   mic.className = "mic-btn";
-  mic.innerHTML = `🎤<span>Toque para falar</span>`;
+  mic.innerHTML = `${ICONS.mic}<span>Toque para falar</span>`;
   const status = document.createElement("div");
   status.className = "mic-status";
   const skip = document.createElement("button");
@@ -1072,7 +1098,7 @@ function renderSpeak(ex, box) {
     if (session.checked) return;
     if (session.recognizer) { try { session.recognizer.stop(); } catch (e) {} return; }
     session.recognizer = recognizeOnce(ex.sentence.en, {
-      onStart: () => { mic.classList.add("listening"); mic.innerHTML = `🎙️<span>Ouvindo...</span>`; status.textContent = ""; },
+      onStart: () => { mic.classList.add("listening"); mic.innerHTML = `${ICONS.mic}<span>Ouvindo...</span>`; status.textContent = ""; },
       onResult: (r) => {
         status.textContent = `Você disse: "${r.text}"`;
         session.answer = r.ok ? ex.sentence.en : r.text;
@@ -1083,7 +1109,7 @@ function renderSpeak(ex, box) {
         status.textContent = err === "unsupported" ? "Reconhecimento de voz indisponível neste navegador."
           : err === "not-allowed" ? "Permita o uso do microfone ou pule este exercício." : "Não consegui ouvir. Tente de novo ou pule.";
       },
-      onEnd: () => { session.recognizer = null; mic.classList.remove("listening"); mic.innerHTML = `🎤<span>Toque para falar</span>`; },
+      onEnd: () => { session.recognizer = null; mic.classList.remove("listening"); mic.innerHTML = `${ICONS.mic}<span>Toque para falar</span>`; },
     });
   });
 
@@ -1105,7 +1131,8 @@ function renderSpeak(ex, box) {
 }
 
 function renderMatch(ex, box) {
-  box.innerHTML = `<div class="ex-title">Toque nos pares correspondentes</div>`;
+  box.innerHTML = "";
+  charTitle(box, "Toque nos pares correspondentes");
   const grid = document.createElement("div");
   grid.className = "match-cols";
   box.appendChild(grid);
@@ -1503,6 +1530,7 @@ $("#card-verse").addEventListener("click", () => {
   speak(v.text, { char: CHARACTERS.jesus });
 });
 
+document.querySelectorAll("i.nav-ico[data-ico]").forEach((i) => { i.innerHTML = ICONS[i.dataset.ico] || ""; });
 loadAudioManifest();
 registerServiceWorker();
 renderHome();

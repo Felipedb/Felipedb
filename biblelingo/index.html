@@ -26,11 +26,11 @@
           <span class="logo-text">Bíblia<b>Learn</b></span>
         </div>
         <nav class="nav">
-          <button class="nav-item active" data-nav="inicio">🏠 <span>Início</span></button>
-          <button class="nav-item" data-nav="praticar">🏋️ <span>Praticar</span></button>
-          <button class="nav-item" data-nav="conquistas">⭐ <span>Conquistas</span></button>
-          <button class="nav-item" data-nav="estatisticas">📊 <span>Estatísticas</span></button>
-          <button class="nav-item" data-nav="config">⚙️ <span>Configurações</span></button>
+          <button class="nav-item active" data-nav="inicio"><i class="nav-ico" data-ico="home"></i> <span>Início</span></button>
+          <button class="nav-item" data-nav="praticar"><i class="nav-ico" data-ico="practice"></i> <span>Praticar</span></button>
+          <button class="nav-item" data-nav="conquistas"><i class="nav-ico" data-ico="star"></i> <span>Conquistas</span></button>
+          <button class="nav-item" data-nav="estatisticas"><i class="nav-ico" data-ico="chart"></i> <span>Estatísticas</span></button>
+          <button class="nav-item" data-nav="config"><i class="nav-ico" data-ico="gear"></i> <span>Configurações</span></button>
         </nav>
       </aside>
 
@@ -90,18 +90,18 @@
 
     <!-- Navegação inferior (mobile) -->
     <nav class="bottom-nav">
-      <button class="nav-item active" data-nav="inicio">🏠<span>Início</span></button>
-      <button class="nav-item" data-nav="praticar">🏋️<span>Praticar</span></button>
-      <button class="nav-item" data-nav="conquistas">⭐<span>Conquistas</span></button>
-      <button class="nav-item" data-nav="estatisticas">📊<span>Estatíst.</span></button>
-      <button class="nav-item" data-nav="config">⚙️<span>Config.</span></button>
+      <button class="nav-item active" data-nav="inicio"><i class="nav-ico" data-ico="home"></i><span>Início</span></button>
+      <button class="nav-item" data-nav="praticar"><i class="nav-ico" data-ico="practice"></i><span>Praticar</span></button>
+      <button class="nav-item" data-nav="conquistas"><i class="nav-ico" data-ico="star"></i><span>Conquistas</span></button>
+      <button class="nav-item" data-nav="estatisticas"><i class="nav-ico" data-ico="chart"></i><span>Estatíst.</span></button>
+      <button class="nav-item" data-nav="config"><i class="nav-ico" data-ico="gear"></i><span>Config.</span></button>
     </nav>
   </section>
 
   <!-- ===== Hub de prática ===== -->
   <section id="screen-hub" class="screen">
     <div class="lesson-top">
-      <button class="btn-close hub-back" aria-label="Voltar">✕</button>
+      <button class="btn-close hub-back" aria-label="Voltar"><i class="nav-ico" data-ico="close"></i></button>
       <span class="hub-top-title">Praticar</span>
     </div>
     <main id="hub-body" class="exercise hub"></main>
@@ -110,7 +110,7 @@
   <!-- ===== Match Madness ===== -->
   <section id="screen-madness" class="screen">
     <div class="lesson-top">
-      <button class="btn-close hub-back" aria-label="Sair">✕</button>
+      <button class="btn-close hub-back" aria-label="Sair"><i class="nav-ico" data-ico="close"></i></button>
       <span class="md-stat">⚡ <b id="md-score">0</b></span>
       <span class="md-stat time" id="md-time">60</span>
     </div>
@@ -120,7 +120,7 @@
   <!-- ===== História ===== -->
   <section id="screen-story" class="screen">
     <div class="lesson-top">
-      <button class="btn-close hub-back" aria-label="Sair">✕</button>
+      <button class="btn-close hub-back" aria-label="Sair"><i class="nav-ico" data-ico="close"></i></button>
       <div class="progress-track"><div id="story-fill" class="progress-fill"></div></div>
       <span class="hub-top-title small" id="story-title"></span>
     </div>
@@ -131,7 +131,7 @@
   <!-- ===== Tela de lição ===== -->
   <section id="screen-lesson" class="screen">
     <div class="lesson-top">
-      <button id="btn-quit" class="btn-close" aria-label="Sair da lição">✕</button>
+      <button id="btn-quit" class="btn-close" aria-label="Sair da lição"><i class="nav-ico" data-ico="close"></i></button>
       <div class="progress-track"><div id="progress-fill" class="progress-fill"></div></div>
       <span id="level-chip" class="combo-chip level-chip" hidden>👑</span>
       <span id="combo-chip" class="combo-chip">🔥 0</span>
@@ -140,14 +140,14 @@
     <main id="exercise-body" class="exercise"></main>
     <footer id="footer" class="footer">
       <div class="feedback ok">
-        <span class="fb-icon">✓</span>
+        <span class="fb-icon"><i class="nav-ico" data-ico="check"></i></span>
         <div>
           <div class="fb-title" id="fb-ok-title">Excelente!</div>
           <div class="fb-detail" id="fb-ok-detail"></div>
         </div>
       </div>
       <div class="feedback bad">
-        <span class="fb-icon">✕</span>
+        <span class="fb-icon"><i class="nav-ico" data-ico="close"></i></span>
         <div>
           <div class="fb-title" id="fb-bad-title">Resposta correta:</div>
           <div class="fb-detail" id="fb-bad-detail"></div>
@@ -224,6 +224,7 @@
     </div>
   </div>
 
+  <script src="icons.js"></script>
   <script src="sfx-data.js"></script>
   <script src="sfx.js"></script>
   <script src="characters.js"></script>

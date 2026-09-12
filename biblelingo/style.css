@@ -870,3 +870,48 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .switch-row input { width: 44px; height: 24px; accent-color: var(--green-bright); }
 
 .new-word-tag { margin: -6px 0 10px; }
+
+/* ---------- Revisão visual: ícones SVG delicados, personagem em card ---------- */
+.nav-ico { display: inline-flex; width: 22px; height: 22px; vertical-align: middle; }
+.nav-ico svg { width: 100%; height: 100%; }
+.nav-item .nav-ico { color: #b8b0a0; }
+.nav-item.active .nav-ico { color: var(--green); }
+.bottom-nav .nav-item .nav-ico { width: 24px; height: 24px; }
+.btn-close { color: #c4bba6; padding: 6px; }
+.btn-close .nav-ico { width: 18px; height: 18px; }
+.fb-icon .nav-ico { width: 22px; height: 22px; }
+
+.btn-audio { width: 44px; height: 44px; border-radius: 12px; box-shadow: 0 3px 0 #1899d6; padding: 9px; }
+.btn-audio svg { width: 100%; height: 100%; }
+.btn-audio.big { width: 76px; height: 76px; border-radius: 18px; padding: 16px; box-shadow: 0 4px 0 #1899d6; }
+.btn-audio.slow { width: 36px; height: 36px; border-radius: 10px; padding: 7px; background: #ddf4ff; border: 2px solid #84d8ff; box-shadow: 0 3px 0 #84d8ff; color: #1899d6; }
+.btn-audio.slow:active { box-shadow: 0 1px 0 #84d8ff; }
+.audio-pair { align-items: center; gap: 8px; }
+.big-audio .btn-audio.slow { width: 44px; height: 44px; }
+.title-ico { display: inline-flex; width: 36px; height: 36px; padding: 7px; border-radius: 10px; background: var(--blue); color: #fff; margin-right: 10px; vertical-align: middle; box-shadow: 0 2px 0 #1899d6; }
+.title-ico svg { width: 100%; height: 100%; }
+.ex-title { font-size: 20px; display: flex; align-items: center; gap: 0; }
+.ex-title.with-avatar { gap: 10px; }
+.mini-avatar { width: 40px; height: 40px; border-radius: 50%; overflow: hidden; border: 2px solid var(--line); flex: none; position: relative; }
+.mini-avatar img, .mini-avatar svg { width: 100%; height: 100%; object-fit: cover; }
+.mini-avatar .react { position: absolute; right: -6px; top: -6px; font-size: 16px; }
+
+.char-card { display: flex; flex-direction: column; align-items: center; margin-bottom: 22px; }
+.char-card .char-fig { width: min(220px, 62%); position: relative; animation: char-in 0.3s ease; }
+.char-card .char-fig img { width: 100%; height: auto; display: block; border-radius: 18px; border: 2px solid var(--line); box-shadow: 0 6px 16px rgba(90,70,30,0.10); }
+.char-card .char-fig svg { width: 100%; height: auto; display: block; }
+.char-card .char-name { position: absolute; left: 50%; bottom: -10px; transform: translateX(-50%); }
+.char-card .react { top: -8px; right: -8px; font-size: 26px; }
+.char-card .bubble { margin: 22px 0 0; width: 100%; max-width: 440px; justify-content: center; text-align: left; box-shadow: 0 4px 12px rgba(90,70,30,0.08); border-radius: 16px; padding: 12px 14px; }
+.char-card .bubble::before { left: 50%; bottom: auto; top: -9px; transform: translateX(-50%) rotate(135deg); }
+.char-card .bubble-inner { gap: 10px; }
+.ex-word { font-size: 20px; }
+.bubble-col { align-items: flex-start; }
+
+.pbtn { padding: 8px 12px; font-size: 13.5px; border-radius: 12px; gap: 6px; }
+.pbtn .nav-ico, .pbtn svg { width: 16px; height: 16px; }
+.mic-btn { width: 104px; height: 104px; font-size: 0; }
+.mic-btn svg { width: 40px; height: 40px; }
+.mic-btn span { font-size: 11px; }
+.opt { border-radius: 14px; padding: 13px 16px; font-size: 16.5px; }
+.tile { border-radius: 12px; padding: 9px 13px; font-size: 16px; }
