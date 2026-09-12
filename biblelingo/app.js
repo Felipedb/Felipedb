@@ -311,9 +311,39 @@ function exKey(e) {
   return e.word ? "w:" + e.word.en : e.sentence ? "s:" + e.sentence.en : e.type;
 }
 
-function buildExercises(lesson, unit) {
+// Fábrica de exercícios por formato (usada pelo montador e pela adaptação durante a lição)
+const exDistract = (v, key, n = 3) =>
+  shuffle(allVocab().filter((p) => p[key] !== v[key] && p.icon !== v.icon)).slice(0, n);
+const exBank = (s, lang = "en") => {
+  const words = s[lang].split(" ");
+  const extra = shuffle(allVocab().map((p) => p[lang].replace("to ", ""))).filter((w) => !words.includes(w)).slice(0, 2);
+  return shuffle([...words, ...extra]);
+};
+const exBlankOf = (s) => {
   const pool = allVocab();
-  const sentPool = allSentences();
+  const words = s.en.split(" ");
+  const cands = words.filter((w) => pool.some((p) => normalize(p.en.replace(/^to /, "")) === normalize(w)) && w.length > 2);
+  return cands.length ? cands[Math.floor(Math.random() * cands.length)] : null;
+};
+const exPtDistractors = (s, unitId) =>
+  shuffle(allSentences().filter((o) => o.pt !== s.pt)).sort((a, b) => (b.unit === unitId) - (a.unit === unitId)).slice(0, 2).map((o) => o.pt);
+const EX_MAKE = {
+  "image-choice": (w) => ({ type: "image-choice", word: w, options: shuffle([w, ...exDistract(w, "en")]) }),
+  "choice-en-pt": (w) => ({ type: "choice-en-pt", word: w, options: shuffle([w.pt, ...exDistract(w, "pt").map((p) => p.pt)]) }),
+  "choice-pt-en": (w) => ({ type: "choice-pt-en", word: w, options: shuffle([w.en, ...exDistract(w, "en").map((p) => p.en)]) }),
+  "listen": (w) => ({ type: "listen", word: w, options: shuffle([w.en, ...exDistract(w, "en").map((p) => p.en)]) }),
+  "type": (w) => ({ type: "type", word: w }),
+  "build": (s) => ({ type: "build", sentence: s, bank: exBank(s) }),
+  "translate-en-pt": (s) => ({ type: "translate-en-pt", sentence: s, bank: exBank(s, "pt") }),
+  "listen-build": (s) => ({ type: "listen-build", sentence: s, bank: exBank(s) }),
+  "listen-type": (s) => ({ type: "listen-type", sentence: s }),
+  "listen-choice": (s, unitId) => ({ type: "listen-choice", sentence: s, options: shuffle([s.pt, ...exPtDistractors(s, unitId)]) }),
+  "missing-word": (s, blank) => ({ type: "missing-word", sentence: s, blank, options: shuffle([blank, ...shuffle(allVocab().map((p) => p.en.replace(/^to /, ""))).filter((w) => normalize(w) !== normalize(blank)).slice(0, 2)]) }),
+  "complete-translation": (s, blank) => ({ type: "complete-translation", sentence: s, blank }),
+  "speak": (s) => ({ type: "speak", sentence: s }),
+};
+
+function buildExercises(lesson, unit) {
   const lessons = lesson.review ? unit.lessons.filter((l) => !l.review) : [lesson];
   const speakMuted = state.speakMutedUntil && Date.now() < state.speakMutedUntil;
   const canSpeak = SPEECH_OK && !speakMuted;
@@ -332,35 +362,7 @@ function buildExercises(lesson, unit) {
     ...lessons.map((l) => l.quiz && { type: "quiz", quiz: l.quiz, options: shuffle(l.quiz.options) }),
   ].filter(Boolean));
 
-  const distract = (v, key, n = 3) =>
-    shuffle(pool.filter((p) => p[key] !== v[key] && p.icon !== v.icon)).slice(0, n);
-  const makeBank = (s, lang = "en") => {
-    const words = s[lang].split(" ");
-    const extra = shuffle(pool.map((p) => p[lang].replace("to ", ""))).filter((w) => !words.includes(w)).slice(0, 2);
-    return shuffle([...words, ...extra]);
-  };
-  const blankOf = (s) => {
-    const words = s.en.split(" ");
-    const cands = words.filter((w) => pool.some((p) => normalize(p.en.replace(/^to /, "")) === normalize(w)) && w.length > 2);
-    return cands.length ? cands[Math.floor(Math.random() * cands.length)] : null;
-  };
-  const ptDistractors = (s) => shuffle(sentPool.filter((o) => o.pt !== s.pt)).sort((a, b) => (b.unit === unit.id) - (a.unit === unit.id)).slice(0, 2).map((o) => o.pt);
-
-  // Fábrica de candidatos por tipo
-  const make = {
-    "image-choice": (w) => ({ type: "image-choice", word: w, options: shuffle([w, ...distract(w, "en")]) }),
-    "choice-en-pt": (w) => ({ type: "choice-en-pt", word: w, options: shuffle([w.pt, ...distract(w, "pt").map((p) => p.pt)]) }),
-    "choice-pt-en": (w) => ({ type: "choice-pt-en", word: w, options: shuffle([w.en, ...distract(w, "en").map((p) => p.en)]) }),
-    "listen": (w) => ({ type: "listen", word: w, options: shuffle([w.en, ...distract(w, "en").map((p) => p.en)]) }),
-    "type": (w) => ({ type: "type", word: w }),
-    "build": (s) => ({ type: "build", sentence: s, bank: makeBank(s) }),
-    "translate-en-pt": (s) => ({ type: "translate-en-pt", sentence: s, bank: makeBank(s, "pt") }),
-    "listen-build": (s) => ({ type: "listen-build", sentence: s, bank: makeBank(s) }),
-    "listen-type": (s) => ({ type: "listen-type", sentence: s }),
-    "listen-choice": (s) => ({ type: "listen-choice", sentence: s, options: shuffle([s.pt, ...ptDistractors(s)]) }),
-    "missing-word": (s, blank) => ({ type: "missing-word", sentence: s, blank, options: shuffle([blank, ...shuffle(pool.map((p) => p.en.replace(/^to /, ""))).filter((w) => normalize(w) !== normalize(blank)).slice(0, 2)]) }),
-    "complete-translation": (s, blank) => ({ type: "complete-translation", sentence: s, blank }),
-  };
+  const make = EX_MAKE;
 
   const count = {};
   const chosen = [];
@@ -382,7 +384,7 @@ function buildExercises(lesson, unit) {
     : ["listen-type", "translate-en-pt", "listen-build", "build", "listen-choice"];
   sentences.forEach((s, i) => {
     const rot = sentTypes.slice(i % sentTypes.length).concat(sentTypes.slice(0, i % sentTypes.length));
-    pick(rot, s);
+    pick(rot, s, unit.id);
   });
   if (vocab.length >= 4) take({ type: "match", pairs: shuffle(vocab).slice(0, 4) });
   verses.forEach((v) => take({ type: "verse", verse: v, options: shuffle(v.options) }));
@@ -396,7 +398,7 @@ function buildExercises(lesson, unit) {
     if (t) optional.push({ pri: 1, mk: () => make[t](w), type: t });
   });
   sentences.forEach((s, i) => {
-    const blank = blankOf(s);
+    const blank = exBlankOf(s);
     if (blank) optional.push({ pri: 2, mk: () => make[i % 2 ? "complete-translation" : "missing-word"](s, blank), type: i % 2 ? "complete-translation" : "missing-word" });
   });
   stories.slice(0, lesson.review ? 2 : 1).forEach((st) => optional.push({ pri: 1, mk: () => st, type: st.type }));
@@ -1398,6 +1400,7 @@ function checkAnswer() {
 
   // Avança
   session.index++;
+  adaptNext();
   if (session.index >= session.exercises.length) {
     // Sem erros: libera os exercícios mais difíceis reservados
     if (!session.hardAdded && session.mistakes === 0 && session.hard.length) {
@@ -1420,6 +1423,24 @@ function checkAnswer() {
   } else {
     renderExercise();
   }
+}
+
+// Adaptação dentro da lição (versão simples do Birdbrain): indo bem, o próximo exercício de palavra
+// sobe para produção; com erros acumulados, o próximo exercício de produção desce para reconhecimento.
+function adaptNext() {
+  const nxt = session.exercises[session.index];
+  if (!nxt || nxt.isReview || nxt.newWord || session.reviewing || session.lesson.practiceErrors) return;
+  const prev = session.exercises[session.index - 1];
+  const sameNeighbor = (e) => prev && (e.type === prev.type || exKey(e) === exKey(prev));
+  let swap = null;
+  if (session.combo >= 3 && nxt.word && (nxt.type === "listen" || nxt.type === "choice-pt-en")) {
+    swap = EX_MAKE.type(nxt.word);
+  } else if (session.mistakes >= 2 && nxt.word && nxt.type === "type") {
+    swap = EX_MAKE["choice-pt-en"](nxt.word);
+  } else if (session.mistakes >= 2 && nxt.sentence && (nxt.type === "listen-type" || nxt.type === "build")) {
+    swap = EX_MAKE["listen-choice"](nxt.sentence, session.lesson.unit.id);
+  }
+  if (swap && !sameNeighbor(swap)) { swap.adapted = true; session.exercises[session.index] = swap; }
 }
 
 // Cópia limpa de um exercício para a revisão (novo embaralhamento das opções)
