@@ -781,9 +781,26 @@ function makeOptions(box, options, cols, onSelect) {
 
 // Personagem em card com balão embaixo (layout da referência: retrato + pergunta)
 // Personagem do exercício atual: alterna entre o elenco da unidade (fixo quando o usuário escolheu "Praticar com")
+// Texto principal do exercício (o mesmo usado para escolher a voz na geração)
+function exKeyText(ex) {
+  if (!ex) return "";
+  return ex.audioText || (ex.sentence && ex.sentence.en) || (ex.word && ex.word.en) || (ex.verse && ex.verse.text) || (ex.quiz && ex.quiz.q) || (ex.reading && ex.reading.q) || (ex.dialogue && ex.dialogue.line) || "";
+}
+function castHash(key) {
+  let h = 0;
+  for (let i = 0; i < key.length; i++) h = (h * 31 + key.charCodeAt(i)) >>> 0;
+  return h;
+}
 function currentChar() {
   if (!session) return null;
   if (session.fixedNarrator || !session.cast || !session.cast.length) return session.narrator;
+  // Determinístico pelo texto: o personagem exibido é o dono da voz gravada
+  const cast = UNIT_CAST[session.lesson.unit.id];
+  const key = audioKey(exKeyText(session.exercises[session.index]));
+  if (cast && cast.length && key) {
+    const k = cast[castHash(key) % cast.length];
+    if (CHARACTERS[k]) return { key: k, ...CHARACTERS[k] };
+  }
   return session.cast[session.index % session.cast.length];
 }
 function buildCast(unitId, narrator) {

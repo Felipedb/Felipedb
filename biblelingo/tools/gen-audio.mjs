@@ -56,15 +56,23 @@ const add = (text, char) => {
   const id = `${k}|${char}`;
   if (!jobs.has(id)) jobs.set(id, { key: k, text, char });
 };
+// O personagem "dono" de cada texto: mesmo cálculo do app (currentChar),
+// para que quem aparece na cena seja sempre quem gravou o áudio
+const castHash = (key) => { let h = 0; for (let i = 0; i < key.length; i++) h = (h * 31 + key.charCodeAt(i)) >>> 0; return h; };
+const castCharFor = (unitId, text) => {
+  const cast = UNIT_CAST[unitId] || ["narrator"];
+  const key = audioKey(text);
+  return cast[castHash(key) % cast.length] || cast[0];
+};
 COURSE.forEach((u) => {
-  const narrator = (UNIT_CAST[u.id] || ["narrator"])[0];
+  const own = (t) => castCharFor(u.id, t);
   u.lessons.forEach((l) => {
-    (l.vocab || []).forEach((v) => add(v.en, narrator));
-    (l.sentences || []).forEach((s) => add(s.en, narrator));
-    if (l.verse) { add(l.verse.text, narrator); add(l.verse.text.replace(l.verse.blank, "blank"), narrator); l.verse.options.forEach((o) => add(o, narrator)); }
-    if (l.dialogue) { add(l.dialogue.line, narrator); l.dialogue.options.forEach((o) => add(o, narrator)); }
-    if (l.quiz) { add(l.quiz.q, narrator); l.quiz.options.forEach((o) => add(o, narrator)); }
-    if (l.reading) { add(l.reading.text, narrator); add(l.reading.q, narrator); l.reading.options.forEach((o) => add(o, narrator)); }
+    (l.vocab || []).forEach((v) => add(v.en, own(v.en)));
+    (l.sentences || []).forEach((s) => add(s.en, own(s.en)));
+    if (l.verse) { const c = own(l.verse.text); add(l.verse.text, c); add(l.verse.text.replace(l.verse.blank, "blank"), c); l.verse.options.forEach((o) => add(o, c)); }
+    if (l.dialogue) { const c = own(l.dialogue.line); add(l.dialogue.line, c); l.dialogue.options.forEach((o) => add(o, c)); }
+    if (l.quiz) { const c = own(l.quiz.q); add(l.quiz.q, c); l.quiz.options.forEach((o) => add(o, c)); }
+    if (l.reading) { const c = own(l.reading.q); add(l.reading.text, c); add(l.reading.q, c); l.reading.options.forEach((o) => add(o, c)); }
   });
 });
 STORIES.forEach((s) => s.beats.forEach((b) => {
