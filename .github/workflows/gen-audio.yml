@@ -20,6 +20,9 @@ jobs:
         with:
           node-version: "20"
       - name: Gerar clipes
+        # Falha parcial (ex.: cota esgotada) não pode descartar o que já foi pago:
+        # os passos seguintes commitam o resultado mesmo assim
+        continue-on-error: true
         env:
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
         run: |

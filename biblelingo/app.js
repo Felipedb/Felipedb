@@ -798,7 +798,13 @@ function currentChar() {
   const cast = UNIT_CAST[session.lesson.unit.id];
   const key = audioKey(exKeyText(session.exercises[session.index]));
   if (cast && cast.length && key) {
-    const k = cast[castHash(key) % cast.length];
+    let k = cast[castHash(key) % cast.length];
+    // Enquanto o clipe do dono não existe, mostra quem de fato gravou o áudio
+    const entry = typeof AUDIO !== "undefined" && AUDIO.manifest && AUDIO.manifest[key];
+    if (entry && !entry[k]) {
+      const rec = Object.keys(entry).find((c) => c !== "default" && CHARACTERS[c]);
+      if (rec) k = rec;
+    }
     if (CHARACTERS[k]) return { key: k, ...CHARACTERS[k] };
   }
   return session.cast[session.index % session.cast.length];
