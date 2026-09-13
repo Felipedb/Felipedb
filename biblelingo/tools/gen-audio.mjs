@@ -19,11 +19,11 @@ const LIMIT = Number((process.argv.find((a) => a.startsWith("--limit=")) || "").
 // Carrega os dados do app num sandbox
 const ctx = { window: {}, navigator: {}, document: {}, console };
 vm.createContext(ctx);
-for (const f of ["characters.js", "data.js", "stories.js"]) {
-  const src = fs.readFileSync(path.join(ROOT, f), "utf8").replace(/^const (CHARACTERS|COURSE|STORIES|UNIT_CAST|CHARACTER_UNIT|CHARACTER_ORDER) =/gm, "var $1 =");
+for (const f of ["characters.js", "data.js", "stories.js", "scenes.js", "scenes2.js"]) {
+  const src = fs.readFileSync(path.join(ROOT, f), "utf8").replace(/^const (CHARACTERS|COURSE|STORIES|UNIT_CAST|CHARACTER_UNIT|CHARACTER_ORDER|SCENES|SCENE_EXTRAS) =/gm, "var $1 =");
   vm.runInContext(src, ctx);
 }
-const { CHARACTERS, COURSE, STORIES, UNIT_CAST } = ctx;
+const { CHARACTERS, COURSE, STORIES, UNIT_CAST, SCENES, SCENE_EXTRAS } = ctx;
 
 // Catálogo de vozes pré-definidas da ElevenLabs (IDs públicos; valem para qualquer conta)
 const VOICES = {
@@ -50,10 +50,10 @@ const VOICES = {
 // Voz própria de cada personagem (uma voz por personagem; o narrador é Brian)
 const VOICE_BY_CHAR = {
   narrator: "brian",
-  jesus: "george", moises: "bill", noe: "daniel", abraao: "roger", isaias: "will", elias: "arnold", eliseu: "callum",
+  jesus: "george", moises: "bill", noe: "daniel", abraao: "roger", isaias: "george", elias: "arnold", eliseu: "callum",
   ezequiel: "adam", arao: "chris", josue: "ethan", calebe: "eric", gideao: "josh", sansao: "clyde", samuel: "antoni",
-  davi: "liam", jose: "harry", salomao: "james", daniel: "matthew", jonas: "fin", neemias: "thomas", pedro: "charlie",
-  paulo: "michael", barnabe: "paul", timoteo: "sam", filipe: "dave", natanael: "jeremy", tome: "joseph", zaqueu: "giovanni",
+  davi: "liam", jose: "harry", salomao: "james", daniel: "matthew", jonas: "fin", neemias: "thomas", pedro: "bill",
+  paulo: "michael", barnabe: "paul", timoteo: "sam", filipe: "dave", natanael: "jeremy", tome: "joseph", zaqueu: "daniel",
   bartimeu: "patrick", joaobatista: "drew", josepai: "brian", adao: "josh", isaac: "jeremy", jaco: "eric",
   eva: "alice", sara: "matilda", rebeca: "lily", debora: "charlotte", rute: "laura", ester: "sarah", maria: "jessica",
   marta: "aria", lidia: "rachel", madalena: "domi",
@@ -96,9 +96,15 @@ STORIES.forEach((s) => s.beats.forEach((b) => {
   if (b.gap) b.options.forEach((o) => add(o, "narrator"));
 }));
 Object.keys(CHARACTERS).forEach((k) => add(CHARACTERS[k].name.split(" (")[0], k));
+// Cenas do dia a dia: cada fala na voz de quem fala (galeria ou extras), vocabulário na voz do herói
+SCENES.forEach((s) => {
+  s.lines.forEach((l) => add(l.en, l.who));
+  s.vocab.forEach((v) => add(v.en, s.char));
+});
 // Palavras isoladas de todas as frases (peças do banco de palavras) e "blank"
 const words = new Set();
 COURSE.forEach((u) => u.lessons.forEach((l) => (l.sentences || []).forEach((s) => s.en.split(" ").forEach((w) => words.add(w.replace(/[.,;:!?'"]/g, ""))))));
+SCENES.forEach((s) => s.lines.filter((l) => l.who === s.char).forEach((l) => l.en.split(" ").forEach((w) => words.add(w.replace(/[.,;:!?"]/g, "")))));
 words.forEach((w) => add(w, "narrator"));
 
 let list = [...jobs.values()];
@@ -117,7 +123,8 @@ const manifest = fs.existsSync(MANIFEST) ? JSON.parse(fs.readFileSync(MANIFEST, 
 // ---------- Vozes ----------
 if (!DRY && !KEY) { console.error("Defina ELEVENLABS_API_KEY"); process.exit(1); }
 const assigned = { ...VOICE_BY_CHAR };
-const gender = (char) => (CHARACTERS[char]?.voice?.gender === "female" ? "f" : "m");
+Object.keys(SCENE_EXTRAS).forEach((k) => { if (!assigned[k]) assigned[k] = SCENE_EXTRAS[k].voice; });
+const gender = (char) => ((CHARACTERS[char]?.voice?.gender || SCENE_EXTRAS[char]?.gender) === "female" ? "f" : "m");
 const voiceFor = (char) => {
   const name = assigned[char] && VOICES[assigned[char]] ? assigned[char] : "brian";
   return { name, voice_id: VOICES[name][0] };

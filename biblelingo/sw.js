@@ -1,8 +1,8 @@
 // BíbliaLearn — cache offline do app (shell, arte e áudios já tocados)
-const CACHE = "biblialearn-v3";
+const CACHE = "biblialearn-v4";
 const SHELL = [
   "./", "index.html", "style.css", "app.js", "features.js", "characters.js", "data.js",
-  "manifest.webmanifest", "sfx-data.js", "sfx.js", "hub.js", "stories.js", "icons.js", "screens.js",
+  "manifest.webmanifest", "sfx-data.js", "sfx.js", "hub.js", "stories.js", "icons.js", "screens.js", "scenes.js", "scenes2.js", "scene-engine.js",
   "chars/jesus.jpg", "chars/moises.jpg", "chars/davi.jpg", "chars/ester.jpg", "chars/noe.jpg",
   "chars/maria.jpg", "chars/pedro.jpg", "chars/isaias.jpg", "chars/hero.jpg", "chars/promo.jpg",
 ];

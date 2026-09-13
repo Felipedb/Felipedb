@@ -14,7 +14,8 @@ function renderTrail(currentId) {
   const trail = $("#trail");
   if (!trail) return;
   trail.innerHTML = "";
-  const OFFSETS = [0, 1, 2, 1]; // zigue-zague da etapa 1 à 4 (de baixo para cima)
+  // Serpentina: a posição horizontal de cada etapa segue uma onda (funciona para 4 ou 10 etapas)
+  const xOf = (li) => Math.round(Math.sin(li * Math.PI / 3) * 1.4);
 
   const end = document.createElement("div");
   end.className = "trail-end";
@@ -23,7 +24,7 @@ function renderTrail(currentId) {
 
   const units = COURSE.map((u, i) => ({ u, i })).reverse();
   units.forEach(({ u: unit, i: ui }, k) => {
-    const lessons = unit.lessons;
+    const lessons = unitSteps(unit);
     const doneCount = lessons.filter((l) => state.completed[l.id]).length;
     const unitDoneAll = doneCount === lessons.length;
     const starsGot = lessons.reduce((s, l) => s + (state.stars[l.id] || 0), 0);
@@ -60,14 +61,16 @@ function renderTrail(currentId) {
       const stars = state.stars[lesson.id] || 0;
       const row = document.createElement("div");
       row.className = "lnode" + (isCurrent ? " current" : done ? " done" : unlocked ? "" : " locked");
-      row.style.setProperty("--x", OFFSETS[li % OFFSETS.length] - 1);
+      row.style.setProperty("--x", xOf(li));
       const btn = document.createElement("button");
       btn.className = "portrait" + (isCurrent ? "" : " sm") + (unlocked ? "" : " locked");
       btn.style.setProperty("--pc", unit.color);
+      const hero = lesson.scene ? castChar(SCENE_BY_ID[lesson.sceneId].char) : null;
       const face = !unlocked ? '<span class="picon picon-lock">🔒</span>'
         : lesson.review ? '<span class="picon">🏅</span>'
-        : charFace(CHARACTERS[unit.face] || CHARACTERS.jesus);
-      const badge = done ? '<span class="badge">✓</span>' : "";
+        : charFace(hero || CHARACTERS[unit.face] || CHARACTERS.jesus);
+      const badge = done ? '<span class="badge">✓</span>' : lesson.scene && unlocked ? '<span class="badge scene">💬</span>' : "";
+      if (lesson.scene) row.classList.add("scene");
       const tip = isCurrent ? `<span class="start-tip">${resumable() && resumable().lessonId === lesson.id ? "RETOMAR" : "COMEÇAR"}</span>` : "";
       if (done && unitCrowns(unit.id) >= MAX_CROWN) btn.classList.add("legendary");
       btn.innerHTML = `${isCurrent ? '<span class="pulse"></span>' : ""}${tip}<span class="face">${face}</span>${badge}` +
@@ -77,6 +80,7 @@ function renderTrail(currentId) {
       const cap = document.createElement("span");
       cap.className = "lcap";
       cap.textContent = lesson.review ? "Revisão" : lesson.title;
+      if (lesson.scene) cap.insertAdjacentHTML("afterbegin", '<span class="lcap-tag">Cena</span> ');
       row.appendChild(btn);
       row.appendChild(cap);
       nodes.appendChild(row);
@@ -136,6 +140,7 @@ function openSheet(id, html) {
 }
 
 function openNodeSheet(unit, ui, lesson, li) {
+  if (lesson.scene) return openSceneSheet(unit, ui, lesson, li);
   const done = !!state.completed[lesson.id];
   const unlocked = lessonUnlocked(lesson.id);
   const unitDoneAll = unit.lessons.every((l) => state.completed[l.id]);
@@ -152,7 +157,7 @@ function openNodeSheet(unit, ui, lesson, li) {
   const close = openSheet("node-sheet", `
     <div class="ns-head" style="--uc:${unit.color}">
       <span class="ns-face">${charFace(CHARACTERS[unit.face] || CHARACTERS.jesus)}</span>
-      <div><span class="ns-eyebrow">Capítulo ${ui + 1} · Etapa ${li + 1} de ${unit.lessons.length}</span>
+      <div><span class="ns-eyebrow">Capítulo ${ui + 1} · Etapa ${li + 1} de ${unitSteps(unit).length}</span>
       <h3>${lesson.title}</h3></div>
       <button class="sheet-x" data-close aria-label="Fechar">${ICONS.close}</button>
     </div>
@@ -166,6 +171,39 @@ function openNodeSheet(unit, ui, lesson, li) {
   if (go) go.addEventListener("click", () => { close(); startLesson(lesson.id); });
   const lvl = $("#ns-level");
   if (lvl) lvl.addEventListener("click", () => { close(); startLevelUp(unit); });
+}
+
+// Folha de uma cena do dia a dia: situação, personagens, contexto e vocabulário
+function openSceneSheet(unit, ui, lesson, li) {
+  const sc = SCENE_BY_ID[lesson.sceneId];
+  const done = !!state.completed[lesson.id];
+  const unlocked = lessonUnlocked(lesson.id);
+  const r = resumable();
+  const resume = r && r.lessonId === lesson.id;
+  const hero = castChar(sc.char), other = castChar(sc.with);
+  let action = "";
+  if (!unlocked) action = `<p class="ns-locked">🔒 Conclua a etapa anterior para desbloquear</p><button class="btn-main" disabled>Bloqueada</button>`;
+  else if (resume) action = `<button class="btn-main" id="ns-go">Retomar (${Math.min(r.index + 1, r.exercises.length)}/${r.exercises.length})</button>`;
+  else if (!done) action = `<button class="btn-main" id="ns-go">Viver a cena +${XP_PER_LESSON} XP</button>`;
+  else action = `<button class="btn-main blue" id="ns-go">Praticar de novo +5 XP</button>`;
+  const close = openSheet("node-sheet", `
+    <div class="ns-head" style="--uc:${unit.color}">
+      <span class="ns-face">${charFace(hero)}</span>
+      <div><span class="ns-eyebrow">Capítulo ${ui + 1} · Cena · Etapa ${li + 1} de ${unitSteps(unit).length}</span>
+      <h3>${sc.title}</h3></div>
+      <button class="sheet-x" data-close aria-label="Fechar">${ICONS.close}</button>
+    </div>
+    <div class="ns-body">
+      ${done ? starsHTML(state.stars[lesson.id] || 0, "ns-stars") : ""}
+      <div class="ns-func">💬 ${sc.func}</div>
+      <p class="ns-desc">${sc.context}</p>
+      <div class="ns-cast"><span>${sceneFaceHTML(hero, "me")} ${hero.name.split(" (")[0]}</span><span class="ns-vs">↔</span><span>${sceneFaceHTML(other, "them")} ${other.name.split(" (")[0]}</span></div>
+      <div class="ns-ref">📖 ${sc.ref}</div>
+      <div class="ns-words">${sc.vocab.map((w) => `<span class="ns-word">${w.icon || ""} ${w.en}</span>`).join("")}</div>
+      ${action}
+    </div>`);
+  const go = $("#ns-go");
+  if (go) go.addEventListener("click", () => { close(); startLesson(lesson.id); });
 }
 
 // ---------- Guia do capítulo (como o guidebook do Duolingo) ----------

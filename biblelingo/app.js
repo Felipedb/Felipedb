@@ -114,7 +114,7 @@ function speak(text, opts = {}) {
   const ch = opts.char || (session && session.voiceChar) || null;
   if (playClip(text, ch && ch.key, opts.slow)) {
     if ("speechSynthesis" in window) speechSynthesis.cancel();
-    const fig = document.querySelector(".scene-img, .char-card .char-fig");
+    const fig = document.querySelector(".sc-face.now, .scene-img, .char-card .char-fig");
     if (fig) { fig.classList.add("talking"); setTimeout(() => fig.classList.remove("talking"), Math.min(4000, 400 + text.length * 70)); }
     return;
   }
@@ -129,7 +129,7 @@ function speak(text, opts = {}) {
     ? (_voices[profile.gender] || _voices.any)
     : _voices.any;
   if (voice) u.voice = voice;
-  const fig = document.querySelector(".scene-img, .char-card .char-fig");
+  const fig = document.querySelector(".sc-face.now, .scene-img, .char-card .char-fig");
   if (fig) { u.onstart = () => fig.classList.add("talking"); u.onend = u.onerror = () => fig.classList.remove("talking"); }
   speechSynthesis.speak(u);
 }
@@ -144,7 +144,7 @@ function unitVocab(unit) {
 
 // ---------- Trilha ----------
 function flatLessons() {
-  return COURSE.flatMap((u) => u.lessons.map((l) => ({ ...l, unit: u })));
+  return COURSE.flatMap((u) => (typeof unitSteps === "function" ? unitSteps(u) : u.lessons.map((l) => ({ ...l, unit: u }))));
 }
 
 function lessonUnlocked(lessonId) {
@@ -161,7 +161,7 @@ function currentLessonId() {
 }
 
 function charFace(ch) {
-  return ch.img ? `<img src="${ch.img}" alt="${ch.name}">` : ch.svg;
+  return ch.img ? `<img src="${ch.img}" alt="${ch.name}">` : ch.emoji ? `<span class="emoji-face" role="img" aria-label="${ch.name}">${ch.emoji}</span>` : ch.svg;
 }
 
 function starsHTML(n, cls = "stars") {
@@ -241,7 +241,7 @@ function renderContinueCTA(currentId) {
   cta.hidden = false;
   cta.innerHTML = r
     ? `${ICONS.play || ""}<span>Retomar: ${lesson.title} (${Math.min(r.index + 1, r.exercises.length)}/${r.exercises.length})</span>`
-    : `${ICONS.play || ""}<span>Continuar: ${lesson.title} (+${XP_PER_LESSON} XP)</span>`;
+    : `${ICONS.play || ""}<span>${lesson.scene ? "Cena" : "Continuar"}: ${lesson.title} (+${XP_PER_LESSON} XP)</span>`;
   cta.style.bottom = matchMedia("(min-width: 980px)").matches ? "18px" : "calc(72px + env(safe-area-inset-bottom))";
   cta.onclick = () => startLesson(lesson.id);
 }
@@ -428,7 +428,7 @@ function buildExercises(lesson, unit) {
   stories.slice(lesson.review ? 2 : 1, lesson.review ? 3 : 2).forEach((st) => optional.push({ pri: 3, mk: () => st, type: st.type }));
   if (canSpeak && sentences.length) optional.push({ pri: 1, mk: () => ({ type: "speak", sentence: sentences[0] }), type: "speak" });
   // Exercício de revisão de lição anterior (como o "review exercise" do Duolingo)
-  const earlier = flatLessons().filter((l) => !l.review && state.completed[l.id] && l.id !== lesson.id).flatMap((l) => l.vocab || []);
+  const earlier = flatLessons().filter((l) => !l.review && !l.scene && state.completed[l.id] && l.id !== lesson.id).flatMap((l) => l.vocab || []);
   if (earlier.length && !lesson.review) {
     const w = weakestWords(earlier, 3)[Math.floor(Math.random() * Math.min(3, earlier.length))]; // entre as 3 mais urgentes
     optional.push({ pri: 2, mk: () => ({ ...make[Math.random() < 0.5 ? "listen" : "choice-pt-en"](w), isReview: true }), type: "review" });
@@ -499,9 +499,11 @@ function startLesson(lessonId, narrator) {
   const r = resumable();
   if (r && r.lessonId === lessonId && !narrator && resumeLesson()) return;
 
+  const heroKey = lesson.scene && SCENE_BY_ID[lesson.sceneId] && SCENE_BY_ID[lesson.sceneId].char;
+  if (heroKey) narrator = castChar(heroKey);
   session = {
     lesson,
-    exercises: buildExercises(lesson, lesson.unit),
+    exercises: lesson.scene ? buildSceneExercises(lesson) : buildExercises(lesson, lesson.unit),
     index: 0,
     mistakes: 0,
     combo: 0,
@@ -512,7 +514,7 @@ function startLesson(lessonId, narrator) {
     answer: null,
     startedAt: Date.now(),
     narrator: narrator || pickCharacter(lesson.unit.id),
-    fixedNarrator: !!narrator,
+    fixedNarrator: !!narrator || !!heroKey,
     reviewQueue: [],
     reviewing: false,
     hardAdded: false,
@@ -593,7 +595,7 @@ function renderExercise() {
     "verse": renderVerse,
     "dialogue": renderDialogue,
     "quiz": renderQuiz,
-  }[ex.type];
+  }[ex.type] || (typeof SCENE_RENDER !== "undefined" && SCENE_RENDER[ex.type]);
   render(ex, box);
   if (ex.isReview) {
     const t = box.querySelector(".ex-title");
@@ -748,7 +750,7 @@ function updateCombo() {
 const PRAISES = ["Excelente!", "Muito bem!", "Incrível!", "Perfeito!", "Isso aí!", "Boa!", "Amém!"];
 
 function reactCharacter(ok) {
-  const fig = document.querySelector(".scene-img") || document.querySelector(".char-fig");
+  const fig = document.querySelector(".sc-face.now") || document.querySelector(".scene-img") || document.querySelector(".char-fig");
   if (!fig) return;
   const badge = fig.querySelector(".react");
   if (badge) badge.textContent = ok ? ["😊", "🙌", "👏", "✨"][Math.floor(Math.random() * 4)] : "😕";
@@ -1471,6 +1473,9 @@ function checkAnswer() {
   const ex = session.exercises[session.index];
   const btn = $("#btn-check");
 
+  // Cartões sem resposta (introdução e falas lidas das cenas): só avançam, sem feedback
+  if (ex.silent && !session.checked) session.checked = true;
+
   if (!session.checked) {
     session.checked = true;
     if (session.recognizer) { try { session.recognizer.abort(); } catch (e) {} }
@@ -1515,6 +1520,7 @@ function checkAnswer() {
     if (inp) { inp.disabled = true; inp.classList.add(ok ? "ok" : "bad"); inp.blur(); }
 
     reactCharacter(ok);
+    if (typeof ex.onChecked === "function") { try { ex.onChecked(ok); } catch (e) { /* ignora */ } }
 
     if (ok) {
       if (ex.word && state.errors[ex.word.en] && session.lesson.practiceErrors) {
@@ -1658,7 +1664,7 @@ function finishLesson() {
   save();
 
   // Personagem comemorando + confete
-  const ch = pickCharacter(session.lesson.unit.id);
+  const ch = session.lesson.scene && session.narrator ? session.narrator : pickCharacter(session.lesson.unit.id);
   $("#result-char").innerHTML = charFace(ch);
   $("#result-emoji").style.display = "none";
   SFX.finish();
@@ -1674,7 +1680,7 @@ function finishLesson() {
   $("#result-emoji").textContent = perfect ? "🌟" : "🎉";
   $("#result-title").textContent = session.levelUp
     ? (session.legendary ? "Nível Lendário!" : `Coroa ${unitCrowns(session.lesson.unit.id)} conquistada!`)
-    : perfect ? "Lição perfeita!" : "Lição concluída!";
+    : session.lesson.scene ? (perfect ? "Cena perfeita!" : "Cena concluída!") : perfect ? "Lição perfeita!" : "Lição concluída!";
   recordLesson({ gained, perfect, bestCombo: session.bestCombo });
   $("#result-sub").textContent = (first ? "Você avançou na trilha." : "Ótima prática!")
     + ` ⏱️ ${mm}:${ss}` + (session.bonus ? ` · 🔥 combo +${session.bonus} XP` : "");

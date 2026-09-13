@@ -31,8 +31,12 @@ function renderHub() {
       <button class="hub-card" data-hub="listen"><span class="hub-icon">🎧</span><b>Escuta rápida</b><small>8 exercícios de escuta</small></button>
       <button class="hub-card${nErr ? "" : " locked"}" data-hub="errors" ${nErr ? "" : "disabled"}><span class="hub-icon">🩹</span><b>Praticar erros</b><small>${nErr ? `${nErr} palavra(s) para acertar` : "Nenhum erro pendente"}</small></button>
     </div>
+    <h3 class="hub-h3">💬 Situações do dia a dia</h3>
+    <p class="hub-sub">Conversas reais da Bíblia vividas como situações de hoje: apresentar-se, comprar, pedir ajuda, falar do tempo...</p>
+    <div class="sit-groups">${typeof renderSituations === "function" ? renderSituations() : ""}</div>
     <h3 class="hub-h3">📚 Histórias</h3>
     <div class="story-list">${stories}</div>`;
+  hub.querySelectorAll(".sit-card").forEach((b) => b.addEventListener("click", () => startLesson(b.dataset.scene)));
   hub.querySelectorAll(".hub-card").forEach((b) => b.addEventListener("click", () => {
     const k = b.dataset.hub;
     if (k === "madness") startMatchMadness();
