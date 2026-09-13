@@ -928,7 +928,7 @@
  "no": {
   "moises": "6fba8e27dd24b0fd.mp3",
   "default": "d52564703138ae4c.mp3",
-  "noe": "6fba8e27dd24b0fd.mp3",
+  "noe": "ae2c85b4c3248f0c.mp3",
   "narrator": "d52564703138ae4c.mp3"
  },
  "yes": {
@@ -2816,7 +2816,7 @@
   "default": "bcfeb4a928f3e2a1.mp3"
  },
  "jesus": {
-  "jesus": "8b7ab887d38ca921.mp3",
+  "jesus": "65fbd3baea32faf0.mp3",
   "default": "ce73f8711dc99a65.mp3",
   "narrator": "ce73f8711dc99a65.mp3"
  },
@@ -2825,170 +2825,170 @@
   "default": "a8ac490b2750c0b5.mp3"
  },
  "davi": {
-  "davi": "da37be6e2c53568e.mp3",
-  "default": "da37be6e2c53568e.mp3"
+  "davi": "7ec19c2ca252adc7.mp3",
+  "default": "7ec19c2ca252adc7.mp3"
  },
  "moiss": {
-  "moises": "7642dbf1582fb8e7.mp3",
-  "default": "7642dbf1582fb8e7.mp3"
+  "moises": "fa9e62ea077cba3d.mp3",
+  "default": "fa9e62ea077cba3d.mp3"
  },
  "ester": {
-  "ester": "3ade4d409e226914.mp3",
-  "default": "3ade4d409e226914.mp3"
+  "ester": "33757ca4b6668b02.mp3",
+  "default": "33757ca4b6668b02.mp3"
  },
  "pedro": {
-  "pedro": "0e51307f1a9f5f79.mp3",
-  "default": "0e51307f1a9f5f79.mp3"
+  "pedro": "0844b4d3f2415e42.mp3",
+  "default": "0844b4d3f2415e42.mp3"
  },
  "maria": {
-  "maria": "2ec9d8ce48709e25.mp3",
-  "default": "2ec9d8ce48709e25.mp3"
+  "maria": "b06cae53b3ada44e.mp3",
+  "default": "b06cae53b3ada44e.mp3"
  },
  "isaas": {
-  "isaias": "1a3ae694929c864d.mp3",
-  "default": "1a3ae694929c864d.mp3"
+  "isaias": "3c0485bd869e3234.mp3",
+  "default": "3c0485bd869e3234.mp3"
  },
  "eva": {
-  "eva": "e074e6c0c88c7ac0.mp3",
-  "default": "e074e6c0c88c7ac0.mp3"
+  "eva": "6e61b2b10aeaff62.mp3",
+  "default": "6e61b2b10aeaff62.mp3"
  },
  "ado": {
-  "adao": "4ad4bc2def5cfe51.mp3",
-  "default": "4ad4bc2def5cfe51.mp3"
+  "adao": "2424d528013b5613.mp3",
+  "default": "2424d528013b5613.mp3"
  },
  "abrao": {
-  "abraao": "7b0db22f21ffa73a.mp3",
-  "default": "7b0db22f21ffa73a.mp3"
+  "abraao": "5b16b981ddb8c75f.mp3",
+  "default": "5b16b981ddb8c75f.mp3"
  },
  "sara": {
-  "sara": "74f4e6222cd56395.mp3",
-  "default": "74f4e6222cd56395.mp3"
+  "sara": "95b2e14b1814e79e.mp3",
+  "default": "95b2e14b1814e79e.mp3"
  },
  "isaac": {
-  "isaac": "e52f9d5ebf182d51.mp3",
-  "default": "e52f9d5ebf182d51.mp3"
+  "isaac": "b9bde95296ef381e.mp3",
+  "default": "b9bde95296ef381e.mp3"
  },
  "jac": {
-  "jaco": "c7d456dbcc850e55.mp3",
-  "default": "c7d456dbcc850e55.mp3"
+  "jaco": "cf98a61d811d270a.mp3",
+  "default": "cf98a61d811d270a.mp3"
  },
  "rebeca": {
-  "rebeca": "334d1d76dc74b035.mp3",
-  "default": "334d1d76dc74b035.mp3"
+  "rebeca": "c2b195c5078f2270.mp3",
+  "default": "c2b195c5078f2270.mp3"
  },
  "aro": {
-  "arao": "5e69a8160b920fe2.mp3",
-  "default": "5e69a8160b920fe2.mp3"
+  "arao": "dff3bc8933200e13.mp3",
+  "default": "dff3bc8933200e13.mp3"
  },
  "jos": {
-  "jose": "5c833411d5f40e1a.mp3",
-  "default": "5c833411d5f40e1a.mp3",
-  "josepai": "2c4e744366bf07c0.mp3"
+  "jose": "ecc3678467568544.mp3",
+  "default": "ecc3678467568544.mp3",
+  "josepai": "95d4d6f833c751df.mp3"
  },
  "josu": {
-  "josue": "ee97c66fa3ddd833.mp3",
-  "default": "ee97c66fa3ddd833.mp3"
+  "josue": "90b8976eedef9d50.mp3",
+  "default": "90b8976eedef9d50.mp3"
  },
  "calebe": {
-  "calebe": "ef7de180437f579e.mp3",
-  "default": "ef7de180437f579e.mp3"
+  "calebe": "9849a4a7a1f4e9ba.mp3",
+  "default": "9849a4a7a1f4e9ba.mp3"
  },
  "dbora": {
-  "debora": "eb595ba1acface16.mp3",
-  "default": "eb595ba1acface16.mp3"
+  "debora": "e78e679873b8444a.mp3",
+  "default": "e78e679873b8444a.mp3"
  },
  "gideo": {
-  "gideao": "7a966828c6b0e40c.mp3",
-  "default": "7a966828c6b0e40c.mp3"
+  "gideao": "6b3a52b4730210e1.mp3",
+  "default": "6b3a52b4730210e1.mp3"
  },
  "sanso": {
-  "sansao": "cddeb66544a0a33a.mp3",
-  "default": "cddeb66544a0a33a.mp3"
+  "sansao": "fb121d26a9276246.mp3",
+  "default": "fb121d26a9276246.mp3"
  },
  "rute": {
-  "rute": "f07fe9b69e76cf76.mp3",
-  "default": "f07fe9b69e76cf76.mp3"
+  "rute": "5970c5502e05b5a9.mp3",
+  "default": "5970c5502e05b5a9.mp3"
  },
  "samuel": {
-  "samuel": "84d41669c102dfb7.mp3",
-  "default": "84d41669c102dfb7.mp3"
+  "samuel": "266cfbada8e9332a.mp3",
+  "default": "266cfbada8e9332a.mp3"
  },
  "salomo": {
-  "salomao": "6a6b69438254f8c5.mp3",
-  "default": "6a6b69438254f8c5.mp3"
+  "salomao": "e15a0e6ea90d5837.mp3",
+  "default": "e15a0e6ea90d5837.mp3"
  },
  "elias": {
-  "elias": "ff9f61142ba96b84.mp3",
-  "default": "ff9f61142ba96b84.mp3"
+  "elias": "b64b9d1b34f35275.mp3",
+  "default": "b64b9d1b34f35275.mp3"
  },
  "eliseu": {
-  "eliseu": "fbd102a3a5fde21f.mp3",
-  "default": "fbd102a3a5fde21f.mp3"
+  "eliseu": "c6a94b6f0a52b9bc.mp3",
+  "default": "c6a94b6f0a52b9bc.mp3"
  },
  "daniel": {
-  "daniel": "cc3172f72960c270.mp3",
+  "daniel": "24409ef6a35be040.mp3",
   "default": "4a4f233e08366697.mp3",
   "narrator": "4a4f233e08366697.mp3"
  },
  "neemias": {
-  "neemias": "b037ade5589b725b.mp3",
-  "default": "b037ade5589b725b.mp3"
+  "neemias": "9cd4705a263fbd7d.mp3",
+  "default": "9cd4705a263fbd7d.mp3"
  },
  "ezequiel": {
-  "ezequiel": "f4940f0be3915a77.mp3",
-  "default": "f4940f0be3915a77.mp3"
+  "ezequiel": "ab87384080d16194.mp3",
+  "default": "ab87384080d16194.mp3"
  },
  "jonas": {
-  "jonas": "040fef4ede6a793b.mp3",
-  "default": "040fef4ede6a793b.mp3"
+  "jonas": "e8c2a69fd74e3f52.mp3",
+  "default": "e8c2a69fd74e3f52.mp3"
  },
  "marta": {
-  "marta": "7933c3512a525951.mp3",
-  "default": "7933c3512a525951.mp3"
+  "marta": "41b4c30752ac8fc6.mp3",
+  "default": "41b4c30752ac8fc6.mp3"
  },
  "paulo": {
-  "paulo": "e9725f3d5b777624.mp3",
-  "default": "e9725f3d5b777624.mp3"
+  "paulo": "b4644ddee42f0e01.mp3",
+  "default": "b4644ddee42f0e01.mp3"
  },
  "barnab": {
-  "barnabe": "736f06d91f9cc648.mp3",
-  "default": "736f06d91f9cc648.mp3"
+  "barnabe": "6012c47704e2cb5e.mp3",
+  "default": "6012c47704e2cb5e.mp3"
  },
  "timteo": {
-  "timoteo": "14a288e434a82c22.mp3",
-  "default": "14a288e434a82c22.mp3"
+  "timoteo": "d434cacf7a3c5047.mp3",
+  "default": "d434cacf7a3c5047.mp3"
  },
  "ldia": {
-  "lidia": "3b42a8d21ccccf4e.mp3",
-  "default": "3b42a8d21ccccf4e.mp3"
+  "lidia": "e8cb4e4a3eac3ceb.mp3",
+  "default": "e8cb4e4a3eac3ceb.mp3"
  },
  "filipe": {
-  "filipe": "b1a4019fd7c86a30.mp3",
-  "default": "b1a4019fd7c86a30.mp3"
+  "filipe": "9de8433e473d32bc.mp3",
+  "default": "9de8433e473d32bc.mp3"
  },
  "natanael": {
-  "natanael": "c9905b675139ed63.mp3",
-  "default": "c9905b675139ed63.mp3"
+  "natanael": "fc67527641bfea7e.mp3",
+  "default": "fc67527641bfea7e.mp3"
  },
  "joo batista": {
-  "joaobatista": "a9bf1f8591b00b1d.mp3",
-  "default": "a9bf1f8591b00b1d.mp3"
+  "joaobatista": "9e73f3e41b75ba4f.mp3",
+  "default": "9e73f3e41b75ba4f.mp3"
  },
  "tom": {
-  "tome": "272056050f184ca3.mp3",
-  "default": "272056050f184ca3.mp3"
+  "tome": "1d6125f3dbaa4689.mp3",
+  "default": "1d6125f3dbaa4689.mp3"
  },
  "zaqueu": {
-  "zaqueu": "58fb6e42540cc151.mp3",
-  "default": "58fb6e42540cc151.mp3"
+  "zaqueu": "d03f1a9962d0cbc4.mp3",
+  "default": "d03f1a9962d0cbc4.mp3"
  },
  "bartimeu": {
-  "bartimeu": "d619d828b460d733.mp3",
-  "default": "d619d828b460d733.mp3"
+  "bartimeu": "342936ea03ae00b1.mp3",
+  "default": "342936ea03ae00b1.mp3"
  },
  "maria madalena": {
-  "madalena": "4f192360c674dbdc.mp3",
-  "default": "4f192360c674dbdc.mp3"
+  "madalena": "295521084aa73766.mp3",
+  "default": "295521084aa73766.mp3"
  },
  "and": {
   "narrator": "a3378a89f623fcb5.mp3",
