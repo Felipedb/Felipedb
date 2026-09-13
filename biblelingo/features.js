@@ -4,7 +4,7 @@
 
 // ---------- 2.2 Áudio gravado com fallback para a síntese do navegador ----------
 // audio/manifest.json: { "<texto normalizado>": { "default": "arquivo.mp3", "<personagem>": "arquivo.mp3" } }
-const AUDIO = { manifest: null, cache: {}, base: "audio/" };
+const AUDIO = { manifest: null, sprites: null, cache: {}, stopTimer: 0, base: "audio/" };
 
 function audioKey(text) {
   return String(text).toLowerCase().replace(/[^a-z0-9 ]/g, "").replace(/\s+/g, " ").trim();
@@ -17,6 +17,13 @@ async function loadAudioManifest() {
   } catch (e) {
     AUDIO.manifest = {};
   }
+  // Mapa de sprites (poucos MP3 grandes com offsets) quando publicado
+  try {
+    const r = await fetch(AUDIO.base + "sprites.json", { cache: "no-cache" });
+    AUDIO.sprites = r.ok ? await r.json() : null;
+  } catch (e) {
+    AUDIO.sprites = null;
+  }
 }
 
 // Toca o clipe gravado se existir; devolve true quando tocou
@@ -27,16 +34,21 @@ function playClip(text, charKey, slow) {
   const file = (charKey && entry[charKey]) || entry.default;
   if (!file) return false;
   try {
-    let el = AUDIO.cache[file];
+    const rate = slow ? 0.65 : 1;
+    clearTimeout(AUDIO.stopTimer);
+    const sprite = AUDIO.sprites && AUDIO.sprites[file];
+    const src = sprite ? "sprites/" + sprite[0] : file;
+    let el = AUDIO.cache[src];
     if (!el) {
-      el = new Audio(AUDIO.base + file);
+      el = new Audio(AUDIO.base + src);
       el.preload = "auto";
-      AUDIO.cache[file] = el;
+      AUDIO.cache[src] = el;
     }
-    el.pause();
-    el.currentTime = 0;
-    el.playbackRate = slow ? 0.65 : 1;
+    Object.values(AUDIO.cache).forEach((a) => a.pause());
+    el.currentTime = sprite ? sprite[1] : 0;
+    el.playbackRate = rate;
     el.play().catch(() => {});
+    if (sprite) AUDIO.stopTimer = setTimeout(() => el.pause(), ((sprite[2] + 0.05) / rate) * 1000);
     return true;
   } catch (e) {
     return false;
