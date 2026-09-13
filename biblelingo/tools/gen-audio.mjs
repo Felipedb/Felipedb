@@ -125,11 +125,13 @@ const voiceFor = (char) => {
 
 // Valida cada voz com um clipe mínimo (custa ~1 crédito por voz). Voz indisponível
 // nesta conta é trocada por outra livre do mesmo gênero, nunca pela voz de todo mundo.
-if (!DRY) {
+// No modo --dry usa só o cache de validação (tools/.voices-ok.json), sem chamar a API.
+{
   const cache = path.join(ROOT, "tools", ".voices-ok.json");
   const ok = fs.existsSync(cache) ? JSON.parse(fs.readFileSync(cache, "utf8")) : {};
   const probe = async (name) => {
     if (name in ok) return ok[name];
+    if (DRY) return true;
     const res = await fetch(`${API}/text-to-speech/${VOICES[name][0]}?output_format=mp3_22050_32`, {
       method: "POST", headers: { "xi-api-key": KEY, "content-type": "application/json" },
       body: JSON.stringify({ text: "Hi.", model_id: MODEL }),
@@ -154,7 +156,7 @@ if (!DRY) {
     assigned[char] = picked;
     inUse.add(picked);
   }
-  fs.writeFileSync(cache, JSON.stringify(ok, null, 1));
+  if (!DRY) fs.writeFileSync(cache, JSON.stringify(ok, null, 1));
 }
 
 // Resumo das vozes resolvidas: se tudo cair numa voz só, algo está errado
@@ -222,7 +224,14 @@ await Promise.all(Array.from({ length: 3 }, async () => {
     try { await gen(job); } catch (e) { failed++; console.error("Falhou:", job.text, "-", e.message); }
   }
 }));
-// Refaz o "default" de cada texto (voz do narrador quando houver) e limpa arquivos órfãos
+// Remove entradas que não correspondem mais a nenhum texto/personagem do conteúdo,
+// refaz o "default" de cada texto (voz do narrador quando houver) e limpa arquivos órfãos
+const wanted = new Set(list.map((j) => `${j.key}|${j.char}`));
+if (!LIMIT && !ONLY) {
+  for (const key of Object.keys(manifest)) {
+    for (const c of Object.keys(manifest[key])) if (c !== "default" && !wanted.has(`${key}|${c}`)) delete manifest[key][c];
+  }
+}
 for (const key of Object.keys(manifest)) {
   const entry = manifest[key];
   const files = Object.keys(entry).filter((c) => c !== "default").map((c) => entry[c]);
