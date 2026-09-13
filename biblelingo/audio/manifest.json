@@ -1,33 +1,27 @@
 {
  "earth": {
-  "jesus": "ce91da4af63442cb.mp3",
   "default": "c737b14a8e5e77bb.mp3",
   "narrator": "c737b14a8e5e77bb.mp3",
   "adao": "07389281109022ef.mp3",
   "eva": "d290e4edc93de82f.mp3"
  },
  "heaven": {
-  "jesus": "5801945db0f24014.mp3",
   "default": "8bb89f3cdceafce6.mp3",
   "narrator": "8bb89f3cdceafce6.mp3",
   "adao": "a7292baeba06e901.mp3"
  },
  "god": {
-  "jesus": "8d1b97f89e9a0d81.mp3",
   "default": "1c0fa07062551fcf.mp3",
   "narrator": "1c0fa07062551fcf.mp3",
   "eva": "474edf72e5af2791.mp3"
  },
  "beginning": {
-  "jesus": "1abed3361ccf67eb.mp3",
   "default": "7b8a0c09a3d1c4b6.mp3",
   "narrator": "7b8a0c09a3d1c4b6.mp3",
   "adao": "2463cc60c149c94e.mp3"
  },
  "light": {
-  "jesus": "777712a43e3d1e49.mp3",
   "default": "605549817d24fa66.mp3",
-  "isaias": "bf7588f82ee5228b.mp3",
   "narrator": "605549817d24fa66.mp3",
   "eva": "d813514195b088fb.mp3",
   "jonas": "087e405b32f3d4cc.mp3"
@@ -37,120 +31,97 @@
   "default": "6ffead99e84967fa.mp3"
  },
  "god created the heaven and the earth": {
-  "jesus": "2d4568feddafb0f5.mp3",
-  "default": "2d4568feddafb0f5.mp3",
+  "default": "5fa6e7961d50118c.mp3",
   "eva": "5fa6e7961d50118c.mp3"
  },
  "in the beginning god created the light": {
-  "jesus": "839ad283fd499123.mp3",
-  "default": "839ad283fd499123.mp3",
+  "default": "9a9cf964973aa627.mp3",
   "eva": "9a9cf964973aa627.mp3"
  },
  "the light is good": {
-  "jesus": "a7aec8fb34fd7ac9.mp3",
-  "default": "a7aec8fb34fd7ac9.mp3",
+  "default": "257faaa73e4ade84.mp3",
   "eva": "257faaa73e4ade84.mp3"
  },
  "god created the earth": {
-  "jesus": "5ef52b1bbcf884e3.mp3",
-  "default": "5ef52b1bbcf884e3.mp3",
+  "default": "dcfbdd9cc420a444.mp3",
   "eva": "dcfbdd9cc420a444.mp3"
  },
  "in the beginning god created the heaven and the earth": {
-  "jesus": "16e1e7401872b31d.mp3",
-  "default": "16e1e7401872b31d.mp3",
+  "default": "48b42fa191b07058.mp3",
   "adao": "48b42fa191b07058.mp3"
  },
  "created": {
-  "jesus": "1c351e16b192ca5b.mp3",
   "default": "55bf41ecf2eb8430.mp3",
   "narrator": "55bf41ecf2eb8430.mp3",
   "adao": "f3809c946fcf8572.mp3"
  },
  "in the beginning god blank the heaven and the earth": {
-  "jesus": "e913839203fca507.mp3",
-  "default": "e913839203fca507.mp3",
+  "default": "87432020a0296043.mp3",
   "adao": "87432020a0296043.mp3"
  },
  "saw": {
-  "jesus": "1f58483d33477ba4.mp3",
   "default": "a737f2f996ef5025.mp3",
   "narrator": "a737f2f996ef5025.mp3",
   "adao": "1cd0421e0636f2bc.mp3"
  },
  "said": {
-  "jesus": "6b0d3d6f5c506f25.mp3",
   "default": "c6b81e01746f13d5.mp3",
   "narrator": "c6b81e01746f13d5.mp3",
   "adao": "45dbbf63db920036.mp3"
  },
  "look god created the light": {
-  "jesus": "ad18a551e963eda1.mp3",
-  "default": "ad18a551e963eda1.mp3",
+  "default": "7b9c87e33720cce4.mp3",
   "eva": "7b9c87e33720cce4.mp3"
  },
  "it is night": {
-  "jesus": "b25eb8399c2da1c9.mp3",
-  "default": "b25eb8399c2da1c9.mp3",
+  "default": "dd5a1fd4a3e1067a.mp3",
   "eva": "dd5a1fd4a3e1067a.mp3"
  },
  "it is good": {
-  "jesus": "351fefcda8db722f.mp3",
-  "default": "351fefcda8db722f.mp3",
+  "default": "f44e93160aefc27d.mp3",
   "eva": "f44e93160aefc27d.mp3"
  },
  "loved": {
-  "jesus": "c30d18046e9ee5b7.mp3",
   "default": "c8298e7f319604fb.mp3",
   "narrator": "c8298e7f319604fb.mp3",
   "adao": "38a8b916b482971a.mp3"
  },
  "where is the ark": {
-  "jesus": "05ee72bd1fd25ba0.mp3",
-  "default": "05ee72bd1fd25ba0.mp3",
+  "default": "91b5f550da069c5f.mp3",
   "eva": "91b5f550da069c5f.mp3"
  },
  "noah": {
-  "jesus": "df79aedb38eef731.mp3",
   "default": "d0c49c3263ef0c6d.mp3",
   "narrator": "d0c49c3263ef0c6d.mp3",
   "eva": "41ddcf7421e0436b.mp3"
  },
  "the king": {
-  "jesus": "79835c9cb79d55fb.mp3",
   "default": "6475c6d6bda02030.mp3",
-  "davi": "4b705a5e3dd83c56.mp3",
-  "daniel": "22b3005dd40d56e6.mp3",
   "narrator": "6475c6d6bda02030.mp3",
   "eva": "271da4f713865ebb.mp3",
   "samuel": "d26db2ce162050f7.mp3",
   "neemias": "286f892c1447b3ca.mp3"
  },
  "in the beginning who created the heaven and the earth": {
-  "jesus": "fc8cf77303241226.mp3",
-  "default": "fc8cf77303241226.mp3",
+  "default": "956bf301d5af9cf0.mp3",
   "eva": "956bf301d5af9cf0.mp3"
  },
  "what did god say": {
-  "jesus": "48ff21f90150ce04.mp3",
-  "default": "48ff21f90150ce04.mp3",
+  "default": "f2cf3393f3f79f39.mp3",
   "adao": "f2cf3393f3f79f39.mp3"
  },
  "in the beginning god created the heaven and the earth the earth was dark then god said let there be light": {
-  "jesus": "5b266ca5b9f7889f.mp3",
-  "default": "5b266ca5b9f7889f.mp3",
+  "default": "343be1cdf72b0de5.mp3",
   "adao": "343be1cdf72b0de5.mp3"
  },
  "let there be light": {
-  "jesus": "86aca7e33ff335b4.mp3",
-  "default": "86aca7e33ff335b4.mp3",
+  "default": "296afa7ced9ed5e4.mp3",
   "isaias": "296afa7ced9ed5e4.mp3",
   "jose": "3109fbe9c2b525f1.mp3",
   "adao": "e640beb1cbb0a5e9.mp3"
  },
  "let there be rain": {
-  "jesus": "a09c70a16fce9b93.mp3",
-  "default": "a09c70a16fce9b93.mp3",
+  "default": "b36c0d4a3d443453.mp3",
   "adao": "b36c0d4a3d443453.mp3"
  },
  "darkness": {
@@ -159,8 +130,7 @@
   "narrator": "eb4c97795ccb2363.mp3"
  },
  "let there be a king": {
-  "jesus": "af50d8f67834e1e8.mp3",
-  "default": "af50d8f67834e1e8.mp3",
+  "default": "81341b284104e92e.mp3",
   "adao": "81341b284104e92e.mp3"
  },
  "day": {
@@ -179,7 +149,6 @@
   "eva": "681d992b24b82918.mp3"
  },
  "good": {
-  "jesus": "4c6141a73ce40d07.mp3",
   "default": "991417fe09f23198.mp3",
   "jose": "78678085d956ab02.mp3",
   "narrator": "991417fe09f23198.mp3",
@@ -191,50 +160,40 @@
   "narrator": "0559767934f348f2.mp3"
  },
  "evening": {
-  "jesus": "41e9d53479af266f.mp3",
   "default": "a6183f0d0fb184ce.mp3",
   "narrator": "a6183f0d0fb184ce.mp3",
   "adao": "fb67ec386510b3f3.mp3"
  },
  "god called the light day": {
-  "jesus": "afc2cee992394c8a.mp3",
-  "default": "afc2cee992394c8a.mp3",
+  "default": "d6784c2b60c6d527.mp3",
   "adao": "d6784c2b60c6d527.mp3"
  },
  "the darkness he called night": {
-  "jesus": "d2339ee0aa9832c0.mp3",
-  "default": "d2339ee0aa9832c0.mp3",
+  "default": "dd666c18f748ca92.mp3",
   "eva": "dd666c18f748ca92.mp3"
  },
  "the day and the night": {
-  "jesus": "e1b604cc0354e3ca.mp3",
-  "default": "e1b604cc0354e3ca.mp3",
+  "default": "c4d76de8c420fa28.mp3",
   "eva": "c4d76de8c420fa28.mp3"
  },
  "god saw the light that it was good": {
-  "jesus": "b6804eec8cf9cd07.mp3",
-  "default": "b6804eec8cf9cd07.mp3",
+  "default": "df71d9b037e4d764.mp3",
   "eva": "df71d9b037e4d764.mp3"
  },
  "the evening and the morning were the first day": {
-  "jesus": "7c5c852c9e94d3df.mp3",
-  "default": "7c5c852c9e94d3df.mp3",
+  "default": "46257f3dd85e9ec8.mp3",
   "adao": "46257f3dd85e9ec8.mp3"
  },
  "and god said let there be blank and there was light": {
-  "jesus": "e13f7e6aa446f14d.mp3",
-  "default": "e13f7e6aa446f14d.mp3",
+  "default": "a88eba5e2d9210e9.mp3",
   "eva": "a88eba5e2d9210e9.mp3"
  },
  "and god said let there be light and there was light": {
-  "jesus": "7bfe359e57b00e6b.mp3",
-  "default": "7bfe359e57b00e6b.mp3",
+  "default": "6e2110a91e3931a3.mp3",
   "eva": "6e2110a91e3931a3.mp3"
  },
  "water": {
-  "jesus": "5527af73bce37c4f.mp3",
   "default": "a564f91866681094.mp3",
-  "noe": "c924c633e58943b0.mp3",
   "jose": "572d8fca1af7b7b1.mp3",
   "narrator": "a564f91866681094.mp3",
   "eva": "05ec620abaf2be1c.mp3",
@@ -255,21 +214,18 @@
  "let my people go": {
   "jesus": "0ee1b8296db604ac.mp3",
   "default": "0ee1b8296db604ac.mp3",
-  "moises": "c616e624420f8732.mp3",
   "arao": "c2c61753f2dc8fd9.mp3",
   "josue": "84dcea3fa07a9338.mp3",
   "madalena": "3572fe98eeea6145.mp3"
  },
  "what did god call the light": {
-  "jesus": "c426c3988b63886c.mp3",
-  "default": "c426c3988b63886c.mp3",
+  "default": "50a92c6e56b84a66.mp3",
   "eva": "50a92c6e56b84a66.mp3"
  },
  "sea": {
   "jesus": "0b61ddd1b2659257.mp3",
   "default": "b3dc56eb64cd7b99.mp3",
   "noe": "ae934a87ef3d262b.mp3",
-  "moises": "d4b1618c3db0e29e.mp3",
   "narrator": "b3dc56eb64cd7b99.mp3",
   "eva": "b1826a4aeccad85f.mp3",
   "adao": "694bdf6f579a08c9.mp3",
@@ -277,7 +233,6 @@
   "josue": "dd9e98437ed43435.mp3"
  },
  "garden": {
-  "jesus": "cd4384014649fc65.mp3",
   "default": "f84649f4116cdf51.mp3",
   "narrator": "f84649f4116cdf51.mp3",
   "adao": "c14131bf4080a628.mp3"
@@ -291,7 +246,6 @@
   "default": "918f1443b441b110.mp3"
  },
  "life": {
-  "jesus": "ffb8c29d7c2395c2.mp3",
   "default": "f79e594bab02ee34.mp3",
   "narrator": "f79e594bab02ee34.mp3",
   "eva": "4083d673a5c96d48.mp3"
@@ -302,7 +256,6 @@
   "narrator": "703175547fa28401.mp3"
  },
  "man": {
-  "jesus": "2ca9ad36c3533faf.mp3",
   "default": "05f23b81cd6005e9.mp3",
   "narrator": "05f23b81cd6005e9.mp3",
   "adao": "1353254df148f044.mp3"
@@ -313,18 +266,15 @@
   "narrator": "6f6860a5529a913e.mp3"
  },
  "fruit": {
-  "jesus": "26401847ed144108.mp3",
-  "default": "26401847ed144108.mp3",
+  "default": "eb50131975566627.mp3",
   "eva": "eb50131975566627.mp3"
  },
  "god saw that it was good": {
-  "jesus": "8511f1c61e31bba7.mp3",
-  "default": "8511f1c61e31bba7.mp3",
+  "default": "0625f41e32657c94.mp3",
   "adao": "0625f41e32657c94.mp3"
  },
  "god planted a garden": {
-  "jesus": "c642db17954c02ff.mp3",
-  "default": "c642db17954c02ff.mp3",
+  "default": "64e68df68a054b74.mp3",
   "adao": "64e68df68a054b74.mp3"
  },
  "the man and the woman lived in the garden": {
@@ -336,64 +286,49 @@
   "default": "b97bc1a8440aa587.mp3"
  },
  "the tree of life": {
-  "jesus": "02a75c449c81b1fa.mp3",
-  "default": "02a75c449c81b1fa.mp3",
+  "default": "ed7e89d93f3df916.mp3",
   "eva": "ed7e89d93f3df916.mp3",
   "adao": "6e0bcd6146a406df.mp3"
  },
  "and the lord god planted a garden eastward in eden": {
-  "jesus": "8554439eea416bcd.mp3",
-  "default": "8554439eea416bcd.mp3",
+  "default": "0a62dd1bcce0285a.mp3",
   "adao": "0a62dd1bcce0285a.mp3"
  },
  "house": {
-  "jesus": "c0b058914409ee24.mp3",
-  "default": "c0b058914409ee24.mp3",
-  "davi": "2ce4894f391e5c55.mp3",
+  "default": "b270fc9b5a61dd1c.mp3",
   "adao": "b270fc9b5a61dd1c.mp3",
   "salomao": "1f7e6e1f0be4d60e.mp3"
  },
  "and the lord god planted a blank eastward in eden": {
-  "jesus": "02b5f90852254ddc.mp3",
-  "default": "02b5f90852254ddc.mp3",
+  "default": "e8848f12c4f5e422.mp3",
   "adao": "e8848f12c4f5e422.mp3"
  },
  "city": {
-  "jesus": "e93f015e04904784.mp3",
-  "default": "e93f015e04904784.mp3",
-  "moises": "c196f64509b8b66b.mp3",
+  "default": "a484809a76b10088.mp3",
   "adao": "a484809a76b10088.mp3",
   "josue": "9d0409cabe9a0f61.mp3"
  },
  "the tree of life is beautiful": {
-  "jesus": "4d33325d7ed1d16d.mp3",
-  "default": "4d33325d7ed1d16d.mp3",
+  "default": "fbe9116cae511f59.mp3",
   "adao": "fbe9116cae511f59.mp3"
  },
  "come and see the garden": {
-  "jesus": "f15170da38f6fb7f.mp3",
-  "default": "f15170da38f6fb7f.mp3",
+  "default": "43413c1b09d7d7de.mp3",
   "adao": "43413c1b09d7d7de.mp3"
  },
  "the sea is dry": {
-  "jesus": "d61b78bc48c19567.mp3",
-  "default": "d61b78bc48c19567.mp3",
-  "davi": "a7c62641388964cd.mp3",
-  "jose": "d0a45014af842cbe.mp3",
-  "daniel": "d0a45014af842cbe.mp3",
+  "default": "0adcdc3f5dca83f5.mp3",
   "adao": "0adcdc3f5dca83f5.mp3",
   "salomao": "788212d9090d4778.mp3",
   "rebeca": "88fa5423ce424973.mp3",
   "ezequiel": "548c78a748a539c9.mp3"
  },
  "where did god plant a garden": {
-  "jesus": "bd01423e0375a58e.mp3",
-  "default": "bd01423e0375a58e.mp3",
+  "default": "66089da17563c533.mp3",
   "eva": "66089da17563c533.mp3"
  },
  "in eden": {
-  "jesus": "dd5ee85064c2bb88.mp3",
-  "default": "dd5ee85064c2bb88.mp3",
+  "default": "19f59ed6eb7d4fac.mp3",
   "eva": "19f59ed6eb7d4fac.mp3"
  },
  "i have five stones": {
@@ -403,30 +338,25 @@
   "adao": "d15c92a94b2719b3.mp3"
  },
  "in egypt": {
-  "jesus": "2bcec7492a20e057.mp3",
   "default": "9b611332f5b80b23.mp3",
   "narrator": "9b611332f5b80b23.mp3",
   "eva": "a852893d9aaf16cd.mp3"
  },
  "in the sea": {
-  "jesus": "97c0eaa5ad3cc78d.mp3",
   "default": "15f1f402a8b3593a.mp3",
   "narrator": "15f1f402a8b3593a.mp3",
   "eva": "ba60b5b8b82b7974.mp3"
  },
  "what was in the garden": {
-  "jesus": "127c988fe719b7c6.mp3",
-  "default": "127c988fe719b7c6.mp3",
+  "default": "b904fb700c004e30.mp3",
   "adao": "b904fb700c004e30.mp3"
  },
  "god planted a garden in eden in the garden there was the tree of life god saw that it was good": {
-  "jesus": "4c7a1aad98290b4a.mp3",
-  "default": "4c7a1aad98290b4a.mp3",
+  "default": "53dd6717f454a6a6.mp3",
   "adao": "53dd6717f454a6a6.mp3"
  },
  "a big ark": {
-  "jesus": "1be7faec7ca1e83b.mp3",
-  "default": "1be7faec7ca1e83b.mp3",
+  "default": "60785cd644bb83d3.mp3",
   "adao": "60785cd644bb83d3.mp3"
  },
  "rain": {
@@ -443,18 +373,15 @@
   "narrator": "eab0e0ed49a90c97.mp3"
  },
  "a golden crown": {
-  "jesus": "0988d989fd77b413.mp3",
-  "default": "0988d989fd77b413.mp3",
+  "default": "7ac560c73cfa8a51.mp3",
   "adao": "7ac560c73cfa8a51.mp3"
  },
  "door": {
-  "noe": "9ef9ccfec13ab6f6.mp3",
   "default": "8f68c9b751251a22.mp3",
   "narrator": "8f68c9b751251a22.mp3",
   "jaco": "b2379d42c9693a37.mp3"
  },
  "animals": {
-  "noe": "56aaefcbe25cf903.mp3",
   "default": "846560b9c6515978.mp3",
   "narrator": "846560b9c6515978.mp3",
   "jaco": "f2cf7aabee559115.mp3"
@@ -465,8 +392,7 @@
   "narrator": "32daa25c3b21bfbe.mp3"
  },
  "to make": {
-  "noe": "938425045f880dee.mp3",
-  "default": "938425045f880dee.mp3",
+  "default": "f9601bc36d240a6d.mp3",
   "jaco": "f9601bc36d240a6d.mp3"
  },
  "noah made an ark of wood": {
@@ -474,18 +400,15 @@
   "default": "d595c7cc82aa165e.mp3"
  },
  "the animals came into the ark": {
-  "noe": "d66185c8baab1bd6.mp3",
-  "default": "d66185c8baab1bd6.mp3",
+  "default": "60d4bd41d941a8e0.mp3",
   "rebeca": "60d4bd41d941a8e0.mp3"
  },
  "god shut the door of the ark": {
-  "noe": "b52feca668f80e81.mp3",
-  "default": "b52feca668f80e81.mp3",
+  "default": "8cc05e94dbfa5a17.mp3",
   "rebeca": "8cc05e94dbfa5a17.mp3"
  },
  "the rain came upon the earth": {
-  "noe": "2fcfbf37e0751b04.mp3",
-  "default": "2fcfbf37e0751b04.mp3",
+  "default": "d0f8a30c1656f074.mp3",
   "rebeca": "d0f8a30c1656f074.mp3"
  },
  "make thee an ark of gopher wood": {
@@ -520,14 +443,11 @@
  "a crown": {
   "noe": "e6e4a6242432b187.mp3",
   "default": "e6e4a6242432b187.mp3",
-  "davi": "6e05bf2254888bda.mp3",
-  "jose": "11dbe2216444ed3c.mp3",
   "samuel": "5001bed6cfde1ac9.mp3",
   "rebeca": "77a61b985ab62d5d.mp3"
  },
  "what did noah make": {
-  "noe": "41bb55631b54eac8.mp3",
-  "default": "41bb55631b54eac8.mp3",
+  "default": "fedb0c13d7ff21eb.mp3",
   "jaco": "fedb0c13d7ff21eb.mp3"
  },
  "an ark of wood": {
@@ -537,65 +457,53 @@
   "jaco": "775721132a5bb24e.mp3"
  },
  "a house of stone": {
-  "noe": "a615e05635027502.mp3",
   "default": "2ebf02cfc27cebbd.mp3",
   "narrator": "2ebf02cfc27cebbd.mp3",
   "jaco": "bd5025c069597a57.mp3"
  },
  "a garden": {
-  "noe": "3e90dcbe9b0bba75.mp3",
-  "default": "3e90dcbe9b0bba75.mp3",
+  "default": "5e0d0f1c2cae6031.mp3",
   "jaco": "5e0d0f1c2cae6031.mp3"
  },
  "how did the animals come in": {
-  "noe": "580bc777df73a38a.mp3",
-  "default": "580bc777df73a38a.mp3",
+  "default": "caf266ddc1063abd.mp3",
   "jaco": "caf266ddc1063abd.mp3"
  },
  "two by two": {
-  "noe": "56b875c3a4448cdf.mp3",
-  "default": "56b875c3a4448cdf.mp3",
+  "default": "c0f77f5209b20a67.mp3",
   "jaco": "c0f77f5209b20a67.mp3"
  },
  "god said to noah make an ark of wood noah made the ark and the animals came in two by two": {
-  "noe": "86bba14cd7b0f56a.mp3",
-  "default": "86bba14cd7b0f56a.mp3",
+  "default": "a9c6fde143c37549.mp3",
   "jaco": "a9c6fde143c37549.mp3"
  },
  "one by one": {
-  "noe": "171fb56e8d9adf4a.mp3",
-  "default": "171fb56e8d9adf4a.mp3",
+  "default": "7deead94ce718be3.mp3",
   "jaco": "7deead94ce718be3.mp3"
  },
  "all at night": {
-  "noe": "97d6274e8c75152d.mp3",
-  "default": "97d6274e8c75152d.mp3",
+  "default": "5029c389f7ea04a7.mp3",
   "jaco": "5029c389f7ea04a7.mp3"
  },
  "forty": {
   "noe": "24e02ea0ebf93482.mp3",
   "default": "9b0e0a57cc7471c3.mp3",
-  "jose": "60ca453eda34252a.mp3",
-  "jesus": "80ff15ea84184713.mp3",
   "narrator": "9b0e0a57cc7471c3.mp3",
   "rebeca": "ab3351a7482509fe.mp3",
   "pedro": "e4bf6e1c2fae9856.mp3"
  },
  "flood": {
-  "noe": "584506ef4aee6fc1.mp3",
   "default": "004243a6928a14c2.mp3",
   "narrator": "004243a6928a14c2.mp3",
   "jaco": "eca5f016ea3ad18e.mp3"
  },
  "window": {
-  "noe": "e7fdee33bf365c4a.mp3",
   "default": "61a90c4b0f1dc420.mp3",
   "narrator": "61a90c4b0f1dc420.mp3",
   "jaco": "66773d6078a85040.mp3"
  },
  "mountain": {
-  "noe": "5794475f7bb5fdd3.mp3",
-  "default": "5794475f7bb5fdd3.mp3",
+  "default": "a48ac90a18b48beb.mp3",
   "jaco": "a48ac90a18b48beb.mp3"
  },
  "to open": {
@@ -603,8 +511,7 @@
   "default": "0aab81325c901e8a.mp3"
  },
  "the rain was upon the earth": {
-  "noe": "7fe572583228bb28.mp3",
-  "default": "7fe572583228bb28.mp3",
+  "default": "c5e60a71965a2ed9.mp3",
   "rebeca": "c5e60a71965a2ed9.mp3"
  },
  "the water covered the mountains": {
@@ -616,18 +523,15 @@
   "default": "8cd236f67f0305f7.mp3"
  },
  "forty days and forty nights": {
-  "noe": "6f1284f84d6ed949.mp3",
-  "default": "6f1284f84d6ed949.mp3",
+  "default": "405531939a04f61e.mp3",
   "jaco": "405531939a04f61e.mp3"
  },
  "and the rain was upon the earth forty days and forty nights": {
-  "noe": "eb5a2c40f3f35e64.mp3",
-  "default": "eb5a2c40f3f35e64.mp3",
+  "default": "c487eb7aa97bc210.mp3",
   "jaco": "c487eb7aa97bc210.mp3"
  },
  "and the blank was upon the earth forty days and forty nights": {
-  "noe": "f0904e3a63599b7b.mp3",
-  "default": "f0904e3a63599b7b.mp3",
+  "default": "b4e1faae7ea6c70f.mp3",
   "jaco": "b4e1faae7ea6c70f.mp3"
  },
  "the flood was upon the earth": {
@@ -635,93 +539,74 @@
   "default": "d3b26034ea087098.mp3"
  },
  "sun": {
-  "noe": "ab4c378330ca6d77.mp3",
   "default": "dd9c375b91619fbc.mp3",
   "narrator": "dd9c375b91619fbc.mp3",
   "jaco": "fd02644f53f6656a.mp3"
  },
  "fire": {
-  "noe": "5751b9327f07849f.mp3",
   "default": "b6f160bf146b68f8.mp3",
-  "moises": "5751b9327f07849f.mp3",
   "narrator": "b6f160bf146b68f8.mp3",
   "jaco": "f04f1a0622c60dc4.mp3",
   "josue": "06d1e16d0feb18e2.mp3"
  },
  "wind": {
-  "noe": "8a415122acf257eb.mp3",
   "default": "ea314e039ce7040b.mp3",
-  "moises": "8a415122acf257eb.mp3",
   "narrator": "ea314e039ce7040b.mp3",
   "jaco": "3e8d124231dad981.mp3",
   "josue": "65f292ce3582922d.mp3"
  },
  "it is raining a lot": {
-  "noe": "a55805cd9b9fc2bc.mp3",
-  "default": "a55805cd9b9fc2bc.mp3",
+  "default": "afcbca002783c636.mp3",
   "jaco": "afcbca002783c636.mp3"
  },
  "let us go into the ark": {
-  "noe": "f324c1793d5c7110.mp3",
-  "default": "f324c1793d5c7110.mp3",
-  "daniel": "f729607a76a159ad.mp3",
+  "default": "48032cff54fca9fc.mp3",
   "jaco": "48032cff54fca9fc.mp3",
   "ezequiel": "e8fbe405420cdbc6.mp3"
  },
  "let us go to the desert": {
-  "noe": "dc6e27428f9c3ef7.mp3",
-  "default": "dc6e27428f9c3ef7.mp3",
+  "default": "0e610546bb430deb.mp3",
   "jaco": "0e610546bb430deb.mp3"
  },
  "the battle is the lords": {
-  "noe": "7280f694403586a1.mp3",
-  "default": "7280f694403586a1.mp3",
+  "default": "6f6691732df21544.mp3",
   "davi": "6f6691732df21544.mp3",
   "jaco": "1dc6fc5a94093af4.mp3"
  },
  "how many days did it rain": {
-  "noe": "2cdc39ec5baf1a19.mp3",
-  "default": "2cdc39ec5baf1a19.mp3",
+  "default": "58c7ab4cef4582a0.mp3",
   "jaco": "58c7ab4cef4582a0.mp3"
  },
  "forty days": {
-  "noe": "4ec548ef81518628.mp3",
-  "default": "4ec548ef81518628.mp3",
+  "default": "8c495f94769f2365.mp3",
   "jaco": "8c495f94769f2365.mp3"
  },
  "seven days": {
-  "noe": "58370cc5161c965a.mp3",
-  "default": "58370cc5161c965a.mp3",
+  "default": "377ddfdbde407a77.mp3",
   "jaco": "377ddfdbde407a77.mp3"
  },
  "three days": {
-  "noe": "b13cd480f38ae116.mp3",
-  "default": "b13cd480f38ae116.mp3",
+  "default": "72e59685b66581c5.mp3",
   "jaco": "72e59685b66581c5.mp3"
  },
  "how long did it rain": {
-  "noe": "34d0ed0a1b500b6e.mp3",
-  "default": "34d0ed0a1b500b6e.mp3",
+  "default": "028dea1ebfd474bf.mp3",
   "jaco": "028dea1ebfd474bf.mp3"
  },
  "one night": {
-  "noe": "b1572d3903323a04.mp3",
-  "default": "b1572d3903323a04.mp3",
+  "default": "6fe6142520646285.mp3",
   "jaco": "6fe6142520646285.mp3"
  },
  "the rain was upon the earth forty days and forty nights the water covered the mountains but noah was safe in the ark": {
-  "noe": "e4be94f2bc2c3d4f.mp3",
-  "default": "e4be94f2bc2c3d4f.mp3",
+  "default": "06d917a96ab7c5f5.mp3",
   "jaco": "06d917a96ab7c5f5.mp3"
  },
  "dove": {
-  "noe": "e65c421dd1dc9cfa.mp3",
   "default": "8debb2f4dd23caca.mp3",
   "narrator": "8debb2f4dd23caca.mp3",
   "jaco": "28ac959db417ae67.mp3"
  },
  "rainbow": {
-  "noe": "a5691ebf5d1e3f8a.mp3",
   "default": "710e6c7711023ae3.mp3",
   "narrator": "710e6c7711023ae3.mp3",
   "jaco": "cb479d8ecafd0e50.mp3"
@@ -754,13 +639,11 @@
   "default": "e71e4099eb3be9ec.mp3"
  },
  "i set my rainbow in the cloud": {
-  "noe": "9d89217de80b8bb5.mp3",
-  "default": "9d89217de80b8bb5.mp3",
+  "default": "c666cc26b31a3d28.mp3",
   "rebeca": "c666cc26b31a3d28.mp3"
  },
  "to remember": {
-  "noe": "3b36f1c65dcc64ff.mp3",
-  "default": "3b36f1c65dcc64ff.mp3",
+  "default": "b59ed9c0bcc12e5d.mp3",
   "rebeca": "b59ed9c0bcc12e5d.mp3"
  },
  "i do set my bow in the cloud": {
@@ -776,77 +659,61 @@
   "default": "2a83e37d2afe0779.mp3"
  },
  "look at the cloud": {
-  "noe": "cd43c085ab435577.mp3",
-  "default": "cd43c085ab435577.mp3",
+  "default": "82692331f8451935.mp3",
   "jaco": "82692331f8451935.mp3"
  },
  "i see a rainbow": {
-  "noe": "dc44b41b42499ce9.mp3",
-  "default": "dc44b41b42499ce9.mp3",
+  "default": "4a6a46d37640ed39.mp3",
   "davi": "4a6a46d37640ed39.mp3",
-  "jose": "531e4cbafb468f91.mp3",
-  "jesus": "3e9b983f7e5c48d6.mp3",
   "jaco": "66ce5ad4ccf1a259.mp3",
   "rebeca": "32eef5cb8a075f8b.mp3",
   "madalena": "761b025432e997dd.mp3"
  },
  "i see a giant": {
-  "noe": "e9797dc57486d79e.mp3",
-  "default": "e9797dc57486d79e.mp3",
-  "jose": "df500579f7846eb5.mp3",
+  "default": "a5a61c2255031cc5.mp3",
   "jaco": "a5a61c2255031cc5.mp3"
  },
  "i see a harp": {
-  "noe": "bf17c084bcbeced8.mp3",
-  "default": "bf17c084bcbeced8.mp3",
+  "default": "6d8ede9e9cc6f999.mp3",
   "jaco": "6d8ede9e9cc6f999.mp3"
  },
  "what did god set in the cloud": {
-  "noe": "58b95847dafc666c.mp3",
-  "default": "58b95847dafc666c.mp3",
+  "default": "d07dce60103b7bec.mp3",
   "rebeca": "d07dce60103b7bec.mp3"
  },
  "a rainbow": {
-  "noe": "17252d012cc6bef8.mp3",
   "default": "b797c83429d82e1e.mp3",
   "narrator": "b797c83429d82e1e.mp3",
   "rebeca": "f5ef4ea2fbe9cbb8.mp3"
  },
  "a dove": {
-  "noe": "2e2790d2b52f0649.mp3",
   "default": "5ef8a5dd2e5f570b.mp3",
   "narrator": "5ef8a5dd2e5f570b.mp3",
   "rebeca": "0609a5af528b47ad.mp3"
  },
  "a star": {
-  "noe": "d9e6d267f9b15e57.mp3",
-  "default": "d9e6d267f9b15e57.mp3",
+  "default": "8e81097e44338a71.mp3",
   "rebeca": "8e81097e44338a71.mp3"
  },
  "noah sent a dove the dove came back with a leaf then god set a rainbow in the cloud as a promise": {
-  "noe": "ea9c119d2c7f401f.mp3",
-  "default": "ea9c119d2c7f401f.mp3",
+  "default": "55be5522b4c9e9d6.mp3",
   "jaco": "55be5522b4c9e9d6.mp3"
  },
  "a leaf": {
-  "noe": "9aea4acbb1b231f2.mp3",
-  "default": "9aea4acbb1b231f2.mp3",
+  "default": "8226bf3cd17afe52.mp3",
   "jaco": "8226bf3cd17afe52.mp3"
  },
  "what did the dove bring": {
-  "noe": "1269cdea38efbf30.mp3",
-  "default": "1269cdea38efbf30.mp3",
+  "default": "b9e60fae722d580b.mp3",
   "jaco": "b9e60fae722d580b.mp3"
  },
  "a stone": {
-  "noe": "ea9bba29ee1e32ea.mp3",
   "default": "0ef6a24139181bf1.mp3",
   "narrator": "0ef6a24139181bf1.mp3",
   "jaco": "89f783cf898ea859.mp3"
  },
  "a fish": {
-  "noe": "6c43107663a77403.mp3",
-  "default": "6c43107663a77403.mp3",
+  "default": "5e59331a08cff1bf.mp3",
   "jaco": "5e59331a08cff1bf.mp3"
  },
  "holy": {
@@ -860,13 +727,11 @@
   "default": "a531949fcaf50fca.mp3"
  },
  "bush": {
-  "moises": "c8e48918dbbc0ece.mp3",
   "default": "6987cfa889dce76f.mp3",
   "narrator": "6987cfa889dce76f.mp3",
   "josue": "54e60f9ec521b700.mp3"
  },
  "ground": {
-  "moises": "9dae127fb6e7c8c7.mp3",
   "default": "d98b66c055b953ed.mp3",
   "narrator": "d98b66c055b953ed.mp3",
   "arao": "95f88b521a08ada4.mp3"
@@ -877,20 +742,16 @@
   "narrator": "0b2924f170240298.mp3"
  },
  "the bush burned with fire": {
-  "moises": "f0e655a5f29a7de3.mp3",
-  "default": "f0e655a5f29a7de3.mp3",
+  "default": "b4fb12cab1f66950.mp3",
   "arao": "b4fb12cab1f66950.mp3"
  },
  "moses saw the fire": {
-  "moises": "232a3219b467a327.mp3",
-  "default": "232a3219b467a327.mp3",
+  "default": "91895aa2bc1422de.mp3",
   "arao": "91895aa2bc1422de.mp3"
  },
  "take off your shoes": {
   "moises": "9c15172d9972fe87.mp3",
   "default": "9c15172d9972fe87.mp3",
-  "davi": "19a5fc80c7ec641a.mp3",
-  "daniel": "9e319fa1de94cb78.mp3",
   "josue": "172edbb2334e71ab.mp3",
   "salomao": "eadcfbbb91bd7f87.mp3",
   "neemias": "0283941eb63ddfb4.mp3"
@@ -900,35 +761,28 @@
   "default": "b16c46b3b2167c46.mp3"
  },
  "the place whereon thou standest is holy ground": {
-  "moises": "ce7cf636e3c590f0.mp3",
-  "default": "ce7cf636e3c590f0.mp3",
+  "default": "0f966cb629ce6d51.mp3",
   "arao": "0f966cb629ce6d51.mp3"
  },
  "dry": {
-  "moises": "5f1f0bf5c2c9a717.mp3",
   "default": "d4951248c4dc1d23.mp3",
-  "daniel": "a6f98262f6c3ee01.mp3",
   "narrator": "d4951248c4dc1d23.mp3",
   "arao": "ce1a62dc2a46d6a1.mp3",
   "josue": "6f192821729d8819.mp3",
   "neemias": "3db5dc19544f5630.mp3"
  },
  "the place whereon thou standest is blank ground": {
-  "moises": "bfc07f07de397f2e.mp3",
-  "default": "bfc07f07de397f2e.mp3",
+  "default": "7fe096aeb8b9f625.mp3",
   "arao": "7fe096aeb8b9f625.mp3"
  },
  "cold": {
-  "moises": "d7967a5de9f22e72.mp3",
   "default": "7ceb8767a07297ca.mp3",
-  "daniel": "7d6825d3db82249b.mp3",
   "narrator": "7ceb8767a07297ca.mp3",
   "arao": "8bb2258c3f9bc4f0.mp3",
   "neemias": "78cf384eae75bf0b.mp3"
  },
  "far": {
-  "moises": "8a31a592b9df4d57.mp3",
-  "default": "8a31a592b9df4d57.mp3",
+  "default": "d0cae46cab2b18b9.mp3",
   "jose": "d0cae46cab2b18b9.mp3",
   "arao": "c1b422d088a0d772.mp3"
  },
@@ -943,7 +797,6 @@
  "no the sea is dry": {
   "moises": "9c926b5c6b7e0546.mp3",
   "default": "9c926b5c6b7e0546.mp3",
-  "daniel": "7c2999d49bd514e9.mp3",
   "jesus": "48f9d1810a3ee78c.mp3",
   "neemias": "5789b2de07b835c9.mp3"
  },
@@ -964,7 +817,6 @@
  "a big river": {
   "moises": "c163b97a3a658851.mp3",
   "default": "b4a04840ed907fa8.mp3",
-  "isaias": "af1b78e5ee01ddd6.mp3",
   "narrator": "b4a04840ed907fa8.mp3",
   "jonas": "afb83a50153d707e.mp3"
  },
@@ -974,13 +826,11 @@
   "narrator": "7e6da2ccb0dbfa52.mp3"
  },
  "what did god say to moses": {
-  "moises": "50979d484c661ffb.mp3",
-  "default": "50979d484c661ffb.mp3",
+  "default": "b6d14876372e2ddd.mp3",
   "josue": "b6d14876372e2ddd.mp3"
  },
  "moses saw a bush that burned with fire but it was not consumed god said take off your shoes this is holy ground": {
-  "moises": "24a1ed1a2cdeb879.mp3",
-  "default": "24a1ed1a2cdeb879.mp3",
+  "default": "ec0aca87f554a935.mp3",
   "josue": "ec0aca87f554a935.mp3"
  },
  "sing a song": {
@@ -1001,139 +851,111 @@
   "arao": "d85d860eb25d800b.mp3"
  },
  "king": {
-  "moises": "6fa7f20215ccd6eb.mp3",
   "default": "151a43fd8020da19.mp3",
-  "daniel": "fc4177c48495a282.mp3",
-  "jesus": "7ffb91185b9d4d75.mp3",
   "narrator": "151a43fd8020da19.mp3",
   "josue": "095934c240878251.mp3",
   "neemias": "1e0bd0c4e689374d.mp3",
   "pedro": "65a62de4ece8631c.mp3"
  },
  "free": {
-  "moises": "56193e09251b475f.mp3",
   "default": "da0726f04505e9df.mp3",
   "narrator": "da0726f04505e9df.mp3",
   "arao": "d40c8724f671fefe.mp3"
  },
  "to go": {
-  "moises": "603cd6bd181fbe61.mp3",
-  "default": "603cd6bd181fbe61.mp3",
+  "default": "9998abbed42a7b05.mp3",
   "josue": "9998abbed42a7b05.mp3"
  },
  "egypt": {
-  "moises": "59c6e561ad6c494d.mp3",
-  "default": "59c6e561ad6c494d.mp3",
+  "default": "39cd9257ea4efc5e.mp3",
   "arao": "39cd9257ea4efc5e.mp3"
  },
  "to say": {
-  "moises": "61f511c90300ffdd.mp3",
-  "default": "61f511c90300ffdd.mp3",
+  "default": "457d7121884f4752.mp3",
   "arao": "457d7121884f4752.mp3"
  },
  "moses went to the king": {
-  "moises": "c82f6c69aba104e9.mp3",
-  "default": "c82f6c69aba104e9.mp3",
+  "default": "2c9d4ff5ac570bb2.mp3",
   "josue": "2c9d4ff5ac570bb2.mp3"
  },
  "my people will be free": {
-  "moises": "b41df232176a4338.mp3",
-  "default": "b41df232176a4338.mp3",
+  "default": "6238e580e9d35b05.mp3",
   "arao": "6238e580e9d35b05.mp3"
  },
  "the king said no": {
-  "moises": "59675bc4220e26b0.mp3",
-  "default": "59675bc4220e26b0.mp3",
+  "default": "5e228058bb9506d4.mp3",
   "josue": "5e228058bb9506d4.mp3"
  },
  "sheep": {
-  "moises": "aa95ad980619879d.mp3",
   "default": "dfc417eec79446e3.mp3",
-  "davi": "d5014d45a35dc10e.mp3",
   "narrator": "dfc417eec79446e3.mp3",
   "arao": "13693282bff51458.mp3",
   "salomao": "c628d846dbd69e08.mp3"
  },
  "thus saith the lord god of israel let my blank go": {
-  "moises": "09cb2b24eaa5f5b6.mp3",
-  "default": "09cb2b24eaa5f5b6.mp3",
+  "default": "a1f2689fd1cb92cc.mp3",
   "arao": "a1f2689fd1cb92cc.mp3"
  },
  "thus saith the lord god of israel let my people go": {
-  "moises": "22d5f012c891cbdd.mp3",
-  "default": "22d5f012c891cbdd.mp3",
+  "default": "f444f1933097fe5b.mp3",
   "arao": "f444f1933097fe5b.mp3"
  },
  "sons": {
-  "moises": "4f278b8f957eeadb.mp3",
-  "default": "4f278b8f957eeadb.mp3",
+  "default": "70c177b5757b205c.mp3",
   "arao": "70c177b5757b205c.mp3"
  },
  "kings": {
-  "moises": "67772c39aa7fc419.mp3",
-  "default": "67772c39aa7fc419.mp3",
+  "default": "e3a2f1851bf7c9ae.mp3",
   "arao": "e3a2f1851bf7c9ae.mp3"
  },
  "who are you": {
-  "moises": "5a3cd02ca454e497.mp3",
-  "default": "5a3cd02ca454e497.mp3",
+  "default": "a4ddc99e07fb1a34.mp3",
   "arao": "a4ddc99e07fb1a34.mp3"
  },
  "i am moses let my people go": {
-  "moises": "8350dd37c2fac4f2.mp3",
-  "default": "8350dd37c2fac4f2.mp3",
+  "default": "64b38800c322736d.mp3",
   "arao": "64b38800c322736d.mp3"
  },
  "i am the ark": {
-  "moises": "4cffea2626a9223c.mp3",
-  "default": "4cffea2626a9223c.mp3",
+  "default": "08dbe5cdf67ca461.mp3",
   "arao": "08dbe5cdf67ca461.mp3"
  },
  "give me gold": {
-  "moises": "6ddcc476df861e69.mp3",
-  "default": "6ddcc476df861e69.mp3",
+  "default": "f324d9d644635e70.mp3",
   "josue": "f324d9d644635e70.mp3"
  },
  "what did moses say to the king": {
-  "moises": "abd1010d1c943082.mp3",
-  "default": "abd1010d1c943082.mp3",
+  "default": "13444436dcba2773.mp3",
   "josue": "13444436dcba2773.mp3"
  },
  "i am a rainbow": {
-  "moises": "3dfeac8bb5b36d49.mp3",
-  "default": "3dfeac8bb5b36d49.mp3",
+  "default": "a3dafe85b58d8aad.mp3",
   "arao": "a3dafe85b58d8aad.mp3"
  },
  "build a city": {
-  "moises": "2f4f59641e3d9757.mp3",
-  "default": "2f4f59641e3d9757.mp3",
+  "default": "24f7b8eec0bd53f9.mp3",
   "josue": "24f7b8eec0bd53f9.mp3"
  },
  "what did the king say": {
-  "moises": "389f22e36062cd50.mp3",
-  "default": "389f22e36062cd50.mp3",
+  "default": "449e511bf8db228f.mp3",
   "josue": "449e511bf8db228f.mp3"
  },
  "moses went to the king of egypt and said let my people go but the king said no so god sent signs": {
-  "moises": "95087ff00484a5b3.mp3",
-  "default": "95087ff00484a5b3.mp3",
+  "default": "c7b866af21bf5d06.mp3",
   "josue": "c7b866af21bf5d06.mp3"
  },
  "no": {
-  "moises": "6fba8e27dd24b0fd.mp3",
   "default": "35543148a45d0061.mp3",
   "noe": "ae2c85b4c3248f0c.mp3",
   "narrator": "35543148a45d0061.mp3",
   "josue": "09aa082948c349f9.mp3"
  },
  "yes": {
-  "moises": "190ea22fd208c381.mp3",
-  "default": "190ea22fd208c381.mp3",
+  "default": "8ddfd68799bd81b0.mp3",
   "josue": "8ddfd68799bd81b0.mp3"
  },
  "maybe": {
-  "moises": "6c9d5f8d7b363f72.mp3",
-  "default": "6c9d5f8d7b363f72.mp3",
+  "default": "80e4a1341c48d7bd.mp3",
   "josue": "80e4a1341c48d7bd.mp3"
  },
  "hand": {
@@ -1146,8 +968,7 @@
   "default": "f82db2641a87cbf4.mp3"
  },
  "to divide": {
-  "moises": "3dce51e93205a65e.mp3",
-  "default": "3dce51e93205a65e.mp3",
+  "default": "50f8932001877766.mp3",
   "arao": "50f8932001877766.mp3"
  },
  "the waters were divided": {
@@ -1155,13 +976,11 @@
   "default": "49307f531be85ccd.mp3"
  },
  "moses stretched out his hand": {
-  "moises": "2a1c7d28f0cecc90.mp3",
-  "default": "2a1c7d28f0cecc90.mp3",
+  "default": "e165a4ecf65a7205.mp3",
   "arao": "e165a4ecf65a7205.mp3"
  },
  "a strong wind divided the sea": {
-  "moises": "8662b81efa258244.mp3",
-  "default": "8662b81efa258244.mp3",
+  "default": "9af3fd2b6628e962.mp3",
   "arao": "9af3fd2b6628e962.mp3"
  },
  "the sea was dry": {
@@ -1173,23 +992,19 @@
   "default": "44ad5d1b472c8a17.mp3"
  },
  "sky": {
-  "moises": "42c28a1d2b272474.mp3",
-  "default": "42c28a1d2b272474.mp3",
+  "default": "9053c221a7ae649c.mp3",
   "josue": "9053c221a7ae649c.mp3"
  },
  "and the lord made the sea dry land and the waters were divided": {
-  "moises": "c6130550bb8ab985.mp3",
-  "default": "c6130550bb8ab985.mp3",
+  "default": "2be2aa56e16d204d.mp3",
   "josue": "2be2aa56e16d204d.mp3"
  },
  "and the lord made the blank dry land and the waters were divided": {
-  "moises": "d603dc817202b0bd.mp3",
-  "default": "d603dc817202b0bd.mp3",
+  "default": "bae36321c0ae43a3.mp3",
   "josue": "bae36321c0ae43a3.mp3"
  },
  "hill": {
-  "moises": "f8658a8c6e6d4286.mp3",
-  "default": "f8658a8c6e6d4286.mp3",
+  "default": "e2674cbb1d3d5421.mp3",
   "josue": "e2674cbb1d3d5421.mp3"
  },
  "stretch out your hand": {
@@ -1213,24 +1028,20 @@
   "default": "47aa569decb893f5.mp3"
  },
  "where did the people walk": {
-  "moises": "60d0e8d70d478a57.mp3",
-  "default": "60d0e8d70d478a57.mp3",
+  "default": "68fc9580c86f760e.mp3",
   "arao": "68fc9580c86f760e.mp3"
  },
  "moses stretched out his hand over the sea the waters were divided and the people walked on dry ground": {
-  "moises": "853c256bef106657.mp3",
-  "default": "853c256bef106657.mp3",
+  "default": "0043e2df24645bb8.mp3",
   "arao": "0043e2df24645bb8.mp3"
  },
  "on dry ground": {
-  "moises": "6cf12719dbd6bc08.mp3",
   "default": "dac8968e83e01332.mp3",
   "narrator": "dac8968e83e01332.mp3",
   "arao": "35fec74f2e259170.mp3"
  },
  "on the water": {
-  "moises": "3723ed9c10b34a7c.mp3",
-  "default": "3723ed9c10b34a7c.mp3",
+  "default": "cf470bb43340339e.mp3",
   "arao": "cf470bb43340339e.mp3"
  },
  "shepherd": {
@@ -1239,30 +1050,25 @@
   "narrator": "bcc3c39cf477ae43.mp3"
  },
  "in the ark": {
-  "moises": "5d769f806ddf948e.mp3",
-  "default": "5d769f806ddf948e.mp3",
+  "default": "7c9c7fd7bc97d391.mp3",
   "arao": "7c9c7fd7bc97d391.mp3"
  },
  "harp": {
-  "davi": "6107cf638c0c4fbf.mp3",
   "default": "f69edc07cff633b0.mp3",
   "narrator": "f69edc07cff633b0.mp3",
   "samuel": "e5705b0cccb794cb.mp3"
  },
  "heart": {
-  "davi": "049f79b1235705dd.mp3",
   "default": "1f8fb1c88b247c01.mp3",
   "narrator": "1f8fb1c88b247c01.mp3",
   "samuel": "7b9656869b6a351a.mp3",
   "salomao": "3aa3e8b68a1a300e.mp3"
  },
  "to play": {
-  "davi": "364338807a3b8f94.mp3",
-  "default": "364338807a3b8f94.mp3",
+  "default": "5315a7c62baeb102.mp3",
   "samuel": "5315a7c62baeb102.mp3"
  },
  "young": {
-  "davi": "d6ecab20ba6716bd.mp3",
   "default": "a7bb1ef56d594d9d.mp3",
   "narrator": "a7bb1ef56d594d9d.mp3",
   "samuel": "3892c41df0d0e6e3.mp3"
@@ -1272,38 +1078,31 @@
   "default": "29076c397d0febab.mp3"
  },
  "david played the harp": {
-  "davi": "a1f833e9494d9f58.mp3",
-  "default": "a1f833e9494d9f58.mp3",
+  "default": "3c4da7c988f33d39.mp3",
   "salomao": "3c4da7c988f33d39.mp3"
  },
  "the lord looks on the heart": {
-  "davi": "b5fc0e68a754195d.mp3",
-  "default": "b5fc0e68a754195d.mp3",
+  "default": "8daf8c49d3e30d35.mp3",
   "salomao": "8daf8c49d3e30d35.mp3"
  },
  "david was a young shepherd": {
-  "davi": "ddc1a01baeaba07c.mp3",
-  "default": "ddc1a01baeaba07c.mp3",
+  "default": "caf4284cc3b72950.mp3",
   "salomao": "caf4284cc3b72950.mp3"
  },
  "man looketh on the outward appearance but the lord looketh on the heart": {
-  "davi": "65efabc1ff75cb2d.mp3",
-  "default": "65efabc1ff75cb2d.mp3",
+  "default": "439faec46c887f7a.mp3",
   "salomao": "439faec46c887f7a.mp3"
  },
  "face": {
-  "davi": "932a7f309f9ab51d.mp3",
-  "default": "932a7f309f9ab51d.mp3",
+  "default": "f0cf96ef1e504c31.mp3",
   "salomao": "f0cf96ef1e504c31.mp3"
  },
  "man looketh on the outward appearance but the lord looketh on the blank": {
-  "davi": "9f140eee9d147d00.mp3",
-  "default": "9f140eee9d147d00.mp3",
+  "default": "d0557aa9ff1af4f8.mp3",
   "salomao": "d0557aa9ff1af4f8.mp3"
  },
  "hands": {
-  "davi": "42241ce26264bf49.mp3",
-  "default": "42241ce26264bf49.mp3",
+  "default": "185e1c667799d4ea.mp3",
   "salomao": "185e1c667799d4ea.mp3"
  },
  "they are in the field": {
@@ -1360,10 +1159,7 @@
   "default": "701cb6d3c0b19a5b.mp3"
  },
  "stone": {
-  "davi": "4a6b72cb39c108c2.mp3",
   "default": "df022ed962d4da05.mp3",
-  "jose": "06a7ec1c96330012.mp3",
-  "daniel": "06a7ec1c96330012.mp3",
   "narrator": "df022ed962d4da05.mp3",
   "samuel": "b2af3f34a294059b.mp3",
   "jaco": "d1e64b830bcdf5d9.mp3",
@@ -1375,7 +1171,6 @@
   "narrator": "83578c8321102b75.mp3"
  },
  "sling": {
-  "davi": "c8f194a788b867aa.mp3",
   "default": "57742d34a1e24b42.mp3",
   "narrator": "57742d34a1e24b42.mp3",
   "samuel": "47a4ecafd5412e84.mp3"
@@ -1386,13 +1181,11 @@
   "narrator": "f6e4c4f1dd143834.mp3"
  },
  "to fall": {
-  "davi": "eab2370391725ed7.mp3",
-  "default": "eab2370391725ed7.mp3",
+  "default": "0d365038a7df6d0b.mp3",
   "salomao": "0d365038a7df6d0b.mp3"
  },
  "to fear": {
-  "davi": "a3348661bddaa439.mp3",
-  "default": "a3348661bddaa439.mp3",
+  "default": "84bc90775e40338f.mp3",
   "samuel": "84bc90775e40338f.mp3"
  },
  "david took five stones": {
@@ -1404,8 +1197,7 @@
   "default": "454575dadd3add7f.mp3"
  },
  "david had a sling and a stone": {
-  "davi": "2e5a5a520e27cdb5.mp3",
-  "default": "2e5a5a520e27cdb5.mp3",
+  "default": "10359efb83e84a78.mp3",
   "samuel": "10359efb83e84a78.mp3"
  },
  "do not fear the giant": {
@@ -1419,7 +1211,6 @@
  "silver": {
   "davi": "16d92a4c901d5b28.mp3",
   "default": "16d92a4c901d5b28.mp3",
-  "jose": "bf63fd1af9fc0e88.mp3",
   "jaco": "2e8debf39dfb8c65.mp3"
  },
  "harvest": {
@@ -1443,52 +1234,42 @@
   "default": "178906c75e94a5b0.mp3"
  },
  "what did david take to the battle": {
-  "davi": "5396439f5819f445.mp3",
-  "default": "5396439f5819f445.mp3",
+  "default": "6212a7d938df82e9.mp3",
   "samuel": "6212a7d938df82e9.mp3"
  },
  "a sword": {
-  "davi": "5f3c73cbb2eaa759.mp3",
-  "default": "5f3c73cbb2eaa759.mp3",
+  "default": "90e218cd729f7795.mp3",
   "samuel": "90e218cd729f7795.mp3"
  },
  "five stones": {
-  "davi": "727289aa7a1b4ab5.mp3",
-  "default": "727289aa7a1b4ab5.mp3",
+  "default": "830272d235d9afaf.mp3",
   "jesus": "830272d235d9afaf.mp3",
   "samuel": "a496b6d59cf14126.mp3"
  },
  "what did david take": {
-  "davi": "54dbaab2e0d7631e.mp3",
-  "default": "54dbaab2e0d7631e.mp3",
+  "default": "00b1b511c3eb8042.mp3",
   "samuel": "00b1b511c3eb8042.mp3"
  },
  "five stones and a sling": {
-  "davi": "c0128eceb1265a36.mp3",
-  "default": "c0128eceb1265a36.mp3",
+  "default": "312d03fd6b303dad.mp3",
   "samuel": "312d03fd6b303dad.mp3"
  },
  "goliath was a giant david took five stones and a sling he said the battle is the lords": {
-  "davi": "3ea04dd2155c3139.mp3",
-  "default": "3ea04dd2155c3139.mp3",
+  "default": "36a71e9262377724.mp3",
   "samuel": "36a71e9262377724.mp3"
  },
  "to sing": {
-  "davi": "f511b1f322013049.mp3",
-  "default": "f511b1f322013049.mp3",
+  "default": "56691aa3db724597.mp3",
   "salomao": "56691aa3db724597.mp3"
  },
  "song": {
-  "davi": "b4840a23c4a5c9d1.mp3",
   "default": "b2aecd5ee26bd0b6.mp3",
-  "jose": "53ec4092bfb2f1fe.mp3",
   "narrator": "b2aecd5ee26bd0b6.mp3",
   "samuel": "f1a06ae4f12703ac.mp3",
   "salomao": "e9ffa55d963d8f6b.mp3",
   "jaco": "ba88341881cc464b.mp3"
  },
  "rock": {
-  "davi": "87b730c64724d0f8.mp3",
   "default": "69fce3a8675514f9.mp3",
   "narrator": "69fce3a8675514f9.mp3",
   "salomao": "f415e8a1d2bfdb74.mp3"
@@ -1499,94 +1280,76 @@
   "narrator": "9754262910c94a88.mp3"
  },
  "fortress": {
-  "davi": "123adfc0c2104302.mp3",
-  "default": "123adfc0c2104302.mp3",
+  "default": "53475762af6c4361.mp3",
   "samuel": "53475762af6c4361.mp3"
  },
  "to trust": {
-  "davi": "1a9359aaebb19484.mp3",
-  "default": "1a9359aaebb19484.mp3",
+  "default": "b1aa0dfeaaed6605.mp3",
   "salomao": "b1aa0dfeaaed6605.mp3"
  },
  "the lord is my rock": {
-  "davi": "fa721a48a7ee61dd.mp3",
-  "default": "fa721a48a7ee61dd.mp3",
+  "default": "e4f43d9b37ebe9fc.mp3",
   "samuel": "e4f43d9b37ebe9fc.mp3",
   "salomao": "434c119d2167a22f.mp3"
  },
  "david sang unto the lord": {
-  "davi": "636b81466b9f1f9a.mp3",
-  "default": "636b81466b9f1f9a.mp3",
+  "default": "d7dbea9587e09043.mp3",
   "salomao": "d7dbea9587e09043.mp3"
  },
  "i trust in the lord": {
-  "davi": "e1673a078837387e.mp3",
-  "default": "e1673a078837387e.mp3",
+  "default": "d980bc650d786703.mp3",
   "salomao": "d980bc650d786703.mp3"
  },
  "sing a new song": {
-  "davi": "dbd83a2d6a5275fa.mp3",
-  "default": "dbd83a2d6a5275fa.mp3",
+  "default": "244d4917b6f8b5ec.mp3",
   "samuel": "244d4917b6f8b5ec.mp3"
  },
  "the lord is my rock and my fortress and my deliverer": {
-  "davi": "2356d00a53cb5f2c.mp3",
-  "default": "2356d00a53cb5f2c.mp3",
+  "default": "1095510b757007cc.mp3",
   "salomao": "1095510b757007cc.mp3"
  },
  "the lord is my blank and my fortress and my deliverer": {
-  "davi": "e49dec732703e6d7.mp3",
-  "default": "e49dec732703e6d7.mp3",
+  "default": "97665deb83876cdb.mp3",
   "salomao": "97665deb83876cdb.mp3"
  },
  "lamp": {
-  "davi": "93b6affba22ce207.mp3",
-  "default": "93b6affba22ce207.mp3",
+  "default": "3771f7f0213d6a79.mp3",
   "salomao": "3771f7f0213d6a79.mp3"
  },
  "road": {
-  "davi": "471d3558c6c6cc11.mp3",
-  "default": "471d3558c6c6cc11.mp3",
+  "default": "be8d72dddde33e0f.mp3",
   "salomao": "be8d72dddde33e0f.mp3"
  },
  "david sing for us": {
-  "davi": "3e0ccbad03256f85.mp3",
-  "default": "3e0ccbad03256f85.mp3",
+  "default": "2071f894f17c28e3.mp3",
   "salomao": "2071f894f17c28e3.mp3"
  },
  "who is my rock said david": {
-  "davi": "b85a6f11e28fc4ca.mp3",
-  "default": "b85a6f11e28fc4ca.mp3",
+  "default": "a9e3a2d0763e1135.mp3",
   "samuel": "a9e3a2d0763e1135.mp3"
  },
  "the lord": {
-  "davi": "68c013b311015c39.mp3",
-  "default": "68c013b311015c39.mp3",
+  "default": "38c932bec1d31b70.mp3",
   "samuel": "38c932bec1d31b70.mp3"
  },
  "the giant": {
-  "davi": "9d9360e8771ef47c.mp3",
-  "default": "9d9360e8771ef47c.mp3",
+  "default": "0c6be09362f335c2.mp3",
   "samuel": "0c6be09362f335c2.mp3"
  },
  "because god was with him": {
-  "davi": "1261ad03aac718ed.mp3",
-  "default": "1261ad03aac718ed.mp3",
+  "default": "3c46485d91f449a2.mp3",
   "salomao": "3c46485d91f449a2.mp3"
  },
  "david became king he sang the lord is my rock and my fortress he was strong because god was with him": {
-  "davi": "b1411d58635208c6.mp3",
-  "default": "b1411d58635208c6.mp3",
+  "default": "06343b599e774369.mp3",
   "salomao": "06343b599e774369.mp3"
  },
  "why was david strong": {
-  "davi": "519cb50522b13f49.mp3",
-  "default": "519cb50522b13f49.mp3",
+  "default": "b0bd377de98e193f.mp3",
   "salomao": "b0bd377de98e193f.mp3"
  },
  "because he had gold": {
-  "davi": "4dcb202e96973057.mp3",
-  "default": "4dcb202e96973057.mp3",
+  "default": "9cef2a542a0383cd.mp3",
   "salomao": "9cef2a542a0383cd.mp3"
  },
  "prophet": {
@@ -1595,25 +1358,21 @@
   "narrator": "8dbe4f498e11e56a.mp3"
  },
  "because he was tall": {
-  "davi": "aead7697c8767fb0.mp3",
   "default": "00c66c00b4dfbfac.mp3",
   "narrator": "00c66c00b4dfbfac.mp3",
   "salomao": "b1052aefab881f1d.mp3"
  },
  "voice": {
-  "isaias": "c02dd08b3536c573.mp3",
   "default": "3f912dd580b07533.mp3",
   "narrator": "3f912dd580b07533.mp3",
   "daniel": "9fb4bc2ce14e0b4b.mp3"
  },
  "to hear": {
-  "isaias": "87c0c2cc2e8293ef.mp3",
-  "default": "87c0c2cc2e8293ef.mp3",
+  "default": "a89dc2f54c5be0b0.mp3",
   "elias": "a89dc2f54c5be0b0.mp3"
  },
  "to send": {
-  "isaias": "30e3e3b2470dca63.mp3",
-  "default": "30e3e3b2470dca63.mp3",
+  "default": "a97c7fb25d4a716f.mp3",
   "jonas": "a97c7fb25d4a716f.mp3"
  },
  "throne": {
@@ -1621,8 +1380,7 @@
   "default": "a7657869f1d6330d.mp3"
  },
  "to call": {
-  "isaias": "e6603e78e4374d49.mp3",
-  "default": "e6603e78e4374d49.mp3",
+  "default": "52d23872dfbe4693.mp3",
   "elias": "52d23872dfbe4693.mp3"
  },
  "here am i send me": {
@@ -1633,13 +1391,11 @@
   "elias": "1bdc50309e48bbd2.mp3"
  },
  "i heard the voice of the lord": {
-  "isaias": "3cc9ac3881d25835.mp3",
-  "default": "3cc9ac3881d25835.mp3",
+  "default": "0bdfe2a77223a0d0.mp3",
   "elias": "0bdfe2a77223a0d0.mp3"
  },
  "isaiah was a prophet": {
-  "isaias": "bc5ea09752cd46d5.mp3",
-  "default": "bc5ea09752cd46d5.mp3",
+  "default": "8b1e4f64c6437bf6.mp3",
   "elias": "8b1e4f64c6437bf6.mp3"
  },
  "whom shall i send": {
@@ -1649,7 +1405,6 @@
  "send": {
   "isaias": "bb4d34b534f970b9.mp3",
   "default": "13bb2f46831f341f.mp3",
-  "jesus": "c66f2f08a5b3fc43.mp3",
   "narrator": "13bb2f46831f341f.mp3",
   "pedro": "5fc2b65cb7bcfe63.mp3"
  },
@@ -1678,36 +1433,30 @@
   "default": "6ced7f2ec3537271.mp3"
  },
  "i cannot go": {
-  "isaias": "d1189b7ce0eced0c.mp3",
   "default": "e9ed12106401bbe0.mp3",
   "narrator": "e9ed12106401bbe0.mp3",
   "elias": "6d216a1f768326e0.mp3",
   "jonas": "73cae5585092df32.mp3"
  },
  "send my brother": {
-  "isaias": "7cb3ee474b7d8416.mp3",
   "default": "b50b30a0cc1f3300.mp3",
   "narrator": "b50b30a0cc1f3300.mp3",
   "elias": "cfb6e5b991406afc.mp3",
   "jonas": "86ec0068c1ae9ee5.mp3"
  },
  "what did isaiah say": {
-  "isaias": "08d895961227a3e8.mp3",
-  "default": "08d895961227a3e8.mp3",
+  "default": "9f095ba04c27b8fe.mp3",
   "jonas": "9f095ba04c27b8fe.mp3"
  },
  "what did isaiah answer to god": {
-  "isaias": "fec18878129edd84.mp3",
-  "default": "fec18878129edd84.mp3",
+  "default": "983eff3a5a4ffb95.mp3",
   "elias": "983eff3a5a4ffb95.mp3"
  },
  "isaiah saw the lord on a throne god said whom shall i send isaiah said here am i send me": {
-  "isaias": "9f5381a4bfe95b68.mp3",
-  "default": "9f5381a4bfe95b68.mp3",
+  "default": "10028431abba9dd2.mp3",
   "jonas": "10028431abba9dd2.mp3"
  },
  "sign": {
-  "isaias": "e2a891eb26664a05.mp3",
   "default": "14aa43fdb0624987.mp3",
   "narrator": "14aa43fdb0624987.mp3",
   "jonas": "d26ea104cb9446b6.mp3",
@@ -1719,15 +1468,13 @@
   "narrator": "a3dad7186bfb92b0.mp3"
  },
  "name": {
-  "isaias": "1f8cd17a381b47c8.mp3",
   "default": "8b664385d59585b3.mp3",
   "narrator": "8b664385d59585b3.mp3",
   "elias": "7c9f76c76d836049.mp3",
   "daniel": "8f0af66aa1486d2d.mp3"
  },
  "son": {
-  "isaias": "cb64db71f9ee8881.mp3",
-  "default": "cb64db71f9ee8881.mp3",
+  "default": "881231cc7467b74c.mp3",
   "daniel": "881231cc7467b74c.mp3"
  },
  "with us": {
@@ -1735,8 +1482,7 @@
   "default": "fdf396d6bfbfe30a.mp3"
  },
  "mother": {
-  "isaias": "d0acdcfd19492b77.mp3",
-  "default": "d0acdcfd19492b77.mp3",
+  "default": "37963742f8de459c.mp3",
   "elias": "37963742f8de459c.mp3"
  },
  "god with us": {
@@ -1745,13 +1491,11 @@
   "narrator": "b2b33eb7677528c8.mp3"
  },
  "his name is immanuel": {
-  "isaias": "f40556420cf6eaaa.mp3",
-  "default": "f40556420cf6eaaa.mp3",
+  "default": "3b98b1f7663499c2.mp3",
   "jonas": "3b98b1f7663499c2.mp3"
  },
  "the lord will give you a sign": {
-  "isaias": "33f69aca8f8cbd7c.mp3",
-  "default": "33f69aca8f8cbd7c.mp3",
+  "default": "2a3fe5dc0b4fceb9.mp3",
   "daniel": "2a3fe5dc0b4fceb9.mp3"
  },
  "a child is born": {
@@ -1759,23 +1503,19 @@
   "default": "522e1ce1521e0f96.mp3"
  },
  "behold a virgin shall conceive and bear a son and shall call his name immanuel": {
-  "isaias": "961211af5235d392.mp3",
-  "default": "961211af5235d392.mp3",
+  "default": "ac71f2dc4dc1a0ae.mp3",
   "daniel": "ac71f2dc4dc1a0ae.mp3"
  },
  "land": {
-  "isaias": "c390105da1252920.mp3",
-  "default": "c390105da1252920.mp3",
+  "default": "26626282ba9e4eae.mp3",
   "daniel": "26626282ba9e4eae.mp3"
  },
  "behold a virgin shall conceive and bear a son and shall call his blank immanuel": {
-  "isaias": "7df134b5498ed312.mp3",
-  "default": "7df134b5498ed312.mp3",
+  "default": "6dda93bd5e784ae3.mp3",
   "daniel": "6dda93bd5e784ae3.mp3"
  },
  "word": {
-  "isaias": "14854e4bb5bfa4e1.mp3",
-  "default": "14854e4bb5bfa4e1.mp3",
+  "default": "72e4df5b8d80a25a.mp3",
   "daniel": "72e4df5b8d80a25a.mp3"
  },
  "what is the name of the child": {
@@ -1824,51 +1564,42 @@
   "default": "c9c3808caaee60ca.mp3"
  },
  "prince": {
-  "isaias": "01ed946cecf4ab74.mp3",
   "default": "4574f23c6d51b522.mp3",
   "narrator": "4574f23c6d51b522.mp3",
   "jonas": "c3913a2521313172.mp3"
  },
  "wonderful": {
-  "isaias": "c28c6870b9af4a0b.mp3",
   "default": "38e3efd6d575065c.mp3",
   "narrator": "38e3efd6d575065c.mp3",
   "daniel": "3a74ca98f149a3de.mp3"
  },
  "counsellor": {
-  "isaias": "77663f14a064629e.mp3",
-  "default": "77663f14a064629e.mp3",
+  "default": "2113235be4abe1f6.mp3",
   "daniel": "2113235be4abe1f6.mp3"
  },
  "mighty": {
-  "isaias": "c2e4978d5b509a4d.mp3",
   "default": "e9b4a0c3172d05cf.mp3",
   "narrator": "e9b4a0c3172d05cf.mp3",
   "daniel": "386cfaa8d93aecb6.mp3"
  },
  "everlasting": {
-  "isaias": "78f84d2a73ebe0cf.mp3",
-  "default": "78f84d2a73ebe0cf.mp3",
+  "default": "a4bcb8471919ca42.mp3",
   "daniel": "a4bcb8471919ca42.mp3"
  },
  "the prince of peace": {
-  "isaias": "5d2c4c036a6135b1.mp3",
-  "default": "5d2c4c036a6135b1.mp3",
+  "default": "4422e5eb0ce3db01.mp3",
   "jonas": "4422e5eb0ce3db01.mp3"
  },
  "his name is wonderful": {
-  "isaias": "daf482506d3bb15d.mp3",
-  "default": "daf482506d3bb15d.mp3",
+  "default": "d0b8d26250f408fa.mp3",
   "elias": "d0b8d26250f408fa.mp3"
  },
  "the mighty god": {
-  "isaias": "1873cde4438c82e9.mp3",
-  "default": "1873cde4438c82e9.mp3",
+  "default": "50ca56837221cf99.mp3",
   "jonas": "50ca56837221cf99.mp3"
  },
  "he brings peace": {
-  "isaias": "6cc6d9c1ef59dca9.mp3",
-  "default": "6cc6d9c1ef59dca9.mp3",
+  "default": "d84fc72a458b2a83.mp3",
   "daniel": "d84fc72a458b2a83.mp3"
  },
  "gold": {
@@ -1879,34 +1610,28 @@
   "jonas": "0e37c6e5aa20ca7a.mp3"
  },
  "and his name shall be called wonderful counsellor the mighty god the everlasting father the prince of peace": {
-  "isaias": "0e0ff5732044b5ca.mp3",
-  "default": "0e0ff5732044b5ca.mp3",
+  "default": "35b863fc0a4b2a39.mp3",
   "jonas": "35b863fc0a4b2a39.mp3"
  },
  "and his name shall be called wonderful counsellor the mighty god the everlasting father the prince of blank": {
-  "isaias": "23013828ce2abac6.mp3",
-  "default": "23013828ce2abac6.mp3",
+  "default": "3427132308cfecfe.mp3",
   "jonas": "3427132308cfecfe.mp3"
  },
  "the king of egypt": {
-  "isaias": "4a1f0b55a607cd0f.mp3",
-  "default": "4a1f0b55a607cd0f.mp3",
+  "default": "31d5868e4ba9e5e7.mp3",
   "jonas": "31d5868e4ba9e5e7.mp3",
   "daniel": "2e02b17469323b3a.mp3"
  },
  "who is called the prince of peace": {
-  "isaias": "312305dc0ae4d181.mp3",
-  "default": "312305dc0ae4d181.mp3",
+  "default": "0335aa16e27417b6.mp3",
   "daniel": "0335aa16e27417b6.mp3"
  },
  "who is coming": {
-  "isaias": "0844301d9effd2c4.mp3",
-  "default": "0844301d9effd2c4.mp3",
+  "default": "957c2a4816f27e96.mp3",
   "jonas": "957c2a4816f27e96.mp3"
  },
  "the prophet": {
-  "isaias": "a9900eb3c4d2a014.mp3",
-  "default": "a9900eb3c4d2a014.mp3",
+  "default": "2917f692e180b9d5.mp3",
   "daniel": "2917f692e180b9d5.mp3"
  },
  "what does the child bring": {
@@ -1918,22 +1643,17 @@
   "default": "3bd4edfa158935af.mp3"
  },
  "the son": {
-  "isaias": "e5f26d564bb2aa92.mp3",
-  "default": "e5f26d564bb2aa92.mp3",
+  "default": "f33c6a56fa73a63f.mp3",
   "daniel": "f33c6a56fa73a63f.mp3"
  },
  "dream": {
-  "jose": "39517b9c2e5b4e60.mp3",
   "default": "e296c8c14df36691.mp3",
   "narrator": "e296c8c14df36691.mp3",
   "rebeca": "ab2a83af3ad30a6c.mp3",
   "jaco": "a8cb795e9b6e26cf.mp3"
  },
  "brother": {
-  "jose": "2a4fbe07debd910f.mp3",
   "default": "23a09dfca7cfeadd.mp3",
-  "daniel": "2a4fbe07debd910f.mp3",
-  "jesus": "ac6a6875c6cfc873.mp3",
   "narrator": "23a09dfca7cfeadd.mp3",
   "rebeca": "1efe36ba22043d7c.mp3",
   "neemias": "25605519f60b92c1.mp3",
@@ -1946,24 +1666,20 @@
   "jaco": "a4bd60bea0cc086d.mp3"
  },
  "to sell": {
-  "jose": "f264345e5436021d.mp3",
-  "default": "f264345e5436021d.mp3",
+  "default": "9b2dce3fa4977891.mp3",
   "jaco": "9b2dce3fa4977891.mp3"
  },
  "colors": {
-  "jose": "725403f6f5f2319d.mp3",
   "default": "11d7b0c79b612fea.mp3",
   "narrator": "11d7b0c79b612fea.mp3",
   "jaco": "da32dff3ec4d3612.mp3"
  },
  "to love": {
-  "jose": "407f3d42ee5b5b01.mp3",
-  "default": "407f3d42ee5b5b01.mp3",
+  "default": "a464c3fef3a1b454.mp3",
   "jaco": "a464c3fef3a1b454.mp3"
  },
  "joseph had a dream": {
-  "jose": "972e311e46de2b97.mp3",
-  "default": "972e311e46de2b97.mp3",
+  "default": "7d02e7112bbec192.mp3",
   "rebeca": "7d02e7112bbec192.mp3"
  },
  "his brothers sold him": {
@@ -1984,62 +1700,50 @@
   "default": "93d15f234a7c2dc8.mp3"
  },
  "and joseph dreamed a dream and he told it his brethren": {
-  "jose": "37018559320291a2.mp3",
-  "default": "37018559320291a2.mp3",
+  "default": "aecf48f885d7a41a.mp3",
   "jaco": "aecf48f885d7a41a.mp3"
  },
  "and joseph blanked a dream and he told it his brethren": {
-  "jose": "a9227823fed449da.mp3",
-  "default": "a9227823fed449da.mp3",
+  "default": "c21c5455972b0dbe.mp3",
   "jaco": "c21c5455972b0dbe.mp3"
  },
  "joseph tell us your dream": {
-  "jose": "1c34563887c00eea.mp3",
-  "default": "1c34563887c00eea.mp3",
+  "default": "f4c40e8568cfaf32.mp3",
   "rebeca": "f4c40e8568cfaf32.mp3"
  },
  "a harp": {
-  "jose": "d0403fcde44c5359.mp3",
-  "default": "d0403fcde44c5359.mp3",
+  "default": "28c71a4771e26a0d.mp3",
   "rebeca": "28c71a4771e26a0d.mp3"
  },
  "the sun and the moon bowed to me": {
-  "jose": "16dafbd40fcac49e.mp3",
-  "default": "16dafbd40fcac49e.mp3",
+  "default": "a071a67d6163a94d.mp3",
   "rebeca": "a071a67d6163a94d.mp3"
  },
  "what did josephs father give him": {
-  "jose": "2b3050c799a6c382.mp3",
-  "default": "2b3050c799a6c382.mp3",
+  "default": "2c193e4bfc8042d2.mp3",
   "rebeca": "2c193e4bfc8042d2.mp3"
  },
  "they were jealous": {
-  "jose": "47dd124b698342b5.mp3",
-  "default": "47dd124b698342b5.mp3",
+  "default": "91ced0531a2805ae.mp3",
   "jaco": "91ced0531a2805ae.mp3"
  },
  "why did the brothers sell joseph": {
-  "jose": "6e9b1f117a93e692.mp3",
-  "default": "6e9b1f117a93e692.mp3",
+  "default": "ab7367d69be9c529.mp3",
   "jaco": "ab7367d69be9c529.mp3"
  },
  "joseph was the son jacob loved his father gave him a coat of many colors his brothers were jealous and sold him to egypt": {
-  "jose": "762a9abe9b59ab11.mp3",
-  "default": "762a9abe9b59ab11.mp3",
+  "default": "8229ac791c77fec6.mp3",
   "jaco": "8229ac791c77fec6.mp3"
  },
  "they needed a boat": {
-  "jose": "dbcbaa068ea6e93c.mp3",
-  "default": "dbcbaa068ea6e93c.mp3",
+  "default": "e83373d9c5320a07.mp3",
   "jaco": "e83373d9c5320a07.mp3"
  },
  "they were afraid of lions": {
-  "jose": "e366e15ceef02e91.mp3",
-  "default": "e366e15ceef02e91.mp3",
+  "default": "04ea1d740c2ca302.mp3",
   "jaco": "04ea1d740c2ca302.mp3"
  },
  "prison": {
-  "jose": "8efa83156b38d62e.mp3",
   "default": "289fe2d3350c1642.mp3",
   "narrator": "289fe2d3350c1642.mp3",
   "jaco": "ac5b11091d9a61b0.mp3"
@@ -2049,9 +1753,7 @@
   "default": "fb71ca1dcf081f73.mp3"
  },
  "seven": {
-  "jose": "19a763fca47c101a.mp3",
   "default": "36c663e0154c797b.mp3",
-  "daniel": "19a763fca47c101a.mp3",
   "narrator": "36c663e0154c797b.mp3",
   "rebeca": "19041c7503d0a695.mp3",
   "ezequiel": "05b89a34f37a531e.mp3"
@@ -2063,13 +1765,11 @@
   "narrator": "dcb4e93a2c2f73bc.mp3"
  },
  "years": {
-  "jose": "3cedb1cf4bcfd465.mp3",
   "default": "4388b56275520f76.mp3",
   "narrator": "4388b56275520f76.mp3",
   "rebeca": "62fac283ab2187fd.mp3"
  },
  "plenty": {
-  "jose": "a6b33803f05e987b.mp3",
   "default": "f8927b44f93b8cb2.mp3",
   "narrator": "f8927b44f93b8cb2.mp3",
   "rebeca": "457fcf09cf7790b9.mp3"
@@ -2083,13 +1783,11 @@
   "default": "52a1a43e0be83bd9.mp3"
  },
  "joseph was in prison": {
-  "jose": "d3a9fef148d35c92.mp3",
-  "default": "d3a9fef148d35c92.mp3",
+  "default": "9e87436aef52c433.mp3",
   "rebeca": "9e87436aef52c433.mp3"
  },
  "the king had a dream": {
-  "jose": "a3fb67d7bf153953.mp3",
-  "default": "a3fb67d7bf153953.mp3",
+  "default": "49d515d03cde081a.mp3",
   "rebeca": "49d515d03cde081a.mp3"
  },
  "but the lord was with joseph and shewed him mercy": {
@@ -2126,17 +1824,14 @@
   "default": "68fe3b4d9d40af52.mp3"
  },
  "three": {
-  "jose": "621ee9ee2af6979a.mp3",
   "default": "aeefab3f7b265530.mp3",
-  "daniel": "621ee9ee2af6979a.mp3",
   "narrator": "aeefab3f7b265530.mp3",
   "rebeca": "c815e6f893065212.mp3",
   "neemias": "0a75ee4a94c71b49.mp3",
   "ezequiel": "9074dc7350d73153.mp3"
  },
  "how many years of plenty did joseph announce": {
-  "jose": "5ab8ab0b3d81363a.mp3",
-  "default": "5ab8ab0b3d81363a.mp3",
+  "default": "96c75034a7267e6d.mp3",
   "rebeca": "96c75034a7267e6d.mp3"
  },
  "a ruler of egypt": {
@@ -2160,9 +1855,7 @@
   "default": "2277e804947cdc25.mp3"
  },
  "to forgive": {
-  "jose": "73ed1b4922c3a486.mp3",
-  "default": "73ed1b4922c3a486.mp3",
-  "jesus": "f7706ccdcfb89933.mp3",
+  "default": "b83403bfb9375901.mp3",
   "rebeca": "b83403bfb9375901.mp3",
   "pedro": "1475c9b6d7b2c024.mp3"
  },
@@ -2180,33 +1873,27 @@
   "default": "a97eff58a12c5159.mp3"
  },
  "to weep": {
-  "jose": "af0194a67075d902.mp3",
-  "default": "af0194a67075d902.mp3",
+  "default": "83ad0ffae6ad5f14.mp3",
   "rebeca": "83ad0ffae6ad5f14.mp3"
  },
  "joseph forgave his brothers": {
-  "jose": "8a5dc0aaa4d6a9d8.mp3",
-  "default": "8a5dc0aaa4d6a9d8.mp3",
+  "default": "4c82bf09c5d4e821.mp3",
   "rebeca": "4c82bf09c5d4e821.mp3"
  },
  "god meant it for good": {
-  "jose": "4ce8dfc692bcb982.mp3",
-  "default": "4ce8dfc692bcb982.mp3",
+  "default": "5b01ae29d5058dd3.mp3",
   "rebeca": "5b01ae29d5058dd3.mp3"
  },
  "joseph wept": {
-  "jose": "e4ea08c331a6c146.mp3",
-  "default": "e4ea08c331a6c146.mp3",
+  "default": "d83fa73aca726984.mp3",
   "jaco": "d83fa73aca726984.mp3"
  },
  "i am joseph your brother": {
-  "jose": "308737b195b72dc2.mp3",
-  "default": "308737b195b72dc2.mp3",
+  "default": "69c4560a8e4d204d.mp3",
   "rebeca": "69c4560a8e4d204d.mp3"
  },
  "the famine came": {
-  "jose": "890cc9a90c172120.mp3",
-  "default": "890cc9a90c172120.mp3",
+  "default": "f6cf664b86b72d04.mp3",
   "rebeca": "f6cf664b86b72d04.mp3"
  },
  "ye thought evil against me but god meant it unto good": {
@@ -2218,13 +1905,11 @@
   "default": "a02b583dcc61a7fe.mp3"
  },
  "do not be afraid god meant it for good": {
-  "jose": "ce5efcc44d3acf43.mp3",
-  "default": "ce5efcc44d3acf43.mp3",
+  "default": "5ed313973d853f93.mp3",
   "jaco": "5ed313973d853f93.mp3"
  },
  "go to the desert": {
-  "jose": "ac399db018eb7fc6.mp3",
-  "default": "ac399db018eb7fc6.mp3",
+  "default": "f499b3971be49481.mp3",
   "jaco": "f499b3971be49481.mp3"
  },
  "he forgave them": {
@@ -2236,8 +1921,7 @@
   "default": "3297b6077fbab852.mp3"
  },
  "we are your brothers forgive us": {
-  "jose": "408198086b4e3366.mp3",
-  "default": "408198086b4e3366.mp3",
+  "default": "0e11b2cd97af4e78.mp3",
   "jaco": "0e11b2cd97af4e78.mp3"
  },
  "he sold them": {
@@ -2249,37 +1933,30 @@
   "default": "cba17bee690423b2.mp3"
  },
  "why did god send joseph to egypt": {
-  "jose": "1662931fd1e017de.mp3",
-  "default": "1662931fd1e017de.mp3",
+  "default": "77dcbfcc62107fda.mp3",
   "jaco": "77dcbfcc62107fda.mp3"
  },
  "the famine came and the brothers went to egypt for bread they did not know joseph joseph wept and said i am joseph your brother god sent me here to save you": {
-  "jose": "09254f5afd924225.mp3",
-  "default": "09254f5afd924225.mp3",
+  "default": "8b224fc8d2892f5f.mp3",
   "jaco": "8b224fc8d2892f5f.mp3"
  },
  "to build an ark": {
-  "jose": "6ba0ddbb8a2644ed.mp3",
-  "default": "6ba0ddbb8a2644ed.mp3",
+  "default": "f69c5ac391591f80.mp3",
   "jaco": "f69c5ac391591f80.mp3"
  },
  "to save his family": {
-  "jose": "2c457b850baf025d.mp3",
-  "default": "2c457b850baf025d.mp3",
+  "default": "28b7b8f49abdb82a.mp3",
   "jaco": "28b7b8f49abdb82a.mp3"
  },
  "to fight a giant": {
-  "jose": "6042d910ee2ea66b.mp3",
-  "default": "6042d910ee2ea66b.mp3",
+  "default": "ee7120748d9ee9f8.mp3",
   "jaco": "ee7120748d9ee9f8.mp3"
  },
  "to pray": {
-  "daniel": "6270434b682f7d29.mp3",
-  "default": "6270434b682f7d29.mp3",
+  "default": "618c18d1b9f9cb01.mp3",
   "ezequiel": "618c18d1b9f9cb01.mp3"
  },
  "lion": {
-  "daniel": "455d7bd94fa91c67.mp3",
   "default": "45b7da3a9dd1adff.mp3",
   "narrator": "45b7da3a9dd1adff.mp3",
   "neemias": "96256004fc5923a7.mp3"
@@ -2295,23 +1972,19 @@
   "narrator": "45f49f1bb92399df.mp3"
  },
  "home": {
-  "daniel": "fa056e45bd248bcf.mp3",
-  "default": "fa056e45bd248bcf.mp3",
+  "default": "9314814dd73be6e3.mp3",
   "neemias": "9314814dd73be6e3.mp3"
  },
  "daniel was faithful to god": {
-  "daniel": "4ad48c6643ab373e.mp3",
-  "default": "4ad48c6643ab373e.mp3",
+  "default": "0d8ba722f987fc28.mp3",
   "ezequiel": "0d8ba722f987fc28.mp3"
  },
  "daniel loved god": {
-  "daniel": "eee3e60c23e43b77.mp3",
-  "default": "eee3e60c23e43b77.mp3",
+  "default": "1f6e4cd16a14218b.mp3",
   "ezequiel": "1f6e4cd16a14218b.mp3"
  },
  "daniel prayed three times a day": {
-  "daniel": "e9e3edc6a7d2027a.mp3",
-  "default": "e9e3edc6a7d2027a.mp3",
+  "default": "e8e8c50eb789cf52.mp3",
   "neemias": "e8e8c50eb789cf52.mp3"
  },
  "the king made a law": {
@@ -2319,8 +1992,7 @@
   "default": "cf78d626d47096e7.mp3"
  },
  "daniel prayed to god": {
-  "daniel": "e3ad65077a3eceea.mp3",
-  "default": "e3ad65077a3eceea.mp3",
+  "default": "6e7e360e5b0aa3bd.mp3",
   "neemias": "6e7e360e5b0aa3bd.mp3"
  },
  "he kneeled upon his knees three times a day and prayed": {
@@ -2351,57 +2023,46 @@
   "default": "020a710ce1194b06.mp3"
  },
  "daniel the king made a new law": {
-  "daniel": "fe17ab03f353a747.mp3",
-  "default": "fe17ab03f353a747.mp3",
+  "default": "aa70681e94a06bed.mp3",
   "ezequiel": "aa70681e94a06bed.mp3"
  },
  "i will pray to my god anyway": {
-  "daniel": "991f7b2cfc8e9248.mp3",
-  "default": "991f7b2cfc8e9248.mp3",
+  "default": "abf5bb10a2cd0fbb.mp3",
   "ezequiel": "abf5bb10a2cd0fbb.mp3"
  },
  "how many times a day did daniel pray": {
-  "daniel": "d454f5860aa6db49.mp3",
   "default": "cba4040eed61c643.mp3",
   "narrator": "cba4040eed61c643.mp3",
   "ezequiel": "a048a7e4e6b4b120.mp3"
  },
  "once": {
-  "daniel": "4194298810dea701.mp3",
   "default": "5b034f2326e47de1.mp3",
   "narrator": "5b034f2326e47de1.mp3",
   "ezequiel": "338624d38f7f1511.mp3"
  },
  "what did the law say": {
-  "daniel": "732de7213c666d5b.mp3",
-  "default": "732de7213c666d5b.mp3",
+  "default": "35a353816c692873.mp3",
   "ezequiel": "35a353816c692873.mp3"
  },
  "pray only to the king": {
-  "daniel": "809996589c7976ef.mp3",
-  "default": "809996589c7976ef.mp3",
+  "default": "0630f135733d836a.mp3",
   "ezequiel": "0630f135733d836a.mp3"
  },
  "build a temple": {
-  "daniel": "674a06a51e911027.mp3",
-  "default": "674a06a51e911027.mp3",
+  "default": "b93b601e9f312ae0.mp3",
   "ezequiel": "b93b601e9f312ae0.mp3"
  },
  "go to egypt": {
-  "daniel": "56af72a2c47a5632.mp3",
   "default": "68851970e41509bc.mp3",
-  "jesus": "5736e1862a4162db.mp3",
   "narrator": "68851970e41509bc.mp3",
   "ezequiel": "82d5518bc6aa9373.mp3",
   "maria": "085218e99a453522.mp3"
  },
  "daniel lived in babylon far from his home he loved god and prayed three times a day the king made a law pray only to the king but daniel prayed to god": {
-  "daniel": "9370bfbff8da1722.mp3",
-  "default": "9370bfbff8da1722.mp3",
+  "default": "7d7ec06ef9bdae1d.mp3",
   "ezequiel": "7d7ec06ef9bdae1d.mp3"
  },
  "mouth": {
-  "daniel": "996207a6525add3b.mp3",
   "default": "129ad17d74267b95.mp3",
   "narrator": "129ad17d74267b95.mp3",
   "neemias": "47df1c0a5b99a583.mp3"
@@ -2417,13 +2078,11 @@
   "default": "e43ea7c44b058364.mp3"
  },
  "morning": {
-  "daniel": "94f1d34f3c3a1780.mp3",
   "default": "b99c4465bcd290ce.mp3",
   "narrator": "b99c4465bcd290ce.mp3",
   "ezequiel": "1e99ee5bab14804e.mp3"
  },
  "den": {
-  "daniel": "c5f1f51c37543693.mp3",
   "default": "3c2c519a3ecdad46.mp3",
   "narrator": "3c2c519a3ecdad46.mp3",
   "neemias": "d67284986cdafa8e.mp3"
@@ -2433,8 +2092,7 @@
   "default": "ce9268fd16c5034e.mp3"
  },
  "god sent his angel": {
-  "daniel": "1f0529df9226e95c.mp3",
-  "default": "1f0529df9226e95c.mp3",
+  "default": "403b61a0347ded88.mp3",
   "ezequiel": "403b61a0347ded88.mp3"
  },
  "they threw daniel into the den": {
@@ -2442,8 +2100,7 @@
   "default": "afe80f22cf2e86ab.mp3"
  },
  "the angel shut the lions mouths": {
-  "daniel": "14ef6fa77cbfb304.mp3",
-  "default": "14ef6fa77cbfb304.mp3",
+  "default": "7c21c9c322952626.mp3",
   "ezequiel": "7c21c9c322952626.mp3"
  },
  "in the morning the king ran to the den": {
@@ -2451,48 +2108,39 @@
   "default": "80e82c3f3ab6e95e.mp3"
  },
  "the angel closed the mouth of the lion": {
-  "daniel": "58caf12c0db1560f.mp3",
-  "default": "58caf12c0db1560f.mp3",
+  "default": "884603da2e2bc022.mp3",
   "neemias": "884603da2e2bc022.mp3"
  },
  "my god hath sent his angel and hath shut the lions mouths": {
-  "daniel": "3045610182b0774e.mp3",
-  "default": "3045610182b0774e.mp3",
+  "default": "544d0838aff073e3.mp3",
   "neemias": "544d0838aff073e3.mp3"
  },
  "yes god sent his angel": {
-  "daniel": "c219a2ebe93e0347.mp3",
-  "default": "c219a2ebe93e0347.mp3",
+  "default": "6138037f9f1d1da7.mp3",
   "neemias": "6138037f9f1d1da7.mp3"
  },
  "daniel is your god able to save you": {
-  "daniel": "eb9ad0219accd113.mp3",
-  "default": "eb9ad0219accd113.mp3",
+  "default": "198b917218c816b3.mp3",
   "neemias": "198b917218c816b3.mp3"
  },
  "my god hath sent his blank and hath shut the lions mouths": {
-  "daniel": "efe7571c79b4cb73.mp3",
-  "default": "efe7571c79b4cb73.mp3",
+  "default": "52f3e05430361ae7.mp3",
   "neemias": "52f3e05430361ae7.mp3"
  },
  "i have a harp": {
-  "daniel": "76d2afc1a204f296.mp3",
-  "default": "76d2afc1a204f296.mp3",
+  "default": "9b15823eefd4027e.mp3",
   "neemias": "9b15823eefd4027e.mp3"
  },
  "who shut the lions mouths": {
-  "daniel": "6eb8d28e6560a88d.mp3",
-  "default": "6eb8d28e6560a88d.mp3",
+  "default": "81c00164cdc5f256.mp3",
   "neemias": "81c00164cdc5f256.mp3"
  },
  "an angel of god": {
-  "daniel": "be82d0022f1baaf2.mp3",
-  "default": "be82d0022f1baaf2.mp3",
+  "default": "44168280e010778d.mp3",
   "neemias": "44168280e010778d.mp3"
  },
  "daniels brother": {
-  "daniel": "a01405ec18ec2783.mp3",
-  "default": "a01405ec18ec2783.mp3",
+  "default": "062305b8dc6bca82.mp3",
   "neemias": "062305b8dc6bca82.mp3"
  },
  "when did the king run to the den": {
@@ -2525,21 +2173,18 @@
   "default": "7487c77d4a5603cd.mp3"
  },
  "forever": {
-  "daniel": "e1d8408f7dcbb7d2.mp3",
   "default": "2ad0accfc1cfcd3c.mp3",
   "narrator": "2ad0accfc1cfcd3c.mp3",
   "neemias": "d14e711e0de686ea.mp3"
  },
  "living": {
-  "daniel": "e6476fbb684f2ecb.mp3",
   "default": "c02608cb8d4a410f.mp3",
   "narrator": "c02608cb8d4a410f.mp3",
   "ezequiel": "6c7595bbc2a1c72e.mp3",
   "neemias": "637bb22aeec3242a.mp3"
  },
  "to deliver": {
-  "daniel": "191ceeacd7fca3ca.mp3",
-  "default": "191ceeacd7fca3ca.mp3",
+  "default": "10a58d8b3d7435c0.mp3",
   "ezequiel": "10a58d8b3d7435c0.mp3"
  },
  "to write": {
@@ -2551,14 +2196,12 @@
   "default": "bbd6eda12cdd4667.mp3"
  },
  "he is the living god": {
-  "daniel": "0ad5518bab1b91a3.mp3",
   "default": "8dc92d9296978489.mp3",
   "narrator": "8dc92d9296978489.mp3",
   "ezequiel": "f1df53e0bc79c4f7.mp3"
  },
  "the king wrote to all the people": {
-  "daniel": "c399067d8de7b8a7.mp3",
-  "default": "c399067d8de7b8a7.mp3",
+  "default": "071407cd15215cd4.mp3",
   "neemias": "071407cd15215cd4.mp3"
  },
  "the god of daniel saves": {
@@ -2566,113 +2209,92 @@
   "default": "343b1e5aece10a28.mp3"
  },
  "he is the living god forever": {
-  "daniel": "84f639ecbfc77aee.mp3",
-  "default": "84f639ecbfc77aee.mp3",
+  "default": "8fd771ec13f5ce00.mp3",
   "neemias": "8fd771ec13f5ce00.mp3"
  },
  "he is the living god and stedfast for ever": {
-  "daniel": "2168685b19579fec.mp3",
-  "default": "2168685b19579fec.mp3",
+  "default": "bda47d4451db7bfc.mp3",
   "neemias": "bda47d4451db7bfc.mp3"
  },
  "little": {
-  "daniel": "85bdf4f3e8cda082.mp3",
-  "default": "85bdf4f3e8cda082.mp3",
+  "default": "18ef4d4899eb77ca.mp3",
   "neemias": "18ef4d4899eb77ca.mp3"
  },
  "he is the blank god and stedfast for ever": {
-  "daniel": "8f1c267340abcceb.mp3",
-  "default": "8f1c267340abcceb.mp3",
+  "default": "fd55416e388a28ce.mp3",
   "neemias": "fd55416e388a28ce.mp3"
  },
  "people of babylon listen": {
-  "daniel": "744210018676e202.mp3",
-  "default": "744210018676e202.mp3",
+  "default": "2edaca7e11a2189e.mp3",
   "neemias": "2edaca7e11a2189e.mp3"
  },
  "the rain is coming": {
-  "daniel": "b29beaece92f01a1.mp3",
-  "default": "b29beaece92f01a1.mp3",
+  "default": "35d953a86b3215e5.mp3",
   "neemias": "35d953a86b3215e5.mp3"
  },
  "the god of daniel is the living god": {
-  "daniel": "56de31eed6b3273e.mp3",
-  "default": "56de31eed6b3273e.mp3",
+  "default": "c23c1aeb8b17d78f.mp3",
   "neemias": "c23c1aeb8b17d78f.mp3"
  },
  "what did the king say about god": {
-  "daniel": "f4e8ddf0c3bbc720.mp3",
   "default": "63a46081a996aeda.mp3",
   "narrator": "63a46081a996aeda.mp3",
   "ezequiel": "7441cb32bc6fd04a.mp3"
  },
  "he is far away": {
-  "daniel": "c222df2d09e618fe.mp3",
   "default": "6b11ad3ea8bd6c53.mp3",
   "narrator": "6b11ad3ea8bd6c53.mp3",
   "ezequiel": "03bc522c77d0ea1f.mp3"
  },
  "he is a king of egypt": {
-  "daniel": "317ffc3f74fe16cf.mp3",
-  "default": "317ffc3f74fe16cf.mp3",
+  "default": "a1ef95c64f2627ea.mp3",
   "ezequiel": "a1ef95c64f2627ea.mp3"
  },
  "how long is gods kingdom": {
-  "daniel": "b4c2a87a3f793bbb.mp3",
-  "default": "b4c2a87a3f793bbb.mp3",
+  "default": "553ecfb3f7b567c0.mp3",
   "neemias": "553ecfb3f7b567c0.mp3"
  },
  "seven years": {
-  "daniel": "b7131188af6df0a8.mp3",
-  "default": "b7131188af6df0a8.mp3",
+  "default": "5eceb359eb9c37c5.mp3",
   "neemias": "5eceb359eb9c37c5.mp3"
  },
  "one day": {
-  "daniel": "5d0763861ebf2415.mp3",
-  "default": "5d0763861ebf2415.mp3",
+  "default": "6b4ef0b674a56cde.mp3",
   "neemias": "6b4ef0b674a56cde.mp3"
  },
  "fisherman": {
-  "jesus": "4b8328cd324bdc29.mp3",
   "default": "0e5366483777d7ed.mp3",
   "narrator": "0e5366483777d7ed.mp3",
   "pedro": "4bc7751fdfcfd486.mp3"
  },
  "the king wrote to all the people the god of daniel is the living god his kingdom is forever he saves and he delivers daniel was faithful and god was faithful to him": {
-  "daniel": "fca0e15dcc9936f2.mp3",
-  "default": "fca0e15dcc9936f2.mp3",
+  "default": "97ed9c0756765add.mp3",
   "neemias": "97ed9c0756765add.mp3"
  },
  "net": {
-  "jesus": "05abe81277ceea08.mp3",
-  "default": "05abe81277ceea08.mp3",
+  "default": "33e9b39181c211d9.mp3",
   "pedro": "33e9b39181c211d9.mp3"
  },
  "disciple": {
-  "jesus": "a44c50acd85a47bb.mp3",
-  "default": "a44c50acd85a47bb.mp3",
+  "default": "413c03cae08f2bd7.mp3",
   "pedro": "413c03cae08f2bd7.mp3"
  },
  "to leave": {
-  "jesus": "111d24b740480243.mp3",
-  "default": "111d24b740480243.mp3",
+  "default": "78b59d0c8359cd81.mp3",
   "maria": "78b59d0c8359cd81.mp3"
  },
  "to follow": {
-  "jesus": "d7e314145e833356.mp3",
-  "default": "d7e314145e833356.mp3",
+  "default": "e9a680a33f0d112f.mp3",
   "maria": "e9a680a33f0d112f.mp3"
  },
  "follow me": {
-  "jesus": "bca31c5a90c9b674.mp3",
   "default": "821c8fba0db656dc.mp3",
   "narrator": "821c8fba0db656dc.mp3",
   "madalena": "c33078e0b382a652.mp3",
   "maria": "f75075f4fa4534b2.mp3"
  },
  "jesus walked by the sea": {
-  "jesus": "c71f37ffe12cfee5.mp3",
-  "default": "c71f37ffe12cfee5.mp3",
+  "default": "e03352b39c713556.mp3",
   "pedro": "e03352b39c713556.mp3"
  },
  "they left their nets and followed him": {
@@ -2680,13 +2302,11 @@
   "default": "8c1e8033fb5287ad.mp3"
  },
  "peter was a fisherman": {
-  "jesus": "bf3a5f3e9c4111fc.mp3",
-  "default": "bf3a5f3e9c4111fc.mp3",
+  "default": "4b03abbbb5bd89cd.mp3",
   "madalena": "4b03abbbb5bd89cd.mp3"
  },
  "the disciples followed jesus": {
-  "jesus": "9b8d945ee0d697ab.mp3",
-  "default": "9b8d945ee0d697ab.mp3",
+  "default": "b4d85197f045946c.mp3",
   "madalena": "b4d85197f045946c.mp3"
  },
  "follow me and i will make you fishers of men": {
@@ -2695,24 +2315,20 @@
   "pedro": "a3e15e857b72d4ca.mp3"
  },
  "blank me and i will make you fishers of men": {
-  "jesus": "b93b50b032dea9a3.mp3",
-  "default": "b93b50b032dea9a3.mp3",
+  "default": "0474d7460f9d5c7c.mp3",
   "pedro": "0474d7460f9d5c7c.mp3"
  },
  "follow": {
-  "jesus": "14e4778f7d0e20ea.mp3",
   "default": "669358d530b61907.mp3",
   "narrator": "669358d530b61907.mp3",
   "pedro": "74af0c9b5f4d248d.mp3"
  },
  "leave": {
-  "jesus": "a5bcdfc622722aca.mp3",
-  "default": "a5bcdfc622722aca.mp3",
+  "default": "59a59bd103dcbae4.mp3",
   "pedro": "59a59bd103dcbae4.mp3"
  },
  "build": {
-  "jesus": "2921c914d9e28361.mp3",
-  "default": "2921c914d9e28361.mp3",
+  "default": "86eb5c3f12f516f9.mp3",
   "pedro": "86eb5c3f12f516f9.mp3"
  },
  "peter leave your nets and follow me": {
@@ -2740,28 +2356,23 @@
   "default": "bffbf094cf095b9a.mp3"
  },
  "their nets": {
-  "jesus": "a52006d96ccf2ed7.mp3",
-  "default": "a52006d96ccf2ed7.mp3",
+  "default": "ea00842bcad76dc1.mp3",
   "maria": "ea00842bcad76dc1.mp3"
  },
  "what did peter and andrew leave": {
-  "jesus": "2df8805e2a050430.mp3",
-  "default": "2df8805e2a050430.mp3",
+  "default": "65ade96832bbe486.mp3",
   "maria": "65ade96832bbe486.mp3"
  },
  "their crowns": {
-  "jesus": "f927eaa911f679e3.mp3",
-  "default": "f927eaa911f679e3.mp3",
+  "default": "584d855ed36b7e2a.mp3",
   "maria": "584d855ed36b7e2a.mp3"
  },
  "jesus walked by the sea he saw peter and andrew two fishermen he said follow me and i will make you fishers of men they left their nets and followed him": {
-  "jesus": "239fef81c9cef2b0.mp3",
-  "default": "239fef81c9cef2b0.mp3",
+  "default": "28c8ee518da1f0ee.mp3",
   "maria": "28c8ee518da1f0ee.mp3"
  },
  "their harps": {
-  "jesus": "4f1925170f99688d.mp3",
-  "default": "4f1925170f99688d.mp3",
+  "default": "bbd9a18192f254bd.mp3",
   "maria": "bbd9a18192f254bd.mp3"
  },
  "father": {
@@ -2771,7 +2382,6 @@
   "pedro": "ff691baef07abdd0.mp3"
  },
  "daily": {
-  "jesus": "2ca30bd8f4953da9.mp3",
   "default": "46456ae6538af5ad.mp3",
   "narrator": "46456ae6538af5ad.mp3",
   "pedro": "8a15ffca3e8baa61.mp3"
@@ -2782,7 +2392,6 @@
   "narrator": "36498b610732e92c.mp3"
  },
  "will": {
-  "jesus": "a3c2fdf2779c3e8f.mp3",
   "default": "f8ba51653c9899a4.mp3",
   "narrator": "f8ba51653c9899a4.mp3",
   "maria": "ae2b4e7347b833a6.mp3"
@@ -2801,49 +2410,40 @@
   "default": "441a74ba0cff9ad6.mp3"
  },
  "your kingdom come": {
-  "jesus": "1e91bfc1c2a6c64d.mp3",
-  "default": "1e91bfc1c2a6c64d.mp3",
+  "default": "487df9f8cabf8edf.mp3",
   "maria": "487df9f8cabf8edf.mp3"
  },
  "our father in heaven": {
-  "jesus": "85bb7d14c0a111ec.mp3",
-  "default": "85bb7d14c0a111ec.mp3",
+  "default": "8774f6c53f99f760.mp3",
   "maria": "8774f6c53f99f760.mp3"
  },
  "servant": {
-  "jesus": "567cd76cfe17cf88.mp3",
-  "default": "567cd76cfe17cf88.mp3",
+  "default": "507d6f636824dc59.mp3",
   "pedro": "507d6f636824dc59.mp3"
  },
  "our father which art in heaven hallowed be thy name": {
-  "jesus": "da170b487a92ad3a.mp3",
-  "default": "da170b487a92ad3a.mp3",
+  "default": "e18b3d91e0658787.mp3",
   "pedro": "e18b3d91e0658787.mp3"
  },
  "our blank which art in heaven hallowed be thy name": {
-  "jesus": "e2f56b42d75465f1.mp3",
-  "default": "e2f56b42d75465f1.mp3",
+  "default": "4053572ddcc5abc8.mp3",
   "pedro": "4053572ddcc5abc8.mp3"
  },
  "lord teach us to pray": {
-  "jesus": "947df46c7eb1282a.mp3",
-  "default": "947df46c7eb1282a.mp3",
+  "default": "9b8c8f112cbef423.mp3",
   "madalena": "9b8c8f112cbef423.mp3"
  },
  "how does the prayer begin": {
-  "jesus": "4bd015f6fc7699eb.mp3",
-  "default": "4bd015f6fc7699eb.mp3",
+  "default": "b40afcfa5acce4db.mp3",
   "maria": "b40afcfa5acce4db.mp3"
  },
  "our father which art in heaven": {
-  "jesus": "90269c9b6f81b0a5.mp3",
-  "default": "90269c9b6f81b0a5.mp3",
+  "default": "216bd375f808fd64.mp3",
   "madalena": "216bd375f808fd64.mp3",
   "maria": "2ee9a888d7a1e31b.mp3"
  },
  "in the beginning": {
-  "jesus": "2d39b7fa8b298a85.mp3",
-  "default": "2d39b7fa8b298a85.mp3",
+  "default": "f40ca175c3142cbb.mp3",
   "maria": "f40ca175c3142cbb.mp3"
  },
  "what do we ask for each day": {
@@ -2868,26 +2468,22 @@
   "default": "efe3c484dfaf948e.mp3"
  },
  "five": {
-  "jesus": "ad17f38ae4f17f15.mp3",
   "default": "365c3530bdc0a459.mp3",
   "narrator": "365c3530bdc0a459.mp3",
   "maria": "af197cdb1c07bf14.mp3",
   "pedro": "3ed845ac4822747c.mp3"
  },
  "crowd": {
-  "jesus": "b39e68ff786adb7a.mp3",
   "default": "4e5b7b62ef969563.mp3",
   "narrator": "4e5b7b62ef969563.mp3",
   "pedro": "cd070a994e1827b0.mp3"
  },
  "to bless": {
-  "jesus": "a6780d8338d40667.mp3",
-  "default": "a6780d8338d40667.mp3",
+  "default": "266f8ead17b455db.mp3",
   "maria": "266f8ead17b455db.mp3"
  },
  "basket": {
-  "jesus": "1792b1af6ce8d663.mp3",
-  "default": "1792b1af6ce8d663.mp3",
+  "default": "e05689bf9ef71e61.mp3",
   "maria": "e05689bf9ef71e61.mp3"
  },
  "two": {
@@ -2897,13 +2493,11 @@
   "maria": "7501ffc957cedfe3.mp3"
  },
  "five loaves and two fishes": {
-  "jesus": "71434604e175b0f5.mp3",
-  "default": "71434604e175b0f5.mp3",
+  "default": "3152335f82bb5b80.mp3",
   "madalena": "3152335f82bb5b80.mp3"
  },
  "a great crowd followed jesus": {
-  "jesus": "c26af2878ff2f011.mp3",
-  "default": "c26af2878ff2f011.mp3",
+  "default": "499d62f745543c9b.mp3",
   "madalena": "499d62f745543c9b.mp3"
  },
  "they did all eat and were filled": {
@@ -2911,83 +2505,68 @@
   "default": "b6ab7f3ea4b43cf1.mp3"
  },
  "they had two fishes": {
-  "jesus": "abe6d94469ed1323.mp3",
-  "default": "abe6d94469ed1323.mp3",
+  "default": "d9635a1abd992953.mp3",
   "madalena": "d9635a1abd992953.mp3"
  },
  "jesus blessed the bread and the fish": {
-  "jesus": "5f9fb809cc806ba1.mp3",
-  "default": "5f9fb809cc806ba1.mp3",
+  "default": "143255f435e4b1b3.mp3",
   "madalena": "143255f435e4b1b3.mp3"
  },
  "blessed": {
-  "jesus": "c56e2558c245a31a.mp3",
   "default": "b311e51934084550.mp3",
   "narrator": "b311e51934084550.mp3",
   "pedro": "e4c065b52d1fd714.mp3"
  },
  "and he took the five loaves and the two fishes and blessed": {
-  "jesus": "de76b507f3591522.mp3",
-  "default": "de76b507f3591522.mp3",
+  "default": "ccb1655542299baf.mp3",
   "pedro": "ccb1655542299baf.mp3"
  },
  "and he took the five loaves and the two fishes and blank": {
-  "jesus": "ce9a4f85b65e380a.mp3",
-  "default": "ce9a4f85b65e380a.mp3",
+  "default": "1f5d99803976017a.mp3",
   "pedro": "1f5d99803976017a.mp3"
  },
  "sold": {
-  "jesus": "b65d1417ad09dea3.mp3",
   "default": "a824b4b974626703.mp3",
   "narrator": "a824b4b974626703.mp3",
   "pedro": "1b24108ef77d2958.mp3"
  },
  "hid": {
-  "jesus": "c10eede041c087a6.mp3",
   "default": "7a749f435422f842.mp3",
   "narrator": "7a749f435422f842.mp3",
   "pedro": "727fe54c246bf954.mp3"
  },
  "cut": {
-  "jesus": "aeac32588e0739ed.mp3",
-  "default": "aeac32588e0739ed.mp3",
+  "default": "853e0088c7db6552.mp3",
   "pedro": "853e0088c7db6552.mp3"
  },
  "bring them to me": {
-  "jesus": "310b200825c7fe05.mp3",
-  "default": "310b200825c7fe05.mp3",
+  "default": "66a9ad07df8a2254.mp3",
   "maria": "66a9ad07df8a2254.mp3"
  },
  "lord we have only five loaves and two fishes": {
-  "jesus": "d84fd8b6df74076d.mp3",
-  "default": "d84fd8b6df74076d.mp3",
+  "default": "80d139335213abdc.mp3",
   "maria": "80d139335213abdc.mp3"
  },
  "close the door": {
-  "jesus": "512bb7443fde6db3.mp3",
-  "default": "512bb7443fde6db3.mp3",
+  "default": "d8b628f6c5a588e3.mp3",
   "maria": "d8b628f6c5a588e3.mp3"
  },
  "twelve": {
-  "jesus": "eaff575cb986bbbf.mp3",
   "default": "bc5d22b53f4a197d.mp3",
   "narrator": "bc5d22b53f4a197d.mp3",
   "pedro": "0d3ce922ed1abc97.mp3",
   "maria": "2fe3f3a6e8e22dc8.mp3"
  },
  "how many loaves did the boy have": {
-  "jesus": "0d8a250f11b76dbd.mp3",
-  "default": "0d8a250f11b76dbd.mp3",
+  "default": "63545a48439111a8.mp3",
   "pedro": "63545a48439111a8.mp3"
  },
  "how many baskets were left": {
-  "jesus": "4de7eb4fb46f3ef8.mp3",
-  "default": "4de7eb4fb46f3ef8.mp3",
+  "default": "5c9d21f31801832c.mp3",
   "maria": "5c9d21f31801832c.mp3"
  },
  "a great crowd followed jesus a boy had five loaves and two fishes jesus blessed the bread and the fish and everyone ate twelve baskets were left over": {
-  "jesus": "d5b39763d3cd3f43.mp3",
-  "default": "d5b39763d3cd3f43.mp3",
+  "default": "9dd8fb7079eb7fb8.mp3",
   "maria": "9dd8fb7079eb7fb8.mp3"
  },
  "he made the light the sea and the trees": {
