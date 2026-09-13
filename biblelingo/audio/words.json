@@ -21,9 +21,9 @@
    "d": 0.26
   },
   "josue": {
-   "f": "words/9c1b08e566d9df8d.mp3",
-   "p": 0.996,
-   "d": 0.14
+   "f": "words/aa8c9c1e4f9a91fc.mp3",
+   "p": 0.997,
+   "d": 0.12
   },
   "arao": {
    "f": "words/4ee5d93bb6b281ee.mp3",
@@ -36,14 +36,14 @@
    "d": 0.14
   },
   "davi": {
-   "f": "words/f7e413430156da09.mp3",
-   "p": 0.998,
-   "d": 0.2
+   "f": "words/aa6be2908ca91a6b.mp3",
+   "p": 0.999,
+   "d": 0.12
   },
   "samuel": {
-   "f": "words/dbbf462a39ff99e2.mp3",
-   "p": 0.994,
-   "d": 0.18
+   "f": "words/2c32f0a32ce3a4a2.mp3",
+   "p": 0.998,
+   "d": 0.12
   },
   "salomao": {
    "f": "words/5befb03dd1f177cf.mp3",
@@ -86,9 +86,9 @@
    "d": 0.16
   },
   "daniel": {
-   "f": "words/03d14d721dd032c7.mp3",
+   "f": "words/b5af7005777b2f0c.mp3",
    "p": 0.999,
-   "d": 0.32
+   "d": 0.14
   },
   "maria": {
    "f": "words/44cc268fde754429.mp3",
@@ -147,8 +147,8 @@
   },
   "juda": {
    "f": "words/167e3b10b2f607fd.mp3",
-   "p": 0.926,
-   "d": 0.14
+   "p": 0.998,
+   "d": 0.12
   },
   "copeiro": {
    "f": "words/4a7b0fcaf71453b8.mp3",
@@ -165,7 +165,22 @@
    "p": 0.997,
    "d": 0.18
   },
-  "default": "words/5a942c1d682026e8.mp3"
+  "default": "words/5a942c1d682026e8.mp3",
+  "pharaoh": {
+   "f": "words/e9949456c55f697e.mp3",
+   "p": 0.999,
+   "d": 0.12
+  },
+  "jesse": {
+   "f": "words/f92b4b97282c3474.mp3",
+   "p": 0.976,
+   "d": 0.14
+  },
+  "jonatas": {
+   "f": "words/5655f9ff9f1489fa.mp3",
+   "p": 1.0,
+   "d": 0.1
+  }
  },
  "create": {
   "jesus": {
@@ -200,14 +215,14 @@
    "d": 0.16
   },
   "jesus": {
-   "f": "words/e802e846ee5254d1.mp3",
-   "p": 0.998,
-   "d": 0.2
+   "f": "words/5d800724d6172ef9.mp3",
+   "p": 0.999,
+   "d": 0.14
   },
   "salomao": {
    "f": "words/af5fbbc54cf2cd4e.mp3",
-   "p": 0.996,
-   "d": 0.2
+   "p": 0.999,
+   "d": 0.14
   },
   "rebeca": {
    "f": "words/ae53d2bb85dc619e.mp3",
@@ -220,9 +235,9 @@
    "d": 0.2
   },
   "jaco": {
-   "f": "words/e85a97259b6223b1.mp3",
+   "f": "words/7bda13aac07fa7a0.mp3",
    "p": 0.999,
-   "d": 0.16
+   "d": 0.12
   },
   "noe": {
    "f": "words/577b2dec6dd19988.mp3",
@@ -230,9 +245,9 @@
    "d": 0.16
   },
   "davi": {
-   "f": "words/2102f928ea7d6ccb.mp3",
-   "p": 0.998,
-   "d": 0.16
+   "f": "words/88c7d38bb1c2e3af.mp3",
+   "p": 1.0,
+   "d": 0.12
   },
   "arao": {
    "f": "words/9949b43f9e1b7f4c.mp3",
@@ -240,9 +255,9 @@
    "d": 0.22
   },
   "josue": {
-   "f": "words/cc4c9e441296383d.mp3",
-   "p": 0.998,
-   "d": 0.16
+   "f": "words/d078595d5ca05520.mp3",
+   "p": 1.0,
+   "d": 0.12
   },
   "moises": {
    "f": "words/d4d07f8ee2350574.mp3",
@@ -250,14 +265,14 @@
    "d": 0.14
   },
   "narrator": {
-   "f": "words/50a4c62b51d9b55f.mp3",
-   "p": 0.996,
-   "d": 0.16
+   "f": "words/5cf2e8a467b618f3.mp3",
+   "p": 0.999,
+   "d": 0.1
   },
   "samuel": {
-   "f": "words/87ee4abdd27cab10.mp3",
+   "f": "words/61fce0a00cdb7ea6.mp3",
    "p": 0.994,
-   "d": 0.22
+   "d": 0.12
   },
   "elias": {
    "f": "words/2712078025b78301.mp3",
@@ -290,9 +305,9 @@
    "d": 0.2
   },
   "pedro": {
-   "f": "words/54714d28791d8851.mp3",
+   "f": "words/dfe61d1c9ef2d6fe.mp3",
    "p": 0.999,
-   "d": 0.16
+   "d": 0.12
   },
   "maria": {
    "f": "words/0e66d890a52427b0.mp3",
@@ -300,24 +315,24 @@
    "d": 0.22
   },
   "sem": {
-   "f": "words/d4073a200706ed89.mp3",
-   "p": 0.816,
-   "d": 0.18
+   "f": "words/bc9d19b60ce3047b.mp3",
+   "p": 0.978,
+   "d": 0.1
   },
   "esposa": {
-   "f": "words/a938df4eece0136f.mp3",
-   "p": 0.772,
-   "d": 0.2
+   "f": "words/3637371e3cea8a8a.mp3",
+   "p": 0.998,
+   "d": 0.12
   },
   "voice": {
-   "f": "words/b37cd270561842e2.mp3",
-   "p": 0.998,
-   "d": 0.22
+   "f": "words/ed891844163f6545.mp3",
+   "p": 0.999,
+   "d": 0.12
   },
   "pharaoh": {
-   "f": "words/d696a348a8ed2caf.mp3",
-   "p": 0.992,
-   "d": 0.18
+   "f": "words/2b89b0087dd54fa5.mp3",
+   "p": 0.997,
+   "d": 0.1
   },
   "jesse": {
    "f": "words/20d65c5aad61cd76.mp3",
@@ -335,9 +350,9 @@
    "d": 0.16
   },
   "atalaia": {
-   "f": "words/af4bf98db4a5bcac.mp3",
-   "p": 0.994,
-   "d": 0.2
+   "f": "words/5ab8708834dfcf02.mp3",
+   "p": 0.997,
+   "d": 0.12
   },
   "ismaelita": {
    "f": "words/4b26b11fcad9c74f.mp3",
@@ -360,21 +375,56 @@
    "d": 0.14
   },
   "belsazar": {
-   "f": "words/98b145ee41820674.mp3",
-   "p": 0.995,
-   "d": 0.22
+   "f": "words/73af276d1f48a19a.mp3",
+   "p": 0.999,
+   "d": 0.1
   },
   "oficial": {
    "f": "words/714aba6bcf2559d6.mp3",
-   "p": 0.991,
-   "d": 0.22
+   "p": 0.999,
+   "d": 0.12
   },
   "dario": {
-   "f": "words/2eb535ab2aed72b1.mp3",
-   "p": 0.998,
-   "d": 0.2
+   "f": "words/6f67fec45d58ee7b.mp3",
+   "p": 0.999,
+   "d": 0.1
   },
-  "default": "words/88a2c057235f527b.mp3"
+  "default": "words/88a2c057235f527b.mp3",
+  "madalena": {
+   "f": "words/0858df0ca0b1bbcb.mp3",
+   "p": 0.963,
+   "d": 0.12
+  },
+  "merchant": {
+   "f": "words/05594ec33acc1e91.mp3",
+   "p": 0.998,
+   "d": 0.1
+  },
+  "povo": {
+   "f": "words/49cd1a42c6f45639.mp3",
+   "p": 0.987,
+   "d": 0.1
+  },
+  "mefibosete": {
+   "f": "words/ef10265a6e8579a5.mp3",
+   "p": 0.936,
+   "d": 0.14
+  },
+  "potifar": {
+   "f": "words/e8dbbae3db4c0e13.mp3",
+   "p": 0.99,
+   "d": 0.12
+  },
+  "aspenaz": {
+   "f": "words/ea1bcc2ca00f6377.mp3",
+   "p": 0.979,
+   "d": 0.12
+  },
+  "serva": {
+   "f": "words/c180b5d0c91789a8.mp3",
+   "p": 0.435,
+   "d": 0.36
+  }
  },
  "heaven": {
   "eva": {
@@ -620,7 +670,12 @@
    "p": 0.972,
    "d": 0.4
   },
-  "default": "words/1af160427260b473.mp3"
+  "default": "words/1af160427260b473.mp3",
+  "ezequias": {
+   "f": "words/35c0885212678cf8.mp3",
+   "p": 0.973,
+   "d": 0.14
+  }
  },
  "earth": {
   "eva": {
@@ -758,8 +813,8 @@
    "d": 0.36
   },
   "arao": {
-   "f": "words/23b28008a20836f1.mp3",
-   "p": 0.706,
+   "f": "words/b1aa622fcec43365.mp3",
+   "p": 0.967,
    "d": 0.14
   },
   "neemias": {
@@ -773,9 +828,9 @@
    "d": 0.14
   },
   "samuel": {
-   "f": "words/0a9470a290e6d057.mp3",
-   "p": 0.974,
-   "d": 0.8
+   "f": "words/6e20672d8077fa4b.mp3",
+   "p": 0.991,
+   "d": 0.14
   },
   "jonas": {
    "f": "words/3ee114283d5406a5.mp3",
@@ -783,9 +838,9 @@
    "d": 0.2
   },
   "isaias": {
-   "f": "words/538c06c9efe8e25b.mp3",
-   "p": 0.997,
-   "d": 0.18
+   "f": "words/a8328c9a43cd9ebe.mp3",
+   "p": 0.998,
+   "d": 0.14
   },
   "elias": {
    "f": "words/3b8f5cf615916ddf.mp3",
@@ -813,9 +868,9 @@
    "d": 0.24
   },
   "noe": {
-   "f": "words/f08899d2356fdc17.mp3",
-   "p": 0.996,
-   "d": 0.22
+   "f": "words/1bb8ebf7dd72e7ff.mp3",
+   "p": 0.997,
+   "d": 0.14
   },
   "esposa": {
    "f": "words/a9f7db464ee33588.mp3",
@@ -873,24 +928,24 @@
    "d": 0.14
   },
   "potifar": {
-   "f": "words/449618e8b25bda83.mp3",
+   "f": "words/71ad638c9a570ba9.mp3",
    "p": 0.991,
-   "d": 0.22
+   "d": 0.1
   },
   "mordomo": {
-   "f": "words/0cff02b18814461b.mp3",
-   "p": 0.699,
-   "d": 0.16
+   "f": "words/3b90c75ee4d33216.mp3",
+   "p": 0.987,
+   "d": 0.12
   },
   "aspenaz": {
-   "f": "words/12ce83a0a4dce5bb.mp3",
-   "p": 0.998,
-   "d": 0.18
+   "f": "words/3cef3afcc25231f5.mp3",
+   "p": 0.999,
+   "d": 0.12
   },
   "nabucodonosor": {
-   "f": "words/4c8228a6e573c14b.mp3",
-   "p": 0.976,
-   "d": 0.42
+   "f": "words/4e91390eb3033f66.mp3",
+   "p": 0.982,
+   "d": 0.12
   },
   "oficial": {
    "f": "words/5ac897d441ee3aa9.mp3",
@@ -902,7 +957,27 @@
    "p": 0.879,
    "d": 0.16
   },
-  "default": "words/a2322e584cc4f8b8.mp3"
+  "default": "words/a2322e584cc4f8b8.mp3",
+  "andre": {
+   "f": "words/692270ccd89dfdc1.mp3",
+   "p": 0.566,
+   "d": 0.14
+  },
+  "marta": {
+   "f": "words/c17e722cfe564304.mp3",
+   "p": 0.887,
+   "d": 0.12
+  },
+  "povo": {
+   "f": "words/d26faa9feac79af3.mp3",
+   "p": 0.986,
+   "d": 0.12
+  },
+  "jonatas": {
+   "f": "words/ce96e4653cd8d163.mp3",
+   "p": 0.995,
+   "d": 0.14
+  }
  },
  "good": {
   "eva": {
@@ -1065,14 +1140,14 @@
  },
  "it": {
   "eva": {
-   "f": "words/2a71d1c0230fb3ef.mp3",
-   "p": 0.84,
-   "d": 0.16
+   "f": "words/40f2938836856e07.mp3",
+   "p": 0.993,
+   "d": 0.12
   },
   "jaco": {
-   "f": "words/331ca7354061fe62.mp3",
-   "p": 0.858,
-   "d": 0.14
+   "f": "words/7ca05d62d195d3df.mp3",
+   "p": 0.998,
+   "d": 0.1
   },
   "isaias": {
    "f": "words/7c703d60e7888521.mp3",
@@ -1090,9 +1165,9 @@
    "d": 0.22
   },
   "adao": {
-   "f": "words/96124dbe81125f27.mp3",
-   "p": 0.705,
-   "d": 0.42
+   "f": "words/32c1e13e79e99b3c.mp3",
+   "p": 0.994,
+   "d": 0.1
   },
   "voice": {
    "f": "words/f6e1d51bd59516f3.mp3",
@@ -1140,14 +1215,14 @@
    "d": 0.4
   },
   "nabucodonosor": {
-   "f": "words/b7f9e03e3a23933a.mp3",
-   "p": 0.69,
-   "d": 0.78
+   "f": "words/e9fc710610db39ac.mp3",
+   "p": 0.996,
+   "d": 0.12
   },
   "belsazar": {
-   "f": "words/09d69804804a91e2.mp3",
-   "p": 0.992,
-   "d": 0.3
+   "f": "words/e18886ee19c0be31.mp3",
+   "p": 0.994,
+   "d": 0.1
   },
   "daniel": {
    "f": "words/d21981efb5a1a22c.mp3",
@@ -1155,11 +1230,16 @@
    "d": 0.62
   },
   "pedro": {
-   "f": "words/967193a051dedacb.mp3",
-   "p": 0.948,
-   "d": 0.32
+   "f": "words/1613715bf3a0e603.mp3",
+   "p": 0.997,
+   "d": 0.14
   },
-  "default": "words/d21981efb5a1a22c.mp3"
+  "default": "words/d21981efb5a1a22c.mp3",
+  "moises": {
+   "f": "words/d1641f31bed57caf.mp3",
+   "p": 0.994,
+   "d": 0.12
+  }
  },
  "ark": {
   "eva": {
@@ -1320,7 +1400,12 @@
    "p": 0.908,
    "d": 0.34
   },
-  "default": "words/e3bdf115f6b31547.mp3"
+  "default": "words/e3bdf115f6b31547.mp3",
+  "moises": {
+   "f": "words/c03ae45c9a205a57.mp3",
+   "p": 0.987,
+   "d": 0.14
+  }
  },
  "who": {
   "eva": {
@@ -1339,9 +1424,9 @@
    "d": 0.2
   },
   "isaias": {
-   "f": "words/2b6c7bc52d2127e4.mp3",
-   "p": 0.996,
-   "d": 0.16
+   "f": "words/5f92b216904d4fa8.mp3",
+   "p": 0.997,
+   "d": 0.14
   },
   "daniel": {
    "f": "words/b73395f7f2d65488.mp3",
@@ -1407,9 +1492,9 @@
    "d": 0.18
   },
   "josue": {
-   "f": "words/a29c09bc7ac2b17f.mp3",
-   "p": 0.973,
-   "d": 0.16
+   "f": "words/0b177c8748881770.mp3",
+   "p": 0.983,
+   "d": 0.14
   },
   "davi": {
    "f": "words/795760eb4c495d21.mp3",
@@ -1437,9 +1522,9 @@
    "d": 0.16
   },
   "ezequiel": {
-   "f": "words/75023a91b7f77a88.mp3",
-   "p": 0.899,
-   "d": 0.18
+   "f": "words/649ab004430ae1b2.mp3",
+   "p": 0.981,
+   "d": 0.1
   },
   "daniel": {
    "f": "words/9506e740e0916281.mp3",
@@ -1452,11 +1537,16 @@
    "d": 0.16
   },
   "dario": {
-   "f": "words/becc6f3c6951202d.mp3",
-   "p": 0.958,
-   "d": 0.66
+   "f": "words/157c303b580fc6a8.mp3",
+   "p": 0.989,
+   "d": 0.1
   },
-  "default": "words/9506e740e0916281.mp3"
+  "default": "words/9506e740e0916281.mp3",
+  "moises": {
+   "f": "words/6f69cf8ac5568ad0.mp3",
+   "p": 0.994,
+   "d": 0.12
+  }
  },
  "say": {
   "adao": {
@@ -1533,9 +1623,9 @@
  },
  "was": {
   "adao": {
-   "f": "words/ccb0eda8f26746dc.mp3",
-   "p": 0.998,
-   "d": 0.16
+   "f": "words/3e59969a64efdd76.mp3",
+   "p": 0.999,
+   "d": 0.14
   },
   "eva": {
    "f": "words/6f0618213397fcf9.mp3",
@@ -1612,7 +1702,12 @@
    "p": 0.981,
    "d": 0.18
   },
-  "default": "words/280b7b184d093490.mp3"
+  "default": "words/280b7b184d093490.mp3",
+  "josue": {
+   "f": "words/d6e31fa1f24c9450.mp3",
+   "p": 1.0,
+   "d": 0.12
+  }
  },
  "dark": {
   "adao": {
@@ -1658,7 +1753,12 @@
    "p": 0.518,
    "d": 0.24
   },
-  "default": "words/b85f0bda1f318833.mp3"
+  "default": "words/b85f0bda1f318833.mp3",
+  "isaias": {
+   "f": "words/c6efa7d6952cd050.mp3",
+   "p": 0.418,
+   "d": 0.54
+  }
  },
  "god": {
   "adao": {
@@ -1795,9 +1895,9 @@
    "d": 0.3
   },
   "josue": {
-   "f": "words/c4c6522cda895099.mp3",
+   "f": "words/2b6a27caf64aec69.mp3",
    "p": 0.999,
-   "d": 0.26
+   "d": 0.3
   },
   "samuel": {
    "f": "words/ff565bb0b6c16f0b.mp3",
@@ -1882,7 +1982,12 @@
    "p": 0.999,
    "d": 0.2
   },
-  "default": "words/51e1325ec97b955b.mp3"
+  "default": "words/51e1325ec97b955b.mp3",
+  "pharaoh": {
+   "f": "words/1e3efdbd8993ff28.mp3",
+   "p": 0.999,
+   "d": 0.14
+  }
  },
  "there": {
   "adao": {
@@ -1896,9 +2001,9 @@
    "d": 0.18
   },
   "jose": {
-   "f": "words/8ab0b44618be35fe.mp3",
-   "p": 0.97,
-   "d": 0.18
+   "f": "words/0f439780702a6bae.mp3",
+   "p": 0.995,
+   "d": 0.12
   },
   "eva": {
    "f": "words/479298333cf5a7ad.mp3",
@@ -2014,9 +2119,9 @@
    "d": 0.14
   },
   "davi": {
-   "f": "words/effc549dadb79f78.mp3",
-   "p": 0.866,
-   "d": 0.18
+   "f": "words/990e734ac631e4a5.mp3",
+   "p": 0.999,
+   "d": 0.12
   },
   "pharaoh": {
    "f": "words/affd8d7bae85f268.mp3",
@@ -2024,9 +2129,9 @@
    "d": 0.16
   },
   "juda": {
-   "f": "words/2b5c809fbf2667ae.mp3",
-   "p": 0.991,
-   "d": 0.46
+   "f": "words/cde76d00a8036035.mp3",
+   "p": 0.997,
+   "d": 0.12
   },
   "aspenaz": {
    "f": "words/6fde54e51bc4528f.mp3",
@@ -2038,7 +2143,12 @@
    "p": 0.902,
    "d": 0.16
   },
-  "default": "words/dc948604b6118987.mp3"
+  "default": "words/dc948604b6118987.mp3",
+  "acaz": {
+   "f": "words/2ba225f0c0f4037e.mp3",
+   "p": 0.968,
+   "d": 0.14
+  }
  },
  "rain": {
   "adao": {
@@ -2095,9 +2205,9 @@
    "d": 0.16
   },
   "rebeca": {
-   "f": "words/b80726335e8c1457.mp3",
-   "p": 0.993,
-   "d": 0.14
+   "f": "words/46d0acc376456ff9.mp3",
+   "p": 0.997,
+   "d": 0.12
   },
   "narrator": {
    "f": "words/0a555900f21d242c.mp3",
@@ -2105,8 +2215,8 @@
    "d": 0.14
   },
   "jaco": {
-   "f": "words/30b8d40bb0aabdff.mp3",
-   "p": 0.984,
+   "f": "words/c285687aaf7a9f72.mp3",
+   "p": 0.999,
    "d": 0.14
   },
   "madalena": {
@@ -2125,14 +2235,14 @@
    "d": 0.2
   },
   "arao": {
-   "f": "words/5dcd483d895e1c11.mp3",
-   "p": 0.674,
-   "d": 0.14
+   "f": "words/9539a19476890f0c.mp3",
+   "p": 0.981,
+   "d": 0.12
   },
   "samuel": {
-   "f": "words/98ef6b92d4170a42.mp3",
-   "p": 0.995,
-   "d": 0.18
+   "f": "words/948afe8b6750380c.mp3",
+   "p": 0.996,
+   "d": 0.12
   },
   "elias": {
    "f": "words/c56bf9bdcb163016.mp3",
@@ -2150,9 +2260,9 @@
    "d": 0.14
   },
   "jose": {
-   "f": "words/fce40aacd3f43311.mp3",
-   "p": 0.995,
-   "d": 0.14
+   "f": "words/92f16b76306a8277.mp3",
+   "p": 0.998,
+   "d": 0.12
   },
   "neemias": {
    "f": "words/6c3f3f4386d790a5.mp3",
@@ -2180,9 +2290,9 @@
    "d": 0.14
   },
   "voice": {
-   "f": "words/58a43af8b1aa4536.mp3",
-   "p": 0.996,
-   "d": 0.16
+   "f": "words/6e64ee9374d47cbb.mp3",
+   "p": 0.998,
+   "d": 0.12
   },
   "davi": {
    "f": "words/7cbf08f7bf51fa54.mp3",
@@ -2190,21 +2300,76 @@
    "d": 0.18
   },
   "copeiro": {
-   "f": "words/da31be21c83a03fd.mp3",
-   "p": 0.994,
-   "d": 0.14
+   "f": "words/bf135bf7e36f7e9b.mp3",
+   "p": 0.998,
+   "d": 0.12
   },
   "belsazar": {
-   "f": "words/ed9a37d835d811cf.mp3",
-   "p": 0.513,
-   "d": 0.88
+   "f": "words/353a495a9fe3e69f.mp3",
+   "p": 0.906,
+   "d": 0.12
   },
   "serva": {
    "f": "words/883c8d352d92ce0f.mp3",
    "p": 0.997,
    "d": 0.18
   },
-  "default": "words/e227c1fd86c5fe4f.mp3"
+  "default": "words/e227c1fd86c5fe4f.mp3",
+  "salomao": {
+   "f": "words/8d29671d4673bffd.mp3",
+   "p": 0.998,
+   "d": 0.12
+  },
+  "jonas": {
+   "f": "words/73ef0f4cc8eb836c.mp3",
+   "p": 0.522,
+   "d": 0.12
+  },
+  "andre": {
+   "f": "words/0484ed36afc36b23.mp3",
+   "p": 0.995,
+   "d": 0.12
+  },
+  "pharaoh": {
+   "f": "words/d698dc99efcf78dd.mp3",
+   "p": 0.998,
+   "d": 0.12
+  },
+  "jonatas": {
+   "f": "words/a52eb6ed8c9f183d.mp3",
+   "p": 0.995,
+   "d": 0.12
+  },
+  "acaz": {
+   "f": "words/f38f8e2c56fe0dfd.mp3",
+   "p": 0.985,
+   "d": 0.12
+  },
+  "ezequias": {
+   "f": "words/aa3cf1d4c337a530.mp3",
+   "p": 0.992,
+   "d": 0.12
+  },
+  "juda": {
+   "f": "words/3cb97bb185596164.mp3",
+   "p": 0.992,
+   "d": 0.12
+  },
+  "ismaelita": {
+   "f": "words/ae8f63508ecd5f03.mp3",
+   "p": 0.992,
+   "d": 0.12
+  },
+  "nabucodonosor": {
+   "f": "words/621628bd51f58d66.mp3",
+   "p": 0.996,
+   "d": 0.12
+  },
+  "dario": {
+   "f": "words/ef3b36d9c927c5c1.mp3",
+   "p": 0.997,
+   "d": 0.12
+  }
  },
  "called": {
   "adao": {
@@ -2317,14 +2482,14 @@
    "d": 0.22
   },
   "jesus": {
-   "f": "words/4b11e192882b5711.mp3",
-   "p": 0.972,
-   "d": 0.24
+   "f": "words/5d315c0445a17157.mp3",
+   "p": 0.998,
+   "d": 0.12
   },
   "davi": {
-   "f": "words/7b2b04fc1bf86b90.mp3",
-   "p": 0.734,
-   "d": 0.14
+   "f": "words/98a760e3733d0a24.mp3",
+   "p": 0.791,
+   "d": 0.12
   },
   "samuel": {
    "f": "words/3d6b2cd3cfc164cc.mp3",
@@ -2347,9 +2512,9 @@
    "d": 0.6
   },
   "jose": {
-   "f": "words/51bccf5c4e6841cf.mp3",
-   "p": 0.795,
-   "d": 0.18
+   "f": "words/7cb2a08c62dca207.mp3",
+   "p": 0.989,
+   "d": 0.12
   },
   "daniel": {
    "f": "words/570a6c2bce04d1af.mp3",
@@ -2371,7 +2536,22 @@
    "p": 0.983,
    "d": 0.9
   },
-  "default": "words/045b20ea8c48b860.mp3"
+  "default": "words/5d315c0445a17157.mp3",
+  "jaco": {
+   "f": "words/14e70bfe1345707b.mp3",
+   "p": 0.865,
+   "d": 0.1
+  },
+  "pedro": {
+   "f": "words/00c7c41ad0b2088b.mp3",
+   "p": 0.847,
+   "d": 0.1
+  },
+  "ezequias": {
+   "f": "words/5422bfc054af770f.mp3",
+   "p": 0.996,
+   "d": 0.12
+  }
  },
  "saw": {
   "eva": {
@@ -2424,7 +2604,12 @@
    "p": 0.989,
    "d": 0.24
   },
-  "default": "words/1f3c6ab54df9266f.mp3"
+  "default": "words/1f3c6ab54df9266f.mp3",
+  "narrator": {
+   "f": "words/ef69ae09bf41a4bd.mp3",
+   "p": 0.96,
+   "d": 0.14
+  }
  },
  "that": {
   "eva": {
@@ -2468,16 +2653,21 @@
    "d": 0.18
   },
   "jesus": {
-   "f": "words/ab1b706130a569a6.mp3",
-   "p": 0.975,
-   "d": 0.18
+   "f": "words/9114b24e8d34e637.mp3",
+   "p": 0.994,
+   "d": 0.14
   },
   "pedro": {
    "f": "words/7ce8c0aa9cd43fe7.mp3",
    "p": 0.995,
    "d": 0.2
   },
-  "default": "words/7a351e0d94cc58f1.mp3"
+  "default": "words/7a351e0d94cc58f1.mp3",
+  "serva": {
+   "f": "words/a73c185b68af5ce8.mp3",
+   "p": 0.998,
+   "d": 0.12
+  }
  },
  "evening": {
   "adao": {
@@ -2562,9 +2752,9 @@
    "d": 0.3
   },
   "jesus": {
-   "f": "words/d23aed655fa0af90.mp3",
-   "p": 0.98,
-   "d": 0.28
+   "f": "words/3858d989c0c2f49d.mp3",
+   "p": 0.994,
+   "d": 0.12
   },
   "moises": {
    "f": "words/a52cacef8fd37708.mp3",
@@ -2723,9 +2913,9 @@
    "d": 0.2
   },
   "zaqueu": {
-   "f": "words/ecf6df4d04da4b3e.mp3",
-   "p": 0.995,
-   "d": 0.18
+   "f": "words/68956274326bd421.mp3",
+   "p": 0.999,
+   "d": 0.14
   },
   "marta": {
    "f": "words/755c645921a653d2.mp3",
@@ -3177,9 +3367,9 @@
  },
  "in": {
   "jesus": {
-   "f": "words/2e6370308d12485c.mp3",
+   "f": "words/c75fe515d967a4fc.mp3",
    "p": 0.998,
-   "d": 0.2
+   "d": 0.12
   },
   "adao": {
    "f": "words/65f6875ce749c10e.mp3",
@@ -3282,14 +3472,14 @@
    "d": 0.16
   },
   "jesse": {
-   "f": "words/24d0f460aa876c20.mp3",
-   "p": 0.989,
-   "d": 0.18
+   "f": "words/4d136f66ce396a39.mp3",
+   "p": 0.998,
+   "d": 0.12
   },
   "isaias": {
-   "f": "words/9c0994bd636c2ae9.mp3",
-   "p": 0.988,
-   "d": 0.2
+   "f": "words/e0a2d7dd5af203c3.mp3",
+   "p": 0.992,
+   "d": 0.1
   },
   "ismaelita": {
    "f": "words/492d4a409d0172ca.mp3",
@@ -3311,7 +3501,17 @@
    "p": 0.998,
    "d": 0.24
   },
-  "default": "words/9de729d4beb57203.mp3"
+  "default": "words/9de729d4beb57203.mp3",
+  "potifar": {
+   "f": "words/b1c6dbc34df929cd.mp3",
+   "p": 0.998,
+   "d": 0.1
+  },
+  "nabucodonosor": {
+   "f": "words/3c0bb643bc3b2a66.mp3",
+   "p": 0.986,
+   "d": 0.12
+  }
  },
  "tree": {
   "jesus": {
@@ -3338,9 +3538,9 @@
  },
  "of": {
   "jesus": {
-   "f": "words/29ed31efd5e981e5.mp3",
-   "p": 0.996,
-   "d": 0.14
+   "f": "words/5098b87ed17775cf.mp3",
+   "p": 0.999,
+   "d": 0.12
   },
   "eva": {
    "f": "words/dc528d43802ebbed.mp3",
@@ -3358,14 +3558,14 @@
    "d": 0.14
   },
   "noe": {
-   "f": "words/10813edb7a547f2c.mp3",
-   "p": 0.998,
-   "d": 0.24
+   "f": "words/8048b14f79be86bb.mp3",
+   "p": 0.999,
+   "d": 0.12
   },
   "narrator": {
-   "f": "words/57a9d352ab3f0b9a.mp3",
+   "f": "words/c639d2dd3304444f.mp3",
    "p": 0.998,
-   "d": 0.2
+   "d": 0.12
   },
   "jaco": {
    "f": "words/1a538dbdd4e2b67f.mp3",
@@ -3373,9 +3573,9 @@
    "d": 0.16
   },
   "arao": {
-   "f": "words/fd414eee1b685a1e.mp3",
-   "p": 0.993,
-   "d": 0.14
+   "f": "words/ce5e481b132e7131.mp3",
+   "p": 0.995,
+   "d": 0.12
   },
   "josue": {
    "f": "words/4fe9a788acacab91.mp3",
@@ -3438,9 +3638,9 @@
    "d": 0.22
   },
   "voice": {
-   "f": "words/25a18da750527fb4.mp3",
-   "p": 0.991,
-   "d": 0.2
+   "f": "words/5c8ad67b9f3af71f.mp3",
+   "p": 0.999,
+   "d": 0.1
   },
   "davi": {
    "f": "words/c18273db5df380c5.mp3",
@@ -3502,7 +3702,17 @@
    "p": 0.999,
    "d": 0.14
   },
-  "default": "words/32130b08fab5c3df.mp3"
+  "default": "words/32130b08fab5c3df.mp3",
+  "zaqueu": {
+   "f": "words/37be0844ca3b4c9f.mp3",
+   "p": 0.997,
+   "d": 0.12
+  },
+  "jesse": {
+   "f": "words/f1bf4041844a7a60.mp3",
+   "p": 0.996,
+   "d": 0.12
+  }
  },
  "life": {
   "jesus": {
@@ -3834,7 +4044,22 @@
    "p": 0.994,
    "d": 0.28
   },
-  "default": "words/fd014c81371cc887.mp3"
+  "default": "words/fd014c81371cc887.mp3",
+  "maria": {
+   "f": "words/cf7988f4d014d18f.mp3",
+   "p": 0.984,
+   "d": 0.12
+  },
+  "pharaoh": {
+   "f": "words/0d7667a245cba351.mp3",
+   "p": 0.996,
+   "d": 0.12
+  },
+  "coxo": {
+   "f": "words/16b2a09b77ee5e99.mp3",
+   "p": 0.935,
+   "d": 0.12
+  }
  },
  "five": {
   "jesus": {
@@ -4138,7 +4363,17 @@
    "p": 0.502,
    "d": 0.52
   },
-  "default": "words/9c1c987b74a13a73.mp3"
+  "default": "words/9c1c987b74a13a73.mp3",
+  "voice": {
+   "f": "words/74479a1d5b271509.mp3",
+   "p": 0.409,
+   "d": 0.44
+  },
+  "esposa": {
+   "f": "words/e10256126d0ae043.mp3",
+   "p": 0.415,
+   "d": 0.5
+  }
  },
  "made": {
   "noe": {
@@ -4176,7 +4411,12 @@
    "p": 0.992,
    "d": 0.2
   },
-  "default": "words/932826fb8f1ad6dc.mp3"
+  "default": "words/932826fb8f1ad6dc.mp3",
+  "jaco": {
+   "f": "words/0e8d587e46d0f057.mp3",
+   "p": 0.999,
+   "d": 0.14
+  }
  },
  "an": {
   "noe": {
@@ -4190,9 +4430,9 @@
    "d": 0.2
   },
   "jaco": {
-   "f": "words/cbe8b83304888d3b.mp3",
+   "f": "words/e9952d7c908d6e91.mp3",
    "p": 0.995,
-   "d": 0.22
+   "d": 0.14
   },
   "moises": {
    "f": "words/1d4afec89a769efb.mp3",
@@ -4499,7 +4739,12 @@
    "p": 0.987,
    "d": 0.22
   },
-  "default": "words/9fe3a31e619299f2.mp3"
+  "default": "words/9fe3a31e619299f2.mp3",
+  "jose": {
+   "f": "words/7737d46efc20ed88.mp3",
+   "p": 0.981,
+   "d": 0.12
+  }
  },
  "making": {
   "noe": {
@@ -4596,7 +4841,17 @@
    "p": 0.509,
    "d": 0.22
   },
-  "default": "words/c15295c5f3559f58.mp3"
+  "default": "words/c15295c5f3559f58.mp3",
+  "noe": {
+   "f": "words/5803b9c03f6e9598.mp3",
+   "p": 0.441,
+   "d": 0.64
+  },
+  "dario": {
+   "f": "words/56410c84721e6a45.mp3",
+   "p": 0.405,
+   "d": 0.28
+  }
  },
  "come": {
   "jaco": {
@@ -4658,8 +4913,8 @@
  },
  "by": {
   "jaco": {
-   "f": "words/bfa172ed88bed342.mp3",
-   "p": 0.931,
+   "f": "words/78d973686637122d.mp3",
+   "p": 0.988,
    "d": 0.14
   },
   "noe": {
@@ -4778,18 +5033,23 @@
    "p": 0.985,
    "d": 0.24
   },
-  "default": "words/743a9bc5e9673038.mp3"
+  "default": "words/743a9bc5e9673038.mp3",
+  "neemias": {
+   "f": "words/4c520e0dab7b9e33.mp3",
+   "p": 0.422,
+   "d": 0.14
+  }
  },
  "at": {
   "jaco": {
-   "f": "words/68b43c6670fc8efa.mp3",
-   "p": 0.99,
-   "d": 0.14
+   "f": "words/e37f8eaa102866dd.mp3",
+   "p": 0.996,
+   "d": 0.12
   },
   "daniel": {
-   "f": "words/d910bd4c40eb0104.mp3",
-   "p": 0.797,
-   "d": 0.18
+   "f": "words/7802c02e57c17fd0.mp3",
+   "p": 0.998,
+   "d": 0.12
   },
   "samuel": {
    "f": "words/bee41cf0d295b5ab.mp3",
@@ -4811,7 +5071,32 @@
    "p": 0.996,
    "d": 0.16
   },
-  "default": "words/865ec48252f3a929.mp3"
+  "default": "words/865ec48252f3a929.mp3",
+  "davi": {
+   "f": "words/86919aea4b9c988b.mp3",
+   "p": 0.997,
+   "d": 0.12
+  },
+  "esposa": {
+   "f": "words/1a00b3c155ab345a.mp3",
+   "p": 0.999,
+   "d": 0.12
+  },
+  "voice": {
+   "f": "words/8a27e026993666b3.mp3",
+   "p": 0.996,
+   "d": 0.12
+  },
+  "potifar": {
+   "f": "words/ab74d7460800ed21.mp3",
+   "p": 0.996,
+   "d": 0.14
+  },
+  "coxo": {
+   "f": "words/afd9424e7033e56e.mp3",
+   "p": 0.996,
+   "d": 0.14
+  }
  },
  "open": {
   "noe": {
@@ -4819,7 +5104,12 @@
    "p": 0.969,
    "d": 0.46
   },
-  "default": "words/9f69ecb62ee5809c.mp3"
+  "default": "words/9f69ecb62ee5809c.mp3",
+  "daniel": {
+   "f": "words/e808072bd0d38022.mp3",
+   "p": 0.442,
+   "d": 0.24
+  }
  },
  "water": {
   "noe": {
@@ -5398,9 +5688,9 @@
    "d": 0.36
   },
   "jose": {
-   "f": "words/31b9a0d3397b7f3d.mp3",
-   "p": 0.996,
-   "d": 0.36
+   "f": "words/1418bcebc3a17c68.mp3",
+   "p": 0.997,
+   "d": 0.14
   },
   "rebeca": {
    "f": "words/d02d9c99a2cb3a3e.mp3",
@@ -5564,9 +5854,9 @@
    "d": 0.24
   },
   "samuel": {
-   "f": "words/7b52040bb981b8c0.mp3",
-   "p": 0.995,
-   "d": 0.28
+   "f": "words/5564bcc8e2307120.mp3",
+   "p": 0.998,
+   "d": 0.12
   },
   "goliath": {
    "f": "words/14223d0abfffdb82.mp3",
@@ -5574,9 +5864,9 @@
    "d": 0.18
   },
   "pharaoh": {
-   "f": "words/7ebb21c51f967417.mp3",
-   "p": 0.991,
-   "d": 0.16
+   "f": "words/c4fcb86df058df0d.mp3",
+   "p": 0.993,
+   "d": 0.12
   },
   "mordomo": {
    "f": "words/1a5da5c07d3797b0.mp3",
@@ -5593,7 +5883,22 @@
    "p": 0.994,
    "d": 0.14
   },
-  "default": "words/31a557860248b266.mp3"
+  "default": "words/31a557860248b266.mp3",
+  "ezequiel": {
+   "f": "words/78bb11493bfc03c9.mp3",
+   "p": 0.984,
+   "d": 0.12
+  },
+  "acaz": {
+   "f": "words/c90d6245ab19f13e.mp3",
+   "p": 0.991,
+   "d": 0.12
+  },
+  "copeiro": {
+   "f": "words/de150286db0da5cd.mp3",
+   "p": 0.994,
+   "d": 0.1
+  }
  },
  "remember": {
   "noe": {
@@ -5747,9 +6052,9 @@
    "d": 0.2
   },
   "jose": {
-   "f": "words/9430191a4ae76508.mp3",
-   "p": 0.99,
-   "d": 0.38
+   "f": "words/21f4588334b2bcee.mp3",
+   "p": 0.998,
+   "d": 0.14
   },
   "narrator": {
    "f": "words/d09c9d1d8c956071.mp3",
@@ -5777,9 +6082,9 @@
    "d": 0.26
   },
   "isaias": {
-   "f": "words/0043b8d6ea6c0446.mp3",
-   "p": 0.994,
-   "d": 0.14
+   "f": "words/5735be359cc68256.mp3",
+   "p": 0.997,
+   "d": 0.1
   },
   "potifar": {
    "f": "words/fa13edb3861a265b.mp3",
@@ -5806,7 +6111,27 @@
    "p": 0.997,
    "d": 0.16
   },
-  "default": "words/5b14e8b4088b4703.mp3"
+  "default": "words/5b14e8b4088b4703.mp3",
+  "arao": {
+   "f": "words/eb07e56fce46ca9e.mp3",
+   "p": 0.977,
+   "d": 0.12
+  },
+  "mefibosete": {
+   "f": "words/7177a0650c5d61f6.mp3",
+   "p": 0.996,
+   "d": 0.1
+  },
+  "acaz": {
+   "f": "words/79dcead31828deea.mp3",
+   "p": 0.971,
+   "d": 0.1
+  },
+  "sedento": {
+   "f": "words/5d58626e7457b857.mp3",
+   "p": 0.993,
+   "d": 0.1
+  }
  },
  "bow": {
   "noe": {
@@ -6254,9 +6579,9 @@
    "d": 0.18
   },
   "josue": {
-   "f": "words/884e8b5dc2f9062b.mp3",
-   "p": 0.996,
-   "d": 0.16
+   "f": "words/94dbfbc9cd139c6c.mp3",
+   "p": 1.0,
+   "d": 0.14
   },
   "salomao": {
    "f": "words/31f1ee740db9a44f.mp3",
@@ -6274,14 +6599,14 @@
    "d": 0.16
   },
   "jaco": {
-   "f": "words/ae605d41da3e5940.mp3",
-   "p": 0.982,
-   "d": 0.18
+   "f": "words/4c98ee0a08ec8912.mp3",
+   "p": 0.989,
+   "d": 0.12
   },
   "jesus": {
-   "f": "words/daf956a283fb37f8.mp3",
-   "p": 0.994,
-   "d": 0.16
+   "f": "words/2dc4c8db5a232774.mp3",
+   "p": 0.997,
+   "d": 0.12
   },
   "narrator": {
    "f": "words/16261c066377f90a.mp3",
@@ -6299,9 +6624,9 @@
    "d": 0.14
   },
   "jesse": {
-   "f": "words/cf93f16735954978.mp3",
-   "p": 0.994,
-   "d": 0.16
+   "f": "words/9b304a3a5ed73ad1.mp3",
+   "p": 0.998,
+   "d": 0.1
   },
   "jonatas": {
    "f": "words/e75bda32e6a5cf6a.mp3",
@@ -6309,9 +6634,9 @@
    "d": 0.16
   },
   "davi": {
-   "f": "words/f70e40383a9afcec.mp3",
+   "f": "words/b48cd015729ce16e.mp3",
    "p": 0.997,
-   "d": 0.2
+   "d": 0.12
   },
   "mefibosete": {
    "f": "words/7ea71e358be1cd10.mp3",
@@ -6348,7 +6673,37 @@
    "p": 0.822,
    "d": 0.18
   },
-  "default": "words/e75bda32e6a5cf6a.mp3"
+  "default": "words/e75bda32e6a5cf6a.mp3",
+  "samuel": {
+   "f": "words/15a708d19b86db8b.mp3",
+   "p": 0.985,
+   "d": 0.14
+  },
+  "goliath": {
+   "f": "words/bb1f909aa3f51f03.mp3",
+   "p": 0.996,
+   "d": 0.12
+  },
+  "potifar": {
+   "f": "words/7b96e028c352e8ba.mp3",
+   "p": 0.998,
+   "d": 0.1
+  },
+  "jose": {
+   "f": "words/1e999463e760d7d3.mp3",
+   "p": 0.998,
+   "d": 0.12
+  },
+  "mordomo": {
+   "f": "words/3babd9c17bed0d6a.mp3",
+   "p": 0.994,
+   "d": 0.12
+  },
+  "dario": {
+   "f": "words/d36b829a30f0f45d.mp3",
+   "p": 0.99,
+   "d": 0.14
+  }
  },
  "shoes": {
   "moises": {
@@ -6580,7 +6935,12 @@
    "p": 0.549,
    "d": 0.3
   },
-  "default": "words/b49396ae8e4082c5.mp3"
+  "default": "words/b49396ae8e4082c5.mp3",
+  "jesse": {
+   "f": "words/335265bc4e8f8f02.mp3",
+   "p": 0.442,
+   "d": 0.58
+  }
  },
  "burning": {
   "moises": {
@@ -6707,7 +7067,12 @@
    "p": 0.998,
    "d": 0.26
   },
-  "default": "words/281d395e1b0501c3.mp3"
+  "default": "words/281d395e1b0501c3.mp3",
+  "daniel": {
+   "f": "words/6be701b7fd3ea168.mp3",
+   "p": 0.417,
+   "d": 0.36
+  }
  },
  "consumed": {
   "josue": {
@@ -6913,7 +7278,37 @@
    "p": 0.991,
    "d": 0.16
   },
-  "default": "words/c853ce084046837c.mp3"
+  "default": "words/c853ce084046837c.mp3",
+  "pharaoh": {
+   "f": "words/b774a3a8369f24ef.mp3",
+   "p": 0.995,
+   "d": 0.12
+  },
+  "josue": {
+   "f": "words/cd208dc2eae6de88.mp3",
+   "p": 0.999,
+   "d": 0.12
+  },
+  "povo": {
+   "f": "words/dbf6e7379144dcd8.mp3",
+   "p": 0.93,
+   "d": 0.12
+  },
+  "potifar": {
+   "f": "words/a532ce3c5a4b2d52.mp3",
+   "p": 0.952,
+   "d": 0.1
+  },
+  "juda": {
+   "f": "words/0a118fd7fa6ecfb1.mp3",
+   "p": 0.937,
+   "d": 0.1
+  },
+  "serva": {
+   "f": "words/a12c313c23b6e0e4.mp3",
+   "p": 0.99,
+   "d": 0.12
+  }
  },
  "you": {
   "arao": {
@@ -6932,9 +7327,9 @@
    "d": 0.3
   },
   "jose": {
-   "f": "words/bd62069926352d8f.mp3",
-   "p": 0.998,
-   "d": 0.32
+   "f": "words/93f85dc076892fde.mp3",
+   "p": 0.999,
+   "d": 0.1
   },
   "jaco": {
    "f": "words/b1f9b3de1e3f9693.mp3",
@@ -7042,9 +7437,9 @@
    "d": 0.18
   },
   "dario": {
-   "f": "words/ae3f6f96f1f6ff85.mp3",
-   "p": 0.99,
-   "d": 0.16
+   "f": "words/6b7c0a9e91aa4081.mp3",
+   "p": 0.999,
+   "d": 0.12
   },
   "serva": {
    "f": "words/33d2b91675be9a0f.mp3",
@@ -7056,7 +7451,12 @@
    "p": 0.494,
    "d": 0.39
   },
-  "default": "words/2de5dc2d4e8d2624.mp3"
+  "default": "words/2de5dc2d4e8d2624.mp3",
+  "nabucodonosor": {
+   "f": "words/9a808ab7aba23ae3.mp3",
+   "p": 0.998,
+   "d": 0.12
+  }
  },
  "me": {
   "josue": {
@@ -7414,7 +7814,12 @@
    "p": 0.999,
    "d": 0.22
   },
-  "default": "words/5a658db4218809a9.mp3"
+  "default": "words/5a658db4218809a9.mp3",
+  "dario": {
+   "f": "words/1b999197495ada99.mp3",
+   "p": 0.997,
+   "d": 0.12
+  }
  },
  "hand": {
   "arao": {
@@ -7515,9 +7920,9 @@
    "d": 0.18
   },
   "narrator": {
-   "f": "words/fdb528dc47ac8797.mp3",
-   "p": 0.985,
-   "d": 0.16
+   "f": "words/a58527ec51c8e803.mp3",
+   "p": 0.991,
+   "d": 0.14
   },
   "salomao": {
    "f": "words/52d32855e224db2d.mp3",
@@ -7540,14 +7945,14 @@
    "d": 0.16
   },
   "noe": {
-   "f": "words/2fc161a8a8ce4263.mp3",
-   "p": 0.995,
-   "d": 0.2
+   "f": "words/0428f0ae1d8f3545.mp3",
+   "p": 0.998,
+   "d": 0.14
   },
   "josue": {
    "f": "words/4740d2a73919b606.mp3",
    "p": 0.987,
-   "d": 0.14
+   "d": 0.12
   },
   "sedento": {
    "f": "words/c86a9d6545422a95.mp3",
@@ -7675,7 +8080,12 @@
    "p": 0.999,
    "d": 0.48
   },
-  "default": "words/828afca06ff2a7bb.mp3"
+  "default": "words/828afca06ff2a7bb.mp3",
+  "ezequiel": {
+   "f": "words/63275cc81fd0afe0.mp3",
+   "p": 0.967,
+   "d": 0.12
+  }
  },
  "happened": {
   "moises": {
@@ -7863,7 +8273,12 @@
    "p": 0.856,
    "d": 0.32
   },
-  "default": "words/3783a886f2eda759.mp3"
+  "default": "words/3783a886f2eda759.mp3",
+  "jose": {
+   "f": "words/e8d29f6d0f468fec.mp3",
+   "p": 0.408,
+   "d": 0.48
+  }
  },
  "looketh": {
   "salomao": {
@@ -7975,7 +8390,12 @@
    "p": 0.719,
    "d": 0.26
   },
-  "default": "words/8cec4182273532e6.mp3"
+  "default": "words/8cec4182273532e6.mp3",
+  "marta": {
+   "f": "words/e94f8eef9544e708.mp3",
+   "p": 0.405,
+   "d": 0.4
+  }
  },
  "field": {
   "davi": {
@@ -8039,7 +8459,17 @@
    "p": 0.992,
    "d": 0.2
   },
-  "default": "words/62e47a72d1f92cf3.mp3"
+  "default": "words/62e47a72d1f92cf3.mp3",
+  "belsazar": {
+   "f": "words/030fb4c96218d0a3.mp3",
+   "p": 0.983,
+   "d": 0.14
+  },
+  "daniel": {
+   "f": "words/2f443ab00646bdd4.mp3",
+   "p": 0.968,
+   "d": 0.12
+  }
  },
  "look": {
   "davi": {
@@ -8063,9 +8493,9 @@
    "d": 0.22
   },
   "jose": {
-   "f": "words/1af74b63da70a10b.mp3",
-   "p": 0.993,
-   "d": 0.16
+   "f": "words/2f767e2f7d281c3e.mp3",
+   "p": 0.997,
+   "d": 0.12
   },
   "mordomo": {
    "f": "words/188fe3f31740df13.mp3",
@@ -8148,9 +8578,9 @@
    "d": 0.24
   },
   "isaias": {
-   "f": "words/7cf47f511fbe580a.mp3",
+   "f": "words/19acb4064fe8b14b.mp3",
    "p": 0.997,
-   "d": 0.18
+   "d": 0.12
   },
   "jonas": {
    "f": "words/05d8d936c20297a8.mp3",
@@ -8183,11 +8613,26 @@
    "d": 0.18
   },
   "narrator": {
-   "f": "words/8cc219f1fc78b655.mp3",
-   "p": 0.972,
+   "f": "words/943d6ef84bd0d9c7.mp3",
+   "p": 0.997,
+   "d": 0.12
+  },
+  "default": "words/0ea9878b622eac1b.mp3",
+  "arao": {
+   "f": "words/adaedbd37c63c410.mp3",
+   "p": 0.994,
+   "d": 0.12
+  },
+  "rebeca": {
+   "f": "words/91fa7cf521538cc8.mp3",
+   "p": 0.996,
    "d": 0.14
   },
-  "default": "words/0ea9878b622eac1b.mp3"
+  "serva": {
+   "f": "words/71cfd6fcd016ce8e.mp3",
+   "p": 0.997,
+   "d": 0.14
+  }
  },
  "chose": {
   "davi": {
@@ -8292,9 +8737,9 @@
    "d": 0.22
   },
   "jose": {
-   "f": "words/5de510550d85aaeb.mp3",
-   "p": 0.993,
-   "d": 0.22
+   "f": "words/047d7c9fa239e5d2.mp3",
+   "p": 0.997,
+   "d": 0.14
   },
   "madalena": {
    "f": "words/1859623f921c7a45.mp3",
@@ -8500,7 +8945,12 @@
    "p": 0.987,
    "d": 0.18
   },
-  "default": "words/7548c644633db811.mp3"
+  "default": "words/7548c644633db811.mp3",
+  "isaias": {
+   "f": "words/8f9d7fbf000bed4e.mp3",
+   "p": 0.999,
+   "d": 0.14
+  }
  },
  "our": {
   "davi": {
@@ -8519,9 +8969,9 @@
    "d": 0.18
   },
   "maria": {
-   "f": "words/dfef7a75a37aedf3.mp3",
-   "p": 0.576,
-   "d": 0.18
+   "f": "words/fbb3fcaf29d30e3c.mp3",
+   "p": 0.948,
+   "d": 0.14
   },
   "juda": {
    "f": "words/93bdd5cc89c3f40a.mp3",
@@ -8661,7 +9111,12 @@
    "p": 0.998,
    "d": 0.22
   },
-  "default": "words/4a4b63eecdc4b9cb.mp3"
+  "default": "words/4a4b63eecdc4b9cb.mp3",
+  "samuel": {
+   "f": "words/f16879aa8d26dee0.mp3",
+   "p": 0.429,
+   "d": 0.26
+  }
  },
  "rock": {
   "samuel": {
@@ -8766,7 +9221,12 @@
    "p": 0.998,
    "d": 0.14
   },
-  "default": "words/5145ef49e9038a4c.mp3"
+  "default": "words/5145ef49e9038a4c.mp3",
+  "juda": {
+   "f": "words/e066270afc27f1ef.mp3",
+   "p": 0.997,
+   "d": 0.14
+  }
  },
  "fortress": {
   "salomao": {
@@ -8856,17 +9316,22 @@
    "p": 0.995,
    "d": 0.38
   },
-  "default": "words/097018983d65a8d2.mp3"
+  "default": "words/097018983d65a8d2.mp3",
+  "elias": {
+   "f": "words/5fb201da926e5a31.mp3",
+   "p": 0.432,
+   "d": 0.34
+  }
  },
  "am": {
   "isaias": {
-   "f": "words/9ff88116626515b3.mp3",
-   "p": 0.993,
-   "d": 0.34
+   "f": "words/ee5e3141f130ad4a.mp3",
+   "p": 0.995,
+   "d": 0.12
   },
   "jonas": {
-   "f": "words/632f1af079740b68.mp3",
-   "p": 0.885,
+   "f": "words/2542bd52e8a45bfd.mp3",
+   "p": 0.888,
    "d": 0.14
   },
   "elias": {
@@ -8885,8 +9350,8 @@
    "d": 0.2
   },
   "jose": {
-   "f": "words/115858aaf8f9db3c.mp3",
-   "p": 0.938,
+   "f": "words/da07592be926d881.mp3",
+   "p": 0.97,
    "d": 0.14
   },
   "marta": {
@@ -8915,9 +9380,9 @@
    "d": 0.18
   },
   "davi": {
-   "f": "words/85ddf861bd167d6a.mp3",
-   "p": 0.957,
-   "d": 0.16
+   "f": "words/a1c6aa028b9cf113.mp3",
+   "p": 0.993,
+   "d": 0.1
   },
   "mefibosete": {
    "f": "words/b2fe457f06cfdbe6.mp3",
@@ -8944,7 +9409,27 @@
    "p": 0.89,
    "d": 0.14
   },
-  "default": "words/b2fe457f06cfdbe6.mp3"
+  "default": "words/b2fe457f06cfdbe6.mp3",
+  "arao": {
+   "f": "words/2d3be19fab2d94fc.mp3",
+   "p": 0.942,
+   "d": 0.12
+  },
+  "narrator": {
+   "f": "words/7a1ac0906e939c26.mp3",
+   "p": 0.827,
+   "d": 0.14
+  },
+  "pedro": {
+   "f": "words/d10ba1eec14e0612.mp3",
+   "p": 0.99,
+   "d": 0.12
+  },
+  "bartimeu": {
+   "f": "words/3ecf0bc6239f49e2.mp3",
+   "p": 0.901,
+   "d": 0.1
+  }
  },
  "heard": {
   "elias": {
@@ -8988,7 +9473,17 @@
    "p": 0.824,
    "d": 0.86
   },
-  "default": "words/34e9bf94b8800fd7.mp3"
+  "default": "words/34e9bf94b8800fd7.mp3",
+  "isaias": {
+   "f": "words/e6daadc29de6169d.mp3",
+   "p": 0.413,
+   "d": 0.5
+  },
+  "narrator": {
+   "f": "words/cf311929ebd06715.mp3",
+   "p": 0.417,
+   "d": 0.44
+  }
  },
  "prophet": {
   "elias": {
@@ -9122,7 +9617,22 @@
    "p": 0.871,
    "d": 0.16
   },
-  "default": "words/c40ff7b5082a0f4f.mp3"
+  "default": "words/c40ff7b5082a0f4f.mp3",
+  "maria": {
+   "f": "words/11150525ac02b0ab.mp3",
+   "p": 0.973,
+   "d": 0.12
+  },
+  "sedento": {
+   "f": "words/f9d00b39b889bc63.mp3",
+   "p": 0.957,
+   "d": 0.14
+  },
+  "belsazar": {
+   "f": "words/a420ec52dfedffee.mp3",
+   "p": 0.561,
+   "d": 0.14
+  }
  },
  "cannot": {
   "narrator": {
@@ -9414,7 +9924,12 @@
    "p": 0.972,
    "d": 0.28
   },
-  "default": "words/7e7768dcf33b79bb.mp3"
+  "default": "words/7e7768dcf33b79bb.mp3",
+  "bartimeu": {
+   "f": "words/d82c10c2f87b2f2f.mp3",
+   "p": 0.924,
+   "d": 0.12
+  }
  },
  "far": {
   "isaias": {
@@ -10335,7 +10850,12 @@
    "p": 0.932,
    "d": 0.38
   },
-  "default": "words/8068974022acebeb.mp3"
+  "default": "words/8068974022acebeb.mp3",
+  "neemias": {
+   "f": "words/4509aaedd2e2e3f0.mp3",
+   "p": 0.423,
+   "d": 0.26
+  }
  },
  "famine": {
   "jose": {
@@ -10668,7 +11188,12 @@
    "p": 0.997,
    "d": 0.22
   },
-  "default": "words/40e235a9cbb94d7d.mp3"
+  "default": "words/40e235a9cbb94d7d.mp3",
+  "serva": {
+   "f": "words/4798873259323ead.mp3",
+   "p": 0.998,
+   "d": 0.12
+  }
  },
  "save": {
   "jaco": {
@@ -11005,7 +11530,12 @@
    "p": 0.942,
    "d": 0.42
   },
-  "default": "words/571e8e11b640ba55.mp3"
+  "default": "words/571e8e11b640ba55.mp3",
+  "juda": {
+   "f": "words/2677fedc66882b35.mp3",
+   "p": 0.407,
+   "d": 0.76
+  }
  },
  "temple": {
   "ezequiel": {
@@ -11198,7 +11728,12 @@
    "p": 0.906,
    "d": 0.56
   },
-  "default": "words/2cf42afe03e488d1.mp3"
+  "default": "words/2cf42afe03e488d1.mp3",
+  "ezequiel": {
+   "f": "words/db62527c672d7f1b.mp3",
+   "p": 0.42,
+   "d": 0.5
+  }
  },
  "very": {
   "daniel": {
@@ -11423,7 +11958,12 @@
    "p": 1.0,
    "d": 0.28
   },
-  "default": "words/c143a9b4b526c8b6.mp3"
+  "default": "words/c143a9b4b526c8b6.mp3",
+  "jaco": {
+   "f": "words/bea5046d69a79df8.mp3",
+   "p": 0.439,
+   "d": 0.18
+  }
  },
  "saves": {
   "daniel": {
@@ -11441,7 +11981,7 @@
  "stedfast": {
   "neemias": {
    "f": "words/f465de35c8da60c2.mp3",
-   "p": 0.598,
+   "p": 0.698,
    "d": 0.38
   },
   "default": "words/f465de35c8da60c2.mp3"
@@ -11565,7 +12105,12 @@
    "p": 0.989,
    "d": 0.4
   },
-  "default": "words/12442fae3b39ccd9.mp3"
+  "default": "words/12442fae3b39ccd9.mp3",
+  "jesus": {
+   "f": "words/5f5fc8d3b0806790.mp3",
+   "p": 0.448,
+   "d": 0.32
+  }
  },
  "follow": {
   "maria": {
@@ -11652,7 +12197,12 @@
    "p": 1.0,
    "d": 0.18
   },
-  "default": "words/2d980abc1d545639.mp3"
+  "default": "words/2d980abc1d545639.mp3",
+  "acaz": {
+   "f": "words/8bb4ccdcd6a4d4e6.mp3",
+   "p": 0.438,
+   "d": 0.48
+  }
  },
  "nets": {
   "jesus": {
@@ -11875,7 +12425,12 @@
    "p": 0.649,
    "d": 0.22
   },
-  "default": "words/fbdb9455d9c68aaa.mp3"
+  "default": "words/fbdb9455d9c68aaa.mp3",
+  "maria": {
+   "f": "words/9df39b135941362e.mp3",
+   "p": 0.45,
+   "d": 0.2
+  }
  },
  "art": {
   "pedro": {
@@ -11993,9 +12548,9 @@
    "d": 0.14
   },
   "noe": {
-   "f": "words/e531667ec042bda8.mp3",
-   "p": 0.992,
-   "d": 0.18
+   "f": "words/02a984d905eabe52.mp3",
+   "p": 0.996,
+   "d": 0.14
   },
   "moises": {
    "f": "words/4ffb40125c8ca23c.mp3",
@@ -12003,9 +12558,9 @@
    "d": 0.24
   },
   "povo": {
-   "f": "words/12c520e472828e29.mp3",
-   "p": 0.889,
-   "d": 0.24
+   "f": "words/bbb67caca332b03e.mp3",
+   "p": 0.987,
+   "d": 0.12
   },
   "copeiro": {
    "f": "words/4a49035152d6a808.mp3",
@@ -12017,7 +12572,22 @@
    "p": 0.999,
    "d": 0.16
   },
-  "default": "words/a9503fd09c0f85e8.mp3"
+  "default": "words/a9503fd09c0f85e8.mp3",
+  "arao": {
+   "f": "words/0157d2ee7225577e.mp3",
+   "p": 0.998,
+   "d": 0.12
+  },
+  "pharaoh": {
+   "f": "words/bfb06d5b611a6b17.mp3",
+   "p": 0.999,
+   "d": 0.12
+  },
+  "daniel": {
+   "f": "words/e98d668f76c3c2be.mp3",
+   "p": 0.999,
+   "d": 0.12
+  }
  },
  "others": {
   "jesus": {
@@ -12676,7 +13246,12 @@
    "p": 0.996,
    "d": 0.2
   },
-  "default": "words/1e8903befb3ddc0e.mp3"
+  "default": "words/bfcb5749d1c026c1.mp3",
+  "arao": {
+   "f": "words/bfcb5749d1c026c1.mp3",
+   "p": 0.998,
+   "d": 0.12
+  }
  },
  "down": {
   "jesus": {
@@ -13126,7 +13701,12 @@
    "p": 0.995,
    "d": 0.18
   },
-  "default": "words/57296715752259ab.mp3"
+  "default": "words/57296715752259ab.mp3",
+  "merchant": {
+   "f": "words/1d60b8269aca82a1.mp3",
+   "p": 0.998,
+   "d": 0.14
+  }
  },
  "thing": {
   "jesus": {
@@ -13207,7 +13787,12 @@
    "p": 0.944,
    "d": 0.3
   },
-  "default": "words/1c1ccba6c0b5b336.mp3"
+  "default": "words/1c1ccba6c0b5b336.mp3",
+  "jose": {
+   "f": "words/aa84266fcee7a94e.mp3",
+   "p": 0.863,
+   "d": 0.14
+  }
  },
  "master": {
   "bartimeu": {
@@ -13321,10 +13906,15 @@
   },
   "coxo": {
    "f": "words/aab7868a8d1fa89b.mp3",
-   "p": 0.998,
-   "d": 0.16
+   "p": 0.999,
+   "d": 0.12
   },
-  "default": "words/ce59e6a6824f99f8.mp3"
+  "default": "words/ce59e6a6824f99f8.mp3",
+  "potifar": {
+   "f": "words/46a04fdf6b4966a9.mp3",
+   "p": 0.993,
+   "d": 0.12
+  }
  },
  "everything": {
   "bartimeu": {
@@ -13471,14 +14061,14 @@
  },
  "need": {
   "merchant": {
-   "f": "words/454885172abd8150.mp3",
+   "f": "words/b007b19ae1491f56.mp3",
    "p": 0.998,
-   "d": 0.28
+   "d": 0.14
   },
   "noe": {
-   "f": "words/a8bc5650f650571e.mp3",
-   "p": 0.958,
-   "d": 0.34
+   "f": "words/69bc1c6ea412215c.mp3",
+   "p": 0.999,
+   "d": 0.14
   },
   "moises": {
    "f": "words/602f84e23d4bf9de.mp3",
@@ -13784,7 +14374,7 @@
   "pedro": {
    "f": "words/bb3059b94d041b79.mp3",
    "p": 0.871,
-   "d": 0.41
+   "d": 0.36
   },
   "default": "words/2a37adfbdbe089aa.mp3"
  },
@@ -14036,7 +14626,12 @@
    "p": 0.997,
    "d": 0.3
   },
-  "default": "words/14bcf094e37dff1c.mp3"
+  "default": "words/14bcf094e37dff1c.mp3",
+  "jesus": {
+   "f": "words/9b283ae4eecb3cdf.mp3",
+   "p": 0.997,
+   "d": 0.14
+  }
  },
  "palace": {
   "pharaoh": {
@@ -14112,7 +14707,12 @@
    "p": 0.996,
    "d": 0.3
   },
-  "default": "words/750d6b3f2878c3e1.mp3"
+  "default": "words/750d6b3f2878c3e1.mp3",
+  "daniel": {
+   "f": "words/5029704e21ba0b7c.mp3",
+   "p": 0.44,
+   "d": 0.74
+  }
  },
  "gone": {
   "moises": {
@@ -14460,7 +15060,12 @@
    "p": 0.998,
    "d": 0.14
   },
-  "default": "words/4b5d95b13b184179.mp3"
+  "default": "words/4b5d95b13b184179.mp3",
+  "samuel": {
+   "f": "words/3362fcc9cb24e1a2.mp3",
+   "p": 0.997,
+   "d": 0.12
+  }
  },
  "too": {
   "davi": {
@@ -14504,10 +15109,10 @@
   },
   "daniel": {
    "f": "words/276520198c93576d.mp3",
-   "p": 0.503,
+   "p": 0.838,
    "d": 0.26
   },
-  "default": "words/568cdc8219f65099.mp3"
+  "default": "words/276520198c93576d.mp3"
  },
  "cheeses": {
   "jesse": {
@@ -14794,7 +15399,7 @@
  "jonathans": {
   "davi": {
    "f": "words/7ff4e0c9a808e9cc.mp3",
-   "p": 0.455,
+   "p": 0.531,
    "d": 0.34
   },
   "default": "words/7ff4e0c9a808e9cc.mp3"
@@ -14839,7 +15444,12 @@
    "p": 0.455,
    "d": 0.6
   },
-  "default": "words/22ec93336b9c1f3d.mp3"
+  "default": "words/22ec93336b9c1f3d.mp3",
+  "jesus": {
+   "f": "words/18cd97ce7d4aca9f.mp3",
+   "p": 0.417,
+   "d": 0.36
+  }
  },
  "nobody": {
   "mefibosete": {
@@ -14970,7 +15580,12 @@
    "p": 0.926,
    "d": 0.26
   },
-  "default": "words/0cba10974f14ee03.mp3"
+  "default": "words/0cba10974f14ee03.mp3",
+  "aspenaz": {
+   "f": "words/d7636aba37e39917.mp3",
+   "p": 0.44,
+   "d": 0.18
+  }
  },
  "attack": {
   "acaz": {
@@ -16459,7 +17074,7 @@
   "belsazar": {
    "f": "words/c7e39601db21f48c.mp3",
    "p": 0.997,
-   "d": 0.52
+   "d": 0.42
   },
   "default": "words/c7e39601db21f48c.mp3"
  },
@@ -16477,7 +17092,12 @@
    "p": 0.722,
    "d": 0.44
   },
-  "default": "words/4b12c1de6d834db7.mp3"
+  "default": "words/4b12c1de6d834db7.mp3",
+  "noe": {
+   "f": "words/2c6714af32464515.mp3",
+   "p": 0.446,
+   "d": 0.28
+  }
  },
  "noon": {
   "daniel": {
@@ -16509,7 +17129,12 @@
    "p": 0.995,
    "d": 0.18
   },
-  "default": "words/59acd40f7f48b6af.mp3"
+  "default": "words/59acd40f7f48b6af.mp3",
+  "juda": {
+   "f": "words/1619e304a8587a2e.mp3",
+   "p": 0.993,
+   "d": 0.12
+  }
  },
  "any": {
   "oficial": {
@@ -16918,5 +17543,53 @@
    "d": 0.22
   },
   "default": "words/49008e0cdfadcd4b.mp3"
+ },
+ "shewed": {
+  "jose": {
+   "f": "words/29c0e0e0f2b0f469.mp3",
+   "p": 0.448,
+   "d": 0.36
+  },
+  "default": "words/29c0e0e0f2b0f469.mp3"
+ },
+ "eve": {
+  "narrator": {
+   "f": "words/e0259d95e1922930.mp3",
+   "p": 0.88,
+   "d": 0.12
+  },
+  "default": "words/e0259d95e1922930.mp3"
+ },
+ "zacchaeus": {
+  "jesus": {
+   "f": "words/5c1eec61786d8555.mp3",
+   "p": 0.402,
+   "d": 0.54
+  },
+  "default": "words/5c1eec61786d8555.mp3"
+ },
+ "spices": {
+  "ismaelita": {
+   "f": "words/0efd7228ae1032c9.mp3",
+   "p": 0.443,
+   "d": 0.5
+  },
+  "default": "words/0efd7228ae1032c9.mp3"
+ },
+ "goshen": {
+  "jose": {
+   "f": "words/2e5310df9fa2a638.mp3",
+   "p": 0.416,
+   "d": 0.38
+  },
+  "default": "words/2e5310df9fa2a638.mp3"
+ },
+ "oclock": {
+  "pedro": {
+   "f": "words/70eb10e027bba958.mp3",
+   "p": 0.697,
+   "d": 0.53
+  },
+  "default": "words/70eb10e027bba958.mp3"
  }
 }
