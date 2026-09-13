@@ -1,28 +1,22 @@
 {
  "earth": {
-  "default": "c737b14a8e5e77bb.mp3",
-  "narrator": "c737b14a8e5e77bb.mp3",
-  "adao": "07389281109022ef.mp3",
-  "eva": "d290e4edc93de82f.mp3"
+  "default": "07389281109022ef.mp3",
+  "adao": "07389281109022ef.mp3"
  },
  "heaven": {
-  "default": "8bb89f3cdceafce6.mp3",
-  "narrator": "8bb89f3cdceafce6.mp3",
+  "default": "a7292baeba06e901.mp3",
   "adao": "a7292baeba06e901.mp3"
  },
  "god": {
-  "default": "1c0fa07062551fcf.mp3",
-  "narrator": "1c0fa07062551fcf.mp3",
+  "default": "474edf72e5af2791.mp3",
   "eva": "474edf72e5af2791.mp3"
  },
  "beginning": {
-  "default": "7b8a0c09a3d1c4b6.mp3",
-  "narrator": "7b8a0c09a3d1c4b6.mp3",
+  "default": "2463cc60c149c94e.mp3",
   "adao": "2463cc60c149c94e.mp3"
  },
  "light": {
-  "default": "605549817d24fa66.mp3",
-  "narrator": "605549817d24fa66.mp3",
+  "default": "d813514195b088fb.mp3",
   "eva": "d813514195b088fb.mp3",
   "jonas": "087e405b32f3d4cc.mp3"
  },
@@ -51,8 +45,7 @@
   "adao": "48b42fa191b07058.mp3"
  },
  "created": {
-  "default": "55bf41ecf2eb8430.mp3",
-  "narrator": "55bf41ecf2eb8430.mp3",
+  "default": "f3809c946fcf8572.mp3",
   "adao": "f3809c946fcf8572.mp3"
  },
  "in the beginning god blank the heaven and the earth": {
@@ -60,14 +53,14 @@
   "adao": "87432020a0296043.mp3"
  },
  "saw": {
-  "default": "a737f2f996ef5025.mp3",
-  "narrator": "a737f2f996ef5025.mp3",
-  "adao": "1cd0421e0636f2bc.mp3"
+  "default": "1cd0421e0636f2bc.mp3",
+  "adao": "1cd0421e0636f2bc.mp3",
+  "eva": "b485ce75514437d7.mp3"
  },
  "said": {
-  "default": "c6b81e01746f13d5.mp3",
-  "narrator": "c6b81e01746f13d5.mp3",
-  "adao": "45dbbf63db920036.mp3"
+  "default": "45dbbf63db920036.mp3",
+  "adao": "45dbbf63db920036.mp3",
+  "eva": "6279331c26679104.mp3"
  },
  "look god created the light": {
   "default": "7b9c87e33720cce4.mp3",
@@ -82,8 +75,7 @@
   "eva": "f44e93160aefc27d.mp3"
  },
  "loved": {
-  "default": "c8298e7f319604fb.mp3",
-  "narrator": "c8298e7f319604fb.mp3",
+  "default": "38a8b916b482971a.mp3",
   "adao": "38a8b916b482971a.mp3"
  },
  "where is the ark": {
@@ -91,8 +83,7 @@
   "eva": "91b5f550da069c5f.mp3"
  },
  "noah": {
-  "default": "d0c49c3263ef0c6d.mp3",
-  "narrator": "d0c49c3263ef0c6d.mp3",
+  "default": "41ddcf7421e0436b.mp3",
   "eva": "41ddcf7421e0436b.mp3"
  },
  "the king": {
@@ -126,8 +117,7 @@
  },
  "darkness": {
   "jesus": "a2f5b73efaa04b99.mp3",
-  "default": "eb4c97795ccb2363.mp3",
-  "narrator": "eb4c97795ccb2363.mp3"
+  "default": "a2f5b73efaa04b99.mp3"
  },
  "let there be a king": {
   "default": "81341b284104e92e.mp3",
@@ -135,16 +125,14 @@
  },
  "day": {
   "jesus": "d84d62e714b4df8d.mp3",
-  "default": "a17f9f36ebeec91b.mp3",
-  "narrator": "a17f9f36ebeec91b.mp3",
+  "default": "d84d62e714b4df8d.mp3",
   "eva": "334744236ededa09.mp3"
  },
  "night": {
   "jesus": "8b53d606fa570605.mp3",
-  "default": "2917bcd8fec5e15c.mp3",
+  "default": "8b53d606fa570605.mp3",
   "noe": "b758727ded91e082.mp3",
   "jose": "939302db7027cbbd.mp3",
-  "narrator": "2917bcd8fec5e15c.mp3",
   "adao": "1f1aba5378394bd9.mp3",
   "eva": "681d992b24b82918.mp3",
   "daniel": "f48a7dd5eee716bf.mp3"
@@ -157,12 +145,10 @@
  },
  "first": {
   "jesus": "2a5fd4d4a04b2d5d.mp3",
-  "default": "0559767934f348f2.mp3",
-  "narrator": "0559767934f348f2.mp3"
+  "default": "2a5fd4d4a04b2d5d.mp3"
  },
  "evening": {
-  "default": "a6183f0d0fb184ce.mp3",
-  "narrator": "a6183f0d0fb184ce.mp3",
+  "default": "fb67ec386510b3f3.mp3",
   "adao": "fb67ec386510b3f3.mp3"
  },
  "god called the light day": {
@@ -185,19 +171,13 @@
   "default": "46257f3dd85e9ec8.mp3",
   "adao": "46257f3dd85e9ec8.mp3"
  },
- "and god said let there be blank and there was light": {
-  "default": "a88eba5e2d9210e9.mp3",
-  "eva": "a88eba5e2d9210e9.mp3"
- },
  "and god said let there be light and there was light": {
   "default": "6e2110a91e3931a3.mp3",
   "eva": "6e2110a91e3931a3.mp3"
  },
  "water": {
-  "default": "a564f91866681094.mp3",
+  "default": "572d8fca1af7b7b1.mp3",
   "jose": "572d8fca1af7b7b1.mp3",
-  "narrator": "a564f91866681094.mp3",
-  "eva": "05ec620abaf2be1c.mp3",
   "jaco": "1bfb34e3de0ebf96.mp3",
   "moises": "08b159c609d4837f.mp3"
  },
@@ -227,17 +207,15 @@
  },
  "sea": {
   "jesus": "0b61ddd1b2659257.mp3",
-  "default": "b3dc56eb64cd7b99.mp3",
+  "default": "0b61ddd1b2659257.mp3",
   "noe": "ae934a87ef3d262b.mp3",
-  "narrator": "b3dc56eb64cd7b99.mp3",
   "eva": "b1826a4aeccad85f.mp3",
   "adao": "694bdf6f579a08c9.mp3",
   "arao": "ff0358802af1c419.mp3",
   "josue": "dd9e98437ed43435.mp3"
  },
  "garden": {
-  "default": "f84649f4116cdf51.mp3",
-  "narrator": "f84649f4116cdf51.mp3",
+  "default": "c14131bf4080a628.mp3",
   "adao": "c14131bf4080a628.mp3"
  },
  "god called the light day and the darkness he called night the evening and the morning were the first day": {
@@ -249,24 +227,20 @@
   "default": "918f1443b441b110.mp3"
  },
  "life": {
-  "default": "f79e594bab02ee34.mp3",
-  "narrator": "f79e594bab02ee34.mp3",
+  "default": "4083d673a5c96d48.mp3",
   "eva": "4083d673a5c96d48.mp3"
  },
  "tree": {
   "jesus": "e53852c5b70c9f64.mp3",
-  "default": "703175547fa28401.mp3",
-  "narrator": "703175547fa28401.mp3"
+  "default": "e53852c5b70c9f64.mp3"
  },
  "man": {
-  "default": "05f23b81cd6005e9.mp3",
-  "narrator": "05f23b81cd6005e9.mp3",
+  "default": "1353254df148f044.mp3",
   "adao": "1353254df148f044.mp3"
  },
  "woman": {
   "jesus": "d689e9c7756b0356.mp3",
-  "default": "6f6860a5529a913e.mp3",
-  "narrator": "6f6860a5529a913e.mp3"
+  "default": "d689e9c7756b0356.mp3"
  },
  "fruit": {
   "default": "eb50131975566627.mp3",
@@ -298,11 +272,10 @@
   "adao": "0a62dd1bcce0285a.mp3"
  },
  "house": {
-  "default": "e622b9a7cbd9c95c.mp3",
+  "default": "b270fc9b5a61dd1c.mp3",
   "adao": "b270fc9b5a61dd1c.mp3",
   "salomao": "1f7e6e1f0be4d60e.mp3",
-  "jesus": "c457687f5041eb6d.mp3",
-  "narrator": "e622b9a7cbd9c95c.mp3"
+  "jesus": "c457687f5041eb6d.mp3"
  },
  "and the lord god planted a blank eastward in eden": {
   "default": "e8848f12c4f5e422.mp3",
@@ -374,29 +347,25 @@
  },
  "ark": {
   "noe": "87af67e1544915cd.mp3",
-  "default": "eab0e0ed49a90c97.mp3",
-  "narrator": "eab0e0ed49a90c97.mp3"
+  "default": "87af67e1544915cd.mp3"
  },
  "a golden crown": {
   "default": "7ac560c73cfa8a51.mp3",
   "adao": "7ac560c73cfa8a51.mp3"
  },
  "door": {
-  "default": "8f68c9b751251a22.mp3",
-  "narrator": "8f68c9b751251a22.mp3",
+  "default": "b2379d42c9693a37.mp3",
   "jaco": "b2379d42c9693a37.mp3",
   "noe": "80f3768a6e5f6b51.mp3"
  },
  "animals": {
-  "default": "846560b9c6515978.mp3",
-  "narrator": "846560b9c6515978.mp3",
+  "default": "f2cf7aabee559115.mp3",
   "jaco": "f2cf7aabee559115.mp3",
   "noe": "f6202291fcbe6b8f.mp3"
  },
  "wood": {
   "noe": "4b2df83f9ef0fc02.mp3",
-  "default": "32daa25c3b21bfbe.mp3",
-  "narrator": "32daa25c3b21bfbe.mp3"
+  "default": "4b2df83f9ef0fc02.mp3"
  },
  "to make": {
   "default": "f9601bc36d240a6d.mp3",
@@ -424,9 +393,8 @@
  },
  "boat": {
   "noe": "79844ba7ec772698.mp3",
-  "default": "f8d3a9ae19056c30.mp3",
-  "jesus": "ebbab658d2a02efd.mp3",
-  "narrator": "f8d3a9ae19056c30.mp3"
+  "default": "79844ba7ec772698.mp3",
+  "jesus": "ebbab658d2a02efd.mp3"
  },
  "make thee an blank of gopher wood": {
   "noe": "7ad298bb089b5289.mp3",
@@ -497,27 +465,23 @@
  },
  "forty": {
   "noe": "24e02ea0ebf93482.mp3",
-  "default": "9b0e0a57cc7471c3.mp3",
-  "narrator": "9b0e0a57cc7471c3.mp3",
+  "default": "24e02ea0ebf93482.mp3",
   "rebeca": "ab3351a7482509fe.mp3",
   "pedro": "e4bf6e1c2fae9856.mp3"
  },
  "flood": {
-  "default": "004243a6928a14c2.mp3",
-  "narrator": "004243a6928a14c2.mp3",
+  "default": "eca5f016ea3ad18e.mp3",
   "jaco": "eca5f016ea3ad18e.mp3"
  },
  "window": {
-  "default": "61a90c4b0f1dc420.mp3",
-  "narrator": "61a90c4b0f1dc420.mp3",
+  "default": "66773d6078a85040.mp3",
   "jaco": "66773d6078a85040.mp3",
   "noe": "2cf0227cd41be77d.mp3",
   "daniel": "1d32d744c31ed943.mp3"
  },
  "mountain": {
-  "default": "4b7159a3b76ef4e1.mp3",
-  "jaco": "a48ac90a18b48beb.mp3",
-  "narrator": "4b7159a3b76ef4e1.mp3"
+  "default": "a48ac90a18b48beb.mp3",
+  "jaco": "a48ac90a18b48beb.mp3"
  },
  "to open": {
   "noe": "0aab81325c901e8a.mp3",
@@ -558,8 +522,7 @@
   "jaco": "fd02644f53f6656a.mp3"
  },
  "fire": {
-  "default": "b6f160bf146b68f8.mp3",
-  "narrator": "b6f160bf146b68f8.mp3",
+  "default": "f04f1a0622c60dc4.mp3",
   "jaco": "f04f1a0622c60dc4.mp3",
   "josue": "06d1e16d0feb18e2.mp3",
   "pedro": "db3367a6756cc2d9.mp3"
@@ -620,25 +583,21 @@
   "jaco": "06d917a96ab7c5f5.mp3"
  },
  "dove": {
-  "default": "8debb2f4dd23caca.mp3",
-  "narrator": "8debb2f4dd23caca.mp3",
+  "default": "28ac959db417ae67.mp3",
   "jaco": "28ac959db417ae67.mp3"
  },
  "rainbow": {
-  "default": "710e6c7711023ae3.mp3",
-  "narrator": "710e6c7711023ae3.mp3",
+  "default": "cb479d8ecafd0e50.mp3",
   "jaco": "cb479d8ecafd0e50.mp3",
   "noe": "5683f7379a626165.mp3"
  },
  "promise": {
   "noe": "c3de62bffb39db00.mp3",
-  "default": "468544355ec36c18.mp3",
-  "narrator": "468544355ec36c18.mp3"
+  "default": "c3de62bffb39db00.mp3"
  },
  "cloud": {
   "noe": "5eb22e0cfc27bca6.mp3",
-  "default": "f20611c3c3b2e593.mp3",
-  "narrator": "f20611c3c3b2e593.mp3",
+  "default": "5eb22e0cfc27bca6.mp3",
   "jaco": "9eea8b6d9b4d391e.mp3"
  },
  "leaf": {
@@ -738,8 +697,7 @@
  },
  "holy": {
   "moises": "b5774d56057c300c.mp3",
-  "default": "1122af8c15186816.mp3",
-  "narrator": "1122af8c15186816.mp3",
+  "default": "b5774d56057c300c.mp3",
   "arao": "4058fe07b8f55c33.mp3"
  },
  "to see": {
@@ -748,19 +706,16 @@
   "jesus": "425896c0561fb15d.mp3"
  },
  "bush": {
-  "default": "6987cfa889dce76f.mp3",
-  "narrator": "6987cfa889dce76f.mp3",
+  "default": "54e60f9ec521b700.mp3",
   "josue": "54e60f9ec521b700.mp3"
  },
  "ground": {
-  "default": "d98b66c055b953ed.mp3",
-  "narrator": "d98b66c055b953ed.mp3",
+  "default": "95f88b521a08ada4.mp3",
   "arao": "95f88b521a08ada4.mp3"
  },
  "shoes": {
   "moises": "c4dc5711282aa362.mp3",
-  "default": "0b2924f170240298.mp3",
-  "narrator": "0b2924f170240298.mp3"
+  "default": "c4dc5711282aa362.mp3"
  },
  "the bush burned with fire": {
   "default": "b4fb12cab1f66950.mp3",
@@ -786,8 +741,7 @@
   "arao": "0f966cb629ce6d51.mp3"
  },
  "dry": {
-  "default": "d4951248c4dc1d23.mp3",
-  "narrator": "d4951248c4dc1d23.mp3",
+  "default": "ce1a62dc2a46d6a1.mp3",
   "arao": "ce1a62dc2a46d6a1.mp3",
   "josue": "6f192821729d8819.mp3",
   "neemias": "3db5dc19544f5630.mp3",
@@ -880,8 +834,7 @@
   "pedro": "65a62de4ece8631c.mp3"
  },
  "free": {
-  "default": "da0726f04505e9df.mp3",
-  "narrator": "da0726f04505e9df.mp3",
+  "default": "d40c8724f671fefe.mp3",
   "arao": "d40c8724f671fefe.mp3",
   "isaias": "01e10657beaf8a94.mp3"
  },
@@ -929,9 +882,8 @@
   "arao": "70c177b5757b205c.mp3"
  },
  "kings": {
-  "default": "e4f20087698dd254.mp3",
-  "arao": "e3a2f1851bf7c9ae.mp3",
-  "narrator": "e4f20087698dd254.mp3"
+  "default": "e3a2f1851bf7c9ae.mp3",
+  "arao": "e3a2f1851bf7c9ae.mp3"
  },
  "who are you": {
   "default": "a4ddc99e07fb1a34.mp3",
@@ -971,16 +923,14 @@
   "josue": "c7b866af21bf5d06.mp3"
  },
  "no": {
-  "default": "35543148a45d0061.mp3",
+  "default": "ae2c85b4c3248f0c.mp3",
   "noe": "ae2c85b4c3248f0c.mp3",
-  "narrator": "35543148a45d0061.mp3",
   "josue": "09aa082948c349f9.mp3",
   "moises": "bc010efff3a08c6a.mp3"
  },
  "yes": {
-  "default": "214386d065206aa5.mp3",
-  "josue": "8ddfd68799bd81b0.mp3",
-  "narrator": "214386d065206aa5.mp3"
+  "default": "8ddfd68799bd81b0.mp3",
+  "josue": "8ddfd68799bd81b0.mp3"
  },
  "maybe": {
   "default": "80e4a1341c48d7bd.mp3",
@@ -988,8 +938,7 @@
  },
  "hand": {
   "moises": "ba2eea29cba1c34b.mp3",
-  "default": "5ec13791fe548da7.mp3",
-  "narrator": "5ec13791fe548da7.mp3"
+  "default": "ba2eea29cba1c34b.mp3"
  },
  "to walk": {
   "moises": "f82db2641a87cbf4.mp3",
@@ -1074,22 +1023,19 @@
  },
  "shepherd": {
   "davi": "3ad8280561ac2ff0.mp3",
-  "default": "bcc3c39cf477ae43.mp3",
-  "narrator": "bcc3c39cf477ae43.mp3"
+  "default": "3ad8280561ac2ff0.mp3"
  },
  "in the ark": {
   "default": "7c9c7fd7bc97d391.mp3",
   "arao": "7c9c7fd7bc97d391.mp3"
  },
  "harp": {
-  "default": "f69edc07cff633b0.mp3",
-  "narrator": "f69edc07cff633b0.mp3",
+  "default": "e5705b0cccb794cb.mp3",
   "samuel": "e5705b0cccb794cb.mp3",
   "davi": "14831a888cf31745.mp3"
  },
  "heart": {
-  "default": "1f8fb1c88b247c01.mp3",
-  "narrator": "1f8fb1c88b247c01.mp3",
+  "default": "7b9656869b6a351a.mp3",
   "samuel": "7b9656869b6a351a.mp3",
   "salomao": "3aa3e8b68a1a300e.mp3"
  },
@@ -1098,8 +1044,7 @@
   "samuel": "5315a7c62baeb102.mp3"
  },
  "young": {
-  "default": "a7bb1ef56d594d9d.mp3",
-  "narrator": "a7bb1ef56d594d9d.mp3",
+  "default": "3892c41df0d0e6e3.mp3",
   "samuel": "3892c41df0d0e6e3.mp3"
  },
  "david kept the sheep": {
@@ -1188,8 +1133,7 @@
   "default": "701cb6d3c0b19a5b.mp3"
  },
  "stone": {
-  "default": "df022ed962d4da05.mp3",
-  "narrator": "df022ed962d4da05.mp3",
+  "default": "b2af3f34a294059b.mp3",
   "samuel": "b2af3f34a294059b.mp3",
   "jaco": "d1e64b830bcdf5d9.mp3",
   "neemias": "da024c1c06783a9a.mp3",
@@ -1197,18 +1141,15 @@
  },
  "giant": {
   "davi": "8a4ceff2e1f730dd.mp3",
-  "default": "83578c8321102b75.mp3",
-  "narrator": "83578c8321102b75.mp3"
+  "default": "8a4ceff2e1f730dd.mp3"
  },
  "sling": {
-  "default": "57742d34a1e24b42.mp3",
-  "narrator": "57742d34a1e24b42.mp3",
+  "default": "47a4ecafd5412e84.mp3",
   "samuel": "47a4ecafd5412e84.mp3"
  },
  "battle": {
   "davi": "b4d935e840e65875.mp3",
-  "default": "f6e4c4f1dd143834.mp3",
-  "narrator": "f6e4c4f1dd143834.mp3"
+  "default": "b4d935e840e65875.mp3"
  },
  "to fall": {
   "default": "0d365038a7df6d0b.mp3",
@@ -1240,9 +1181,8 @@
  },
  "silver": {
   "davi": "16d92a4c901d5b28.mp3",
-  "default": "50519473df977920.mp3",
-  "jaco": "2e8debf39dfb8c65.mp3",
-  "narrator": "50519473df977920.mp3"
+  "default": "16d92a4c901d5b28.mp3",
+  "jaco": "2e8debf39dfb8c65.mp3"
  },
  "harvest": {
   "davi": "134f4d51134cccba.mp3",
@@ -1295,24 +1235,21 @@
   "isaias": "a745fe82126c4580.mp3"
  },
  "song": {
-  "default": "b2aecd5ee26bd0b6.mp3",
-  "narrator": "b2aecd5ee26bd0b6.mp3",
+  "default": "f1a06ae4f12703ac.mp3",
   "samuel": "f1a06ae4f12703ac.mp3",
   "salomao": "e9ffa55d963d8f6b.mp3",
   "jaco": "ba88341881cc464b.mp3",
   "davi": "0e029fd3ae721ed7.mp3"
  },
  "rock": {
-  "default": "69fce3a8675514f9.mp3",
-  "narrator": "69fce3a8675514f9.mp3",
+  "default": "f415e8a1d2bfdb74.mp3",
   "salomao": "f415e8a1d2bfdb74.mp3",
   "moises": "5cde4b4f4b30256c.mp3",
   "pedro": "5cde4b4f4b30256c.mp3"
  },
  "strong": {
   "davi": "5d4b32e093e2d631.mp3",
-  "default": "9754262910c94a88.mp3",
-  "narrator": "9754262910c94a88.mp3"
+  "default": "5d4b32e093e2d631.mp3"
  },
  "fortress": {
   "default": "53475762af6c4361.mp3",
@@ -1389,8 +1326,7 @@
  },
  "prophet": {
   "isaias": "09200457d686d7e7.mp3",
-  "default": "8dbe4f498e11e56a.mp3",
-  "narrator": "8dbe4f498e11e56a.mp3"
+  "default": "09200457d686d7e7.mp3"
  },
  "because he was tall": {
   "default": "00c66c00b4dfbfac.mp3",
@@ -1398,8 +1334,7 @@
   "salomao": "b1052aefab881f1d.mp3"
  },
  "voice": {
-  "default": "3f912dd580b07533.mp3",
-  "narrator": "3f912dd580b07533.mp3",
+  "default": "9fb4bc2ce14e0b4b.mp3",
   "daniel": "9fb4bc2ce14e0b4b.mp3"
  },
  "to hear": {
@@ -1439,31 +1374,12 @@
   "default": "6ce05e0ebd62228b.mp3"
  },
  "send": {
-  "isaias": "bb4d34b534f970b9.mp3",
-  "default": "13bb2f46831f341f.mp3",
-  "narrator": "13bb2f46831f341f.mp3",
+  "default": "5fc2b65cb7bcfe63.mp3",
   "pedro": "5fc2b65cb7bcfe63.mp3"
  },
  "whom shall i send and who will go for us then said i here am i send me": {
   "isaias": "150f2aad9ee01e48.mp3",
   "default": "150f2aad9ee01e48.mp3"
- },
- "whom shall i blank and who will go for us then said i here am i send me": {
-  "isaias": "bf5effdb75f5b27c.mp3",
-  "default": "bf5effdb75f5b27c.mp3"
- },
- "keep": {
-  "isaias": "c44da13b3c300b2f.mp3",
-  "default": "4d6aebdd466ca9c2.mp3",
-  "narrator": "4d6aebdd466ca9c2.mp3"
- },
- "teach": {
-  "isaias": "970eef86be06a821.mp3",
-  "default": "970eef86be06a821.mp3"
- },
- "feed": {
-  "isaias": "e1547eba04aa025a.mp3",
-  "default": "e1547eba04aa025a.mp3"
  },
  "send the sheep": {
   "isaias": "6ced7f2ec3537271.mp3",
@@ -1494,26 +1410,22 @@
   "jonas": "10028431abba9dd2.mp3"
  },
  "sign": {
-  "default": "14aa43fdb0624987.mp3",
-  "narrator": "14aa43fdb0624987.mp3",
+  "default": "d26ea104cb9446b6.mp3",
   "jonas": "d26ea104cb9446b6.mp3",
   "daniel": "a0f44ccc5cf4a267.mp3"
  },
  "child": {
   "isaias": "21ca916734f07480.mp3",
-  "default": "a3dad7186bfb92b0.mp3",
-  "narrator": "a3dad7186bfb92b0.mp3"
+  "default": "21ca916734f07480.mp3"
  },
  "name": {
-  "default": "8b664385d59585b3.mp3",
-  "narrator": "8b664385d59585b3.mp3",
+  "default": "7c9f76c76d836049.mp3",
   "elias": "7c9f76c76d836049.mp3",
   "daniel": "8f0af66aa1486d2d.mp3"
  },
  "son": {
-  "default": "bf22c8b861b8e4f8.mp3",
-  "daniel": "881231cc7467b74c.mp3",
-  "narrator": "bf22c8b861b8e4f8.mp3"
+  "default": "881231cc7467b74c.mp3",
+  "daniel": "881231cc7467b74c.mp3"
  },
  "with us": {
   "isaias": "fdf396d6bfbfe30a.mp3",
@@ -1603,13 +1515,11 @@
   "default": "c9c3808caaee60ca.mp3"
  },
  "prince": {
-  "default": "4574f23c6d51b522.mp3",
-  "narrator": "4574f23c6d51b522.mp3",
+  "default": "c3913a2521313172.mp3",
   "jonas": "c3913a2521313172.mp3"
  },
  "wonderful": {
-  "default": "38e3efd6d575065c.mp3",
-  "narrator": "38e3efd6d575065c.mp3",
+  "default": "3a74ca98f149a3de.mp3",
   "daniel": "3a74ca98f149a3de.mp3"
  },
  "counsellor": {
@@ -1617,8 +1527,7 @@
   "daniel": "2113235be4abe1f6.mp3"
  },
  "mighty": {
-  "default": "e9b4a0c3172d05cf.mp3",
-  "narrator": "e9b4a0c3172d05cf.mp3",
+  "default": "386cfaa8d93aecb6.mp3",
   "daniel": "386cfaa8d93aecb6.mp3"
  },
  "everlasting": {
@@ -1686,8 +1595,7 @@
   "daniel": "f33c6a56fa73a63f.mp3"
  },
  "dream": {
-  "default": "e296c8c14df36691.mp3",
-  "narrator": "e296c8c14df36691.mp3",
+  "default": "ab2a83af3ad30a6c.mp3",
   "rebeca": "ab2a83af3ad30a6c.mp3",
   "jaco": "a8cb795e9b6e26cf.mp3"
  },
@@ -1701,8 +1609,7 @@
  },
  "coat": {
   "jose": "0aae8b5e22a8a6a4.mp3",
-  "default": "16619594599ac63f.mp3",
-  "narrator": "16619594599ac63f.mp3",
+  "default": "0aae8b5e22a8a6a4.mp3",
   "jaco": "a4bd60bea0cc086d.mp3"
  },
  "to sell": {
@@ -1710,8 +1617,7 @@
   "jaco": "9b2dce3fa4977891.mp3"
  },
  "colors": {
-  "default": "11d7b0c79b612fea.mp3",
-  "narrator": "11d7b0c79b612fea.mp3",
+  "default": "da32dff3ec4d3612.mp3",
   "jaco": "da32dff3ec4d3612.mp3",
   "jose": "3aff45738510ec38.mp3"
  },
@@ -1785,8 +1691,7 @@
   "jaco": "04ea1d740c2ca302.mp3"
  },
  "prison": {
-  "default": "289fe2d3350c1642.mp3",
-  "narrator": "289fe2d3350c1642.mp3",
+  "default": "ac5b11091d9a61b0.mp3",
   "jaco": "ac5b11091d9a61b0.mp3"
  },
  "to interpret": {
@@ -1801,19 +1706,16 @@
  },
  "bread": {
   "jose": "20798ceafa9706b9.mp3",
-  "default": "dcb4e93a2c2f73bc.mp3",
+  "default": "20798ceafa9706b9.mp3",
   "jesus": "0966cc011bf6f07f.mp3",
-  "narrator": "dcb4e93a2c2f73bc.mp3",
   "pedro": "36eb5fe7943ac95a.mp3"
  },
  "years": {
-  "default": "4388b56275520f76.mp3",
-  "narrator": "4388b56275520f76.mp3",
+  "default": "62fac283ab2187fd.mp3",
   "rebeca": "62fac283ab2187fd.mp3"
  },
  "plenty": {
-  "default": "f8927b44f93b8cb2.mp3",
-  "narrator": "f8927b44f93b8cb2.mp3",
+  "default": "457fcf09cf7790b9.mp3",
   "rebeca": "457fcf09cf7790b9.mp3"
  },
  "god is with joseph": {
@@ -1846,13 +1748,11 @@
  },
  "with": {
   "jose": "6ca291be52cbf097.mp3",
-  "default": "26a0de24a3ed0ddc.mp3",
-  "narrator": "26a0de24a3ed0ddc.mp3"
+  "default": "6ca291be52cbf097.mp3"
  },
  "after": {
   "jose": "b343a6b4c811defa.mp3",
-  "default": "4fe60e6a0f163eb1.mp3",
-  "narrator": "4fe60e6a0f163eb1.mp3"
+  "default": "b343a6b4c811defa.mp3"
  },
  "under": {
   "jose": "38aafa805bd5c288.mp3",
@@ -1904,8 +1804,7 @@
  },
  "family": {
   "jose": "a7476cbc6378a52e.mp3",
-  "default": "a7d446ba09f58f42.mp3",
-  "narrator": "a7d446ba09f58f42.mp3"
+  "default": "a7476cbc6378a52e.mp3"
  },
  "famine": {
   "jose": "5c43937d44968838.mp3",
@@ -2002,21 +1901,18 @@
   "moises": "fc51453a02ab16a6.mp3"
  },
  "lion": {
-  "default": "45b7da3a9dd1adff.mp3",
-  "narrator": "45b7da3a9dd1adff.mp3",
+  "default": "96256004fc5923a7.mp3",
   "neemias": "96256004fc5923a7.mp3",
   "noe": "d9331cbd653e793e.mp3",
   "daniel": "61bbbff7f568b8ef.mp3"
  },
  "law": {
   "daniel": "98fe2ab9d2a2f896.mp3",
-  "default": "97ba087b1ea5386f.mp3",
-  "narrator": "97ba087b1ea5386f.mp3"
+  "default": "98fe2ab9d2a2f896.mp3"
  },
  "faithful": {
   "daniel": "7b407abff0649586.mp3",
-  "default": "45f49f1bb92399df.mp3",
-  "narrator": "45f49f1bb92399df.mp3"
+  "default": "7b407abff0649586.mp3"
  },
  "home": {
   "default": "9314814dd73be6e3.mp3",
@@ -2048,8 +1944,7 @@
  },
  "prayed": {
   "daniel": "74e9c99936144a02.mp3",
-  "default": "84ec2a83c260d680.mp3",
-  "narrator": "84ec2a83c260d680.mp3"
+  "default": "74e9c99936144a02.mp3"
  },
  "he kneeled upon his knees three times a day and blank": {
   "daniel": "fb15e835ea561bec.mp3",
@@ -2057,13 +1952,11 @@
  },
  "sang": {
   "daniel": "c4a1c9bf143d8f8e.mp3",
-  "default": "c2d8d15627b6e727.mp3",
-  "narrator": "c2d8d15627b6e727.mp3"
+  "default": "c4a1c9bf143d8f8e.mp3"
  },
  "ran": {
   "daniel": "f45b3308d0276cfb.mp3",
-  "default": "13b12a494ff0d0eb.mp3",
-  "narrator": "13b12a494ff0d0eb.mp3"
+  "default": "f45b3308d0276cfb.mp3"
  },
  "slept": {
   "daniel": "020a710ce1194b06.mp3",
@@ -2110,8 +2003,7 @@
   "ezequiel": "7d7ec06ef9bdae1d.mp3"
  },
  "mouth": {
-  "default": "129ad17d74267b95.mp3",
-  "narrator": "129ad17d74267b95.mp3",
+  "default": "47df1c0a5b99a583.mp3",
   "neemias": "47df1c0a5b99a583.mp3"
  },
  "angel": {
@@ -2125,13 +2017,11 @@
   "default": "e43ea7c44b058364.mp3"
  },
  "morning": {
-  "default": "b99c4465bcd290ce.mp3",
-  "narrator": "b99c4465bcd290ce.mp3",
+  "default": "1e99ee5bab14804e.mp3",
   "ezequiel": "1e99ee5bab14804e.mp3"
  },
  "den": {
-  "default": "3c2c519a3ecdad46.mp3",
-  "narrator": "3c2c519a3ecdad46.mp3",
+  "default": "d67284986cdafa8e.mp3",
   "neemias": "d67284986cdafa8e.mp3"
  },
  "to throw": {
@@ -2212,23 +2102,20 @@
  },
  "kingdom": {
   "daniel": "27dfabde78d2440f.mp3",
-  "default": "76cf1e4d464c7221.mp3",
-  "narrator": "76cf1e4d464c7221.mp3"
+  "default": "27dfabde78d2440f.mp3"
  },
  "to save": {
   "daniel": "7487c77d4a5603cd.mp3",
   "default": "7487c77d4a5603cd.mp3"
  },
  "forever": {
-  "default": "2ad0accfc1cfcd3c.mp3",
-  "narrator": "2ad0accfc1cfcd3c.mp3",
+  "default": "d14e711e0de686ea.mp3",
   "neemias": "d14e711e0de686ea.mp3",
   "davi": "3de698e31181bc07.mp3",
   "isaias": "0f6f361c4a3ee729.mp3"
  },
  "living": {
-  "default": "c02608cb8d4a410f.mp3",
-  "narrator": "c02608cb8d4a410f.mp3",
+  "default": "6c7595bbc2a1c72e.mp3",
   "ezequiel": "6c7595bbc2a1c72e.mp3",
   "neemias": "637bb22aeec3242a.mp3"
  },
@@ -2313,8 +2200,7 @@
   "neemias": "6b4ef0b674a56cde.mp3"
  },
  "fisherman": {
-  "default": "0e5366483777d7ed.mp3",
-  "narrator": "0e5366483777d7ed.mp3",
+  "default": "4bc7751fdfcfd486.mp3",
   "pedro": "4bc7751fdfcfd486.mp3"
  },
  "the king wrote to all the people the god of daniel is the living god his kingdom is forever he saves and he delivers daniel was faithful and god was faithful to him": {
@@ -2322,9 +2208,8 @@
   "neemias": "97ed9c0756765add.mp3"
  },
  "net": {
-  "default": "c535736e9ed920bc.mp3",
-  "pedro": "33e9b39181c211d9.mp3",
-  "narrator": "c535736e9ed920bc.mp3"
+  "default": "33e9b39181c211d9.mp3",
+  "pedro": "33e9b39181c211d9.mp3"
  },
  "disciple": {
   "default": "413c03cae08f2bd7.mp3",
@@ -2370,14 +2255,12 @@
   "pedro": "0474d7460f9d5c7c.mp3"
  },
  "follow": {
-  "default": "669358d530b61907.mp3",
-  "narrator": "669358d530b61907.mp3",
+  "default": "74af0c9b5f4d248d.mp3",
   "pedro": "74af0c9b5f4d248d.mp3"
  },
  "leave": {
-  "default": "8224b7bcb9c34889.mp3",
-  "pedro": "59a59bd103dcbae4.mp3",
-  "narrator": "8224b7bcb9c34889.mp3"
+  "default": "59a59bd103dcbae4.mp3",
+  "pedro": "59a59bd103dcbae4.mp3"
  },
  "build": {
   "default": "86eb5c3f12f516f9.mp3",
@@ -2397,8 +2280,7 @@
  },
  "fishing": {
   "jesus": "a63e60a4e14cb081.mp3",
-  "default": "3b3bdd5ecc4f7796.mp3",
-  "narrator": "3b3bdd5ecc4f7796.mp3"
+  "default": "a63e60a4e14cb081.mp3"
  },
  "building an ark": {
   "jesus": "dedfb997a8b73641.mp3",
@@ -2430,23 +2312,19 @@
  },
  "father": {
   "jesus": "d5c879b8268b2855.mp3",
-  "default": "5a9c972b34693176.mp3",
-  "narrator": "5a9c972b34693176.mp3",
+  "default": "d5c879b8268b2855.mp3",
   "pedro": "ff691baef07abdd0.mp3"
  },
  "daily": {
-  "default": "46456ae6538af5ad.mp3",
-  "narrator": "46456ae6538af5ad.mp3",
+  "default": "8a15ffca3e8baa61.mp3",
   "pedro": "8a15ffca3e8baa61.mp3"
  },
  "debts": {
   "jesus": "cfb2a0d47a01fe88.mp3",
-  "default": "36498b610732e92c.mp3",
-  "narrator": "36498b610732e92c.mp3"
+  "default": "cfb2a0d47a01fe88.mp3"
  },
  "will": {
-  "default": "f8ba51653c9899a4.mp3",
-  "narrator": "f8ba51653c9899a4.mp3",
+  "default": "ae2b4e7347b833a6.mp3",
   "maria": "ae2b4e7347b833a6.mp3"
  },
  "forgive us our debts": {
@@ -2513,8 +2391,7 @@
  },
  "fish": {
   "jesus": "4b5a5845414d84a7.mp3",
-  "default": "33cf3c50d0d4efbe.mp3",
-  "narrator": "33cf3c50d0d4efbe.mp3"
+  "default": "4b5a5845414d84a7.mp3"
  },
  "a new coat": {
   "jesus": "efe3c484dfaf948e.mp3",
@@ -2527,8 +2404,7 @@
   "pedro": "3ed845ac4822747c.mp3"
  },
  "crowd": {
-  "default": "4e5b7b62ef969563.mp3",
-  "narrator": "4e5b7b62ef969563.mp3",
+  "default": "cd070a994e1827b0.mp3",
   "pedro": "cd070a994e1827b0.mp3"
  },
  "to bless": {
@@ -2916,8 +2792,7 @@
  },
  "jesus": {
   "jesus": "65fbd3baea32faf0.mp3",
-  "default": "f0b9be199c4c0e41.mp3",
-  "narrator": "f0b9be199c4c0e41.mp3"
+  "default": "65fbd3baea32faf0.mp3"
  },
  "how many baskets were left over": {
   "narrator": "84291923df65dfc2.mp3",
@@ -3026,8 +2901,7 @@
  },
  "daniel": {
   "daniel": "24409ef6a35be040.mp3",
-  "default": "c1f7d9c7971b59eb.mp3",
-  "narrator": "c1f7d9c7971b59eb.mp3"
+  "default": "24409ef6a35be040.mp3"
  },
  "neemias": {
   "neemias": "9cd4705a263fbd7d.mp3",
@@ -3089,467 +2963,29 @@
   "madalena": "295521084aa73766.mp3",
   "default": "295521084aa73766.mp3"
  },
- "and": {
-  "narrator": "63a2ade6c5797330.mp3",
-  "default": "63a2ade6c5797330.mp3"
- },
- "in": {
-  "narrator": "e2de43d262df3c4e.mp3",
-  "default": "e2de43d262df3c4e.mp3"
- },
- "the": {
-  "narrator": "8947db5ddeb17141.mp3",
-  "default": "8947db5ddeb17141.mp3"
- },
- "is": {
-  "narrator": "dd57b68f12b828e6.mp3",
-  "default": "dd57b68f12b828e6.mp3"
- },
  "called": {
-  "narrator": "1ad3472db87706d7.mp3",
-  "default": "1ad3472db87706d7.mp3"
- },
- "he": {
-  "narrator": "7f823d8e181e8fcc.mp3",
-  "default": "7f823d8e181e8fcc.mp3"
- },
- "that": {
-  "narrator": "6635ad45419b0ee6.mp3",
-  "default": "6635ad45419b0ee6.mp3"
- },
- "it": {
-  "narrator": "fd6098849efbf6f7.mp3",
-  "default": "fd6098849efbf6f7.mp3"
- },
- "was": {
-  "narrator": "929bade0cb7b24af.mp3",
-  "default": "929bade0cb7b24af.mp3"
- },
- "were": {
-  "narrator": "2e6943a79433fa67.mp3",
-  "default": "2e6943a79433fa67.mp3"
- },
- "of": {
-  "narrator": "195633053ed4966c.mp3",
-  "default": "195633053ed4966c.mp3"
- },
- "planted": {
-  "narrator": "8bd1b0ac0b789a15.mp3",
-  "default": "8bd1b0ac0b789a15.mp3"
- },
- "a": {
-  "narrator": "0fec3ff6e52fae1a.mp3",
-  "default": "0fec3ff6e52fae1a.mp3"
- },
- "lived": {
-  "narrator": "26a2e302e972d6e7.mp3",
-  "default": "26a2e302e972d6e7.mp3"
+  "default": "c48473274d47f64f.mp3",
+  "eva": "c48473274d47f64f.mp3"
  },
  "made": {
-  "narrator": "8f6a27f6d477611b.mp3",
-  "default": "8f6a27f6d477611b.mp3"
- },
- "came": {
-  "narrator": "88640a6a9f1ba963.mp3",
-  "default": "88640a6a9f1ba963.mp3"
- },
- "into": {
-  "narrator": "5927e531d05b381d.mp3",
-  "default": "5927e531d05b381d.mp3"
- },
- "shut": {
-  "narrator": "6c4aad7f2830feb8.mp3",
-  "default": "6c4aad7f2830feb8.mp3"
- },
- "upon": {
-  "narrator": "6e17567afd4d3179.mp3",
-  "default": "6e17567afd4d3179.mp3"
- },
- "days": {
-  "narrator": "98ffee012ba0f28b.mp3",
-  "default": "98ffee012ba0f28b.mp3"
- },
- "an": {
-  "narrator": "6157381cf4ad857e.mp3",
-  "default": "6157381cf4ad857e.mp3"
- },
- "nights": {
-  "narrator": "89267c2cc19de349.mp3",
-  "default": "89267c2cc19de349.mp3"
- },
- "covered": {
-  "narrator": "64fa752ef7c5e9de.mp3",
-  "default": "64fa752ef7c5e9de.mp3"
- },
- "mountains": {
-  "narrator": "4e3f9c897e7dcf1b.mp3",
-  "default": "4e3f9c897e7dcf1b.mp3"
- },
- "opened": {
-  "narrator": "1621648c6c1222e3.mp3",
-  "default": "1621648c6c1222e3.mp3"
- },
- "back": {
-  "narrator": "f3002188be6d17eb.mp3",
-  "default": "f3002188be6d17eb.mp3"
- },
- "to": {
-  "narrator": "2fd8f38dafb3c9d6.mp3",
-  "default": "2fd8f38dafb3c9d6.mp3"
- },
- "him": {
-  "narrator": "f020cba126efbd4d.mp3",
-  "default": "f020cba126efbd4d.mp3"
- },
- "sent": {
-  "narrator": "411f9580625caef5.mp3",
-  "default": "411f9580625caef5.mp3"
- },
- "i": {
-  "narrator": "10fd928a4179d2ec.mp3",
-  "default": "10fd928a4179d2ec.mp3"
- },
- "set": {
-  "narrator": "ef71b3dcdf53d114.mp3",
-  "default": "ef71b3dcdf53d114.mp3"
- },
- "my": {
-  "narrator": "cc5557b0858230e1.mp3",
-  "default": "cc5557b0858230e1.mp3"
- },
- "burned": {
-  "narrator": "2ff0671050bb3ce1.mp3",
-  "default": "2ff0671050bb3ce1.mp3"
- },
- "moses": {
-  "narrator": "6d18975c119429dc.mp3",
-  "default": "6d18975c119429dc.mp3"
- },
- "remember": {
-  "narrator": "948ff4d13125c751.mp3",
-  "default": "948ff4d13125c751.mp3"
- },
- "take": {
-  "narrator": "d342fb7a4ff7bee4.mp3",
-  "default": "d342fb7a4ff7bee4.mp3"
- },
- "off": {
-  "narrator": "7627ce5059154184.mp3",
-  "default": "7627ce5059154184.mp3"
- },
- "your": {
-  "narrator": "f4cc69116ed586dd.mp3",
-  "default": "f4cc69116ed586dd.mp3"
- },
- "this": {
-  "narrator": "72c48623e3c4dd6f.mp3",
-  "default": "72c48623e3c4dd6f.mp3"
- },
- "let": {
-  "narrator": "a8fa554932ed3903.mp3",
-  "default": "a8fa554932ed3903.mp3"
+  "default": "3315843a97681a25.mp3",
+  "eva": "3315843a97681a25.mp3"
  },
  "go": {
-  "narrator": "ee3680484ca16eec.mp3",
-  "default": "ee3680484ca16eec.mp3"
- },
- "went": {
-  "narrator": "eca837effaf64ef8.mp3",
-  "default": "eca837effaf64ef8.mp3"
- },
- "be": {
-  "narrator": "ee5beac34f90601d.mp3",
-  "default": "ee5beac34f90601d.mp3"
- },
- "waters": {
-  "narrator": "d57bd6d2d76af562.mp3",
-  "default": "d57bd6d2d76af562.mp3"
- },
- "divided": {
-  "narrator": "21a053c6290e64f6.mp3",
-  "default": "21a053c6290e64f6.mp3"
- },
- "stretched": {
-  "narrator": "9c8724f8aacfc088.mp3",
-  "default": "9c8724f8aacfc088.mp3"
- },
- "out": {
-  "narrator": "3bd85ccc5ed4b337.mp3",
-  "default": "3bd85ccc5ed4b337.mp3"
- },
- "his": {
-  "narrator": "f9a9626789cd203d.mp3",
-  "default": "f9a9626789cd203d.mp3"
- },
- "walked": {
-  "narrator": "169b754630cbc72f.mp3",
-  "default": "169b754630cbc72f.mp3"
- },
- "on": {
-  "narrator": "f0ff4a1db6337e9a.mp3",
-  "default": "f0ff4a1db6337e9a.mp3"
- },
- "david": {
-  "narrator": "a819c6da7d1bced6.mp3",
-  "default": "a819c6da7d1bced6.mp3"
- },
- "kept": {
-  "narrator": "4c99e46211bc1599.mp3",
-  "default": "4c99e46211bc1599.mp3"
- },
- "played": {
-  "narrator": "102ef41a9191e2ca.mp3",
-  "default": "102ef41a9191e2ca.mp3"
- },
- "lord": {
-  "narrator": "62f3195a939c6af6.mp3",
-  "default": "62f3195a939c6af6.mp3"
- },
- "looks": {
-  "narrator": "afdff0dc9983683b.mp3",
-  "default": "afdff0dc9983683b.mp3"
- },
- "took": {
-  "narrator": "2d03a4b541895a3c.mp3",
-  "default": "2d03a4b541895a3c.mp3"
- },
- "lords": {
-  "narrator": "e34f2a6163517215.mp3",
-  "default": "e34f2a6163517215.mp3"
- },
- "fell": {
-  "narrator": "2b0ac0952f9140ba.mp3",
-  "default": "2b0ac0952f9140ba.mp3"
- },
- "not": {
-  "narrator": "89a84cc9501bcd71.mp3",
-  "default": "89a84cc9501bcd71.mp3"
- },
- "do": {
-  "narrator": "d9d9f0ff6d3d89a5.mp3",
-  "default": "d9d9f0ff6d3d89a5.mp3"
- },
- "fear": {
-  "narrator": "f71aa41f88721520.mp3",
-  "default": "f71aa41f88721520.mp3"
- },
- "trust": {
-  "narrator": "929144395d9754af.mp3",
-  "default": "929144395d9754af.mp3"
- },
- "had": {
-  "narrator": "508fac3653a33a49.mp3",
-  "default": "508fac3653a33a49.mp3"
- },
- "unto": {
-  "narrator": "4d24dbca96497077.mp3",
-  "default": "4d24dbca96497077.mp3"
- },
- "sing": {
-  "narrator": "8239957d48676c61.mp3",
-  "default": "8239957d48676c61.mp3"
- },
- "new": {
-  "narrator": "3d587e9e81792307.mp3",
-  "default": "3d587e9e81792307.mp3"
- },
- "here": {
-  "narrator": "1e42b343c3201df3.mp3",
-  "default": "1e42b343c3201df3.mp3"
- },
- "am": {
-  "narrator": "bb28cb52cceb6633.mp3",
-  "default": "bb28cb52cceb6633.mp3"
- },
- "heard": {
-  "narrator": "476b5ff38ee3306d.mp3",
-  "default": "476b5ff38ee3306d.mp3"
- },
- "me": {
-  "narrator": "2bceee225fe204dd.mp3",
-  "default": "2bceee225fe204dd.mp3"
- },
- "isaiah": {
-  "narrator": "368f647127addb25.mp3",
-  "default": "368f647127addb25.mp3"
- },
- "whom": {
-  "narrator": "969960b160229542.mp3",
-  "default": "969960b160229542.mp3"
- },
- "shall": {
-  "narrator": "45613aa1097d92b8.mp3",
-  "default": "45613aa1097d92b8.mp3"
- },
- "us": {
-  "narrator": "7f04e1b45d8ac994.mp3",
-  "default": "7f04e1b45d8ac994.mp3"
- },
- "immanuel": {
-  "narrator": "0a4468e53fd06757.mp3",
-  "default": "0a4468e53fd06757.mp3"
- },
- "give": {
-  "narrator": "cdddf81dde536b65.mp3",
-  "default": "cdddf81dde536b65.mp3"
- },
- "you": {
-  "narrator": "6a1a6652d07373dd.mp3",
-  "default": "6a1a6652d07373dd.mp3"
- },
- "brings": {
-  "narrator": "b7fe9922d68d6e8b.mp3",
-  "default": "b7fe9922d68d6e8b.mp3"
- },
- "born": {
-  "narrator": "8a364fed7bdae632.mp3",
-  "default": "8a364fed7bdae632.mp3"
- },
- "joseph": {
-  "narrator": "d6993cd080f0d719.mp3",
-  "default": "d6993cd080f0d719.mp3"
- },
- "jacob": {
-  "narrator": "0027499b54b22f0b.mp3",
-  "default": "0027499b54b22f0b.mp3"
+  "default": "0372f7cda1e897b9.mp3",
+  "isaias": "0372f7cda1e897b9.mp3"
  },
  "brothers": {
-  "narrator": "8d2adf51380ebadf.mp3",
-  "default": "8d2adf51380ebadf.mp3",
+  "default": "8e520a41e808d4dc.mp3",
   "jose": "8e520a41e808d4dc.mp3"
  },
- "many": {
-  "narrator": "44308cfe1731ab64.mp3",
-  "default": "44308cfe1731ab64.mp3"
- },
- "forgave": {
-  "narrator": "a747aa143b0f1f74.mp3",
-  "default": "a747aa143b0f1f74.mp3"
- },
- "meant": {
-  "narrator": "01c6435b620ed9ba.mp3",
-  "default": "01c6435b620ed9ba.mp3"
- },
- "for": {
-  "narrator": "0aff530d2575d61f.mp3",
-  "default": "0aff530d2575d61f.mp3"
- },
- "wept": {
-  "narrator": "e836d640bd83bf3f.mp3",
-  "default": "e836d640bd83bf3f.mp3"
- },
- "interpreted": {
-  "narrator": "9af1f10d60e86d4b.mp3",
-  "default": "9af1f10d60e86d4b.mp3"
- },
- "lions": {
-  "narrator": "8a794d2a98b6b2ed.mp3",
-  "default": "8a794d2a98b6b2ed.mp3"
- },
- "times": {
-  "narrator": "94b1d49f14acacea.mp3",
-  "default": "94b1d49f14acacea.mp3"
- },
- "they": {
-  "narrator": "bad67820e195cbeb.mp3",
-  "default": "bad67820e195cbeb.mp3"
- },
- "threw": {
-  "narrator": "f9fff77e6190b026.mp3",
-  "default": "f9fff77e6190b026.mp3"
- },
- "mouths": {
-  "narrator": "6b227e7e88a5a467.mp3",
-  "default": "6b227e7e88a5a467.mp3"
- },
- "closed": {
-  "narrator": "047d47cbc4642f8a.mp3",
-  "default": "047d47cbc4642f8a.mp3"
- },
- "wrote": {
-  "narrator": "9d55ff1e9602dff5.mp3",
-  "default": "9d55ff1e9602dff5.mp3"
- },
- "all": {
-  "narrator": "84395a1ec5923193.mp3",
-  "default": "84395a1ec5923193.mp3"
- },
- "saves": {
-  "narrator": "3b328dc8c36fefa8.mp3",
-  "default": "3b328dc8c36fefa8.mp3"
- },
- "left": {
-  "narrator": "28d2221df645584d.mp3",
-  "default": "28d2221df645584d.mp3"
- },
- "their": {
-  "narrator": "622679f90b4f8a0a.mp3",
-  "default": "622679f90b4f8a0a.mp3"
- },
- "nets": {
-  "narrator": "78ef05c62d10f639.mp3",
-  "default": "78ef05c62d10f639.mp3"
- },
- "followed": {
-  "narrator": "349c6734c2304470.mp3",
-  "default": "349c6734c2304470.mp3"
- },
- "by": {
-  "narrator": "c7740a466aed9096.mp3",
-  "default": "c7740a466aed9096.mp3"
- },
- "peter": {
-  "narrator": "a765568e85859624.mp3",
-  "default": "a765568e85859624.mp3"
- },
- "disciples": {
-  "narrator": "ee18b6d986ad9bc1.mp3",
-  "default": "ee18b6d986ad9bc1.mp3"
- },
- "our": {
-  "narrator": "ad7252995fecf4d9.mp3",
-  "default": "ad7252995fecf4d9.mp3"
- },
  "come": {
-  "narrator": "7977b51c49d66edc.mp3",
-  "default": "7977b51c49d66edc.mp3",
+  "default": "28fb19bee4800bc0.mp3",
   "jesus": "28fb19bee4800bc0.mp3"
  },
- "forgive": {
-  "narrator": "0c402406a701e62c.mp3",
-  "default": "0c402406a701e62c.mp3"
- },
- "taught": {
-  "narrator": "54f5ae7c2bd50601.mp3",
-  "default": "54f5ae7c2bd50601.mp3"
- },
- "pray": {
-  "narrator": "b6d2c8774f4a8fee.mp3",
-  "default": "b6d2c8774f4a8fee.mp3"
- },
- "loaves": {
-  "narrator": "356728e853a9062d.mp3",
-  "default": "356728e853a9062d.mp3"
- },
- "fishes": {
-  "narrator": "4e693113b3316c9b.mp3",
-  "default": "4e693113b3316c9b.mp3"
- },
- "did": {
-  "narrator": "89028df95e363d1c.mp3",
-  "default": "89028df95e363d1c.mp3"
- },
  "eat": {
-  "narrator": "0eed7f8018d2b7db.mp3",
-  "default": "0eed7f8018d2b7db.mp3"
- },
- "filled": {
-  "narrator": "77a109abb4891091.mp3",
-  "default": "77a109abb4891091.mp3"
- },
- "great": {
-  "narrator": "82419535fc1ca63f.mp3",
-  "default": "82419535fc1ca63f.mp3"
+  "default": "0a183483e1a0b74d.mp3",
+  "isaias": "0a183483e1a0b74d.mp3"
  },
  "good morning what are you doing": {
   "jesus": "e6c85285b668fe0d.mp3",
@@ -3642,8 +3078,7 @@
  },
  "hungry": {
   "jesus": "4411c83dd771f6e0.mp3",
-  "narrator": "fb1e4e11e65bccc5.mp3",
-  "default": "fb1e4e11e65bccc5.mp3"
+  "default": "4411c83dd771f6e0.mp3"
  },
  "how many": {
   "jesus": "e3781ebcce4fac50.mp3",
@@ -3651,8 +3086,7 @@
  },
  "enough": {
   "jesus": "d335e4c94184eb86.mp3",
-  "narrator": "4e2edaef0fd6cdea.mp3",
-  "default": "4e2edaef0fd6cdea.mp3"
+  "default": "d335e4c94184eb86.mp3"
  },
  "zacchaeus come down quickly": {
   "jesus": "52d94e5e870aaa3a.mp3",
@@ -3684,13 +3118,11 @@
  },
  "today": {
   "jesus": "6dbea030da3078d6.mp3",
-  "narrator": "81b5c38ae059b229.mp3",
-  "default": "81b5c38ae059b229.mp3"
+  "default": "6dbea030da3078d6.mp3"
  },
  "welcome": {
   "jesus": "2dd227b6af11e00c.mp3",
-  "narrator": "a62f062fdcd4f938.mp3",
-  "default": "a62f062fdcd4f938.mp3"
+  "default": "2dd227b6af11e00c.mp3"
  },
  "to give": {
   "jesus": "f70fe5884494ba2c.mp3",
@@ -3739,8 +3171,7 @@
  "afraid": {
   "jesus": "46bcd09a9212e8da.mp3",
   "isaias": "46bcd09a9212e8da.mp3",
-  "narrator": "ca65703fcdd196b5.mp3",
-  "default": "ca65703fcdd196b5.mp3"
+  "default": "46bcd09a9212e8da.mp3"
  },
  "be quiet": {
   "jesus": "8b2fd98d1450a77e.mp3",
@@ -3748,8 +3179,7 @@
  },
  "calm": {
   "jesus": "95e81ba1de9513bd.mp3",
-  "narrator": "ee938d32633e1427.mp3",
-  "default": "ee938d32633e1427.mp3"
+  "default": "95e81ba1de9513bd.mp3"
  },
  "lord i am cooking and cleaning all alone": {
   "marta": "373beefea521fa41.mp3",
@@ -3789,8 +3219,7 @@
  },
  "busy": {
   "jesus": "e73429c179889ae4.mp3",
-  "narrator": "5dddd241fa5208d2.mp3",
-  "default": "5dddd241fa5208d2.mp3"
+  "default": "e73429c179889ae4.mp3"
  },
  "to help": {
   "jesus": "0c8beca2e4afebd9.mp3",
@@ -3804,10 +3233,6 @@
  "dont worry": {
   "jesus": "551efbbcee5d9c1e.mp3",
   "default": "551efbbcee5d9c1e.mp3"
- },
- "jesus son of david help me": {
-  "bartimeu": "eee6e031c9e79968.mp3",
-  "default": "eee6e031c9e79968.mp3"
  },
  "call him tell him to come here": {
   "jesus": "2bf1163466e7ba93.mp3",
@@ -3847,8 +3272,7 @@
  },
  "faith": {
   "jesus": "40166a5d5aab1718.mp3",
-  "narrator": "b3aaac976230bca5.mp3",
-  "default": "b3aaac976230bca5.mp3"
+  "default": "40166a5d5aab1718.mp3"
  },
  "noah make an ark of wood": {
   "voice": "42716dda16234c32.mp3",
@@ -3888,8 +3312,7 @@
  },
  "long": {
   "noe": "7bd05117348e11ea.mp3",
-  "narrator": "6e064dbcb71c123b.mp3",
-  "default": "6e064dbcb71c123b.mp3"
+  "default": "7bd05117348e11ea.mp3"
  },
  "good morning i need some wood": {
   "noe": "eeb3bbea8c01db09.mp3",
@@ -3941,8 +3364,7 @@
  },
  "expensive": {
   "noe": "3b96574106dafda9.mp3",
-  "narrator": "61aeaa955d056db9.mp3",
-  "default": "61aeaa955d056db9.mp3"
+  "default": "3b96574106dafda9.mp3"
  },
  "deal": {
   "noe": "3a0a4a0b7c754649.mp3",
@@ -4023,18 +3445,15 @@
  "hurry": {
   "noe": "fd3d35f556f7600a.mp3",
   "jose": "e365ded0cbae38fe.mp3",
-  "narrator": "e412416be463cf66.mp3",
-  "default": "e412416be463cf66.mp3"
+  "default": "fd3d35f556f7600a.mp3"
  },
  "inside": {
   "noe": "b985a7105e2a9656.mp3",
-  "narrator": "e6f34fdbadd8b528.mp3",
-  "default": "e6f34fdbadd8b528.mp3"
+  "default": "b985a7105e2a9656.mp3"
  },
  "safe": {
   "noe": "137522195235025b.mp3",
-  "narrator": "961ac74fee43f3b7.mp3",
-  "default": "961ac74fee43f3b7.mp3"
+  "default": "137522195235025b.mp3"
  },
  "father the rain stopped can we go out": {
   "default": "b2bcf77c9b7a5c29.mp3",
@@ -4200,14 +3619,12 @@
  },
  "again": {
   "moises": "ef1b31d140c24c95.mp3",
-  "narrator": "2354744be4e9de84.mp3",
-  "default": "2354744be4e9de84.mp3"
+  "default": "ef1b31d140c24c95.mp3"
  },
  "tomorrow": {
   "moises": "14e31adae8e6c11a.mp3",
   "daniel": "80b08ee84c8acebb.mp3",
-  "narrator": "3ec90ca37da0c337.mp3",
-  "default": "3ec90ca37da0c337.mp3"
+  "default": "14e31adae8e6c11a.mp3"
  },
  "moses i have a big problem": {
   "pharaoh": "35c7eb66bc844236.mp3",
@@ -4243,8 +3660,7 @@
  },
  "problem": {
   "moises": "7420557ebf0c8518.mp3",
-  "narrator": "2f85b84ae8d9855e.mp3",
-  "default": "2f85b84ae8d9855e.mp3"
+  "default": "7420557ebf0c8518.mp3"
  },
  "frog": {
   "moises": "7354c5cb8bb3519b.mp3",
@@ -4284,8 +3700,7 @@
  },
  "lamb": {
   "moises": "59d49e11c7037570.mp3",
-  "narrator": "9727d7e09c882a30.mp3",
-  "default": "9727d7e09c882a30.mp3"
+  "default": "59d49e11c7037570.mp3"
  },
  "the dinner is ready can we sit down": {
   "arao": "cdeb7571b20c45a6.mp3",
@@ -4302,20 +3717,17 @@
  "dinner": {
   "moises": "e84eecc667b4dd69.mp3",
   "daniel": "98d2d75abc1c3aeb.mp3",
-  "narrator": "88f25ea46d0de0ee.mp3",
-  "default": "88f25ea46d0de0ee.mp3"
+  "default": "e84eecc667b4dd69.mp3"
  },
  "quickly": {
   "moises": "068f002c0cbe8efa.mp3",
   "isaias": "ad6b3241587970cc.mp3",
-  "narrator": "eb88f2771576fe36.mp3",
-  "default": "eb88f2771576fe36.mp3"
+  "default": "068f002c0cbe8efa.mp3"
  },
  "ready": {
   "moises": "b3a22a271d575085.mp3",
   "isaias": "8bfad65946af5be1.mp3",
-  "narrator": "4b5074d4db77c5fb.mp3",
-  "default": "4b5074d4db77c5fb.mp3"
+  "default": "b3a22a271d575085.mp3"
  },
  "moses the egyptians are behind us": {
   "josue": "ddf6b981d9b54055.mp3",
@@ -4453,8 +3865,7 @@
  "job": {
   "davi": "9b66dee54983d9de.mp3",
   "jose": "19bf3b3967aadc04.mp3",
-  "narrator": "e4d20d405b3c29e7.mp3",
-  "default": "e4d20d405b3c29e7.mp3"
+  "default": "9b66dee54983d9de.mp3"
  },
  "nice to meet you": {
   "davi": "c4b9e45d6a3df248.mp3",
@@ -4502,8 +3913,7 @@
  },
  "early": {
   "davi": "0b02cbf5275d36a3.mp3",
-  "narrator": "907a83b103e5f7fd.mp3",
-  "default": "907a83b103e5f7fd.mp3"
+  "default": "0b02cbf5275d36a3.mp3"
  },
  "how are they": {
   "davi": "57374c486b770fe7.mp3",
@@ -4547,8 +3957,7 @@
  },
  "sword": {
   "davi": "12e8f6509b10311c.mp3",
-  "narrator": "055f1f3665c52a39.mp3",
-  "default": "055f1f3665c52a39.mp3"
+  "default": "12e8f6509b10311c.mp3"
  },
  "in the name of": {
   "davi": "c122f2154cf3a012.mp3",
@@ -4592,8 +4001,7 @@
  },
  "friend": {
   "davi": "13373b059cfa1c7f.mp3",
-  "narrator": "82c34846051c67ae.mp3",
-  "default": "82c34846051c67ae.mp3"
+  "default": "13373b059cfa1c7f.mp3"
  },
  "gift": {
   "davi": "bbd36cb7e14ab813.mp3",
@@ -4602,8 +4010,7 @@
  },
  "robe": {
   "davi": "203704e376aed1b8.mp3",
-  "narrator": "fd7f3175f63d030f.mp3",
-  "default": "fd7f3175f63d030f.mp3"
+  "default": "203704e376aed1b8.mp3"
  },
  "this is for you": {
   "davi": "14e930f9f8d0c651.mp3",
@@ -4643,8 +4050,7 @@
  },
  "sad": {
   "davi": "3ee4dd9997988caa.mp3",
-  "narrator": "67d463097028b14e.mp3",
-  "default": "67d463097028b14e.mp3"
+  "default": "3ee4dd9997988caa.mp3"
  },
  "to play music": {
   "davi": "1c8c13b5ce5adc37.mp3",
@@ -4652,8 +4058,7 @@
  },
  "better": {
   "davi": "cc78888f1a99d3ad.mp3",
-  "narrator": "b9c50aa54f88a29f.mp3",
-  "default": "b9c50aa54f88a29f.mp3"
+  "default": "cc78888f1a99d3ad.mp3"
  },
  "my king i am your servant": {
   "mefibosete": "6efe346f7e41db07.mp3",
@@ -4693,8 +4098,7 @@
  },
  "table": {
   "davi": "3c54d6522d6a3ea4.mp3",
-  "narrator": "c33a13746627e894.mp3",
-  "default": "c33a13746627e894.mp3"
+  "default": "3c54d6522d6a3ea4.mp3"
  },
  "every day": {
   "davi": "9cdf1850bf21de9b.mp3",
@@ -4703,8 +4107,7 @@
  },
  "kindness": {
   "davi": "c67d9980f3f9fde9.mp3",
-  "narrator": "97804872dd732748.mp3",
-  "default": "97804872dd732748.mp3"
+  "default": "c67d9980f3f9fde9.mp3"
  },
  "i am not ready my lips are unclean": {
   "isaias": "93a58a8a5b1e611a.mp3",
@@ -4733,8 +4136,7 @@
  "who": {
   "isaias": "2c185675a7cdddf7.mp3",
   "pedro": "06cac8d94b34374f.mp3",
-  "narrator": "e9f40eaad2988b67.mp3",
-  "default": "e9f40eaad2988b67.mp3"
+  "default": "2c185675a7cdddf7.mp3"
  },
  "until the cities are empty but a holy seed will remain": {
   "voice": "b4b67590e91c3b46.mp3",
@@ -4838,8 +4240,7 @@
  },
  "weak": {
   "isaias": "25c93d1b7c01e045.mp3",
-  "narrator": "192cd78bb4804fc2.mp3",
-  "default": "192cd78bb4804fc2.mp3"
+  "default": "25c93d1b7c01e045.mp3"
  },
  "its over": {
   "isaias": "629b67435ecd0836.mp3",
@@ -4903,8 +4304,7 @@
  },
  "tears": {
   "isaias": "424d0d51aaa6fb58.mp3",
-  "narrator": "601a5ef273f70ec7.mp3",
-  "default": "601a5ef273f70ec7.mp3"
+  "default": "424d0d51aaa6fb58.mp3"
  },
  "come everyone who is thirsty come to the water": {
   "isaias": "09d6a5b6a7679b8b.mp3",
@@ -4945,13 +4345,11 @@
  "money": {
   "isaias": "3e525ce7db24565d.mp3",
   "pedro": "f274ff053dfff885.mp3",
-  "narrator": "c1eeb82653250e60.mp3",
-  "default": "c1eeb82653250e60.mp3"
+  "default": "3e525ce7db24565d.mp3"
  },
  "thirsty": {
   "isaias": "07fdfbf49a05bc36.mp3",
-  "narrator": "0f600a42de31fb94.mp3",
-  "default": "0f600a42de31fb94.mp3"
+  "default": "07fdfbf49a05bc36.mp3"
  },
  "how much does it cost": {
   "isaias": "31f4f7f3fddcb326.mp3",
@@ -4959,8 +4357,7 @@
  },
  "milk": {
   "isaias": "8dd8f07e33d28193.mp3",
-  "narrator": "988cd9442a9d858b.mp3",
-  "default": "988cd9442a9d858b.mp3"
+  "default": "8dd8f07e33d28193.mp3"
  },
  "look someone is running on the mountain": {
   "atalaia": "8920804d946044f5.mp3",
@@ -4996,8 +4393,7 @@
  },
  "messenger": {
   "isaias": "05552c7454fca7d6.mp3",
-  "narrator": "4d712622d6cc41b5.mp3",
-  "default": "4d712622d6cc41b5.mp3"
+  "default": "05552c7454fca7d6.mp3"
  },
  "really": {
   "isaias": "1944a82ed720751b.mp3",
@@ -5345,8 +4741,7 @@
  },
  "vegetables": {
   "daniel": "77276652dfb3ab98.mp3",
-  "narrator": "885260154fa0f343.mp3",
-  "default": "885260154fa0f343.mp3"
+  "default": "77276652dfb3ab98.mp3"
  },
  "i cant eat this": {
   "daniel": "c55a03f9d2976230.mp3",
@@ -5406,8 +4801,7 @@
  },
  "language": {
   "daniel": "55de713be1696840.mp3",
-  "narrator": "5f1c537439fd5a3b.mp3",
-  "default": "5f1c537439fd5a3b.mp3"
+  "default": "55de713be1696840.mp3"
  },
  "three years": {
   "daniel": "74c7a3096c9a3cfa.mp3",
@@ -5459,8 +4853,7 @@
  },
  "tonight": {
   "daniel": "f8e46e2ef80adb60.mp3",
-  "narrator": "319f9edc77f31451.mp3",
-  "default": "319f9edc77f31451.mp3"
+  "default": "f8e46e2ef80adb60.mp3"
  },
  "worried": {
   "daniel": "cb0a0227e820eaf4.mp3",
@@ -5468,8 +4861,7 @@
  },
  "secret": {
   "daniel": "80e9fe946fa72112.mp3",
-  "narrator": "8cd2823265bf4d9b.mp3",
-  "default": "8cd2823265bf4d9b.mp3"
+  "default": "80e9fe946fa72112.mp3"
  },
  "i see the words my king": {
   "daniel": "f47e392269ec82f3.mp3",
@@ -5639,8 +5031,7 @@
  },
  "nothing": {
   "pedro": "7aa3143b22a2ebb8.mp3",
-  "narrator": "ae3dfd2d5d9389f1.mp3",
-  "default": "ae3dfd2d5d9389f1.mp3"
+  "default": "7aa3143b22a2ebb8.mp3"
  },
  "try again": {
   "pedro": "4e2a9b86978deb6f.mp3",
@@ -5680,8 +5071,7 @@
  },
  "help": {
   "pedro": "25b0b0a57c4852f2.mp3",
-  "narrator": "622fe9fa9dcef043.mp3",
-  "default": "622fe9fa9dcef043.mp3"
+  "default": "25b0b0a57c4852f2.mp3"
  },
  "the wind stopped truly you are the son of god": {
   "pedro": "e1e1b279e9313210.mp3",
@@ -5737,8 +5127,7 @@
  },
  "others": {
   "pedro": "0338e00c5ba397f1.mp3",
-  "narrator": "c724147ea9322870.mp3",
-  "default": "c724147ea9322870.mp3"
+  "default": "0338e00c5ba397f1.mp3"
  },
  "and you": {
   "pedro": "24d890956a9de98d.mp3",
@@ -5782,8 +5171,7 @@
  },
  "rooster": {
   "pedro": "e9905285192ac2e7.mp3",
-  "narrator": "ad555f139c575171.mp3",
-  "default": "ad555f139c575171.mp3"
+  "default": "e9905285192ac2e7.mp3"
  },
  "three times": {
   "pedro": "982f38130214a4eb.mp3",
@@ -5897,1196 +5285,32 @@
   "pedro": "0f59351f056161ba.mp3",
   "default": "0f59351f056161ba.mp3"
  },
- "what": {
-  "narrator": "cda71c59c755927a.mp3",
-  "default": "cda71c59c755927a.mp3"
- },
- "are": {
-  "narrator": "1deae28182e19a10.mp3",
-  "default": "1deae28182e19a10.mp3"
- },
- "doing": {
-  "narrator": "621ab49907ab6e42.mp3",
-  "default": "621ab49907ab6e42.mp3"
- },
- "make": {
-  "narrator": "52652a49c0954dfb.mp3",
-  "default": "52652a49c0954dfb.mp3"
- },
- "men": {
-  "narrator": "744c3fe7eea184f0.mp3",
-  "default": "744c3fe7eea184f0.mp3"
- },
- "fishers": {
-  "narrator": "dadcb4e023c6ff27.mp3",
-  "default": "dadcb4e023c6ff27.mp3"
- },
- "right": {
-  "narrator": "319d2c0c50af26ba.mp3",
-  "default": "319d2c0c50af26ba.mp3"
- },
- "now": {
-  "narrator": "39622d9ea2063672.mp3",
-  "default": "39622d9ea2063672.mp3"
- },
- "we": {
-  "narrator": "6091bf7c589d4664.mp3",
-  "default": "6091bf7c589d4664.mp3"
- },
- "have": {
-  "narrator": "4e4d8aab460b151f.mp3",
-  "default": "4e4d8aab460b151f.mp3"
- },
- "how": {
-  "narrator": "722b7f0b5961c252.mp3",
-  "default": "722b7f0b5961c252.mp3"
- },
- "does": {
-  "narrator": "63eac905211c3e00.mp3",
-  "default": "63eac905211c3e00.mp3"
- },
- "tell": {
-  "narrator": "34c4fb952c3820d3.mp3",
-  "default": "34c4fb952c3820d3.mp3"
- },
- "sit": {
-  "narrator": "8f3441cc245f1497.mp3",
-  "default": "8f3441cc245f1497.mp3"
- },
- "down": {
-  "narrator": "1e05c54c1887d5fd.mp3",
-  "default": "1e05c54c1887d5fd.mp3"
- },
- "bring": {
-  "narrator": "1e93905463a0ba40.mp3",
-  "default": "1e93905463a0ba40.mp3"
- },
- "please": {
-  "narrator": "dbca3225dd5df8f9.mp3",
-  "default": "dbca3225dd5df8f9.mp3"
- },
- "thank": {
-  "narrator": "12cd704e8e91f2f8.mp3",
-  "default": "12cd704e8e91f2f8.mp3"
- },
- "food": {
-  "narrator": "a4060b9fcbcd2747.mp3",
-  "default": "a4060b9fcbcd2747.mp3"
- },
- "zacchaeus": {
-  "narrator": "4446b0654a4a63dc.mp3",
-  "default": "4446b0654a4a63dc.mp3"
- },
- "must": {
-  "narrator": "a274f53f23a11b21.mp3",
-  "default": "a274f53f23a11b21.mp3"
- },
  "stay": {
-  "narrator": "c6b30b506261ce54.mp3",
-  "default": "c6b30b506261ce54.mp3"
- },
- "at": {
-  "narrator": "f920995868504d45.mp3",
-  "default": "f920995868504d45.mp3"
- },
- "nice": {
-  "narrator": "ecf9ccccda9c3786.mp3",
-  "default": "ecf9ccccda9c3786.mp3"
- },
- "very": {
-  "narrator": "79722a763cee6f1c.mp3",
-  "default": "79722a763cee6f1c.mp3"
- },
- "salvation": {
-  "narrator": "7928fbdfdc637ac7.mp3",
-  "default": "7928fbdfdc637ac7.mp3"
- },
- "has": {
-  "narrator": "f5128e57d024d85e.mp3",
-  "default": "f5128e57d024d85e.mp3"
- },
- "happening": {
-  "narrator": "45faf89f2a129b1a.mp3",
-  "default": "45faf89f2a129b1a.mp3"
- },
- "why": {
-  "narrator": "f9b58aca13ba3d96.mp3",
-  "default": "f9b58aca13ba3d96.mp3"
- },
- "quiet": {
-  "narrator": "9904bcf3b29827f2.mp3",
-  "default": "9904bcf3b29827f2.mp3"
- },
- "where": {
-  "narrator": "5c246299796f0463.mp3",
-  "default": "5c246299796f0463.mp3"
- },
- "martha": {
-  "narrator": "598a234f8044e798.mp3",
-  "default": "598a234f8044e798.mp3"
- },
- "dont": {
-  "narrator": "9fb6f75bf95a5f1e.mp3",
-  "default": "9fb6f75bf95a5f1e.mp3"
- },
- "worry": {
-  "narrator": "a3c94b2e1bc3cf6f.mp3",
-  "default": "a3c94b2e1bc3cf6f.mp3"
- },
- "about": {
-  "narrator": "33db69dbf9b55097.mp3",
-  "default": "33db69dbf9b55097.mp3"
- },
- "things": {
-  "narrator": "1e8479fcd05de60a.mp3",
-  "default": "1e8479fcd05de60a.mp3"
- },
- "only": {
-  "narrator": "5245ab344680e59d.mp3",
-  "default": "5245ab344680e59d.mp3"
- },
- "one": {
-  "narrator": "4ea61c95afde2d19.mp3",
-  "default": "4ea61c95afde2d19.mp3"
- },
- "thing": {
-  "narrator": "9cea50aff8b1e92e.mp3",
-  "default": "9cea50aff8b1e92e.mp3"
- },
- "needed": {
-  "narrator": "827512c3964e0fa2.mp3",
-  "default": "827512c3964e0fa2.mp3"
- },
- "mary": {
-  "narrator": "0e5a024d0f426f4f.mp3",
-  "default": "0e5a024d0f426f4f.mp3"
- },
- "listens": {
-  "narrator": "6f38bc8a4fbfb1e0.mp3",
-  "default": "6f38bc8a4fbfb1e0.mp3"
- },
- "she": {
-  "narrator": "09a931cc1bdd14b6.mp3",
-  "default": "09a931cc1bdd14b6.mp3"
- },
- "chose": {
-  "narrator": "50db0699f2361ad8.mp3",
-  "default": "50db0699f2361ad8.mp3"
- },
- "call": {
-  "narrator": "2705afb453528477.mp3",
-  "default": "2705afb453528477.mp3"
- },
- "part": {
-  "narrator": "5275fd2aa967ff21.mp3",
-  "default": "5275fd2aa967ff21.mp3"
- },
- "want": {
-  "narrator": "63377b2590138250.mp3",
-  "default": "63377b2590138250.mp3"
- },
- "walk": {
-  "narrator": "017571a97684b942.mp3",
-  "default": "017571a97684b942.mp3"
- },
- "healed": {
-  "narrator": "1a105cc7da780c09.mp3",
-  "default": "1a105cc7da780c09.mp3"
- },
- "big": {
-  "narrator": "6fb709d3342f0968.mp3",
-  "default": "6fb709d3342f0968.mp3"
- },
- "floors": {
-  "narrator": "8bef37744ac71b05.mp3",
-  "default": "8bef37744ac71b05.mp3"
- },
- "side": {
-  "narrator": "97ccbedb5e64030e.mp3",
-  "default": "97ccbedb5e64030e.mp3"
- },
- "understand": {
-  "narrator": "80a55fec45f04853.mp3",
-  "default": "80a55fec45f04853.mp3"
- },
- "everything": {
-  "narrator": "cc85c63fcfe61f81.mp3",
-  "default": "cc85c63fcfe61f81.mp3"
- },
- "say": {
-  "narrator": "79978a5d963ef6a7.mp3",
-  "default": "79978a5d963ef6a7.mp3"
- },
- "need": {
-  "narrator": "f3fc7fa50f9f8600.mp3",
-  "default": "f3fc7fa50f9f8600.mp3"
- },
- "some": {
-  "narrator": "8811be5746d30fe6.mp3",
-  "default": "8811be5746d30fe6.mp3"
- },
- "lot": {
-  "narrator": "0d81fc9a98765893.mp3",
-  "default": "0d81fc9a98765893.mp3"
- },
- "building": {
-  "narrator": "dcfabc35d0388976.mp3",
-  "default": "dcfabc35d0388976.mp3"
- },
- "much": {
-  "narrator": "cd0b1722f9190569.mp3",
-  "default": "cd0b1722f9190569.mp3"
- },
- "eight": {
-  "narrator": "6c122b9ad07499d6.mp3",
-  "default": "6c122b9ad07499d6.mp3"
- },
- "pieces": {
-  "narrator": "12c1456a69084681.mp3",
-  "default": "12c1456a69084681.mp3"
- },
- "fifty": {
-  "narrator": "38af07be149a7785.mp3",
-  "default": "38af07be149a7785.mp3"
- },
- "trees": {
-  "narrator": "6d031b09f023c984.mp3",
-  "default": "6d031b09f023c984.mp3"
- },
- "male": {
-  "narrator": "2d89fe34fb562a12.mp3",
-  "default": "2d89fe34fb562a12.mp3"
- },
- "female": {
-  "narrator": "2bf40ddd831a9bea.mp3",
-  "default": "2bf40ddd831a9bea.mp3"
- },
- "open": {
-  "narrator": "31305ec336315c35.mp3",
-  "default": "31305ec336315c35.mp3"
- },
- "them": {
-  "narrator": "d0d3d28e17a0d83b.mp3",
-  "default": "d0d3d28e17a0d83b.mp3"
- },
- "slowly": {
-  "narrator": "013379d6552258cf.mp3",
-  "default": "013379d6552258cf.mp3"
- },
- "count": {
-  "narrator": "c829446b184113a7.mp3",
-  "default": "c829446b184113a7.mp3"
- },
- "birds": {
-  "narrator": "0de582924e0a478b.mp3",
-  "default": "0de582924e0a478b.mp3"
- },
- "top": {
-  "narrator": "ab6b235823ce2909.mp3",
-  "default": "ab6b235823ce2909.mp3"
- },
- "floor": {
-  "narrator": "cd2445faecd46b0a.mp3",
-  "default": "cd2445faecd46b0a.mp3"
- },
- "takes": {
-  "narrator": "da07b9d291219b8d.mp3",
-  "default": "da07b9d291219b8d.mp3"
- },
- "care": {
-  "narrator": "287cae570973eb92.mp3",
-  "default": "287cae570973eb92.mp3"
- },
- "every": {
-  "narrator": "7d99ec63bbfd165e.mp3",
-  "default": "7d99ec63bbfd165e.mp3"
- },
- "animal": {
-  "narrator": "414fabae0bb875e5.mp3",
-  "default": "414fabae0bb875e5.mp3"
- },
- "its": {
-  "narrator": "73793e9c07fa1720.mp3",
-  "default": "73793e9c07fa1720.mp3"
- },
- "raining": {
-  "narrator": "c8fbda6f35d6a79f.mp3",
-  "default": "c8fbda6f35d6a79f.mp3"
- },
- "time": {
-  "narrator": "aed918381614268e.mp3",
-  "default": "aed918381614268e.mp3"
+  "default": "5a2abb24807505fe.mp3",
+  "isaias": "5a2abb24807505fe.mp3"
  },
  "everybody": {
   "narrator": "94b483de9601d68c.mp3",
   "default": "94b483de9601d68c.mp3"
  },
- "yet": {
-  "narrator": "74a467fdc99cbe53.mp3",
-  "default": "74a467fdc99cbe53.mp3"
- },
- "then": {
-  "narrator": "ae99c6b5c336ea94.mp3",
-  "default": "ae99c6b5c336ea94.mp3"
- },
- "wait": {
-  "narrator": "7089a9fe784a8a42.mp3",
-  "default": "7089a9fe784a8a42.mp3"
- },
- "more": {
-  "narrator": "55ac27155ac5a301.mp3",
-  "default": "55ac27155ac5a301.mp3"
- },
- "news": {
-  "narrator": "0adf5197e4eec458.mp3",
-  "default": "0adf5197e4eec458.mp3"
- },
- "week": {
-  "narrator": "9f06cf2fa55833c0.mp3",
-  "default": "9f06cf2fa55833c0.mp3"
- },
- "can": {
-  "narrator": "29ca31bb18a69083.mp3",
-  "default": "29ca31bb18a69083.mp3"
- },
- "beautiful": {
-  "narrator": "8baf16b1e9f83790.mp3",
-  "default": "8baf16b1e9f83790.mp3"
- },
- "speaking": {
-  "narrator": "6fb48d4897cd10bc.mp3",
-  "default": "6fb48d4897cd10bc.mp3"
- },
- "but": {
-  "narrator": "a56156e35c8b0aa0.mp3",
-  "default": "a56156e35c8b0aa0.mp3"
- },
- "if": {
-  "narrator": "2d5262518fc700fc.mp3",
-  "default": "2d5262518fc700fc.mp3"
- },
- "ask": {
-  "narrator": "d272d3fae96f9a05.mp3",
-  "default": "d272d3fae96f9a05.mp3"
- },
- "pharaoh": {
-  "narrator": "d180a65dd7240add.mp3",
-  "default": "d180a65dd7240add.mp3"
- },
- "says": {
-  "narrator": "cecf62028c0762f4.mp3",
-  "default": "cecf62028c0762f4.mp3"
- },
- "israel": {
-  "narrator": "16063ff230a309f4.mp3",
-  "default": "16063ff230a309f4.mp3"
- },
- "frogs": {
-  "narrator": "67475148a3e2e2f6.mp3",
-  "default": "67475148a3e2e2f6.mp3"
- },
- "gone": {
-  "narrator": "df1b8cbaebc57b5a.mp3",
-  "default": "df1b8cbaebc57b5a.mp3"
- },
- "each": {
-  "narrator": "b067594a36ae3038.mp3",
-  "default": "b067594a36ae3038.mp3"
- },
- "year": {
-  "narrator": "55a907f70828e733.mp3",
-  "default": "55a907f70828e733.mp3"
- },
- "old": {
-  "narrator": "9070c6a1b74261cd.mp3",
-  "default": "9070c6a1b74261cd.mp3"
- },
- "roast": {
-  "narrator": "96fdbc49599d5fd1.mp3",
-  "default": "96fdbc49599d5fd1.mp3"
- },
- "bitter": {
-  "narrator": "0f6cfed43ba48ce8.mp3",
-  "default": "0f6cfed43ba48ce8.mp3"
- },
- "herbs": {
-  "narrator": "710409823d062295.mp3",
-  "default": "710409823d062295.mp3"
- },
- "put": {
-  "narrator": "20695df9439561cb.mp3",
-  "default": "20695df9439561cb.mp3"
- },
- "stand": {
-  "narrator": "506038a79accb1a3.mp3",
-  "default": "506038a79accb1a3.mp3"
- },
- "still": {
-  "narrator": "50d2e47fd5907977.mp3",
-  "default": "50d2e47fd5907977.mp3"
- },
- "watch": {
-  "narrator": "9dfc6dfc634ce55f.mp3",
-  "default": "9dfc6dfc634ce55f.mp3"
- },
- "fight": {
-  "narrator": "1c725b51d1d85390.mp3",
-  "default": "1c725b51d1d85390.mp3"
- },
- "forward": {
-  "narrator": "388e21327b94447d.mp3",
-  "default": "388e21327b94447d.mp3"
- },
- "through": {
-  "narrator": "294194f688e9d5d6.mp3",
-  "default": "294194f688e9d5d6.mp3"
- },
- "walking": {
-  "narrator": "d8661dfe58b12cf5.mp3",
-  "default": "d8661dfe58b12cf5.mp3"
- },
- "stop": {
-  "narrator": "086cfa5af195d967.mp3",
-  "default": "086cfa5af195d967.mp3"
- },
- "until": {
-  "narrator": "0e31ab42799ef26a.mp3",
-  "default": "0e31ab42799ef26a.mp3"
- },
- "other": {
-  "narrator": "4cf438968fd1a1ca.mp3",
-  "default": "4cf438968fd1a1ca.mp3"
- },
- "from": {
-  "narrator": "8c95d5e4ecae496d.mp3",
-  "default": "8c95d5e4ecae496d.mp3"
- },
- "drink": {
-  "narrator": "4cd45ad67cef2045.mp3",
-  "default": "4cd45ad67cef2045.mp3"
- },
- "afternoon": {
-  "narrator": "55ec9178af433674.mp3",
-  "default": "55ec9178af433674.mp3"
- },
- "meet": {
-  "narrator": "ac3f9ee55aa5613b.mp3",
-  "default": "ac3f9ee55aa5613b.mp3"
- },
- "too": {
-  "narrator": "986fc2ae6e2eb312.mp3",
-  "default": "986fc2ae6e2eb312.mp3"
- },
- "youngest": {
-  "narrator": "a15385b33287b77a.mp3",
-  "default": "a15385b33287b77a.mp3"
- },
- "course": {
-  "narrator": "8c883bacb191a40e.mp3",
-  "default": "8c883bacb191a40e.mp3"
- },
- "ten": {
-  "narrator": "7dcd584582ac641e.mp3",
-  "default": "7dcd584582ac641e.mp3"
- },
- "cheeses": {
-  "narrator": "7f1c0eb50c26c632.mp3",
-  "default": "7f1c0eb50c26c632.mp3"
- },
- "when": {
-  "narrator": "af92433cea4ba934.mp3",
-  "default": "af92433cea4ba934.mp3"
- },
- "jesse": {
-  "narrator": "975a50ed47e0550f.mp3",
-  "default": "975a50ed47e0550f.mp3"
- },
- "everyone": {
-  "narrator": "afe425a0c60b2be5.mp3",
-  "default": "afe425a0c60b2be5.mp3"
- },
- "know": {
-  "narrator": "2341f03e21581ef3.mp3",
-  "default": "2341f03e21581ef3.mp3"
- },
- "there": {
-  "narrator": "9370319a12ba9b96.mp3",
-  "default": "9370319a12ba9b96.mp3"
- },
- "jonathan": {
-  "narrator": "7b321203432b04b3.mp3",
-  "default": "7b321203432b04b3.mp3"
- },
- "true": {
-  "narrator": "a5375be56c8f7c84.mp3",
-  "default": "a5375be56c8f7c84.mp3"
- },
- "friends": {
-  "narrator": "a80813c512e85419.mp3",
-  "default": "a80813c512e85419.mp3"
- },
- "may": {
-  "narrator": "c45f345f743d5b74.mp3",
-  "default": "c45f345f743d5b74.mp3"
- },
- "play": {
-  "narrator": "5841a34a939f566b.mp3",
-  "default": "5841a34a939f566b.mp3"
- },
- "glad": {
-  "narrator": "55ec93cefd919d13.mp3",
-  "default": "55ec93cefd919d13.mp3"
- },
- "music": {
-  "narrator": "e62167911c40dd1a.mp3",
-  "default": "e62167911c40dd1a.mp3"
- },
- "honor": {
-  "narrator": "ac9756096c8c08a1.mp3",
-  "default": "ac9756096c8c08a1.mp3"
- },
- "jonathans": {
-  "narrator": "bae59e3fb1e3f1f8.mp3",
-  "default": "bae59e3fb1e3f1f8.mp3"
- },
- "show": {
-  "narrator": "ead1fdad0c14ada7.mp3",
-  "default": "ead1fdad0c14ada7.mp3"
- },
- "six": {
-  "narrator": "2eef067f30c0e5d5.mp3",
-  "default": "2eef067f30c0e5d5.mp3"
- },
- "lips": {
-  "narrator": "384b06c913119499.mp3",
-  "default": "384b06c913119499.mp3"
- },
- "unclean": {
-  "narrator": "81ae38f67f60541c.mp3",
-  "default": "81ae38f67f60541c.mp3"
- },
- "those": {
-  "narrator": "d2b022f0ef5af74a.mp3",
-  "default": "d2b022f0ef5af74a.mp3"
- },
- "smoking": {
-  "narrator": "d78ee04b9e567e31.mp3",
-  "default": "d78ee04b9e567e31.mp3"
- },
- "sticks": {
-  "narrator": "3b72be7e6d1eb913.mp3",
-  "default": "3b72be7e6d1eb913.mp3"
- },
- "happen": {
-  "narrator": "2b471026c01296c0.mp3",
-  "default": "2b471026c01296c0.mp3"
- },
- "anything": {
-  "narrator": "aaf6fc70e44127a1.mp3",
-  "default": "aaf6fc70e44127a1.mp3"
- },
- "himself": {
-  "narrator": "5bf1dd558b1930e8.mp3",
-  "default": "5bf1dd558b1930e8.mp3"
- },
- "virgin": {
-  "narrator": "f917a6de5ecd94df.mp3",
-  "default": "f917a6de5ecd94df.mp3"
- },
- "should": {
-  "narrator": "71d932ca70bbfa25.mp3",
-  "default": "71d932ca70bbfa25.mp3"
- },
- "feel": {
-  "narrator": "15821f0ca5b6fd33.mp3",
-  "default": "15821f0ca5b6fd33.mp3"
- },
- "like": {
-  "narrator": "11f86a24b5e01d2e.mp3",
-  "default": "11f86a24b5e01d2e.mp3"
- },
- "grass": {
-  "narrator": "0f71b0270c35fcfa.mp3",
-  "default": "0f71b0270c35fcfa.mp3"
- },
- "up": {
-  "narrator": "6dcfc23a06da5a5d.mp3",
-  "default": "6dcfc23a06da5a5d.mp3"
- },
- "shout": {
-  "narrator": "89f869f12e7607f7.mp3",
-  "default": "89f869f12e7607f7.mp3"
- },
- "comes": {
-  "narrator": "65662bcd5fcd7bc9.mp3",
-  "default": "65662bcd5fcd7bc9.mp3"
- },
- "carries": {
-  "narrator": "df35323cfed86404.mp3",
-  "default": "df35323cfed86404.mp3"
- },
- "arms": {
-  "narrator": "c9f7869ef8a3c62e.mp3",
-  "default": "c9f7869ef8a3c62e.mp3"
- },
- "lambs": {
-  "narrator": "0d5bb4403ca9e2b4.mp3",
-  "default": "0d5bb4403ca9e2b4.mp3"
- },
- "order": {
-  "narrator": "02ea6ed9fc1606da.mp3",
-  "default": "02ea6ed9fc1606da.mp3"
- },
- "sickness": {
-  "narrator": "5e619e23b16f9b1f.mp3",
-  "default": "5e619e23b16f9b1f.mp3"
- },
- "serious": {
-  "narrator": "b7668b89bde2d72e.mp3",
-  "default": "b7668b89bde2d72e.mp3"
- },
- "prayer": {
-  "narrator": "a01404972922082d.mp3",
-  "default": "a01404972922082d.mp3"
- },
- "get": {
-  "narrator": "5273937b9de35cf3.mp3",
-  "default": "5273937b9de35cf3.mp3"
- },
- "adds": {
-  "narrator": "ff1068b6233c693b.mp3",
-  "default": "ff1068b6233c693b.mp3"
- },
- "fifteen": {
-  "narrator": "0b91f45ef996dd8e.mp3",
-  "default": "0b91f45ef996dd8e.mp3"
- },
- "figs": {
-  "narrator": "ea8fb01e3bfe8da8.mp3",
-  "default": "ea8fb01e3bfe8da8.mp3"
- },
- "look": {
-  "narrator": "4217804e70186ca1.mp3",
-  "default": "4217804e70186ca1.mp3"
- },
- "wound": {
-  "narrator": "5b287c0b8de000ca.mp3",
-  "default": "5b287c0b8de000ca.mp3"
- },
- "shadow": {
-  "narrator": "902ec99988355238.mp3",
-  "default": "902ec99988355238.mp3"
- },
- "goes": {
-  "narrator": "56a9d6652fe05247.mp3",
-  "default": "56a9d6652fe05247.mp3"
- },
- "steps": {
-  "narrator": "35773728fa3b4b84.mp3",
-  "default": "35773728fa3b4b84.mp3"
- },
- "buy": {
-  "narrator": "8c7ef63fa81aa2eb.mp3",
-  "default": "8c7ef63fa81aa2eb.mp3"
- },
- "wine": {
-  "narrator": "ae4e457e24cc402b.mp3",
-  "default": "ae4e457e24cc402b.mp3"
- },
- "without": {
-  "narrator": "4c5a4cba3d47406e.mp3",
-  "default": "4c5a4cba3d47406e.mp3"
- },
- "costs": {
-  "narrator": "9fba0b48cf6d17c1.mp3",
-  "default": "9fba0b48cf6d17c1.mp3"
- },
- "listen": {
-  "narrator": "94bbcea186c6cbde.mp3",
-  "default": "94bbcea186c6cbde.mp3"
- },
- "soul": {
-  "narrator": "d579624db774b1d4.mp3",
-  "default": "d579624db774b1d4.mp3"
- },
- "live": {
-  "narrator": "67e1590c223210e3.mp3",
-  "default": "67e1590c223210e3.mp3"
- },
- "reigns": {
-  "narrator": "904084f8df648979.mp3",
-  "default": "904084f8df648979.mp3"
- },
- "lift": {
-  "narrator": "5962aaecf056b9a3.mp3",
-  "default": "5962aaecf056b9a3.mp3"
- },
- "together": {
-  "narrator": "b68b71ffad5d9ea1.mp3",
-  "default": "b68b71ffad5d9ea1.mp3"
- },
- "joy": {
-  "narrator": "b13007446fd2e4d0.mp3",
-  "default": "b13007446fd2e4d0.mp3"
- },
- "jerusalem": {
-  "narrator": "b27e7fb40e0d3bc1.mp3",
-  "default": "b27e7fb40e0d3bc1.mp3"
- },
- "comforts": {
-  "narrator": "1e6425ebfea3b1e8.mp3",
-  "default": "1e6425ebfea3b1e8.mp3"
- },
- "gave": {
-  "narrator": "e934f8dd13335bdc.mp3",
-  "default": "e934f8dd13335bdc.mp3"
- },
- "last": {
-  "narrator": "00efe40a8d122462.mp3",
-  "default": "00efe40a8d122462.mp3"
- },
- "tying": {
-  "narrator": "194c0c9adfb76257.mp3",
-  "default": "194c0c9adfb76257.mp3"
- },
- "bundles": {
-  "narrator": "307e2685f448db1c.mp3",
-  "default": "307e2685f448db1c.mp3"
- },
- "wheat": {
-  "narrator": "6e3f4571ecbb8205.mp3",
-  "default": "6e3f4571ecbb8205.mp3"
- },
- "bundle": {
-  "narrator": "dbc398ccbaacc7c3.mp3",
-  "default": "dbc398ccbaacc7c3.mp3"
- },
- "stood": {
-  "narrator": "3cc0ed0100007589.mp3",
-  "default": "3cc0ed0100007589.mp3"
- },
- "yours": {
-  "narrator": "35e6d4babb3fe223.mp3",
-  "default": "35e6d4babb3fe223.mp3"
- },
- "bowed": {
-  "narrator": "f08b920c97d8c179.mp3",
-  "default": "f08b920c97d8c179.mp3"
- },
- "dreamed": {
-  "narrator": "ae89d317441fdb8a.mp3",
-  "default": "ae89d317441fdb8a.mp3"
- },
- "going": {
-  "narrator": "815c7e8c26eb5dad.mp3",
-  "default": "815c7e8c26eb5dad.mp3"
- },
- "see": {
-  "narrator": "90f4fa2a559cf1b6.mp3",
-  "default": "90f4fa2a559cf1b6.mp3"
- },
- "carrying": {
-  "narrator": "06bf0b9d23d9b65e.mp3",
-  "default": "06bf0b9d23d9b65e.mp3"
- },
- "canaan": {
-  "narrator": "2f6e13dbfe1a8280.mp3",
-  "default": "2f6e13dbfe1a8280.mp3"
- },
- "work": {
-  "narrator": "2051a177fab84954.mp3",
-  "default": "2051a177fab84954.mp3"
- },
- "fields": {
-  "narrator": "ee5ddd645b3a990b.mp3",
-  "default": "ee5ddd645b3a990b.mp3"
- },
- "hard": {
-  "narrator": "ac17308577da892f.mp3",
-  "default": "ac17308577da892f.mp3"
- },
- "sir": {
-  "narrator": "74926c54b38ed790.mp3",
-  "default": "74926c54b38ed790.mp3"
- },
- "honest": {
-  "narrator": "b8e0d9f5ad266538.mp3",
-  "default": "b8e0d9f5ad266538.mp3"
- },
- "best": {
-  "narrator": "bdb0c09c52c9bfb4.mp3",
-  "default": "bdb0c09c52c9bfb4.mp3"
- },
- "because": {
-  "narrator": "9669efa69a6b0989.mp3",
-  "default": "9669efa69a6b0989.mp3"
- },
- "so": {
-  "narrator": "eddd49a2c78af6e8.mp3",
-  "default": "eddd49a2c78af6e8.mp3"
- },
- "belong": {
-  "narrator": "c0aab8c2450dd688.mp3",
-  "default": "c0aab8c2450dd688.mp3"
- },
- "explanations": {
-  "narrator": "472136276919e95d.mp3",
-  "default": "472136276919e95d.mp3"
- },
- "branches": {
-  "narrator": "cda44077df4fb62f.mp3",
-  "default": "cda44077df4fb62f.mp3"
- },
- "well": {
-  "narrator": "dd1e125bf2d85016.mp3",
-  "default": "dd1e125bf2d85016.mp3"
- },
- "wrong": {
-  "narrator": "17add4b36b4fdbff.mp3",
-  "default": "17add4b36b4fdbff.mp3"
- },
- "fat": {
-  "narrator": "29e808de91dc5b88.mp3",
-  "default": "29e808de91dc5b88.mp3"
- },
- "answer": {
-  "narrator": "875822f33b2ef420.mp3",
-  "default": "875822f33b2ef420.mp3"
- },
- "cows": {
-  "narrator": "44e20c56a27e5c52.mp3",
-  "default": "44e20c56a27e5c52.mp3"
- },
- "thin": {
-  "narrator": "9294fba7d1462d8d.mp3",
-  "default": "9294fba7d1462d8d.mp3"
- },
- "hunger": {
-  "narrator": "c94b08b9db759aff.mp3",
-  "default": "c94b08b9db759aff.mp3"
- },
- "choose": {
-  "narrator": "2a3071f988231ec1.mp3",
-  "default": "2a3071f988231ec1.mp3"
- },
- "wise": {
-  "narrator": "5721169c546a88f5.mp3",
-  "default": "5721169c546a88f5.mp3"
- },
- "save": {
-  "narrator": "719ab0aa91a5240e.mp3",
-  "default": "719ab0aa91a5240e.mp3"
- },
- "fifth": {
-  "narrator": "6c38ed8ef96bf39f.mp3",
-  "default": "6c38ed8ef96bf39f.mp3"
- },
- "grain": {
-  "narrator": "b1f830331b805762.mp3",
-  "default": "b1f830331b805762.mp3"
- },
- "cities": {
-  "narrator": "6fa529e265cda800.mp3",
-  "default": "6fa529e265cda800.mp3"
- },
- "bad": {
-  "narrator": "c80b1ff177b74b45.mp3",
-  "default": "c80b1ff177b74b45.mp3"
- },
- "near": {
-  "narrator": "8313d66f9e883970.mp3",
-  "default": "8313d66f9e883970.mp3"
- },
- "alive": {
-  "narrator": "12d9b3a0e9841bd0.mp3",
-  "default": "12d9b3a0e9841bd0.mp3"
- },
- "angry": {
-  "narrator": "1e6fe754931d1211.mp3",
-  "default": "1e6fe754931d1211.mp3"
- },
- "yourselves": {
-  "narrator": "d3b8aa6c6a12bd94.mp3",
-  "default": "d3b8aa6c6a12bd94.mp3"
- },
- "before": {
-  "narrator": "78acdd9b0b964952.mp3",
-  "default": "78acdd9b0b964952.mp3"
- },
- "lives": {
-  "narrator": "57b1fe9a480f31a2.mp3",
-  "default": "57b1fe9a480f31a2.mp3"
- },
- "goshen": {
-  "narrator": "b4675443bf8ca66d.mp3",
-  "default": "b4675443bf8ca66d.mp3"
- },
- "cannot": {
-  "narrator": "d2b18ee314037575.mp3",
-  "default": "d2b18ee314037575.mp3"
- },
- "against": {
-  "narrator": "ccf8e54337a08754.mp3",
-  "default": "ccf8e54337a08754.mp3"
- },
- "test": {
-  "narrator": "e1e356ae8c68fa20.mp3",
-  "default": "e1e356ae8c68fa20.mp3"
- },
- "faces": {
-  "narrator": "26dff3f9facaf99a.mp3",
-  "default": "26dff3f9facaf99a.mp3"
- },
- "learn": {
-  "narrator": "5eb71b8bdbf5430c.mp3",
-  "default": "5eb71b8bdbf5430c.mp3"
- },
- "practice": {
-  "narrator": "ea4067d4db0fc918.mp3",
-  "default": "ea4067d4db0fc918.mp3"
- },
- "names": {
-  "narrator": "56c85fca62f4dc74.mp3",
-  "default": "56c85fca62f4dc74.mp3"
- },
- "same": {
-  "narrator": "cf85ed3bf481b0f4.mp3",
-  "default": "cf85ed3bf481b0f4.mp3"
- },
- "knows": {
-  "narrator": "9362a426b0e034cd.mp3",
-  "default": "9362a426b0e034cd.mp3"
- },
- "reveals": {
-  "narrator": "1847575c29231d7f.mp3",
-  "default": "1847575c29231d7f.mp3"
- },
- "secrets": {
-  "narrator": "534b8bd0a8ad23d7.mp3",
-  "default": "534b8bd0a8ad23d7.mp3"
- },
- "statue": {
-  "narrator": "fe664082d81e7165.mp3",
-  "default": "fe664082d81e7165.mp3"
- },
- "head": {
-  "narrator": "556da888ade259d7.mp3",
-  "default": "556da888ade259d7.mp3"
- },
- "chest": {
-  "narrator": "750ffe3a0b5827ff.mp3",
-  "default": "750ffe3a0b5827ff.mp3"
- },
- "belly": {
-  "narrator": "8192e2ccb0f52d5e.mp3",
-  "default": "8192e2ccb0f52d5e.mp3"
- },
- "bronze": {
-  "narrator": "3fef6a7b3f23516c.mp3",
-  "default": "3fef6a7b3f23516c.mp3"
- },
- "legs": {
-  "narrator": "b77e481774d1fe92.mp3",
-  "default": "b77e481774d1fe92.mp3"
- },
- "iron": {
-  "narrator": "4f45a6fc2b9c719c.mp3",
-  "default": "4f45a6fc2b9c719c.mp3"
- },
- "words": {
-  "narrator": "7a683f3182d99cd4.mp3",
-  "default": "7a683f3182d99cd4.mp3"
- },
- "gifts": {
-  "narrator": "68d6aa48133d0226.mp3",
-  "default": "68d6aa48133d0226.mp3"
- },
- "read": {
-  "narrator": "2fd20f296f7eb50c.mp3",
-  "default": "2fd20f296f7eb50c.mp3"
- },
- "explain": {
-  "narrator": "afb2748af1c2de0d.mp3",
-  "default": "afb2748af1c2de0d.mp3"
- },
- "mene": {
-  "narrator": "d607f76a9b8baf22.mp3",
-  "default": "d607f76a9b8baf22.mp3"
- },
- "tekel": {
-  "narrator": "dd2c6628208f50fc.mp3",
-  "default": "dd2c6628208f50fc.mp3"
- },
- "parsin": {
-  "narrator": "ee1d200575a3922c.mp3",
-  "default": "ee1d200575a3922c.mp3"
- },
- "counted": {
-  "narrator": "699fe4d03d3ddbc0.mp3",
-  "default": "699fe4d03d3ddbc0.mp3"
- },
- "weighed": {
-  "narrator": "621650fd835f1920.mp3",
-  "default": "621650fd835f1920.mp3"
- },
- "found": {
-  "narrator": "9f15a6fb302a20f3.mp3",
-  "default": "9f15a6fb302a20f3.mp3"
- },
- "toward": {
-  "narrator": "e543f63a5a61e4a9.mp3",
-  "default": "e543f63a5a61e4a9.mp3"
- },
- "noon": {
-  "narrator": "7eb769804001f48e.mp3",
-  "default": "7eb769804001f48e.mp3"
- },
- "as": {
-  "narrator": "f1fa5e228bcf39d1.mp3",
-  "default": "f1fa5e228bcf39d1.mp3"
- },
- "excuse": {
-  "narrator": "b58c3cf532c2eddf.mp3",
-  "default": "b58c3cf532c2eddf.mp3"
- },
- "always": {
-  "narrator": "4a062a6ee5092edd.mp3",
-  "default": "4a062a6ee5092edd.mp3"
- },
- "or": {
-  "narrator": "b5405aabee1bcc31.mp3",
-  "default": "b5405aabee1bcc31.mp3"
- },
- "worked": {
-  "narrator": "76b3a9f549fcf091.mp3",
-  "default": "76b3a9f549fcf091.mp3"
- },
- "master": {
-  "narrator": "7b4cec4848abd039.mp3",
-  "default": "7b4cec4848abd039.mp3"
- },
- "caught": {
-  "narrator": "747159e875f1ce55.mp3",
-  "default": "747159e875f1ce55.mp3"
- },
- "breaking": {
-  "narrator": "2a1228c0575fd79a.mp3",
-  "default": "2a1228c0575fd79a.mp3"
- },
- "james": {
-  "narrator": "3a33abbcb2b87bfe.mp3",
-  "default": "3a33abbcb2b87bfe.mp3"
- },
- "john": {
-  "narrator": "51207da5b61ac9eb.mp3",
-  "default": "51207da5b61ac9eb.mp3"
- },
- "away": {
-  "narrator": "5b6808ff68bd39a3.mp3",
-  "default": "5b6808ff68bd39a3.mp3"
- },
- "sinful": {
-  "narrator": "ad4721ee3eb12549.mp3",
-  "default": "ad4721ee3eb12549.mp3"
- },
- "someone": {
-  "narrator": "ff8137db0bdc7e9b.mp3",
-  "default": "ff8137db0bdc7e9b.mp3"
- },
- "ghost": {
-  "narrator": "fd4545bc88fdaef8.mp3",
-  "default": "fd4545bc88fdaef8.mp3"
- },
- "looked": {
-  "narrator": "6f44647f72736c6d.mp3",
-  "default": "6f44647f72736c6d.mp3"
- },
- "sinking": {
-  "narrator": "9600c2cdf3c33cf8.mp3",
-  "default": "9600c2cdf3c33cf8.mp3"
- },
- "waves": {
-  "narrator": "1573d82daed7c2db.mp3",
-  "default": "1573d82daed7c2db.mp3"
- },
- "stopped": {
-  "narrator": "24dc83daf2e7ed4a.mp3",
-  "default": "24dc83daf2e7ed4a.mp3"
- },
- "truly": {
-  "narrator": "7b6bb574601d29ca.mp3",
-  "default": "7b6bb574601d29ca.mp3"
- },
- "baptist": {
-  "narrator": "36004dcefe1fdf29.mp3",
-  "default": "36004dcefe1fdf29.mp3"
- },
- "elijah": {
-  "narrator": "57923b9e38e4cc89.mp3",
-  "default": "57923b9e38e4cc89.mp3"
- },
- "jeremiah": {
-  "narrator": "d4f4aafaf532182e.mp3",
-  "default": "d4f4aafaf532182e.mp3"
- },
- "christ": {
-  "narrator": "e4429fe99439a1c0.mp3",
-  "default": "e4429fe99439a1c0.mp3"
- },
- "talking": {
-  "narrator": "8e78b31ed640ee78.mp3",
-  "default": "8e78b31ed640ee78.mp3"
- },
- "showed": {
-  "narrator": "f8886e97820a18c4.mp3",
-  "default": "f8886e97820a18c4.mp3"
- },
- "told": {
-  "narrator": "586e90dbdb543c15.mp3",
-  "default": "586e90dbdb543c15.mp3"
- },
- "crows": {
-  "narrator": "9b6cb4f894852874.mp3",
-  "default": "9b6cb4f894852874.mp3"
- },
- "deny": {
-  "narrator": "26b24a4c1f65d05c.mp3",
-  "default": "26b24a4c1f65d05c.mp3"
- },
- "full": {
-  "narrator": "ac13b4a2a1e74ffe.mp3",
-  "default": "ac13b4a2a1e74ffe.mp3"
- },
- "jumping": {
-  "narrator": "c50f7866a666e7b3.mp3",
-  "default": "c50f7866a666e7b3.mp3"
- },
- "hundred": {
-  "narrator": "90c40c5482acb12a.mp3",
-  "default": "90c40c5482acb12a.mp3"
- },
- "broken": {
-  "narrator": "e5a6383ebd3415cb.mp3",
-  "default": "e5a6383ebd3415cb.mp3"
- },
  "fiftythree": {
   "narrator": "05fca58c7d604d79.mp3",
   "default": "05fca58c7d604d79.mp3"
  },
- "love": {
-  "narrator": "2b7ff4c38a150630.mp3",
-  "default": "2b7ff4c38a150630.mp3"
+ "and god blank let there be light and there was light": {
+  "eva": "8acfee0ae6ddf6ee.mp3",
+  "default": "8acfee0ae6ddf6ee.mp3"
  },
- "temple": {
-  "narrator": "dbf104e43d9e172d.mp3",
-  "default": "dbf104e43d9e172d.mp3"
+ "whom shall i send and who will blank for us then said i here am i send me": {
+  "isaias": "71fe547211f7610c.mp3",
+  "default": "71fe547211f7610c.mp3"
  },
- "nazareth": {
-  "narrator": "a50e0a108efed86d.mp3",
-  "default": "a50e0a108efed86d.mp3"
+ "sleep": {
+  "isaias": "14caf5b19dd10f85.mp3",
+  "default": "14caf5b19dd10f85.mp3"
  },
- "oclock": {
-  "narrator": "084cd20c3853321e.mp3",
-  "default": "084cd20c3853321e.mp3"
+ "jesus son of david have mercy on me": {
+  "bartimeu": "3302d53daf979e13.mp3",
+  "default": "3302d53daf979e13.mp3"
  }
 }
