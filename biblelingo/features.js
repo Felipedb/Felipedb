@@ -131,9 +131,6 @@ function wordUrgency(en) {
 function weakestWords(list, n) {
   return [...list].sort((a, b) => wordUrgency(b.en) - wordUrgency(a.en)).slice(0, n);
 }
-function dueWords(list) {
-  return list.filter((w) => state.words && state.words[w.en] && wordUrgency(w.en) >= 0);
-}
 // Palavras do vocabulário presentes numa frase (para creditar acertos de frase)
 function sentenceVocab(sentence) {
   const toks = new Set(normalize(sentence.en).split(" "));
@@ -313,24 +310,6 @@ function registerServiceWorker() {
 }
 
 
-// ---------- 2.3 Galeria de personagens e ficha ----------
-function renderCharacterStrip() {
-  const wrap = $("#char-strip");
-  if (!wrap) return;
-  wrap.innerHTML = `
-    <div class="strip-head">
-      <div><h2>Personagens bíblicos</h2><p>Conheça pessoas incríveis e suas histórias</p></div>
-      <span class="strip-tag">Histórias diferentes. O mesmo Deus fiel.</span>
-    </div>
-    <div class="strip-row">
-      ${CHARACTER_ORDER.filter((k) => CHARACTERS[k]).map((k) => `
-        <button class="strip-item" data-char="${k}">
-          <span class="strip-face">${charFace(CHARACTERS[k])}</span>
-          <span class="strip-name">${CHARACTERS[k].name.split(" (")[0]}</span>
-        </button>`).join("")}
-    </div>`;
-  wrap.querySelectorAll(".strip-item").forEach((b) => b.addEventListener("click", () => openCharacter(b.dataset.char)));
-}
 
 function openCharacter(key) {
   const ch = CHARACTERS[key];
@@ -359,7 +338,7 @@ function openCharacter(key) {
   if (start) start.addEventListener("click", () => {
     modal.classList.remove("open");
     const next = unit.lessons.find((l) => !state.completed[l.id]) || unit.lessons[unit.lessons.length - 1];
-    if (unit.lessons.every((l) => state.completed[l.id])) startLevelUp(unit); else startLesson(next.id);
+    if (unitDone(unit)) startLevelUp(unit); else startLesson(next.id);
   });
   const prac = $("#cs-practice");
   if (prac) prac.addEventListener("click", () => {

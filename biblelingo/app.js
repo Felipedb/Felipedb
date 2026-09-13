@@ -147,6 +147,11 @@ function flatLessons() {
   return COURSE.flatMap((u) => (typeof unitSteps === "function" ? unitSteps(u) : u.lessons.map((l) => ({ ...l, unit: u }))));
 }
 
+// Capítulo concluído: todas as etapas (lições e cenas)
+function unitDone(unit) {
+  return flatLessons().filter((l) => l.unit && l.unit.id === unit.id).every((l) => state.completed[l.id]);
+}
+
 function lessonUnlocked(lessonId) {
   const list = flatLessons();
   const idx = list.findIndex((l) => l.id === lessonId);
@@ -188,7 +193,6 @@ function renderHome() {
   const pc = $("#promo-char"); if (pc) pc.innerHTML = '<img src="chars/promo.jpg" alt="">';
 
   // Progresso: capítulos totalmente concluídos (rail do desktop)
-  const unitDone = (u) => u.lessons.every((l) => state.completed[l.id]);
   const doneUnits = COURSE.filter(unitDone).length;
   const pf = $("#pbar-fill"); if (pf) pf.style.width = `${(doneUnits / COURSE.length) * 100}%`;
   set("progress-label", `${doneUnits} de ${COURSE.length} capítulos concluídos`);
@@ -218,7 +222,7 @@ function renderWeek() {
   strip.innerHTML = labels.map((lb, i) => {
     const d = new Date(monday);
     d.setDate(monday.getDate() + i);
-    const iso = d.toISOString().slice(0, 10);
+    const iso = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
     const studied = (state.days || {})[iso] > 0;
     if (studied) feitos++;
     const isToday = iso === hoje;
@@ -895,34 +899,6 @@ function practiceBar(ex, micOnly) {
   return wrap;
 }
 
-// ---------- Renderizadores ----------
-// 1.3 Palavra nova: card de introdução (sem verificação)
-function renderIntro(ex, box) {
-  const w = ex.word;
-  box.innerHTML = `<div class="ex-title"><span class="new-tag">Palavra nova</span></div>`;
-  const card = document.createElement("div");
-  card.className = "intro-card";
-  card.innerHTML = `
-    <div class="intro-icon">${w.icon || "📖"}</div>
-    <div class="intro-en">${sayable(w.en)}</div>
-    <div class="intro-pt">${w.pt}</div>
-    ${ex.example ? `<div class="intro-example">${sayable(ex.example.en)}<small>${ex.example.pt}</small></div>` : ""}`;
-  box.appendChild(card);
-  const row = document.createElement("div");
-  row.className = "big-audio";
-  row.appendChild(audioButton(w.en, { big: true }));
-  row.appendChild(audioButton(w.en, { slow: true }));
-  box.appendChild(row);
-  speak(w.en);
-  session.answer = "__intro__";
-  ex.correct = "__intro__";
-  ex.skipped = true;
-  ex.explain = `${w.en} = ${w.pt}`;
-  ex.audioText = w.en;
-  const btn = $("#btn-check");
-  btn.disabled = false;
-  btn.textContent = "Continuar";
-}
 
 // 1.5 Traduzir EN -> PT com banco de palavras em português
 function renderTranslateEnPt(ex, box) {
@@ -1772,7 +1748,7 @@ function startErrorPractice() {
 // ---------- Eventos globais ----------
 $("#btn-check").addEventListener("click", checkAnswer);
 $("#btn-quit").addEventListener("click", () => {
-  speechSynthesis && speechSynthesis.cancel();
+  if ("speechSynthesis" in window) speechSynthesis.cancel();
   showScreen("home");
 });
 $("#btn-result-continue").addEventListener("click", () => showScreen("home"));

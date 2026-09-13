@@ -143,7 +143,7 @@ function openNodeSheet(unit, ui, lesson, li) {
   if (lesson.scene) return openSceneSheet(unit, ui, lesson, li);
   const done = !!state.completed[lesson.id];
   const unlocked = lessonUnlocked(lesson.id);
-  const unitDoneAll = unit.lessons.every((l) => state.completed[l.id]);
+  const unitDoneAll = unitDone(unit);
   const r = resumable();
   const resume = r && r.lessonId === lesson.id;
   const words = (lesson.vocab || []).slice(0, 4).map((w) => `<span class="ns-word">${w.en}</span>`).join("");
@@ -318,7 +318,7 @@ function renderProfile() {
   ];
   $("#badges").innerHTML = badgeDefs.map((b) => {
     const u = COURSE.find((x) => x.id === b.unit);
-    const done = u && u.lessons.every((l) => state.completed[l.id]);
+    const done = u && unitDone(u);
     return `<span class="badge-hex${done ? "" : " locked"}" style="background:${b.color}" title="${u ? u.title : ""}">${b.icon}</span>`;
   }).join("");
 }

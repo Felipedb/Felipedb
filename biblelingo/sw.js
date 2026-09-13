@@ -1,5 +1,5 @@
 // BíbliaLearn — cache offline do app (shell, arte e áudios já tocados)
-const CACHE = "biblialearn-v4";
+const CACHE = "biblialearn-v5";
 const SHELL = [
   "./", "index.html", "style.css", "app.js", "features.js", "characters.js", "data.js",
   "manifest.webmanifest", "sfx-data.js", "sfx.js", "hub.js", "stories.js", "icons.js", "screens.js", "scenes.js", "scenes2.js", "scene-engine.js",
@@ -22,7 +22,8 @@ self.addEventListener("activate", (e) => {
 self.addEventListener("fetch", (e) => {
   const url = new URL(e.request.url);
   if (url.origin !== location.origin) return;
-  const isAsset = /\/(chars|audio)\//.test(url.pathname);
+  // Mapas de áudio (manifest, sprites, words .json) mudam a cada geração: sempre rede primeiro
+  const isAsset = /\/(chars|audio)\//.test(url.pathname) && !/\.json$/.test(url.pathname);
   if (isAsset) {
     e.respondWith(
       caches.match(e.request).then((hit) => hit || fetch(e.request).then((res) => {
