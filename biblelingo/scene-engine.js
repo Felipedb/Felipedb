@@ -64,65 +64,131 @@ function sceneBank(line, scene) {
   return shuffle([...words, ...extra]);
 }
 
-// Distratores para "escolha a fala": outras falas do herói (da cena e, se faltar, das outras cenas dele)
+// Distratores para "escolha a fala": falas do herói em OUTRAS cenas (nunca desta cena, que já está
+// visível no transcript), de tamanho parecido, para exigir compreensão e não eliminação
 function sceneReplyOptions(line, scene) {
-  const own = scene.lines.filter((l) => l.who === scene.char && l.en !== line.en).map((l) => l.en);
-  const others = SCENES.filter((s) => s.char === scene.char && s !== scene).flatMap((s) => s.lines.filter((l) => l.who === s.char).map((l) => l.en));
-  const pool = [...new Set([...shuffle(own), ...shuffle(others)])].filter((e) => e !== line.en);
-  // prefere falas de tamanho parecido, para não entregar a resposta pelo comprimento
-  const near = pool.sort((a, b) => Math.abs(a.length - line.en.length) - Math.abs(b.length - line.en.length)).slice(0, 4);
+  const same = SCENES.filter((s) => s !== scene && s.char === scene.char).flatMap((s) => s.lines.filter((l) => l.who === s.char).map((l) => l.en));
+  const any = SCENES.filter((s) => s !== scene).flatMap((s) => s.lines.filter((l) => l.who === s.char).map((l) => l.en));
+  const sameSet = new Set(same);
+  const pool = [...new Set([...same, ...any])].filter((e) => e !== line.en && !scene.lines.some((l) => l.en === e));
+  // mesmo personagem, mesmo tipo de frase (pergunta ou afirmação) e tamanho parecido primeiro
+  const kind = (t) => /\?\s*$/.test(t) ? "?" : "."; 
+  const near = pool.map((e) => ({ e, d: Math.abs(e.length - line.en.length) + (sameSet.has(e) ? 0 : 25) + (kind(e) === kind(line.en) ? 0 : 15) + Math.random() * 8 }))
+    .sort((x, y) => x.d - y.d).slice(0, 4).map((x) => x.e);
   return shuffle([line.en, ...shuffle(near).slice(0, 2)]);
 }
 
+// Distratores para "o que ele disse?": traduções de falas de outras cenas, de tamanho parecido
 function sceneListenOptions(line, scene) {
-  const pool = [...new Set(scene.lines.filter((l) => l !== line).map((l) => l.pt))];
-  const near = shuffle(pool).sort((a, b) => Math.abs(a.length - line.pt.length) - Math.abs(b.length - line.pt.length)).slice(0, 4);
+  const pool = [...new Set(SCENES.filter((s) => s !== scene).flatMap((s) => s.lines.map((l) => l.pt)))].filter((p) => p !== line.pt);
+  const kind = (t) => /\?\s*$/.test(t) ? "?" : ".";
+  const near = pool.map((p) => ({ p, d: Math.abs(p.length - line.pt.length) + (kind(p) === kind(line.pt) ? 0 : 15) + Math.random() * 8 })).sort((x, y) => x.d - y.d).slice(0, 4).map((x) => x.p);
   return shuffle([line.pt, ...shuffle(near).slice(0, 2)]);
 }
 
+// Montador da cena, com as mesmas regras do montador de lição (análise forense, 16 práticas):
+// receptivo antes de produtivo (i+1), teto por formato, rampa, regra de vizinhança, revisão de
+// conteúdo anterior, desafio reservado ao fim, adaptação durante a cena (adaptNext).
+//  1) introdução da situação
+//  2) 3 expressões apresentadas de forma receptiva (imagem, significado, escuta)
+//  3) leitura da conversa em "batidas" (fala do outro + resposta do herói): a batida é lida com
+//     áudio ou o aprendiz escolhe a resposta do herói; cada batida lida tem uma checagem
+//     (o que ele disse? / palavra que falta)
+//  4) produção sobre falas já vistas: lacuna digitada, montar a frase, falar
+//  5) recordação das outras 2 expressões e 1 exercício de revisão de lição anterior
+//  6) o que aconteceu de verdade
 function buildSceneExercises(step) {
   const sc = sceneOfStep(step);
-  const speakMuted = state.speakMutedUntil && Date.now() < state.speakMutedUntil;
-  const canSpeak = SPEECH_OK && !speakMuted;
-  const ex = [];
+  _distractUnit = step.unit;
   const id = sc.id;
-  ex.push({ type: "scene-intro", sceneId: id, silent: true });
+  const firstTime = !state.completed[id];
+  const canSpeak = SPEECH_OK && !(state.speakMutedUntil && Date.now() < state.speakMutedUntil);
+  const noListen = listenMuted();
+  const isHero = (l) => l.who === sc.char;
+  const count = {};
+  const ex = [];
+  const take = (e, phase) => { e.phase = phase; count[e.type] = (count[e.type] || 0) + 1; ex.push(e); return e; };
+  const under = (t) => (count[t] || 0) < capOf(t);
+  const lineBase = (li) => ({ sceneId: id, li, sentence: { en: sc.lines[li].en, pt: sc.lines[li].pt }, audioText: sc.lines[li].en });
 
-  // Aquecimento: duas checagens do vocabulário da cena (uma EN→PT, uma PT→EN)
+  take({ type: "scene-intro", sceneId: id, silent: true }, "intro");
+
+  // 2) vocabulário receptivo, formatos rotacionados; as 2 expressões restantes voltam como recordação
   const vocab = shuffle(sc.vocab.slice());
-  vocab.slice(0, 2).forEach((w, i) => {
-    const others = sc.vocab.filter((o) => o !== w);
-    const dir = i === 0 ? "en-pt" : "pt-en";
-    const key = dir === "en-pt" ? "pt" : "en";
-    ex.push({ type: "scene-word", sceneId: id, dir, word: w, options: shuffle([w[key], ...shuffle(others).slice(0, 2).map((o) => o[key])]) });
-  });
+  const introTypes = noListen ? ["image-choice", "choice-en-pt"] : ["image-choice", "choice-en-pt", "listen"];
+  vocab.slice(0, 3).forEach((w, i) => take({ ...EX_MAKE[introTypes[i % introTypes.length]](w), newWord: firstTime }, "vocab"));
 
-  // A conversa, fala por fala
-  const cycle = ["reply", "build", "gap", "speak"];
-  let hi = 0, pi = 0;
-  sc.lines.forEach((line, li) => {
-    const base = { sceneId: id, li, sentence: { en: line.en, pt: line.pt }, audioText: line.en };
-    if (line.who === sc.char) {
-      let kind = cycle[hi % cycle.length];
-      hi++;
-      const n = wordCount(line.en);
-      if (kind === "speak" && !canSpeak) kind = "build";
-      if (kind === "build" && n > 12) kind = "gap";
-      if (kind === "gap" && !sceneGapWord(line.en, sc.vocab)) kind = "reply";
-      if (kind === "build" && n < 3) kind = "reply";
-      if (kind === "reply") ex.push({ ...base, type: "scene-reply", options: sceneReplyOptions(line, sc) });
-      else if (kind === "build") ex.push({ ...base, type: "scene-build", bank: sceneBank(line, sc) });
-      else if (kind === "gap") ex.push({ ...base, type: "scene-gap", blank: sceneGapWord(line.en, sc.vocab) });
-      else ex.push({ ...base, type: "scene-speak" });
-    } else {
-      // A primeira fala do outro é sempre revelada (contexto); depois alterna: ouvir e traduzir / ler
-      if (pi % 2 === 1 && !listenMuted()) ex.push({ ...base, type: "scene-listen", options: sceneListenOptions(line, sc) });
-      else ex.push({ ...base, type: "scene-line", silent: true });
-      pi++;
+  // 3) batidas da conversa
+  const beats = [];
+  let cur = [];
+  sc.lines.forEach((l, li) => { cur.push(li); if (isHero(l) || cur.length === 2) { beats.push(cur); cur = []; } });
+  if (cur.length) beats.push(cur);
+  let checkTurn = SCENES.indexOf(sc) % 2; // metade das cenas começa pela lacuna, metade pela escuta
+  beats.forEach((beat, k) => {
+    const last = sc.lines[beat[beat.length - 1]];
+    const heroLast = isHero(last) && beat.length >= 1;
+    if (k > 0 && heroLast && k % 2 === 1 && under("scene-reply")) {
+      // o aprendiz escolhe a resposta do herói (a fala do outro desta batida já aparece no transcript)
+      take({ ...lineBase(beat[beat.length - 1]), type: "scene-reply", shown: beat.slice(0, -1), options: sceneReplyOptions(last, sc) }, "read");
+      return;
+    }
+    take({ type: "scene-read", sceneId: id, lis: beat, silent: true }, "read");
+    if (k === 0) return; // a primeira batida é só contexto
+    // checagem de compreensão sobre uma fala da batida
+    const other = beat.map((li) => sc.lines[li]).find((l) => !isHero(l));
+    const heroL = beat.map((li) => sc.lines[li]).find(isHero);
+    const wantListen = checkTurn % 2 === 0;
+    checkTurn++;
+    if (wantListen && other && !noListen && under("scene-listen")) {
+      take({ ...lineBase(sc.lines.indexOf(other)), type: "scene-listen", options: sceneListenOptions(other, sc) }, "read");
+    } else if (heroL && under("scene-missing")) {
+      const blank = sceneGapWord(heroL.en, sc.vocab);
+      if (blank) take({ ...lineBase(sc.lines.indexOf(heroL)), type: "scene-missing", blank, options: shuffle([blank, ...exNearWords(blank, 2)]) }, "read");
+    } else if (other && !noListen && under("scene-listen")) {
+      take({ ...lineBase(sc.lines.indexOf(other)), type: "scene-listen", options: sceneListenOptions(other, sc) }, "read");
     }
   });
-  ex.push({ type: "scene-truth", sceneId: id, silent: true });
-  ex.hard = [];
+
+  // 4) produção sobre falas do herói já vistas, cada formato numa fala diferente
+  const heroLis = sc.lines.map((l, li) => li).filter((li) => isHero(sc.lines[li]));
+  const used = new Set();
+  const pickLine = (pred) => { const li = shuffle(heroLis.filter((x) => !used.has(x))).find((x) => pred(sc.lines[x])); if (li != null) used.add(li); return li; };
+  const prod = [];
+  const gapLi = pickLine((l) => !!sceneGapWord(l.en, sc.vocab));
+  if (gapLi != null) prod.push({ ...lineBase(gapLi), type: "scene-gap", blank: sceneGapWord(sc.lines[gapLi].en, sc.vocab) });
+  const buildLi = pickLine((l) => { const n = wordCount(l.en); return n >= 3 && n <= 12; });
+  if (buildLi != null) prod.push({ ...lineBase(buildLi), type: "scene-build", bank: sceneBank(sc.lines[buildLi], sc) });
+  const speakLi = pickLine((l) => wordCount(l.en) <= 12);
+  if (speakLi != null) prod.push(canSpeak ? { ...lineBase(speakLi), type: "scene-speak" } : { ...lineBase(speakLi), type: "scene-build", bank: sceneBank(sc.lines[speakLi], sc) });
+
+  // 5) recordação das expressões restantes + revisão de lição anterior
+  const recall = [];
+  if (vocab[3]) recall.push({ ...EX_MAKE[noListen ? "choice-pt-en" : "listen"](vocab[3]), newWord: firstTime });
+  if (vocab[4]) recall.push(EX_MAKE.type(vocab[4]));
+  const earlier = flatLessons().filter((l) => !l.review && !l.scene && state.completed[l.id]).flatMap((l) => l.vocab || []);
+  if (earlier.length) {
+    const w = weakestWords(earlier, 3)[Math.floor(Math.random() * Math.min(3, earlier.length))];
+    recall.push({ ...EX_MAKE[noListen ? "choice-pt-en" : "listen"](w), isReview: true });
+  }
+  // intercala produção e recordação: nunca dois do mesmo formato em sequência
+  const fam = (t) => /listen/.test(t) ? "listen" : t.replace(/^scene-/, "");
+  const tail = [];
+  while (prod.length || recall.length) {
+    const prev = tail[tail.length - 1] || ex[ex.length - 1];
+    let src = (tail.length % 2 === 1 && recall.length) || !prod.length ? recall : prod;
+    let j = src.findIndex((e) => !prev || fam(e.type) !== fam(prev.type));
+    if (j < 0) { const alt = src === prod ? recall : prod; const k = alt.findIndex((e) => !prev || fam(e.type) !== fam(prev.type)); if (k >= 0) { src = alt; j = k; } else j = 0; }
+    tail.push(src.splice(j, 1)[0]);
+  }
+  tail.forEach((e) => take(e, "prod"));
+
+  // desafio reservado: digite o que ouviu (uma fala do herói), liberado só sem erros
+  const hard = [];
+  const hardLi = heroLis.find((li) => !used.has(li) && wordCount(sc.lines[li].en) <= 10) ?? heroLis[0];
+  if (hardLi != null && !noListen) hard.push({ ...EX_MAKE["listen-type"]({ en: sc.lines[hardLi].en, pt: sc.lines[hardLi].pt }), sceneId: id, li: hardLi });
+
+  take({ type: "scene-truth", sceneId: id, silent: true }, "end");
+  ex.hard = hard;
   return ex;
 }
 
@@ -205,44 +271,61 @@ function renderSceneIntro(ex, box) {
   setContinue("Começar a cena");
 }
 
-function renderSceneWord(ex, box) {
+// Batida da conversa: uma ou duas falas lidas com áudio (a do outro e a resposta do herói)
+function renderSceneRead(ex, box) {
   const sc = SCENE_BY_ID[ex.sceneId];
-  const hero = castChar(sc.char);
-  session.voiceChar = hero;
-  const enFirst = ex.dir === "en-pt";
-  box.innerHTML = `<div class="ex-title sc-title"><span class="sc-chip">💬 ${sc.title}</span>${enFirst ? "O que significa?" : "Como se diz em inglês?"}</div>`;
-  const card = document.createElement("div");
-  card.className = "sc-wordcard";
-  card.innerHTML = `<span class="sc-vico big">${ex.word.icon || "•"}</span><span class="ex-word">${enFirst ? ex.word.en : ex.word.pt}</span>`;
-  if (enFirst) { const a = audioButton(ex.word.en); card.prepend(a); }
-  box.appendChild(card);
-  makeOptions(box, ex.options, 1, (opt) => { if (!enFirst) speak(opt, { char: hero }); });
-  if (enFirst) speak(ex.word.en, { char: hero });
-  ex.correct = enFirst ? ex.word.pt : ex.word.en;
-  ex.explain = `${ex.word.en} = ${ex.word.pt}`;
-  ex.audioText = ex.word.en;
+  const lis = ex.lis;
+  const first = sc.lines[lis[0]];
+  session.voiceChar = castChar(first.who);
+  sceneHeader(box, sc, lis[0] === 0 ? "A conversa começa:" : "A conversa continua:");
+  const chat = sceneTranscript(sc, lis[0], box, null);
+  const rows = lis.map((li) => {
+    const line = sc.lines[li];
+    const body = document.createElement("div");
+    body.innerHTML = `<div class="sc-who">${sceneNameOf(line.who)}${line.who === sc.char ? " (você)" : ""}</div>`;
+    const row = document.createElement("div");
+    row.className = "sc-en-row";
+    row.appendChild(audioButton(line.en));
+    row.insertAdjacentHTML("beforeend", `<span class="sc-en">${sayable(line.en)}</span>`);
+    body.appendChild(row);
+    body.insertAdjacentHTML("beforeend", `<div class="sc-pt">${line.pt}</div>`);
+    const msg = sceneMsg(sc, line, { body, now: li === lis[0] });
+    chat.appendChild(msg);
+    return { msg, line };
+  });
+  // toca as falas em sequência, destacando quem fala
+  let i = 0;
+  const playNext = () => {
+    if (i >= rows.length || !$("#screen-lesson").classList.contains("active") || session.exercises[session.index] !== ex) return;
+    rows.forEach((r) => r.msg.classList.remove("now"));
+    const { msg, line } = rows[i++];
+    msg.classList.add("now");
+    speak(line.en, { char: castChar(line.who) });
+    const d = (typeof clipDuration === "function" && clipDuration(line.en, line.who)) || Math.min(5, 0.6 + line.en.length * 0.06);
+    setTimeout(playNext, d * 1000 + 350);
+  };
+  playNext();
+  ex.correct = "__read__";
+  session.answer = "__read__";
+  setContinue("Continuar");
 }
 
-// Fala do outro personagem: só lê (com áudio), sem resposta
-function renderSceneLine(ex, box) {
+// Fala do herói com uma palavra faltando e 3 opções (como "selecione a palavra que falta")
+function renderSceneMissing(ex, box) {
   const sc = SCENE_BY_ID[ex.sceneId];
   const line = sc.lines[ex.li];
-  const ch = castChar(line.who);
-  session.voiceChar = ch;
-  sceneHeader(box, sc, `${sceneNameOf(line.who)} diz:`);
+  const hero = castChar(sc.char);
+  session.voiceChar = hero;
+  sceneHeader(box, sc, `Selecione a palavra que falta:`);
   const body = document.createElement("div");
-  body.innerHTML = `<div class="sc-who">${sceneNameOf(line.who)}</div>`;
-  const row = document.createElement("div");
-  row.className = "sc-en-row";
-  row.appendChild(audioButton(line.en));
-  row.insertAdjacentHTML("beforeend", `<span class="sc-en">${sayable(line.en)}</span>`);
-  body.appendChild(row);
-  body.insertAdjacentHTML("beforeend", `<div class="sc-pt">${line.pt}</div>`);
+  body.innerHTML = `<div class="sc-who">${sceneNameOf(sc.char)} (você)</div><div class="sc-en gap-box">${gappedSentence(line.en, ex.blank)}</div><div class="sc-pt">${line.pt}</div>`;
   sceneTranscript(sc, ex.li, box, sceneMsg(sc, line, { body, now: true }));
-  speak(line.en, { char: ch });
-  ex.correct = "__line__";
-  session.answer = "__line__";
-  setContinue("Continuar");
+  makeOptions(box, ex.options, 2, (opt) => { const g = box.querySelector("#sent-gap"); if (g) g.textContent = opt; speak(opt); });
+  ex.correct = ex.blank;
+  ex.explain = `"${line.en}" = "${line.pt}"`;
+  ex.audioText = line.en.replace(ex.blank, "blank");
+  ex.audioAfter = line.en;
+  ex.onChecked = (ok) => { revealHero(box, line); if (ok) speak(line.en, { char: hero }); };
 }
 
 // Fala do outro personagem: ouvir e escolher a tradução
@@ -287,7 +370,7 @@ function renderSceneReply(ex, box) {
   const line = sc.lines[ex.li];
   const hero = castChar(sc.char);
   session.voiceChar = hero;
-  sceneHeader(box, sc, ex.li === 0 ? `Sua vez: fale por ${sceneNameOf(sc.char)}` : `Sua vez: o que ${sceneNameOf(sc.char)} responde?`);
+  sceneHeader(box, sc, `Sua vez: o que ${sceneNameOf(sc.char)} responde?`);
   sceneTranscript(sc, ex.li, box, sceneMsg(sc, line, { body: heroPromptBody(sc, line, "Escolha a fala em inglês que diz isto:"), now: true }));
   box.insertAdjacentHTML("beforeend", `<div class="reply-label">Sua resposta:</div>`);
   makeOptions(box, ex.options, 1, (opt) => speak(opt, { char: hero }));
@@ -434,8 +517,8 @@ function renderSceneTruth(ex, box) {
 
 const SCENE_RENDER = {
   "scene-intro": renderSceneIntro,
-  "scene-word": renderSceneWord,
-  "scene-line": renderSceneLine,
+  "scene-read": renderSceneRead,
+  "scene-missing": renderSceneMissing,
   "scene-listen": renderSceneListen,
   "scene-reply": renderSceneReply,
   "scene-build": renderSceneBuild,

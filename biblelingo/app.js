@@ -1612,6 +1612,16 @@ function adaptNext() {
   const prev = session.exercises[session.index - 1];
   const sameNeighbor = (e) => prev && (e.type === prev.type || exKey(e) === exKey(prev));
   let swap = null;
+  // Cenas: com erros, montar a frase vira escolher a fala e a lacuna digitada vira lacuna com opções;
+  // indo bem, a lacuna com opções sobe para lacuna digitada
+  if (nxt.sceneId && typeof SCENE_BY_ID !== "undefined") {
+    const sc = SCENE_BY_ID[nxt.sceneId], line = sc && sc.lines[nxt.li];
+    if (line && session.mistakes >= 2 && nxt.type === "scene-build") swap = { ...nxt, type: "scene-reply", options: sceneReplyOptions(line, sc), bank: undefined };
+    else if (line && session.mistakes >= 2 && nxt.type === "scene-gap") swap = { ...nxt, type: "scene-missing", options: shuffle([nxt.blank, ...exNearWords(nxt.blank, 2)]) };
+    else if (line && session.combo >= 3 && nxt.type === "scene-missing") swap = { ...nxt, type: "scene-gap", options: undefined };
+    if (swap && !sameNeighbor(swap)) { swap.adapted = true; session.exercises[session.index] = swap; }
+    return;
+  }
   if (session.combo >= 3 && nxt.word && (nxt.type === "listen" || nxt.type === "choice-pt-en")) {
     swap = EX_MAKE.type(nxt.word);
   } else if (session.mistakes >= 2 && nxt.word && nxt.type === "type") {
