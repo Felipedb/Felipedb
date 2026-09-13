@@ -865,8 +865,21 @@ function audioButton(text, opts = {}) {
   b.innerHTML = opts.slow ? ICONS.turtle : ICONS.speaker;
   b.title = opts.slow ? "Ouvir devagar" : "Ouvir";
   b.setAttribute("aria-label", b.title);
-  b.addEventListener("click", () => speak(text, opts.slow ? { slow: true } : {}));
+  b.addEventListener("click", () => {
+    speak(text, opts.slow ? { slow: true } : {});
+    markPlaying(b, text, opts.slow);
+  });
   return b;
+}
+
+// Ondas no botão de áudio enquanto o clipe toca, como no Duolingo
+let _playingTimer = 0;
+function markPlaying(btn, text, slow) {
+  document.querySelectorAll(".btn-audio.playing, .title-ico.playing").forEach((el) => el.classList.remove("playing"));
+  clearTimeout(_playingTimer);
+  const base = (typeof clipDuration === "function" && clipDuration(text)) || Math.min(4, 0.5 + String(text).length * 0.055);
+  btn.classList.add("playing");
+  _playingTimer = setTimeout(() => btn.classList.remove("playing"), (base / (slow ? 0.65 : 1)) * 1000);
 }
 
 function audioPair(text) {
@@ -1615,6 +1628,11 @@ function checkAnswer() {
       if (ex.word) { state.errors = state.errors || {}; state.errors[ex.word.en] = (state.errors[ex.word.en] || 0) + 1; }
       SFX.wrong();
       buzz([60, 40, 60]);
+      document.querySelectorAll(".opt.wrong, .answer-zone, .gap-input, .type-input").forEach((el) => {
+        el.classList.remove("shake");
+        void el.offsetWidth;
+        el.classList.add("shake");
+      });
       if (!session.practice) {
         state.hearts = Math.max(0, state.hearts - 1);
         save();

@@ -26,6 +26,16 @@ async function loadAudioManifest() {
   }
 }
 
+// Duração do clipe gravado (segundos); 0 quando não há clipe
+function clipDuration(text, charKey) {
+  if (!AUDIO.manifest || !AUDIO.sprites) return 0;
+  const entry = AUDIO.manifest[audioKey(text)];
+  if (!entry) return 0;
+  const file = (charKey && entry[charKey]) || entry.default;
+  const s = file && AUDIO.sprites[file];
+  return s ? s[2] : 0;
+}
+
 // Toca o clipe gravado se existir; devolve true quando tocou
 function playClip(text, charKey, slow) {
   if (!AUDIO.manifest) return false;

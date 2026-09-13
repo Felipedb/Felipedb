@@ -1000,7 +1000,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .gap-input.bad { border-bottom-color: var(--red); color: var(--red); }
 .bubble .say-word, .bubble .hint-word, .bubble .plain-word { border-bottom: 2px dotted var(--dot); padding-bottom: 1px; }
 .bubble .hint-word { border-bottom-color: var(--blue); }
-.answer-zone .tile { border-color: var(--ok-line); color: var(--green); }
+.answer-zone .tile { background: var(--card); }
 .mic-btn { width: 200px; height: 84px; border-radius: 22px; font-size: 0; }
 .mic-btn svg { width: 36px; height: 36px; }
 .btn-link.muted { color: var(--disabled-fg); text-transform: uppercase; letter-spacing: 0.06em; font-size: 13px; margin-top: auto; }
@@ -1353,3 +1353,62 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .result-char { width: 210px; }
 .result .big-emoji { font-size: 40px; margin-bottom: -2px; }
 .verse-blessing { background: var(--gold-soft); border-color: var(--gold-line); }
+
+/* ---------- Polimento de interação (paridade Duolingo) ---------- */
+/* Zona de resposta com linhas pautadas (duas fileiras) */
+.answer-zone {
+  border: none;
+  min-height: 112px;
+  align-content: flex-start;
+  padding: 4px 2px 0;
+  background: repeating-linear-gradient(to bottom, transparent 0 51px, var(--line) 51px 53px, transparent 53px 55px);
+}
+.answer-zone .tile { margin-bottom: 0; }
+
+/* Ondas enquanto o áudio toca */
+.btn-audio, .title-ico { position: relative; }
+.btn-audio.playing svg, .title-ico.playing svg { animation: spk-pulse 0.45s ease-in-out infinite alternate; }
+@keyframes spk-pulse { from { transform: scale(1); } to { transform: scale(1.18); } }
+.btn-audio.playing::after, .title-ico.playing::after {
+  content: ""; position: absolute; inset: -5px; border-radius: inherit;
+  border: 3px solid var(--blue); pointer-events: none;
+  animation: spk-ring 0.9s ease-out infinite;
+}
+@keyframes spk-ring { 0% { opacity: 0.65; transform: scale(0.92); } 100% { opacity: 0; transform: scale(1.22); } }
+
+/* Erro: balançar a opção/resposta */
+@keyframes shake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-7px); } 40% { transform: translateX(7px); } 60% { transform: translateX(-4px); } 80% { transform: translateX(4px); } }
+.shake { animation: shake 0.4s ease; }
+
+/* Botão principal: caixa alta e "pop" ao habilitar */
+.footer .btn-main { text-transform: uppercase; letter-spacing: 0.8px; }
+#btn-check:enabled { animation: arm 0.18s ease; }
+@keyframes arm { 0% { transform: scale(0.97); } 60% { transform: scale(1.03); } 100% { transform: scale(1); } }
+
+/* Folha de feedback com ícone em círculo, como no Duolingo */
+.footer.correct .feedback.ok, .footer.wrong .feedback.bad { display: flex; align-items: center; gap: 12px; }
+.fb-icon {
+  width: 54px; height: 54px; border-radius: 50%; flex: none;
+  background: var(--card); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.14);
+  display: flex; align-items: center; justify-content: center;
+}
+.fb-icon .nav-ico { width: 28px; height: 28px; }
+
+/* Balão de fala com rabinho apontando para o personagem */
+.scene .scene-prompt { position: relative; }
+.scene .scene-prompt::before {
+  content: ""; position: absolute; top: -10px; left: 50%; width: 16px; height: 16px;
+  background: var(--card); border-left: 2px solid var(--line); border-top: 2px solid var(--line);
+  transform: translateX(-50%) rotate(45deg);
+}
+
+/* Barra de progresso com brilho interno */
+.progress-fill::before {
+  content: ""; position: absolute; left: 8px; right: 8px; top: 3px; height: 4px;
+  border-radius: 4px; background: rgba(255, 255, 255, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-audio.playing svg, .title-ico.playing svg, .btn-audio.playing::after, .title-ico.playing::after,
+  .shake, #btn-check:enabled { animation: none; }
+}
