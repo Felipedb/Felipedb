@@ -31,6 +31,15 @@ jobs:
         run: |
           cd biblelingo
           node tools/gen-audio.mjs --limit=${{ github.event.inputs.limit }} --only=${{ github.event.inputs.only }}
+      - name: Cortar palavras das frases (alinhamento forçado)
+        # Palavra isolada sintetizada sai com artefatos; a palavra recortada da própria frase, na
+        # mesma voz, é o que o app toca ao tocar numa palavra. Falha aqui não descarta os clipes.
+        continue-on-error: true
+        run: |
+          sudo apt-get -y install ffmpeg
+          pip install -q faster-whisper
+          cd biblelingo
+          python3 tools/align-words.py
       - name: Reconstruir sprites
         run: |
           sudo apt-get -y install ffmpeg

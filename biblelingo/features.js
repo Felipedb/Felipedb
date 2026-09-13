@@ -33,6 +33,18 @@ async function loadAudioManifest() {
   } catch (e) {
     AUDIO.manifest = {};
   }
+  // Palavras recortadas das frases (tools/align-words.py): substituem a síntese da palavra isolada,
+  // que sai com artefatos; por personagem, a palavra vem da própria frase dele
+  try {
+    const r = await fetch(AUDIO.base + "words.json", { cache: "no-cache" });
+    const words = r.ok ? await r.json() : {};
+    Object.keys(words).forEach((w) => {
+      const cut = words[w];
+      const entry = (AUDIO.manifest[w] = AUDIO.manifest[w] || {});
+      Object.keys(cut).forEach((c) => { if (c !== "default") entry[c] = cut[c].f; });
+      if (cut.default) entry.default = cut.default;
+    });
+  } catch (e) { /* sem cortes: segue com os clipes isolados */ }
   // Mapa de sprites (poucos MP3 grandes com offsets) quando publicado
   try {
     const r = await fetch(AUDIO.base + "sprites.json", { cache: "no-cache" });

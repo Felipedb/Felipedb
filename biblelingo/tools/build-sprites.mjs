@@ -14,7 +14,11 @@ const GAP = Math.round(0.12 * RATE) * 2; // 120 ms de silêncio entre clipes (by
 const PER_SPRITE = 64; // clipes por sprite
 
 const manifest = JSON.parse(fs.readFileSync(path.join(AUDIO_DIR, "manifest.json"), "utf8"));
-const files = [...new Set(Object.values(manifest).flatMap((e) => Object.values(e)))].sort();
+// Cortes de palavras (audio/words.json, de tools/align-words.py) entram nos mesmos sprites
+const wordsPath = path.join(AUDIO_DIR, "words.json");
+const words = fs.existsSync(wordsPath) ? JSON.parse(fs.readFileSync(wordsPath, "utf8")) : {};
+const wordFiles = Object.values(words).flatMap((e) => Object.keys(e).filter((c) => c !== "default").map((c) => e[c].f));
+const files = [...new Set([...Object.values(manifest).flatMap((e) => Object.values(e)), ...wordFiles])].filter((f) => fs.existsSync(path.join(AUDIO_DIR, f))).sort();
 fs.rmSync(OUT_DIR, { recursive: true, force: true });
 fs.mkdirSync(OUT_DIR, { recursive: true });
 
