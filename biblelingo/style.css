@@ -1412,3 +1412,19 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .btn-audio.playing svg, .title-ico.playing svg, .btn-audio.playing::after, .title-ico.playing::after,
   .shake, #btn-check:enabled { animation: none; }
 }
+
+/* ---------- Placar da lição no resultado ---------- */
+.result-review { width: 100%; max-width: 420px; margin: 4px auto 10px; text-align: left; }
+.rr-toggle {
+  width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 10px;
+  background: var(--card); border: 2px solid var(--line); border-radius: 14px; padding: 12px 14px;
+  font-weight: 800; font-size: 15px; color: var(--text);
+}
+.rr-toggle b { color: var(--green); }
+.rr-list { margin-top: 8px; display: flex; flex-direction: column; gap: 8px; }
+.rr-item { background: var(--card); border: 2px solid var(--line); border-radius: 12px; padding: 10px 12px; font-size: 14px; }
+.rr-q { font-weight: 800; margin-bottom: 4px; }
+.rr-a { color: var(--red); }
+.rr-a s { text-decoration-thickness: 2px; }
+.rr-c { color: var(--green-dark); font-weight: 800; }
+.rr-empty { margin: 0; padding: 10px 12px; color: var(--text-soft); font-weight: 700; }

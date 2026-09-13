@@ -42,4 +42,6 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add biblelingo/audio biblelingo/tools/.voices-ok.json
           git diff --cached --quiet && echo "Nada a commitar" || git commit -m "chore: áudios gerados com ElevenLabs"
+          # A branch pode ter avançado durante a geração: rebase antes de enviar (nunca perder áudio pago)
+          git pull --rebase --autostash origin "${{ github.ref_name }}"
           git push

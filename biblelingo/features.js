@@ -96,6 +96,81 @@ function playClip(text, charKey, slow) {
   }
 }
 
+// ---------- Repetição espaçada por palavra ----------
+// Cada acerto sobe um nível (intervalo maior até a próxima revisão); cada erro desce dois.
+const SR_INTERVALS = [0, 1, 2, 4, 7, 15, 30]; // dias até vencer, por nível
+function wordStat(en) {
+  state.words = state.words || {};
+  return state.words[en] || (state.words[en] = { lvl: 0, ok: 0, bad: 0, last: 0 });
+}
+function recordWord(en, ok) {
+  const w = wordStat(en);
+  w.last = Date.now();
+  if (ok) { w.ok++; w.lvl = Math.min(SR_INTERVALS.length - 1, w.lvl + 1); }
+  else { w.bad++; w.lvl = Math.max(0, w.lvl - 2); }
+}
+// Urgência de revisão: dias além do vencimento, mais peso para palavras com histórico de erro
+function wordUrgency(en) {
+  const w = state.words && state.words[en];
+  if (!w) return 0.5; // nunca praticada fora da lição: revisar cedo
+  const overdue = (Date.now() - (w.last + SR_INTERVALS[w.lvl] * 864e5)) / 864e5;
+  return overdue + w.bad * 0.6 - w.ok * 0.3;
+}
+function weakestWords(list, n) {
+  return [...list].sort((a, b) => wordUrgency(b.en) - wordUrgency(a.en)).slice(0, n);
+}
+function dueWords(list) {
+  return list.filter((w) => state.words && state.words[w.en] && wordUrgency(w.en) >= 0);
+}
+// Palavras do vocabulário presentes numa frase (para creditar acertos de frase)
+function sentenceVocab(sentence) {
+  const toks = new Set(normalize(sentence.en).split(" "));
+  return allVocab().filter((w) => normalize(w.en.replace(/^to /, "")).split(" ").every((t) => toks.has(t)));
+}
+
+// ---------- Retomar a lição no ponto ----------
+const RESUME_TTL = 3 * 864e5;
+function saveResume() {
+  if (!session || session.practice || session.levelUp || !session.lesson || !session.lesson.unit || session.lesson.practiceErrors || String(session.lesson.id).startsWith("quick")) return;
+  if (session.index >= session.exercises.length) return;
+  try {
+    state.resume = {
+      lessonId: session.lesson.id, index: session.index, mistakes: session.mistakes, combo: session.combo, bestCombo: session.bestCombo,
+      bonus: session.bonus, startedAt: session.startedAt, reviewing: session.reviewing, hardAdded: session.hardAdded,
+      narratorKey: session.narrator && session.narrator.key, fixedNarrator: !!session.fixedNarrator,
+      exercises: JSON.parse(JSON.stringify(session.exercises)), hard: JSON.parse(JSON.stringify(session.hard || [])),
+      reviewQueue: JSON.parse(JSON.stringify(session.reviewQueue || [])), log: session.log || [], savedAt: Date.now(),
+    };
+    save();
+  } catch (e) { /* exercício não serializável: segue sem retomar */ }
+}
+function resumable() {
+  const r = state.resume;
+  if (!r || Date.now() - r.savedAt > RESUME_TTL) return null;
+  const lesson = flatLessons().find((l) => l.id === r.lessonId);
+  return lesson ? { ...r, lesson } : null;
+}
+function resumeLesson() {
+  const r = resumable();
+  if (!r) return false;
+  const lesson = r.lesson;
+  _distractUnit = lesson.unit;
+  const narrator = r.narratorKey && CHARACTERS[r.narratorKey] ? { key: r.narratorKey, ...CHARACTERS[r.narratorKey] } : pickCharacter(lesson.unit.id);
+  const exercises = r.exercises;
+  exercises.hard = r.hard;
+  session = {
+    lesson, exercises, index: r.index, mistakes: r.mistakes, combo: r.combo, bestCombo: r.bestCombo, bonus: r.bonus,
+    practice: false, checked: false, answer: null, startedAt: Date.now() - (r.savedAt - r.startedAt),
+    narrator, fixedNarrator: r.fixedNarrator, reviewQueue: r.reviewQueue, reviewing: r.reviewing, hardAdded: r.hardAdded,
+    hard: r.hard, log: r.log || [],
+  };
+  session.cast = buildCast(lesson.unit.id, narrator);
+  showScreen("lesson");
+  SFX.start();
+  renderExercise();
+  return true;
+}
+
 // ---------- 3.3 Coroas por unidade e nível lendário ----------
 const MAX_CROWN = 5;
 

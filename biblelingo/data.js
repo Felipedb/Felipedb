@@ -25,7 +25,7 @@ const COURSE = [
           { en: "light", pt: "luz", icon: "💡" },
         ],
         sentences: [
-          { en: "God created the heaven and the earth", pt: "Deus criou o céu e a terra" },
+          { en: "God created the heaven and the earth", alt: ["God created the heavens and the earth"], pt: "Deus criou o céu e a terra" },
         ],
         verse: {
           text: "In the beginning God created the heaven and the earth.",
@@ -316,7 +316,7 @@ const COURSE = [
           { en: "strong", pt: "forte", icon: "💪" },
         ],
         sentences: [
-          { en: "David sang unto the Lord", pt: "Davi cantou ao Senhor" },
+          { en: "David sang unto the Lord", alt: ["David sang to the Lord"], pt: "Davi cantou ao Senhor" },
         ],
         verse: {
           text: "The LORD is my rock, and my fortress, and my deliverer.",

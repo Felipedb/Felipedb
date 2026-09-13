@@ -27,6 +27,8 @@ function load() {
     name: "", // como o app te chama na saudação
     days: {}, // "YYYY-MM-DD" -> XP do dia (meta semanal)
     chests: {}, // unitId -> true (baú da unidade aberto)
+    words: {}, // palavra EN -> { lvl, ok, bad, last } (repetição espaçada)
+    resume: null, // lição interrompida, para retomar no ponto
   };
   try {
     const raw = localStorage.getItem("biblelingo");
@@ -375,10 +377,13 @@ function renderWeek() {
 function renderContinueCTA(currentId) {
   const cta = $("#cta-continue");
   if (!cta) return;
-  const lesson = flatLessons().find((l) => l.id === currentId);
+  const r = resumable();
+  const lesson = r ? r.lesson : flatLessons().find((l) => l.id === currentId);
   if (!lesson) { cta.hidden = true; return; }
   cta.hidden = false;
-  cta.innerHTML = `${ICONS.play || ""}<span>Continuar: ${lesson.title} (+${XP_PER_LESSON} XP)</span>`;
+  cta.innerHTML = r
+    ? `${ICONS.play || ""}<span>Retomar: ${lesson.title} (${Math.min(r.index + 1, r.exercises.length)}/${r.exercises.length})</span>`
+    : `${ICONS.play || ""}<span>Continuar: ${lesson.title} (+${XP_PER_LESSON} XP)</span>`;
   cta.style.bottom = matchMedia("(min-width: 980px)").matches ? "18px" : "calc(72px + env(safe-area-inset-bottom))";
   cta.onclick = () => startLesson(lesson.id);
 }
@@ -509,7 +514,7 @@ function buildExercises(lesson, unit) {
   const firstTime = !state.completed[lesson.id];
 
   // 4 palavras por lição (como no Duolingo): na 1ª vez, as palavras-base; ao refazer, sorteia entre todas
-  const vocab = lesson.review ? shuffle(unitVocab(unit)).slice(0, 4)
+  const vocab = lesson.review ? weakestWords(unitVocab(unit), 4)
     : firstTime ? (lesson.vocab || []).slice(0, 4) : shuffle(lesson.vocab || []).slice(0, 4);
   const sentences = lesson.review
     ? shuffle(lessons.flatMap((l) => l.sentences || [])).slice(0, 3)
@@ -567,7 +572,7 @@ function buildExercises(lesson, unit) {
   // Exercício de revisão de lição anterior (como o "review exercise" do Duolingo)
   const earlier = flatLessons().filter((l) => !l.review && state.completed[l.id] && l.id !== lesson.id).flatMap((l) => l.vocab || []);
   if (earlier.length && !lesson.review) {
-    const w = earlier[Math.floor(Math.random() * earlier.length)];
+    const w = weakestWords(earlier, 3)[Math.floor(Math.random() * Math.min(3, earlier.length))]; // entre as 3 mais urgentes
     optional.push({ pri: 2, mk: () => ({ ...make[Math.random() < 0.5 ? "listen" : "choice-pt-en"](w), isReview: true }), type: "review" });
   }
   const target = LESSON_SIZE + 1; // +1 reservado como desafio final
@@ -632,6 +637,9 @@ function startLesson(lessonId, narrator) {
   const list = flatLessons();
   const lesson = list.find((l) => l.id === lessonId);
   if (!lesson) return;
+  // Lição interrompida: retoma do ponto em vez de recomeçar
+  const r = resumable();
+  if (r && r.lessonId === lessonId && !narrator && resumeLesson()) return;
 
   session = {
     lesson,
@@ -650,6 +658,7 @@ function startLesson(lessonId, narrator) {
     reviewQueue: [],
     reviewing: false,
     hardAdded: false,
+    log: [],
   };
   session.hard = session.exercises.hard || [];
   session.cast = buildCast(lesson.unit.id, session.narrator);
@@ -691,6 +700,7 @@ function renderExercise() {
   btn.disabled = true;
   btn.classList.remove("red", "blue");
 
+  saveResume();
   const box = $("#exercise-body");
   box.innerHTML = "";
   box.classList.remove("slide-in");
@@ -1548,8 +1558,22 @@ function registerMistakeSoft() {
 }
 
 // ---------- Checagem ----------
+// Contrações expandidas dos dois lados ("don't" = "do not"), para aceitar as duas formas
 function normalize(s) {
-  return String(s).toLowerCase().replace(/[.,;:!?'"]/g, "").replace(/\s+/g, " ").trim();
+  let t = String(s).toLowerCase().replace(/[\u2018\u2019]/g, "'");
+  if (t.includes("'")) {
+    t = t.replace(/\bi'm\b/g, "i am").replace(/\bcan't\b/g, "cannot").replace(/\bwon't\b/g, "will not").replace(/\blet's\b/g, "let us")
+      .replace(/\b(\w+)n't\b/g, "$1 not").replace(/\b(\w+)'re\b/g, "$1 are").replace(/\b(it|he|she|that|there|what|who)'s\b/g, "$1 is")
+      .replace(/\b(\w+)'ll\b/g, "$1 will").replace(/\b(\w+)'ve\b/g, "$1 have").replace(/\b(\w+)'d\b/g, "$1 would");
+  }
+  return t.replace(/[.,;:!?'"]/g, "").replace(/\s+/g, " ").trim();
+}
+// Respostas alternativas aceitas, definidas no conteúdo (alt para inglês, altPt para português)
+function altsOf(ex) {
+  if (ex.type === "translate-en-pt") return (ex.sentence && ex.sentence.altPt) || [];
+  if (["build", "listen-build", "listen-type"].includes(ex.type)) return (ex.sentence && ex.sentence.alt) || [];
+  if (ex.type === "type") return (ex.word && ex.word.alt) || [];
+  return [];
 }
 
 // Resposta correta com as palavras que o aluno errou em destaque (como no Duolingo)
@@ -1586,10 +1610,18 @@ function checkAnswer() {
     session.checked = true;
     if (session.recognizer) { try { session.recognizer.abort(); } catch (e) {} }
     if (session.practiceRec) { try { session.practiceRec.abort(); } catch (e) {} }
-    const accepts = ex.accept || [ex.correct];
+    const accepts = [...(ex.accept || [ex.correct]), ...altsOf(ex)];
     const ok = accepts.some((c) => normalize(session.answer) === normalize(c))
       || ((ex.fuzzy || ex.type === "build" || ex.type === "listen-build") && accepts.some((c) => fuzzyEqual(session.answer, c)));
     if (ok && !accepts.some((c) => normalize(session.answer) === normalize(c))) ex.typo = true;
+    // Placar da lição e força das palavras (repetição espaçada)
+    if (ex.correct !== "__matched__" && !ex.skipped) {
+      (session.log = session.log || []).push({ q: exKeyText(ex) || ex.type, a: String(session.answer || ""), c: String(ex.correctLabel || ex.correct), ok, review: !!session.reviewing });
+    }
+    if (!ex.skipped) {
+      if (ex.word) recordWord(ex.word.en, ok);
+      else if (ex.sentence) sentenceVocab(ex.sentence).forEach((w) => recordWord(w.en, ok));
+    }
     const footer = $("#footer");
     footer.classList.add(ok ? "correct" : "wrong", "up");
     if (ok) {
@@ -1731,6 +1763,7 @@ function cloneExercise(ex) {
 }
 
 function finishLesson() {
+  state.resume = null;
   const perfect = session.mistakes === 0;
   const first = !state.completed[session.lesson.id];
   let gained = session.practice ? 5 : XP_PER_LESSON;
@@ -1793,6 +1826,7 @@ function finishLesson() {
   ];
   const b = blessings[Math.floor(Math.random() * blessings.length)];
   $("#result-verse").innerHTML = `"${b.t}"<br><b>${b.r}</b>`;
+  renderResultReview();
 
   $("#progress-fill").style.width = "100%";
   const chest = $("#chest");
@@ -1811,6 +1845,22 @@ function finishLesson() {
     $("#result-xp").textContent = `+${gained + bonus}`;
   };
   showScreen("result");
+}
+
+// Placar da lição: o que errou, o que respondeu e a resposta certa
+function renderResultReview() {
+  const box = $("#result-review");
+  if (!box) return;
+  const log = session.log || [];
+  const wrong = log.filter((e) => !e.ok && !e.review);
+  const esc = (t) => String(t).replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+  if (!log.length) { box.hidden = true; return; }
+  box.hidden = false;
+  const right = log.filter((e) => e.ok).length;
+  box.innerHTML = `<button class="rr-toggle" aria-expanded="false"><span>📋 Revisão da lição</span><b>${right} de ${log.length} certas</b></button>
+    <div class="rr-list" hidden>${wrong.length ? wrong.map((e) => `<div class="rr-item"><div class="rr-q">${esc(e.q)}</div><div class="rr-a"><s>${esc(e.a)}</s></div><div class="rr-c">${esc(e.c)}</div></div>`).join("") : `<p class="rr-empty">Nenhum erro na primeira passada. Excelente!</p>`}</div>`;
+  const tg = box.querySelector(".rr-toggle"), list = box.querySelector(".rr-list");
+  tg.onclick = () => { list.hidden = !list.hidden; tg.setAttribute("aria-expanded", String(!list.hidden)); SFX.tap(); };
 }
 
 // 1.8 Praticar erros: lição montada com as palavras erradas

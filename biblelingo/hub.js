@@ -27,7 +27,7 @@ function renderHub() {
     <p class="hub-sub">${learned} palavras aprendidas · ${nErr} para revisar</p>
     <div class="hub-grid">
       <button class="hub-card" data-hub="madness"><span class="hub-icon">⚡</span><b>Match Madness</b><small>Pares contra o relógio · 60 s</small></button>
-      <button class="hub-card" data-hub="review"><span class="hub-icon">🔁</span><b>Revisão rápida</b><small>10 exercícios do que você já aprendeu</small></button>
+      <button class="hub-card" data-hub="review"><span class="hub-icon">🔁</span><b>Revisão rápida</b><small>10 exercícios das palavras que mais precisam de revisão</small></button>
       <button class="hub-card" data-hub="listen"><span class="hub-icon">🎧</span><b>Escuta rápida</b><small>8 exercícios de escuta</small></button>
       <button class="hub-card${nErr ? "" : " locked"}" data-hub="errors" ${nErr ? "" : "disabled"}><span class="hub-icon">🩹</span><b>Praticar erros</b><small>${nErr ? `${nErr} palavra(s) para acertar` : "Nenhum erro pendente"}</small></button>
     </div>
@@ -46,7 +46,7 @@ function renderHub() {
 // Revisão rápida / escuta rápida: lição de prática (sem perder corações)
 function startQuickPractice(kind) {
   const pool = allVocab();
-  const words = shuffle(learnedVocab()).slice(0, 8);
+  const words = shuffle(weakestWords(learnedVocab(), 8)); // as mais urgentes pela repetição espaçada
   const distract = (v, key) => shuffle(pool.filter((p) => p[key] !== v[key] && p.icon !== v.icon)).slice(0, 3);
   const ex = [];
   words.forEach((v, i) => {
