@@ -14,5 +14,8 @@ const ICONS = {
   sun: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2" fill="currentColor" stroke="none"/><path d="M12 2.5v2.2M12 19.3v2.2M4.2 4.2l1.6 1.6M18.2 18.2l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.2 19.8l1.6-1.6M18.2 5.8l1.6-1.6"/></svg>',
   moon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>',
   auto: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8.5" fill="none"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor" stroke="none"/></svg>',
+  quest: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 3h2v18H5z"/><path d="M8 4h11l-3 4 3 4H8z"/></svg>',
+  people: '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="9.5" r="2.6"/><path d="M2.5 19c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6v1h-13z"/><path d="M16.4 20v-1c0-1.7-.5-3.2-1.4-4.4 1.6-.6 4-.2 5.3 1.1.9.9 1.2 2 1.2 3.3v1z"/></svg>',
+  user: '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4.2"/><path d="M4 20.5c0-4.2 3.6-7 8-7s8 2.8 8 7V21H4z"/></svg>',
   flame: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2s1 4 4 7a6 6 0 1 1-8 0c1-1 1.5-2 1.5-3.5 1 .8 1.5 2 1.5 3 .7-1.2 1-3.6 1-6.5z"/></svg>',
 };

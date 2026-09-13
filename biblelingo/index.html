@@ -24,60 +24,41 @@
     })();
   </script>
 </head>
-<body>
+<body class="tabs">
 
-  <!-- ===== Tela inicial ===== -->
+  <!-- ===== Início: trilha (o progresso sobe) ===== -->
   <section id="screen-home" class="screen active">
+    <!-- Barra superior fixa (celular): unidade atual e placar -->
+    <header class="topbar" id="topbar">
+      <button class="tb-course" id="tb-course"><span class="tb-ico">📖</span><span id="tb-course-name">Antigo Testamento</span></button>
+      <span class="hud-chip flame"><i class="nav-ico" data-ico="flame"></i><b id="hud-streak">0</b></span>
+      <span class="hud-chip xp"><i class="nav-ico" data-ico="star"></i><b id="hud-xp">0</b></span>
+      <span class="hud-chip heart">❤️<b id="hud-hearts">5</b></span>
+    </header>
     <div class="shell">
 
-      <!-- Sidebar (desktop) / topo (mobile) -->
+      <!-- Sidebar (só no desktop) -->
       <aside class="sidebar">
         <div class="logo">
           <span class="logo-mark">✝</span>
           <span class="logo-text">Bíblia<b>Learn</b></span>
-          <div class="hud">
-            <span class="hud-chip flame"><i class="nav-ico" data-ico="flame"></i><b id="hud-streak">0</b></span>
-            <span class="hud-chip xp"><i class="nav-ico" data-ico="star"></i><b id="hud-xp">0</b></span>
-            <span class="hud-chip heart">❤️<b id="hud-hearts">5</b></span>
-            <button class="hud-avatar" id="hud-avatar" aria-label="Personagens"></button>
-          </div>
         </div>
         <nav class="nav">
           <button class="nav-item active" data-nav="inicio"><i class="nav-ico" data-ico="home"></i> <span>Início</span></button>
           <button class="nav-item" data-nav="praticar"><i class="nav-ico" data-ico="practice"></i> <span>Praticar</span></button>
-          <button class="nav-item" data-nav="conquistas"><i class="nav-ico" data-ico="star"></i> <span>Conquistas</span></button>
-          <button class="nav-item" data-nav="estatisticas"><i class="nav-ico" data-ico="chart"></i> <span>Estatísticas</span></button>
-          <button class="nav-item" data-nav="config"><i class="nav-ico" data-ico="gear"></i> <span>Configurações</span></button>
+          <button class="nav-item" data-nav="missoes"><i class="nav-ico" data-ico="quest"></i> <span>Missões</span></button>
+          <button class="nav-item" data-nav="personagens"><i class="nav-ico" data-ico="people"></i> <span>Personagens</span></button>
+          <button class="nav-item" data-nav="perfil"><i class="nav-ico" data-ico="user"></i> <span>Perfil</span></button>
         </nav>
       </aside>
 
-      <!-- Coluna central -->
+      <!-- Coluna central: a trilha, de baixo (início) para cima -->
       <main class="center">
-        <section class="home-head" id="home-head">
-          <div class="greet">
-            <button class="greet-avatar" id="greet-avatar" aria-label="Personagens"></button>
-            <div class="greet-text">
-              <h2 id="greet-title">Olá!</h2>
-              <p id="greet-sub">Continue aprendendo a Palavra de Deus</p>
-            </div>
-            <button class="greet-bell" id="greet-bell" aria-label="Missões de hoje">🔔</button>
-          </div>
-          <div class="stat-cards">
-            <div class="stat-card"><span class="sc-ico">🔥</span><b id="sc-streak">0</b><small>dias seguidos</small></div>
-            <div class="stat-card"><span class="sc-ico">👑</span><b id="sc-lessons">0</b><small>lições</small></div>
-            <div class="stat-card"><span class="sc-ico">❤️</span><b id="sc-lives">5</b><small>vidas</small></div>
-          </div>
-        </section>
-        <div class="hero has-img">
-          <img class="hero-img" src="chars/hero.jpg" alt="Seja bem-vindo! Vamos aprender juntos a Palavra de Deus?" />
-        </div>
         <div id="trail" class="trail"></div>
         <button id="cta-continue" class="cta-continue" hidden></button>
-        <section id="char-strip" class="char-strip"></section>
-        <div class="scenery"></div>
       </main>
 
-      <!-- Rail direito -->
+      <!-- Rail direito (só no desktop) -->
       <aside class="rail">
         <div class="rail-top">
           <div class="streak-chip">
@@ -86,65 +67,79 @@
           </div>
           <div class="avatar" id="avatar"></div>
         </div>
-
         <div class="card" id="card-progresso">
           <h3>Seu progresso</h3>
           <div class="pbar"><div class="pbar-fill" id="pbar-fill"></div></div>
-          <p id="progress-label">0 de 5 lições concluídas</p>
+          <p id="progress-label">0 de 8 capítulos concluídos</p>
           <p class="hearts-line">❤️ <b id="stat-hearts">5</b> corações &nbsp;·&nbsp; ⚡ <b id="stat-xp">0</b> XP</p>
           <button id="btn-practice-errors" class="btn-mini" hidden>🔁 Praticar erros</button>
         </div>
-
-        <div class="card" id="card-daily"></div>
-
-        <div class="card gold-card" id="card-verse">
-          <h3><span>📖 Versículo bilíngue do dia</span><button class="vd-audio" id="vd-audio" aria-label="Ouvir em inglês"><i class="nav-ico" data-ico="speaker"></i></button></h3>
-          <p class="vd-text" id="vd-text"></p>
-          <div class="vd-foot">
-            <span class="vd-ref" id="vd-ref"></span>
-            <button class="vd-toggle" id="vd-toggle" aria-expanded="false">Ver tradução ▾</button>
-          </div>
-          <div class="vd-trans" id="vd-trans" hidden>
-            <p class="vd-pt" id="vd-pt"></p>
-            <p class="vd-hints" id="vd-hints"></p>
-          </div>
-        </div>
-
-        <div class="card" id="card-sequencia">
-          <h3><span>🔥 Meta semanal de fidelidade</span><b class="week-count" id="week-count">0 de 7</b></h3>
-          <div class="week-strip" id="week-strip"></div>
-          <p class="muted"><span id="streak-days">0</span> dias de sequência. Continue firme!</p>
-        </div>
-
-        <div class="card" id="card-conquistas">
-          <h3>🏆 Conquistas</h3>
-          <div class="badges" id="badges"></div>
-        </div>
-
         <div class="promo" id="promo">
           <p>Grandes coisas acontecem quando você permanece na Palavra!</p>
           <div class="promo-char" id="promo-char"></div>
         </div>
       </aside>
     </div>
-
-    <!-- Navegação inferior (mobile) -->
-    <nav class="bottom-nav">
-      <button class="nav-item active" data-nav="inicio"><i class="nav-ico" data-ico="home"></i><span>Início</span></button>
-      <button class="nav-item" data-nav="praticar"><i class="nav-ico" data-ico="practice"></i><span>Praticar</span></button>
-      <button class="nav-item" data-nav="conquistas"><i class="nav-ico" data-ico="star"></i><span>Conquistas</span></button>
-      <button class="nav-item" data-nav="estatisticas"><i class="nav-ico" data-ico="chart"></i><span>Estatíst.</span></button>
-      <button class="nav-item" data-nav="config"><i class="nav-ico" data-ico="gear"></i><span>Config.</span></button>
-    </nav>
   </section>
 
-  <!-- ===== Hub de prática ===== -->
+  <!-- ===== Praticar ===== -->
   <section id="screen-hub" class="screen">
-    <div class="lesson-top">
-      <button class="btn-close hub-back" aria-label="Voltar"><i class="nav-ico" data-ico="close"></i></button>
-      <span class="hub-top-title">Praticar</span>
-    </div>
-    <main id="hub-body" class="exercise hub"></main>
+    <main id="hub-body" class="exercise hub tab-body"></main>
+  </section>
+
+  <!-- ===== Missões ===== -->
+  <section id="screen-quests" class="screen">
+    <main class="tab-body">
+      <h2 class="tab-title">Missões</h2>
+      <p class="tab-sub" id="quests-sub">Sua caminhada de hoje</p>
+      <div class="card" id="card-daily"></div>
+      <div class="card" id="card-sequencia">
+        <h3><span>🔥 Meta semanal de fidelidade</span><b class="week-count" id="week-count">0 de 7</b></h3>
+        <div class="week-strip" id="week-strip"></div>
+        <p class="muted"><span id="streak-days">0</span> dias de sequência. Continue firme!</p>
+      </div>
+      <div class="card gold-card" id="card-verse">
+        <h3><span>📖 Versículo bilíngue do dia</span><button class="vd-audio" id="vd-audio" aria-label="Ouvir em inglês"><i class="nav-ico" data-ico="speaker"></i></button></h3>
+        <p class="vd-text" id="vd-text"></p>
+        <div class="vd-foot">
+          <span class="vd-ref" id="vd-ref"></span>
+          <button class="vd-toggle" id="vd-toggle" aria-expanded="false">Ver tradução ▾</button>
+        </div>
+        <div class="vd-trans" id="vd-trans" hidden>
+          <p class="vd-pt" id="vd-pt"></p>
+          <p class="vd-hints" id="vd-hints"></p>
+        </div>
+      </div>
+      <button id="btn-quests-errors" class="hub-card wide" hidden><span class="hub-icon">🩹</span><b>Praticar erros</b><small id="quests-errors-sub"></small></button>
+    </main>
+  </section>
+
+  <!-- ===== Personagens ===== -->
+  <section id="screen-characters" class="screen">
+    <main class="tab-body">
+      <h2 class="tab-title">Personagens</h2>
+      <p class="tab-sub">Histórias diferentes. O mesmo Deus fiel.</p>
+      <div id="char-groups"></div>
+    </main>
+  </section>
+
+  <!-- ===== Perfil ===== -->
+  <section id="screen-profile" class="screen">
+    <main class="tab-body">
+      <div class="prof-head">
+        <div class="prof-avatar" id="prof-avatar"></div>
+        <div class="prof-text">
+          <h2 id="prof-name">Discípulo</h2>
+          <p id="prof-since">Membro desde hoje</p>
+        </div>
+        <button class="prof-gear" id="prof-gear" aria-label="Configurações"><i class="nav-ico" data-ico="gear"></i></button>
+      </div>
+      <div class="tiles" id="prof-tiles"></div>
+      <h3 class="tab-h3">🏆 Conquistas</h3>
+      <div class="ach-list" id="ach-list"></div>
+      <h3 class="tab-h3">📚 Capítulos concluídos</h3>
+      <div class="badges" id="badges"></div>
+    </main>
   </section>
 
   <!-- ===== Match Madness ===== -->
@@ -228,12 +223,31 @@
     </main>
   </section>
 
+  <!-- ===== Navegação inferior (abas) ===== -->
+  <nav class="bottom-nav" id="bottom-nav">
+    <button class="nav-item active" data-nav="inicio"><i class="nav-ico" data-ico="home"></i><span>Início</span></button>
+    <button class="nav-item" data-nav="praticar"><i class="nav-ico" data-ico="practice"></i><span>Praticar</span></button>
+    <button class="nav-item" data-nav="missoes"><i class="nav-ico" data-ico="quest"></i><span>Missões</span></button>
+    <button class="nav-item" data-nav="personagens"><i class="nav-ico" data-ico="people"></i><span>Personagens</span></button>
+    <button class="nav-item" data-nav="perfil"><i class="nav-ico" data-ico="user"></i><span>Perfil</span></button>
+  </nav>
+
+  <!-- ===== Folha do nó da trilha (toque numa etapa) ===== -->
+  <div id="node-sheet" class="sheet-backdrop">
+    <div class="sheet" id="node-sheet-body" role="dialog" aria-modal="true"></div>
+  </div>
+
+  <!-- ===== Guia da unidade ===== -->
+  <div id="guide-sheet" class="sheet-backdrop">
+    <div class="sheet tall" id="guide-sheet-body" role="dialog" aria-modal="true"></div>
+  </div>
+
   <!-- ===== Modal: sem corações ===== -->
   <div id="modal-hearts" class="modal-backdrop">
     <div class="modal">
       <div class="big-emoji">💔</div>
       <h3>Você ficou sem corações!</h3>
-      <p>Pratique uma lição já concluída para recuperar um coração, ou volte amanhã — eles se renovam todo dia.</p>
+      <p>Pratique uma lição já concluída para recuperar um coração, ou volte amanhã: eles se renovam todo dia.</p>
       <button id="btn-modal-practice" class="btn-main blue">Praticar para recuperar</button>
       <button id="btn-modal-close" class="btn-ghost">Fechar</button>
     </div>
@@ -242,16 +256,6 @@
   <!-- ===== Modal: ficha do personagem ===== -->
   <div id="modal-char" class="modal-backdrop">
     <div class="modal char-modal" id="char-sheet"></div>
-  </div>
-
-  <!-- ===== Modal: estatísticas ===== -->
-  <div id="modal-stats" class="modal-backdrop">
-    <div class="modal">
-      <div class="big-emoji">📊</div>
-      <h3>Estatísticas</h3>
-      <div id="stats-body" class="stats-body"></div>
-      <button class="btn-ghost modal-close">Fechar</button>
-    </div>
   </div>
 
   <!-- ===== Modal: configurações ===== -->
@@ -280,6 +284,7 @@
   <script src="stories.js"></script>
   <script src="hub.js"></script>
   <script src="features.js"></script>
+  <script src="screens.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

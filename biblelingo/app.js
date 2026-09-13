@@ -29,6 +29,7 @@ function load() {
     chests: {}, // unitId -> true (baú da unidade aberto)
     words: {}, // palavra EN -> { lvl, ok, bad, last } (repetição espaçada)
     resume: null, // lição interrompida, para retomar no ponto
+    joined: null, // "YYYY-MM-DD" do primeiro acesso (perfil)
   };
   try {
     const raw = localStorage.getItem("biblelingo");
@@ -176,175 +177,32 @@ function verseOfDay() {
 }
 
 function renderHome() {
-  $("#stat-streak").textContent = state.streak;
-  $("#streak-days").textContent = state.streak;
-  $("#stat-xp").textContent = state.xp;
-  $("#stat-hearts").textContent = state.hearts;
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  set("stat-streak", state.streak);
+  set("stat-xp", state.xp);
+  set("stat-hearts", state.hearts);
+  set("hud-streak", state.streak);
+  set("hud-xp", state.xp);
+  set("hud-hearts", state.hearts);
+  const av = $("#avatar"); if (av) av.innerHTML = charFace(CHARACTERS.jesus);
+  const pc = $("#promo-char"); if (pc) pc.innerHTML = '<img src="chars/promo.jpg" alt="">';
 
-  // Saudação e cartões de status (referência BibleLearn)
-  const doneLessons = Object.keys(state.completed).length;
-  $("#greet-title").textContent = state.name ? `Olá, ${state.name}!` : "Olá!";
-  $("#greet-sub").textContent = state.streak > 0
-    ? `${state.streak} ${state.streak === 1 ? "dia" : "dias"} seguidos na Palavra. Continue!`
-    : "Continue aprendendo a Palavra de Deus";
-  $("#greet-avatar").innerHTML = charFace(CHARACTERS.jesus);
-  $("#sc-streak").textContent = state.streak;
-  $("#sc-lessons").textContent = doneLessons;
-  $("#sc-lives").textContent = state.hearts;
-
-  $("#hud-streak").textContent = state.streak;
-  $("#hud-xp").textContent = state.xp;
-  $("#hud-hearts").textContent = state.hearts;
-
-  // Avatar e promo
-  $("#hud-avatar").innerHTML = charFace(CHARACTERS.jesus);
-  $("#avatar").innerHTML = charFace(CHARACTERS.jesus);
-  $("#promo-char").innerHTML = '<img src="chars/promo.jpg" alt="">';
-
-  // Versículo bilíngue do dia: inglês na frente, tradução e dicas sob demanda
-  const v = verseOfDay();
-  $("#vd-text").innerHTML = `“${sayable(v.text)}”`;
-  $("#vd-ref").textContent = `${v.ref} (KJV)`;
-  $("#vd-pt").textContent = `“${v.pt}”`;
-  const pool = allVocab();
-  const hints = v.text.replace(/[.,;:!?"']/g, "").split(" ")
-    .map((w) => pool.find((p) => normalize(p.en.replace(/^to /, "")) === normalize(w)))
-    .filter((p, i, arr) => p && arr.indexOf(p) === i).slice(0, 3);
-  $("#vd-hints").innerHTML = hints.length
-    ? "Dica: " + hints.map((p) => `<b>${p.en}</b> = ${p.pt}`).join(" · ")
-    : "";
-  renderWeek();
-
-  // Progresso: unidades totalmente concluídas
+  // Progresso: capítulos totalmente concluídos (rail do desktop)
   const unitDone = (u) => u.lessons.every((l) => state.completed[l.id]);
   const doneUnits = COURSE.filter(unitDone).length;
-  $("#pbar-fill").style.width = `${(doneUnits / COURSE.length) * 100}%`;
-  $("#progress-label").textContent = `${doneUnits} de ${COURSE.length} lições concluídas`;
+  const pf = $("#pbar-fill"); if (pf) pf.style.width = `${(doneUnits / COURSE.length) * 100}%`;
+  set("progress-label", `${doneUnits} de ${COURSE.length} capítulos concluídos`);
   const errBtn = $("#btn-practice-errors");
   const nErr = Object.keys(state.errors || {}).length;
-  errBtn.hidden = nErr === 0;
-  errBtn.textContent = `🔁 Praticar erros (${nErr})`;
-  errBtn.onclick = startErrorPractice;
+  if (errBtn) { errBtn.hidden = nErr === 0; errBtn.textContent = `🔁 Praticar erros (${nErr})`; errBtn.onclick = startErrorPractice; }
 
-  renderDailyCard();
-
-  // Conquistas
-  const badgeDefs = [
-    { icon: "📖", color: "#58a700", unit: "u1" },
-    { icon: "🚢", color: "#7e57c2", unit: "u2" },
-    { icon: "👑", color: "#e6a817", unit: "u4" },
-    { icon: "📜", color: "#1cb0f6", unit: "u5" },
-    { icon: "🌾", color: "#2e9d8a", unit: "u6" },
-    { icon: "🦁", color: "#c0392b", unit: "u7" },
-    { icon: "🐟", color: "#3f7fd6", unit: "u8" },
-  ];
-  $("#badges").innerHTML = badgeDefs.map((b) => {
-    const done = unitDone(COURSE.find((u) => u.id === b.unit));
-    return `<span class="badge-hex${done ? "" : " locked"}" style="background:${b.color}">${b.icon}</span>`;
-  }).join("");
-
-  // Trilha: um capítulo por unidade, um nó por lição e o baú no fim (referência do projeto)
-  const trail = $("#trail");
-  trail.innerHTML = "";
+  // Barra superior: testamento/capítulo da etapa atual
   const currentId = currentLessonId();
-  const indents = ["", "indent-1", "indent-2", "indent-1", ""];
+  const cur = flatLessons().find((l) => l.id === currentId);
+  if (cur) set("tb-course-name", `${testamentOf(cur.unit, COURSE.indexOf(cur.unit))} · Cap. ${COURSE.indexOf(cur.unit) + 1}`);
 
-  let testamentoAtual = "";
-  COURSE.forEach((unit, ui) => {
-    const testamento = unit.testament || (ui < 7 ? "Antigo Testamento" : "Novo Testamento");
-    if (testamento !== testamentoAtual) {
-      testamentoAtual = testamento;
-      const sep = document.createElement("div");
-      sep.className = "testament";
-      sep.innerHTML = `<span>${testamento}</span>`;
-      trail.appendChild(sep);
-    }
-    const lessons = unit.lessons;
-    const doneCount = lessons.filter((l) => state.completed[l.id]).length;
-    const unitDoneAll = doneCount === lessons.length;
-    const starsGot = lessons.reduce((s, l) => s + (state.stars[l.id] || 0), 0);
-
-    // Cabeçalho do capítulo
-    const head = document.createElement("div");
-    head.className = "chapter";
-    head.innerHTML = `<div class="ch-left">
-        <span class="ch-ico">${unit.face === "book" || !CHARACTERS[unit.face] ? "📖" : charFace(CHARACTERS[unit.face])}</span>
-        <div><span class="ch-eyebrow">Capítulo ${ui + 1}${unitDoneAll ? " · concluído" : ""}</span>
-        <h3>${unit.title}</h3></div>
-      </div>
-      <span class="ch-stars">⭐ <b>${starsGot}</b>/${lessons.length * 3}</span>`;
-    trail.appendChild(head);
-
-    const nodes = document.createElement("div");
-    nodes.className = "nodes";
-
-    lessons.forEach((lesson, li) => {
-      const done = !!state.completed[lesson.id];
-      const unlocked = lessonUnlocked(lesson.id);
-      const isCurrent = lesson.id === currentId;
-      const stars = state.stars[lesson.id] || 0;
-
-      const row = document.createElement("div");
-      row.className = `lesson-row ${indents[li % indents.length]}` +
-        (isCurrent ? " current" : done ? " done" : unlocked ? "" : " locked");
-
-      const btn = document.createElement("button");
-      btn.className = "portrait" + (isCurrent ? "" : " sm") + (unlocked ? "" : " locked");
-      btn.style.setProperty("--pc", unit.color);
-      const face = !unlocked ? '<span class="picon picon-lock">🔒</span>'
-        : lesson.review ? '<span class="picon">🏅</span>'
-        : charFace(CHARACTERS[unit.face] || CHARACTERS.jesus);
-      const badge = done ? '<span class="badge">✓</span>' : "";
-      const tip = isCurrent ? '<span class="start-tip">COMEÇAR</span>' : "";
-      if (done && unitCrowns(unit.id) >= MAX_CROWN) btn.classList.add("legendary");
-      btn.innerHTML = `${isCurrent ? '<span class="pulse"></span>' : ""}${tip}<span class="face">${face}</span>${badge}` +
-        (li === 0 ? crownBadge(unit, unitDoneAll) : "") +
-        starsHTML(stars, "node-stars");
-      btn.disabled = !unlocked;
-      btn.addEventListener("click", () => {
-        if (!unlocked) { toast("🔒 Conclua a etapa anterior"); return; }
-        if (done && unitDoneAll && unitCrowns(unit.id) < MAX_CROWN) { startLevelUp(unit); return; }
-        startLesson(lesson.id);
-      });
-
-      const estado = isCurrent ? "Em andamento" : done ? "Concluída" : unlocked ? "Disponível" : "Bloqueada";
-      const palavras = (lesson.vocab || []).slice(0, 3).map((w) => w.en).join(", ");
-      const info = document.createElement("div");
-      info.className = "lesson-info";
-      info.innerHTML = `<span class="step">Etapa ${li + 1} · ${estado}</span>
-        <h3>${lesson.title}</h3>
-        <div class="lref">${lesson.review ? "Revisão de toda a unidade" : palavras || unit.subtitle}</div>`;
-
-      row.appendChild(btn);
-      row.appendChild(info);
-      nodes.appendChild(row);
-    });
-
-    trail.appendChild(nodes);
-    drawTrailPath(nodes, "#9db97a");
-
-    // Baú do capítulo
-    const taken = !!(state.chests || {})[unit.id];
-    const chest = document.createElement("button");
-    chest.className = "unit-chest" + (taken ? " taken" : unitDoneAll ? "" : " locked");
-    chest.innerHTML = `<span class="uc-emoji">${taken ? "✅" : unitDoneAll ? "🎁" : "🔒"}</span>
-      <span>Baú do capítulo ${ui + 1}</span>
-      <small>${taken ? "recompensa recebida" : unitDoneAll ? "toque para abrir · +20 XP" : `conclua as ${lessons.length} etapas`}</small>`;
-    chest.addEventListener("click", () => {
-      if (taken || !unitDoneAll) { SFX.tap(); return; }
-      state.chests[unit.id] = true;
-      state.xp += 20;
-      save();
-      SFX.sparkle();
-      if (window.confetti) confetti({ particleCount: 70, spread: 65, origin: { y: 0.7 } });
-      toast("🎁 Baú aberto! +20 XP", "combo");
-      renderHome();
-    });
-    trail.appendChild(chest);
-  });
-
+  renderTrail(currentId);
   renderContinueCTA(currentId);
-  renderCharacterStrip();
 }
 
 // Faixa dos 7 dias da semana (segunda a domingo), como a meta de fidelidade da referência
@@ -671,8 +529,15 @@ function startLesson(lessonId, narrator) {
 function showScreen(name) {
   document.querySelectorAll(".screen").forEach((s) => s.classList.remove("active"));
   $(`#screen-${name}`).classList.add("active");
-  if (name === "home") renderHome();
+  document.body.classList.toggle("tabs", TAB_SCREENS.includes(name));
+  const nav = Object.keys(NAV_TO_SCREEN).find((k) => NAV_TO_SCREEN[k] === name);
+  if (nav) setNav(nav);
+  if (name === "home") { renderHome(); scrollToCurrentNode(false); }
+  else window.scrollTo(0, 0);
   if (name === "hub") renderHub();
+  if (name === "quests") renderQuests();
+  if (name === "characters") renderCharacters();
+  if (name === "profile") renderProfile();
 }
 
 function renderExercise() {
@@ -1929,31 +1794,14 @@ function setNav(name) {
 document.querySelectorAll(".nav-item").forEach((b) => {
   b.addEventListener("click", () => {
     const nav = b.dataset.nav;
-    setNav(nav === "estatisticas" || nav === "config" || nav === "praticar" ? "inicio" : nav);
-    if (nav === "inicio") window.scrollTo({ top: 0, behavior: "smooth" });
-    if (nav === "praticar") { showScreen("hub"); return; }
-    if (nav === "conquistas") $("#card-conquistas").scrollIntoView({ behavior: "smooth", block: "center" });
-    if (nav === "estatisticas") {
-      const totalStars = Object.values(state.stars).reduce((s, x) => s + x, 0);
-      const doneLessons = Object.keys(state.completed).length;
-      $("#stats-body").innerHTML = `
-        <p>⚡ <b>${state.xp}</b> XP acumulado</p>
-        <p>🔥 <b>${state.streak}</b> dias de sequência</p>
-        <p>✅ <b>${doneLessons}</b> etapas concluídas</p>
-        <p>⭐ <b>${totalStars}</b> estrelas conquistadas</p>
-        <p>❤️ <b>${state.hearts}</b> corações hoje</p>`;
-      $("#modal-stats").classList.add("open");
-    }
-    if (nav === "config") {
-      const t = $("#toggle-sound");
-      if (t) t.checked = state.sound !== false;
-      const nm = $("#input-name");
-      if (nm) nm.value = state.name || "";
-      applyTheme();
-      $("#modal-config").classList.add("open");
-    }
+    const screen = NAV_TO_SCREEN[nav];
+    if (!screen) return;
+    SFX.tap();
+    if (screen === "home" && $("#screen-home").classList.contains("active")) { scrollToCurrentNode(true); return; }
+    showScreen(screen);
   });
 });
+$("#prof-gear").addEventListener("click", openConfig);
 document.querySelectorAll(".modal-close").forEach((b) =>
   b.addEventListener("click", () => b.closest(".modal-backdrop").classList.remove("open")));
 $("#toggle-sound").addEventListener("change", (e) => {
@@ -1986,33 +1834,21 @@ $("#vd-toggle").addEventListener("click", () => {
   $("#vd-toggle").textContent = open ? "Ocultar ▴" : "Ver tradução ▾";
   $("#vd-toggle").setAttribute("aria-expanded", String(open));
 });
-$("#greet-bell").addEventListener("click", () => {
-  const card = $("#card-daily");
-  if (card) card.scrollIntoView({ behavior: "smooth", block: "center" });
-  SFX.tap();
-});
-$("#greet-avatar").addEventListener("click", () => {
-  const strip = $("#char-strip");
-  if (strip) strip.scrollIntoView({ behavior: "smooth", block: "start" });
-});
 $("#input-name").addEventListener("input", (e) => {
   state.name = e.target.value.trim().slice(0, 18);
   save();
-  $("#greet-title").textContent = state.name ? `Olá, ${state.name}!` : "Olá!";
+  const pn = $("#prof-name"); if (pn) pn.textContent = state.name || "Discípulo";
 });
-$("#hud-avatar").addEventListener("click", () => {
-  const strip = $("#char-strip");
-  if (strip) strip.scrollIntoView({ behavior: "smooth", block: "start" });
-});
+$("#tb-course").addEventListener("click", () => scrollToCurrentNode(true));
 
 document.querySelectorAll("i.nav-ico[data-ico]").forEach((i) => { i.innerHTML = ICONS[i.dataset.ico] || ""; });
 applyTheme();
 loadAudioManifest();
 registerServiceWorker();
-renderHome();
+if (!state.joined) { state.joined = today(); save(); }
 showScreen("home");
 // Redesenha o caminho quando fontes carregam ou a janela muda de tamanho
-if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => renderHome());
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if ($("#screen-home").classList.contains("active")) { renderHome(); scrollToCurrentNode(false); } });
 let _rz;
 window.addEventListener("resize", () => {
   clearTimeout(_rz);
