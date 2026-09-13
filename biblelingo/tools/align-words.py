@@ -48,8 +48,9 @@ def transcribe_words(model, path, text):
         d = duration(path)
         step = d / max(1, len(toks))
         return [(w, i * step, (i + 1) * step, 1.0) for i, w in enumerate(toks)]
-    segments, _ = model.transcribe(path, language="en", word_timestamps=True, beam_size=1,
-                                   initial_prompt=text, condition_on_previous_text=False, vad_filter=False)
+    # Sem initial_prompt: com o prompt igual ao texto o modelo "pula" a primeira palavra (confiança ~0)
+    segments, _ = model.transcribe(path, language="en", word_timestamps=True, beam_size=5,
+                                   condition_on_previous_text=False, vad_filter=False)
     words = []
     for s in segments:
         for w in s.words or []:
@@ -81,7 +82,8 @@ def align(tokens, heard):
     for tag, i1, i2, j1, j2 in sm.get_opcodes():
         if tag == "equal":
             for k in range(i2 - i1):
-                out[i1 + k] = heard[j1 + k][1:]
+                s, e, p = heard[j1 + k][1:]
+                out[i1 + k] = (s, e, max(p, 0.6))
         elif tag == "replace":
             # trechos diferentes: casa em ordem por semelhança (ex.: 'shewed' ~ 'showed', 'start' ~ 'star')
             j = j1
@@ -93,7 +95,7 @@ def align(tokens, heard):
                         best, bj = r, jj
                 if bj >= 0 and best >= 0.7:
                     s, e, p = heard[bj][1:]
-                    out[i] = (s, e, p * (1.0 if best >= 0.95 else 0.7))
+                    out[i] = (s, e, (1.0 if best >= 0.95 else 0.7) * max(p, 0.5))
                     j = bj + 1
     return out
 
@@ -156,7 +158,7 @@ def main():
             if not prev or p > prev.get("p", 0):
                 entry[char] = {"f": "words/" + name, "p": round(p, 3), "d": round(ce - cs, 3)}
             produced.append(tok)
-        index[file] = {"key": key, "char": char, "words": produced}
+        index[file] = {"key": key, "char": char, "words": produced, "heard": " ".join(h[0] for h in heard)}
         done += 1
         if done % 25 == 0:
             json.dump(words, open(OUT, "w"), ensure_ascii=False, indent=1)
