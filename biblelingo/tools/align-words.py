@@ -20,7 +20,15 @@ MANIFEST = os.path.join(AUDIO, "manifest.json")
 OUT = os.path.join(AUDIO, "words.json")
 INDEX = os.path.join(AUDIO, "words-index.json")
 MOCK = "--mock" in sys.argv
-PAD_BEFORE, PAD_AFTER, MIN_DUR, MIN_PROB = 0.05, 0.10, 0.14, 0.45
+PAD_BEFORE, PAD_AFTER, MIN_DUR, MIN_PROB = 0.05, 0.10, 0.10, 0.40
+# O whisper escreve números em dígitos e algumas formas modernas; o texto usa a forma escrita
+NUMBERS = {"0": "zero", "1": "one", "2": "two", "3": "three", "4": "four", "5": "five", "6": "six", "7": "seven",
+           "8": "eight", "9": "nine", "10": "ten", "11": "eleven", "12": "twelve", "13": "thirteen", "14": "fourteen",
+           "15": "fifteen", "16": "sixteen", "17": "seventeen", "18": "eighteen", "19": "nineteen", "20": "twenty",
+           "30": "thirty", "40": "forty", "50": "fifty", "60": "sixty", "70": "seventy", "80": "eighty", "90": "ninety",
+           "100": "hundred", "153": "one hundred and fifty three", "1000": "thousand"}
+VARIANTS = {"yes": {"yeah", "yep", "yess"}, "ye": {"you"}, "shewed": {"showed"}, "thou": {"you"}, "thy": {"your"},
+            "hath": {"has"}, "unto": {"to"}, "ok": {"okay"}}
 
 
 def norm(t):
@@ -46,9 +54,22 @@ def transcribe_words(model, path, text):
     for s in segments:
         for w in s.words or []:
             n = norm(w.word)
-            if n:
-                words.append((n, float(w.start), float(w.end), float(w.probability)))
+            if not n:
+                continue
+            if n in NUMBERS:
+                parts = NUMBERS[n].split(" ")
+                span = (float(w.end) - float(w.start)) / len(parts)
+                for i, p in enumerate(parts):
+                    words.append((p, float(w.start) + i * span, float(w.start) + (i + 1) * span, float(w.probability)))
+                continue
+            words.append((n, float(w.start), float(w.end), float(w.probability)))
     return words
+
+
+def similar(a, b):
+    if a == b or b in VARIANTS.get(a, ()):
+        return 1.0
+    return difflib.SequenceMatcher(a=a, b=b, autojunk=False).ratio()
 
 
 def align(tokens, heard):
@@ -61,11 +82,19 @@ def align(tokens, heard):
         if tag == "equal":
             for k in range(i2 - i1):
                 out[i1 + k] = heard[j1 + k][1:]
-        elif tag == "replace" and (i2 - i1) == (j2 - j1):
-            # mesma contagem: aceita o casamento posicional com probabilidade reduzida
-            for k in range(i2 - i1):
-                s, e, p = heard[j1 + k][1:]
-                out[i1 + k] = (s, e, p * 0.6)
+        elif tag == "replace":
+            # trechos diferentes: casa em ordem por semelhança (ex.: 'shewed' ~ 'showed', 'start' ~ 'star')
+            j = j1
+            for i in range(i1, i2):
+                best, bj = 0.0, -1
+                for jj in range(j, j2):
+                    r = similar(a[i], b[jj])
+                    if r > best:
+                        best, bj = r, jj
+                if bj >= 0 and best >= 0.7:
+                    s, e, p = heard[bj][1:]
+                    out[i] = (s, e, p * (1.0 if best >= 0.95 else 0.7))
+                    j = bj + 1
     return out
 
 
@@ -86,6 +115,10 @@ def main():
         from faster_whisper import WhisperModel
         model = WhisperModel(os.environ.get("WHISPER_MODEL", "small.en"), device="cpu", compute_type="int8")
     sentences = [(k, c, f) for k, e in manifest.items() if " " in k for c, f in e.items() if c != "default"]
+    # frases já alinhadas mas com alguma palavra sem corte voltam para a fila (o alinhador melhorou)
+    for f, meta in list(index.items()):
+        if len(set(meta.get("words", []))) < len(set(meta.get("key", "").split(" "))):
+            del index[f]
     todo = [(k, c, f) for k, c, f in sentences if f not in index]
     print(f"Frases gravadas: {len(sentences)} · a alinhar: {len(todo)}")
     done = 0
