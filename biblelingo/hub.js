@@ -48,9 +48,11 @@ function renderHub() {
 }
 
 // Revisão rápida / escuta rápida: lição de prática (sem perder corações)
-function startQuickPractice(kind) {
+function startQuickPractice(kind, narrator) {
   const pool = allVocab();
-  const words = shuffle(weakestWords(learnedVocab(), 8)); // as mais urgentes pela repetição espaçada
+  // As mais urgentes pela repetição espaçada; usuário novo (nada aprendido) pratica as primeiras palavras do curso
+  const learned = learnedVocab();
+  const words = shuffle(weakestWords(learned.length ? learned : COURSE[0].lessons[0].vocab.slice(0, 8), 8));
   const distract = (v, key) => shuffle(pool.filter((p) => p[key] !== v[key] && p.icon !== v.icon)).slice(0, 3);
   const ex = [];
   words.forEach((v, i) => {
@@ -72,7 +74,7 @@ function startQuickPractice(kind) {
     lesson: { id: "quick-" + kind, title: kind === "listen" ? "Escuta rápida" : "Revisão rápida", unit, practiceErrors: true },
     exercises: list, index: 0, mistakes: 0, combo: 0, bestCombo: 0, bonus: 0,
     practice: true, checked: false, answer: null, startedAt: Date.now(),
-    narrator: pickCharacter(unit.id), reviewQueue: [], reviewing: false, hardAdded: true, hard: [],
+    narrator: narrator || pickCharacter(unit.id), fixedNarrator: !!narrator, reviewQueue: [], reviewing: false, hardAdded: true, hard: [],
   };
   showScreen("lesson");
   renderExercise();
@@ -96,6 +98,7 @@ function startMatchMadness() {
 }
 
 function madnessRound() {
+  if (!madness || madness.ended) return;
   const start = (madness.round * 5) % madness.words.length;
   let pairs = madness.words.slice(start, start + 5);
   if (pairs.length < 5) pairs = pairs.concat(madness.words.slice(0, 5 - pairs.length));
@@ -144,13 +147,15 @@ function madnessRound() {
 }
 
 function endMatchMadness() {
+  if (madness.ended) return;
+  madness.ended = true;
   clearInterval(madness.timer);
   const gained = Math.min(15, Math.floor(madness.score / 2));
   state.xp += gained;
   state.best = state.best || {};
   const record = madness.score > (state.best.madness || 0);
   if (record) state.best.madness = madness.score;
-  recordLesson({ gained, perfect: madness.misses === 0, bestCombo: 0 });
+  recordLesson({ gained, perfect: madness.score > 0 && madness.misses === 0, bestCombo: 0 });
   save();
   SFX.finish();
   $("#md-grid").innerHTML = `<div class="md-end">

@@ -55,8 +55,8 @@ const COURSE = [
           text: "And God said, Let there be light: and there was light.",
           pt: "E disse Deus: Haja luz. E houve luz.",
           ref: "Gênesis 1:3",
-          blank: "light",
-          options: ["light", "water", "earth", "night"],
+          blank: "said",
+          options: ["said", "made", "saw", "called"],
         },
       },
       {
@@ -356,8 +356,8 @@ const COURSE = [
           text: "Whom shall I send, and who will go for us? Then said I, Here am I; send me.",
           pt: "A quem enviarei, e quem há de ir por nós? Então, disse eu: Eis-me aqui, envia-me a mim.",
           ref: "Isaías 6:8",
-          blank: "send",
-          options: ["send", "keep", "teach", "feed"],
+          blank: "go",
+          options: ["go", "stay", "eat", "sleep"],
         },
       },
       {
@@ -694,7 +694,7 @@ const COURSE = [
         {
           "en": "law",
           "pt": "lei",
-          "icon": "📜"
+          "icon": "⚖️"
         }
       ],
       "sentences": [
@@ -1236,7 +1236,7 @@ const EXTRA_CONTENT = {
     ],
   },
   u3l2: {
-    vocab: [{ en: "Egypt", pt: "Egito", icon: "🏜️" }, { en: "to say", pt: "dizer", icon: "💬" }],
+    vocab: [{ en: "Egypt", pt: "Egito", icon: "🐫" }, { en: "to say", pt: "dizer", icon: "💬" }],
     sentences: [
       { en: "Moses went to the king", pt: "Moisés foi ao rei" },
       { en: "The king said no", pt: "O rei disse não" },
@@ -1244,7 +1244,7 @@ const EXTRA_CONTENT = {
     ],
   },
   u3l3: {
-    vocab: [{ en: "to walk", pt: "andar", icon: "🚶" }, { en: "to divide", pt: "dividir", icon: "✂️" }],
+    vocab: [{ en: "to walk", pt: "andar", icon: "🦶" }, { en: "to divide", pt: "dividir", icon: "✂️" }],
     sentences: [
       { en: "The people walked on dry ground", pt: "O povo andou em chão seco" },
       { en: "A strong wind divided the sea", pt: "Um vento forte dividiu o mar" },
@@ -1252,7 +1252,7 @@ const EXTRA_CONTENT = {
     ],
   },
   u4l1: {
-    vocab: [{ en: "to play", pt: "tocar", icon: "🎶" }, { en: "young", pt: "jovem", icon: "🧒" }],
+    vocab: [{ en: "to play", pt: "tocar", icon: "🎻" }, { en: "young", pt: "jovem", icon: "🧒" }],
     sentences: [
       { en: "David played the harp", pt: "Davi tocava a harpa" },
       { en: "The Lord looks on the heart", pt: "O Senhor olha para o coração" },
@@ -1356,7 +1356,7 @@ const EXTRA_CONTENT = {
     ],
   },
   u8l2: {
-    vocab: [{ en: "debts", pt: "dívidas", icon: "📜" }, { en: "will", pt: "vontade", icon: "🙌" }],
+    vocab: [{ en: "debts", pt: "dívidas", icon: "💸" }, { en: "will", pt: "vontade", icon: "🫶" }],
     sentences: [
       { en: "Our Father in heaven", pt: "Pai nosso que estás no céu" },
       { en: "Your kingdom come", pt: "Venha o teu reino" },

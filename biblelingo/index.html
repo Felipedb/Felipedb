@@ -7,6 +7,8 @@
   <meta name="description" content="Aprenda inglês com a Bíblia — trilha de lições estilo Duolingo, otimizada para celular." />
   <title>BíbliaLearn</title>
   <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%2358a700'/><text x='50' y='72' font-size='58' text-anchor='middle' fill='white'>✝</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet" />
@@ -243,7 +245,7 @@
   </div>
 
   <!-- ===== Modal: sem corações ===== -->
-  <div id="modal-hearts" class="modal-backdrop">
+  <div id="modal-hearts" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Sem corações">
     <div class="modal">
       <div class="big-emoji">💔</div>
       <h3>Você ficou sem corações!</h3>
@@ -254,12 +256,12 @@
   </div>
 
   <!-- ===== Modal: ficha do personagem ===== -->
-  <div id="modal-char" class="modal-backdrop">
+  <div id="modal-char" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Personagem">
     <div class="modal char-modal" id="char-sheet"></div>
   </div>
 
   <!-- ===== Modal: configurações ===== -->
-  <div id="modal-config" class="modal-backdrop">
+  <div id="modal-config" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Configurações">
     <div class="modal">
       <div class="big-emoji">⚙️</div>
       <h3>Configurações</h3>

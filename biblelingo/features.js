@@ -12,14 +12,21 @@ function audioCtx() {
 }
 
 // Baixa e decodifica um sprite uma única vez (cache limitado aos 6 mais recentes)
-async function spriteBuffer(name) {
-  if (AUDIO.buffers[name]) return AUDIO.buffers[name];
-  const ab = await (await fetch(AUDIO.base + "sprites/" + name)).arrayBuffer();
-  const buf = await audioCtx().decodeAudioData(ab);
-  AUDIO.buffers[name] = buf;
+function spriteBuffer(name) {
+  // Cache LRU de 4 sprites decodificados (~10 MB cada em PCM no celular); a Promise é guardada
+  // para dois toques rápidos não baixarem e decodificarem o mesmo sprite duas vezes
+  if (AUDIO.buffers[name]) {
+    AUDIO.order = AUDIO.order.filter((n) => n !== name).concat(name);
+    return AUDIO.buffers[name];
+  }
+  const p = fetch(AUDIO.base + "sprites/" + name)
+    .then((r) => { if (!r.ok) throw new Error("sprite " + r.status); return r.arrayBuffer(); })
+    .then((ab) => audioCtx().decodeAudioData(ab))
+    .catch((e) => { delete AUDIO.buffers[name]; AUDIO.order = AUDIO.order.filter((n) => n !== name); throw e; });
+  AUDIO.buffers[name] = p;
   AUDIO.order.push(name);
-  if (AUDIO.order.length > 6) delete AUDIO.buffers[AUDIO.order.shift()];
-  return buf;
+  while (AUDIO.order.length > 4) delete AUDIO.buffers[AUDIO.order.shift()];
+  return p;
 }
 
 function audioKey(text) {
@@ -52,6 +59,20 @@ async function loadAudioManifest() {
   } catch (e) {
     AUDIO.sprites = null;
   }
+  // Sprites têm nome por conteúdo: os que o mapa novo não cita são lixo no cache do service worker
+  if (AUDIO.sprites && "caches" in window) {
+    try {
+      const live = new Set(Object.values(AUDIO.sprites).map((s) => s[0]));
+      const keys = await caches.keys();
+      for (const k of keys) {
+        const c = await caches.open(k);
+        for (const req of await c.keys()) {
+          const m = req.url.match(/\/audio\/sprites\/([^/?]+)$/);
+          if (m && !live.has(m[1])) c.delete(req);
+        }
+      }
+    } catch (e) { /* sem acesso ao cache: segue */ }
+  }
 }
 
 // Duração do clipe gravado (segundos); 0 quando não há clipe
@@ -64,44 +85,57 @@ function clipDuration(text, charKey) {
   return s ? s[2] : 0;
 }
 
+// Interrompe qualquer clipe em reprodução (sair da lição, trocar de tela)
+function stopClip() {
+  AUDIO.playToken++;
+  if (AUDIO.curSrc) { try { AUDIO.curSrc.stop(); } catch (e) {} AUDIO.curSrc = null; }
+  Object.values(AUDIO.cache).forEach((a) => a.pause());
+}
+
 // Toca o clipe gravado se existir; devolve true quando tocou
-function playClip(text, charKey, slow) {
+function playClip(text, charKey, slow, onFail) {
   if (!AUDIO.manifest) return false;
   const entry = AUDIO.manifest[audioKey(text)];
   if (!entry) return false;
   const file = (charKey && entry[charKey]) || entry.default;
   if (!file) return false;
+  const fail = () => { if (typeof onFail === "function") onFail(); };
   try {
-    const rate = slow ? 0.65 : 1;
-    clearTimeout(AUDIO.stopTimer);
-    if (AUDIO.curSrc) { try { AUDIO.curSrc.stop(); } catch (e) {} AUDIO.curSrc = null; }
-    Object.values(AUDIO.cache).forEach((a) => a.pause());
+    const rate = slow ? 0.75 : 1;
+    stopClip();
+    const token = AUDIO.playToken;
+    const playFile = () => {
+      // Arquivo individual (reserva quando o sprite falha ou não existe)
+      let el = AUDIO.cache[file];
+      if (!el) {
+        el = new Audio(AUDIO.base + file);
+        el.preload = "auto";
+        AUDIO.cache[file] = el;
+      }
+      el.currentTime = 0;
+      el.playbackRate = rate;
+      el.onerror = () => { delete AUDIO.cache[file]; if (token === AUDIO.playToken) fail(); };
+      el.play().catch(() => { if (token === AUDIO.playToken) fail(); });
+    };
     const sprite = AUDIO.sprites && AUDIO.sprites[file];
     if (sprite && window.AudioContext) {
-      // WebAudio: toca o trecho exato do sprite (seek confiável em qualquer hospedagem)
-      const token = ++AUDIO.playToken;
+      // WebAudio: toca o trecho exato do sprite. O contexto é criado/retomado aqui, ainda dentro
+      // do gesto do usuário (iOS exige), e não depois do download
+      const ctx = audioCtx();
+      if (ctx.state !== "running") { try { ctx.resume(); } catch (e) {} }
       spriteBuffer(sprite[0]).then((buf) => {
         if (token !== AUDIO.playToken) return;
-        const ctx = audioCtx();
-        if (ctx.state === "suspended") ctx.resume();
         const src = ctx.createBufferSource();
         src.buffer = buf;
         src.playbackRate.value = rate;
         src.connect(ctx.destination);
         src.start(0, sprite[1], sprite[2]);
         AUDIO.curSrc = src;
-      }).catch(() => {});
+      }).catch(() => { if (token === AUDIO.playToken) playFile(); });
       return true;
     }
-    let el = AUDIO.cache[file];
-    if (!el) {
-      el = new Audio(AUDIO.base + file);
-      el.preload = "auto";
-      AUDIO.cache[file] = el;
-    }
-    el.currentTime = 0;
-    el.playbackRate = rate;
-    el.play().catch(() => {});
+    if (AUDIO.sprites && !sprite) return false; // publicado só com sprites: o arquivo avulso não existe
+    playFile();
     return true;
   } catch (e) {
     return false;
@@ -233,6 +267,9 @@ function ensureDaily() {
   if (!state.daily || state.daily.date !== t) {
     state.daily = { date: t, xp: 0, lessons: 0, perfect: 0, combo: 0, claimed: [] };
   }
+  const d0 = state.daily;
+  if (!Array.isArray(d0.claimed)) d0.claimed = [];
+  ["xp", "lessons", "perfect", "combo"].forEach((k) => { if (typeof d0[k] !== "number") d0[k] = 0; });
   if (!state.dailyGoal) state.dailyGoal = 20;
   return state.daily;
 }
@@ -242,8 +279,14 @@ function recordLesson({ gained, perfect, bestCombo }) {
   // Dia marcado na meta semanal de fidelidade
   state.days = state.days || {};
   state.days[today()] = (state.days[today()] || 0) + gained;
+  // Ofensiva: qualquer atividade com XP (lição, cena, história, Match Madness) conta o dia
+  const t = today();
+  if (gained > 0 && state.lastStudy !== t) {
+    state.streak = state.lastStudy && daysBetween(state.lastStudy, t) === 1 ? state.streak + 1 : 1;
+    state.lastStudy = t;
+  }
   d.xp += gained;
-  d.lessons += 1;
+  if (gained > 0) d.lessons += 1;
   if (perfect) d.perfect += 1;
   d.combo = Math.max(d.combo, bestCombo || 0);
   // Missões concluídas rendem XP extra
@@ -337,14 +380,13 @@ function openCharacter(key) {
   const start = $("#cs-start");
   if (start) start.addEventListener("click", () => {
     modal.classList.remove("open");
-    const next = unit.lessons.find((l) => !state.completed[l.id]) || unit.lessons[unit.lessons.length - 1];
+    const steps = unitSteps(unit);
+    const next = steps.find((l) => !state.completed[l.id]) || steps[steps.length - 1];
     if (unitDone(unit)) startLevelUp(unit); else startLesson(next.id);
   });
   const prac = $("#cs-practice");
   if (prac) prac.addEventListener("click", () => {
     modal.classList.remove("open");
-    const u = COURSE[Math.floor(Math.random() * COURSE.length)];
-    const review = u.lessons.find((l) => l.review);
-    startLesson(review.id, ch);
+    startQuickPractice("review", ch);
   });
 }

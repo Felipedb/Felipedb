@@ -40,14 +40,19 @@ function load() {
   if (!base.crowns) base.crowns = {};
   if (!base.days) base.days = {};
   if (!base.chests) base.chests = {};
-  // Corações renovam a cada novo dia
-  if (base.heartsDay !== today()) {
-    base.hearts = MAX_HEARTS;
-    base.heartsDay = today();
-  }
-  // Ofensiva quebra se ficou mais de um dia sem estudar
-  if (base.lastStudy && daysBetween(base.lastStudy, today()) > 1) base.streak = 0;
+  ensureDay(base);
   return base;
+}
+
+// Virada do dia com o app aberto: corações renovam e a ofensiva quebra sem precisar recarregar
+function ensureDay(st) {
+  const s = st || state;
+  if (!s) return;
+  if (s.heartsDay !== today()) {
+    s.hearts = MAX_HEARTS;
+    s.heartsDay = today();
+  }
+  if (s.lastStudy && daysBetween(s.lastStudy, today()) > 1) s.streak = 0;
 }
 
 // ---------- Tema (claro / escuro / automático) ----------
@@ -66,9 +71,12 @@ function save() {
   try { localStorage.setItem("biblelingo", JSON.stringify(state)); } catch (e) {}
 }
 
-function today() {
-  const d = new Date();
+// Chave de dia no fuso local (AAAA-MM-DD); toda leitura e escrita de state.days usa esta forma
+function dateKey(d) {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+function today() {
+  return dateKey(new Date());
 }
 
 function daysBetween(a, b) {
@@ -112,12 +120,17 @@ if ("speechSynthesis" in window) {
 
 function speak(text, opts = {}) {
   const ch = opts.char || (session && session.voiceChar) || null;
-  if (playClip(text, ch && ch.key, opts.slow)) {
+  if (playClip(text, ch && ch.key, opts.slow, () => speakTTS(text, ch, opts))) {
     if ("speechSynthesis" in window) speechSynthesis.cancel();
     const fig = document.querySelector(".sc-face.now, .scene-img, .char-card .char-fig");
     if (fig) { fig.classList.add("talking"); setTimeout(() => fig.classList.remove("talking"), Math.min(4000, 400 + text.length * 70)); }
     return;
   }
+  speakTTS(text, ch, opts);
+}
+
+// Síntese do navegador (reserva quando não há clipe gravado ou ele falhou)
+function speakTTS(text, ch, opts = {}) {
   if (!("speechSynthesis" in window)) return;
   speechSynthesis.cancel();
   const profile = ch && ch.voice ? ch.voice : null;
@@ -149,7 +162,8 @@ function flatLessons() {
 
 // Capítulo concluído: todas as etapas (lições e cenas)
 function unitDone(unit) {
-  return flatLessons().filter((l) => l.unit && l.unit.id === unit.id).every((l) => state.completed[l.id]);
+  const steps = typeof unitSteps === "function" ? unitSteps(unit) : unit.lessons;
+  return steps.every((l) => state.completed[l.id]);
 }
 
 function lessonUnlocked(lessonId) {
@@ -182,6 +196,7 @@ function verseOfDay() {
 }
 
 function renderHome() {
+  ensureDay();
   const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
   set("stat-streak", state.streak);
   set("stat-xp", state.xp);
@@ -222,7 +237,7 @@ function renderWeek() {
   strip.innerHTML = labels.map((lb, i) => {
     const d = new Date(monday);
     d.setDate(monday.getDate() + i);
-    const iso = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+    const iso = dateKey(d);
     const studied = (state.days || {})[iso] > 0;
     if (studied) feitos++;
     const isToday = iso === hoje;
@@ -279,7 +294,10 @@ function drawTrailPath(nodesEl, color) {
 }
 
 // ---------- Feedback tátil (os efeitos sonoros estão em sfx.js) ----------
+const REDUCED_MOTION = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (REDUCED_MOTION) window.confetti = () => {};
 function buzz(pattern) {
+  if (REDUCED_MOTION) return;
   try { if (navigator.vibrate) navigator.vibrate(pattern); } catch (e) {}
 }
 
@@ -359,11 +377,12 @@ const EX_MAKE = {
   "match": (pairs) => ({ type: "match", pairs }),
   "listen-match": (pairs) => ({ type: "listen-match", pairs }),
 };
-const LISTEN_TYPES = ["listen", "listen-choice", "listen-build", "listen-type", "listen-match"];
+const LISTEN_TYPES = ["listen", "listen-choice", "listen-build", "listen-type", "listen-match", "scene-listen"];
 const listenMuted = () => state.listenMutedUntil && Date.now() < state.listenMutedUntil;
 // Troca os exercícios de escuta que ainda vêm por equivalentes sem áudio ("Não posso ouvir agora")
 function replaceUpcomingListening() {
-  const map = { "listen": (e) => EX_MAKE["choice-pt-en"](e.word), "listen-choice": (e) => EX_MAKE["translate-en-pt"](e.sentence), "listen-build": (e) => EX_MAKE.build(e.sentence), "listen-type": (e) => EX_MAKE.build(e.sentence), "listen-match": (e) => EX_MAKE.match(e.pairs) };
+  const map = { "listen": (e) => EX_MAKE["choice-pt-en"](e.word), "listen-choice": (e) => EX_MAKE["translate-en-pt"](e.sentence), "listen-build": (e) => EX_MAKE.build(e.sentence), "listen-type": (e) => EX_MAKE.build(e.sentence), "listen-match": (e) => EX_MAKE.match(e.pairs),
+    "scene-listen": (e) => ({ type: "scene-read", sceneId: e.sceneId, lis: [e.li], silent: true }) };
   session.exercises = session.exercises.map((e, i) => (i > session.index && map[e.type]) ? Object.assign(map[e.type](e), { isReview: e.isReview }) : e);
   session.hard = session.hard.filter((e) => !LISTEN_TYPES.includes(e.type));
 }
@@ -499,6 +518,8 @@ function startLesson(lessonId, narrator) {
   const list = flatLessons();
   const lesson = list.find((l) => l.id === lessonId);
   if (!lesson) return;
+  if (!lessonUnlocked(lessonId)) { toast("🔒 Conclua a etapa anterior primeiro"); return; }
+  ensureDay();
   // Lição interrompida: retoma do ponto em vez de recomeçar
   const r = resumable();
   if (r && r.lessonId === lessonId && !narrator && resumeLesson()) return;
@@ -781,9 +802,10 @@ let _playingTimer = 0;
 function markPlaying(btn, text, slow) {
   document.querySelectorAll(".btn-audio.playing, .title-ico.playing").forEach((el) => el.classList.remove("playing"));
   clearTimeout(_playingTimer);
-  const base = (typeof clipDuration === "function" && clipDuration(text)) || Math.min(4, 0.5 + String(text).length * 0.055);
+  const who = session && session.voiceChar;
+  const base = (typeof clipDuration === "function" && clipDuration(text, who && who.key)) || Math.min(4, 0.5 + String(text).length * 0.055);
   btn.classList.add("playing");
-  _playingTimer = setTimeout(() => btn.classList.remove("playing"), (base / (slow ? 0.65 : 1)) * 1000);
+  _playingTimer = setTimeout(() => btn.classList.remove("playing"), (base / (slow ? 0.75 : 1)) * 1000);
 }
 
 function audioPair(text) {
@@ -1090,6 +1112,16 @@ function textInput(placeholder) {
   return inp;
 }
 
+// Formas aceitas ao digitar uma palavra: sem "to ", sem o parêntese explicativo, cada lado de "a / b"
+function typeAccepts(en) {
+  const base = en.replace(/\s*\([^)]*\)/g, "").trim();
+  const parts = base.split(/\s*\/\s*/);
+  const out = new Set([en, base]);
+  parts.forEach((p) => { out.add(p); out.add(p.replace(/^to /, "")); });
+  out.add(base.replace(/^to /, ""));
+  return [...out].filter(Boolean);
+}
+
 function renderType(ex, box) {
   box.innerHTML = `<div class="ex-title">Digite em inglês:</div>`;
   box.appendChild(characterRow(`<span class="ex-word">${ex.word.icon || ""} ${ex.word.pt}</span>`));
@@ -1097,7 +1129,7 @@ function renderType(ex, box) {
   box.appendChild(inp);
   setTimeout(() => inp.focus(), 50);
   ex.correct = ex.word.en;
-  ex.accept = [ex.word.en, ex.word.en.replace(/^to /, "")];
+  ex.accept = typeAccepts(ex.word.en);
   ex.explain = `${ex.word.pt} = ${ex.word.en}`;
   ex.audioText = ex.word.en;
 }
@@ -1446,6 +1478,7 @@ function fuzzyEqual(answer, target) {
 }
 
 function checkAnswer() {
+  if (!session || session.locked) return;
   const ex = session.exercises[session.index];
   const btn = $("#btn-check");
 
@@ -1543,6 +1576,8 @@ function checkAnswer() {
       btn.textContent = "OK!";
       btn.classList.add("red");
       if (!session.practice && state.hearts <= 0) {
+        session.locked = true;
+        btn.disabled = true;
         setTimeout(() => {
           $("#modal-hearts").classList.add("open");
           showScreen("home");
@@ -1620,7 +1655,7 @@ function cloneExercise(ex) {
 }
 
 function finishLesson() {
-  state.resume = null;
+  if (state.resume && state.resume.lessonId === session.lesson.id) state.resume = null;
   const perfect = session.mistakes === 0;
   const first = !state.completed[session.lesson.id];
   let gained = session.practice ? 5 : XP_PER_LESSON;
@@ -1641,12 +1676,6 @@ function finishLesson() {
   // Prática recupera 1 coração
   if (session.practice && state.hearts < MAX_HEARTS) state.hearts++;
 
-  // Ofensiva
-  const t = today();
-  if (state.lastStudy !== t) {
-    state.streak = state.lastStudy && daysBetween(state.lastStudy, t) === 1 ? state.streak + 1 : 1;
-    state.lastStudy = t;
-  }
   save();
 
   // Personagem comemorando + confete
@@ -1724,8 +1753,16 @@ function renderResultReview() {
 function startErrorPractice() {
   const words = Object.keys(state.errors || {});
   if (!words.length) return;
-  const pool = allVocab();
+  // Palavras de lição e das cenas (as cenas também alimentam state.errors)
+  const seen = new Set();
+  const pool = [...allVocab(), ...(typeof SCENES !== "undefined" ? SCENES.flatMap((s) => s.vocab) : [])].filter((p) => !seen.has(p.en) && seen.add(p.en));
   const vocab = shuffle(pool.filter((p) => words.includes(p.en))).slice(0, 6);
+  if (!vocab.length) {
+    // erros de palavras que não existem mais no conteúdo: descarta e segue
+    state.errors = {}; save(); renderHome();
+    toast("✅ Nenhum erro pendente");
+    return;
+  }
   const unit = COURSE[0];
   const lesson = { id: "practice-errors", title: "Praticar erros", vocab, sentences: [], unit, practiceErrors: true };
   const distract = (v, key) => shuffle(pool.filter((p) => p[key] !== v[key] && p.icon !== v.icon)).slice(0, 3);
@@ -1749,6 +1786,7 @@ function startErrorPractice() {
 $("#btn-check").addEventListener("click", checkAnswer);
 $("#btn-quit").addEventListener("click", () => {
   if ("speechSynthesis" in window) speechSynthesis.cancel();
+  if (typeof stopClip === "function") stopClip();
   showScreen("home");
 });
 $("#btn-result-continue").addEventListener("click", () => showScreen("home"));
@@ -1757,7 +1795,16 @@ $("#btn-modal-practice").addEventListener("click", () => {
   $("#modal-hearts").classList.remove("open");
   // Abre a última lição concluída como prática para recuperar coração
   const doneIds = flatLessons().filter((l) => state.completed[l.id]).map((l) => l.id);
-  if (doneIds.length) startLesson(doneIds[doneIds.length - 1]);
+  if (doneIds.length) startLesson(doneIds[doneIds.length - 1]); else startQuickPractice("review");
+});
+
+// Escape fecha o modal ou a folha aberta
+document.addEventListener("keydown", (e) => {
+  if (e.key !== "Escape") return;
+  const modal = document.querySelector(".modal-backdrop.open");
+  if (modal) { modal.classList.remove("open"); return; }
+  const closeBtn = document.querySelector(".sheet-backdrop.open [data-close], .sheet.open [data-close]");
+  if (closeBtn) closeBtn.click();
 });
 
 // Atalhos de teclado na lição (desktop)
@@ -1773,6 +1820,7 @@ document.addEventListener("keydown", (e) => {
 });
 
 document.querySelectorAll(".hub-back").forEach((b) => b.addEventListener("click", () => {
+  if (typeof stopClip === "function") stopClip();
   if (typeof madness !== "undefined" && madness && madness.timer) clearInterval(madness.timer);
   if ("speechSynthesis" in window) speechSynthesis.cancel();
   showScreen($("#screen-hub").classList.contains("active") ? "home" : "hub");

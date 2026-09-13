@@ -1,4 +1,4 @@
-# Gera os áudios do BíbliaLearn com o ElevenLabs e faz commit na branch escolhida.
+# Gera os áudios do BíbliaLearn com o ElevenLabs, recorta as palavras das frases e faz commit na branch escolhida.
 # Requer o segredo ELEVENLABS_API_KEY (Settings → Secrets and variables → Actions).
 name: Gerar áudios (ElevenLabs)
 on:
@@ -12,6 +12,10 @@ on:
         default: ""
 permissions:
   contents: write
+# Duas execuções ao mesmo tempo disputariam o mesmo commit de áudio: uma espera a outra
+concurrency:
+  group: gen-audio-${{ github.ref_name }}
+  cancel-in-progress: false
 jobs:
   audio:
     runs-on: ubuntu-latest
@@ -22,35 +26,65 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: biblelingo/tools/requirements.txt
+      - name: Cache do modelo whisper
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: whisper-small-en-v1
       - name: Gerar clipes
+        id: gen
         # Falha parcial (ex.: cota esgotada) não pode descartar o que já foi pago:
-        # os passos seguintes commitam o resultado mesmo assim
+        # os passos seguintes commitam o resultado mesmo assim e o job falha no fim
         continue-on-error: true
         env:
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          LIMIT: ${{ github.event.inputs.limit }}
+          ONLY: ${{ github.event.inputs.only }}
         run: |
           cd biblelingo
-          node tools/gen-audio.mjs --limit=${{ github.event.inputs.limit }} --only=${{ github.event.inputs.only }}
+          node tools/gen-audio.mjs "--limit=$LIMIT" "--only=$ONLY"
       - name: Cortar palavras das frases (alinhamento forçado)
+        id: align
         # Palavra isolada sintetizada sai com artefatos; a palavra recortada da própria frase, na
         # mesma voz, é o que o app toca ao tocar numa palavra. Falha aqui não descarta os clipes.
         continue-on-error: true
         run: |
-          sudo apt-get -y install ffmpeg
-          pip install -q faster-whisper
+          ffmpeg -version >/dev/null 2>&1 || (sudo apt-get update && sudo apt-get -y install ffmpeg)
+          pip install -q -r biblelingo/tools/requirements.txt
           cd biblelingo
           python3 tools/align-words.py
       - name: Reconstruir sprites
         run: |
-          sudo apt-get -y install ffmpeg
+          ffmpeg -version >/dev/null 2>&1 || (sudo apt-get update && sudo apt-get -y install ffmpeg)
           cd biblelingo
           node tools/build-sprites.mjs
+      - name: Guardar o áudio como artefato do job
+        # Cópia de segurança antes de qualquer passo git: áudio pago nunca fica só no runner
+        uses: actions/upload-artifact@v4
+        with:
+          name: audio-${{ github.run_id }}
+          path: |
+            biblelingo/audio
+            biblelingo/tools/.voices-ok.json
+            biblelingo/tools/.voices-assigned.json
+          retention-days: 7
       - name: Commit dos áudios
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add biblelingo/audio biblelingo/tools/.voices-ok.json
+          git add biblelingo/audio biblelingo/tools/.voices-ok.json biblelingo/tools/.voices-assigned.json
           git diff --cached --quiet && echo "Nada a commitar" || git commit -m "chore: áudios gerados com ElevenLabs"
-          # A branch pode ter avançado durante a geração: rebase antes de enviar (nunca perder áudio pago)
-          git pull --rebase --autostash origin "${{ github.ref_name }}"
+          # A branch pode ter avançado durante a geração: rebase antes de enviar (nunca perder áudio pago).
+          # Em conflito nos arquivos gerados, a versão desta execução vence (no rebase, "theirs" é o nosso commit).
+          git pull --rebase --autostash -X theirs origin "${{ github.ref_name }}"
           git push
+      - name: Falha visível se algum passo falhou
+        if: steps.gen.outcome == 'failure' || steps.align.outcome == 'failure'
+        run: |
+          echo "Geração: ${{ steps.gen.outcome }} · Alinhamento: ${{ steps.align.outcome }}"
+          exit 1

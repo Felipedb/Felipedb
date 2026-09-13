@@ -4,6 +4,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
+import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -11,7 +12,7 @@ const AUDIO_DIR = path.join(ROOT, "audio");
 const OUT_DIR = path.join(AUDIO_DIR, "sprites");
 const RATE = 44100; // s16le mono
 const GAP = Math.round(0.12 * RATE) * 2; // 120 ms de silêncio entre clipes (bytes)
-const PER_SPRITE = 64; // clipes por sprite
+const BUCKETS = 100; // partição estável: bucket = hash do nome; sprite só muda quando um clipe dele muda
 
 const manifest = JSON.parse(fs.readFileSync(path.join(AUDIO_DIR, "manifest.json"), "utf8"));
 // Cortes de palavras (audio/words.json, de tools/align-words.py) entram nos mesmos sprites
@@ -24,8 +25,9 @@ fs.mkdirSync(OUT_DIR, { recursive: true });
 
 const map = {};
 let spriteIdx = 0;
-for (let i = 0; i < files.length; i += PER_SPRITE) {
-  const group = files.slice(i, i + PER_SPRITE);
+const buckets = Array.from({ length: BUCKETS }, () => []);
+files.forEach((f) => buckets[parseInt(crypto.createHash("sha1").update(f).digest("hex").slice(0, 6), 16) % BUCKETS].push(f));
+for (const group of buckets.filter((g) => g.length)) {
   const chunks = [];
   let offset = 0; // bytes
   for (const f of group) {
@@ -37,7 +39,10 @@ for (let i = 0; i < files.length; i += PER_SPRITE) {
     offset += pcm.length + GAP;
   }
   const raw = Buffer.concat(chunks);
-  const out = path.join(OUT_DIR, `s${spriteIdx}.mp3`);
+  // Nome com hash do conteúdo: o service worker pode guardar o sprite para sempre sem servir bytes velhos
+  const name = `s${spriteIdx}-${crypto.createHash("sha1").update(raw).digest("hex").slice(0, 8)}.mp3`;
+  group.forEach((f) => { map[f][0] = name; });
+  const out = path.join(OUT_DIR, name);
   execFileSync("ffmpeg", ["-v", "error", "-f", "s16le", "-ac", "1", "-ar", String(RATE), "-i", "-", "-codec:a", "libmp3lame", "-b:a", "64k", "-y", out], { input: raw, maxBuffer: 1 << 28 });
   spriteIdx++;
 }

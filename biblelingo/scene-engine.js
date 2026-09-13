@@ -323,8 +323,7 @@ function renderSceneMissing(ex, box) {
   makeOptions(box, ex.options, 2, (opt) => { const g = box.querySelector("#sent-gap"); if (g) g.textContent = opt; speak(opt); });
   ex.correct = ex.blank;
   ex.explain = `"${line.en}" = "${line.pt}"`;
-  ex.audioText = line.en.replace(ex.blank, "blank");
-  ex.audioAfter = line.en;
+  ex.audioText = line.en;
   ex.onChecked = (ok) => { revealHero(box, line); if (ok) speak(line.en, { char: hero }); };
 }
 

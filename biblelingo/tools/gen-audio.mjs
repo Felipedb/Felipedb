@@ -105,7 +105,10 @@ SCENES.forEach((s) => {
 const words = new Set();
 COURSE.forEach((u) => u.lessons.forEach((l) => (l.sentences || []).forEach((s) => s.en.split(" ").forEach((w) => words.add(w.replace(/[.,;:!?'"]/g, ""))))));
 SCENES.forEach((s) => s.lines.filter((l) => l.who === s.char).forEach((l) => l.en.split(" ").forEach((w) => words.add(w.replace(/[.,;:!?"]/g, "")))));
-words.forEach((w) => add(w, "narrator"));
+// Palavra que já tem recorte de frase (tools/align-words.py) não precisa de síntese isolada, que sai com artefatos
+const wordsJson = path.join(AUDIO_DIR, "words.json");
+const cuts = fs.existsSync(wordsJson) ? JSON.parse(fs.readFileSync(wordsJson, "utf8")) : {};
+words.forEach((w) => { if (!cuts[audioKey(w)]) add(w, "narrator"); });
 
 let list = [...jobs.values()];
 // --only=names: só o nome de cada personagem na própria voz (amostra barata para ouvir todas)
@@ -136,17 +139,27 @@ const voiceFor = (char) => {
 {
   const cache = path.join(ROOT, "tools", ".voices-ok.json");
   const ok = fs.existsSync(cache) ? JSON.parse(fs.readFileSync(cache, "utf8")) : {};
+  // Só 400/404 marcam a voz como indisponível; 429/5xx/rede são transitórios e nunca entram no cache
+  // (uma falha passageira trocaria a voz do personagem e regeraria todos os clipes dele, pagos)
   const probe = async (name) => {
     if (name in ok) return ok[name];
     if (DRY) return true;
-    const res = await fetch(`${API}/text-to-speech/${VOICES[name][0]}?output_format=mp3_22050_32`, {
-      method: "POST", headers: { "xi-api-key": KEY, "content-type": "application/json" },
-      body: JSON.stringify({ text: "Hi.", model_id: MODEL }),
-    });
-    ok[name] = res.ok;
-    if (!res.ok) console.log(`Voz indisponível: ${name} (${res.status})`);
-    return res.ok;
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      const res = await fetch(`${API}/text-to-speech/${VOICES[name][0]}?output_format=mp3_22050_32`, {
+        method: "POST", headers: { "xi-api-key": KEY, "content-type": "application/json" },
+        body: JSON.stringify({ text: "Hi.", model_id: MODEL }),
+      });
+      if (res.ok) { ok[name] = true; return true; }
+      if (res.status === 400 || res.status === 404) { ok[name] = false; console.log(`Voz indisponível: ${name} (${res.status})`); return false; }
+      console.log(`Probe de ${name}: ${res.status}, tentando de novo`);
+      await new Promise((r) => setTimeout(r, 1500 * attempt));
+    }
+    return true; // indisponibilidade transitória: mantém a voz (a geração tentará de novo)
   };
+  // Atribuições de reserva já resolvidas em execuções anteriores (evita trocar voz ao mudar o catálogo)
+  const assignedCache = path.join(ROOT, "tools", ".voices-assigned.json");
+  const saved = fs.existsSync(assignedCache) ? JSON.parse(fs.readFileSync(assignedCache, "utf8")) : {};
+  Object.keys(saved).forEach((c) => { if (assigned[c] && VOICES[saved[c]] && ok[assigned[c]] === false) assigned[c] = saved[c]; });
   const inUse = new Set(Object.values(assigned));
   for (const char of Object.keys(assigned)) {
     if (await probe(assigned[char])) continue;
@@ -162,8 +175,9 @@ const voiceFor = (char) => {
     console.log(`  ${char}: ${assigned[char]} → ${picked}`);
     assigned[char] = picked;
     inUse.add(picked);
+    saved[char] = picked;
   }
-  if (!DRY) fs.writeFileSync(cache, JSON.stringify(ok, null, 1));
+  if (!DRY) { fs.writeFileSync(cache, JSON.stringify(ok, null, 1)); fs.writeFileSync(assignedCache, JSON.stringify(saved, null, 1)); }
 }
 
 // Resumo das vozes resolvidas: se tudo cair numa voz só, algo está errado
@@ -247,8 +261,10 @@ for (const key of Object.keys(manifest)) {
 }
 const referenced = new Set(Object.values(manifest).flatMap((e) => Object.values(e)));
 let removed = 0;
-for (const f of fs.readdirSync(AUDIO_DIR)) {
-  if (f.endsWith(".mp3") && !referenced.has(f)) { fs.unlinkSync(path.join(AUDIO_DIR, f)); removed++; }
+if (!LIMIT && !ONLY) {
+  for (const f of fs.readdirSync(AUDIO_DIR)) {
+    if (f.endsWith(".mp3") && !referenced.has(f)) { fs.unlinkSync(path.join(AUDIO_DIR, f)); removed++; }
+  }
 }
 fs.writeFileSync(MANIFEST, JSON.stringify(manifest, null, 1));
 console.log(`Concluído: ${done} gerados, ${failed} falhas, ${removed} órfãos removidos, manifesto com ${Object.keys(manifest).length} textos.`);

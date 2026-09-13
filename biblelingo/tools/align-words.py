@@ -21,6 +21,7 @@ OUT = os.path.join(AUDIO, "words.json")
 INDEX = os.path.join(AUDIO, "words-index.json")
 MOCK = "--mock" in sys.argv
 PAD_BEFORE, PAD_AFTER, MIN_DUR, MIN_PROB = 0.05, 0.10, 0.10, 0.40
+ALIGN_VER = 3  # sobe quando o alinhador muda: só então as frases já feitas voltam à fila
 # O whisper escreve números em dígitos e algumas formas modernas; o texto usa a forma escrita
 NUMBERS = {"0": "zero", "1": "one", "2": "two", "3": "three", "4": "four", "5": "five", "6": "six", "7": "seven",
            "8": "eight", "9": "nine", "10": "ten", "11": "eleven", "12": "twelve", "13": "thirteen", "14": "fourteen",
@@ -28,7 +29,7 @@ NUMBERS = {"0": "zero", "1": "one", "2": "two", "3": "three", "4": "four", "5": 
            "30": "thirty", "40": "forty", "50": "fifty", "60": "sixty", "70": "seventy", "80": "eighty", "90": "ninety",
            "100": "hundred", "153": "one hundred and fifty three", "1000": "thousand"}
 VARIANTS = {"yes": {"yeah", "yep", "yess"}, "ye": {"you"}, "shewed": {"showed"}, "thou": {"you"}, "thy": {"your"},
-            "hath": {"has"}, "unto": {"to"}, "ok": {"okay"}}
+            "hath": {"has"}, "unto": {"to"}, "ok": {"okay"}, "ark": {"arc"}, "goshen": {"goshun"}}
 
 
 def norm(t):
@@ -77,6 +78,27 @@ def align(tokens, heard):
     """Casa os tokens do texto com as palavras ouvidas (mesma ordem); devolve {idx_token: (ini, fim, prob)}."""
     a = tokens
     b = [h[0] for h in heard]
+    # "goodnight" ouvido para "good night": divide o tempo proporcionalmente
+    fused = []
+    for h in heard:
+        fused.append(h)
+    i = 0
+    expanded = []
+    for h in fused:
+        w, s0, e0, p0 = h
+        pair = None
+        for k in range(len(a) - 1):
+            if a[k] + a[k + 1] == w:
+                pair = (a[k], a[k + 1])
+                break
+        if pair:
+            cut = (e0 - s0) * len(pair[0]) / max(1, len(w))
+            expanded.append((pair[0], s0, s0 + cut, p0))
+            expanded.append((pair[1], s0 + cut, e0, p0))
+        else:
+            expanded.append(h)
+    heard = expanded
+    b = [h[0] for h in heard]
     sm = difflib.SequenceMatcher(a=a, b=b, autojunk=False)
     out = {}
     for tag, i1, i2, j1, j2 in sm.get_opcodes():
@@ -119,7 +141,7 @@ def main():
     sentences = [(k, c, f) for k, e in manifest.items() if " " in k for c, f in e.items() if c != "default"]
     # frases já alinhadas mas com alguma palavra sem corte voltam para a fila (o alinhador melhorou)
     for f, meta in list(index.items()):
-        if len(set(meta.get("words", []))) < len(set(meta.get("key", "").split(" "))):
+        if meta.get("ver") != ALIGN_VER:
             del index[f]
     todo = [(k, c, f) for k, c, f in sentences if f not in index]
     print(f"Frases gravadas: {len(sentences)} · a alinhar: {len(todo)}")
@@ -141,7 +163,7 @@ def main():
             if i not in matched:
                 continue
             s, e, p = matched[i]
-            if p < MIN_PROB:
+            if p < MIN_PROB or tok == "blank":
                 continue
             prev_end = matched[i - 1][1] if (i - 1) in matched else 0.0
             next_start = matched[i + 1][0] if (i + 1) in matched else total
@@ -155,10 +177,11 @@ def main():
             entry = words.setdefault(tok, {})
             prev = entry.get(char)
             # entre várias frases do mesmo personagem, fica a de maior confiança
-            if not prev or p > prev.get("p", 0):
+            prev_alive = prev and os.path.basename(prev["f"]) in {hashlib.sha1(f"{tok}|{char}|{ff}".encode()).hexdigest()[:16] + ".mp3" for ff in index if index[ff].get("char") == char}
+            if not prev or not prev_alive or p > prev.get("p", 0):
                 entry[char] = {"f": "words/" + name, "p": round(p, 3), "d": round(ce - cs, 3)}
             produced.append(tok)
-        index[file] = {"key": key, "char": char, "words": produced, "heard": " ".join(h[0] for h in heard)}
+        index[file] = {"key": key, "char": char, "words": produced, "heard": " ".join(h[0] for h in heard), "ver": ALIGN_VER}
         done += 1
         if done % 25 == 0:
             json.dump(words, open(OUT, "w"), ensure_ascii=False, indent=1)
@@ -175,13 +198,15 @@ def main():
             if c == "default":
                 continue
             meta = entry[c]
-            if not os.path.exists(os.path.join(AUDIO, meta["f"])) or not any(f in live and c == index[f]["char"] and tok in index[f]["words"] for f in index):
+            valid = {hashlib.sha1(f"{tok}|{c}|{f}".encode()).hexdigest()[:16] + ".mp3" for f in live if f in index and index[f]["char"] == c}
+            if not os.path.exists(os.path.join(AUDIO, meta["f"])) or os.path.basename(meta["f"]) not in valid:
                 del entry[c]
         chars = [c for c in entry if c != "default"]
         if not chars:
             del words[tok]
             continue
-        best = max(chars, key=lambda c: (entry[c]["p"], -abs(entry[c]["d"] - 0.5)))
+        med = sorted(entry[c]["d"] for c in chars)[len(chars) // 2]
+        best = "narrator" if "narrator" in chars else max(chars, key=lambda c: (round(entry[c]["p"], 1), -abs(entry[c]["d"] - med)))
         entry["default"] = entry[best]["f"]
         referenced.update(entry[c]["f"] for c in chars)
     removed = 0

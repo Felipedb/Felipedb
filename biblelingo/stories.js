@@ -73,7 +73,7 @@ const STORIES = [
       { who: "jonas", en: "God gives peace to everyone who believes.", pt: "Deus dá paz a todo aquele que crê." },
       { q: "What does Immanuel mean?", options: ["God with us", "King of Egypt", "A big river"], answer: "God with us" },
     ],
-  },,
+  },
   {
     id: "s6", unit: "u6", title: "José e seus irmãos", subtitle: "Gênesis 37–45", cover: "jose", xp: 10,
     beats: [

@@ -225,7 +225,7 @@ function openGuide(unit, ui) {
       ${verses.length ? `<h4>Versículos</h4>${verses.map((v) => `<blockquote class="g-verse"><p>${v.text.replace(v.blank, `<b>${v.blank}</b>`)}</p><cite>${v.ref} (KJV)</cite></blockquote>`).join("")}` : ""}
     </div>`;
   openSheet("guide-sheet", html);
-  document.querySelectorAll("#guide-sheet [data-say]").forEach((b) => b.addEventListener("click", () => speak(b.dataset.say, { char: { key: unit.face, ...CHARACTERS[unit.face] } })));
+  document.querySelectorAll("#guide-sheet [data-say]").forEach((b) => b.addEventListener("click", () => speak(b.dataset.say, { char: castChar(CHARACTERS[unit.face] ? unit.face : (UNIT_CAST[unit.id] || [])[0]) })));
 }
 
 // ---------- Missões ----------
@@ -294,7 +294,7 @@ function renderProfile() {
   const stars = Object.values(state.stars || {}).reduce((s, x) => s + x, 0);
   $("#prof-tiles").innerHTML = [
     ["🔥", state.streak, "Dias seguidos"], ["⚡", state.xp, "XP total"], ["👑", crowns, "Coroas"], ["⭐", stars, "Estrelas"],
-  ].map(([i, v, l]) => `<div class="tile"><span class="tile-ico">${i}</span><b>${v}</b><small>${l}</small></div>`).join("");
+  ].map(([i, v, l]) => `<div class="stat-tile"><span class="stat-ico">${i}</span><b>${v}</b><small>${l}</small></div>`).join("");
   $("#ach-list").innerHTML = ACHIEVEMENTS.map((a) => {
     const v = a.value();
     let lvl = a.tiers.findIndex((t) => v < t);
