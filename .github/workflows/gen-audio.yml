@@ -25,6 +25,11 @@ jobs:
         run: |
           cd biblelingo
           node tools/gen-audio.mjs --limit=${{ github.event.inputs.limit }}
+      - name: Reconstruir sprites
+        run: |
+          sudo apt-get -y install ffmpeg
+          cd biblelingo
+          node tools/build-sprites.mjs
       - name: Commit dos áudios
         run: |
           git config user.name "github-actions[bot]"
