@@ -1,0 +1,19 @@
+# dependências e build
+node_modules/
+dist/
+.vite/
+
+# ambiente
+.env
+.env.*
+!.env.example
+
+# mídia pesada (usar Git LFS ou storage externo quando o catálogo crescer)
+*.wav
+*.mp4
+*.mov
+*.webm
+
+# sistema
+.DS_Store
+Thumbs.db
