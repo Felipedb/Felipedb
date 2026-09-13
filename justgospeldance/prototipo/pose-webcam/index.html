@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JustGospelDance: protótipo de pose</title>
+  <script type="importmap">
+    { "imports": { "@mediapipe/tasks-vision": "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@1.0.1/vision_bundle.mjs" } }
+  </script>
+  <style>
+    :root { color-scheme: dark; --fundo: #0f1117; --painel: #171a23; --texto: #e6e6e6; --muted: #9aa0ad; --ok: #7ee787; --warn: #f2cc60; --bad: #ff7b72; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 15px/1.4 system-ui, sans-serif; background: var(--fundo); color: var(--texto); padding: 16px; }
+    header { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; margin-bottom: 12px; }
+    header h1 { font-size: 20px; margin: 0; }
+    header span { color: var(--muted); }
+    main { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 16px; }
+    @media (max-width: 760px) { main { grid-template-columns: 1fr; } }
+    .palco { position: relative; background: #000; border-radius: 12px; overflow: hidden; aspect-ratio: 4 / 3; }
+    .palco video, .palco canvas { position: absolute; inset: 0; width: 100%; height: 100%; transform: scaleX(-1); }
+    .palco video { object-fit: cover; }
+    #classe { position: absolute; left: 50%; top: 12%; transform: translateX(-50%); font-size: clamp(28px, 7vw, 64px); font-weight: 800; letter-spacing: 2px; text-shadow: 0 2px 12px #000; }
+    #status { position: absolute; left: 12px; bottom: 12px; right: 12px; background: rgba(0,0,0,.55); padding: 8px 12px; border-radius: 8px; color: var(--muted); }
+    aside { background: var(--painel); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+    aside h2 { font-size: 14px; margin: 6px 0 0; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+    button, select { font: inherit; padding: 8px 12px; border-radius: 8px; border: 1px solid #2a2f3d; background: #222736; color: var(--texto); cursor: pointer; }
+    button:disabled { opacity: .5; cursor: default; }
+    button.primario { background: #2f6feb; border-color: #2f6feb; }
+    dl { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; margin: 0; }
+    dt { color: var(--muted); } dd { margin: 0; font-variant-numeric: tabular-nums; }
+    #nota { font-size: 28px; font-weight: 700; }
+    .PERFECT { color: var(--ok); } .GOOD { color: #58a6ff; } .OK { color: var(--warn); } .MISS { color: var(--bad); }
+    small { color: var(--muted); }
+  </style>
+</head>
+<body
+  data-mp-wasm="https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@1.0.1/wasm"
+  data-mp-model-lite="https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task"
+  data-mp-model-full="https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_full/float16/1/pose_landmarker_full.task">
+  <header>
+    <h1>JustGospelDance</h1>
+    <span>protótipo: pose na webcam e pontuação contra uma pose de referência</span>
+  </header>
+  <main>
+    <div class="palco">
+      <video id="video" playsinline muted></video>
+      <canvas id="canvas"></canvas>
+      <div id="classe"></div>
+      <div id="status">Clique em "Iniciar câmera" e permita o acesso à webcam.</div>
+    </div>
+    <aside>
+      <button id="btnIniciar" class="primario">Iniciar câmera</button>
+      <label>Modelo
+        <select id="modelo">
+          <option value="lite" selected>lite (rápido)</option>
+          <option value="full">full (mais preciso)</option>
+        </select>
+      </label>
+      <h2>Referência</h2>
+      <button id="btnCapturar" disabled>Capturar minha pose em 3 s</button>
+      <button id="btnT" disabled>Usar pose em T</button>
+      <small id="refInfo">Referência atual: pose em T (braços abertos na horizontal).</small>
+      <h2>Leitura</h2>
+      <dl>
+        <dt>Nota</dt><dd id="nota">–</dd>
+        <dt>Membros visíveis</dt><dd id="visiveis">–</dd>
+        <dt>FPS de detecção</dt><dd id="fps">–</dd>
+        <dt>Modelo / delegate</dt><dd id="delegate">–</dd>
+        <dt>Cotovelo E / D</dt><dd id="cotovelos">–</dd>
+        <dt>Ombro E / D</dt><dd id="ombros">–</dd>
+        <dt>Joelho E / D</dt><dd id="joelhos">–</dd>
+      </dl>
+      <small>Nota = média ponderada da similaridade de cosseno entre as direções dos membros do jogador e da referência, usando as coordenadas 3D (worldLandmarks). PERFECT ≥ 0,90, GOOD ≥ 0,80, OK ≥ 0,65.</small>
+    </aside>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
