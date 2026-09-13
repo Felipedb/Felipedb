@@ -4,7 +4,23 @@
 
 // ---------- 2.2 Áudio gravado com fallback para a síntese do navegador ----------
 // audio/manifest.json: { "<texto normalizado>": { "default": "arquivo.mp3", "<personagem>": "arquivo.mp3" } }
-const AUDIO = { manifest: null, sprites: null, cache: {}, stopTimer: 0, base: "audio/" };
+const AUDIO = { manifest: null, sprites: null, cache: {}, buffers: {}, order: [], ctx: null, curSrc: null, playToken: 0, stopTimer: 0, base: "audio/" };
+
+function audioCtx() {
+  AUDIO.ctx = AUDIO.ctx || new (window.AudioContext || window.webkitAudioContext)();
+  return AUDIO.ctx;
+}
+
+// Baixa e decodifica um sprite uma única vez (cache limitado aos 6 mais recentes)
+async function spriteBuffer(name) {
+  if (AUDIO.buffers[name]) return AUDIO.buffers[name];
+  const ab = await (await fetch(AUDIO.base + "sprites/" + name)).arrayBuffer();
+  const buf = await audioCtx().decodeAudioData(ab);
+  AUDIO.buffers[name] = buf;
+  AUDIO.order.push(name);
+  if (AUDIO.order.length > 6) delete AUDIO.buffers[AUDIO.order.shift()];
+  return buf;
+}
 
 function audioKey(text) {
   return String(text).toLowerCase().replace(/[^a-z0-9 ]/g, "").replace(/\s+/g, " ").trim();
@@ -46,19 +62,34 @@ function playClip(text, charKey, slow) {
   try {
     const rate = slow ? 0.65 : 1;
     clearTimeout(AUDIO.stopTimer);
-    const sprite = AUDIO.sprites && AUDIO.sprites[file];
-    const src = sprite ? "sprites/" + sprite[0] : file;
-    let el = AUDIO.cache[src];
-    if (!el) {
-      el = new Audio(AUDIO.base + src);
-      el.preload = "auto";
-      AUDIO.cache[src] = el;
-    }
+    if (AUDIO.curSrc) { try { AUDIO.curSrc.stop(); } catch (e) {} AUDIO.curSrc = null; }
     Object.values(AUDIO.cache).forEach((a) => a.pause());
-    el.currentTime = sprite ? sprite[1] : 0;
+    const sprite = AUDIO.sprites && AUDIO.sprites[file];
+    if (sprite && window.AudioContext) {
+      // WebAudio: toca o trecho exato do sprite (seek confiável em qualquer hospedagem)
+      const token = ++AUDIO.playToken;
+      spriteBuffer(sprite[0]).then((buf) => {
+        if (token !== AUDIO.playToken) return;
+        const ctx = audioCtx();
+        if (ctx.state === "suspended") ctx.resume();
+        const src = ctx.createBufferSource();
+        src.buffer = buf;
+        src.playbackRate.value = rate;
+        src.connect(ctx.destination);
+        src.start(0, sprite[1], sprite[2]);
+        AUDIO.curSrc = src;
+      }).catch(() => {});
+      return true;
+    }
+    let el = AUDIO.cache[file];
+    if (!el) {
+      el = new Audio(AUDIO.base + file);
+      el.preload = "auto";
+      AUDIO.cache[file] = el;
+    }
+    el.currentTime = 0;
     el.playbackRate = rate;
     el.play().catch(() => {});
-    if (sprite) AUDIO.stopTimer = setTimeout(() => el.pause(), ((sprite[2] + 0.05) / rate) * 1000);
     return true;
   } catch (e) {
     return false;
