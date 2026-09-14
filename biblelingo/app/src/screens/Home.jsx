@@ -1,5 +1,6 @@
 // Trilha: capítulos com nós (lições, cenas, revisão) e CTA fixo de continuar
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { motion } from "motion/react";
 import { useAppState } from "../core/useStore.js";
 import { COURSE, unitSteps, unitDone, currentLessonId, CHARACTERS, castChar, testamentOf, verseOfDay, SCENE_BY_ID, flatLessons } from "../core/content.js";
 import { startLesson, startLevelUp, resumable, unitCrowns, MAX_CROWN } from "../core/session.js";
@@ -15,6 +16,48 @@ function StarRow({ n }) {
         <span key={i} className={i <= n ? "text-gold" : "text-locked"}>★</span>
       ))}
     </span>
+  );
+}
+
+// Caminho tracejado ligando os nós (porta de drawTrailPath do app clássico)
+function TrailNodes({ color, children }) {
+  const ref = useRef(null);
+  const [d, setD] = useState("");
+  const [size, setSize] = useState([0, 0]);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const draw = () => {
+      const nodes = [...el.querySelectorAll("[data-node] button")];
+      const box = el.getBoundingClientRect();
+      if (nodes.length < 2 || !box.height) return;
+      const cs = nodes.map((n) => {
+        const r = n.getBoundingClientRect();
+        return { x: r.left - box.left + r.width / 2, y: r.top - box.top + r.height / 2 };
+      });
+      let path = `M ${cs[0].x} ${cs[0].y}`;
+      for (let i = 1; i < cs.length; i++) {
+        const a = cs[i - 1], b = cs[i];
+        const my = (a.y + b.y) / 2;
+        path += ` C ${a.x} ${my}, ${b.x} ${my}, ${b.x} ${b.y}`;
+      }
+      setD(path);
+      setSize([box.width, box.height]);
+    };
+    draw();
+    const ro = new ResizeObserver(draw);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+  return (
+    <div ref={ref} className="relative mx-auto mt-5 flex max-w-sm flex-col items-center gap-4">
+      {d && (
+        <svg className="pointer-events-none absolute inset-0" viewBox={`0 0 ${size[0]} ${size[1]}`} preserveAspectRatio="none" aria-hidden="true">
+          <path d={d} fill="none" stroke={color} strokeOpacity="0.25" strokeWidth="12" strokeLinecap="round" strokeDasharray="0.1 22" />
+        </svg>
+      )}
+      {children}
+    </div>
   );
 }
 
@@ -62,7 +105,7 @@ export default function Home() {
                 <div className="text-sm opacity-90">{u.subtitle}</div>
               </div>
 
-              <div className="mx-auto mt-5 flex max-w-sm flex-col items-center gap-4">
+              <TrailNodes color={u.color}>
                 {steps.map((step, i) => {
                   const prevId = i === 0 ? (ui === 0 ? null : unitSteps(COURSE[ui - 1]).slice(-1)[0].id) : steps[i - 1].id;
                   const unlocked = !prevId || !!state.completed[prevId];
@@ -70,7 +113,9 @@ export default function Home() {
                   const isCurrent = step.id === currentId;
                   const x = Math.round(Math.sin(i * 1.15) * 64);
                   return (
-                    <div key={step.id} className="relative" style={{ transform: `translateX(${x}px)` }} data-node={step.id} data-current={isCurrent || undefined}>
+                    <motion.div key={step.id} className="relative z-[1]" style={{ x }} data-node={step.id} data-current={isCurrent || undefined}
+                      initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-40px" }}
+                      transition={{ type: "spring", stiffness: 220, damping: 24 }}>
                       {isCurrent && (
                         <span className="absolute -top-9 left-1/2 -translate-x-1/2 animate-bounce whitespace-nowrap rounded-xl border-2 border-line bg-card px-3 py-1 text-xs font-extrabold uppercase text-brand shadow-sm">
                           Começar
@@ -86,7 +131,7 @@ export default function Home() {
                       {doneStep && !step.scene && !step.review && (
                         <span className="absolute -bottom-2 left-1/2 -translate-x-1/2"><StarRow n={state.stars[step.id] || 0} /></span>
                       )}
-                    </div>
+                    </motion.div>
                   );
                 })}
                 {done && (
@@ -94,7 +139,7 @@ export default function Home() {
                     👑 {unitCrowns(u.id) >= MAX_CROWN ? "Lendária" : `Subir de nível (${unitCrowns(u.id)}/${MAX_CROWN})`}
                   </button>
                 )}
-              </div>
+              </TrailNodes>
             </section>
           );
         })}

@@ -6,8 +6,7 @@ const dist = path.resolve(import.meta.dirname, "..", "dist");
 const outDir = process.argv[2] || "/tmp";
 const html = fs.readFileSync(path.join(dist, "index.html"), "utf8");
 const head = html.match(/<title>[\s\S]*?<\/head>/)[0].replace(/<\/head>$/, "").replace(/^\s+/gm, "  ");
-const bodyScripts = [...html.matchAll(/<script[^>]*src="[^"]+"[^>]*><\/script>/g)].map((m) => m[0]).join("\n");
-const page = `${head}\n<div id="root"></div>\n${bodyScripts}\n`;
+const page = `${head}\n<div id="root"></div>\n`;
 fs.writeFileSync(path.join(outDir, "biblelingo-react.html"), page.replace(/"\.\//g, '"'));
 // mapa: tudo de dist menos index.html
 const files = {};
@@ -15,7 +14,7 @@ const walk = (dir, rel = "") => {
   for (const f of fs.readdirSync(dir)) {
     const p = path.join(dir, f), r = rel ? rel + "/" + f : f;
     if (fs.statSync(p).isDirectory()) walk(p, r);
-    else if (r !== "index.html") files[r] = "app/dist/" + r;
+    else if (r !== "index.html" && (r.startsWith("assets/") || r === "sw.js" || r === "manifest.webmanifest")) files[r] = "app/dist/" + r;
   }
 };
 walk(dist);

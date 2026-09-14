@@ -102,3 +102,9 @@
   25% { transform: translateX(-6px); }
   75% { transform: translateX(6px); }
 }
+
+@layer base {
+  /* Foco visível consistente (teclado) */
+  :focus-visible { outline: 3px solid var(--color-sky); outline-offset: 2px; border-radius: 8px; }
+  button:focus:not(:focus-visible) { outline: none; }
+}
