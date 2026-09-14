@@ -1,0 +1,457 @@
+{
+  "id": "u4",
+  "lessons": [
+    {
+      "id": "u4l1",
+      "title": "O pastor escolhido",
+      "vocab": [
+        {
+          "en": "shepherd",
+          "pt": "pastor",
+          "icon": "🧑‍🌾"
+        },
+        {
+          "en": "sheep",
+          "pt": "ovelha",
+          "icon": "🐑"
+        },
+        {
+          "en": "harp",
+          "pt": "harpa",
+          "icon": "🎶"
+        },
+        {
+          "en": "heart",
+          "pt": "coração",
+          "icon": "❤️"
+        },
+        {
+          "en": "oil",
+          "pt": "azeite (óleo)",
+          "icon": "🏺"
+        },
+        {
+          "en": "to anoint",
+          "pt": "ungir",
+          "icon": "👑"
+        },
+        {
+          "en": "to look",
+          "pt": "olhar",
+          "icon": "👀"
+        },
+        {
+          "en": "to choose",
+          "pt": "escolher",
+          "icon": "✅"
+        },
+        {
+          "en": "to play",
+          "pt": "tocar",
+          "icon": "🎻"
+        },
+        {
+          "en": "young",
+          "pt": "jovem",
+          "icon": "🧒"
+        }
+      ],
+      "sentences": [
+        {
+          "en": "David kept the sheep",
+          "pt": "Davi cuidava das ovelhas"
+        },
+        {
+          "en": "David was a young shepherd",
+          "pt": "Davi era um jovem pastor"
+        },
+        {
+          "en": "Samuel went to Bethlehem with oil",
+          "pt": "Samuel foi a Belém com azeite"
+        },
+        {
+          "en": "Do not look on his face or his height",
+          "pt": "Não atentes para a sua aparência nem para a sua altura"
+        },
+        {
+          "en": "The Lord looks on the heart",
+          "pt": "O Senhor olha para o coração"
+        },
+        {
+          "en": "The youngest son is keeping the sheep",
+          "pt": "O filho mais novo está apascentando as ovelhas"
+        },
+        {
+          "en": "God chose David, the youngest of the brothers",
+          "pt": "Deus escolheu Davi, o mais novo dos irmãos"
+        },
+        {
+          "en": "Arise, anoint him, for this is he",
+          "pt": "Levanta-te e unge-o, porque é este mesmo"
+        },
+        {
+          "en": "Samuel anointed David with oil among his brothers",
+          "pt": "Samuel ungiu Davi com azeite no meio de seus irmãos"
+        },
+        {
+          "en": "David played the harp",
+          "pt": "Davi tocava a harpa"
+        },
+        {
+          "en": "When David played the harp, Saul was refreshed",
+          "pt": "Quando Davi tocava a harpa, Saul sentia alívio"
+        }
+      ],
+      "verse": {
+        "text": "Man looketh on the outward appearance, but the LORD looketh on the heart.",
+        "pt": "Pois o homem vê o que está diante dos olhos, porém o Senhor olha para o coração.",
+        "ref": "1 Samuel 16:7",
+        "blank": "heart",
+        "options": [
+          "heart",
+          "face",
+          "hands",
+          "house"
+        ]
+      },
+      "reading": {
+        "text": "Samuel went to Bethlehem. Seven sons of Jesse passed before him, but the Lord did not choose them. The youngest was keeping the sheep. Samuel anointed him with oil, and the Spirit of the Lord came upon David.",
+        "pt": "Samuel foi a Belém. Sete filhos de Jessé passaram diante dele, mas o Senhor não os escolheu. O mais novo estava apascentando as ovelhas. Samuel o ungiu com azeite, e o Espírito do Senhor veio sobre Davi.",
+        "q": "Where was David when Samuel came?",
+        "options": [
+          "Keeping the sheep",
+          "Playing for King Saul",
+          "Fighting the giant"
+        ],
+        "answer": "Keeping the sheep"
+      },
+      "dialogue": {
+        "line": "Bring the harp, David. I feel bad.",
+        "pt": "Traga a harpa, Davi. Eu me sinto mal.",
+        "options": [
+          "I will play for you, my king.",
+          "I will bring five stones.",
+          "The ark is on the mountain."
+        ],
+        "answer": "I will play for you, my king.",
+        "answerPt": "Vou tocar para o senhor, meu rei."
+      },
+      "quiz": {
+        "q": "Where does the Lord look?",
+        "options": [
+          "On the heart",
+          "On the face",
+          "On the hands"
+        ],
+        "answer": "On the heart",
+        "explain": "O homem vê o que está diante dos olhos, porém o Senhor olha para o coração (1 Samuel 16:7)."
+      }
+    },
+    {
+      "id": "u4l2",
+      "title": "Davi e Golias",
+      "vocab": [
+        {
+          "en": "giant",
+          "pt": "gigante",
+          "icon": "🗿"
+        },
+        {
+          "en": "stone",
+          "pt": "pedra",
+          "icon": "🥌"
+        },
+        {
+          "en": "sling",
+          "pt": "funda",
+          "icon": "🎯"
+        },
+        {
+          "en": "battle",
+          "pt": "batalha",
+          "icon": "⚔️"
+        },
+        {
+          "en": "bear",
+          "pt": "urso",
+          "icon": "🐻"
+        },
+        {
+          "en": "sword",
+          "pt": "espada",
+          "icon": "🗡️"
+        },
+        {
+          "en": "shield",
+          "pt": "escudo",
+          "icon": "🛡️"
+        },
+        {
+          "en": "brook",
+          "pt": "ribeiro",
+          "icon": "🏞️"
+        },
+        {
+          "en": "to fall",
+          "pt": "cair",
+          "icon": "🍂"
+        },
+        {
+          "en": "to fear",
+          "pt": "temer",
+          "icon": "😨"
+        }
+      ],
+      "sentences": [
+        {
+          "en": "The giant Goliath came from Gath",
+          "pt": "O gigante Golias veio de Gate"
+        },
+        {
+          "en": "Do not fear the giant",
+          "pt": "Não temas o gigante"
+        },
+        {
+          "en": "Your servant killed both the lion and the bear",
+          "pt": "O teu servo feriu tanto o leão como o urso"
+        },
+        {
+          "en": "David chose five smooth stones out of the brook",
+          "pt": "Davi escolheu cinco pedras lisas do ribeiro"
+        },
+        {
+          "en": "David had a sling and a stone",
+          "pt": "Davi tinha uma funda e uma pedra"
+        },
+        {
+          "en": "David took five stones",
+          "pt": "Davi tomou cinco pedras"
+        },
+        {
+          "en": "You come to me with a sword, a spear and a shield",
+          "pt": "Tu vens a mim com espada, e com lança, e com escudo"
+        },
+        {
+          "en": "The battle is the Lord's",
+          "pt": "A batalha é do Senhor"
+        },
+        {
+          "en": "The stone sank into the forehead of the giant",
+          "pt": "A pedra se cravou na testa do gigante"
+        },
+        {
+          "en": "The giant fell to the ground",
+          "pt": "O gigante caiu no chão"
+        },
+        {
+          "en": "David ran and took the sword of the giant",
+          "pt": "Davi correu e tomou a espada do gigante"
+        },
+        {
+          "en": "The Lord saves not with sword and spear",
+          "pt": "O Senhor salva, não com espada, nem com lança"
+        }
+      ],
+      "verse": {
+        "text": "For the battle is the LORD's, and he will give you into our hands.",
+        "pt": "Porque do Senhor é a guerra, e ele vos entregará na nossa mão.",
+        "ref": "1 Samuel 17:47",
+        "blank": "battle",
+        "options": [
+          "battle",
+          "silver",
+          "harvest",
+          "story"
+        ]
+      },
+      "reading": {
+        "text": "Goliath was a giant from Gath. For forty days he defied the armies of Israel. Saul gave David his armor, but David could not walk with it. He took his staff, his sling and five smooth stones from the brook.",
+        "pt": "Golias era um gigante de Gate. Durante quarenta dias ele afrontou os exércitos de Israel. Saul deu a Davi a sua armadura, mas Davi não conseguia andar com ela. Ele tomou o seu cajado, a sua funda e cinco pedras lisas do ribeiro.",
+        "q": "Why did David not use Saul's armor?",
+        "options": [
+          "He had not tried it",
+          "It was made of gold",
+          "The giant took it"
+        ],
+        "answer": "He had not tried it"
+      },
+      "dialogue": {
+        "line": "The giant is coming!",
+        "pt": "O gigante está vindo!",
+        "options": [
+          "The battle is the Lord's!",
+          "Good night!",
+          "I see a rainbow!"
+        ],
+        "answer": "The battle is the Lord's!",
+        "answerPt": "A batalha é do Senhor!"
+      },
+      "quiz": {
+        "q": "What did David kill when he kept the sheep?",
+        "options": [
+          "A lion and a bear",
+          "A wolf and a fox",
+          "A snake and a dog"
+        ],
+        "answer": "A lion and a bear",
+        "explain": "Davi feriu o leão e o urso que tomaram um cordeiro do rebanho (1 Samuel 17:34-36)."
+      }
+    },
+    {
+      "id": "u4l3",
+      "title": "O rei cantor",
+      "vocab": [
+        {
+          "en": "song",
+          "pt": "cântico",
+          "icon": "🎵"
+        },
+        {
+          "en": "to sing",
+          "pt": "cantar",
+          "icon": "🎤"
+        },
+        {
+          "en": "rock",
+          "pt": "rocha",
+          "icon": "⛰️"
+        },
+        {
+          "en": "strong",
+          "pt": "forte",
+          "icon": "💪"
+        },
+        {
+          "en": "fortress",
+          "pt": "fortaleza",
+          "icon": "🏰"
+        },
+        {
+          "en": "to trust",
+          "pt": "confiar",
+          "icon": "🤝"
+        },
+        {
+          "en": "to reign",
+          "pt": "reinar",
+          "icon": "👑"
+        },
+        {
+          "en": "valley",
+          "pt": "vale",
+          "icon": "🏞️"
+        },
+        {
+          "en": "mercy",
+          "pt": "misericórdia",
+          "icon": "💗"
+        },
+        {
+          "en": "pasture",
+          "pt": "pasto",
+          "icon": "🌿"
+        }
+      ],
+      "sentences": [
+        {
+          "en": "David was thirty years old when he began to reign",
+          "pt": "Davi tinha trinta anos quando começou a reinar"
+        },
+        {
+          "en": "David reigned over all Israel",
+          "pt": "Davi reinou sobre todo o Israel"
+        },
+        {
+          "en": "I will sing praises unto your name",
+          "alt": [
+            "I will sing praises to your name"
+          ],
+          "pt": "Cantarei louvores ao teu nome"
+        },
+        {
+          "en": "David sang this song when the Lord delivered him",
+          "pt": "Davi cantou este cântico quando o Senhor o livrou"
+        },
+        {
+          "en": "The Lord is my rock",
+          "pt": "O Senhor é a minha rocha"
+        },
+        {
+          "en": "God is my fortress",
+          "pt": "Deus é a minha fortaleza"
+        },
+        {
+          "en": "I trust in the Lord",
+          "pt": "Eu confio no Senhor"
+        },
+        {
+          "en": "Sing a new song",
+          "pt": "Cantai um cântico novo"
+        },
+        {
+          "en": "David was strong because God was with him",
+          "pt": "Davi era forte porque Deus estava com ele"
+        },
+        {
+          "en": "Though I walk through the valley of the shadow of death",
+          "pt": "Ainda que eu andasse pelo vale da sombra da morte"
+        },
+        {
+          "en": "He makes me to lie down in green pastures",
+          "alt": [
+            "He makes me lie down in green pastures"
+          ],
+          "pt": "Deitar-me faz em verdes pastos"
+        },
+        {
+          "en": "Goodness and mercy shall follow me all the days of my life",
+          "pt": "A bondade e a misericórdia me seguirão todos os dias da minha vida"
+        }
+      ],
+      "verse": {
+        "text": "The LORD is my rock, and my fortress, and my deliverer.",
+        "pt": "O Senhor é a minha rocha, a minha fortaleza e o meu libertador.",
+        "ref": "2 Samuel 22:2",
+        "blank": "rock",
+        "options": [
+          "rock",
+          "song",
+          "lamp",
+          "road"
+        ]
+      },
+      "reading": {
+        "text": "David wrote many songs. In one song he said: The Lord is my shepherd, I shall not want. He leads me beside the still waters. Goodness and mercy shall follow me all the days of my life.",
+        "pt": "Davi escreveu muitos cânticos. Num cântico ele disse: O Senhor é o meu pastor, nada me faltará. Guia-me mansamente a águas tranquilas. A bondade e a misericórdia me seguirão todos os dias da minha vida.",
+        "q": "In David's song, who is his shepherd?",
+        "options": [
+          "The Lord",
+          "Samuel",
+          "His father Jesse"
+        ],
+        "answer": "The Lord"
+      },
+      "dialogue": {
+        "line": "David, sing for us!",
+        "pt": "Davi, cante para nós!",
+        "options": [
+          "The Lord is my rock!",
+          "The sea is dry!",
+          "Take off your shoes!"
+        ],
+        "answer": "The Lord is my rock!",
+        "answerPt": "O Senhor é a minha rocha!"
+      },
+      "quiz": {
+        "q": "How old was David when he began to reign?",
+        "options": [
+          "Thirty",
+          "Twelve",
+          "Seventy"
+        ],
+        "answer": "Thirty",
+        "explain": "Davi tinha trinta anos quando começou a reinar, e reinou quarenta anos (2 Samuel 5:4)."
+      }
+    }
+  ]
+}

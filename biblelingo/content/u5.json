@@ -1,0 +1,107 @@
+{
+  "id": "u5",
+  "lessons": [
+    {
+      "id": "u5l1",
+      "title": "Santo, santo, santo",
+      "vocab": [
+        { "en": "prophet", "pt": "profeta", "icon": "📜" },
+        { "en": "throne", "pt": "trono", "icon": "👑" },
+        { "en": "holy", "pt": "santo", "icon": "✨" },
+        { "en": "to send", "pt": "enviar", "icon": "📨" },
+        { "en": "voice", "pt": "voz", "icon": "🗣️" },
+        { "en": "to hear", "pt": "ouvir", "icon": "👂" },
+        { "en": "glory", "pt": "glória", "icon": "🌟" },
+        { "en": "wings", "pt": "asas", "icon": "🦅" },
+        { "en": "coal", "pt": "brasa", "icon": "🔥" },
+        { "en": "lips", "pt": "lábios", "icon": "👄" }
+      ],
+      "sentences": [
+        { "en": "Isaiah was a prophet", "pt": "Isaías era um profeta" },
+        { "en": "Isaiah saw the Lord sitting upon a throne, high and lifted up", "pt": "Isaías viu o Senhor assentado sobre um alto e sublime trono" },
+        { "en": "The Lord sat on a throne", "pt": "O Senhor estava sentado num trono" },
+        { "en": "Each seraph had six wings", "pt": "Cada serafim tinha seis asas" },
+        { "en": "Holy, holy, holy is the Lord of hosts", "pt": "Santo, Santo, Santo é o Senhor dos Exércitos" },
+        { "en": "The whole earth is full of his glory", "pt": "Toda a terra está cheia da sua glória" },
+        { "en": "Woe is me! I am a man of unclean lips", "pt": "Ai de mim! Eu sou um homem de lábios impuros" },
+        { "en": "The seraph took a live coal from the altar", "pt": "O serafim tirou uma brasa viva do altar" },
+        { "en": "The coal touched my lips and my sin was purged", "pt": "A brasa tocou os meus lábios, e o meu pecado foi purificado" },
+        { "en": "I heard the voice of the Lord", "pt": "Eu ouvi a voz do Senhor" },
+        { "en": "Whom shall I send?", "pt": "A quem enviarei?" },
+        { "en": "Here am I; send me", "pt": "Eis-me aqui, envia-me a mim" }
+      ],
+      "verse": { "text": "Whom shall I send, and who will go for us? Then said I, Here am I; send me.", "pt": "A quem enviarei, e quem há de ir por nós? Então, disse eu: Eis-me aqui, envia-me a mim.", "ref": "Isaías 6:8", "blank": "go", "options": ["go", "stay", "eat", "sleep"] },
+      "reading": { "text": "In the year that king Uzziah died, Isaiah saw the Lord on a high throne. Seraphim stood above him. Each one had six wings. They cried: Holy, holy, holy is the Lord of hosts.", "pt": "No ano em que morreu o rei Uzias, Isaías viu o Senhor num alto trono. Serafins estavam acima dele. Cada um tinha seis asas. Eles clamavam: Santo, Santo, Santo é o Senhor dos Exércitos.", "q": "How many wings did each seraph have?", "options": ["Six", "Two", "Twelve"], "answer": "Six" },
+      "dialogue": { "line": "Whom shall I send?", "pt": "A quem enviarei?", "options": ["Here am I; send me.", "Send the sheep.", "Let there be light."], "answer": "Here am I; send me.", "answerPt": "Eis-me aqui, envia-me a mim." },
+      "quiz": { "q": "What did the seraph bring to Isaiah's lips?", "options": ["A live coal", "A cup of water", "A piece of bread"], "answer": "A live coal", "explain": "Um serafim tocou a boca de Isaías com uma brasa viva tirada do altar (Isaías 6:6-7)." }
+    },
+    {
+      "id": "u5l2",
+      "title": "Emanuel, Deus conosco",
+      "vocab": [
+        { "en": "sign", "pt": "sinal", "icon": "⭐" },
+        { "en": "child", "pt": "menino (criança)", "icon": "👶" },
+        { "en": "name", "pt": "nome", "icon": "🏷️" },
+        { "en": "with us", "pt": "conosco", "icon": "👫" },
+        { "en": "virgin", "pt": "virgem", "icon": "👰" },
+        { "en": "son", "pt": "filho", "icon": "👦" },
+        { "en": "honey", "pt": "mel", "icon": "🍯" },
+        { "en": "to ask", "pt": "pedir", "icon": "🙋" },
+        { "en": "to shine", "pt": "resplandecer (brilhar)", "icon": "🔆" },
+        { "en": "great", "pt": "grande", "icon": "🌟" }
+      ],
+      "sentences": [
+        { "en": "The Lord will give you a sign", "pt": "O Senhor vos dará um sinal" },
+        { "en": "Ask a sign of the Lord your God", "pt": "Pede para ti ao Senhor, teu Deus, um sinal" },
+        { "en": "King Ahaz said, I will not ask", "pt": "O rei Acaz disse: Não pedirei" },
+        { "en": "A virgin shall conceive and bear a son", "pt": "Uma virgem conceberá e dará à luz um filho" },
+        { "en": "His name is Immanuel", "pt": "O seu nome é Emanuel" },
+        { "en": "God with us", "pt": "Deus conosco" },
+        { "en": "Butter and honey shall he eat", "pt": "Manteiga e mel comerá" },
+        { "en": "The people that walked in darkness have seen a great light", "pt": "O povo que andava em trevas viu uma grande luz" },
+        { "en": "Upon them the light has shined", "pt": "Sobre eles resplandeceu a luz" },
+        { "en": "A child is born", "pt": "Um menino nasceu" },
+        { "en": "Unto us a son is given", "alt": ["To us a son is given"], "pt": "Um filho se nos deu" },
+        { "en": "The name Immanuel means God with us", "pt": "O nome Emanuel significa Deus conosco" }
+      ],
+      "verse": { "text": "Behold, a virgin shall conceive, and bear a son, and shall call his name Immanuel.", "pt": "Eis que uma virgem conceberá, e dará à luz um filho, e será o seu nome Emanuel.", "ref": "Isaías 7:14", "blank": "name", "options": ["name", "land", "word", "sign"] },
+      "reading": { "text": "Two kings came to fight against Jerusalem, and king Ahaz was afraid. Isaiah said: Do not fear. The Lord gave a sign: a virgin shall bear a son, Immanuel. The child shall eat butter and honey.", "pt": "Dois reis vieram guerrear contra Jerusalém, e o rei Acaz teve medo. Isaías disse: Não temas. O Senhor deu um sinal: uma virgem dará à luz um filho, Emanuel. O menino comerá manteiga e mel.", "q": "What shall the child eat?", "options": ["Butter and honey", "Bread and fish", "Fruit of the garden"], "answer": "Butter and honey" },
+      "dialogue": { "line": "What is the name of the child?", "pt": "Qual é o nome do menino?", "options": ["Immanuel: God with us.", "Goliath the giant.", "Noah of the ark."], "answer": "Immanuel: God with us.", "answerPt": "Emanuel: Deus conosco." },
+      "quiz": { "q": "What did the people that walked in darkness see?", "options": ["A great light", "A great flood", "A great fire"], "answer": "A great light", "explain": "O povo que andava em trevas viu uma grande luz (Isaías 9:2)." }
+    },
+    {
+      "id": "u5l3",
+      "title": "O Príncipe da Paz",
+      "vocab": [
+        { "en": "peace", "pt": "paz", "icon": "☮️" },
+        { "en": "prince", "pt": "príncipe", "icon": "🤴" },
+        { "en": "wonderful", "pt": "maravilhoso", "icon": "🌟" },
+        { "en": "counsellor", "pt": "conselheiro", "icon": "🧠" },
+        { "en": "mighty", "pt": "forte (poderoso)", "icon": "🦁" },
+        { "en": "everlasting", "pt": "eterno", "icon": "♾️" },
+        { "en": "government", "pt": "governo (principado)", "icon": "🏛️" },
+        { "en": "shoulder", "pt": "ombro", "icon": "💪" },
+        { "en": "justice", "pt": "justiça", "icon": "⚖️" },
+        { "en": "zeal", "pt": "zelo", "icon": "🔥" }
+      ],
+      "sentences": [
+        { "en": "The government shall be upon his shoulder", "pt": "O principado está sobre os seus ombros" },
+        { "en": "His name is Wonderful", "pt": "O seu nome é Maravilhoso" },
+        { "en": "His name shall be called Wonderful, Counsellor", "alt": ["His name shall be called Wonderful, Counselor"], "pt": "O seu nome será Maravilhoso, Conselheiro" },
+        { "en": "The mighty God", "pt": "O Deus Forte" },
+        { "en": "He is the everlasting Father", "pt": "Ele é o Pai da Eternidade" },
+        { "en": "The Prince of Peace", "pt": "O Príncipe da Paz" },
+        { "en": "He brings peace", "pt": "Ele traz paz" },
+        { "en": "Of his government and peace there shall be no end", "pt": "Do aumento deste principado e da paz não haverá fim" },
+        { "en": "The Prince of Peace will sit on the throne of David", "pt": "O Príncipe da Paz se assentará sobre o trono de Davi" },
+        { "en": "He will establish it with judgment and with justice", "pt": "Ele o firmará em juízo e em justiça" },
+        { "en": "The zeal of the Lord of hosts will perform this", "pt": "O zelo do Senhor dos Exércitos fará isto" },
+        { "en": "His kingdom will have peace for ever", "alt": ["His kingdom will have peace forever"], "pt": "O seu reino terá paz para sempre" }
+      ],
+      "verse": { "text": "And his name shall be called Wonderful, Counsellor, The mighty God, The everlasting Father, The Prince of Peace.", "pt": "E o seu nome será Maravilhoso, Conselheiro, Deus Forte, Pai da Eternidade, Príncipe da Paz.", "ref": "Isaías 9:6", "blank": "Peace", "options": ["Peace", "Rain", "Gold", "Light"] },
+      "reading": { "text": "Isaiah spoke of a child that is born to us. He will sit on the throne of David. Of his peace there shall be no end. The zeal of the Lord of hosts will perform this.", "pt": "Isaías falou de um menino que nos nasceu. Ele se assentará sobre o trono de Davi. Da sua paz não haverá fim. O zelo do Senhor dos Exércitos fará isto.", "q": "On whose throne will the child sit?", "options": ["The throne of David", "The throne of Pharaoh", "The throne of Goliath"], "answer": "The throne of David" },
+      "dialogue": { "line": "Who is coming?", "pt": "Quem está vindo?", "options": ["The Prince of Peace!", "The king of Egypt!", "A big river!"], "answer": "The Prince of Peace!", "answerPt": "O Príncipe da Paz!" },
+      "quiz": { "q": "What shall be upon the shoulder of the child?", "options": ["The government", "A coat of many colors", "A sling and five stones"], "answer": "The government", "explain": "O principado está sobre os seus ombros (Isaías 9:6)." }
+    }
+  ]
+}

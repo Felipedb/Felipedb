@@ -1,0 +1,107 @@
+{
+  "id": "u2",
+  "lessons": [
+    {
+      "id": "u2l1",
+      "title": "A arca",
+      "vocab": [
+        { "en": "ark", "pt": "arca", "icon": "🚢" },
+        { "en": "wood", "pt": "madeira", "icon": "🌲" },
+        { "en": "animals", "pt": "animais", "icon": "🐘" },
+        { "en": "door", "pt": "porta", "icon": "🚪" },
+        { "en": "grace", "pt": "graça", "icon": "🙏" },
+        { "en": "wicked", "pt": "perverso (mau)", "icon": "😈" },
+        { "en": "righteous", "pt": "justo", "icon": "✅" },
+        { "en": "wife", "pt": "mulher (esposa)", "icon": "👩" },
+        { "en": "two by two", "pt": "dois a dois", "icon": "2️⃣" },
+        { "en": "to shut", "pt": "fechar", "icon": "🔒" }
+      ],
+      "sentences": [
+        { "en": "Noah made an ark of wood", "pt": "Noé fez uma arca de madeira" },
+        { "en": "The animals came into the ark", "pt": "Os animais entraram na arca" },
+        { "en": "God shut the door of the ark", "pt": "Deus fechou a porta da arca" },
+        { "en": "The wickedness of man was great in the earth", "pt": "A maldade do homem se multiplicara sobre a terra" },
+        { "en": "But Noah found grace in the eyes of the LORD", "alt": ["But Noah found grace in the eyes of the Lord"], "pt": "Mas Noé achou graça aos olhos do Senhor" },
+        { "en": "Noah was a righteous man and walked with God", "alt": ["Noah was a just man and walked with God"], "pt": "Noé era um homem justo e andava com Deus" },
+        { "en": "God said, Make an ark of gopher wood", "alt": ["God said, Make you an ark of gopher wood"], "pt": "Deus disse: Faze uma arca de madeira de gofer" },
+        { "en": "The ark was three hundred cubits long", "pt": "A arca tinha trezentos côvados de comprimento" },
+        { "en": "The animals went in two by two, male and female", "pt": "Os animais entraram dois a dois, macho e fêmea" },
+        { "en": "Noah, his wife and his three sons went into the ark", "pt": "Noé, sua mulher e seus três filhos entraram na arca" },
+        { "en": "Eight people were saved in the ark", "pt": "Oito pessoas foram salvas na arca" },
+        { "en": "The LORD shut him in", "alt": ["The Lord shut him in"], "pt": "E o Senhor o fechou por fora" }
+      ],
+      "verse": { "text": "Make thee an ark of gopher wood.", "pt": "Faze para ti uma arca de madeira de gofer.", "ref": "Gênesis 6:14", "blank": "ark", "options": ["ark", "boat", "tent", "wall"] },
+      "reading": { "text": "The earth was full of violence, but Noah found grace. God said to Noah: Make an ark of wood. Noah made the ark, and the animals came in two by two.", "pt": "A terra estava cheia de violência, mas Noé achou graça. Deus disse a Noé: Faze uma arca de madeira. Noé fez a arca, e os animais entraram de dois em dois.", "q": "How did the animals come in?", "options": ["Two by two", "One by one", "All at night"], "answer": "Two by two" },
+      "dialogue": { "line": "Noah, what are you making?", "pt": "Noé, o que você está fazendo?", "options": ["An ark of wood.", "A song.", "A crown."], "answer": "An ark of wood.", "answerPt": "Uma arca de madeira." },
+      "quiz": { "q": "Who shut the door of the ark?", "options": ["The LORD", "Noah", "The animals"], "answer": "The LORD", "explain": "Quando todos entraram, o Senhor o fechou por fora (Gênesis 7:16)." }
+    },
+    {
+      "id": "u2l2",
+      "title": "Quarenta dias",
+      "vocab": [
+        { "en": "flood", "pt": "dilúvio", "icon": "⛈️" },
+        { "en": "forty", "pt": "quarenta", "icon": "🔢" },
+        { "en": "water", "pt": "água", "icon": "💧" },
+        { "en": "window", "pt": "janela", "icon": "🔲" },
+        { "en": "rain", "pt": "chuva", "icon": "🌧️" },
+        { "en": "mountain", "pt": "montanha (monte)", "icon": "⛰️" },
+        { "en": "to open", "pt": "abrir", "icon": "🔓" },
+        { "en": "raven", "pt": "corvo", "icon": "🐦" },
+        { "en": "to cover", "pt": "cobrir", "icon": "🌊" },
+        { "en": "alive", "pt": "vivo", "icon": "❤️" }
+      ],
+      "sentences": [
+        { "en": "The rain was upon the earth", "pt": "A chuva caiu sobre a terra" },
+        { "en": "Forty days and forty nights", "pt": "Quarenta dias e quarenta noites" },
+        { "en": "The water covered the mountains", "pt": "A água cobriu as montanhas" },
+        { "en": "Noah opened the window of the ark", "pt": "Noé abriu a janela da arca" },
+        { "en": "The flood was upon the earth", "pt": "O dilúvio estava sobre a terra" },
+        { "en": "The windows of heaven were opened", "pt": "As janelas dos céus se abriram" },
+        { "en": "The ark went upon the face of the waters", "pt": "A arca andava sobre as águas" },
+        { "en": "Everything that lived on the earth died in the flood", "pt": "Tudo o que vivia sobre a terra morreu no dilúvio" },
+        { "en": "Only Noah remained alive, and those with him in the ark", "pt": "Ficou somente Noé vivo, e os que com ele estavam na arca" },
+        { "en": "God remembered Noah, and the waters went down", "pt": "Deus se lembrou de Noé, e as águas diminuíram" },
+        { "en": "The ark rested on the mountains of Ararat", "pt": "A arca repousou sobre os montes de Ararate" },
+        { "en": "Noah sent out a raven, and it went to and fro", "pt": "Noé soltou um corvo, que saiu, indo e voltando" }
+      ],
+      "verse": { "text": "And the rain was upon the earth forty days and forty nights.", "pt": "E houve chuva sobre a terra quarenta dias e quarenta noites.", "ref": "Gênesis 7:12", "blank": "rain", "options": ["rain", "sun", "wind", "fire"] },
+      "reading": { "text": "The rain was upon the earth forty days and forty nights. The water covered the high mountains. Only Noah remained alive, and those with him in the ark.", "pt": "A chuva caiu sobre a terra quarenta dias e quarenta noites. A água cobriu os altos montes. Ficou somente Noé vivo, e os que com ele estavam na arca.", "q": "How long did it rain?", "options": ["Forty days and forty nights", "Seven days", "One night"], "answer": "Forty days and forty nights" },
+      "dialogue": { "line": "It is raining a lot!", "pt": "Está chovendo muito!", "options": ["Let us go into the ark.", "Let us go to the desert.", "The battle is the Lord's."], "answer": "Let us go into the ark.", "answerPt": "Vamos entrar na arca." },
+      "quiz": { "q": "Where did the ark rest?", "options": ["On the mountains of Ararat", "On Mount Sinai", "In the land of Egypt"], "answer": "On the mountains of Ararat", "explain": "A arca repousou sobre os montes de Ararate (Gênesis 8:4)." }
+    },
+    {
+      "id": "u2l3",
+      "title": "A pomba e a promessa",
+      "vocab": [
+        { "en": "dove", "pt": "pomba", "icon": "🕊️" },
+        { "en": "rainbow", "pt": "arco-íris", "icon": "🌈" },
+        { "en": "promise", "pt": "promessa", "icon": "🤝" },
+        { "en": "cloud", "pt": "nuvem", "icon": "☁️" },
+        { "en": "leaf", "pt": "folha", "icon": "🍃" },
+        { "en": "olive", "pt": "oliveira (azeitona)", "icon": "🌳" },
+        { "en": "altar", "pt": "altar", "icon": "🔥" },
+        { "en": "covenant", "pt": "concerto (aliança)", "icon": "📜" },
+        { "en": "to remember", "pt": "lembrar", "icon": "💭" },
+        { "en": "to destroy", "pt": "destruir", "icon": "💥" }
+      ],
+      "sentences": [
+        { "en": "The dove came back to him", "pt": "A pomba voltou para ele" },
+        { "en": "The dove had a leaf", "pt": "A pomba tinha uma folha" },
+        { "en": "Noah sent a dove", "pt": "Noé enviou uma pomba" },
+        { "en": "I set my rainbow in the cloud", "pt": "Eu ponho o meu arco-íris na nuvem" },
+        { "en": "I will remember my promise", "pt": "Eu me lembrarei da minha promessa" },
+        { "en": "But the dove found no rest for her foot", "pt": "Mas a pomba não achou repouso para a planta do seu pé" },
+        { "en": "In the evening the dove came with an olive leaf", "pt": "À tarde a pomba voltou com uma folha de oliveira" },
+        { "en": "Noah sent the dove again, and it did not return", "pt": "Noé soltou a pomba de novo, e ela não voltou mais" },
+        { "en": "Noah built an altar to the LORD", "alt": ["Noah built an altar to the Lord"], "pt": "Noé edificou um altar ao Senhor" },
+        { "en": "God made a covenant with Noah and every living creature", "pt": "Deus fez um concerto com Noé e todo ser vivente" },
+        { "en": "The waters shall no more become a flood to destroy all flesh", "alt": ["The waters will no more become a flood to destroy all flesh"], "pt": "As águas não se tornarão mais em dilúvio para destruir toda carne" },
+        { "en": "The rainbow is the sign of the covenant", "pt": "O arco-íris é o sinal do concerto" }
+      ],
+      "verse": { "text": "I do set my bow in the cloud, and it shall be for a token of a covenant between me and the earth.", "pt": "O meu arco tenho posto nas nuvens; este será por sinal do concerto entre mim e a terra.", "ref": "Gênesis 9:13", "blank": "cloud", "options": ["cloud", "sea", "field", "night"] },
+      "reading": { "text": "Noah sent a dove, but it found no rest. Seven days later the dove came back with an olive leaf. Then God set a rainbow in the cloud as a promise.", "pt": "Noé enviou uma pomba, mas ela não achou repouso. Sete dias depois a pomba voltou com uma folha de oliveira. Então Deus pôs um arco-íris na nuvem como promessa.", "q": "What did the dove bring?", "options": ["A leaf", "A stone", "A fish"], "answer": "A leaf" },
+      "dialogue": { "line": "Look at the cloud!", "pt": "Olha a nuvem!", "options": ["I see a rainbow!", "I see a giant!", "I see a harp!"], "answer": "I see a rainbow!", "answerPt": "Eu vejo um arco-íris!" },
+      "quiz": { "q": "What did Noah build when he came out of the ark?", "options": ["An altar", "A city", "A tower"], "answer": "An altar", "explain": "Noé edificou um altar ao Senhor e ofereceu holocaustos (Gênesis 8:20)." }
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "id": "u1",
+  "lessons": [
+    {
+      "id": "u1l1",
+      "title": "No princípio",
+      "vocab": [
+        { "en": "God", "pt": "Deus", "icon": "🙏" },
+        { "en": "heaven", "pt": "céu", "icon": "🌤️" },
+        { "en": "earth", "pt": "terra", "icon": "🌍" },
+        { "en": "light", "pt": "luz", "icon": "💡" },
+        { "en": "darkness", "pt": "trevas", "icon": "🌑" },
+        { "en": "water", "pt": "água", "icon": "💧" },
+        { "en": "beginning", "pt": "princípio", "icon": "🌅" },
+        { "en": "to create", "pt": "criar", "icon": "✨" }
+      ],
+      "sentences": [
+        { "en": "God created the heaven and the earth", "alt": ["God created the heavens and the earth"], "pt": "Deus criou o céu e a terra" },
+        { "en": "In the beginning there was nothing", "pt": "No princípio não havia nada" },
+        { "en": "The earth was empty and dark", "pt": "A terra estava vazia e escura" },
+        { "en": "Darkness was upon the face of the deep", "pt": "Havia trevas sobre a face do abismo" },
+        { "en": "The Spirit of God moved upon the waters", "pt": "O Espírito de Deus se movia sobre as águas" },
+        { "en": "God said, Let there be light", "pt": "Deus disse: Haja luz" },
+        { "en": "And there was light", "pt": "E houve luz" },
+        { "en": "God saw the light that it was good", "pt": "Deus viu que a luz era boa" },
+        { "en": "God divided the light from the darkness", "pt": "Deus separou a luz das trevas" },
+        { "en": "The light is good", "pt": "A luz é boa" }
+      ],
+      "verse": { "text": "In the beginning God created the heaven and the earth.", "pt": "No princípio, Deus criou o céu e a terra.", "ref": "Gênesis 1:1", "blank": "created", "options": ["created", "loved", "said", "saw"] },
+      "reading": { "text": "In the beginning, God created the heaven and the earth. The earth was dark. Then God said: Let there be light.", "pt": "No princípio, Deus criou o céu e a terra. A terra estava escura. Então Deus disse: Haja luz.", "q": "What did God say?", "options": ["Let there be light", "Let there be rain", "Let there be a king"], "answer": "Let there be light" },
+      "dialogue": { "line": "Look! God created the light.", "pt": "Olha! Deus criou a luz.", "options": ["It is good!", "It is night.", "Where is the ark?"], "answer": "It is good!", "answerPt": "É bom!" },
+      "quiz": { "q": "What moved upon the face of the waters?", "options": ["The Spirit of God", "A big fish", "The wind of Egypt"], "answer": "The Spirit of God", "explain": "O Espírito de Deus se movia sobre a face das águas (Gênesis 1:2)." }
+    },
+    {
+      "id": "u1l2",
+      "title": "Os sete dias",
+      "vocab": [
+        { "en": "day", "pt": "dia", "icon": "🌞" },
+        { "en": "night", "pt": "noite", "icon": "🌃" },
+        { "en": "seven", "pt": "sete", "icon": "7️⃣" },
+        { "en": "to rest", "pt": "descansar", "icon": "😴" },
+        { "en": "sun", "pt": "sol", "icon": "☀️" },
+        { "en": "moon", "pt": "lua", "icon": "🌙" },
+        { "en": "stars", "pt": "estrelas", "icon": "⭐" },
+        { "en": "to make", "pt": "fazer", "icon": "🔨" },
+        { "en": "good", "pt": "bom", "icon": "👍" },
+        { "en": "evening", "pt": "entardecer", "icon": "🌇" }
+      ],
+      "sentences": [
+        { "en": "God called the light Day", "pt": "Deus chamou a luz de Dia" },
+        { "en": "The darkness he called Night", "pt": "Às trevas ele chamou Noite" },
+        { "en": "The evening and the morning were the first day", "pt": "A tarde e a manhã foram o primeiro dia" },
+        { "en": "God made two great lights", "pt": "Deus fez dois grandes luminares" },
+        { "en": "The sun rules the day and the moon rules the night", "pt": "O sol governa o dia e a lua governa a noite" },
+        { "en": "He made the stars also", "pt": "Ele fez também as estrelas" },
+        { "en": "God made the fish and the birds", "pt": "Deus fez os peixes e as aves" },
+        { "en": "The animals were made on the sixth day", "pt": "Os animais foram feitos no sexto dia" },
+        { "en": "In six days God made heaven and earth", "pt": "Em seis dias Deus fez o céu e a terra" },
+        { "en": "On the seventh day God rested", "pt": "No sétimo dia Deus descansou" },
+        { "en": "God blessed the seventh day", "pt": "Deus abençoou o sétimo dia" }
+      ],
+      "verse": { "text": "And he rested on the seventh day from all his work which he had made.", "pt": "E descansou no sétimo dia de toda a sua obra que tinha feito.", "ref": "Gênesis 2:2", "blank": "rested", "options": ["rested", "worked", "walked", "sang"] },
+      "reading": { "text": "God made the sun, the moon and the stars. He made the fish, the birds and the animals. In six days God made everything. On the seventh day he rested.", "pt": "Deus fez o sol, a lua e as estrelas. Ele fez os peixes, as aves e os animais. Em seis dias Deus fez tudo. No sétimo dia ele descansou.", "q": "What did God do on the seventh day?", "options": ["He rested", "He made the sun", "He planted a garden"], "answer": "He rested" },
+      "dialogue": { "line": "What did God make on the fourth day?", "pt": "O que Deus fez no quarto dia?", "options": ["The sun, the moon and the stars.", "The tree of life.", "A big ark of wood."], "answer": "The sun, the moon and the stars.", "answerPt": "O sol, a lua e as estrelas." },
+      "quiz": { "q": "How many days did God work?", "options": ["Six", "Seven", "Forty"], "answer": "Six", "explain": "Em seis dias Deus fez o céu e a terra e descansou no sétimo (Gênesis 2:2; Êxodo 20:11)." }
+    },
+    {
+      "id": "u1l3",
+      "title": "À imagem de Deus",
+      "vocab": [
+        { "en": "man", "pt": "homem", "icon": "🧔" },
+        { "en": "woman", "pt": "mulher", "icon": "👩" },
+        { "en": "image", "pt": "imagem", "icon": "🖼️" },
+        { "en": "garden", "pt": "jardim", "icon": "🌳" },
+        { "en": "tree", "pt": "árvore", "icon": "🌲" },
+        { "en": "life", "pt": "vida", "icon": "🌱" },
+        { "en": "fruit", "pt": "fruto", "icon": "🍎" },
+        { "en": "likeness", "pt": "semelhança", "icon": "👤" },
+        { "en": "alone", "pt": "só (sozinho)", "icon": "🧍" },
+        { "en": "to eat", "pt": "comer", "icon": "🍽️" }
+      ],
+      "sentences": [
+        { "en": "Let us make man in our image", "pt": "Façamos o homem à nossa imagem" },
+        { "en": "God created man in his own image", "pt": "Deus criou o homem à sua imagem" },
+        { "en": "He created them man and woman", "pt": "Homem e mulher os criou" },
+        { "en": "God planted a garden in Eden", "pt": "Deus plantou um jardim no Éden" },
+        { "en": "The tree of life", "pt": "A árvore da vida" },
+        { "en": "You may eat of every tree of the garden", "pt": "Podes comer de toda árvore do jardim" },
+        { "en": "It is not good that the man should be alone", "pt": "Não é bom que o homem esteja só" },
+        { "en": "God made a woman and brought her to the man", "pt": "Deus fez uma mulher e a trouxe ao homem" },
+        { "en": "Eve took the fruit and ate", "pt": "Eva tomou o fruto e comeu" },
+        { "en": "The man and the woman hid from God", "pt": "O homem e a mulher se esconderam de Deus" }
+      ],
+      "verse": { "text": "And God said, Let us make man in our image, after our likeness.", "pt": "E disse Deus: Façamos o homem à nossa imagem, conforme a nossa semelhança.", "ref": "Gênesis 1:26", "blank": "image", "options": ["image", "garden", "light", "water"] },
+      "reading": { "text": "God made man from the dust of the ground. He put the man in the garden of Eden. Then God made a woman from the rib of the man.", "pt": "Deus fez o homem do pó da terra. Ele pôs o homem no jardim do Éden. Depois Deus fez uma mulher da costela do homem.", "q": "What did God make from the rib of the man?", "options": ["A woman", "A tree", "An ark"], "answer": "A woman" },
+      "dialogue": { "line": "Come and see the garden!", "pt": "Vem ver o jardim!", "options": ["The tree of life is beautiful.", "The sea is dry.", "I have five stones."], "answer": "The tree of life is beautiful.", "answerPt": "A árvore da vida é linda." },
+      "quiz": { "q": "In whose image did God create man?", "options": ["In God's image", "In the image of a king", "In the image of an angel"], "answer": "In God's image", "explain": "Deus criou o homem à sua imagem (Gênesis 1:27)." }
+    }
+  ]
+}
