@@ -10,3 +10,8 @@ loadAudioManifest();
 if (!state.joined) { state.joined = today(); save(); }
 
 createRoot(document.getElementById("root")).render(<App />);
+
+// Offline: só no build publicado (o dev server não precisa)
+if (import.meta.env.PROD && "serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
+  navigator.serviceWorker.register("sw.js").catch(() => {});
+}
