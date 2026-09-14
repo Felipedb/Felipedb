@@ -3,8 +3,9 @@
 // setAnswer/check/registerMistakeSoft; `session.checked` diz se já foi conferido.
 import Placeholder from "./Placeholder.jsx";
 import { REGISTRY } from "./registry.js";
+import { SCENE_REGISTRY } from "../scenes/registry.js";
 
 export default function ExerciseView({ ex }) {
-  const C = REGISTRY[ex.type] || Placeholder;
+  const C = REGISTRY[ex.type] || SCENE_REGISTRY[ex.type] || Placeholder;
   return <C ex={ex} />;
 }
