@@ -102,7 +102,7 @@ export default function ChoiceExercise({ ex }) {
           const isCorrect = checked && normalize(o.value) === normalize(String(ex.correct));
           const isWrong = checked && isChosen && !isCorrect;
           return (
-            <motion.button key={o.value + i} whileTap={{ scale: 0.97 }}
+            <motion.button key={o.value + i} whileTap={{ scale: 0.97 }} data-opt={i + 1}
               onClick={() => {
                 if (session.checked) return;
                 setAnswer(o.value);

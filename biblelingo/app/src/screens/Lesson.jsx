@@ -16,6 +16,33 @@ export default function Lesson() {
   const app = useAppState();
   useEffect(() => () => stopClip(), []);
 
+  // Em desenvolvimento, expõe a sessão para os testes de ponta a ponta
+  if (import.meta.env.DEV && typeof window !== "undefined") window.__session = session;
+
+  // Atalhos de teclado: Enter/espaço verifica ou continua; 1-9 escolhe a opção
+  useEffect(() => {
+    const onKey = (e) => {
+      if (!session || session.phase === "result") return;
+      const tag = e.target && e.target.tagName;
+      const inInput = tag === "INPUT" || tag === "TEXTAREA";
+      const cur = session.exercises[session.index];
+      if (!cur) return;
+      const has = cur.silent || (session.answer != null && String(session.answer) !== "");
+      if ((e.key === "Enter" || (e.key === " " && session.checked)) && !inInput && (has || session.checked)) {
+        e.preventDefault();
+        check();
+        return;
+      }
+      if (!inInput && !session.checked && /^[1-9]$/.test(e.key)) {
+        const opts = document.querySelectorAll("[data-opt]");
+        const o = opts[Number(e.key) - 1];
+        if (o) o.click();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, []);
+
   if (!session) return null;
   if (session.phase === "result") return <Result />;
 
