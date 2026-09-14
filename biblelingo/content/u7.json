@@ -1,0 +1,482 @@
+{
+  "id": "u7",
+  "lessons": [
+    {
+      "id": "u7l1",
+      "title": "Fiel na Babilônia",
+      "vocab": [
+        {
+          "en": "Babylon",
+          "pt": "Babilônia",
+          "icon": "🏙️"
+        },
+        {
+          "en": "food",
+          "pt": "comida (manjar)",
+          "icon": "🍲"
+        },
+        {
+          "en": "vegetables",
+          "pt": "legumes",
+          "icon": "🥦"
+        },
+        {
+          "en": "wisdom",
+          "pt": "sabedoria",
+          "icon": "🦉"
+        },
+        {
+          "en": "wine",
+          "pt": "vinho",
+          "icon": "🍷"
+        },
+        {
+          "en": "ten",
+          "pt": "dez",
+          "icon": "🔟"
+        },
+        {
+          "en": "home",
+          "pt": "casa (lar)",
+          "icon": "🏠"
+        },
+        {
+          "en": "to defile",
+          "pt": "contaminar(-se)",
+          "icon": "🚫"
+        },
+        {
+          "en": "statue",
+          "pt": "estátua",
+          "icon": "🗿"
+        },
+        {
+          "en": "furnace",
+          "pt": "fornalha",
+          "icon": "🔥"
+        }
+      ],
+      "sentences": [
+        {
+          "en": "Daniel was far from home",
+          "pt": "Daniel estava longe de casa"
+        },
+        {
+          "en": "In Babylon, Daniel was called Belteshazzar",
+          "pt": "Na Babilônia, Daniel foi chamado Beltessazar"
+        },
+        {
+          "en": "The king gave them his food and his wine",
+          "pt": "O rei lhes deu do seu manjar e do seu vinho"
+        },
+        {
+          "en": "Daniel purposed in his heart not to defile himself",
+          "pt": "Daniel assentou no seu coração não se contaminar",
+          "alt": [
+            "Daniel decided in his heart not to defile himself"
+          ]
+        },
+        {
+          "en": "Give us vegetables to eat and water to drink",
+          "pt": "Dá-nos legumes para comer e água para beber"
+        },
+        {
+          "en": "Test your servants for ten days",
+          "alt": [
+            "Prove your servants for ten days"
+          ],
+          "pt": "Experimenta os teus servos por dez dias"
+        },
+        {
+          "en": "After ten days they looked healthier than the other young men",
+          "pt": "Ao fim de dez dias, pareciam mais saudáveis que os outros jovens"
+        },
+        {
+          "en": "God gave them knowledge and wisdom",
+          "pt": "Deus lhes deu conhecimento e sabedoria"
+        },
+        {
+          "en": "The king found them ten times wiser than all his magicians",
+          "alt": [
+            "The king found them ten times better than all his magicians"
+          ],
+          "pt": "O rei os achou dez vezes mais doutos que todos os seus magos"
+        },
+        {
+          "en": "Nebuchadnezzar dreamed of a great statue",
+          "pt": "Nabucodonosor sonhou com uma grande estátua"
+        },
+        {
+          "en": "A stone broke the statue into pieces",
+          "pt": "Uma pedra quebrou a estátua em pedaços"
+        },
+        {
+          "en": "Our God is able to deliver us from the fiery furnace",
+          "pt": "O nosso Deus nos pode livrar da fornalha de fogo ardente"
+        }
+      ],
+      "verse": {
+        "text": "Daniel purposed in his heart that he would not defile himself with the portion of the king's meat.",
+        "pt": "Daniel assentou no seu coração não se contaminar com a porção do manjar do rei.",
+        "ref": "Daniel 1:8",
+        "blank": "heart",
+        "options": [
+          "heart",
+          "hand",
+          "mouth",
+          "house"
+        ]
+      },
+      "reading": {
+        "text": "Daniel was taken from Jerusalem to Babylon. King Nebuchadnezzar had a dream about a great statue of gold, silver, brass and iron. A stone broke the statue into pieces. God showed Daniel the dream and its meaning.",
+        "pt": "Daniel foi levado de Jerusalém para a Babilônia. O rei Nabucodonosor teve um sonho com uma grande estátua de ouro, prata, bronze e ferro. Uma pedra quebrou a estátua em pedaços. Deus mostrou a Daniel o sonho e o seu significado.",
+        "q": "What broke the statue into pieces?",
+        "options": [
+          "A stone",
+          "A lion",
+          "The wind"
+        ],
+        "answer": "A stone"
+      },
+      "dialogue": {
+        "line": "Daniel, the king gave you his food and his wine.",
+        "pt": "Daniel, o rei lhe deu do seu manjar e do seu vinho.",
+        "options": [
+          "Please, give us vegetables and water for ten days.",
+          "Bring me a harp and a sling.",
+          "Let there be light."
+        ],
+        "answer": "Please, give us vegetables and water for ten days.",
+        "answerPt": "Por favor, dê-nos legumes e água por dez dias."
+      },
+      "quiz": {
+        "q": "Who was thrown into the fiery furnace?",
+        "options": [
+          "Shadrach, Meshach and Abednego",
+          "Daniel and the king",
+          "The magicians of Babylon"
+        ],
+        "answer": "Shadrach, Meshach and Abednego",
+        "explain": "Sadraque, Mesaque e Abede-Nego não adoraram a estátua de ouro e foram lançados na fornalha, mas Deus os livrou (Daniel 3:17-27)."
+      }
+    },
+    {
+      "id": "u7l2",
+      "title": "A cova dos leões",
+      "vocab": [
+        {
+          "en": "lion",
+          "pt": "leão",
+          "icon": "🦁"
+        },
+        {
+          "en": "to pray",
+          "pt": "orar",
+          "icon": "🛐"
+        },
+        {
+          "en": "law",
+          "pt": "lei",
+          "icon": "⚖️"
+        },
+        {
+          "en": "den",
+          "pt": "cova",
+          "icon": "🕳️"
+        },
+        {
+          "en": "to kneel",
+          "pt": "ajoelhar-se",
+          "icon": "🧎"
+        },
+        {
+          "en": "faithful",
+          "pt": "fiel",
+          "icon": "🛡️"
+        },
+        {
+          "en": "decree",
+          "pt": "decreto",
+          "icon": "📜"
+        },
+        {
+          "en": "to throw",
+          "pt": "lançar",
+          "icon": "🤾"
+        },
+        {
+          "en": "to seal",
+          "pt": "selar",
+          "icon": "🔏"
+        },
+        {
+          "en": "to sleep",
+          "pt": "dormir",
+          "icon": "😴"
+        }
+      ],
+      "sentences": [
+        {
+          "en": "Daniel was faithful to God",
+          "pt": "Daniel era fiel a Deus"
+        },
+        {
+          "en": "The king made a law",
+          "pt": "O rei fez uma lei"
+        },
+        {
+          "en": "For thirty days they could only pray to the king",
+          "pt": "Por trinta dias, só podiam orar ao rei"
+        },
+        {
+          "en": "Darius signed the decree",
+          "pt": "Dario assinou o decreto"
+        },
+        {
+          "en": "The law of the Medes and Persians cannot be changed",
+          "pt": "A lei dos medos e dos persas não se pode revogar"
+        },
+        {
+          "en": "He prayed with his window open toward Jerusalem",
+          "alt": [
+            "He prayed with his windows open toward Jerusalem"
+          ],
+          "pt": "Ele orava com a janela aberta do lado de Jerusalém"
+        },
+        {
+          "en": "Daniel prayed three times a day",
+          "pt": "Daniel orava três vezes ao dia"
+        },
+        {
+          "en": "He knelt, prayed and gave thanks to his God",
+          "alt": [
+            "He kneeled, prayed and gave thanks to his God"
+          ],
+          "pt": "Ele se punha de joelhos, orava e dava graças ao seu Deus"
+        },
+        {
+          "en": "They threw Daniel into the den",
+          "pt": "Eles lançaram Daniel na cova"
+        },
+        {
+          "en": "A stone was laid upon the mouth of the lions' den",
+          "pt": "Uma pedra foi posta sobre a boca da cova dos leões"
+        },
+        {
+          "en": "Darius sealed the stone with his own ring",
+          "alt": [
+            "Darius sealed the stone with his own signet"
+          ],
+          "pt": "Dario selou a pedra com o seu anel"
+        },
+        {
+          "en": "The king could not sleep that night",
+          "pt": "Naquela noite, o rei não conseguiu dormir"
+        }
+      ],
+      "verse": {
+        "text": "He kneeled upon his knees three times a day, and prayed, and gave thanks before his God.",
+        "pt": "Três vezes no dia se punha de joelhos, e orava, e dava graças diante do seu Deus.",
+        "ref": "Daniel 6:10",
+        "blank": "prayed",
+        "options": [
+          "prayed",
+          "sang",
+          "slept",
+          "ran"
+        ]
+      },
+      "reading": {
+        "text": "King Darius set Daniel over all the princes, because an excellent spirit was in him. The princes sought to find a fault in Daniel, but they found none, because he was faithful. So they asked the king to sign a law: for thirty days, pray only to the king.",
+        "pt": "O rei Dario pôs Daniel sobre todos os príncipes, porque nele havia um espírito excelente. Os príncipes procuraram achar culpa em Daniel, mas não acharam nenhuma, porque ele era fiel. Então pediram ao rei que assinasse uma lei: por trinta dias, orar só ao rei.",
+        "q": "Why could the princes find no fault in Daniel?",
+        "options": [
+          "Because he was faithful",
+          "Because he hid in the den",
+          "Because he was the king's son"
+        ],
+        "answer": "Because he was faithful"
+      },
+      "dialogue": {
+        "line": "Daniel, the king made a new law!",
+        "pt": "Daniel, o rei fez uma nova lei!",
+        "options": [
+          "I will pray to my God anyway.",
+          "Then I will pray only to the king.",
+          "Bring me the king's wine."
+        ],
+        "answer": "I will pray to my God anyway.",
+        "answerPt": "Vou orar ao meu Deus mesmo assim."
+      },
+      "quiz": {
+        "q": "What did the king do with the stone on the den?",
+        "options": [
+          "He sealed it with his signet",
+          "He broke it into pieces",
+          "He threw it into the sea"
+        ],
+        "answer": "He sealed it with his signet",
+        "explain": "Puseram uma pedra sobre a boca da cova, e o rei a selou com o seu anel (Daniel 6:17)."
+      }
+    },
+    {
+      "id": "u7l3",
+      "title": "O Deus vivo",
+      "vocab": [
+        {
+          "en": "angel",
+          "pt": "anjo",
+          "icon": "👼"
+        },
+        {
+          "en": "living",
+          "pt": "vivo (vivente)",
+          "icon": "💚"
+        },
+        {
+          "en": "kingdom",
+          "pt": "reino",
+          "icon": "🏰"
+        },
+        {
+          "en": "to deliver",
+          "pt": "livrar",
+          "icon": "🛡️"
+        },
+        {
+          "en": "mouth",
+          "pt": "boca",
+          "icon": "👄"
+        },
+        {
+          "en": "to close",
+          "pt": "fechar (cerrar)",
+          "icon": "🔒"
+        },
+        {
+          "en": "morning",
+          "pt": "manhã",
+          "icon": "🌄"
+        },
+        {
+          "en": "forever",
+          "pt": "para sempre",
+          "icon": "♾️"
+        },
+        {
+          "en": "to save",
+          "pt": "salvar",
+          "icon": "🆘"
+        },
+        {
+          "en": "to write",
+          "pt": "escrever",
+          "icon": "📝"
+        }
+      ],
+      "sentences": [
+        {
+          "en": "In the morning the king ran to the den",
+          "pt": "De manhã o rei correu para a cova"
+        },
+        {
+          "en": "Daniel, servant of the living God!",
+          "pt": "Daniel, servo do Deus vivo!"
+        },
+        {
+          "en": "Is your God able to deliver you from the lions?",
+          "pt": "Pode o teu Deus livrar-te dos leões?"
+        },
+        {
+          "en": "O king, live forever",
+          "alt": [
+            "O king, live for ever"
+          ],
+          "pt": "Ó rei, vive para sempre!"
+        },
+        {
+          "en": "God sent his angel",
+          "pt": "Deus enviou o seu anjo"
+        },
+        {
+          "en": "The angel shut the lions' mouths",
+          "alt": [
+            "The angel closed the lions' mouths"
+          ],
+          "pt": "O anjo fechou a boca dos leões"
+        },
+        {
+          "en": "He is the living God",
+          "pt": "Ele é o Deus vivo"
+        },
+        {
+          "en": "His kingdom is forever",
+          "pt": "O seu reino é para sempre"
+        },
+        {
+          "en": "His kingdom shall not be destroyed",
+          "alt": [
+            "His kingdom will not be destroyed"
+          ],
+          "pt": "O seu reino não se pode destruir"
+        },
+        {
+          "en": "He delivers and he saves",
+          "pt": "Ele livra e salva"
+        },
+        {
+          "en": "The king wrote to all the people",
+          "pt": "O rei escreveu a todo o povo"
+        },
+        {
+          "en": "He delivered Daniel from the power of the lions",
+          "pt": "Ele livrou Daniel do poder dos leões"
+        }
+      ],
+      "verse": {
+        "text": "He is the living God, and stedfast for ever, and his kingdom that which shall not be destroyed.",
+        "pt": "Ele é o Deus vivo e para sempre permanece; e o seu reino não se pode destruir.",
+        "ref": "Daniel 6:26",
+        "blank": "living",
+        "options": [
+          "living",
+          "little",
+          "mighty",
+          "holy"
+        ]
+      },
+      "reading": {
+        "text": "The king rose very early and went in haste to the den. Daniel was alive! The king was very glad and took Daniel out of the den. No hurt was found on him, because he believed in his God.",
+        "pt": "O rei se levantou muito cedo e foi com pressa à cova. Daniel estava vivo! O rei ficou muito alegre e tirou Daniel da cova. Nenhum dano se achou nele, porque crera no seu Deus.",
+        "q": "Why was no hurt found on Daniel?",
+        "options": [
+          "Because he believed in his God",
+          "Because the lions were asleep",
+          "Because the den was empty"
+        ],
+        "answer": "Because he believed in his God"
+      },
+      "dialogue": {
+        "line": "Daniel, is your God able to save you?",
+        "pt": "Daniel, o seu Deus pode salvá-lo?",
+        "options": [
+          "Yes! God sent his angel.",
+          "No, the window is closed.",
+          "Bring me five loaves."
+        ],
+        "answer": "Yes! God sent his angel.",
+        "answerPt": "Sim! Deus enviou o seu anjo."
+      },
+      "quiz": {
+        "q": "What happened to the men who accused Daniel?",
+        "options": [
+          "They were thrown into the lions' den",
+          "They became princes",
+          "They went to Jerusalem"
+        ],
+        "answer": "They were thrown into the lions' den",
+        "explain": "Os homens que acusaram Daniel foram lançados na cova dos leões (Daniel 6:24)."
+      }
+    }
+  ]
+}

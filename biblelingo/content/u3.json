@@ -1,0 +1,484 @@
+{
+  "id": "u3",
+  "lessons": [
+    {
+      "id": "u3l1",
+      "title": "A sarça ardente",
+      "vocab": [
+        {
+          "en": "fire",
+          "pt": "fogo",
+          "icon": "🔥"
+        },
+        {
+          "en": "holy",
+          "pt": "santo",
+          "icon": "✨"
+        },
+        {
+          "en": "ground",
+          "pt": "chão (terra)",
+          "icon": "🟫"
+        },
+        {
+          "en": "to see",
+          "pt": "ver",
+          "icon": "👀"
+        },
+        {
+          "en": "bush",
+          "pt": "sarça",
+          "icon": "🌿"
+        },
+        {
+          "en": "shoes",
+          "pt": "sapatos (sandálias)",
+          "icon": "👡"
+        },
+        {
+          "en": "afraid",
+          "pt": "com medo",
+          "icon": "😨"
+        },
+        {
+          "en": "serpent",
+          "pt": "serpente (cobra)",
+          "icon": "🐍"
+        },
+        {
+          "en": "I AM",
+          "pt": "EU SOU",
+          "icon": "🗣️"
+        },
+        {
+          "en": "to speak",
+          "pt": "falar",
+          "icon": "💬"
+        }
+      ],
+      "sentences": [
+        {
+          "en": "The bush burned with fire",
+          "pt": "A sarça ardia no fogo"
+        },
+        {
+          "en": "The angel of the LORD appeared in a flame of fire",
+          "pt": "O anjo do Senhor lhe apareceu numa chama de fogo"
+        },
+        {
+          "en": "Take off your shoes",
+          "pt": "Tira os teus sapatos"
+        },
+        {
+          "en": "This is holy ground",
+          "pt": "Este é chão santo"
+        },
+        {
+          "en": "Moses saw a bush that burned but was not consumed",
+          "pt": "Moisés viu uma sarça que ardia mas não se consumia"
+        },
+        {
+          "en": "God called to him out of the bush, Moses, Moses",
+          "alt": [
+            "God called him out of the bush, Moses, Moses"
+          ],
+          "pt": "Deus o chamou do meio da sarça: Moisés, Moisés"
+        },
+        {
+          "en": "Moses hid his face, for he was afraid to look at God",
+          "alt": [
+            "Moses hid his face because he was afraid to look at God"
+          ],
+          "pt": "Moisés encobriu o rosto, porque temeu olhar para Deus"
+        },
+        {
+          "en": "I AM THAT I AM",
+          "alt": [
+            "I am that I am",
+            "I am who I am"
+          ],
+          "pt": "EU SOU O QUE SOU"
+        },
+        {
+          "en": "Say to them, I AM has sent me to you",
+          "alt": [
+            "God said, I am has sent me to you"
+          ],
+          "pt": "Dize-lhes: EU SOU me enviou a vós"
+        },
+        {
+          "en": "The rod became a serpent, and Moses fled from it",
+          "pt": "A vara se tornou em cobra, e Moisés fugiu dela"
+        },
+        {
+          "en": "Moses said, I am slow of speech",
+          "pt": "Moisés disse: Eu sou pesado de boca"
+        },
+        {
+          "en": "Aaron your brother will speak for you",
+          "pt": "Arão, teu irmão, falará por ti"
+        }
+      ],
+      "verse": {
+        "text": "The place whereon thou standest is holy ground.",
+        "pt": "O lugar em que tu estás é terra santa.",
+        "ref": "Êxodo 3:5",
+        "blank": "holy",
+        "options": [
+          "holy",
+          "dry",
+          "cold",
+          "far"
+        ]
+      },
+      "reading": {
+        "text": "Moses saw a bush that burned with fire, but it was not consumed. God called to him from the bush. God said: Take off your shoes, this is holy ground.",
+        "pt": "Moisés viu uma sarça que ardia em fogo, mas não se consumia. Deus o chamou do meio da sarça. Deus disse: Tira os teus sapatos, este é chão santo.",
+        "q": "What did God say to Moses?",
+        "options": [
+          "Take off your shoes",
+          "Build an ark",
+          "Sing a song"
+        ],
+        "answer": "Take off your shoes"
+      },
+      "dialogue": {
+        "line": "Moses, who sent you to us?",
+        "pt": "Moisés, quem te enviou a nós?",
+        "options": [
+          "I AM has sent me to you.",
+          "The king of Egypt sent me.",
+          "Noah sent me."
+        ],
+        "answer": "I AM has sent me to you.",
+        "answerPt": "EU SOU me enviou a vós."
+      },
+      "quiz": {
+        "q": "What did the rod of Moses become?",
+        "options": [
+          "A serpent",
+          "A fish",
+          "A tree"
+        ],
+        "answer": "A serpent",
+        "explain": "Moisés lançou a vara na terra, e ela se tornou em cobra (Êxodo 4:3)."
+      }
+    },
+    {
+      "id": "u3l2",
+      "title": "Deixa ir o meu povo",
+      "vocab": [
+        {
+          "en": "people",
+          "pt": "povo",
+          "icon": "👥"
+        },
+        {
+          "en": "Pharaoh",
+          "pt": "Faraó",
+          "icon": "👑"
+        },
+        {
+          "en": "to go",
+          "pt": "ir",
+          "icon": "🚶"
+        },
+        {
+          "en": "Egypt",
+          "pt": "Egito",
+          "icon": "🏺"
+        },
+        {
+          "en": "to say",
+          "pt": "dizer",
+          "icon": "💬"
+        },
+        {
+          "en": "free",
+          "pt": "livre",
+          "icon": "🔓"
+        },
+        {
+          "en": "to harden",
+          "pt": "endurecer",
+          "icon": "🧱"
+        },
+        {
+          "en": "blood",
+          "pt": "sangue",
+          "icon": "🔴"
+        },
+        {
+          "en": "frogs",
+          "pt": "rãs",
+          "icon": "🐸"
+        },
+        {
+          "en": "lamb",
+          "pt": "cordeiro",
+          "icon": "🐑"
+        }
+      ],
+      "sentences": [
+        {
+          "en": "Let my people go",
+          "pt": "Deixa ir o meu povo"
+        },
+        {
+          "en": "Moses went to Egypt",
+          "pt": "Moisés foi ao Egito"
+        },
+        {
+          "en": "The king said no",
+          "pt": "O rei disse não"
+        },
+        {
+          "en": "My people will be free",
+          "pt": "O meu povo será livre"
+        },
+        {
+          "en": "Pharaoh said, Who is the LORD? I do not know the LORD",
+          "alt": [
+            "Pharaoh said, Who is the Lord? I do not know the Lord"
+          ],
+          "pt": "Faraó disse: Quem é o Senhor? Eu não conheço o Senhor"
+        },
+        {
+          "en": "Pharaoh hardened his heart and did not let the people go",
+          "pt": "Faraó endureceu o seu coração e não deixou ir o povo"
+        },
+        {
+          "en": "The water of the river turned to blood",
+          "pt": "A água do rio se tornou em sangue"
+        },
+        {
+          "en": "Frogs came up and covered the land of Egypt",
+          "pt": "Rãs subiram e cobriram a terra do Egito"
+        },
+        {
+          "en": "God sent locusts and thick darkness upon Egypt",
+          "pt": "Deus enviou gafanhotos e trevas espessas sobre o Egito"
+        },
+        {
+          "en": "Put the blood of the lamb on the door posts",
+          "pt": "Ponde o sangue do cordeiro nas ombreiras das portas"
+        },
+        {
+          "en": "When I see the blood, I will pass over you",
+          "pt": "Quando eu vir o sangue, passarei por cima de vós"
+        },
+        {
+          "en": "Pharaoh called Moses by night and said, Go out from my people",
+          "pt": "Faraó chamou a Moisés de noite e disse: Saí do meio do meu povo"
+        }
+      ],
+      "verse": {
+        "text": "Thus saith the LORD God of Israel, Let my people go.",
+        "pt": "Assim diz o Senhor, Deus de Israel: Deixa ir o meu povo.",
+        "ref": "Êxodo 5:1",
+        "blank": "people",
+        "options": [
+          "people",
+          "sheep",
+          "sons",
+          "kings"
+        ]
+      },
+      "reading": {
+        "text": "Moses went to Pharaoh and said: Let my people go. But Pharaoh hardened his heart. So God sent frogs, locusts and darkness upon Egypt.",
+        "pt": "Moisés foi a Faraó e disse: Deixa ir o meu povo. Mas Faraó endureceu o seu coração. Então Deus enviou rãs, gafanhotos e trevas sobre o Egito.",
+        "q": "What did God send upon Egypt?",
+        "options": [
+          "Frogs, locusts and darkness",
+          "Snow and ice",
+          "Lions and bears"
+        ],
+        "answer": "Frogs, locusts and darkness"
+      },
+      "dialogue": {
+        "line": "Who are you?",
+        "pt": "Quem é você?",
+        "options": [
+          "I am Moses. Let my people go.",
+          "I am the ark.",
+          "I am a rainbow."
+        ],
+        "answer": "I am Moses. Let my people go.",
+        "answerPt": "Eu sou Moisés. Deixa ir o meu povo."
+      },
+      "quiz": {
+        "q": "What did the people put on the door posts?",
+        "options": [
+          "The blood of the lamb",
+          "Olive leaves",
+          "Gold and silver"
+        ],
+        "answer": "The blood of the lamb",
+        "explain": "Puseram o sangue do cordeiro nas ombreiras das portas, e o Senhor passou por cima daquelas casas (Êxodo 12:7,13)."
+      }
+    },
+    {
+      "id": "u3l3",
+      "title": "O mar se abre",
+      "vocab": [
+        {
+          "en": "sea",
+          "pt": "mar",
+          "icon": "🌊"
+        },
+        {
+          "en": "dry",
+          "pt": "seco",
+          "icon": "🏜️"
+        },
+        {
+          "en": "hand",
+          "pt": "mão",
+          "icon": "✋"
+        },
+        {
+          "en": "wind",
+          "pt": "vento",
+          "icon": "💨"
+        },
+        {
+          "en": "to walk",
+          "pt": "andar",
+          "icon": "🦶"
+        },
+        {
+          "en": "to divide",
+          "pt": "dividir",
+          "icon": "✂️"
+        },
+        {
+          "en": "pillar",
+          "pt": "coluna",
+          "icon": "🏛️"
+        },
+        {
+          "en": "wall",
+          "pt": "muro",
+          "icon": "🧱"
+        },
+        {
+          "en": "to sink",
+          "pt": "afundar",
+          "icon": "⬇️"
+        },
+        {
+          "en": "to fight",
+          "pt": "pelejar (lutar)",
+          "icon": "⚔️"
+        }
+      ],
+      "sentences": [
+        {
+          "en": "The waters were divided",
+          "pt": "As águas foram divididas"
+        },
+        {
+          "en": "Moses stretched out his hand",
+          "pt": "Moisés estendeu a sua mão"
+        },
+        {
+          "en": "The people walked on dry ground",
+          "pt": "O povo andou em chão seco"
+        },
+        {
+          "en": "A strong wind divided the sea",
+          "pt": "Um vento forte dividiu o mar"
+        },
+        {
+          "en": "The children of Israel went into the midst of the sea",
+          "pt": "Os filhos de Israel entraram pelo meio do mar"
+        },
+        {
+          "en": "The LORD went before them in a pillar of fire by night",
+          "alt": [
+            "The Lord went before them in a pillar of fire by night"
+          ],
+          "pt": "O Senhor ia adiante deles, de noite, numa coluna de fogo"
+        },
+        {
+          "en": "Pharaoh followed them with his chariots to the sea",
+          "pt": "Faraó os seguiu com os seus carros até o mar"
+        },
+        {
+          "en": "Fear not, the LORD will fight for you",
+          "alt": [
+            "Fear not, the Lord will fight for you",
+            "Do not fear, the LORD will fight for you"
+          ],
+          "pt": "Não temais, o Senhor pelejará por vós"
+        },
+        {
+          "en": "The waters were a wall on their right and on their left",
+          "pt": "As águas foram como muro à sua direita e à sua esquerda"
+        },
+        {
+          "en": "The sea came back and covered the Egyptians and their chariots",
+          "pt": "O mar voltou e cobriu os egípcios e os seus carros"
+        },
+        {
+          "en": "The Egyptians sank into the sea like a stone",
+          "alt": [
+            "The Egyptians sank into the sea as a stone"
+          ],
+          "pt": "Os egípcios afundaram no mar como uma pedra"
+        },
+        {
+          "en": "Miriam sang, He threw the horse and his rider into the sea",
+          "alt": [
+            "Miriam sang, The horse and his rider he has thrown into the sea"
+          ],
+          "pt": "Miriã cantou: Ele lançou no mar o cavalo e o seu cavaleiro"
+        }
+      ],
+      "verse": {
+        "text": "The LORD caused the sea to go back by a strong east wind all that night, and made the sea dry land, and the waters were divided.",
+        "pt": "O Senhor fez retirar o mar por um forte vento oriental toda aquela noite; e o mar tornou-se em seco, e as águas foram partidas.",
+        "ref": "Êxodo 14:21",
+        "blank": "divided",
+        "options": [
+          "divided",
+          "deep",
+          "dry",
+          "cold"
+        ]
+      },
+      "reading": {
+        "text": "The LORD went before the people in a pillar of cloud by day and a pillar of fire by night. At the sea, Moses stretched out his hand. The waters were divided, and the people walked on dry ground.",
+        "pt": "O Senhor ia adiante do povo, de dia numa coluna de nuvem e de noite numa coluna de fogo. No mar, Moisés estendeu a mão. As águas foram divididas, e o povo andou em terra seca.",
+        "q": "What went before the people by night?",
+        "options": [
+          "A pillar of fire",
+          "A pillar of cloud",
+          "A big fish"
+        ],
+        "answer": "A pillar of fire"
+      },
+      "dialogue": {
+        "line": "Moses, the sea is in front of us!",
+        "pt": "Moisés, o mar está na nossa frente!",
+        "options": [
+          "Stretch out your hand!",
+          "Sing a song!",
+          "Build an ark!"
+        ],
+        "answer": "Stretch out your hand!",
+        "answerPt": "Estende a tua mão!"
+      },
+      "quiz": {
+        "q": "What happened to the Egyptians in the sea?",
+        "options": [
+          "The waters covered them",
+          "They walked on dry ground",
+          "They went back to Egypt"
+        ],
+        "answer": "The waters covered them",
+        "explain": "As águas tornaram e cobriram os carros e os cavaleiros de Faraó; nem ainda um deles ficou (Êxodo 14:28)."
+      }
+    }
+  ]
+}
