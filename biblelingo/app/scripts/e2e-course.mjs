@@ -102,7 +102,8 @@ for (const id of ids) {
         if (!window.__session || window.__session.index !== index) return false;
         const nrm = (s) => String(s).toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, " ").replace(/\s+/g, " ").trim();
         const opts = [...document.querySelectorAll("[data-opt]")];
-        const hit = opts.find((b) => nrm(b.textContent) === nrm(correct));
+        const c = nrm(correct);
+        const hit = opts.find((b) => b.dataset.value != null ? nrm(b.dataset.value) === c : (nrm(b.textContent) === c || nrm(b.textContent).endsWith(" " + c)));
         if (hit) hit.click();
         return !!hit;
       }, { correct: st.correct, index: st.index });
