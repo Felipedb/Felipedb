@@ -222,7 +222,7 @@ function openGuide(unit, ui) {
       <div class="g-words">${vocab.map((w) => `<button class="g-word" data-say="${w.en.replace(/"/g, "&quot;")}"><span class="g-ico">${w.icon || "📖"}</span><b>${w.en}</b><small>${w.pt}</small></button>`).join("")}</div>
       <h4>Frases</h4>
       <div class="g-sents">${sentences.map((s) => `<button class="g-sent" data-say="${s.en.replace(/"/g, "&quot;")}"><i class="nav-ico">${ICONS.speaker}</i><span><b>${s.en}</b><small>${s.pt}</small></span></button>`).join("")}</div>
-      ${verses.length ? `<h4>Versículos</h4>${verses.map((v) => `<blockquote class="g-verse"><p>${v.text.replace(v.blank, `<b>${v.blank}</b>`)}</p><cite>${v.ref} (KJV)</cite></blockquote>`).join("")}` : ""}
+      ${verses.length ? `<h4>Versículos</h4>${verses.map((v) => `<blockquote class="g-verse"><p>${v.text.replace(blankRegex(v.blank), `<b>${v.blank}</b>`)}</p><cite>${v.ref} (KJV)</cite></blockquote>`).join("")}` : ""}
     </div>`;
   openSheet("guide-sheet", html);
   document.querySelectorAll("#guide-sheet [data-say]").forEach((b) => b.addEventListener("click", () => speak(b.dataset.say, { char: castChar(CHARACTERS[unit.face] ? unit.face : (UNIT_CAST[unit.id] || [])[0]) })));
@@ -287,11 +287,11 @@ function renderProfile() {
   if (!state.joined) { state.joined = today(); save(); }
   $("#prof-avatar").innerHTML = charFace(CHARACTERS.jesus);
   $("#prof-name").textContent = state.name || "Discípulo";
-  const [y, m] = state.joined.split("-");
+  const [y, m] = String(state.joined || today()).split("-");
   const meses = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
   $("#prof-since").textContent = `Membro desde ${meses[+m - 1]} de ${y}`;
   const crowns = Object.values(state.crowns || {}).reduce((s, c) => s + c, 0);
-  const stars = Object.values(state.stars || {}).reduce((s, x) => s + x, 0);
+  const stars = Object.values(state.stars || {}).reduce((s, x) => s + Math.min(3, Number(x) || 0), 0);
   $("#prof-tiles").innerHTML = [
     ["🔥", state.streak, "Dias seguidos"], ["⚡", state.xp, "XP total"], ["👑", crowns, "Coroas"], ["⭐", stars, "Estrelas"],
   ].map(([i, v, l]) => `<div class="stat-tile"><span class="stat-ico">${i}</span><b>${v}</b><small>${l}</small></div>`).join("");

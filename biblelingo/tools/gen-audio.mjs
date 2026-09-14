@@ -59,7 +59,7 @@ const VOICE_BY_CHAR = {
   marta: "aria", lidia: "rachel", madalena: "domi",
 };
 
-const audioKey = (t) => String(t).toLowerCase().replace(/[^a-z0-9 ]/g, "").replace(/\s+/g, " ").trim();
+const audioKey = (t) => String(t).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9 ]/g, "").replace(/\s+/g, " ").trim();
 
 // ---------- Coleta de textos: { text, char } ----------
 const jobs = new Map(); // key|char -> { text, char }
@@ -83,7 +83,7 @@ COURSE.forEach((u) => {
   u.lessons.forEach((l) => {
     (l.vocab || []).forEach((v) => add(v.en, own(v.en)));
     (l.sentences || []).forEach((s) => add(s.en, own(s.en)));
-    if (l.verse) { const c = own(l.verse.text); add(l.verse.text, c); add(l.verse.text.replace(l.verse.blank, "blank"), c); l.verse.options.forEach((o) => add(o, c)); }
+    if (l.verse) { const c = own(l.verse.text); add(l.verse.text, c); add(l.verse.text.replace(new RegExp("\\b" + l.verse.blank.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b"), "blank"), c); l.verse.options.forEach((o) => add(o, c)); }
     if (l.dialogue) { const c = own(l.dialogue.line); add(l.dialogue.line, c); l.dialogue.options.forEach((o) => add(o, c)); }
     if (l.quiz) { const c = own(l.quiz.q); add(l.quiz.q, c); l.quiz.options.forEach((o) => add(o, c)); }
     if (l.reading) { const c = own(l.reading.q); add(l.reading.text, c); add(l.reading.q, c); l.reading.options.forEach((o) => add(o, c)); }

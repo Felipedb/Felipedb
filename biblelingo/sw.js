@@ -1,5 +1,5 @@
 // BíbliaLearn — cache offline do app (shell, arte e áudios já tocados)
-const CACHE = "biblialearn-v5";
+const CACHE = "biblialearn-v6";
 const SHELL = [
   "./", "index.html", "style.css", "app.js", "features.js", "characters.js", "data.js",
   "manifest.webmanifest", "sfx-data.js", "sfx.js", "hub.js", "stories.js", "icons.js", "screens.js", "scenes.js", "scenes2.js", "scene-engine.js",
@@ -27,8 +27,8 @@ self.addEventListener("fetch", (e) => {
   if (isAsset) {
     e.respondWith(
       caches.match(e.request).then((hit) => hit || fetch(e.request).then((res) => {
-        const copy = res.clone();
-        caches.open(CACHE).then((c) => c.put(e.request, copy));
+        // Só respostas completas e boas entram no cache (um 404 guardado nunca seria rebuscado)
+        if (res.ok && res.status === 200) { const copy = res.clone(); caches.open(CACHE).then((c) => c.put(e.request, copy)).catch(() => {}); }
         return res;
       }))
     );
@@ -36,9 +36,8 @@ self.addEventListener("fetch", (e) => {
   }
   e.respondWith(
     fetch(e.request).then((res) => {
-      const copy = res.clone();
-      caches.open(CACHE).then((c) => c.put(e.request, copy));
+      if (res.ok && res.status === 200) { const copy = res.clone(); caches.open(CACHE).then((c) => c.put(e.request, copy)).catch(() => {}); }
       return res;
-    }).catch(() => caches.match(e.request).then((hit) => hit || caches.match("index.html")))
+    }).catch(() => caches.match(e.request).then((hit) => hit || (e.request.mode === "navigate" ? caches.match("index.html") : Response.error())))
   );
 });

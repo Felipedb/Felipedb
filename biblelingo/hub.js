@@ -1,24 +1,29 @@
 // BíbliaLearn — hub de prática (Match Madness, revisão rápida, escuta, erros, histórias)
 // Carregado antes de app.js; só define funções.
 
-function learnedVocab() {
+// Palavras das etapas concluídas (sem duplicar as que aparecem em dois capítulos)
+function learnedOnly() {
   const done = new Set(Object.keys(state.completed || {}));
-  const words = [];
-  COURSE.forEach((u) => u.lessons.forEach((l) => { if (done.has(l.id) && l.vocab) words.push(...l.vocab); }));
+  const seen = new Set(), words = [];
+  COURSE.forEach((u) => u.lessons.forEach((l) => { if (done.has(l.id) && l.vocab) l.vocab.forEach((v) => { if (!seen.has(v.en)) { seen.add(v.en); words.push(v); } }); }));
+  return words;
+}
+function learnedVocab() {
+  const words = learnedOnly();
   return words.length >= 8 ? words : allVocab().slice(0, 16);
 }
 
 function renderHub() {
   const hub = $("#hub-body");
   const nErr = Object.keys(state.errors || {}).length;
-  const learned = learnedVocab().length;
+  const learned = learnedOnly().length;
   const stories = STORIES.map((s) => {
     const unit = COURSE.find((u) => u.id === s.unit);
     const unlocked = unit && state.completed[unit.lessons[0].id];
     const done = state.stories && state.stories[s.id];
     return `<button class="story-card${unlocked ? "" : " locked"}" data-story="${s.id}" ${unlocked ? "" : "disabled"}>
       <span class="story-face">${charFace(CHARACTERS[s.cover])}</span>
-      <span class="story-info"><b>${s.title}</b><small>${s.subtitle}${done ? " · ✓ lida" : unlocked ? "" : " · 🔒 conclua a 1ª etapa da unidade"}</small></span>
+      <span class="story-info"><b>${s.title}</b><small>${s.subtitle}${done ? " · ✓ lida" : unlocked ? "" : " · 🔒 conclua a 1ª etapa do capítulo"}</small></span>
       <span class="story-xp">+${s.xp} XP</span>
     </button>`;
   }).join("");
@@ -27,7 +32,7 @@ function renderHub() {
     <p class="hub-sub">${learned} palavras aprendidas · ${nErr} para revisar</p>
     <div class="hub-grid">
       <button class="hub-card" data-hub="madness"><span class="hub-icon">⚡</span><b>Match Madness</b><small>Pares contra o relógio · 60 s</small></button>
-      <button class="hub-card" data-hub="review"><span class="hub-icon">🔁</span><b>Revisão rápida</b><small>10 exercícios das palavras que mais precisam de revisão</small></button>
+      <button class="hub-card" data-hub="review"><span class="hub-icon">🔁</span><b>Revisão rápida</b><small>9 exercícios das palavras que mais precisam de revisão</small></button>
       <button class="hub-card" data-hub="listen"><span class="hub-icon">🎧</span><b>Escuta rápida</b><small>8 exercícios de escuta</small></button>
       <button class="hub-card${nErr ? "" : " locked"}" data-hub="errors" ${nErr ? "" : "disabled"}><span class="hub-icon">🩹</span><b>Praticar erros</b><small>${nErr ? `${nErr} palavra(s) para acertar` : "Nenhum erro pendente"}</small></button>
     </div>
@@ -52,7 +57,7 @@ function startQuickPractice(kind, narrator) {
   const pool = allVocab();
   // As mais urgentes pela repetição espaçada; usuário novo (nada aprendido) pratica as primeiras palavras do curso
   const learned = learnedVocab();
-  const words = shuffle(weakestWords(learned.length ? learned : COURSE[0].lessons[0].vocab.slice(0, 8), 8));
+  const words = shuffle(weakestWords(learned, 8));
   const distract = (v, key) => shuffle(pool.filter((p) => p[key] !== v[key] && p.icon !== v.icon)).slice(0, 3);
   const ex = [];
   words.forEach((v, i) => {
@@ -67,7 +72,7 @@ function startQuickPractice(kind, narrator) {
     }
   });
   if (kind !== "listen" && words.length >= 4) ex.push({ type: "match", pairs: words.slice(0, 4) });
-  const list = kind === "listen" ? ex : shuffle(ex).slice(0, 10);
+  const list = spreadNeighbors(kind === "listen" ? ex : shuffle(ex).slice(0, 10));
   list.hard = [];
   const unit = COURSE[0];
   session = {
@@ -120,7 +125,8 @@ function madnessRound() {
       const sel = madness.selected;
       if (!sel) { madness.selected = { item, el: b }; b.classList.add("selected"); return; }
       if (sel.el === b) { b.classList.remove("selected"); madness.selected = null; return; }
-      if (sel.item.key === item.key && sel.item.side !== item.side) {
+      if (sel.item.side === item.side) { sel.el.classList.remove("selected"); madness.selected = { item, el: b }; b.classList.add("selected"); return; }
+      if (sel.item.key === item.key) {
         [sel.el, b].forEach((el) => { el.classList.remove("selected"); el.classList.add("matched", "pop"); });
         madness.score++;
         madness.pending--;

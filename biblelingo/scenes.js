@@ -17,7 +17,7 @@ const SCENE_EXTRAS = {
   jesse: { name: "Jessé", gender: "male", emoji: "👴", voice: "thomas" },
   acaz: { name: "Rei Acaz", gender: "male", emoji: "👑", voice: "harry" },
   ezequias: { name: "Rei Ezequias", gender: "male", emoji: "👑", voice: "matthew" },
-  potifar: { name: "Potifar", gender: "male", emoji: "🧔‍♂️", voice: "michael" },
+  potifar: { name: "Potifar", gender: "male", emoji: "🧔", voice: "michael" },
   copeiro: { name: "Copeiro do rei", gender: "male", emoji: "🍷", voice: "dave" },
   juda: { name: "Judá", gender: "male", emoji: "🧑‍🦱", voice: "paul" },
   ismaelita: { name: "Mercador ismaelita", gender: "male", emoji: "🐪", voice: "patrick" },
@@ -92,7 +92,7 @@ const SCENES = [
       { who: "jesus", en: "Yes. Today I must stay at your house.", pt: "Sim. Hoje eu preciso ficar na sua casa." },
       { who: "zaqueu", en: "At my house? Welcome, Lord! Please come in.", pt: "Na minha casa? Bem-vindo, Senhor! Por favor, entre." },
       { who: "jesus", en: "Thank you. Your house is very nice.", pt: "Obrigado. Sua casa é muito bonita." },
-      { who: "zaqueu", en: "Lord, I give half of my money to the poor.", pt: "Senhor, eu dou metade do meu dinheiro aos pobres." },
+      { who: "zaqueu", en: "Lord, I give half of what I have to the poor.", pt: "Senhor, eu dou metade do que tenho aos pobres." },
       { who: "jesus", en: "Today salvation has come to this house.", pt: "Hoje a salvação chegou a esta casa." },
     ],
     truth: "Jesus chamou Zaqueu pelo nome, hospedou-se em sua casa, e Zaqueu prometeu dar metade dos bens aos pobres e devolver em quádruplo o que tomara (Lucas 19:5-9).",
@@ -103,7 +103,7 @@ const SCENES = [
     context: "De noite, no barco, vem uma grande tempestade. Jesus dorme na popa.",
     vocab: [
       { en: "wind", pt: "vento", icon: "🌬️" }, { en: "storm", pt: "tempestade", icon: "⛈️" },
-      { en: "afraid", pt: "com medo", icon: "😨" }, { en: "Be quiet!", pt: "Silêncio!", icon: "🤫" }, { en: "calm", pt: "calmo", icon: "😌" },
+      { en: "afraid", pt: "com medo", icon: "😨" }, { en: "Be quiet!", pt: "Aquieta-te!", icon: "🤫" }, { en: "calm", pt: "calmo", icon: "😌" },
     ],
     lines: [
       { who: "pedro", en: "Master, wake up! There is a big storm!", pt: "Mestre, acorde! Há uma grande tempestade!" },
@@ -191,7 +191,7 @@ const SCENES = [
       { who: "noe", en: "Good morning! I need some wood.", pt: "Bom dia! Preciso de madeira." },
       { who: "merchant", en: "Good morning. How much wood do you need?", pt: "Bom dia. De quanta madeira o senhor precisa?" },
       { who: "noe", en: "A lot of wood. I am building a very big boat.", pt: "Muita madeira. Estou construindo um barco muito grande." },
-      { who: "merchant", en: "A boat? Here, in the desert?", pt: "Um barco? Aqui, no deserto?" },
+      { who: "merchant", en: "A boat? Here, so far from the sea?", pt: "Um barco? Aqui, tão longe do mar?" },
       { who: "noe", en: "Yes. How much is the wood?", pt: "Sim. Quanto custa a madeira?" },
       { who: "merchant", en: "Ten pieces of silver for each tree.", pt: "Dez peças de prata por árvore." },
       { who: "noe", en: "That is expensive. Eight pieces, and I take fifty trees.", pt: "Está caro. Oito peças, e eu levo cinquenta árvores." },
@@ -231,7 +231,7 @@ const SCENES = [
     lines: [
       { who: "esposa", en: "Noah, look at the sky! Black clouds!", pt: "Noé, olhe o céu! Nuvens negras!" },
       { who: "noe", en: "It's raining. It's time. Everybody inside!", pt: "Está chovendo. É hora. Todo mundo para dentro!" },
-      { who: "esposa", en: "Where are the children?", pt: "Onde estão as crianças?" },
+      { who: "esposa", en: "Where are our sons?", pt: "Onde estão os nossos filhos?" },
       { who: "noe", en: "They are with the animals. Hurry, please!", pt: "Estão com os animais. Depressa, por favor!" },
       { who: "esposa", en: "The rain is very strong now!", pt: "A chuva está muito forte agora!" },
       { who: "noe", en: "Don't be afraid. We are safe in the ark.", pt: "Não tenha medo. Estamos seguros na arca." },
@@ -250,12 +250,12 @@ const SCENES = [
     ],
     lines: [
       { who: "sem", en: "Father, the rain stopped. Can we go out?", pt: "Pai, a chuva parou. Podemos sair?" },
-      { who: "noe", en: "Not yet. First I will send a dove.", pt: "Ainda não. Primeiro vou enviar uma pomba." },
+      { who: "noe", en: "Not yet. First a raven, then a dove.", pt: "Ainda não. Primeiro um corvo, depois uma pomba." },
       { who: "sem", en: "The dove came back. There is no dry land.", pt: "A pomba voltou. Não há terra seca." },
       { who: "noe", en: "Then we wait seven more days.", pt: "Então esperamos mais sete dias." },
       { who: "sem", en: "Look! The dove came back with a leaf!", pt: "Olha! A pomba voltou com uma folha!" },
       { who: "noe", en: "Good news! The trees are dry.", pt: "Boa notícia! As árvores estão secas." },
-      { who: "sem", en: "And now, father?", pt: "E agora, pai?" },
+      { who: "sem", en: "And now, Father?", pt: "E agora, pai?" },
       { who: "noe", en: "One more week. Then we can go out.", pt: "Mais uma semana. Depois podemos sair." },
     ],
     truth: "Noé soltou um corvo e depois uma pomba; ela voltou sem pousar, sete dias depois voltou com uma folha de oliveira no bico, e após mais sete dias não voltou mais (Gênesis 8:7-12).",
@@ -265,7 +265,7 @@ const SCENES = [
     ref: "Gênesis 8:15-20; 9:12-17", with: "voice",
     context: "Todos saem da arca. Noé constrói um altar, e Deus faz uma promessa.",
     vocab: [
-      { en: "Thank you", pt: "Obrigado", icon: "🙏" }, { en: "promise", pt: "promessa", icon: "🤞" },
+      { en: "Thank you", pt: "Obrigado", icon: "🙏" }, { en: "promise", pt: "promessa", icon: "🤝" },
       { en: "rainbow", pt: "arco-íris", icon: "🌈" }, { en: "never again", pt: "nunca mais", icon: "🚫" }, { en: "to remember", pt: "lembrar", icon: "🧠" },
     ],
     lines: [
@@ -287,8 +287,8 @@ const SCENES = [
     ref: "Êxodo 3:1-14", with: "voice",
     context: "No deserto, Moisés vê uma sarça que arde sem se queimar e ouve uma voz.",
     vocab: [
-      { en: "What is your name?", pt: "Qual é o seu nome?", icon: "🪪" }, { en: "My name is", pt: "Meu nome é", icon: "🙋‍♂️" },
-      { en: "Here I am", pt: "Aqui estou", icon: "📍" }, { en: "shoes", pt: "sandálias", icon: "👡" }, { en: "holy", pt: "santo", icon: "✨" },
+      { en: "What is your name?", pt: "Qual é o seu nome?", icon: "🏷️" }, { en: "My name is", pt: "Meu nome é", icon: "🙋‍♂️" },
+      { en: "Here I am", pt: "Eis-me aqui", icon: "📍" }, { en: "shoes", pt: "sandálias", icon: "👡" }, { en: "holy", pt: "santo", icon: "✨" },
     ],
     lines: [
       { who: "voice", en: "Moses! Moses!", pt: "Moisés! Moisés!" },
@@ -303,11 +303,11 @@ const SCENES = [
     truth: "Deus chamou Moisés na sarça ardente, mandou tirar as sandálias, apresentou-se como o Deus de Abraão, Isaque e Jacó e revelou seu nome: EU SOU O QUE SOU (Êxodo 3:4-6, 13-14).",
   },
   {
-    id: "c-moises-2", char: "moises", unit: "u3", title: "Deixe o meu povo ir", func: "Fazer um pedido e lidar com um não",
+    id: "c-moises-2", char: "moises", unit: "u3", title: "Deixa ir o meu povo", func: "Fazer um pedido e lidar com um não",
     ref: "Êxodo 5:1-2; 7:14-16", with: "pharaoh",
     context: "Moisés e Arão vão ao palácio pedir a liberdade de Israel.",
     vocab: [
-      { en: "Let my people go", pt: "Deixe o meu povo ir", icon: "🕊️" }, { en: "No", pt: "Não", icon: "🙅" },
+      { en: "Let my people go", pt: "Deixa ir o meu povo", icon: "🕊️" }, { en: "No", pt: "Não", icon: "🙅" },
       { en: "to work", pt: "trabalhar", icon: "🧱" }, { en: "again", pt: "de novo", icon: "🔁" }, { en: "tomorrow", pt: "amanhã", icon: "📅" },
     ],
     lines: [
@@ -347,7 +347,7 @@ const SCENES = [
     context: "Na última noite no Egito, cada família prepara o cordeiro da Páscoa.",
     vocab: [
       { en: "lamb", pt: "cordeiro", icon: "🐑" }, { en: "to roast", pt: "assar", icon: "🔥" },
-      { en: "dinner", pt: "jantar", icon: "🍽️" }, { en: "quickly", pt: "rapidamente", icon: "⚡" }, { en: "ready", pt: "pronto", icon: "✅" },
+      { en: "dinner", pt: "jantar", icon: "🍽️" }, { en: "quickly", pt: "depressa", icon: "⚡" }, { en: "ready", pt: "pronto", icon: "✅" },
     ],
     lines: [
       { who: "arao", en: "Moses, what do we eat tonight?", pt: "Moisés, o que comemos hoje à noite?" },
@@ -355,7 +355,7 @@ const SCENES = [
       { who: "arao", en: "How do we cook it?", pt: "Como o cozinhamos?" },
       { who: "moises", en: "Roast it with fire, with bread and bitter herbs.", pt: "Asse no fogo, com pão e ervas amargas." },
       { who: "arao", en: "And the blood of the lamb?", pt: "E o sangue do cordeiro?" },
-      { who: "moises", en: "Put it on the door of the house.", pt: "Ponha nas portas da casa." },
+      { who: "moises", en: "Put it on the door of the house.", pt: "Ponha na porta da casa." },
       { who: "arao", en: "The dinner is ready. Can we sit down?", pt: "O jantar está pronto. Podemos sentar?" },
       { who: "moises", en: "No. Eat quickly, with your shoes on. Tonight we leave!", pt: "Não. Comam depressa, calçados. Hoje à noite partimos!" },
     ],
@@ -434,7 +434,7 @@ const SCENES = [
     ],
     lines: [
       { who: "jesse", en: "David, take this food to your brothers.", pt: "Davi, leve esta comida aos seus irmãos." },
-      { who: "davi", en: "Of course, father. What do I take?", pt: "Claro, pai. O que eu levo?" },
+      { who: "davi", en: "Of course, Father. What do I take?", pt: "Claro, pai. O que eu levo?" },
       { who: "jesse", en: "Ten loaves of bread, some grain and ten cheeses.", pt: "Dez pães, um pouco de grão e dez queijos." },
       { who: "davi", en: "Ten cheeses? Who are the cheeses for?", pt: "Dez queijos? Para quem são os queijos?" },
       { who: "jesse", en: "For the captain. And see how your brothers are.", pt: "Para o capitão. E veja como estão seus irmãos." },
@@ -457,7 +457,7 @@ const SCENES = [
       { who: "davi", en: "I am David, the son of Jesse.", pt: "Eu sou Davi, filho de Jessé." },
       { who: "goliath", en: "Where is your sword? Do you have a stick?", pt: "Onde está a sua espada? Você tem um pau?" },
       { who: "davi", en: "I have five stones and a sling.", pt: "Tenho cinco pedras e uma funda." },
-      { who: "goliath", en: "Stones? Come here, and I will feed you to the birds!", pt: "Pedras? Venha cá, e eu darei você aos pássaros!" },
+      { who: "goliath", en: "Stones? Come here, and I will feed you to the birds!", pt: "Pedras? Venha cá, e eu vou dar você de comer aos pássaros!" },
       { who: "davi", en: "You come with a sword. I come in the name of the Lord.", pt: "Você vem com espada. Eu venho em nome do Senhor." },
       { who: "goliath", en: "The Lord? Ha! I am not afraid of you.", pt: "O Senhor? Ha! Eu não tenho medo de você." },
       { who: "davi", en: "Today everyone will know that there is a God in Israel.", pt: "Hoje todos saberão que há um Deus em Israel." },
@@ -489,8 +489,8 @@ const SCENES = [
     ref: "1 Samuel 16:14-23", with: "saul",
     context: "O rei Saul está triste e sem paz. Chamam Davi para tocar harpa.",
     vocab: [
-      { en: "to play (music)", pt: "tocar", icon: "🎶" }, { en: "harp", pt: "harpa", icon: "🎵" },
-      { en: "sad", pt: "triste", icon: "😢" }, { en: "better", pt: "melhor", icon: "📈" }, { en: "song", pt: "canção", icon: "🎤" },
+      { en: "to play (music)", pt: "tocar", icon: "🎻" }, { en: "harp", pt: "harpa", icon: "🎶" },
+      { en: "sad", pt: "triste", icon: "😢" }, { en: "better", pt: "melhor", icon: "😊" }, { en: "song", pt: "cântico", icon: "🎤" },
     ],
     lines: [
       { who: "saul", en: "I feel sad and tired. Nothing helps me.", pt: "Eu me sinto triste e cansado. Nada me ajuda." },
@@ -515,12 +515,12 @@ const SCENES = [
     lines: [
       { who: "mefibosete", en: "My king, I am your servant.", pt: "Meu rei, eu sou seu servo." },
       { who: "davi", en: "Don't be afraid. Are you Jonathan's son?", pt: "Não tenha medo. Você é filho de Jônatas?" },
-      { who: "mefibosete", en: "Yes, I am Mephibosheth. Why do you call me?", pt: "Sim, eu sou Mefibosete. Por que o senhor me chama?" },
+      { who: "mefibosete", en: "Yes, I am Mephibosheth. Why did you call me?", pt: "Sim, eu sou Mefibosete. Por que o senhor me chama?" },
       { who: "davi", en: "I want to show you kindness, for your father.", pt: "Quero mostrar bondade a você, por causa do seu pai." },
       { who: "mefibosete", en: "Kindness to me? I am nobody.", pt: "Bondade comigo? Eu não sou ninguém." },
       { who: "davi", en: "You will eat at my table every day.", pt: "Você comerá à minha mesa todos os dias." },
       { who: "mefibosete", en: "At the king's table? Thank you, my king!", pt: "À mesa do rei? Obrigado, meu rei!" },
-      { who: "davi", en: "Welcome to my house. Dinner is at six.", pt: "Bem-vindo à minha casa. O jantar é às seis." },
+      { who: "davi", en: "Welcome to my house. Dinner is tonight.", pt: "Bem-vindo à minha casa. O jantar é hoje à noite." },
     ],
     truth: "Davi perguntou se restava alguém da casa de Saul para usar de bondade por amor de Jônatas; achou Mefibosete, coxo dos pés, devolveu-lhe as terras e disse que ele comeria sempre à mesa do rei (2 Samuel 9:1-13).",
   },

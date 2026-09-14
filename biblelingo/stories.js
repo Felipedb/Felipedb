@@ -12,7 +12,7 @@ const STORIES = [
       { who: "adao", en: "God planted a garden in Eden.", pt: "Deus plantou um jardim no Éden." },
       { who: "eva", en: "In the garden there is the tree of life.", pt: "No jardim há a árvore da vida." },
       { gap: "God saw that it was ___.", options: ["good", "dark", "cold"], answer: "good", pt: "Deus viu que era bom." },
-      { who: "adao", en: "God said: it is very good!", pt: "Deus disse: é muito bom!" },
+      { who: "adao", en: "God saw that it was very good.", pt: "Deus viu que era muito bom." },
       { who: "eva", en: "We walk with God in the garden.", pt: "Nós andamos com Deus no jardim." },
       { q: "Where do Adam and Eve walk with God?", options: ["In the garden", "In the sea", "In Egypt"], answer: "In the garden" },
     ],
@@ -64,13 +64,13 @@ const STORIES = [
     id: "s5", unit: "u5", title: "Eis-me aqui", subtitle: "Isaías 6–9", cover: "isaias", xp: 10,
     beats: [
       { who: null, en: "Isaiah saw the Lord sitting on a throne.", pt: "Isaías viu o Senhor sentado num trono." },
-      { who: "isaias", en: "Whom shall I send? said the Lord.", pt: "A quem enviarei?, disse o Senhor." },
+      { who: "isaias", en: "Whom shall I send? said the Lord.", pt: "\"A quem enviarei?\", disse o Senhor." },
       { who: "isaias", en: "Here am I; send me!", pt: "Eis-me aqui, envia-me a mim!" },
       { q: "What did Isaiah answer?", options: ["Here am I; send me", "I cannot go", "Send my brother"], answer: "Here am I; send me" },
       { who: null, en: "Isaiah spoke about a child.", pt: "Isaías falou sobre um menino." },
       { who: "isaias", en: "His name will be Immanuel: God with us.", pt: "O nome dele será Emanuel: Deus conosco." },
       { gap: "He is the Prince of ___.", options: ["Peace", "Rain", "Gold"], answer: "Peace", pt: "Ele é o Príncipe da Paz." },
-      { who: "jonas", en: "God gives peace to everyone who believes.", pt: "Deus dá paz a todo aquele que crê." },
+      { who: "isaias", en: "He will bring peace to his people.", pt: "Ele trará paz ao seu povo." },
       { q: "What does Immanuel mean?", options: ["God with us", "King of Egypt", "A big river"], answer: "God with us" },
     ],
   },
@@ -78,7 +78,7 @@ const STORIES = [
     id: "s6", unit: "u6", title: "José e seus irmãos", subtitle: "Gênesis 37–45", cover: "jose", xp: 10,
     beats: [
       { who: "jose", en: "My father gave me a coat of many colors.", pt: "Meu pai me deu uma túnica de muitas cores." },
-      { who: null, en: "His brothers were jealous and sold him to Egypt.", pt: "Os irmãos tiveram inveja e o venderam para o Egito." },
+      { who: null, en: "His brothers were jealous and sold him to merchants going to Egypt.", pt: "Os irmãos tiveram inveja e o venderam a mercadores que iam para o Egito." },
       { q: "Where did the brothers sell Joseph?", options: ["To Egypt", "To Babylon", "To the sea"], answer: "To Egypt" },
       { who: "jose", en: "But God was with me in Egypt.", pt: "Mas Deus estava comigo no Egito." },
       { gap: "Seven years of plenty, then seven years of ___.", options: ["famine", "rain", "peace"], answer: "famine", pt: "Sete anos de fartura, depois sete anos de fome." },
@@ -101,7 +101,7 @@ const STORIES = [
     ],
   },
   {
-    id: "s8", unit: "u8", title: "Pescadores de homens", subtitle: "Mateus 4 e 14", cover: "pedro", xp: 10,
+    id: "s8", unit: "u8", title: "Pescadores de homens", subtitle: "Mateus 4, 6 e 14", cover: "pedro", xp: 10,
     beats: [
       { who: "pedro", en: "I am a fisherman. I work with nets by the sea.", pt: "Eu sou pescador. Trabalho com redes à beira do mar." },
       { who: "jesus", en: "Follow me, and I will make you fishers of men.", pt: "Vinde após mim, e eu vos farei pescadores de homens." },

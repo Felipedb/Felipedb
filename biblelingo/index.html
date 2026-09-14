@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.9.3/confetti.browser.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.9.3/confetti.browser.min.js"></script>
   <script>
     // Aplica o tema antes da primeira pintura (evita piscar claro no modo escuro)
     (function () {
@@ -239,7 +239,7 @@
     <div class="sheet" id="node-sheet-body" role="dialog" aria-modal="true"></div>
   </div>
 
-  <!-- ===== Guia da unidade ===== -->
+  <!-- ===== Guia do capítulo ===== -->
   <div id="guide-sheet" class="sheet-backdrop">
     <div class="sheet tall" id="guide-sheet-body" role="dialog" aria-modal="true"></div>
   </div>
@@ -271,7 +271,7 @@
         <button class="theme-opt" data-theme-opt="dark"><i class="nav-ico" data-ico="moon"></i><span>Escuro</span></button>
         <button class="theme-opt" data-theme-opt="auto"><i class="nav-ico" data-ico="auto"></i><span>Automático</span></button>
       </div>
-      <label class="switch-row name-row"><span>🙋 Seu nome</span><input type="text" id="input-name" maxlength="18" placeholder="Como te chamamos?" /></label>
+      <label class="switch-row name-row"><span>🙋 Seu nome</span><input type="text" id="input-name" maxlength="18" placeholder="Qual é o seu nome?" /></label>
       <label class="switch-row"><span>🔊 Efeitos sonoros</span><input type="checkbox" id="toggle-sound" checked /></label>
       <button id="btn-reset" class="btn-main red">Apagar progresso</button>
       <button class="btn-ghost modal-close">Fechar</button>

@@ -49,7 +49,7 @@ const COURSE = [
         ],
         sentences: [
           { en: "God called the light Day", pt: "Deus chamou a luz de Dia" },
-          { en: "the darkness he called Night", pt: "às trevas ele chamou Noite" },
+          { en: "The darkness he called Night", pt: "às trevas ele chamou Noite" },
         ],
         verse: {
           text: "And God said, Let there be light: and there was light.",
@@ -72,7 +72,7 @@ const COURSE = [
           { en: "man", pt: "homem", icon: "🧔" },
         ],
         sentences: [
-          { en: "the tree of life", pt: "a árvore da vida" },
+          { en: "The tree of life", pt: "a árvore da vida" },
           { en: "God saw that it was good", pt: "Deus viu que era bom" },
         ],
         verse: {
@@ -88,7 +88,7 @@ const COURSE = [
   },
   {
     id: "u2",
-    title: "Noé e a Arca",
+    title: "Noé e a arca",
     subtitle: "Gênesis 6–9",
     icon: "🚢",
     face: "noe",
@@ -130,8 +130,8 @@ const COURSE = [
           { en: "window", pt: "janela", icon: "🪟" },
         ],
         sentences: [
-          { en: "the rain was upon the earth", pt: "a chuva caiu sobre a terra" },
-          { en: "forty days and forty nights", pt: "quarenta dias e quarenta noites" },
+          { en: "The rain was upon the earth", pt: "a chuva caiu sobre a terra" },
+          { en: "Forty days and forty nights", pt: "quarenta dias e quarenta noites" },
         ],
         verse: {
           text: "And the rain was upon the earth forty days and forty nights.",
@@ -150,11 +150,11 @@ const COURSE = [
         vocab: [
           { en: "dove", pt: "pomba", icon: "🕊️" },
           { en: "rainbow", pt: "arco-íris", icon: "🌈" },
-          { en: "promise", pt: "promessa", icon: "✍️" },
+          { en: "promise", pt: "promessa", icon: "🤝" },
           { en: "cloud", pt: "nuvem", icon: "☁️" },
         ],
         sentences: [
-          { en: "the dove came back to him", pt: "a pomba voltou para ele" },
+          { en: "The dove came back to him", pt: "a pomba voltou para ele" },
         ],
         verse: {
           text: "I do set my bow in the cloud.",
@@ -188,7 +188,7 @@ const COURSE = [
           { en: "to see", pt: "ver", icon: "👀" },
         ],
         sentences: [
-          { en: "the bush burned with fire", pt: "a sarça ardia no fogo" },
+          { en: "The bush burned with fire", pt: "a sarça ardia no fogo" },
         ],
         verse: {
           text: "The place whereon thou standest is holy ground.",
@@ -211,7 +211,7 @@ const COURSE = [
           { en: "to go", pt: "ir", icon: "🚶" },
         ],
         sentences: [
-          { en: "let my people go", pt: "deixa ir o meu povo" },
+          { en: "Let my people go", pt: "deixa ir o meu povo" },
         ],
         verse: {
           text: "Thus saith the LORD God of Israel, Let my people go.",
@@ -234,15 +234,15 @@ const COURSE = [
           { en: "wind", pt: "vento", icon: "💨" },
         ],
         sentences: [
-          { en: "the waters were divided", pt: "as águas foram divididas" },
+          { en: "The waters were divided", pt: "as águas foram divididas" },
           { en: "Moses stretched out his hand", pt: "Moisés estendeu a sua mão" },
         ],
         verse: {
-          text: "And the LORD made the sea dry land, and the waters were divided.",
-          pt: "E o Senhor fez o mar terra seca, e as águas foram partidas.",
+          text: "The LORD caused the sea to go back, and made the sea dry land, and the waters were divided.",
+          pt: "O Senhor fez retirar o mar, e o mar tornou-se em seco, e as águas foram partidas.",
           ref: "Êxodo 14:21",
-          blank: "sea",
-          options: ["sea", "sky", "hill", "city"],
+          blank: "divided",
+          options: ["divided", "deep", "dry", "cold"],
         },
       },
       { id: "u3r", title: "Revisão", review: true },
@@ -250,8 +250,8 @@ const COURSE = [
   },
   {
     id: "u4",
-    title: "Davi, um coração segundo o coração de Deus",
-    subtitle: "1 Samuel 16–31",
+    title: "Davi, um homem segundo o coração de Deus",
+    subtitle: "1 Samuel 16 – 2 Samuel 22",
     icon: "👑",
     face: "davi",
     color: "#6a4fb3",
@@ -292,7 +292,7 @@ const COURSE = [
           { en: "battle", pt: "batalha", icon: "⚔️" },
         ],
         sentences: [
-          { en: "the battle is the Lord's", pt: "a batalha é do Senhor" },
+          { en: "The battle is the Lord's", pt: "a batalha é do Senhor" },
           { en: "David took five stones", pt: "Davi tomou cinco pedras" },
         ],
         verse: {
@@ -307,12 +307,12 @@ const COURSE = [
         id: "u4l3",
         reading: {"text": "David became king. He sang: The Lord is my rock and my fortress. He was strong because God was with him.", "pt": "Davi tornou-se rei. Ele cantou: O Senhor é a minha rocha e a minha fortaleza. Ele era forte porque Deus estava com ele.", "q": "Why was David strong?", "options": ["Because God was with him", "Because he had gold", "Because he was tall"], "answer": "Because God was with him"},
         dialogue: {"line": "David, sing for us!", "pt": "Davi, cante para nós!", "options": ["The Lord is my rock!", "The sea is dry!", "Take off your shoes!"], "answer": "The Lord is my rock!", "answerPt": "O Senhor é a minha rocha!"},
-        quiz: {"q": "Who is my rock, said David?", "options": ["The Lord", "The king", "The giant"], "answer": "The Lord", "explain": "\"O Senhor é o meu rochedo\" (2 Samuel 22:2)."},
+        quiz: {"q": "Who did David say is his rock?", "options": ["The Lord", "The king", "The giant"], "answer": "The Lord", "explain": "\"O Senhor é a minha rocha\" (2 Samuel 22:2)."},
         title: "O rei cantor",
         vocab: [
           { en: "song", pt: "cântico", icon: "🎵" },
           { en: "to sing", pt: "cantar", icon: "🎤" },
-          { en: "rock", pt: "rocha", icon: "⛰️" },
+          { en: "rock", pt: "rocha", icon: "🪨" },
           { en: "strong", pt: "forte", icon: "💪" },
         ],
         sentences: [
@@ -320,7 +320,7 @@ const COURSE = [
         ],
         verse: {
           text: "The LORD is my rock, and my fortress, and my deliverer.",
-          pt: "O Senhor é o meu rochedo, e o meu lugar forte, e o meu libertador.",
+          pt: "O Senhor é a minha rocha, a minha fortaleza e o meu libertador.",
           ref: "2 Samuel 22:2",
           blank: "rock",
           options: ["rock", "song", "lamp", "road"],
@@ -339,7 +339,7 @@ const COURSE = [
     lessons: [
       {
         id: "u5l1",
-        reading: {"text": "Isaiah saw the Lord on a throne. God said: Whom shall I send? Isaiah said: Here am I; send me.", "pt": "Isaías viu o Senhor num trono. Deus disse: A quem enviarei? Isaías disse: Eis-me aqui, envia-me a mim.", "q": "What did Isaiah say?", "options": ["Here am I; send me", "I cannot go", "Send my brother"], "answer": "Here am I; send me"},
+        reading: {"text": "Isaiah saw the Lord on a throne. God said: Whom shall I send? Isaiah said: Here am I; send me.", "pt": "Isaías viu o Senhor num trono. Deus disse: A quem enviarei? Isaías disse: Eis-me aqui, envia-me a mim.", "q": "Where did Isaiah see the Lord?", "options": ["On a throne", "In the ark", "In Egypt"], "answer": "On a throne"},
         dialogue: {"line": "Whom shall I send?", "pt": "A quem enviarei?", "options": ["Here am I; send me.", "Send the sheep.", "Let there be light."], "answer": "Here am I; send me.", "answerPt": "Eis-me aqui, envia-me a mim."},
         quiz: {"q": "What did Isaiah answer to God?", "options": ["Here am I; send me", "I cannot go", "Send my brother"], "answer": "Here am I; send me", "explain": "\"Eis-me aqui, envia-me a mim\" (Isaías 6:8)."},
         title: "Eis-me aqui",
@@ -350,7 +350,7 @@ const COURSE = [
           { en: "to hear", pt: "ouvir", icon: "👂" },
         ],
         sentences: [
-          { en: "here am I; send me", pt: "eis-me aqui, envia-me a mim" },
+          { en: "Here am I; send me", pt: "eis-me aqui, envia-me a mim" },
         ],
         verse: {
           text: "Whom shall I send, and who will go for us? Then said I, Here am I; send me.",
@@ -368,7 +368,7 @@ const COURSE = [
         title: "Emanuel",
         vocab: [
           { en: "sign", pt: "sinal", icon: "⭐" },
-          { en: "child", pt: "menino", icon: "👶" },
+          { en: "child", pt: "criança", icon: "👶" },
           { en: "name", pt: "nome", icon: "🏷️" },
           { en: "with us", pt: "conosco", icon: "👫" },
         ],
@@ -396,11 +396,11 @@ const COURSE = [
           { en: "counsellor", pt: "conselheiro", icon: "🧠" },
         ],
         sentences: [
-          { en: "the Prince of Peace", pt: "o Príncipe da Paz" },
+          { en: "The Prince of Peace", pt: "o Príncipe da Paz" },
         ],
         verse: {
           text: "And his name shall be called Wonderful, Counsellor, The mighty God, The everlasting Father, The Prince of Peace.",
-          pt: "E o seu nome será Maravilhoso Conselheiro, Deus Forte, Pai da Eternidade, Príncipe da Paz.",
+          pt: "E o seu nome será Maravilhoso, Conselheiro, Deus Forte, Pai da Eternidade, Príncipe da Paz.",
           ref: "Isaías 9:6",
           blank: "Peace",
           options: ["Peace", "Rain", "Gold", "Light"],
@@ -424,12 +424,12 @@ const COURSE = [
         {
           "en": "dream",
           "pt": "sonho",
-          "icon": "💭"
+          "icon": "💤"
         },
         {
           "en": "brother",
           "pt": "irmão",
-          "icon": "👬"
+          "icon": "👦"
         },
         {
           "en": "coat",
@@ -448,7 +448,7 @@ const COURSE = [
           "pt": "José teve um sonho"
         },
         {
-          "en": "his brothers sold him",
+          "en": "His brothers sold him",
           "pt": "os irmãos dele o venderam"
         }
       ],
@@ -486,7 +486,7 @@ const COURSE = [
         "explain": "Jacó deu a José uma túnica de muitas cores."
       },
       "reading": {
-        "text": "Joseph was the son Jacob loved. His father gave him a coat of many colors. His brothers were jealous and sold him to Egypt.",
+        "text": "Joseph was the son Jacob loved. His father gave him a coat of many colors. His brothers were jealous and sold him, and he was taken to Egypt.",
         "pt": "José era o filho que Jacó amava. O pai lhe deu uma túnica de muitas cores. Os irmãos tiveram inveja e o venderam para o Egito.",
         "q": "Why did the brothers sell Joseph?",
         "options": [
@@ -528,13 +528,13 @@ const COURSE = [
           "pt": "Deus está com José"
         },
         {
-          "en": "seven years of plenty",
+          "en": "Seven years of plenty",
           "pt": "sete anos de fartura"
         }
       ],
       "verse": {
         "text": "But the LORD was with Joseph, and shewed him mercy.",
-        "pt": "Mas o Senhor era com José e lhe mostrou misericórdia.",
+        "pt": "Mas o Senhor estava com José e lhe mostrou misericórdia.",
         "ref": "Gênesis 39:21",
         "blank": "with",
         "options": [
@@ -594,7 +594,7 @@ const COURSE = [
         {
           "en": "famine",
           "pt": "fome",
-          "icon": "🌵"
+          "icon": "🥀"
         },
         {
           "en": "to weep",
@@ -614,7 +614,7 @@ const COURSE = [
       ],
       "verse": {
         "text": "Ye thought evil against me; but God meant it unto good.",
-        "pt": "Vós pensastes o mal contra mim, mas Deus o tornou em bem.",
+        "pt": "Vós bem intentastes mal contra mim, porém Deus o tornou em bem.",
         "ref": "Gênesis 50:20",
         "blank": "good",
         "options": [
@@ -674,7 +674,7 @@ const COURSE = [
   "lessons": [
     {
       "id": "u7l1",
-      "title": "Fiel em Babilônia",
+      "title": "Fiel na Babilônia",
       "vocab": [
         {
           "en": "lion",
@@ -684,12 +684,12 @@ const COURSE = [
         {
           "en": "to pray",
           "pt": "orar",
-          "icon": "🙏"
+          "icon": "🛐"
         },
         {
           "en": "faithful",
           "pt": "fiel",
-          "icon": "💎"
+          "icon": "🛡️"
         },
         {
           "en": "law",
@@ -774,7 +774,7 @@ const COURSE = [
         {
           "en": "morning",
           "pt": "manhã",
-          "icon": "🌅"
+          "icon": "🌄"
         }
       ],
       "sentences": [
@@ -783,7 +783,7 @@ const COURSE = [
           "pt": "Deus enviou o seu anjo"
         },
         {
-          "en": "the angel shut the lions' mouths",
+          "en": "The angel shut the lions' mouths",
           "pt": "o anjo fechou a boca dos leões"
         }
       ],
@@ -822,7 +822,7 @@ const COURSE = [
       },
       "reading": {
         "text": "They threw Daniel into the lions' den. In the morning, the king ran to the den. Daniel said: My God sent his angel and shut the lions' mouths. The king was very happy.",
-        "pt": "Jogaram Daniel na cova dos leões. De manhã, o rei correu até a cova. Daniel disse: O meu Deus enviou o seu anjo e fechou a boca dos leões. O rei ficou muito feliz.",
+        "pt": "Lançaram Daniel na cova dos leões. De manhã, o rei correu até a cova. Daniel disse: O meu Deus enviou o seu anjo e fechou a boca dos leões. O rei ficou muito feliz.",
         "q": "When did the king run to the den?",
         "options": [
           "In the morning",
@@ -849,7 +849,7 @@ const COURSE = [
         {
           "en": "to save",
           "pt": "salvar",
-          "icon": "🛟"
+          "icon": "🆘"
         },
         {
           "en": "living",
@@ -859,11 +859,11 @@ const COURSE = [
       ],
       "sentences": [
         {
-          "en": "he is the living God",
+          "en": "He is the living God",
           "pt": "ele é o Deus vivo"
         },
         {
-          "en": "his kingdom is forever",
+          "en": "His kingdom is forever",
           "pt": "o seu reino é para sempre"
         }
       ],
@@ -939,7 +939,7 @@ const COURSE = [
         {
           "en": "net",
           "pt": "rede",
-          "icon": "🕸️"
+          "icon": "🥅"
         },
         {
           "en": "to follow",
@@ -954,11 +954,11 @@ const COURSE = [
       ],
       "sentences": [
         {
-          "en": "follow me",
+          "en": "Follow me",
           "pt": "segue-me"
         },
         {
-          "en": "they left their nets and followed him",
+          "en": "They left their nets and followed him",
           "pt": "eles deixaram as redes e o seguiram"
         }
       ],
@@ -1029,16 +1029,16 @@ const COURSE = [
         {
           "en": "daily",
           "pt": "diário",
-          "icon": "📅"
+          "icon": "🗓️"
         }
       ],
       "sentences": [
         {
-          "en": "give us this day our daily bread",
+          "en": "Give us this day our daily bread",
           "pt": "o pão nosso de cada dia nos dá hoje"
         },
         {
-          "en": "forgive us our debts",
+          "en": "Forgive us our debts",
           "pt": "perdoa-nos as nossas dívidas"
         }
       ],
@@ -1114,17 +1114,17 @@ const COURSE = [
       ],
       "sentences": [
         {
-          "en": "five loaves and two fishes",
+          "en": "Five loaves and two fishes",
           "pt": "cinco pães e dois peixes"
         },
         {
-          "en": "they did all eat and were filled",
+          "en": "They did all eat and were filled",
           "pt": "todos comeram e ficaram satisfeitos"
         }
       ],
       "verse": {
-        "text": "And he took the five loaves, and the two fishes, and blessed.",
-        "pt": "E tomou os cinco pães e os dois peixes e abençoou.",
+        "text": "He took the five loaves, and the two fishes, and looking up to heaven, he blessed.",
+        "pt": "Tomou os cinco pães e os dois peixes e, olhando para o céu, abençoou.",
         "ref": "Mateus 14:19",
         "blank": "blessed",
         "options": [
@@ -1146,7 +1146,7 @@ const COURSE = [
         "answerPt": "Tragam-nos a mim."
       },
       "quiz": {
-        "q": "How many loaves did the boy have?",
+        "q": "How many loaves did the disciples have?",
         "options": [
           "Five",
           "Forty",
@@ -1156,8 +1156,8 @@ const COURSE = [
         "explain": "Cinco pães e dois peixes alimentaram a multidão."
       },
       "reading": {
-        "text": "A great crowd followed Jesus. A boy had five loaves and two fishes. Jesus blessed the bread and the fish, and everyone ate. Twelve baskets were left over.",
-        "pt": "Uma grande multidão seguia Jesus. Um menino tinha cinco pães e dois peixes. Jesus abençoou o pão e o peixe, e todos comeram. Sobraram doze cestos.",
+        "text": "A great crowd followed Jesus. The disciples had five loaves and two fishes. Jesus blessed the bread and the fish, and everyone ate. Twelve baskets were left over.",
+        "pt": "Uma grande multidão seguia Jesus. Os discípulos tinham cinco pães e dois peixes. Jesus abençoou o pão e o peixe, e todos comeram. Sobraram doze cestos.",
         "q": "How many baskets were left?",
         "options": [
           "Twelve",
@@ -1180,7 +1180,7 @@ const COURSE = [
 // Frases curtas, com vocabulário da própria lição + palavras já vistas (princípio "i+1" do Duolingo).
 const EXTRA_CONTENT = {
   u1l1: {
-    vocab: [{ en: "beginning", pt: "princípio", icon: "🌅" }, { en: "to create", pt: "criar", icon: "✨" }],
+    vocab: [{ en: "beginning", pt: "princípio", icon: "🌅" }, { en: "to create", pt: "criar", icon: "🌍" }],
     sentences: [
       { en: "In the beginning God created the light", pt: "No princípio Deus criou a luz" },
       { en: "The light is good", pt: "A luz é boa" },
@@ -1188,7 +1188,7 @@ const EXTRA_CONTENT = {
     ],
   },
   u1l2: {
-    vocab: [{ en: "first", pt: "primeiro", icon: "1️⃣" }, { en: "evening", pt: "tarde", icon: "🌇" }],
+    vocab: [{ en: "first", pt: "primeiro", icon: "1️⃣" }, { en: "evening", pt: "entardecer", icon: "🌇" }],
     sentences: [
       { en: "The day and the night", pt: "O dia e a noite" },
       { en: "God saw the light that it was good", pt: "Deus viu a luz que era boa" },
@@ -1198,6 +1198,7 @@ const EXTRA_CONTENT = {
   u1l3: {
     vocab: [{ en: "woman", pt: "mulher", icon: "👩" }, { en: "fruit", pt: "fruto", icon: "🍎" }],
     sentences: [
+      { en: "Eve took the fruit", pt: "Eva tomou o fruto" },
       { en: "God planted a garden", pt: "Deus plantou um jardim" },
       { en: "The man and the woman lived in the garden", pt: "O homem e a mulher viviam no jardim" },
       { en: "The tree of life is in the garden", pt: "A árvore da vida está no jardim" },
@@ -1222,22 +1223,24 @@ const EXTRA_CONTENT = {
   u2l3: {
     vocab: [{ en: "leaf", pt: "folha", icon: "🍃" }, { en: "to remember", pt: "lembrar", icon: "💭" }],
     sentences: [
+      { en: "The dove had a leaf", pt: "A pomba tinha uma folha" },
       { en: "Noah sent a dove", pt: "Noé enviou uma pomba" },
       { en: "I set my rainbow in the cloud", pt: "Eu ponho o meu arco-íris na nuvem" },
-      { en: "I will remember my promise", pt: "Eu lembrarei da minha promessa" },
+      { en: "I will remember my promise", pt: "Eu me lembrarei da minha promessa" },
     ],
   },
   u3l1: {
-    vocab: [{ en: "bush", pt: "sarça", icon: "🌿" }, { en: "shoes", pt: "sapatos", icon: "👞" }],
+    vocab: [{ en: "bush", pt: "sarça", icon: "🌿" }, { en: "shoes", pt: "sandálias", icon: "👡" }],
     sentences: [
       { en: "Moses saw the fire", pt: "Moisés viu o fogo" },
-      { en: "Take off your shoes", pt: "Tira os teus sapatos" },
+      { en: "Take off your shoes", pt: "Tira as tuas sandálias" },
       { en: "This is holy ground", pt: "Este é chão santo" },
     ],
   },
   u3l2: {
-    vocab: [{ en: "Egypt", pt: "Egito", icon: "🐫" }, { en: "to say", pt: "dizer", icon: "💬" }],
+    vocab: [{ en: "Egypt", pt: "Egito", icon: "🏺" }, { en: "to say", pt: "dizer", icon: "💬" }],
     sentences: [
+      { en: "Moses went to Egypt", pt: "Moisés foi ao Egito" },
       { en: "Moses went to the king", pt: "Moisés foi ao rei" },
       { en: "The king said no", pt: "O rei disse não" },
       { en: "My people will be free", pt: "O meu povo será livre" },
@@ -1268,8 +1271,9 @@ const EXTRA_CONTENT = {
     ],
   },
   u4l3: {
-    vocab: [{ en: "fortress", pt: "fortaleza", icon: "🏰" }, { en: "to trust", pt: "confiar", icon: "🤝" }],
+    vocab: [{ en: "fortress", pt: "fortaleza", icon: "🧱" }, { en: "to trust", pt: "confiar", icon: "🤝" }],
     sentences: [
+      { en: "God is my fortress", pt: "Deus é a minha fortaleza" },
       { en: "The Lord is my rock", pt: "O Senhor é a minha rocha" },
       { en: "I trust in the Lord", pt: "Eu confio no Senhor" },
       { en: "Sing a new song", pt: "Cantai um cântico novo" },
@@ -1278,29 +1282,32 @@ const EXTRA_CONTENT = {
   u5l1: {
     vocab: [{ en: "throne", pt: "trono", icon: "🪑" }, { en: "to call", pt: "chamar", icon: "📣" }],
     sentences: [
+      { en: "The Lord sat on a throne", pt: "O Senhor estava sentado num trono" },
       { en: "I heard the voice of the Lord", pt: "Eu ouvi a voz do Senhor" },
       { en: "Isaiah was a prophet", pt: "Isaías era um profeta" },
-      { en: "Whom shall I send", pt: "A quem enviarei" },
+      { en: "Whom shall I send?", pt: "A quem enviarei?" },
     ],
   },
   u5l2: {
     vocab: [{ en: "son", pt: "filho", icon: "👦" }, { en: "mother", pt: "mãe", icon: "👩‍🍼" }],
     sentences: [
+      { en: "The mother of the child", pt: "A mãe da criança" },
       { en: "His name is Immanuel", pt: "O seu nome é Emanuel" },
       { en: "The Lord will give you a sign", pt: "O Senhor vos dará um sinal" },
       { en: "A child is born", pt: "Um menino nasceu" },
     ],
   },
   u5l3: {
-    vocab: [{ en: "mighty", pt: "poderoso", icon: "💪" }, { en: "everlasting", pt: "eterno", icon: "♾️" }],
+    vocab: [{ en: "mighty", pt: "poderoso", icon: "🦁" }, { en: "everlasting", pt: "eterno", icon: "♾️" }],
     sentences: [
+      { en: "He is the everlasting Father", pt: "Ele é o Pai da Eternidade" },
       { en: "His name is Wonderful", pt: "O seu nome é Maravilhoso" },
       { en: "The mighty God", pt: "O Deus poderoso" },
       { en: "He brings peace", pt: "Ele traz paz" },
     ],
   },
   u6l1: {
-    vocab: [{ en: "colors", pt: "cores", icon: "🎨" }, { en: "to love", pt: "amar", icon: "❤️" }],
+    vocab: [{ en: "colors", pt: "cores", icon: "🎨" }, { en: "to love", pt: "amar", icon: "💕" }],
     sentences: [
       { en: "Jacob loved Joseph", pt: "Jacó amava José" },
       { en: "A coat of many colors", pt: "Uma túnica de muitas cores" },
@@ -1316,16 +1323,18 @@ const EXTRA_CONTENT = {
     ],
   },
   u6l3: {
-    vocab: [{ en: "evil", pt: "mal", icon: "🌑" }, { en: "silver", pt: "prata", icon: "🪙" }],
+    vocab: [{ en: "evil", pt: "mal", icon: "😈" }, { en: "silver", pt: "prata", icon: "🪙" }],
     sentences: [
+      { en: "They sold him for silver", pt: "Eles o venderam por prata" }, { en: "Joseph saved his family from evil", pt: "José salvou a sua família do mal" },
       { en: "Joseph wept", pt: "José chorou" },
-      { en: "I am Joseph your brother", pt: "Eu sou José o vosso irmão" },
+      { en: "I am Joseph, your brother", pt: "Eu sou José, o irmão de vocês" },
       { en: "The famine came", pt: "A fome veio" },
     ],
   },
   u7l1: {
-    vocab: [{ en: "three", pt: "três", icon: "3️⃣" }, { en: "home", pt: "lar", icon: "🏠" }],
+    vocab: [{ en: "three", pt: "três", icon: "3️⃣" }, { en: "home", pt: "casa (lar)", icon: "🏠" }],
     sentences: [
+      { en: "Daniel was far from home", pt: "Daniel estava longe de casa" },
       { en: "Daniel loved God", pt: "Daniel amava a Deus" },
       { en: "The king made a law", pt: "O rei fez uma lei" },
       { en: "Daniel prayed to God", pt: "Daniel orava a Deus" },
@@ -1340,25 +1349,28 @@ const EXTRA_CONTENT = {
     ],
   },
   u7l3: {
-    vocab: [{ en: "to deliver", pt: "livrar", icon: "🛡️" }, { en: "to write", pt: "escrever", icon: "✍️" }],
+    vocab: [{ en: "to deliver", pt: "livrar", icon: "🛡️" }, { en: "to write", pt: "escrever", icon: "📝" }],
     sentences: [
+      { en: "God can deliver us", pt: "Deus pode nos livrar" },
       { en: "The king wrote to all the people", pt: "O rei escreveu a todo o povo" },
       { en: "The God of Daniel saves", pt: "O Deus de Daniel salva" },
       { en: "He is the living God forever", pt: "Ele é o Deus vivo para sempre" },
     ],
   },
   u8l1: {
-    vocab: [{ en: "boat", pt: "barco", icon: "⛵" }, { en: "to leave", pt: "deixar", icon: "🚪" }],
+    vocab: [{ en: "boat", pt: "barco", icon: "⛵" }, { en: "to leave", pt: "deixar", icon: "🏃" }],
     sentences: [
+      { en: "Peter had a boat", pt: "Pedro tinha um barco" },
       { en: "Jesus walked by the sea", pt: "Jesus andava junto ao mar" },
       { en: "Peter was a fisherman", pt: "Pedro era um pescador" },
       { en: "The disciples followed Jesus", pt: "Os discípulos seguiram Jesus" },
     ],
   },
   u8l2: {
-    vocab: [{ en: "debts", pt: "dívidas", icon: "💸" }, { en: "will", pt: "vontade", icon: "🫶" }],
+    vocab: [{ en: "debts", pt: "dívidas", icon: "💸" }, { en: "will", pt: "vontade", icon: "📜" }],
     sentences: [
-      { en: "Our Father in heaven", pt: "Pai nosso que estás no céu" },
+      { en: "Thy will be done", pt: "Seja feita a tua vontade" },
+      { en: "Our Father in heaven", pt: "Pai nosso que estás nos céus" },
       { en: "Your kingdom come", pt: "Venha o teu reino" },
       { en: "Jesus taught his disciples to pray", pt: "Jesus ensinou os seus discípulos a orar" },
     ],
@@ -1366,6 +1378,7 @@ const EXTRA_CONTENT = {
   u8l3: {
     vocab: [{ en: "basket", pt: "cesto", icon: "🧺" }, { en: "two", pt: "dois", icon: "2️⃣" }],
     sentences: [
+      { en: "Twelve baskets were left", pt: "Sobraram doze cestos" },
       { en: "A great crowd followed Jesus", pt: "Uma grande multidão seguiu Jesus" },
       { en: "Jesus blessed the bread and the fish", pt: "Jesus abençoou o pão e o peixe" },
       { en: "They had two fishes", pt: "Eles tinham dois peixes" },

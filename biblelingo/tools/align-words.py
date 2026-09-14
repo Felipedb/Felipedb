@@ -20,8 +20,10 @@ MANIFEST = os.path.join(AUDIO, "manifest.json")
 OUT = os.path.join(AUDIO, "words.json")
 INDEX = os.path.join(AUDIO, "words-index.json")
 MOCK = "--mock" in sys.argv
-PAD_BEFORE, PAD_AFTER, MIN_DUR, MIN_PROB = 0.05, 0.10, 0.10, 0.40
-ALIGN_VER = 3  # sobe quando o alinhador muda: só então as frases já feitas voltam à fila
+PAD_BEFORE, PAD_AFTER, MIN_DUR, MIN_PROB = 0.05, 0.12, 0.10, 0.40
+BLEED = 0.04      # sem pausa depois, o corte pode invadir 40 ms da palavra seguinte (o fade esconde o ataque)
+FADE_OUT = 0.035  # saída suave: a última sílaba não "trava"
+ALIGN_VER = 4  # sobe quando o alinhador muda: só então as frases já feitas voltam à fila
 # O whisper escreve números em dígitos e algumas formas modernas; o texto usa a forma escrita
 NUMBERS = {"0": "zero", "1": "one", "2": "two", "3": "three", "4": "four", "5": "five", "6": "six", "7": "seven",
            "8": "eight", "9": "nine", "10": "ten", "11": "eleven", "12": "twelve", "13": "thirteen", "14": "fourteen",
@@ -125,7 +127,7 @@ def align(tokens, heard):
 def cut(src, start, end, dst):
     fade = 0.015
     subprocess.check_call(["ffmpeg", "-v", "error", "-y", "-ss", f"{start:.3f}", "-t", f"{end - start:.3f}", "-i", src,
-                           "-af", f"afade=t=in:st=0:d={fade},afade=t=out:st={max(0, end - start - fade):.3f}:d={fade}",
+                           "-af", f"afade=t=in:st=0:d={fade},afade=t=out:st={max(0, end - start - FADE_OUT):.3f}:d={FADE_OUT}",
                            "-ac", "1", "-ar", "22050", "-codec:a", "libmp3lame", "-b:a", "48k", dst])
 
 
@@ -167,10 +169,14 @@ def main():
                 continue
             prev_end = matched[i - 1][1] if (i - 1) in matched else 0.0
             next_start = matched[i + 1][0] if (i + 1) in matched else total
+            gap_before, gap_after = max(0.0, s - prev_end), max(0.0, next_start - e)
             cs = max(prev_end, s - PAD_BEFORE, 0.0)
-            ce = min(next_start, e + PAD_AFTER, total)
+            ce = min(next_start + BLEED, e + PAD_AFTER, total)
             if ce - cs < MIN_DUR:
                 continue
+            # Entre as ocorrências da mesma palavra vence a que soa inteira: pausa depois (a sílaba final
+            # termina), pausa antes (não sai "corrida") e fim de frase; a confiança desempata
+            score = p + min(gap_after, 0.25) + 0.5 * min(gap_before, 0.2) + (0.25 if i == len(tokens) - 1 else 0.0)
             name = hashlib.sha1(f"{tok}|{char}|{file}".encode()).hexdigest()[:16] + ".mp3"
             dst = os.path.join(WORDS, name)
             cut(src, cs, ce, dst)
@@ -178,8 +184,8 @@ def main():
             prev = entry.get(char)
             # entre várias frases do mesmo personagem, fica a de maior confiança
             prev_alive = prev and os.path.basename(prev["f"]) in {hashlib.sha1(f"{tok}|{char}|{ff}".encode()).hexdigest()[:16] + ".mp3" for ff in index if index[ff].get("char") == char}
-            if not prev or not prev_alive or p > prev.get("p", 0):
-                entry[char] = {"f": "words/" + name, "p": round(p, 3), "d": round(ce - cs, 3)}
+            if not prev or not prev_alive or score > prev.get("p", 0):
+                entry[char] = {"f": "words/" + name, "p": round(score, 3), "d": round(ce - cs, 3)}
             produced.append(tok)
         index[file] = {"key": key, "char": char, "words": produced, "heard": " ".join(h[0] for h in heard), "ver": ALIGN_VER}
         done += 1

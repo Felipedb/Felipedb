@@ -12,7 +12,7 @@ SCENES.push(
   // ===================== ISAÍAS (capítulo 5) =====================
   {
     id: "c-isaias-1", char: "isaias", unit: "u5", title: "Eis-me aqui, envia-me", func: "Oferecer-se para uma tarefa",
-    ref: "Isaías 6:1-11", with: "voice",
+    ref: "Isaías 6:1-13", with: "voice",
     context: "No templo, Isaías vê o Senhor no trono. Um serafim toca seus lábios com uma brasa. Então ouve uma pergunta.",
     vocab: [
       { en: "Who?", pt: "Quem?", icon: "❓" }, { en: "to send", pt: "enviar", icon: "📨" },
@@ -57,12 +57,12 @@ SCENES.push(
     context: "O povo está cansado e sem esperança. Deus dá a Isaías uma mensagem de consolo para Jerusalém.",
     vocab: [
       { en: "to comfort", pt: "consolar", icon: "🤗" }, { en: "It's over", pt: "Acabou", icon: "🏁" },
-      { en: "weak", pt: "fraco", icon: "😮‍💨" }, { en: "forever", pt: "para sempre", icon: "♾️" }, { en: "new strength", pt: "novas forças", icon: "💪" },
+      { en: "weak", pt: "fraco", icon: "😓" }, { en: "forever", pt: "para sempre", icon: "♾️" }, { en: "new strength", pt: "novas forças", icon: "💪" },
     ],
     lines: [
       { who: "voice", en: "Comfort my people. Speak kindly to Jerusalem.", pt: "Consolai o meu povo. Falai com carinho a Jerusalém." },
       { who: "isaias", en: "What should I say to them, Lord?", pt: "O que devo dizer a eles, Senhor?" },
-      { who: "voice", en: "Tell them: your hard time is over.", pt: "Diga a eles: o tempo difícil acabou." },
+      { who: "voice", en: "Tell them: your hard time is over.", pt: "Diga-lhes: o tempo difícil acabou." },
       { who: "isaias", en: "The people feel weak, like grass.", pt: "O povo se sente fraco, como a erva." },
       { who: "voice", en: "Grass dries and flowers fall, but my word stands forever.", pt: "A erva seca e a flor cai, mas a minha palavra permanece para sempre." },
       { who: "isaias", en: "Then I will go up the mountain and shout the good news.", pt: "Então vou subir ao monte e gritar a boa notícia." },
@@ -77,12 +77,12 @@ SCENES.push(
     ref: "Isaías 38:1-8, 21", with: "ezequias",
     context: "O rei Ezequias está doente, à beira da morte. Isaías vai ao palácio levar a palavra do Senhor.",
     vocab: [
-      { en: "How do you feel?", pt: "Como você se sente?", icon: "🩺" }, { en: "sick", pt: "doente", icon: "🤒" },
-      { en: "to get better", pt: "melhorar", icon: "📈" }, { en: "fifteen years", pt: "quinze anos", icon: "🕰️" }, { en: "tears", pt: "lágrimas", icon: "😢" },
+      { en: "How do you feel?", pt: "Como o senhor se sente?", icon: "🩺" }, { en: "sick", pt: "doente", icon: "🤒" },
+      { en: "to get better", pt: "melhorar", icon: "😊" }, { en: "fifteen years", pt: "quinze anos", icon: "🕰️" }, { en: "tears", pt: "lágrimas", icon: "😢" },
     ],
     lines: [
       { who: "isaias", en: "Good afternoon, my king. How do you feel today?", pt: "Boa tarde, meu rei. Como o senhor se sente hoje?" },
-      { who: "ezequias", en: "Very sick. I have a bad wound and a fever.", pt: "Muito doente. Tenho uma ferida feia e febre." },
+      { who: "ezequias", en: "Very sick. I have a bad sore.", pt: "Muito doente. Tenho uma ferida feia." },
       { who: "isaias", en: "The Lord says: put your house in order. This sickness is serious.", pt: "O Senhor diz: põe a tua casa em ordem. Esta doença é grave." },
       { who: "ezequias", en: "Please, Lord, remember me. I served you with all my heart.", pt: "Por favor, Senhor, lembra-te de mim. Eu te servi de todo o coração." },
       { who: "isaias", en: "Wait... The Lord heard your prayer and saw your tears.", pt: "Espere... O Senhor ouviu a sua oração e viu as suas lágrimas." },
@@ -119,16 +119,16 @@ SCENES.push(
     ref: "Isaías 52:7-10", with: "atalaia",
     context: "Do muro de Jerusalém, o atalaia vê alguém correndo pelos montes. Isaías explica quem é.",
     vocab: [
-      { en: "good news", pt: "boas notícias", icon: "📣" }, { en: "messenger", pt: "mensageiro", icon: "🏃" },
-      { en: "quickly", pt: "rápido", icon: "⚡" }, { en: "Really?", pt: "Sério?", icon: "😮" }, { en: "to sing", pt: "cantar", icon: "🎶" },
+      { en: "good news", pt: "boa notícia", icon: "📣" }, { en: "messenger", pt: "mensageiro", icon: "🏃" },
+      { en: "quickly", pt: "depressa", icon: "⚡" }, { en: "Really?", pt: "Sério?", icon: "😮" }, { en: "to sing", pt: "cantar", icon: "🎶" },
     ],
     lines: [
       { who: "atalaia", en: "Look! Someone is running on the mountain.", pt: "Olhe! Alguém está correndo na montanha." },
-      { who: "isaias", en: "It is a messenger. He brings good news.", pt: "É um mensageiro. Ele traz boas notícias." },
+      { who: "isaias", en: "It is a messenger. He brings good news.", pt: "É um mensageiro. Ele traz boa notícia." },
       { who: "atalaia", en: "What news? Tell me quickly!", pt: "Que notícias? Diga rápido!" },
       { who: "isaias", en: "Peace! Salvation! Your God reigns!", pt: "Paz! Salvação! O seu Deus reina!" },
       { who: "atalaia", en: "Really? The Lord is coming back to Zion?", pt: "Sério? O Senhor está voltando a Sião?" },
-      { who: "isaias", en: "Yes. Lift up your voice and sing together.", pt: "Sim. Levante a voz e cantem juntos." },
+      { who: "isaias", en: "Yes. Lift up your voice and sing together.", pt: "Sim. Levantem a voz e cantem juntos." },
       { who: "atalaia", en: "This is the best news of my life.", pt: "Esta é a melhor notícia da minha vida." },
       { who: "isaias", en: "Sing for joy, Jerusalem! The Lord comforts his people.", pt: "Cante de alegria, Jerusalém! O Senhor consola o seu povo." },
     ],
@@ -185,7 +185,7 @@ SCENES.push(
     context: "No Egito, José é comprado por Potifar, oficial do Faraó, e começa a trabalhar na casa dele.",
     vocab: [
       { en: "job", pt: "trabalho", icon: "💼" }, { en: "What can you do?", pt: "O que você sabe fazer?", icon: "🛠️" },
-      { en: "to work hard", pt: "trabalhar duro", icon: "💪" }, { en: "in charge of", pt: "responsável por", icon: "🗝️" }, { en: "Yes, sir", pt: "Sim, senhor", icon: "🫡" },
+      { en: "to work hard", pt: "trabalhar duro", icon: "💪" }, { en: "in charge of", pt: "responsável por", icon: "🗝️" }, { en: "Yes, sir", pt: "Sim, senhor", icon: "✅" },
     ],
     lines: [
       { who: "potifar", en: "You are the new servant. What is your name?", pt: "Você é o servo novo. Qual é o seu nome?" },
@@ -232,8 +232,8 @@ SCENES.push(
       { who: "pharaoh", en: "I had a dream and no one can explain it. They say you can.", pt: "Eu tive um sonho e ninguém consegue explicar. Dizem que você consegue." },
       { who: "jose", en: "Not me, but God will give Pharaoh a good answer.", pt: "Eu não, mas Deus dará ao Faraó uma boa resposta." },
       { who: "pharaoh", en: "Seven fat cows came out of the river. Then seven thin cows ate them.", pt: "Sete vacas gordas saíram do rio. Depois sete vacas magras as comeram." },
-      { who: "jose", en: "The seven fat cows are seven good years. The seven thin cows are seven years of hunger.", pt: "As sete vacas gordas são sete anos bons. As sete vacas magras são sete anos de fome." },
-      { who: "pharaoh", en: "Seven years of hunger? What can we do?", pt: "Sete anos de fome? O que podemos fazer?" },
+      { who: "jose", en: "The seven fat cows are seven good years. The seven thin cows are seven years of famine.", pt: "As sete vacas gordas são sete anos bons. As sete vacas magras são sete anos de fome." },
+      { who: "pharaoh", en: "Seven years of famine? What can we do?", pt: "Sete anos de fome? O que podemos fazer?" },
       { who: "jose", en: "Choose a wise man. In the good years, save one fifth of the food.", pt: "Escolha um homem sábio. Nos anos bons, guarde um quinto da comida." },
       { who: "pharaoh", en: "Save one fifth every year, for seven years...", pt: "Guardar um quinto por ano, durante sete anos..." },
       { who: "jose", en: "Yes. Keep the grain in the cities. Then there will be food in the bad years.", pt: "Sim. Guarde o grão nas cidades. Assim haverá comida nos anos ruins." },
@@ -246,7 +246,7 @@ SCENES.push(
     ref: "Gênesis 45:1-11", with: "juda",
     context: "Anos depois, os irmãos vêm comprar comida no Egito sem saber quem é o governador. José não aguenta mais.",
     vocab: [
-      { en: "Come near", pt: "Chegue perto", icon: "🫂" }, { en: "still alive", pt: "ainda vivo", icon: "❤️" },
+      { en: "Come near", pt: "Chegue perto", icon: "🤗" }, { en: "still alive", pt: "ainda vivo", icon: "❤️" },
       { en: "Don't be sad", pt: "Não fique triste", icon: "🙂" }, { en: "Hurry!", pt: "Depressa!", icon: "🏃" }, { en: "to take care of", pt: "cuidar de", icon: "🛡️" },
     ],
     lines: [
@@ -254,8 +254,8 @@ SCENES.push(
       { who: "juda", en: "Joseph?! It can't be... We are so afraid.", pt: "José?! Não pode ser... Estamos com tanto medo." },
       { who: "jose", en: "Don't be sad, and don't be angry with yourselves.", pt: "Não fiquem tristes, nem com raiva de si mesmos." },
       { who: "juda", en: "But we sold you. We were wrong.", pt: "Mas nós vendemos você. Nós erramos." },
-      { who: "jose", en: "God sent me here before you, to save lives.", pt: "Deus me enviou aqui antes de vocês, para salvar vidas." },
-      { who: "juda", en: "There are still five years of hunger. What can we do?", pt: "Ainda faltam cinco anos de fome. O que podemos fazer?" },
+      { who: "jose", en: "God sent me here before you, to save lives. There are still five years of famine.", pt: "Deus me enviou aqui antes de vocês, para salvar vidas. Ainda faltam cinco anos de fome." },
+      { who: "juda", en: "Five more years? What can we do?", pt: "Mais cinco anos? O que podemos fazer?" },
       { who: "jose", en: "Hurry! Go to my father and bring him here. You will live in Goshen, near me.", pt: "Depressa! Vão ao meu pai e o tragam aqui. Vocês vão morar em Gósen, perto de mim." },
       { who: "juda", en: "All of us? Our children, our sheep, everything?", pt: "Todos nós? Nossos filhos, nossas ovelhas, tudo?" },
       { who: "jose", en: "Yes, all of you. I will take care of you.", pt: "Sim, todos vocês. Eu vou cuidar de vocês." },
@@ -307,16 +307,16 @@ SCENES.push(
     truth: "Aspenaz recebeu jovens de Judá para aprender as letras e a língua dos caldeus por três anos; deu-lhes nomes novos (Daniel: Beltessazar); Deus lhes deu conhecimento, e o rei os achou dez vezes melhores que todos os sábios (Daniel 1:3-7, 17-20).",
   },
   {
-    id: "c-daniel-3", char: "daniel", unit: "u7", title: "Me dê um pouco de tempo", func: "Pedir mais tempo e marcar um horário",
+    id: "c-daniel-3", char: "daniel", unit: "u7", title: "Dê-me um pouco de tempo", func: "Pedir mais tempo e marcar um horário",
     ref: "Daniel 2:1-47", with: "nabucodonosor",
     context: "O rei Nabucodonosor teve um sonho e exige que os sábios contem o sonho e o sentido. Ninguém consegue.",
     vocab: [
-      { en: "Give me time", pt: "Me dê tempo", icon: "⏳" }, { en: "tomorrow", pt: "amanhã", icon: "📆" },
+      { en: "Give me time", pt: "Dê-me tempo", icon: "⏳" }, { en: "tomorrow", pt: "amanhã", icon: "📆" },
       { en: "tonight", pt: "hoje à noite", icon: "🌙" }, { en: "worried", pt: "preocupado", icon: "😟" }, { en: "secret", pt: "segredo", icon: "🤫" },
     ],
     lines: [
       { who: "nabucodonosor", en: "I had a dream and I am worried. Tell me the dream and its meaning!", pt: "Tive um sonho e estou preocupado. Diga-me o sonho e o seu sentido!" },
-      { who: "daniel", en: "Give me some time, my king. Tomorrow I will bring the answer.", pt: "Me dê um pouco de tempo, meu rei. Amanhã eu trago a resposta." },
+      { who: "daniel", en: "Give me some time, my king. Tomorrow I will bring the answer.", pt: "Dê-me um pouco de tempo, meu rei. Amanhã eu trago a resposta." },
       { who: "nabucodonosor", en: "Tomorrow? The wise men could not do it in many days.", pt: "Amanhã? Os sábios não conseguiram em muitos dias." },
       { who: "daniel", en: "Tonight I will pray with my friends. God knows every secret.", pt: "Hoje à noite vou orar com meus amigos. Deus conhece todos os segredos." },
       { who: "nabucodonosor", en: "Well, Daniel? It is morning. Can you tell me my dream?", pt: "E então, Daniel? Já é de manhã. Pode me dizer o meu sonho?" },
@@ -423,10 +423,10 @@ SCENES.push(
     lines: [
       { who: "pedro", en: "Look! Someone is walking on the water! Is it a ghost?", pt: "Olhem! Alguém está andando sobre a água! É um fantasma?" },
       { who: "jesus", en: "Take courage! It is I. Don't be afraid.", pt: "Tenham coragem! Sou eu. Não tenham medo." },
-      { who: "pedro", en: "Lord, if it is you, tell me to come to you on the water.", pt: "Senhor, se é o senhor, mande-me ir até o senhor sobre a água." },
+      { who: "pedro", en: "Lord, if it is you, tell me to come to you on the water.", pt: "Senhor, se é o senhor, mande-me ir até aí sobre a água." },
       { who: "jesus", en: "Come.", pt: "Venha." },
       { who: "pedro", en: "I am walking on the water! But the wind is so strong... I am sinking! Lord, save me!", pt: "Estou andando sobre a água! Mas o vento é tão forte... Estou afundando! Senhor, salva-me!" },
-      { who: "jesus", en: "I have you. Why did you doubt? You have little faith.", pt: "Eu te seguro. Por que você duvidou? Você tem pouca fé." },
+      { who: "jesus", en: "I've got you. Why did you doubt? You have little faith.", pt: "Eu seguro você. Por que duvidou? Você tem pouca fé." },
       { who: "pedro", en: "I looked at the waves, not at you.", pt: "Eu olhei para as ondas, não para o senhor." },
       { who: "jesus", en: "Let's get into the boat.", pt: "Vamos entrar no barco." },
       { who: "pedro", en: "The wind stopped. Truly you are the Son of God.", pt: "O vento parou. Verdadeiramente o senhor é o Filho de Deus." },
@@ -439,7 +439,7 @@ SCENES.push(
     context: "Na região de Cesareia de Filipe, andando pela estrada, Jesus faz uma pergunta aos discípulos.",
     vocab: [
       { en: "Who?", pt: "Quem?", icon: "❓" }, { en: "people say", pt: "as pessoas dizem", icon: "🗣️" },
-      { en: "others", pt: "outros", icon: "👥" }, { en: "And you?", pt: "E você?", icon: "👉" }, { en: "rock", pt: "rocha", icon: "🪨" },
+      { en: "others", pt: "outros", icon: "👥" }, { en: "And you?", pt: "E você?", icon: "👉" }, { en: "rock", pt: "pedra", icon: "🪨" },
     ],
     lines: [
       { who: "jesus", en: "Who do people say that I am?", pt: "Quem as pessoas dizem que eu sou?" },
@@ -448,8 +448,8 @@ SCENES.push(
       { who: "pedro", en: "You are the Christ, the Son of the living God.", pt: "O senhor é o Cristo, o Filho do Deus vivo." },
       { who: "jesus", en: "Blessed are you, Simon. My Father in heaven showed you this.", pt: "Bem-aventurado é você, Simão. Meu Pai no céu lhe mostrou isso." },
       { who: "pedro", en: "Your Father showed me?", pt: "Seu Pai me mostrou?" },
-      { who: "jesus", en: "Yes. And I say to you: you are Peter, and on this rock I will build my church.", pt: "Sim. E eu lhe digo: você é Pedro, e sobre esta rocha edificarei a minha igreja." },
-      { who: "pedro", en: "Peter... the rock. Thank you, Lord.", pt: "Pedro... a rocha. Obrigado, Senhor." },
+      { who: "jesus", en: "Yes. And I say to you: you are Peter, and on this rock I will build my church.", pt: "Sim. E eu lhe digo: você é Pedro, e sobre esta pedra edificarei a minha igreja." },
+      { who: "pedro", en: "Peter... the rock. Thank you, Lord.", pt: "Pedro... a pedra. Obrigado, Senhor." },
     ],
     truth: "Em Cesareia de Filipe Jesus perguntou \"quem dizem os homens ser o Filho do homem?\"; responderam João Batista, Elias, Jeremias; \"e vós?\"; Pedro: \"tu és o Cristo, o Filho do Deus vivo\"; Jesus: \"bem-aventurado és tu, Simão... tu és Pedro, e sobre esta pedra edificarei a minha igreja\" (Mateus 16:13-18).",
   },
@@ -488,7 +488,7 @@ SCENES.push(
       { who: "pedro", en: "The net is full! John says it is the Lord. I am jumping into the water!", pt: "A rede está cheia! João diz que é o Senhor. Vou pular na água!" },
       { who: "jesus", en: "Come and have breakfast. The fish are on the fire, and there is bread.", pt: "Venham tomar café da manhã. Os peixes estão no fogo, e há pão." },
       { who: "pedro", en: "One hundred and fifty-three fish! And the net is not broken.", pt: "Cento e cinquenta e três peixes! E a rede não rasgou." },
-      { who: "jesus", en: "Simon, son of John, do you love me?", pt: "Simão, filho de João, você me ama?" },
+      { who: "jesus", en: "Simon, son of Jonas, do you love me?", pt: "Simão, filho de Jonas, você me ama?" },
       { who: "pedro", en: "Yes, Lord. You know that I love you.", pt: "Sim, Senhor. O senhor sabe que eu o amo." },
       { who: "jesus", en: "Then feed my sheep.", pt: "Então apascente as minhas ovelhas." },
     ],

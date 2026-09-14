@@ -45,11 +45,17 @@ const cleanWord = (w) => w.replace(/[.,;:!?"]/g, "").replace(/^'|'$/g, "");
 const wordCount = (s) => s.trim().split(/\s+/).length;
 
 // Palavra da lacuna: um item do vocabulário que aparece na fala; senão, a palavra mais longa
-function sceneGapWord(en, vocab) {
+function sceneGapWord(en, vocab, allowPhrase) {
   const tokens = en.split(" ").map(cleanWord).filter(Boolean);
   const single = vocab.map((v) => v.en.replace(/^to /, "")).filter((v) => !v.includes(" "));
   const hit = tokens.find((t) => single.some((v) => normalize(v) === normalize(t)));
   if (hit) return hit;
+  if (allowPhrase) {
+    // expressão de várias palavras ("Good morning") vira uma lacuna só, quando aparece inteira na fala
+    const clean = en.split(" ").map(cleanWord).join(" ");
+    const phrase = vocab.map((v) => v.en.replace(/^to /, "")).filter((v) => v.includes(" ")).find((v) => new RegExp("(^|\\s)" + v.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "(\\s|$)", "i").test(clean));
+    if (phrase) { const m = new RegExp("(^|\\s)(" + phrase.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")(\\s|$)", "i").exec(clean); return m ? m[2] : phrase; }
+  }
   const cands = tokens.filter((t) => /^[a-z]+$/i.test(t) && t.length >= 4 && !/^[A-Z]/.test(t));
   if (!cands.length) return null;
   return cands.sort((a, b) => b.length - a.length)[0];
@@ -115,7 +121,8 @@ function buildSceneExercises(step) {
 
   // 2) vocabulário receptivo, formatos rotacionados; as 2 expressões restantes voltam como recordação
   const vocab = shuffle(sc.vocab.slice());
-  const introTypes = noListen ? ["image-choice", "choice-en-pt"] : ["image-choice", "choice-en-pt", "listen"];
+  // na 1ª visita toda expressão nova é apresentada com significado (imagem/tradução), nunca só pelo som
+  const introTypes = (firstTime || noListen) ? ["image-choice", "choice-en-pt"] : ["image-choice", "choice-en-pt", "listen"];
   vocab.slice(0, 3).forEach((w, i) => take({ ...EX_MAKE[introTypes[i % introTypes.length]](w), newWord: firstTime }, "vocab"));
 
   // 3) batidas da conversa
@@ -154,8 +161,8 @@ function buildSceneExercises(step) {
   const used = new Set();
   const pickLine = (pred) => { const li = shuffle(heroLis.filter((x) => !used.has(x))).find((x) => pred(sc.lines[x])); if (li != null) used.add(li); return li; };
   const prod = [];
-  const gapLi = pickLine((l) => !!sceneGapWord(l.en, sc.vocab));
-  if (gapLi != null) prod.push({ ...lineBase(gapLi), type: "scene-gap", blank: sceneGapWord(sc.lines[gapLi].en, sc.vocab) });
+  const gapLi = pickLine((l) => !!sceneGapWord(l.en, sc.vocab, true));
+  if (gapLi != null) prod.push({ ...lineBase(gapLi), type: "scene-gap", blank: sceneGapWord(sc.lines[gapLi].en, sc.vocab, true) });
   const buildLi = pickLine((l) => { const n = wordCount(l.en); return n >= 3 && n <= 12; });
   if (buildLi != null) prod.push({ ...lineBase(buildLi), type: "scene-build", bank: sceneBank(sc.lines[buildLi], sc) });
   const speakLi = pickLine((l) => wordCount(l.en) <= 12);
@@ -163,8 +170,8 @@ function buildSceneExercises(step) {
 
   // 5) recordação das expressões restantes + revisão de lição anterior
   const recall = [];
-  if (vocab[3]) recall.push({ ...EX_MAKE[noListen ? "choice-pt-en" : "listen"](vocab[3]), newWord: firstTime });
-  if (vocab[4]) recall.push(EX_MAKE.type(vocab[4]));
+  if (vocab[3]) recall.push({ ...EX_MAKE[firstTime ? "image-choice" : noListen ? "choice-pt-en" : "listen"](vocab[3]), newWord: firstTime });
+  if (vocab[4]) recall.push(firstTime ? { ...EX_MAKE["choice-en-pt"](vocab[4]), newWord: true } : EX_MAKE.type(vocab[4]));
   const earlier = flatLessons().filter((l) => !l.review && !l.scene && state.completed[l.id]).flatMap((l) => l.vocab || []);
   if (earlier.length) {
     const w = weakestWords(earlier, 3)[Math.floor(Math.random() * Math.min(3, earlier.length))];
@@ -172,12 +179,13 @@ function buildSceneExercises(step) {
   }
   // intercala produção e recordação: nunca dois do mesmo formato em sequência
   const fam = (t) => /listen/.test(t) ? "listen" : t.replace(/^scene-/, "");
+  const differs = (e, prev) => !prev || (fam(e.type) !== fam(prev.type) && (e.li == null || prev.li == null || e.li !== prev.li));
   const tail = [];
   while (prod.length || recall.length) {
     const prev = tail[tail.length - 1] || ex[ex.length - 1];
     let src = (tail.length % 2 === 1 && recall.length) || !prod.length ? recall : prod;
-    let j = src.findIndex((e) => !prev || fam(e.type) !== fam(prev.type));
-    if (j < 0) { const alt = src === prod ? recall : prod; const k = alt.findIndex((e) => !prev || fam(e.type) !== fam(prev.type)); if (k >= 0) { src = alt; j = k; } else j = 0; }
+    let j = src.findIndex((e) => differs(e, prev));
+    if (j < 0) { const alt = src === prod ? recall : prod; const k = alt.findIndex((e) => differs(e, prev)); if (k >= 0) { src = alt; j = k; } else j = 0; }
     tail.push(src.splice(j, 1)[0]);
   }
   tail.forEach((e) => take(e, "prod"));
@@ -343,7 +351,7 @@ function renderSceneListen(ex, box) {
   row.insertAdjacentHTML("beforeend", `<span class="sc-en sc-secret">${line.en}</span>`);
   body.appendChild(row);
   sceneTranscript(sc, ex.li, box, sceneMsg(sc, line, { body, now: true }));
-  box.insertAdjacentHTML("beforeend", `<div class="reply-label">Em português, ele disse:</div>`);
+  box.insertAdjacentHTML("beforeend", `<div class="reply-label">Em português, ${sceneNameOf(line.who)} disse:</div>`);
   makeOptions(box, ex.options, 1);
   speak(line.en, { char: ch });
   ex.correct = line.pt;
@@ -449,9 +457,11 @@ function renderSceneSpeak(ex, box) {
   mic.addEventListener("click", () => {
     if (session.checked) return;
     if (session.recognizer) { try { session.recognizer.stop(); } catch (e) {} return; }
+    const s0 = session;
     session.recognizer = recognizeOnce(line.en, {
       onStart: () => { mic.classList.add("listening"); mic.innerHTML = `${ICONS.mic}<span>Ouvindo...</span>`; status.textContent = ""; },
       onResult: (r) => {
+        if (session !== s0) return;
         status.textContent = `Você disse: "${r.text}"`;
         session.answer = r.ok ? line.en : r.text;
         $("#btn-check").disabled = false;
@@ -461,7 +471,7 @@ function renderSceneSpeak(ex, box) {
         status.textContent = err === "unsupported" ? "Reconhecimento de voz indisponível neste navegador."
           : err === "not-allowed" ? "Permita o uso do microfone ou pule este exercício." : "Não consegui ouvir. Tente de novo ou pule.";
       },
-      onEnd: () => { session.recognizer = null; mic.classList.remove("listening"); mic.innerHTML = `${ICONS.mic}<span>Toque para falar</span>`; },
+      onEnd: () => { s0.recognizer = null; mic.classList.remove("listening"); mic.innerHTML = `${ICONS.mic}<span>Toque para falar</span>`; },
     });
   });
   skip.addEventListener("click", () => {
@@ -500,7 +510,7 @@ function renderSceneTruth(ex, box) {
     replay.disabled = true;
     let i = 0;
     const next = () => {
-      if (i >= sc.lines.length || !$("#screen-lesson").classList.contains("active")) { replay.disabled = false; return; }
+      if (i >= sc.lines.length || !$("#screen-lesson").classList.contains("active") || !session || session.exercises[session.index] !== ex) { replay.disabled = false; return; }
       const l = sc.lines[i++];
       replay.textContent = `${sceneNameOf(l.who)}: ${l.en}`;
       speak(l.en, { char: castChar(l.who) });

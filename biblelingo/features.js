@@ -11,7 +11,7 @@ function audioCtx() {
   return AUDIO.ctx;
 }
 
-// Baixa e decodifica um sprite uma única vez (cache limitado aos 6 mais recentes)
+// Baixa e decodifica um sprite uma única vez (cache limitado aos 4 mais recentes)
 function spriteBuffer(name) {
   // Cache LRU de 4 sprites decodificados (~10 MB cada em PCM no celular); a Promise é guardada
   // para dois toques rápidos não baixarem e decodificarem o mesmo sprite duas vezes
@@ -30,7 +30,8 @@ function spriteBuffer(name) {
 }
 
 function audioKey(text) {
-  return String(text).toLowerCase().replace(/[^a-z0-9 ]/g, "").replace(/\s+/g, " ").trim();
+  // Acentos viram a letra base: "Noé" -> "noe" (antes virava "no", a mesma chave da palavra inglesa)
+  return String(text).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9 ]/g, "").replace(/\s+/g, " ").trim();
 }
 
 async function loadAudioManifest() {
@@ -114,8 +115,10 @@ function playClip(text, charKey, slow, onFail) {
       }
       el.currentTime = 0;
       el.playbackRate = rate;
-      el.onerror = () => { delete AUDIO.cache[file]; if (token === AUDIO.playToken) fail(); };
-      el.play().catch(() => { if (token === AUDIO.playToken) fail(); });
+      let failed = false;
+      const failOnce = () => { if (failed) return; failed = true; if (token === AUDIO.playToken) fail(); };
+      el.onerror = () => { delete AUDIO.cache[file]; failOnce(); };
+      el.play().catch(failOnce);
     };
     const sprite = AUDIO.sprites && AUDIO.sprites[file];
     if (sprite && window.AudioContext) {
@@ -152,18 +155,23 @@ function wordStat(en) {
 function recordWord(en, ok) {
   const w = wordStat(en);
   w.last = Date.now();
-  if (ok) { w.ok++; w.lvl = Math.min(SR_INTERVALS.length - 1, w.lvl + 1); }
-  else { w.bad++; w.lvl = Math.max(0, w.lvl - 2); }
+  if (ok) {
+    w.ok++;
+    // Sobe no máximo um nível por dia: vários acertos na mesma lição não empurram a revisão para 30 dias
+    const day = typeof today === "function" ? today() : "";
+    if (w.up !== day) { w.up = day; w.lvl = Math.min(SR_INTERVALS.length - 1, w.lvl + 1); }
+  } else { w.bad++; w.lvl = Math.max(0, w.lvl - 2); }
 }
 // Urgência de revisão: dias além do vencimento, mais peso para palavras com histórico de erro
 function wordUrgency(en) {
   const w = state.words && state.words[en];
   if (!w) return 0.5; // nunca praticada fora da lição: revisar cedo
   const overdue = (Date.now() - (w.last + SR_INTERVALS[w.lvl] * 864e5)) / 864e5;
-  return overdue + w.bad * 0.6 - w.ok * 0.3;
+  return overdue + w.bad * 0.6 - Math.min(w.ok, 5) * 0.3;
 }
 function weakestWords(list, n) {
-  return [...list].sort((a, b) => wordUrgency(b.en) - wordUrgency(a.en)).slice(0, n);
+  // embaralha antes de ordenar: empates de urgência não devolvem sempre o mesmo conjunto
+  return shuffle([...list]).sort((a, b) => wordUrgency(b.en) - wordUrgency(a.en)).slice(0, n);
 }
 // Palavras do vocabulário presentes numa frase (para creditar acertos de frase)
 function sentenceVocab(sentence) {
@@ -178,7 +186,7 @@ function saveResume() {
   if (session.index >= session.exercises.length) return;
   try {
     state.resume = {
-      lessonId: session.lesson.id, index: session.index, mistakes: session.mistakes, combo: session.combo, bestCombo: session.bestCombo,
+      lessonId: session.lesson.id, index: session.index, mistakes: session.mistakes, firstMistakes: session.firstMistakes || 0, combo: session.combo, bestCombo: session.bestCombo,
       bonus: session.bonus, startedAt: session.startedAt, reviewing: session.reviewing, hardAdded: session.hardAdded,
       narratorKey: session.narrator && session.narrator.key, fixedNarrator: !!session.fixedNarrator,
       exercises: JSON.parse(JSON.stringify(session.exercises)), hard: JSON.parse(JSON.stringify(session.hard || [])),
@@ -190,8 +198,14 @@ function saveResume() {
 function resumable() {
   const r = state.resume;
   if (!r || Date.now() - r.savedAt > RESUME_TTL) return null;
+  // Retomada gravada por uma versão antiga ou corrompida: descarta em vez de travar a tela de lição
+  const known = (t) => (typeof EX_RANK !== "undefined" && t in EX_RANK) || (typeof SCENE_RENDER !== "undefined" && t in SCENE_RENDER) || ["read", "verse", "dialogue", "quiz", "match", "listen-match", "speak"].includes(t);
+  const sane = Array.isArray(r.exercises) && r.exercises.length && Number.isInteger(r.index) && r.index >= 0 && r.index < r.exercises.length
+    && r.exercises.every((e) => e && typeof e === "object" && known(e.type) && (!("word" in e) || (e.word && e.word.en)) && (!("sentence" in e) || (e.sentence && e.sentence.en)));
+  if (!sane) { state.resume = null; save(); return null; }
   const lesson = flatLessons().find((l) => l.id === r.lessonId);
-  return lesson ? { ...r, lesson } : null;
+  if (!lesson) { state.resume = null; save(); return null; }
+  return { ...r, lesson };
 }
 function resumeLesson() {
   const r = resumable();
@@ -202,7 +216,7 @@ function resumeLesson() {
   const exercises = r.exercises;
   exercises.hard = r.hard;
   session = {
-    lesson, exercises, index: r.index, mistakes: r.mistakes, combo: r.combo, bestCombo: r.bestCombo, bonus: r.bonus,
+    lesson, exercises, index: r.index, mistakes: r.mistakes, firstMistakes: r.firstMistakes || 0, combo: r.combo, bestCombo: r.bestCombo, bonus: r.bonus,
     practice: false, checked: false, answer: null, startedAt: Date.now() - (r.savedAt - r.startedAt),
     narrator, fixedNarrator: r.fixedNarrator, reviewQueue: r.reviewQueue, reviewing: r.reviewing, hardAdded: r.hardAdded,
     hard: r.hard, log: r.log || [],
@@ -234,7 +248,7 @@ function startLevelUp(unit) {
   const light = exercises.filter((e) => !heavy.has(e.type));
   const prod = exercises.filter((e) => heavy.has(e.type));
   const keepLight = Math.max(2, 6 - crowns);
-  exercises = shuffle(light).slice(0, keepLight).concat(prod);
+  exercises = spreadNeighbors(shuffle(light).slice(0, keepLight).concat(prod));
   exercises.hard = [];
   session = {
     lesson, exercises, index: 0, mistakes: 0, combo: 0, bestCombo: 0, bonus: 0,

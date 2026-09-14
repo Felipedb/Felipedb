@@ -1,6 +1,8 @@
-// BibleLingo — lógica do app (trilha, exercícios, corações, XP, ofensiva)
+// BíbliaLearn — lógica do app (trilha, exercícios, corações, XP, ofensiva)
 
 const MAX_HEARTS = 5;
+// Contrações escritas sem apóstrofo, aceitas como a forma com apóstrofo (normalize)
+const NO_APOS = { dont: "do not", cant: "cannot", wont: "will not", isnt: "is not", arent: "are not", didnt: "did not", doesnt: "does not", wasnt: "was not", werent: "were not", hasnt: "has not", havent: "have not", im: "i am", lets: "let us", youre: "you are", theyre: "they are", ive: "i have", youve: "you have", thats: "that is", whats: "what is", heres: "here is", theres: "there is" };
 const XP_PER_LESSON = 10;
 const XP_PERFECT_BONUS = 5;
 
@@ -35,11 +37,15 @@ function load() {
     const raw = localStorage.getItem("biblelingo");
     if (raw) Object.assign(base, JSON.parse(raw));
   } catch (e) { /* armazenamento indisponível: segue em memória */ }
-  if (!base.stars) base.stars = {};
-  if (!base.errors) base.errors = {};
-  if (!base.crowns) base.crowns = {};
-  if (!base.days) base.days = {};
-  if (!base.chests) base.chests = {};
+  // Armazenamento corrompido (tipo errado) não pode derrubar o app: cada campo volta ao padrão
+  const isObj = (x) => x && typeof x === "object" && !Array.isArray(x);
+  ["completed", "stars", "errors", "crowns", "days", "chests", "words"].forEach((k) => { if (!isObj(base[k])) base[k] = {}; });
+  ["xp", "hearts", "streak", "dailyGoal"].forEach((k) => { if (k in base && !Number.isFinite(Number(base[k]))) base[k] = k === "hearts" ? MAX_HEARTS : k === "dailyGoal" ? 20 : 0; else if (k in base) base[k] = Number(base[k]); });
+  if (base.hearts != null) base.hearts = Math.max(0, Math.min(MAX_HEARTS, base.hearts));
+  if (base.resume != null && !isObj(base.resume)) base.resume = null;
+  if (base.daily != null && !isObj(base.daily)) base.daily = null;
+  if (base.joined != null && typeof base.joined !== "string") base.joined = null;
+  if (base.name != null && typeof base.name !== "string") base.name = "";
   ensureDay(base);
   return base;
 }
@@ -349,13 +355,15 @@ const exNearWords = (target, n = 2) => {
 };
 const exBank = (s, lang = "en") => {
   const words = s[lang].split(" ");
-  const extra = shuffle(allVocab().map((p) => p[lang].replace("to ", ""))).filter((w) => !words.includes(w)).slice(0, 2);
+  const have = new Set(words.map((w) => normalize(w)));
+  const extra = shuffle(allVocab().map((p) => p[lang].replace(/^to /, "").replace(/\s*\([^)]*\)/g, ""))).filter((w) => !have.has(normalize(w))).slice(0, 2);
   return shuffle([...words, ...extra]);
 };
 const exBlankOf = (s) => {
   const pool = allVocab();
   const words = s.en.split(" ");
-  const cands = words.filter((w) => pool.some((p) => normalize(p.en.replace(/^to /, "")) === normalize(w)) && w.length > 2);
+  // palavra repetida na frase ("forty days and forty nights") não vira lacuna: só a primeira abriria
+  const cands = words.filter((w) => pool.some((p) => normalize(p.en.replace(/^to /, "")) === normalize(w)) && w.length > 2 && words.filter((x) => normalize(x) === normalize(w)).length === 1);
   return cands.length ? cands[Math.floor(Math.random() * cands.length)] : null;
 };
 const exPtDistractors = (s, unitId) =>
@@ -384,7 +392,21 @@ function replaceUpcomingListening() {
   const map = { "listen": (e) => EX_MAKE["choice-pt-en"](e.word), "listen-choice": (e) => EX_MAKE["translate-en-pt"](e.sentence), "listen-build": (e) => EX_MAKE.build(e.sentence), "listen-type": (e) => EX_MAKE.build(e.sentence), "listen-match": (e) => EX_MAKE.match(e.pairs),
     "scene-listen": (e) => ({ type: "scene-read", sceneId: e.sceneId, lis: [e.li], silent: true }) };
   session.exercises = session.exercises.map((e, i) => (i > session.index && map[e.type]) ? Object.assign(map[e.type](e), { isReview: e.isReview }) : e);
+  session.reviewQueue = (session.reviewQueue || []).map((e) => map[e.type] ? Object.assign(map[e.type](e), { isReview: true }) : e);
   session.hard = session.hard.filter((e) => !LISTEN_TYPES.includes(e.type));
+}
+
+// Reordena uma lista pronta para nunca repetir formato nem item em sequência (greedy, mantém a ordem quando possível)
+function spreadNeighbors(list) {
+  const rest = list.slice(), out = [];
+  while (rest.length) {
+    const prev = out[out.length - 1];
+    let j = rest.findIndex((e) => !prev || (e.type !== prev.type && exKey(e) !== exKey(prev)));
+    if (j < 0) j = 0;
+    out.push(rest.splice(j, 1)[0]);
+  }
+  out.hard = list.hard || [];
+  return out;
 }
 
 function buildExercises(lesson, unit) {
@@ -397,9 +419,10 @@ function buildExercises(lesson, unit) {
   // 4 palavras por lição (como no Duolingo): na 1ª vez, as palavras-base; ao refazer, sorteia entre todas
   const vocab = lesson.review ? weakestWords(unitVocab(unit), 4)
     : firstTime ? (lesson.vocab || []).slice(0, 4) : shuffle(lesson.vocab || []).slice(0, 4);
+  // 4 frases por lição, sorteadas entre as 8 a 12 da passagem: cada visita cobre um trecho diferente da história
   const sentences = lesson.review
-    ? shuffle(lessons.flatMap((l) => l.sentences || [])).slice(0, 3)
-    : shuffle(lesson.sentences || []).slice(0, 3);
+    ? shuffle(lessons.flatMap((l) => l.sentences || [])).slice(0, 4)
+    : shuffle(lesson.sentences || []).slice(0, 4);
   const verses = lesson.review ? shuffle(lessons.map((l) => l.verse).filter(Boolean)).slice(0, 1) : lesson.verse ? [lesson.verse] : [];
   const stories = shuffle([
     ...lessons.map((l) => l.reading && { type: "read", reading: l.reading, options: shuffle(l.reading.options) }),
@@ -454,7 +477,8 @@ function buildExercises(lesson, unit) {
   const earlier = flatLessons().filter((l) => !l.review && !l.scene && state.completed[l.id] && l.id !== lesson.id).flatMap((l) => l.vocab || []);
   if (earlier.length && !lesson.review) {
     const w = weakestWords(earlier, 3)[Math.floor(Math.random() * Math.min(3, earlier.length))]; // entre as 3 mais urgentes
-    optional.push({ pri: 2, mk: () => ({ ...make[Math.random() < 0.5 ? "listen" : "choice-pt-en"](w), isReview: true }), type: "review" });
+    const rt = noListen(["listen", "choice-pt-en"]);
+    optional.push({ pri: 1.5, mk: () => ({ ...make[rt[Math.floor(Math.random() * rt.length)]](w), isReview: true }), type: "review" });
   }
   const target = LESSON_SIZE + 1; // +1 reservado como desafio final
   shuffle(optional).sort((a, b) => a.pri - b.pri).forEach((o) => {
@@ -474,7 +498,8 @@ function buildExercises(lesson, unit) {
   const isIntro = (e) => e.type === "image-choice" || e.type === "choice-en-pt";
   const cands = chosen.map((e) => ({ e, k: isIntro(e) ? Math.random() * 420 : EX_RANK[e.type] * 100 + Math.random() * 160 })).sort((x, y) => x.k - y.k).map((x) => x.e);
   const introOf = {};
-  cands.forEach((e) => { if (e.word && introOf[e.word.en] == null) introOf[e.word.en] = e; });
+  // A apresentação de cada palavra é o exercício receptivo (imagem/significado), nunca a escuta ou a digitação
+  cands.forEach((e) => { if (e.word && (introOf[e.word.en] == null || (!isIntro(introOf[e.word.en]) && isIntro(e)))) introOf[e.word.en] = e; });
   const placed = new Set();
   const ordered = [];
   while (cands.length) {
@@ -897,9 +922,11 @@ function practiceBar(ex, micOnly) {
   mic.addEventListener("click", () => {
     if (session.practiceRec) { try { session.practiceRec.stop(); } catch (e) {} return; }
     const target = getTarget();
+    const s0 = session;
     session.practiceRec = recognizeOnce(target, {
       onStart: () => { mic.classList.add("listening"); mic.innerHTML = `${ICONS.mic}<span>Ouvindo...</span>`; status.textContent = `Diga: "${target}"`; },
       onResult: (r) => {
+        if (session !== s0) return;
         if (r.ok) { SFX.correct(); buzz(25); status.textContent = `✅ Boa pronúncia! (${Math.round(r.score * 100)}%)`; }
         else { buzz(60); status.textContent = `🙂 Quase. Você disse: "${r.text}". Tente de novo!`; }
       },
@@ -908,7 +935,7 @@ function practiceBar(ex, micOnly) {
           ? "Reconhecimento de voz indisponível neste navegador."
           : err === "not-allowed" ? "Permita o uso do microfone para praticar." : "Não consegui ouvir. Tente de novo.";
       },
-      onEnd: () => { session.practiceRec = null; mic.classList.remove("listening"); mic.innerHTML = `${ICONS.mic}<span>Falar</span>`; },
+      onEnd: () => { s0.practiceRec = null; mic.classList.remove("listening"); mic.innerHTML = `${ICONS.mic}<span>Falar</span>`; },
     });
   });
 
@@ -1113,6 +1140,9 @@ function textInput(placeholder) {
 }
 
 // Formas aceitas ao digitar uma palavra: sem "to ", sem o parêntese explicativo, cada lado de "a / b"
+// Troca a lacuna do versículo como palavra inteira ("dream" não pega o "dream" de "dreamed")
+function blankRegex(blank) { return new RegExp("\\b" + blank.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b"); }
+
 function typeAccepts(en) {
   const base = en.replace(/\s*\([^)]*\)/g, "").trim();
   const parts = base.split(/\s*\/\s*/);
@@ -1148,7 +1178,7 @@ function renderVerse(ex, box) {
   });
   ex.correct = v.blank;
   ex.explain = `"${v.text}" — ${v.ref}`;
-  ex.audioText = v.text.replace(v.blank, "blank");
+  ex.audioText = v.text.replace(blankRegex(v.blank), "blank");
   ex.audioAfter = v.text;
 }
 
@@ -1327,9 +1357,11 @@ function renderSpeak(ex, box) {
   mic.addEventListener("click", () => {
     if (session.checked) return;
     if (session.recognizer) { try { session.recognizer.stop(); } catch (e) {} return; }
+    const s0 = session;
     session.recognizer = recognizeOnce(ex.sentence.en, {
       onStart: () => { mic.classList.add("listening"); mic.innerHTML = `${ICONS.mic}<span>Ouvindo...</span>`; status.textContent = ""; },
       onResult: (r) => {
+        if (session !== s0) return;
         status.textContent = `Você disse: "${r.text}"`;
         session.answer = r.ok ? ex.sentence.en : r.text;
         $("#btn-check").disabled = false;
@@ -1339,7 +1371,7 @@ function renderSpeak(ex, box) {
         status.textContent = err === "unsupported" ? "Reconhecimento de voz indisponível neste navegador."
           : err === "not-allowed" ? "Permita o uso do microfone ou pule este exercício." : "Não consegui ouvir. Tente de novo ou pule.";
       },
-      onEnd: () => { session.recognizer = null; mic.classList.remove("listening"); mic.innerHTML = `${ICONS.mic}<span>Toque para falar</span>`; },
+      onEnd: () => { s0.recognizer = null; mic.classList.remove("listening"); mic.innerHTML = `${ICONS.mic}<span>Toque para falar</span>`; },
     });
   });
 
@@ -1392,7 +1424,14 @@ function renderMatch(ex, box) {
         selected = null;
         return;
       }
-      if (selected.item.key === item.key && selected.item.side !== item.side) {
+      if (selected.item.side === item.side) {
+        // Trocar a seleção na mesma coluna não é um par errado
+        selected.el.classList.remove("selected");
+        selected = { item, el: b };
+        b.classList.add("selected");
+        return;
+      }
+      if (selected.item.key === item.key) {
         [selected.el, b].forEach((el) => { el.classList.remove("selected"); el.classList.add("matched", "pop"); });
         matched++;
         SFX.pop(matched);
@@ -1429,13 +1468,17 @@ function renderMatch(ex, box) {
 // Erro em pareamento não trava o exercício, mas conta para o bônus perfeito
 function registerMistakeSoft() {
   session.mistakes++;
+  if (!session.reviewing) session.firstMistakes = (session.firstMistakes || 0) + 1;
   session.combo = 0;
 }
 
 // ---------- Checagem ----------
 // Contrações expandidas dos dois lados ("don't" = "do not"), para aceitar as duas formas
-function normalize(s) {
-  let t = String(s).toLowerCase().replace(/[\u2018\u2019]/g, "'");
+function normalize(s, loose) {
+  let t = String(s).toLowerCase().replace(/[\u2018\u2019]/g, "'").replace(/-/g, " ").replace(/\bcan not\b/g, "cannot");
+  if (loose) t = t.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  // "dont", "lets", "im": contração sem apóstrofo vale como a forma com apóstrofo
+  t = t.replace(/\b([a-z]+)\b/g, (w) => NO_APOS[w] || w);
   if (t.includes("'")) {
     t = t.replace(/\bi'm\b/g, "i am").replace(/\bcan't\b/g, "cannot").replace(/\bwon't\b/g, "will not").replace(/\blet's\b/g, "let us")
       .replace(/\b(\w+)n't\b/g, "$1 not").replace(/\b(\w+)'re\b/g, "$1 are").replace(/\b(it|he|she|that|there|what|who)'s\b/g, "$1 is")
@@ -1471,10 +1514,22 @@ function editDistance(x, y) {
   }
   return prev[n];
 }
+let _corpusWords = null;
+function corpusWords() {
+  if (_corpusWords) return _corpusWords;
+  const set = new Set();
+  const addText = (t) => normalize(t).split(" ").forEach((w) => { if (w) set.add(w); });
+  allVocab().forEach((w) => addText(w.en));
+  allSentences().forEach((s) => addText(s.en));
+  if (typeof SCENES !== "undefined") SCENES.forEach((sc) => { sc.lines.forEach((l) => addText(l.en)); sc.vocab.forEach((v) => addText(v.en)); });
+  return (_corpusWords = set);
+}
 function fuzzyEqual(answer, target) {
   const a = normalize(answer).split(" "), t = normalize(target).split(" ");
   if (a.length !== t.length) return false;
-  return t.every((w, i) => a[i] === w || (w.length >= 4 && editDistance(a[i], w) <= 1));
+  // Tolera 1 letra trocada em palavras de 4+ letras, mas nunca quando o que foi escrito é outra
+  // palavra real do curso ("night" no lugar de "light", "God" no lugar de "good" não são erros de digitação)
+  return t.every((w, i) => a[i] === w || (w.length >= 4 && editDistance(a[i], w) <= 1 && !corpusWords().has(a[i])));
 }
 
 function checkAnswer() {
@@ -1487,10 +1542,15 @@ function checkAnswer() {
 
   if (!session.checked) {
     session.checked = true;
+    // Toque duplo em "Verificar" não engole o feedback: o botão fica travado por um instante
+    const s0 = session;
+    btn.disabled = true;
+    setTimeout(() => { if (session === s0 && !s0.locked) btn.disabled = false; }, 300);
     if (session.recognizer) { try { session.recognizer.abort(); } catch (e) {} }
     if (session.practiceRec) { try { session.practiceRec.abort(); } catch (e) {} }
     const accepts = [...(ex.accept || [ex.correct]), ...altsOf(ex)];
     const ok = accepts.some((c) => normalize(session.answer) === normalize(c))
+      || (ex.type === "translate-en-pt" && accepts.some((c) => normalize(session.answer, true) === normalize(c, true)))
       || ((ex.fuzzy || ex.type === "build" || ex.type === "listen-build") && accepts.some((c) => fuzzyEqual(session.answer, c)));
     if (ok && !accepts.some((c) => normalize(session.answer) === normalize(c))) ex.typo = true;
     // Placar da lição e força das palavras (repetição espaçada)
@@ -1547,7 +1607,7 @@ function checkAnswer() {
           if (session.bonus < 5) session.bonus++;
           if (session.combo % 5 === 0) {
             SFX.combo();
-            $("#fb-ok-detail").insertAdjacentHTML("afterbegin", `<span class="combo-pill">🔥 ${session.combo} seguidas · +${Math.min(session.combo / 5, 5) | 0} XP</span> `);
+            $("#fb-ok-detail").insertAdjacentHTML("afterbegin", `<span class="combo-pill">🔥 ${session.combo} seguidas · +${session.bonus} XP de bônus</span> `);
           } else SFX.correct();
         } else {
           SFX.correct();
@@ -1557,9 +1617,11 @@ function checkAnswer() {
       }
     } else {
       session.mistakes++;
+      if (!session.reviewing) session.firstMistakes = (session.firstMistakes || 0) + 1;
       session.combo = 0;
       updateCombo();
       if (!session.reviewing) session.reviewQueue.push(cloneExercise(ex));
+      saveResume(); // sair depois de errar não apaga o erro (retomar não vira "lição perfeita")
       if (ex.word) { state.errors = state.errors || {}; state.errors[ex.word.en] = (state.errors[ex.word.en] || 0) + 1; }
       SFX.wrong();
       buzz([60, 40, 60]);
@@ -1578,7 +1640,9 @@ function checkAnswer() {
       if (!session.practice && state.hearts <= 0) {
         session.locked = true;
         btn.disabled = true;
-        setTimeout(() => {
+        const s0 = session;
+        s0.heartsTimer = setTimeout(() => {
+          if (session !== s0) return; // o usuário já saiu ou começou outra coisa
           $("#modal-hearts").classList.add("open");
           showScreen("home");
         }, 1200);
@@ -1591,25 +1655,33 @@ function checkAnswer() {
   // Avança
   session.index++;
   adaptNext();
-  if (session.index >= session.exercises.length) {
-    // Sem erros: libera os exercícios mais difíceis reservados
+  const atEnd = session.index >= session.exercises.length;
+  // Nas cenas o último cartão ("Cena completa!") fecha a história: desafio e revisão entram antes dele
+  const closing = !atEnd && session.index === session.exercises.length - 1 && session.exercises[session.index].type === "scene-truth";
+  if (atEnd || closing) {
+    const at = closing ? session.index : session.exercises.length;
+    // Sem erros: libera os exercícios mais difíceis reservados (nunca sobre a mesma frase que acabou de sair)
     if (!session.hardAdded && session.mistakes === 0 && session.hard.length) {
       session.hardAdded = true;
-      session.exercises.push(...session.hard.slice(0, 2));
-      toast("💪 Mandou bem! Um desafio extra");
-      renderExercise();
-      return;
+      const last = session.exercises[at - 1];
+      const fresh = session.hard.filter((h) => !last || exKey(h) !== exKey(last)).slice(0, 2);
+      if (fresh.length) {
+        session.exercises.splice(at, 0, ...fresh);
+        toast("💪 Mandou bem! Um desafio extra");
+        renderExercise();
+        return;
+      }
     }
     // Com erros: revisa os erros no fim da lição
     if (!session.reviewing && session.reviewQueue.length) {
       session.reviewing = true;
-      session.exercises.push(...session.reviewQueue);
+      session.exercises.splice(at, 0, ...session.reviewQueue);
       session.reviewQueue = [];
       toast("🔁 Vamos revisar seus erros");
       renderExercise();
       return;
     }
-    finishLesson();
+    if (atEnd) finishLesson(); else renderExercise();
   } else {
     renderExercise();
   }
@@ -1621,7 +1693,8 @@ function adaptNext() {
   const nxt = session.exercises[session.index];
   if (!nxt || nxt.isReview || nxt.newWord || session.reviewing || session.lesson.practiceErrors) return;
   const prev = session.exercises[session.index - 1];
-  const sameNeighbor = (e) => prev && (e.type === prev.type || exKey(e) === exKey(prev));
+  const after = session.exercises[session.index + 1];
+  const sameNeighbor = (e) => [prev, after].some((n) => n && (e.type === n.type || exKey(e) === exKey(n)));
   let swap = null;
   // Cenas: com erros, montar a frase vira escolher a fala e a lacuna digitada vira lacuna com opções;
   // indo bem, a lacuna com opções sobe para lacuna digitada
@@ -1630,14 +1703,15 @@ function adaptNext() {
     if (line && session.mistakes >= 2 && nxt.type === "scene-build") swap = { ...nxt, type: "scene-reply", options: sceneReplyOptions(line, sc), bank: undefined };
     else if (line && session.mistakes >= 2 && nxt.type === "scene-gap") swap = { ...nxt, type: "scene-missing", options: shuffle([nxt.blank, ...exNearWords(nxt.blank, 2)]) };
     else if (line && session.combo >= 3 && nxt.type === "scene-missing") swap = { ...nxt, type: "scene-gap", options: undefined };
-    if (swap && !sameNeighbor(swap)) { swap.adapted = true; session.exercises[session.index] = swap; }
+    const usedSc = swap ? session.exercises.filter((e) => e.type === swap.type).length : 0;
+    if (swap && !sameNeighbor(swap) && usedSc < capOf(swap.type)) { swap.adapted = true; session.exercises[session.index] = swap; }
     return;
   }
   if (session.combo >= 3 && nxt.word && (nxt.type === "listen" || nxt.type === "choice-pt-en")) {
     swap = EX_MAKE.type(nxt.word);
   } else if (session.mistakes >= 2 && nxt.word && nxt.type === "type") {
     swap = EX_MAKE["choice-pt-en"](nxt.word);
-  } else if (session.mistakes >= 2 && nxt.sentence && (nxt.type === "listen-type" || nxt.type === "build")) {
+  } else if (!listenMuted() && session.mistakes >= 2 && nxt.sentence && (nxt.type === "listen-type" || nxt.type === "build")) {
     swap = EX_MAKE["listen-choice"](nxt.sentence, session.lesson.unit.id);
   }
   const used = swap ? session.exercises.filter((e) => e.type === swap.type).length : 0;
@@ -1647,7 +1721,7 @@ function adaptNext() {
 // Cópia limpa de um exercício para a revisão (novo embaralhamento das opções)
 function cloneExercise(ex) {
   const c = { ...ex };
-  delete c.correct; delete c.explain; delete c.accept; delete c.audioText; delete c.audioAfter; delete c.skipped;
+  delete c.correct; delete c.explain; delete c.accept; delete c.audioText; delete c.audioAfter; delete c.skipped; delete c.newWord;
   if (Array.isArray(ex.options)) c.options = shuffle(ex.options);
   if (Array.isArray(ex.bank)) c.bank = shuffle(ex.bank);
   c.isReview = true;
@@ -1657,7 +1731,7 @@ function cloneExercise(ex) {
 function finishLesson() {
   if (state.resume && state.resume.lessonId === session.lesson.id) state.resume = null;
   const perfect = session.mistakes === 0;
-  const first = !state.completed[session.lesson.id];
+  const first = !state.completed[session.lesson.id] && !session.lesson.practiceErrors && !String(session.lesson.id).startsWith("quick");
   let gained = session.practice ? 5 : XP_PER_LESSON;
   if (perfect) gained += XP_PERFECT_BONUS;
   gained += session.bonus;
@@ -1670,7 +1744,7 @@ function finishLesson() {
   }
 
   // Estrelas: 3 = perfeita, 2 = até 2 erros, 1 = concluída
-  const earned = perfect ? 3 : session.mistakes <= 2 ? 2 : 1;
+  const earned = perfect ? 3 : (session.firstMistakes || 0) <= 2 ? 2 : 1;
   if (!session.lesson.practiceErrors && !session.levelUp) state.stars[session.lesson.id] = Math.max(state.stars[session.lesson.id] || 0, earned);
 
   // Prática recupera 1 coração
@@ -1701,8 +1775,8 @@ function finishLesson() {
     + ` ⏱️ ${mm}:${ss}` + (session.bonus ? ` · 🔥 combo +${session.bonus} XP` : "");
   $("#result-xp").textContent = `+${gained}`;
   $("#result-streak").textContent = state.streak;
-  const firstPass = session.exercises.filter((e) => !e.isReview).length;
-  $("#result-acc").textContent = `${Math.max(0, Math.round((1 - session.mistakes / Math.max(1, firstPass)) * 100))}%`;
+  const firstPass = session.exercises.filter((e) => !e.isReview && !e.silent).length;
+  $("#result-acc").textContent = `${Math.max(0, Math.round((1 - (session.firstMistakes || 0) / Math.max(1, firstPass)) * 100))}%`;
 
   const blessings = [
     { t: "I can do all things through Christ which strengtheneth me.", r: "Filipenses 4:13" },
@@ -1782,11 +1856,23 @@ function startErrorPractice() {
   renderExercise();
 }
 
+// Encerra o que a sessão atual deixou rodando (voz, microfone, temporizador dos corações)
+function dropSession() {
+  if ("speechSynthesis" in window) speechSynthesis.cancel();
+  if (typeof stopClip === "function") stopClip();
+  if (session) {
+    if (session.recognizer) { try { session.recognizer.abort(); } catch (e) {} }
+    if (session.practiceRec) { try { session.practiceRec.abort(); } catch (e) {} }
+    if (session.heartsTimer) clearTimeout(session.heartsTimer);
+    session = null;
+  }
+}
+
 // ---------- Eventos globais ----------
 $("#btn-check").addEventListener("click", checkAnswer);
 $("#btn-quit").addEventListener("click", () => {
-  if ("speechSynthesis" in window) speechSynthesis.cancel();
-  if (typeof stopClip === "function") stopClip();
+  save(); // força das palavras e erros registrados até aqui não se perdem
+  dropSession();
   showScreen("home");
 });
 $("#btn-result-continue").addEventListener("click", () => showScreen("home"));
@@ -1820,9 +1906,9 @@ document.addEventListener("keydown", (e) => {
 });
 
 document.querySelectorAll(".hub-back").forEach((b) => b.addEventListener("click", () => {
-  if (typeof stopClip === "function") stopClip();
   if (typeof madness !== "undefined" && madness && madness.timer) clearInterval(madness.timer);
-  if ("speechSynthesis" in window) speechSynthesis.cancel();
+  save();
+  dropSession();
   showScreen($("#screen-hub").classList.contains("active") ? "home" : "hub");
 }));
 $("#story-next").addEventListener("click", () => { if (story && story.done) showScreen("hub"); else nextBeat(); });
