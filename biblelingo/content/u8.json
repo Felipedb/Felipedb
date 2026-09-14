@@ -5,103 +5,484 @@
       "id": "u8l1",
       "title": "Pescadores de homens",
       "vocab": [
-        { "en": "fisherman", "pt": "pescador", "icon": "🎣" },
-        { "en": "net", "pt": "rede", "icon": "🥅" },
-        { "en": "to follow", "pt": "seguir", "icon": "👣" },
-        { "en": "disciple", "pt": "discípulo", "icon": "🧑‍🤝‍🧑" },
-        { "en": "boat", "pt": "barco", "icon": "⛵" },
-        { "en": "to leave", "pt": "deixar", "icon": "🏃" },
-        { "en": "to cast", "pt": "lançar (a rede)", "icon": "🎯" },
-        { "en": "Galilee", "pt": "Galileia", "icon": "🌊" },
-        { "en": "to mend", "pt": "consertar", "icon": "🧵" },
-        { "en": "immediately", "pt": "imediatamente (logo)", "icon": "⚡" }
+        {
+          "en": "fisherman",
+          "pt": "pescador",
+          "icon": "🎣"
+        },
+        {
+          "en": "net",
+          "pt": "rede",
+          "icon": "🥅"
+        },
+        {
+          "en": "to follow",
+          "pt": "seguir",
+          "icon": "👣"
+        },
+        {
+          "en": "disciple",
+          "pt": "discípulo",
+          "icon": "🧑"
+        },
+        {
+          "en": "boat",
+          "pt": "barco",
+          "icon": "⛵"
+        },
+        {
+          "en": "to leave",
+          "pt": "deixar",
+          "icon": "🏃"
+        },
+        {
+          "en": "to cast",
+          "pt": "lançar (a rede)",
+          "icon": "🎯"
+        },
+        {
+          "en": "Galilee",
+          "pt": "Galileia",
+          "icon": "🌊"
+        },
+        {
+          "en": "to mend",
+          "pt": "consertar",
+          "icon": "🧵"
+        },
+        {
+          "en": "immediately",
+          "pt": "imediatamente (logo)",
+          "icon": "⚡"
+        }
       ],
       "sentences": [
-        { "en": "Jesus walked by the sea of Galilee", "pt": "Jesus andava junto ao mar da Galileia" },
-        { "en": "Peter was a fisherman", "pt": "Pedro era um pescador" },
-        { "en": "Peter and Andrew were brothers and fishermen", "pt": "Pedro e André eram irmãos e pescadores" },
-        { "en": "Simon and Andrew were casting a net into the sea", "pt": "Simão e André lançavam a rede ao mar" },
-        { "en": "Follow me", "pt": "Vinde após mim" },
-        { "en": "I will make you fishers of men", "pt": "Eu vos farei pescadores de homens" },
-        { "en": "They left their nets and followed him", "pt": "Eles deixaram as redes e o seguiram" },
-        { "en": "James and John were in a boat with Zebedee", "alt": ["James and John were in a ship with Zebedee"], "pt": "Tiago e João estavam num barco com Zebedeu" },
-        { "en": "Jesus saw them mending their nets and called them", "pt": "Jesus os viu consertando as redes e chamou-os" },
-        { "en": "They immediately left the boat and their father", "alt": ["They immediately left the ship and their father"], "pt": "Eles deixaram imediatamente o barco e seu pai" },
-        { "en": "The disciples followed Jesus", "pt": "Os discípulos seguiram Jesus" },
-        { "en": "Jesus went about all Galilee, teaching and healing", "pt": "Jesus percorria toda a Galileia, ensinando e curando" }
+        {
+          "en": "Jesus walked by the sea of Galilee",
+          "pt": "Jesus andava junto ao mar da Galileia"
+        },
+        {
+          "en": "Peter was a fisherman",
+          "pt": "Pedro era um pescador"
+        },
+        {
+          "en": "Jesus called four fishermen to be his disciples",
+          "pt": "Jesus chamou quatro pescadores para serem seus discípulos"
+        },
+        {
+          "en": "Simon and Andrew were casting a net into the sea",
+          "pt": "Simão e André lançavam a rede ao mar"
+        },
+        {
+          "en": "Follow me",
+          "pt": "Vinde após mim"
+        },
+        {
+          "en": "I will make you fishers of men",
+          "pt": "Eu vos farei pescadores de homens"
+        },
+        {
+          "en": "They left their nets and followed him",
+          "pt": "Eles deixaram as redes e o seguiram"
+        },
+        {
+          "en": "James and John were in a boat with Zebedee",
+          "alt": [
+            "James and John were in a ship with Zebedee"
+          ],
+          "pt": "Tiago e João estavam num barco com Zebedeu"
+        },
+        {
+          "en": "Jesus saw them mending their nets and called them",
+          "pt": "Jesus os viu consertando as redes e chamou-os"
+        },
+        {
+          "en": "They immediately left the boat and their father",
+          "alt": [
+            "They immediately left the ship and their father"
+          ],
+          "pt": "Eles deixaram imediatamente o barco e seu pai"
+        },
+        {
+          "en": "The disciples followed Jesus",
+          "pt": "Os discípulos seguiram Jesus"
+        },
+        {
+          "en": "Jesus went about all Galilee, teaching and healing",
+          "pt": "Jesus percorria toda a Galileia, ensinando e curando"
+        }
       ],
-      "verse": { "text": "Follow me, and I will make you fishers of men.", "pt": "Vinde após mim, e eu vos farei pescadores de homens.", "ref": "Mateus 4:19", "blank": "Follow", "options": ["Follow", "Leave", "Send", "Build"] },
-      "reading": { "text": "Jesus walked by the sea of Galilee. He saw Simon, called Peter, and Andrew his brother. Then he saw James and John in a boat with their father Zebedee. He called them, and they followed him.", "pt": "Jesus andava junto ao mar da Galileia. Viu Simão, chamado Pedro, e André, seu irmão. Depois viu Tiago e João num barco com seu pai, Zebedeu. Ele os chamou, e eles o seguiram.", "q": "Who was in the boat with James and John?", "options": ["Zebedee, their father", "Peter and Andrew", "Their mother"], "answer": "Zebedee, their father" },
-      "dialogue": { "line": "Peter, leave your nets and follow me.", "pt": "Pedro, deixe as redes e siga-me.", "options": ["Yes, Lord! I will follow you.", "No, I must mend my net first.", "The lions are hungry."], "answer": "Yes, Lord! I will follow you.", "answerPt": "Sim, Senhor! Eu te seguirei." },
-      "quiz": { "q": "What were Peter and Andrew doing when Jesus saw them?", "options": ["Casting a net into the sea", "Building a boat", "Selling bread"], "answer": "Casting a net into the sea", "explain": "Simão e André lançavam as redes ao mar, porque eram pescadores (Mateus 4:18)." }
+      "verse": {
+        "text": "Follow me, and I will make you fishers of men.",
+        "pt": "Vinde após mim, e eu vos farei pescadores de homens.",
+        "ref": "Mateus 4:19",
+        "blank": "Follow",
+        "options": [
+          "Follow",
+          "Leave",
+          "Send",
+          "Build"
+        ]
+      },
+      "reading": {
+        "text": "Jesus walked by the sea of Galilee. He saw Simon, called Peter, and Andrew his brother. Then he saw James and John in a boat with their father Zebedee. He called them, and they followed him.",
+        "pt": "Jesus andava junto ao mar da Galileia. Viu Simão, chamado Pedro, e André, seu irmão. Depois viu Tiago e João num barco com seu pai, Zebedeu. Ele os chamou, e eles o seguiram.",
+        "q": "Who was in the boat with James and John?",
+        "options": [
+          "Zebedee, their father",
+          "Peter and Andrew",
+          "Their mother"
+        ],
+        "answer": "Zebedee, their father"
+      },
+      "dialogue": {
+        "line": "Peter, leave your nets and follow me.",
+        "pt": "Pedro, deixe as redes e siga-me.",
+        "options": [
+          "Yes, Lord! I will follow you.",
+          "No, I must mend my net first.",
+          "The lions are hungry."
+        ],
+        "answer": "Yes, Lord! I will follow you.",
+        "answerPt": "Sim, Senhor! Eu te seguirei."
+      },
+      "quiz": {
+        "q": "What were Peter and Andrew doing when Jesus saw them?",
+        "options": [
+          "Casting a net into the sea",
+          "Building a boat",
+          "Selling bread"
+        ],
+        "answer": "Casting a net into the sea",
+        "explain": "Simão e André lançavam as redes ao mar, porque eram pescadores (Mateus 4:18)."
+      }
     },
     {
       "id": "u8l2",
       "title": "O Pai Nosso",
       "vocab": [
-        { "en": "father", "pt": "pai", "icon": "👨" },
-        { "en": "bread", "pt": "pão", "icon": "🍞" },
-        { "en": "to forgive", "pt": "perdoar", "icon": "🤲" },
-        { "en": "daily", "pt": "diário (de cada dia)", "icon": "🗓️" },
-        { "en": "debts", "pt": "dívidas", "icon": "💸" },
-        { "en": "will", "pt": "vontade", "icon": "📜" },
-        { "en": "hallowed", "pt": "santificado", "icon": "✨" },
-        { "en": "temptation", "pt": "tentação", "icon": "🍬" },
-        { "en": "kingdom", "pt": "reino", "icon": "👑" },
-        { "en": "prayer", "pt": "oração", "icon": "📿" }
+        {
+          "en": "father",
+          "pt": "pai",
+          "icon": "👨"
+        },
+        {
+          "en": "bread",
+          "pt": "pão",
+          "icon": "🍞"
+        },
+        {
+          "en": "to forgive",
+          "pt": "perdoar",
+          "icon": "🤲"
+        },
+        {
+          "en": "daily",
+          "pt": "diário (de cada dia)",
+          "icon": "🗓️"
+        },
+        {
+          "en": "debts",
+          "pt": "dívidas",
+          "icon": "💸"
+        },
+        {
+          "en": "will",
+          "pt": "vontade",
+          "icon": "📜"
+        },
+        {
+          "en": "hallowed",
+          "pt": "santificado",
+          "icon": "✨"
+        },
+        {
+          "en": "temptation",
+          "pt": "tentação",
+          "icon": "🍬"
+        },
+        {
+          "en": "kingdom",
+          "pt": "reino",
+          "icon": "👑"
+        },
+        {
+          "en": "prayer",
+          "pt": "oração",
+          "icon": "🙏"
+        }
       ],
       "sentences": [
-        { "en": "Jesus taught his disciples to pray", "pt": "Jesus ensinou os seus discípulos a orar" },
-        { "en": "When you pray, go into your room and shut the door", "alt": ["When you pray, enter into your room and shut the door"], "pt": "Quando orares, entra no teu aposento e fecha a tua porta" },
-        { "en": "Our Father in heaven", "pt": "Pai nosso que estás nos céus" },
-        { "en": "Hallowed be thy name", "alt": ["Hallowed be your name"], "pt": "Santificado seja o teu nome" },
-        { "en": "Your kingdom come", "pt": "Venha o teu Reino" },
-        { "en": "Thy will be done", "alt": ["Your will be done"], "pt": "Seja feita a tua vontade" },
-        { "en": "Give us this day our daily bread", "pt": "O pão nosso de cada dia nos dá hoje" },
-        { "en": "Forgive us our debts", "pt": "Perdoa-nos as nossas dívidas" },
-        { "en": "As we forgive our debtors", "pt": "Assim como nós perdoamos aos nossos devedores" },
-        { "en": "Lead us not into temptation, but deliver us from evil", "alt": ["Do not lead us into temptation, but deliver us from evil"], "pt": "Não nos induzas à tentação, mas livra-nos do mal" },
-        { "en": "For thine is the kingdom, the power, and the glory", "alt": ["For yours is the kingdom, the power, and the glory"], "pt": "Porque teu é o Reino, e o poder, e a glória" },
-        { "en": "If you forgive men, your Father will also forgive you", "pt": "Se perdoardes aos homens, vosso Pai também vos perdoará" }
+        {
+          "en": "Jesus taught his disciples to pray",
+          "pt": "Jesus ensinou os seus discípulos a orar"
+        },
+        {
+          "en": "When you pray, go into your room and shut the door",
+          "alt": [
+            "When you pray, enter into your room and shut the door"
+          ],
+          "pt": "Quando orares, entra no teu aposento e fecha a tua porta"
+        },
+        {
+          "en": "Our Father in heaven",
+          "pt": "Pai nosso que estás nos céus"
+        },
+        {
+          "en": "Hallowed be thy name",
+          "alt": [
+            "Hallowed be your name"
+          ],
+          "pt": "Santificado seja o teu nome"
+        },
+        {
+          "en": "Thy kingdom come",
+          "pt": "Venha o teu Reino",
+          "alt": [
+            "Your kingdom come"
+          ]
+        },
+        {
+          "en": "Thy will be done",
+          "alt": [
+            "Your will be done"
+          ],
+          "pt": "Seja feita a tua vontade"
+        },
+        {
+          "en": "Give us this day our daily bread",
+          "pt": "O pão nosso de cada dia nos dá hoje"
+        },
+        {
+          "en": "Forgive us our debts",
+          "pt": "Perdoa-nos as nossas dívidas"
+        },
+        {
+          "en": "As we forgive our debtors",
+          "pt": "Assim como nós perdoamos aos nossos devedores"
+        },
+        {
+          "en": "Lead us not into temptation, but deliver us from evil",
+          "alt": [
+            "Do not lead us into temptation, but deliver us from evil"
+          ],
+          "pt": "Não nos induzas à tentação, mas livra-nos do mal"
+        },
+        {
+          "en": "For thine is the kingdom, the power, and the glory",
+          "alt": [
+            "For yours is the kingdom, the power, and the glory"
+          ],
+          "pt": "Porque teu é o Reino, e o poder, e a glória"
+        },
+        {
+          "en": "If you forgive men, your Father will also forgive you",
+          "pt": "Se perdoardes aos homens, vosso Pai também vos perdoará"
+        }
       ],
-      "verse": { "text": "Our Father which art in heaven, Hallowed be thy name.", "pt": "Pai nosso que estás nos céus, santificado seja o teu nome.", "ref": "Mateus 6:9", "blank": "Father", "options": ["Father", "Brother", "King", "Servant"] },
-      "reading": { "text": "Jesus said: When you pray, do not use many vain words. Your Father knows what you need before you ask him. Then he taught them: Our Father which art in heaven, hallowed be thy name.", "pt": "Jesus disse: Quando orardes, não useis de vãs repetições. Vosso Pai sabe o que vos é necessário antes de vós lho pedirdes. Depois ele os ensinou: Pai nosso, que estás nos céus, santificado seja o teu nome.", "q": "What does the Father know before we ask him?", "options": ["What we need", "The name of the king", "How many fish we have"], "answer": "What we need" },
-      "dialogue": { "line": "Lord, teach us to pray.", "pt": "Senhor, ensina-nos a orar.", "options": ["Our Father which art in heaven...", "Give me five loaves and two fishes.", "Follow me to Galilee."], "answer": "Our Father which art in heaven...", "answerPt": "Pai nosso que estás nos céus..." },
-      "quiz": { "q": "What do we ask God to give us this day?", "options": ["Our daily bread", "A new boat", "Silver and gold"], "answer": "Our daily bread", "explain": "O pão nosso de cada dia nos dá hoje (Mateus 6:11)." }
+      "verse": {
+        "text": "Our Father which art in heaven, Hallowed be thy name.",
+        "pt": "Pai nosso que estás nos céus, santificado seja o teu nome.",
+        "ref": "Mateus 6:9",
+        "blank": "Father",
+        "options": [
+          "Father",
+          "Brother",
+          "King",
+          "Servant"
+        ]
+      },
+      "reading": {
+        "text": "Jesus said: When you pray, do not use many vain words. Your Father knows what you need before you ask him. Then he taught them: Our Father which art in heaven, hallowed be thy name.",
+        "pt": "Jesus disse: Quando orardes, não useis de vãs repetições. Vosso Pai sabe o que vos é necessário antes de vós lho pedirdes. Depois ele os ensinou: Pai nosso, que estás nos céus, santificado seja o teu nome.",
+        "q": "What does the Father know before we ask him?",
+        "options": [
+          "What we need",
+          "The name of the king",
+          "How many fish we have"
+        ],
+        "answer": "What we need"
+      },
+      "dialogue": {
+        "line": "Lord, teach us to pray.",
+        "pt": "Senhor, ensina-nos a orar.",
+        "options": [
+          "Our Father which art in heaven...",
+          "Give me five loaves and two fishes.",
+          "Follow me to Galilee."
+        ],
+        "answer": "Our Father which art in heaven...",
+        "answerPt": "Pai nosso que estás nos céus..."
+      },
+      "quiz": {
+        "q": "What do we ask God to give us this day?",
+        "options": [
+          "Our daily bread",
+          "A new boat",
+          "Silver and gold"
+        ],
+        "answer": "Our daily bread",
+        "explain": "O pão nosso de cada dia nos dá hoje (Mateus 6:11)."
+      }
     },
     {
       "id": "u8l3",
       "title": "Pães e peixes",
       "vocab": [
-        { "en": "fish", "pt": "peixe", "icon": "🐟" },
-        { "en": "five", "pt": "cinco", "icon": "5️⃣" },
-        { "en": "crowd", "pt": "multidão", "icon": "👥" },
-        { "en": "to bless", "pt": "abençoar", "icon": "🙌" },
-        { "en": "loaves", "pt": "pães", "icon": "🥖" },
-        { "en": "basket", "pt": "cesto", "icon": "🧺" },
-        { "en": "faith", "pt": "fé", "icon": "🙏" },
-        { "en": "to sink", "pt": "afundar", "icon": "⬇️" },
-        { "en": "afraid", "pt": "com medo", "icon": "😨" },
-        { "en": "to walk", "pt": "andar", "icon": "🚶" }
+        {
+          "en": "fish",
+          "pt": "peixe",
+          "icon": "🐟"
+        },
+        {
+          "en": "five",
+          "pt": "cinco",
+          "icon": "5️⃣"
+        },
+        {
+          "en": "crowd",
+          "pt": "multidão",
+          "icon": "👥"
+        },
+        {
+          "en": "to bless",
+          "pt": "abençoar",
+          "icon": "🙌"
+        },
+        {
+          "en": "loaves",
+          "pt": "pães",
+          "icon": "🥖"
+        },
+        {
+          "en": "basket",
+          "pt": "cesto",
+          "icon": "🧺"
+        },
+        {
+          "en": "faith",
+          "pt": "fé",
+          "icon": "🙏"
+        },
+        {
+          "en": "to sink",
+          "pt": "afundar",
+          "icon": "⬇️"
+        },
+        {
+          "en": "afraid",
+          "pt": "com medo",
+          "icon": "😨"
+        },
+        {
+          "en": "to walk",
+          "pt": "andar",
+          "icon": "🚶"
+        }
       ],
       "sentences": [
-        { "en": "A great crowd followed Jesus", "pt": "Uma grande multidão seguiu Jesus" },
-        { "en": "Jesus told the disciples to feed the crowd", "pt": "Jesus mandou os discípulos dar de comer à multidão" },
-        { "en": "Five loaves and two fishes", "alt": ["Five loaves and two fish"], "pt": "Cinco pães e dois peixes" },
-        { "en": "He commanded the crowd to sit down on the grass", "pt": "Mandou que a multidão se assentasse sobre a erva" },
-        { "en": "Jesus blessed the bread and the fish", "pt": "Jesus abençoou o pão e o peixe" },
-        { "en": "About five thousand men ate and were filled", "pt": "Quase cinco mil homens comeram e ficaram saciados" },
-        { "en": "Twelve baskets were left", "pt": "Sobraram doze cestos" },
-        { "en": "Jesus came to them, walking on the sea", "pt": "Jesus foi ter com eles, andando por cima do mar" },
-        { "en": "Be of good cheer, it is I, be not afraid", "alt": ["Be of good cheer, it is I, do not be afraid"], "pt": "Tende bom ânimo, sou eu, não temais" },
-        { "en": "Peter walked on the water to go to Jesus", "pt": "Pedro andou sobre as águas para ir ter com Jesus" },
-        { "en": "Peter began to sink and cried, Lord, save me", "pt": "Pedro começou a afundar e clamou: Senhor, salva-me!" },
-        { "en": "O you of little faith, why did you doubt?", "alt": ["You of little faith, why did you doubt?"], "pt": "Homem de pequena fé, por que duvidaste?" }
+        {
+          "en": "A great crowd followed Jesus",
+          "pt": "Uma grande multidão seguiu Jesus"
+        },
+        {
+          "en": "Jesus told the disciples to feed the crowd",
+          "pt": "Jesus mandou os discípulos dar de comer à multidão"
+        },
+        {
+          "en": "Five loaves and two fishes",
+          "alt": [
+            "Five loaves and two fish"
+          ],
+          "pt": "Cinco pães e dois peixes"
+        },
+        {
+          "en": "He commanded the crowd to sit down on the grass",
+          "pt": "Mandou que a multidão se assentasse sobre a erva"
+        },
+        {
+          "en": "Jesus blessed the bread and the fish",
+          "pt": "Jesus abençoou o pão e o peixe"
+        },
+        {
+          "en": "About five thousand men ate and were filled",
+          "pt": "Quase cinco mil homens comeram e ficaram saciados"
+        },
+        {
+          "en": "Twelve baskets were left",
+          "pt": "Sobraram doze cestos"
+        },
+        {
+          "en": "Jesus came to them, walking on the sea",
+          "pt": "Jesus foi ter com eles, andando por cima do mar"
+        },
+        {
+          "en": "Be of good cheer, it is I, be not afraid",
+          "alt": [
+            "Be of good cheer, it is I, do not be afraid"
+          ],
+          "pt": "Tende bom ânimo, sou eu, não temais"
+        },
+        {
+          "en": "Peter walked on the water to go to Jesus",
+          "pt": "Pedro andou sobre as águas para ir ter com Jesus"
+        },
+        {
+          "en": "Peter began to sink and cried, Lord, save me",
+          "pt": "Pedro começou a afundar e clamou: Senhor, salva-me!"
+        },
+        {
+          "en": "O you of little faith, why did you doubt?",
+          "alt": [
+            "You of little faith, why did you doubt?"
+          ],
+          "pt": "Homem de pequena fé, por que duvidaste?"
+        }
       ],
-      "verse": { "text": "He took the five loaves, and the two fishes, and looking up to heaven, he blessed.", "pt": "Tomou os cinco pães e os dois peixes e, olhando para o céu, abençoou.", "ref": "Mateus 14:19", "blank": "blessed", "options": ["blessed", "sold", "hid", "cut"] },
-      "reading": { "text": "In the night, the disciples were in a boat, and the wind was contrary. Jesus came to them, walking on the sea. Peter walked on the water, but he was afraid and began to sink. Jesus stretched out his hand and caught him.", "pt": "De noite, os discípulos estavam num barco, e o vento era contrário. Jesus foi ter com eles, andando sobre o mar. Pedro andou sobre as águas, mas teve medo e começou a afundar. Jesus estendeu a mão e o segurou.", "q": "What did Jesus do when Peter began to sink?", "options": ["He stretched out his hand and caught him", "He sent an angel", "He went back to the boat"], "answer": "He stretched out his hand and caught him" },
-      "dialogue": { "line": "Lord, we have only five loaves and two fishes.", "pt": "Senhor, temos só cinco pães e dois peixes.", "options": ["Bring them to me.", "Send the crowd to Egypt.", "Close the window."], "answer": "Bring them to me.", "answerPt": "Tragam-nos a mim." },
-      "quiz": { "q": "How many men ate of the loaves and fishes?", "options": ["About five thousand", "Twelve", "Forty"], "answer": "About five thousand", "explain": "Os que comeram foram quase cinco mil homens, além das mulheres e crianças (Mateus 14:21)." }
+      "verse": {
+        "text": "He took the five loaves, and the two fishes, and looking up to heaven, he blessed.",
+        "pt": "Tomou os cinco pães e os dois peixes e, olhando para o céu, abençoou.",
+        "ref": "Mateus 14:19",
+        "blank": "blessed",
+        "options": [
+          "blessed",
+          "sold",
+          "hid",
+          "cut"
+        ]
+      },
+      "reading": {
+        "text": "In the night, the disciples were in a boat, and the wind was contrary. Jesus came to them, walking on the sea. Peter walked on the water, but he was afraid and began to sink. Jesus stretched out his hand and caught him.",
+        "pt": "De noite, os discípulos estavam num barco, e o vento era contrário. Jesus foi ter com eles, andando sobre o mar. Pedro andou sobre as águas, mas teve medo e começou a afundar. Jesus estendeu a mão e o segurou.",
+        "q": "What did Jesus do when Peter began to sink?",
+        "options": [
+          "He stretched out his hand and caught him",
+          "He sent an angel",
+          "He went back to the boat"
+        ],
+        "answer": "He stretched out his hand and caught him"
+      },
+      "dialogue": {
+        "line": "Lord, we have only five loaves and two fishes.",
+        "pt": "Senhor, temos só cinco pães e dois peixes.",
+        "options": [
+          "Bring them to me.",
+          "Send the crowd to Egypt.",
+          "Close the window."
+        ],
+        "answer": "Bring them to me.",
+        "answerPt": "Tragam-nos a mim."
+      },
+      "quiz": {
+        "q": "How many men ate of the loaves and fishes?",
+        "options": [
+          "About five thousand",
+          "Twelve",
+          "Forty"
+        ],
+        "answer": "About five thousand",
+        "explain": "Os que comeram foram quase cinco mil homens, além das mulheres e crianças (Mateus 14:21)."
+      }
     }
   ]
 }

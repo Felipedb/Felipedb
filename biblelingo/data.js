@@ -65,8 +65,8 @@ const COURSE = [
             "pt": "Deus criou o céu e a terra"
           },
           {
-            "en": "In the beginning there was nothing",
-            "pt": "No princípio não havia nada"
+            "en": "The earth was without form and void",
+            "pt": "A terra era sem forma e vazia"
           },
           {
             "en": "The earth was empty and dark",
@@ -89,8 +89,11 @@ const COURSE = [
             "pt": "E houve luz"
           },
           {
-            "en": "God saw the light that it was good",
-            "pt": "Deus viu que a luz era boa"
+            "en": "God saw that the light was good",
+            "pt": "Deus viu que a luz era boa",
+            "alt": [
+              "God saw the light that it was good"
+            ]
           },
           {
             "en": "God divided the light from the darkness",
@@ -103,7 +106,7 @@ const COURSE = [
         ],
         "verse": {
           "text": "In the beginning God created the heaven and the earth.",
-          "pt": "No princípio, Deus criou o céu e a terra.",
+          "pt": "No princípio, criou Deus os céus e a terra.",
           "ref": "Gênesis 1:1",
           "blank": "created",
           "options": [
@@ -153,7 +156,7 @@ const COURSE = [
           {
             "en": "day",
             "pt": "dia",
-            "icon": "🌞"
+            "icon": "📅"
           },
           {
             "en": "night",
@@ -197,7 +200,7 @@ const COURSE = [
           },
           {
             "en": "evening",
-            "pt": "entardecer",
+            "pt": "tarde (entardecer)",
             "icon": "🌇"
           }
         ],
@@ -314,7 +317,7 @@ const COURSE = [
           {
             "en": "garden",
             "pt": "jardim",
-            "icon": "🌳"
+            "icon": "🌷"
           },
           {
             "en": "tree",
@@ -358,7 +361,7 @@ const COURSE = [
           },
           {
             "en": "He created them man and woman",
-            "pt": "Homem e mulher os criou"
+            "pt": "Ele os criou homem e mulher"
           },
           {
             "en": "God planted a garden in Eden",
@@ -519,7 +522,7 @@ const COURSE = [
           },
           {
             "en": "The wickedness of man was great in the earth",
-            "pt": "A maldade do homem se multiplicara sobre a terra"
+            "pt": "A maldade do homem era grande sobre a terra"
           },
           {
             "en": "But Noah found grace in the eyes of the LORD",
@@ -563,7 +566,7 @@ const COURSE = [
             "alt": [
               "The Lord shut him in"
             ],
-            "pt": "E o Senhor o fechou por fora"
+            "pt": "O Senhor o fechou por fora"
           }
         ],
         "verse": {
@@ -580,7 +583,7 @@ const COURSE = [
         },
         "reading": {
           "text": "The earth was full of violence, but Noah found grace. God said to Noah: Make an ark of wood. Noah made the ark, and the animals came in two by two.",
-          "pt": "A terra estava cheia de violência, mas Noé achou graça. Deus disse a Noé: Faze uma arca de madeira. Noé fez a arca, e os animais entraram de dois em dois.",
+          "pt": "A terra estava cheia de violência, mas Noé achou graça. Deus disse a Noé: Faze uma arca de madeira. Noé fez a arca, e os animais entraram dois a dois.",
           "q": "How did the animals come in?",
           "options": [
             "Two by two",
@@ -669,7 +672,7 @@ const COURSE = [
         "sentences": [
           {
             "en": "The rain was upon the earth",
-            "pt": "A chuva caiu sobre a terra"
+            "pt": "Houve chuva sobre a terra"
           },
           {
             "en": "Forty days and forty nights",
@@ -684,8 +687,8 @@ const COURSE = [
             "pt": "Noé abriu a janela da arca"
           },
           {
-            "en": "The flood was upon the earth",
-            "pt": "O dilúvio estava sobre a terra"
+            "en": "Noah was six hundred years old when the flood came",
+            "pt": "Noé tinha seiscentos anos quando veio o dilúvio"
           },
           {
             "en": "The windows of heaven were opened",
@@ -712,8 +715,8 @@ const COURSE = [
             "pt": "A arca repousou sobre os montes de Ararate"
           },
           {
-            "en": "Noah sent out a raven, and it went to and fro",
-            "pt": "Noé soltou um corvo, que saiu, indo e voltando"
+            "en": "Noah sent out a raven, and it went back and forth",
+            "pt": "Noé soltou um corvo, e ele ia e voltava"
           }
         ],
         "verse": {
@@ -822,8 +825,8 @@ const COURSE = [
             "pt": "A pomba voltou para ele"
           },
           {
-            "en": "The dove had a leaf",
-            "pt": "A pomba tinha uma folha"
+            "en": "Never again will a flood destroy the earth",
+            "pt": "Nunca mais um dilúvio destruirá a terra"
           },
           {
             "en": "Noah sent a dove",
@@ -839,7 +842,7 @@ const COURSE = [
           },
           {
             "en": "But the dove found no rest for her foot",
-            "pt": "Mas a pomba não achou repouso para a planta do seu pé"
+            "pt": "Mas a pomba não achou repouso para o seu pé"
           },
           {
             "en": "In the evening the dove came with an olive leaf",
@@ -993,8 +996,8 @@ const COURSE = [
             "pt": "A sarça ardia no fogo"
           },
           {
-            "en": "Moses saw the fire",
-            "pt": "Moisés viu o fogo"
+            "en": "The angel of the LORD appeared in a flame of fire",
+            "pt": "O anjo do Senhor lhe apareceu numa chama de fogo"
           },
           {
             "en": "Take off your shoes",
@@ -1031,11 +1034,11 @@ const COURSE = [
             "pt": "EU SOU O QUE SOU"
           },
           {
-            "en": "God said, I AM has sent me to you",
+            "en": "Say to them, I AM has sent me to you",
             "alt": [
               "God said, I am has sent me to you"
             ],
-            "pt": "Deus disse: EU SOU me enviou a vós"
+            "pt": "Dize-lhes: EU SOU me enviou a vós"
           },
           {
             "en": "The rod became a serpent, and Moses fled from it",
@@ -1196,7 +1199,7 @@ const COURSE = [
           },
           {
             "en": "When I see the blood, I will pass over you",
-            "pt": "Vendo eu sangue, passarei por cima de vós"
+            "pt": "Quando eu vir o sangue, passarei por cima de vós"
           },
           {
             "en": "Pharaoh called Moses by night and said, Go out from my people",
@@ -1285,7 +1288,7 @@ const COURSE = [
           {
             "en": "pillar",
             "pt": "coluna",
-            "icon": "🕯️"
+            "icon": "🏛️"
           },
           {
             "en": "wall",
@@ -1321,8 +1324,8 @@ const COURSE = [
             "pt": "Um vento forte dividiu o mar"
           },
           {
-            "en": "The sea was dry",
-            "pt": "O mar estava seco"
+            "en": "The children of Israel went into the midst of the sea",
+            "pt": "Os filhos de Israel entraram pelo meio do mar"
           },
           {
             "en": "The LORD went before them in a pillar of fire by night",
@@ -1356,19 +1359,19 @@ const COURSE = [
             "alt": [
               "The Egyptians sank into the sea as a stone"
             ],
-            "pt": "Os egípcios desceram às profundezas do mar como pedra"
+            "pt": "Os egípcios afundaram no mar como uma pedra"
           },
           {
-            "en": "Miriam sang, The horse and his rider he threw into the sea",
+            "en": "Miriam sang, He threw the horse and his rider into the sea",
             "alt": [
               "Miriam sang, The horse and his rider he has thrown into the sea"
             ],
-            "pt": "Miriã cantou: Lançou no mar o cavalo com o seu cavaleiro"
+            "pt": "Miriã cantou: Ele lançou no mar o cavalo e o seu cavaleiro"
           }
         ],
         "verse": {
-          "text": "The LORD caused the sea to go back, and made the sea dry land, and the waters were divided.",
-          "pt": "O Senhor fez retirar o mar, e o mar tornou-se em seco, e as águas foram partidas.",
+          "text": "The LORD caused the sea to go back by a strong east wind all that night, and made the sea dry land, and the waters were divided.",
+          "pt": "O Senhor fez retirar o mar por um forte vento oriental toda aquela noite; e o mar tornou-se em seco, e as águas foram partidas.",
           "ref": "Êxodo 14:21",
           "blank": "divided",
           "options": [
@@ -1496,7 +1499,7 @@ const COURSE = [
           },
           {
             "en": "Do not look on his face or his height",
-            "pt": "Não atentes para a sua aparência nem para a sua altura"
+            "pt": "Não olhes para o seu rosto nem para a sua altura"
           },
           {
             "en": "The Lord looks on the heart",
@@ -1551,8 +1554,8 @@ const COURSE = [
           "answer": "Keeping the sheep"
         },
         "dialogue": {
-          "line": "Bring the harp, David. I feel bad.",
-          "pt": "Traga a harpa, Davi. Eu me sinto mal.",
+          "line": "Bring the harp, David. I am not well.",
+          "pt": "Traga a harpa, Davi. Não estou bem.",
           "options": [
             "I will play for you, my king.",
             "I will bring five stones.",
@@ -1649,8 +1652,8 @@ const COURSE = [
             "pt": "Davi tinha uma funda e uma pedra"
           },
           {
-            "en": "David took five stones",
-            "pt": "Davi tomou cinco pedras"
+            "en": "David put the stones in his shepherd's bag",
+            "pt": "Davi pôs as pedras no seu alforje de pastor"
           },
           {
             "en": "You come to me with a sword, a spear and a shield",
@@ -1673,8 +1676,11 @@ const COURSE = [
             "pt": "Davi correu e tomou a espada do gigante"
           },
           {
-            "en": "The Lord saves not with sword and spear",
-            "pt": "O Senhor salva, não com espada, nem com lança"
+            "en": "The Lord does not save with sword and spear",
+            "pt": "O Senhor salva, não com espada, nem com lança",
+            "alt": [
+              "The Lord saveth not with sword and spear"
+            ]
           }
         ],
         "verse": {
@@ -1690,8 +1696,8 @@ const COURSE = [
           ]
         },
         "reading": {
-          "text": "Goliath was a giant from Gath. For forty days he defied the armies of Israel. Saul gave David his armor, but David could not walk with it. He took his staff, his sling and five smooth stones from the brook.",
-          "pt": "Golias era um gigante de Gate. Durante quarenta dias ele afrontou os exércitos de Israel. Saul deu a Davi a sua armadura, mas Davi não conseguia andar com ela. Ele tomou o seu cajado, a sua funda e cinco pedras lisas do ribeiro.",
+          "text": "Goliath was a giant from Gath. For forty days he defied the armies of Israel. Saul gave David his armor, but David could not walk with it, for he had not tried it. He took his staff, his sling and five smooth stones from the brook.",
+          "pt": "Golias era um gigante de Gate. Durante quarenta dias ele afrontou os exércitos de Israel. Saul deu a Davi a sua armadura, mas Davi não conseguia andar com ela, pois não a tinha provado. Ele tomou o seu cajado, a sua funda e cinco pedras lisas do ribeiro.",
           "q": "Why did David not use Saul's armor?",
           "options": [
             "He had not tried it",
@@ -1787,9 +1793,9 @@ const COURSE = [
             "pt": "Davi reinou sobre todo o Israel"
           },
           {
-            "en": "I will sing praises unto your name",
+            "en": "I will sing praises to your name",
             "alt": [
-              "I will sing praises to your name"
+              "I will sing praises unto thy name"
             ],
             "pt": "Cantarei louvores ao teu nome"
           },
@@ -1822,9 +1828,9 @@ const COURSE = [
             "pt": "Ainda que eu andasse pelo vale da sombra da morte"
           },
           {
-            "en": "He makes me to lie down in green pastures",
+            "en": "He makes me lie down in green pastures",
             "alt": [
-              "He makes me lie down in green pastures"
+              "He makes me to lie down in green pastures"
             ],
             "pt": "Deitar-me faz em verdes pastos"
           },
@@ -1958,8 +1964,8 @@ const COURSE = [
             "pt": "Isaías viu o Senhor assentado sobre um alto e sublime trono"
           },
           {
-            "en": "The Lord sat on a throne",
-            "pt": "O Senhor estava sentado num trono"
+            "en": "The posts of the door moved at his voice",
+            "pt": "Os umbrais da porta se moveram à sua voz"
           },
           {
             "en": "Each seraph had six wings",
@@ -2095,7 +2101,7 @@ const COURSE = [
           {
             "en": "great",
             "pt": "grande",
-            "icon": "🌟"
+            "icon": "🏔️"
           }
         ],
         "sentences": [
@@ -2124,16 +2130,22 @@ const COURSE = [
             "pt": "Deus conosco"
           },
           {
-            "en": "Butter and honey shall he eat",
-            "pt": "Manteiga e mel comerá"
+            "en": "He shall eat butter and honey",
+            "pt": "Ele comerá manteiga e mel",
+            "alt": [
+              "Butter and honey shall he eat"
+            ]
           },
           {
             "en": "The people that walked in darkness have seen a great light",
             "pt": "O povo que andava em trevas viu uma grande luz"
           },
           {
-            "en": "Upon them the light has shined",
-            "pt": "Sobre eles resplandeceu a luz"
+            "en": "The light has shined upon them",
+            "pt": "A luz resplandeceu sobre eles",
+            "alt": [
+              "Upon them the light has shined"
+            ]
           },
           {
             "en": "A child is born",
@@ -2285,7 +2297,7 @@ const COURSE = [
           },
           {
             "en": "Of his government and peace there shall be no end",
-            "pt": "Do aumento deste principado e da paz não haverá fim"
+            "pt": "Do seu principado e da paz não haverá fim"
           },
           {
             "en": "The Prince of Peace will sit on the throne of David",
@@ -2413,7 +2425,7 @@ const COURSE = [
           },
           {
             "en": "pit",
-            "pt": "cova",
+            "pt": "cova (poço)",
             "icon": "🕳️"
           },
           {
@@ -2428,8 +2440,8 @@ const COURSE = [
             "pt": "Jacó amava José e lhe fez uma túnica de muitas cores"
           },
           {
-            "en": "A coat of many colors",
-            "pt": "Uma túnica de muitas cores"
+            "en": "Jacob loved Joseph more than all his sons",
+            "pt": "Jacó amava José mais do que todos os seus filhos"
           },
           {
             "en": "Joseph had a dream",
@@ -2468,16 +2480,16 @@ const COURSE = [
             "alt": [
               "They sold Joseph to the Ishmeelites for twenty pieces of silver"
             ],
-            "pt": "Venderam José por vinte moedas de prata aos ismaelitas"
+            "pt": "Venderam José aos ismaelitas por vinte moedas de prata"
           },
           {
-            "en": "They sold him for silver",
-            "pt": "Eles o venderam por prata"
+            "en": "They dipped the coat in the blood of a goat",
+            "pt": "Molharam a túnica no sangue de um cabrito"
           }
         ],
         "verse": {
           "text": "And Joseph dreamed a dream, and he told it his brethren.",
-          "pt": "Teve José um sonho, que contou a seus irmãos.",
+          "pt": "Sonhou também José um sonho, que contou a seus irmãos.",
           "ref": "Gênesis 37:5",
           "blank": "dream",
           "options": [
@@ -2585,8 +2597,8 @@ const COURSE = [
             "pt": "Potifar se irou e pôs José na prisão"
           },
           {
-            "en": "Joseph was in prison",
-            "pt": "José estava na prisão"
+            "en": "The keeper of the prison gave Joseph all the prisoners",
+            "pt": "O carcereiro entregou a José todos os presos"
           },
           {
             "en": "The Lord was with Joseph in the prison",
@@ -2597,8 +2609,8 @@ const COURSE = [
             "pt": "O copeiro e o padeiro tiveram sonhos"
           },
           {
-            "en": "Joseph interpreted the dream",
-            "pt": "José interpretou o sonho"
+            "en": "Joseph interpreted the dreams",
+            "pt": "José interpretou os sonhos"
           },
           {
             "en": "Do not interpretations belong to God?",
@@ -2632,7 +2644,7 @@ const COURSE = [
           "blank": "with",
           "options": [
             "with",
-            "far",
+            "against",
             "after",
             "under"
           ]
@@ -2727,7 +2739,7 @@ const COURSE = [
         ],
         "sentences": [
           {
-            "en": "The brothers went to Egypt to buy grain",
+            "en": "The brothers went down to Egypt to buy grain",
             "pt": "Os irmãos desceram ao Egito para comprar trigo"
           },
           {
@@ -2744,7 +2756,7 @@ const COURSE = [
           },
           {
             "en": "I am Joseph, your brother",
-            "pt": "Eu sou José, o irmão de vocês"
+            "pt": "Eu sou José, vosso irmão"
           },
           {
             "en": "I am Joseph; is my father still alive?",
@@ -2782,9 +2794,9 @@ const COURSE = [
           "blank": "good",
           "options": [
             "good",
-            "gold",
-            "night",
-            "water"
+            "bad",
+            "nothing",
+            "war"
           ]
         },
         "reading": {
@@ -2905,11 +2917,14 @@ const COURSE = [
           },
           {
             "en": "Daniel purposed in his heart not to defile himself",
-            "pt": "Daniel assentou no seu coração não se contaminar"
+            "pt": "Daniel assentou no seu coração não se contaminar",
+            "alt": [
+              "Daniel decided in his heart not to defile himself"
+            ]
           },
           {
             "en": "Give us vegetables to eat and water to drink",
-            "pt": "Que se nos deem legumes a comer e água a beber"
+            "pt": "Dá-nos legumes para comer e água para beber"
           },
           {
             "en": "Test your servants for ten days",
@@ -3079,9 +3094,9 @@ const COURSE = [
             "pt": "Daniel orava três vezes ao dia"
           },
           {
-            "en": "He kneeled, prayed and gave thanks to his God",
+            "en": "He knelt, prayed and gave thanks to his God",
             "alt": [
-              "He knelt, prayed and gave thanks to his God"
+              "He kneeled, prayed and gave thanks to his God"
             ],
             "pt": "Ele se punha de joelhos, orava e dava graças ao seu Deus"
           },
@@ -3094,9 +3109,9 @@ const COURSE = [
             "pt": "Uma pedra foi posta sobre a boca da cova dos leões"
           },
           {
-            "en": "Darius sealed the stone with his own signet",
+            "en": "Darius sealed the stone with his own ring",
             "alt": [
-              "Darius sealed the stone with his own ring"
+              "Darius sealed the stone with his own signet"
             ],
             "pt": "Dario selou a pedra com o seu anel"
           },
@@ -3161,7 +3176,7 @@ const COURSE = [
           },
           {
             "en": "living",
-            "pt": "vivo",
+            "pt": "vivo (vivente)",
             "icon": "💚"
           },
           {
@@ -3181,7 +3196,7 @@ const COURSE = [
           },
           {
             "en": "to close",
-            "pt": "fechar",
+            "pt": "fechar (cerrar)",
             "icon": "🔒"
           },
           {
@@ -3216,7 +3231,7 @@ const COURSE = [
           },
           {
             "en": "Is your God able to deliver you from the lions?",
-            "pt": "Pôde o teu Deus livrar-te dos leões?"
+            "pt": "Pode o teu Deus livrar-te dos leões?"
           },
           {
             "en": "O king, live forever",
@@ -3260,8 +3275,8 @@ const COURSE = [
             "pt": "O rei escreveu a todo o povo"
           },
           {
-            "en": "The angel closed the mouth of the lion",
-            "pt": "O anjo fechou a boca do leão"
+            "en": "He delivered Daniel from the power of the lions",
+            "pt": "Ele livrou Daniel do poder dos leões"
           }
         ],
         "verse": {
@@ -3346,7 +3361,7 @@ const COURSE = [
           {
             "en": "disciple",
             "pt": "discípulo",
-            "icon": "🧑‍🤝‍🧑"
+            "icon": "🧑"
           },
           {
             "en": "boat",
@@ -3389,8 +3404,8 @@ const COURSE = [
             "pt": "Pedro era um pescador"
           },
           {
-            "en": "Peter and Andrew were brothers and fishermen",
-            "pt": "Pedro e André eram irmãos e pescadores"
+            "en": "Jesus called four fishermen to be his disciples",
+            "pt": "Jesus chamou quatro pescadores para serem seus discípulos"
           },
           {
             "en": "Simon and Andrew were casting a net into the sea",
@@ -3532,7 +3547,7 @@ const COURSE = [
           {
             "en": "prayer",
             "pt": "oração",
-            "icon": "📿"
+            "icon": "🙏"
           }
         ],
         "sentences": [
@@ -3559,8 +3574,11 @@ const COURSE = [
             "pt": "Santificado seja o teu nome"
           },
           {
-            "en": "Your kingdom come",
-            "pt": "Venha o teu Reino"
+            "en": "Thy kingdom come",
+            "pt": "Venha o teu Reino",
+            "alt": [
+              "Your kingdom come"
+            ]
           },
           {
             "en": "Thy will be done",

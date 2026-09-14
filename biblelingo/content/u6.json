@@ -47,7 +47,7 @@
         },
         {
           "en": "pit",
-          "pt": "cova",
+          "pt": "cova (poço)",
           "icon": "🕳️"
         },
         {
@@ -62,8 +62,8 @@
           "pt": "Jacó amava José e lhe fez uma túnica de muitas cores"
         },
         {
-          "en": "A coat of many colors",
-          "pt": "Uma túnica de muitas cores"
+          "en": "Jacob loved Joseph more than all his sons",
+          "pt": "Jacó amava José mais do que todos os seus filhos"
         },
         {
           "en": "Joseph had a dream",
@@ -102,16 +102,16 @@
           "alt": [
             "They sold Joseph to the Ishmeelites for twenty pieces of silver"
           ],
-          "pt": "Venderam José por vinte moedas de prata aos ismaelitas"
+          "pt": "Venderam José aos ismaelitas por vinte moedas de prata"
         },
         {
-          "en": "They sold him for silver",
-          "pt": "Eles o venderam por prata"
+          "en": "They dipped the coat in the blood of a goat",
+          "pt": "Molharam a túnica no sangue de um cabrito"
         }
       ],
       "verse": {
         "text": "And Joseph dreamed a dream, and he told it his brethren.",
-        "pt": "Teve José um sonho, que contou a seus irmãos.",
+        "pt": "Sonhou também José um sonho, que contou a seus irmãos.",
         "ref": "Gênesis 37:5",
         "blank": "dream",
         "options": [
@@ -219,8 +219,8 @@
           "pt": "Potifar se irou e pôs José na prisão"
         },
         {
-          "en": "Joseph was in prison",
-          "pt": "José estava na prisão"
+          "en": "The keeper of the prison gave Joseph all the prisoners",
+          "pt": "O carcereiro entregou a José todos os presos"
         },
         {
           "en": "The Lord was with Joseph in the prison",
@@ -231,8 +231,8 @@
           "pt": "O copeiro e o padeiro tiveram sonhos"
         },
         {
-          "en": "Joseph interpreted the dream",
-          "pt": "José interpretou o sonho"
+          "en": "Joseph interpreted the dreams",
+          "pt": "José interpretou os sonhos"
         },
         {
           "en": "Do not interpretations belong to God?",
@@ -266,7 +266,7 @@
         "blank": "with",
         "options": [
           "with",
-          "far",
+          "against",
           "after",
           "under"
         ]
@@ -361,7 +361,7 @@
       ],
       "sentences": [
         {
-          "en": "The brothers went to Egypt to buy grain",
+          "en": "The brothers went down to Egypt to buy grain",
           "pt": "Os irmãos desceram ao Egito para comprar trigo"
         },
         {
@@ -378,7 +378,7 @@
         },
         {
           "en": "I am Joseph, your brother",
-          "pt": "Eu sou José, o irmão de vocês"
+          "pt": "Eu sou José, vosso irmão"
         },
         {
           "en": "I am Joseph; is my father still alive?",
@@ -416,9 +416,9 @@
         "blank": "good",
         "options": [
           "good",
-          "gold",
-          "night",
-          "water"
+          "bad",
+          "nothing",
+          "war"
         ]
       },
       "reading": {

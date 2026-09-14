@@ -71,7 +71,7 @@
         },
         {
           "en": "Do not look on his face or his height",
-          "pt": "Não atentes para a sua aparência nem para a sua altura"
+          "pt": "Não olhes para o seu rosto nem para a sua altura"
         },
         {
           "en": "The Lord looks on the heart",
@@ -126,8 +126,8 @@
         "answer": "Keeping the sheep"
       },
       "dialogue": {
-        "line": "Bring the harp, David. I feel bad.",
-        "pt": "Traga a harpa, Davi. Eu me sinto mal.",
+        "line": "Bring the harp, David. I am not well.",
+        "pt": "Traga a harpa, Davi. Não estou bem.",
         "options": [
           "I will play for you, my king.",
           "I will bring five stones.",
@@ -224,8 +224,8 @@
           "pt": "Davi tinha uma funda e uma pedra"
         },
         {
-          "en": "David took five stones",
-          "pt": "Davi tomou cinco pedras"
+          "en": "David put the stones in his shepherd's bag",
+          "pt": "Davi pôs as pedras no seu alforje de pastor"
         },
         {
           "en": "You come to me with a sword, a spear and a shield",
@@ -248,8 +248,11 @@
           "pt": "Davi correu e tomou a espada do gigante"
         },
         {
-          "en": "The Lord saves not with sword and spear",
-          "pt": "O Senhor salva, não com espada, nem com lança"
+          "en": "The Lord does not save with sword and spear",
+          "pt": "O Senhor salva, não com espada, nem com lança",
+          "alt": [
+            "The Lord saveth not with sword and spear"
+          ]
         }
       ],
       "verse": {
@@ -265,8 +268,8 @@
         ]
       },
       "reading": {
-        "text": "Goliath was a giant from Gath. For forty days he defied the armies of Israel. Saul gave David his armor, but David could not walk with it. He took his staff, his sling and five smooth stones from the brook.",
-        "pt": "Golias era um gigante de Gate. Durante quarenta dias ele afrontou os exércitos de Israel. Saul deu a Davi a sua armadura, mas Davi não conseguia andar com ela. Ele tomou o seu cajado, a sua funda e cinco pedras lisas do ribeiro.",
+        "text": "Goliath was a giant from Gath. For forty days he defied the armies of Israel. Saul gave David his armor, but David could not walk with it, for he had not tried it. He took his staff, his sling and five smooth stones from the brook.",
+        "pt": "Golias era um gigante de Gate. Durante quarenta dias ele afrontou os exércitos de Israel. Saul deu a Davi a sua armadura, mas Davi não conseguia andar com ela, pois não a tinha provado. Ele tomou o seu cajado, a sua funda e cinco pedras lisas do ribeiro.",
         "q": "Why did David not use Saul's armor?",
         "options": [
           "He had not tried it",
@@ -362,9 +365,9 @@
           "pt": "Davi reinou sobre todo o Israel"
         },
         {
-          "en": "I will sing praises unto your name",
+          "en": "I will sing praises to your name",
           "alt": [
-            "I will sing praises to your name"
+            "I will sing praises unto thy name"
           ],
           "pt": "Cantarei louvores ao teu nome"
         },
@@ -397,9 +400,9 @@
           "pt": "Ainda que eu andasse pelo vale da sombra da morte"
         },
         {
-          "en": "He makes me to lie down in green pastures",
+          "en": "He makes me lie down in green pastures",
           "alt": [
-            "He makes me lie down in green pastures"
+            "He makes me to lie down in green pastures"
           ],
           "pt": "Deitar-me faz em verdes pastos"
         },

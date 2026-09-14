@@ -37,7 +37,7 @@ u.lessons.forEach((l) => {
     if (/[—]/.test(s.en + s.pt)) P("travessão em: " + s.en);
     const k = w.slice(0, 2).join(" "); starts[k] = (starts[k] || 0) + 1;
     const IRR = { made: "make", said: "say", saw: "see", went: "go", came: "come", took: "take", gave: "give", ate: "eat", built: "build", sent: "send", told: "tell", brought: "bring", left: "leave", fed: "feed", led: "lead", threw: "throw", wrote: "write", sang: "sing", slept: "sleep", stood: "stand", found: "find", heard: "hear", knew: "know", spoke: "speak", ran: "run", sat: "sit", forgave: "forgive", rose: "rise", fell: "fall", drank: "drink", began: "begin", chose: "choose", kept: "keep", became: "become", grew: "grow", forgot: "forget", hid: "hide", fled: "flee", woke: "wake", shone: "shine", thought: "think", brake: "break", broke: "break", bought: "buy", caught: "catch", taught: "teach", fought: "fight", sought: "seek", meant: "mean", met: "meet", paid: "pay", lay: "lie", laid: "lay", shook: "shake", struck: "strike", swam: "swim", wept: "weep", blew: "blow", flew: "fly", drew: "draw", withdrew: "withdraw", bore: "bear", tore: "tear", wore: "wear", swore: "swear", sold: "sell", held: "hold", cast: "cast", did: "do", had: "have", was: "be", were: "be", is: "be", are: "be" };
-    const stem = (x) => (IRR[x] || x).replace(/(ies|es|ed|ing|s|d)$/, "").slice(0, 4);
+    const stem = (x) => (IRR[x] || x).replace(/(ies|es|ed|ing|s|d)$/, "").replace(/e$/, "").slice(0, 4);
     const hit = vocabWords.some((vw) => vw && ((" " + n + " ").includes(" " + vw + " ") || vw.split(" ").every((p) => w.some((t) => stem(t) === stem(p) && stem(p).length >= 3))));
     if (!hit) P("frase sem palavra do vocabulário da lição: " + s.en);
   });
