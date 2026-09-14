@@ -10,7 +10,9 @@ page.on("pageerror", (e) => errors.push(e.message));
 
 await page.goto(URL);
 await page.waitForSelector("[data-node]");
-const ids = await page.evaluate(() => [...document.querySelectorAll("[data-node]")].map((n) => n.dataset.node));
+const ids = await page.evaluate(() => [...document.querySelectorAll("[data-node]")]
+  .sort((a, b) => (+a.dataset.order) - (+b.dataset.order))
+  .map((n) => n.dataset.node));
 console.log("etapas:", ids.length);
 const typesSeen = new Set();
 
