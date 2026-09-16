@@ -43,6 +43,9 @@ for (const id of ids) {
     if (st.result) { console.log(`${id}: ${st.result.title} +${st.result.gained}`); break; }
     typesSeen.add(st.type);
 
+    // Interstício (ex.: "vamos corrigir os erros"): o rodapé dispensa e o exercício aparece
+    if (await page.$("[data-interstitial]")) { await clickFooter(); await page.waitForTimeout(400); continue; }
+
     if (st.checked) {
       if (!st.ok && !wrongOnce) throw new Error(`${id}: resposta errada em ${st.type} #${st.index}`);
       wrongOnce = false;

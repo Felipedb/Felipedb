@@ -41,7 +41,7 @@ export default function Speak({ ex }) {
 
   return (
     <div>
-      <h2 className="font-display mb-3 text-lg font-extrabold">
+      <h2 className="font-display mb-4 text-2xl font-extrabold">
         Repita o que {who ? who.name.split(" (")[0] : "o personagem"} disse:
       </h2>
       <CharacterBubble big>
@@ -65,7 +65,7 @@ export default function Speak({ ex }) {
       </div>
       {!session.checked && (
         <div className="text-center">
-          <button onClick={skipSpeaking} className="mt-3 text-sm font-bold text-ink-soft underline-offset-2 hover:underline">
+          <button onClick={skipSpeaking} className="mt-3 text-sm font-extrabold uppercase tracking-[0.14em] text-locked transition-colors hover:text-ink-soft">
             Não posso falar agora
           </button>
         </div>

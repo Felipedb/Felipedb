@@ -340,7 +340,6 @@ export function check() {
       session.reviewing = true;
       session.exercises.splice(at, 0, ...session.reviewQueue);
       session.reviewQueue = [];
-      toast("🔁 Vamos revisar seus erros");
       prepareCurrent(); saveResume(); notify();
       return;
     }

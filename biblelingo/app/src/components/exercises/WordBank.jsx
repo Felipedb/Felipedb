@@ -6,13 +6,12 @@ import { motion } from "motion/react";
 import { session, setAnswer, check } from "../../core/session.js";
 import { useSessionVersion } from "../../core/useSession.js";
 import { speak } from "../../core/audio.js";
-import AudioButton, { AudioPair } from "./AudioButton.jsx";
+import AudioButton, { WaveButton, SlowButton } from "./AudioButton.jsx";
 import CharacterBubble from "./CharacterBubble.jsx";
 import { Sayable, HintedText } from "./Sayable.jsx";
-import Icon from "../Icon.jsx";
 
 let seq = 0;
-const TILE = "rounded-xl border-2 border-b-4 px-3 py-1.5 font-bold";
+const TILE = "rounded-xl border-2 border-b-4 px-3.5 py-2 font-bold";
 
 export default function WordBank({ ex }) {
   useSessionVersion();
@@ -62,28 +61,24 @@ export default function WordBank({ ex }) {
     <div>
       {t === "build" && (
         <>
-          <h2 className="font-display mb-3 text-lg font-extrabold">Escreva em inglês:</h2>
+          <h2 className="font-display mb-4 text-2xl font-extrabold">Escreva em inglês:</h2>
           <CharacterBubble big>
             <AudioButton text={ex.sentence.en} />
             <HintedText pt={ex.sentence.pt} className="text-lg" />
           </CharacterBubble>
-          <div className="mb-3 -mt-2 text-xs text-ink-soft">Toque numa palavra sublinhada para ver a dica</div>
         </>
       )}
       {t === "listen-build" && (
         <>
-          <h2 className="font-display mb-3 flex items-center gap-2 text-lg font-extrabold">
-            <Icon name="speaker" className="text-sky" />Toque no que você ouviu:
-          </h2>
-          <CharacterBubble big>
-            <AudioPair text={ex.sentence.en} />
-            <span className="text-ink-soft">Toque para ouvir</span>
+          <h2 className="font-display mb-4 text-2xl font-extrabold">Toque no que escutar:</h2>
+          <CharacterBubble big under={<SlowButton text={ex.sentence.en} />}>
+            <WaveButton text={ex.sentence.en} />
           </CharacterBubble>
         </>
       )}
       {t === "translate-en-pt" && (
         <>
-          <h2 className="font-display mb-3 text-lg font-extrabold">Traduza para o português:</h2>
+          <h2 className="font-display mb-4 text-2xl font-extrabold">Traduza para o português:</h2>
           <CharacterBubble big>
             <AudioButton text={ex.sentence.en} />
             <Sayable text={ex.sentence.en} className="text-lg font-bold" />
@@ -93,24 +88,27 @@ export default function WordBank({ ex }) {
 
       {!keyboard && (
         <>
-          {/* Zona de resposta */}
-          <div className={`mb-4 flex min-h-16 flex-wrap content-start items-start gap-2 rounded-2xl border-2 border-dashed p-2.5 ${
-            checked ? (ok ? "border-ok-line bg-ok-soft" : "border-bad-line bg-bad-bg") : "border-line bg-cream"}`}>
-            {chosen.map((i) => (
-              <motion.button key={i} layoutId={`wb${uid}-${i}`} whileTap={{ scale: 0.95 }}
-                onClick={() => unpick(i)} disabled={checked}
-                className={`${TILE} border-sky-line bg-card text-ink`}>
-                {words[i]}
-              </motion.button>
-            ))}
+          {/* Zona de resposta: fichas assentam sobre linhas, como no alvo visual */}
+          <div className="relative mb-8 min-h-[118px]">
+            <div aria-hidden className="pointer-events-none absolute inset-x-0 top-[52px] border-t-2 border-track" />
+            <div aria-hidden className="pointer-events-none absolute inset-x-0 top-[110px] border-t-2 border-track" />
+            <div className="flex flex-wrap content-start items-start gap-x-1.5 gap-y-3">
+              {chosen.map((i) => (
+                <motion.button key={i} layoutId={`wb${uid}-${i}`} whileTap={{ scale: 0.95 }}
+                  onClick={() => unpick(i)} disabled={checked}
+                  className={`${TILE} border-line bg-card text-ink`}>
+                  {words[i]}
+                </motion.button>
+              ))}
+            </div>
           </div>
 
           {/* Banco de peças */}
           <div className="flex flex-wrap justify-center gap-2">
             {words.map((w, i) => (
               <span key={i} className="relative inline-block">
-                {/* fantasma: mantém o lugar da peça no banco */}
-                <span aria-hidden className={`${TILE} inline-block border-line bg-track text-transparent select-none ${chosen.includes(i) ? "opacity-60" : "opacity-0"}`}>{w}</span>
+                {/* fantasma: encaixe rebaixado no lugar da peça escolhida */}
+                <span aria-hidden className={`${TILE} inline-block border-track bg-track text-transparent select-none ${chosen.includes(i) ? "" : "opacity-0"}`}>{w}</span>
                 {!chosen.includes(i) && (
                   <motion.button layoutId={`wb${uid}-${i}`} whileTap={{ scale: 0.95 }}
                     onClick={() => pick(i)} disabled={checked} data-tile={w}

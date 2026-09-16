@@ -6,7 +6,7 @@ import { session, setAnswer, check } from "../../core/session.js";
 import { useSessionVersion } from "../../core/useSession.js";
 import { normalize, blankRegex } from "../../core/util.js";
 import { speak } from "../../core/audio.js";
-import AudioButton, { AudioPair } from "./AudioButton.jsx";
+import AudioButton, { WaveButton, SlowButton } from "./AudioButton.jsx";
 import CharacterBubble from "./CharacterBubble.jsx";
 import { Sayable } from "./Sayable.jsx";
 
@@ -14,7 +14,7 @@ const TITLES = {
   "image-choice": "Selecione a palavra correta:",
   "choice-en-pt": "O que significa esta palavra?",
   "choice-pt-en": null,
-  "listen": "Ouça e escolha a resposta certa:",
+  "listen": "Toque no que escutar:",
   "listen-choice": "Ouça e escolha a tradução:",
   "read": "Leia e responda:",
   "dialogue": "Complete a conversa:",
@@ -43,7 +43,7 @@ export default function ChoiceExercise({ ex }) {
 
   return (
     <div>
-      <h2 className="font-display mb-3 text-lg font-extrabold">
+      <h2 className="font-display mb-4 text-2xl font-extrabold">
         {t === "choice-pt-en" ? <>Qual destas significa “{ex.word.pt}”?</> : TITLES[t]}
       </h2>
 
@@ -58,9 +58,8 @@ export default function ChoiceExercise({ ex }) {
         <CharacterBubble big><span className="text-xl font-bold">{ex.word.icon || ""} {ex.word.pt}</span></CharacterBubble>
       )}
       {(t === "listen" || t === "listen-choice") && (
-        <CharacterBubble big>
-          <AudioPair text={t === "listen" ? ex.word.en : ex.sentence.en} />
-          <span className="text-ink-soft">Toque para ouvir</span>
+        <CharacterBubble big under={<SlowButton text={t === "listen" ? ex.word.en : ex.sentence.en} />}>
+          <WaveButton text={t === "listen" ? ex.word.en : ex.sentence.en} />
         </CharacterBubble>
       )}
       {t === "read" && (
@@ -108,12 +107,13 @@ export default function ChoiceExercise({ ex }) {
                 setAnswer(o.value);
                 if (t === "verse" || t === "missing-word" || t === "read" || t === "dialogue" || t === "quiz" || t === "choice-pt-en" || t === "listen") speak(o.value);
               }}
-              className={`rounded-2xl border-2 border-b-4 px-4 py-3 text-left font-bold transition-colors ${
+              className={`rounded-2xl border-2 border-b-4 px-4 font-bold transition-colors ${
+                t === "image-choice" ? "flex flex-col items-center justify-center gap-2 py-5 text-center" : "py-3.5 text-left"} ${
                 isCorrect ? "border-ok-line bg-ok-bg text-brand" :
                 isWrong ? "animate-[shake_0.3s] border-bad-line bg-bad-bg text-bad-fg" :
                 isChosen ? "border-sky-line bg-sky-soft text-sky-fg" :
                 checked ? "border-line bg-card opacity-50" : "border-line bg-card hover:bg-hover"}`}>
-              {o.icon && <span className="mb-1 block text-3xl">{o.icon}</span>}
+              {o.icon && <span className={`block ${t === "image-choice" ? "text-5xl" : "mb-1 text-3xl"}`}>{o.icon}</span>}
               {o.label}
             </motion.button>
           );

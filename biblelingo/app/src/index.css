@@ -51,15 +51,19 @@
 @custom-variant dark (&:where(.dark, .dark *));
 .dark {
   --color-page: #131f24;
-  --color-card: #1b2b33;
+  --color-card: #131f24;
   --color-card-2: #17252c;
   --color-cream: #17252c;
-  --color-ink: #eef3e9;
-  --color-ink-soft: #9fb0a5;
-  --color-line: #2c3f48;
-  --color-locked: #3a4d56;
-  --color-track: #24363f;
-  --color-hover: #22343d;
+  --color-ink: #f1f7fb;
+  --color-ink-soft: #9db4bd;
+  --color-line: #37464f;
+  --color-locked: #52656d;
+  --color-track: #37464f;
+  --color-hover: #202f36;
+  --color-sky: #49c0f8;
+  --color-sky-fg: #49c0f8;
+  --color-brand: #93d333;
+  --color-gold: #ffc800;
   --color-brand-soft: #1d3321;
   --color-sky-soft: #14313f;
   --color-sky-line: #1e4a5f;
@@ -92,10 +96,36 @@
     box-shadow: 0 4px 0 var(--btn-shadow, var(--color-brand-shadow));
   }
   .btn-3d:active:not(:disabled) { transform: translateY(4px); box-shadow: 0 0 0 var(--btn-shadow, var(--color-brand-shadow)); }
-  .btn-3d:disabled { @apply cursor-default; }
+  .btn-3d:disabled { @apply cursor-default; box-shadow: none; }
 
   .card { @apply bg-card rounded-(--radius-card) border-2 border-line; }
+
+  /* Chamada principal do rodapé (usar junto com .btn-3d): caixa alta como no alvo visual */
+  .btn-cta { @apply px-6 py-3.5 text-[15px] uppercase tracking-[0.12em] font-extrabold; }
+
+  /* Balão de fala com rabinho apontando para o personagem */
+  .bubble { @apply relative rounded-2xl border-2 border-line bg-card; }
+  .bubble::before {
+    content: "";
+    position: absolute;
+    left: -9px;
+    bottom: 18px;
+    width: 14px;
+    height: 14px;
+    transform: rotate(45deg);
+    background: var(--color-card);
+    border-left: 2px solid var(--color-line);
+    border-bottom: 2px solid var(--color-line);
+  }
 }
+
+/* Onda sonora do balão de escuta */
+@keyframes wavebar {
+  0%, 100% { transform: scaleY(0.45); }
+  50% { transform: scaleY(1); }
+}
+.wave-bar { transform-origin: center; border-radius: 999px; }
+.wave-playing .wave-bar { animation: wavebar 0.9s ease-in-out infinite; }
 
 @keyframes shake {
   0%, 100% { transform: translateX(0); }

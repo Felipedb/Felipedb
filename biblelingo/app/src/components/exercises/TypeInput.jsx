@@ -5,7 +5,7 @@ import { session, setAnswer, check } from "../../core/session.js";
 import { useSessionVersion } from "../../core/useSession.js";
 import { blankRegex } from "../../core/util.js";
 import { speak } from "../../core/audio.js";
-import { AudioPair } from "./AudioButton.jsx";
+import { WaveButton, SlowButton } from "./AudioButton.jsx";
 import CharacterBubble from "./CharacterBubble.jsx";
 import { Sayable } from "./Sayable.jsx";
 import Icon from "../Icon.jsx";
@@ -47,7 +47,7 @@ export default function TypeInput({ ex }) {
     const after = m ? ex.sentence.en.slice(m.index + m[0].length) : "";
     return (
       <div>
-        <h2 className="font-display mb-3 text-lg font-extrabold">Complete a tradução:</h2>
+        <h2 className="font-display mb-4 text-2xl font-extrabold">Complete a tradução:</h2>
         <CharacterBubble big><span className="text-lg font-bold">{ex.sentence.pt}</span></CharacterBubble>
         {m ? (
           <div className="card p-4 text-lg leading-loose">
@@ -67,14 +67,13 @@ export default function TypeInput({ ex }) {
 
   return (
     <div>
-      <h2 className="font-display mb-3 flex items-center gap-2 text-lg font-extrabold">
+      <h2 className="font-display mb-4 flex items-center gap-2 text-2xl font-extrabold">
         {t === "listen-type" && <Icon name="speaker" className="text-sky" />}
         {t === "listen-type" ? "Digite o que você ouviu:" : "Digite em inglês:"}
       </h2>
       {t === "listen-type" ? (
-        <CharacterBubble big>
-          <AudioPair text={ex.sentence.en} />
-          <span className="text-ink-soft">Toque para ouvir</span>
+        <CharacterBubble big under={<SlowButton text={ex.sentence.en} />}>
+          <WaveButton text={ex.sentence.en} />
         </CharacterBubble>
       ) : (
         <CharacterBubble big>

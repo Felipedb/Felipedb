@@ -20,6 +20,7 @@ export default function Match({ ex }) {
   const [selected, setSelected] = useState(null); // { key, side, id }
   const [matched, setMatched] = useState([]);     // chaves fechadas
   const [wrong, setWrong] = useState([]);         // ids em erro (shake)
+  const [flash, setFlash] = useState([]);         // chaves recém-fechadas (brilho verde antes de apagar)
 
   const onCell = (item, id) => {
     if (session.checked || matched.includes(item.key)) return;
@@ -31,6 +32,8 @@ export default function Match({ ex }) {
       const m = [...matched, item.key];
       setMatched(m);
       setSelected(null);
+      setFlash((f) => [...f, item.key]);
+      setTimeout(() => setFlash((f) => f.filter((k) => k !== item.key)), 550);
       sfx("pop", m.length);
       if (m.length === ex.pairs.length) {
         setAnswer("__matched__");
@@ -47,17 +50,20 @@ export default function Match({ ex }) {
 
   const cell = (item, id) => {
     const isMatched = matched.includes(item.key);
+    const isFlash = flash.includes(item.key);
     const isSel = selected && selected.id === id;
     const isWrong = wrong.includes(id);
     return (
       <motion.button key={id} data-side={item.side} data-key={item.key}
         onClick={() => onCell(item, id)}
-        variants={{ idle: { scale: 1 }, matched: { scale: [1, 1.18, 1] } }}
+        variants={{ idle: { scale: 1 }, matched: { scale: [1, 1.14, 1] } }}
         animate={isMatched ? "matched" : "idle"}
         transition={{ duration: 0.3 }}
         aria-label={audioLeft && item.side === "en" ? "Ouvir" : item.label}
-        className={`${audioLeft && item.side === "en" ? "flex items-center justify-center text-xl text-sky-fg " : ""}rounded-2xl border-2 border-b-4 px-4 py-3 text-left font-bold transition-colors ${
-          isMatched ? "border-ok-line bg-ok-bg text-brand" :
+        className={`flex min-h-[72px] items-center justify-center rounded-2xl border-2 border-b-4 px-3 py-4 text-center font-bold transition-colors ${
+          audioLeft && item.side === "en" ? "text-2xl text-sky " : ""}${
+          isFlash ? "border-ok-line bg-ok-bg text-brand" :
+          isMatched ? "border-line/60 text-locked opacity-60" :
           isWrong ? "animate-[shake_0.3s] border-bad-line bg-bad-bg text-bad-fg" :
           isSel ? "border-sky-line bg-sky-soft text-sky-fg" :
           "border-line bg-card hover:bg-hover"}`}>
@@ -68,12 +74,12 @@ export default function Match({ ex }) {
 
   return (
     <div>
-      <h2 className="font-display mb-3 text-lg font-extrabold">
+      <h2 className="font-display mb-4 text-2xl font-extrabold">
         {audioLeft ? "Toque no que você ouviu e no par:" : "Combine os pares:"}
       </h2>
-      <div className="grid grid-cols-2 gap-2.5">
+      <div className="grid grid-cols-2 gap-3">
         {cols.map((col, c) => (
-          <div key={c} className="flex flex-col gap-2.5">
+          <div key={c} className="flex flex-col gap-3">
             {col.map((item, r) => cell(item, `${item.side}:${r}`))}
           </div>
         ))}
