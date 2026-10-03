@@ -1,469 +1,1500 @@
 {
+  "v": 2,
   "id": "u5",
   "lessons": [
     {
       "id": "u5l1",
       "title": "Santo, santo, santo",
-      "vocab": [
+      "ref": "Isaías 6:1-8",
+      "level": "A2.1",
+      "narrator": "isaias",
+      "guests": [
+        "anjo",
+        "voice"
+      ],
+      "names": [
         {
-          "en": "prophet",
-          "pt": "profeta",
-          "icon": "📜"
+          "en": "Isaiah",
+          "pt": "Isaías",
+          "note": "o profeta; narra a unidade"
         },
+        {
+          "en": "Uzziah",
+          "pt": "Uzias",
+          "note": "rei de Judá; morreu no ano da visão"
+        },
+        {
+          "en": "the Lord",
+          "pt": "o Senhor"
+        },
+        {
+          "en": "the Lord of Armies",
+          "pt": "o Senhor dos Exércitos",
+          "note": "a KJV diz Lord of hosts"
+        }
+      ],
+      "hints": {
+        "die": "morrer, morreu",
+        "high": "alto",
+        "fly": "voar, voava, voavam",
+        "call": "clamar, clamavam",
+        "unclean": "impuro, impuros",
+        "sin": "pecado",
+        "voice": "voz"
+      },
+      "tips": [
+        {
+          "part": 1,
+          "id": "past-see-hear",
+          "grammar": "past-see-hear",
+          "title": "saw, heard: ver e ouvir no passado",
+          "body": "Alguns verbos não ganham -ed no passado: eles mudam de forma. see vira saw (vi, viu) e hear vira heard (ouvi, ouviu). A forma é a mesma para todas as pessoas: I saw, he saw, they saw.",
+          "examples": [
+            {
+              "en": "I see the Lord",
+              "pt": "Eu vejo o Senhor"
+            },
+            {
+              "en": "I saw the Lord",
+              "pt": "Eu vi o Senhor"
+            }
+          ],
+          "contrast": {
+            "a": "I hear his voice",
+            "b": "I heard his voice",
+            "note": "hear = agora; heard = naquele momento"
+          }
+        },
+        {
+          "part": 2,
+          "id": "will-question",
+          "grammar": "will-question",
+          "title": "Who will go? Will you go?: perguntas com will",
+          "body": "will marca o futuro e não muda de pessoa: I will go, he will go. Para perguntar, will vai antes do sujeito: Will you go? Com quem ou quando, a palavra de pergunta vem primeiro: Who will go for us?",
+          "examples": [
+            {
+              "en": "Who will go for us?",
+              "pt": "Quem irá por nós?"
+            },
+            {
+              "en": "Will you go?",
+              "pt": "Você vai?"
+            }
+          ],
+          "contrast": {
+            "a": "I will go",
+            "b": "Will I go?",
+            "note": "afirmativa: sujeito + will; pergunta: will + sujeito"
+          }
+        }
+      ],
+      "vocab": [
         {
           "en": "throne",
           "pt": "trono",
-          "icon": "👑"
+          "pos": "noun",
+          "field": "objects",
+          "tier": "core",
+          "part": 1,
+          "icon": "💺",
+          "example": 2
         },
         {
-          "en": "holy",
-          "pt": "santo",
-          "icon": "✨"
+          "en": "wing",
+          "pt": "asa",
+          "pos": "noun",
+          "field": "body",
+          "tier": "core",
+          "part": 1,
+          "icon": "🦅",
+          "example": 3
         },
         {
-          "en": "to send",
-          "pt": "enviar",
-          "icon": "📨"
+          "en": "seraph",
+          "pt": "serafim",
+          "plural": "seraphim",
+          "forms": [
+            "seraphim"
+          ],
+          "pos": "noun",
+          "field": "faith",
+          "tier": "bible",
+          "part": 1,
+          "icon": "😇",
+          "example": 3,
+          "note": "ser celestial de seis asas; plural seraphim"
         },
         {
-          "en": "voice",
-          "pt": "voz",
-          "icon": "🗣️"
+          "en": "to see",
+          "pt": "ver",
+          "pos": "verb",
+          "field": "mind",
+          "tier": "core",
+          "part": 1,
+          "icon": "👀",
+          "example": 1
         },
         {
-          "en": "to hear",
-          "pt": "ouvir",
-          "icon": "👂"
+          "en": "Holy, holy, holy",
+          "pt": "Santo, santo, santo",
+          "pos": "chunk",
+          "field": "speech",
+          "tier": "core",
+          "part": 1,
+          "icon": "🎶",
+          "iconic": true,
+          "example": 5
         },
         {
-          "en": "glory",
-          "pt": "glória",
-          "icon": "🌟"
-        },
-        {
-          "en": "wings",
-          "pt": "asas",
-          "icon": "🦅"
+          "en": "lip",
+          "pt": "lábio",
+          "pos": "noun",
+          "field": "body",
+          "tier": "core",
+          "part": 2,
+          "icon": "👄",
+          "example": 7
         },
         {
           "en": "coal",
           "pt": "brasa",
-          "icon": "🔥"
+          "ptAlt": [
+            "carvão"
+          ],
+          "pos": "noun",
+          "field": "objects",
+          "tier": "core",
+          "part": 2,
+          "icon": "♨️",
+          "example": 8
         },
         {
-          "en": "lips",
-          "pt": "lábios",
-          "icon": "👄"
+          "en": "to touch",
+          "pt": "tocar",
+          "pos": "verb",
+          "field": "actions",
+          "tier": "core",
+          "part": 2,
+          "icon": "👆",
+          "example": 8
+        },
+        {
+          "en": "to hear",
+          "pt": "ouvir",
+          "ptAlt": [
+            "escutar"
+          ],
+          "pos": "verb",
+          "field": "mind",
+          "tier": "core",
+          "part": 2,
+          "icon": "👂",
+          "example": 10
+        },
+        {
+          "en": "Here I am. Send me!",
+          "pt": "Aqui estou. Envie-me!",
+          "ptAlt": [
+            "Eis-me aqui, envia-me a mim",
+            "Aqui estou eu. Me envie!"
+          ],
+          "alt": [
+            "Here am I; send me"
+          ],
+          "pos": "chunk",
+          "field": "speech",
+          "tier": "core",
+          "part": 2,
+          "icon": "🙋‍♂️",
+          "iconic": true,
+          "example": 12
         }
       ],
-      "sentences": [
+      "beats": [
         {
-          "en": "Isaiah was a prophet",
-          "pt": "Isaías era um profeta"
+          "order": 1,
+          "en": "I saw the Lord in the year King Uzziah died",
+          "pt": "Eu vi o Senhor no ano em que o rei Uzias morreu",
+          "altPt": [
+            "No ano em que morreu o rei Uzias, eu vi o Senhor"
+          ],
+          "kind": "first-person",
+          "fact": true,
+          "speaker": "isaias",
+          "gap": {
+            "word": "saw",
+            "kind": "grammar",
+            "options": [
+              "saw",
+              "see",
+              "sees"
+            ]
+          },
+          "grammar": "past-see-hear"
         },
         {
-          "en": "Isaiah saw the Lord sitting upon a throne, high and lifted up",
-          "pt": "Isaías viu o Senhor assentado sobre um alto e sublime trono"
+          "order": 2,
+          "en": "The Lord was on a high throne",
+          "pt": "O Senhor estava num trono alto",
+          "altPt": [
+            "O Senhor estava assentado sobre um alto e sublime trono"
+          ],
+          "alt": [
+            "The Lord was sitting on a high throne"
+          ],
+          "kind": "statement",
+          "fact": true
         },
         {
-          "en": "The posts of the door moved at his voice",
-          "pt": "Os umbrais da porta se moveram à sua voz"
-        },
-        {
+          "order": 3,
           "en": "Each seraph had six wings",
-          "pt": "Cada serafim tinha seis asas"
+          "pt": "Cada serafim tinha seis asas",
+          "kind": "statement",
+          "fact": true
         },
         {
-          "en": "Holy, holy, holy is the Lord of hosts",
-          "pt": "Santo, Santo, Santo é o Senhor dos Exércitos"
+          "order": 4,
+          "en": "Did the seraph fly with six wings? No, with two",
+          "pt": "O serafim voava com seis asas? Não, com duas",
+          "kind": "question",
+          "fact": true
         },
         {
-          "en": "The whole earth is full of his glory",
-          "pt": "Toda a terra está cheia da sua glória"
+          "order": 5,
+          "en": "They called, \"Holy, holy, holy is the Lord of Armies\"",
+          "pt": "Eles clamavam: \"Santo, santo, santo é o Senhor dos Exércitos\"",
+          "alt": [
+            "Holy, holy, holy is the Lord of hosts",
+            "Holy, holy, holy, is the Lord of Armies"
+          ],
+          "altPt": [
+            "Santo, Santo, Santo é o Senhor dos Exércitos"
+          ],
+          "kind": "quote",
+          "fact": true,
+          "iconic": true,
+          "prod": false,
+          "speaker": "anjo"
         },
         {
-          "en": "Woe is me! I am a man of unclean lips",
-          "pt": "Ai de mim! Eu sou um homem de lábios impuros"
+          "order": 6,
+          "en": "What did I see? The Lord on a high throne",
+          "pt": "O que eu vi? O Senhor num trono alto",
+          "kind": "question",
+          "fact": true,
+          "speaker": "isaias"
         },
         {
-          "en": "The seraph took a live coal from the altar",
-          "pt": "O serafim tirou uma brasa viva do altar"
+          "order": 7,
+          "en": "I said, \"I am a man of unclean lips\"",
+          "pt": "Eu disse: \"Eu sou um homem de lábios impuros\"",
+          "kind": "first-person",
+          "fact": true,
+          "speaker": "isaias"
         },
         {
-          "en": "The coal touched my lips and my sin was purged",
-          "pt": "A brasa tocou os meus lábios, e o meu pecado foi purificado"
+          "order": 8,
+          "en": "A seraph touched my lips with a coal",
+          "pt": "Um serafim tocou os meus lábios com uma brasa",
+          "altPt": [
+            "Um serafim tocou a minha boca com uma brasa"
+          ],
+          "kind": "statement",
+          "fact": true,
+          "gap": {
+            "word": "coal",
+            "kind": "lexical",
+            "options": [
+              "coal",
+              "wing",
+              "throne"
+            ]
+          }
         },
         {
-          "en": "I heard the voice of the Lord",
-          "pt": "Eu ouvi a voz do Senhor"
+          "order": 9,
+          "en": "The coal touched my lips and my sin was forgiven",
+          "pt": "A brasa tocou os meus lábios e o meu pecado foi perdoado",
+          "altPt": [
+            "A brasa tocou os meus lábios, e o meu pecado foi perdoado"
+          ],
+          "kind": "statement",
+          "fact": true
         },
         {
-          "en": "Whom shall I send?",
-          "pt": "A quem enviarei?"
+          "order": 10,
+          "en": "Did I hear the Lord? Yes, I heard his voice",
+          "pt": "Eu ouvi o Senhor? Sim, eu ouvi a voz dele",
+          "kind": "question",
+          "fact": true,
+          "speaker": "isaias"
         },
         {
-          "en": "Here am I; send me",
-          "pt": "Eis-me aqui, envia-me a mim"
+          "order": 11,
+          "en": "I heard him ask, \"Who will go for us?\"",
+          "pt": "Eu o ouvi perguntar: \"Quem irá por nós?\"",
+          "alt": [
+            "I heard him ask, \"Whom shall I send, and who will go for us?\""
+          ],
+          "altPt": [
+            "Eu ouvi ele perguntar: \"Quem irá por nós?\"",
+            "Eu o ouvi perguntar: \"Quem há de ir por nós?\""
+          ],
+          "kind": "question",
+          "fact": true,
+          "iconic": true,
+          "gap": {
+            "word": "will",
+            "kind": "grammar",
+            "options": [
+              "will",
+              "can",
+              "must"
+            ]
+          },
+          "grammar": "will-question"
+        },
+        {
+          "order": 12,
+          "en": "I said, \"Here I am. Send me!\"",
+          "pt": "Eu disse: \"Aqui estou. Envie-me!\"",
+          "alt": [
+            "Then I said, \"Here I am. Send me!\"",
+            "I said, \"Here am I; send me\""
+          ],
+          "altPt": [
+            "Então disse eu: \"Eis-me aqui, envia-me a mim\"",
+            "Eu disse: \"Aqui estou eu. Me envie!\""
+          ],
+          "kind": "quote",
+          "fact": true,
+          "iconic": true,
+          "speaker": "isaias"
+        }
+      ],
+      "contrast": [
+        {
+          "a": "I saw the Lord in the year King Uzziah died",
+          "b": "I see the Lord on his throne",
+          "note": "saw = vi (passado); see = vejo (presente)"
+        },
+        {
+          "a": "Did I hear the Lord? Yes, I heard his voice",
+          "b": "Will I hear the Lord? Yes, I will hear his voice",
+          "note": "did + hear = passado; will + hear = futuro"
         }
       ],
       "verse": {
-        "text": "Whom shall I send, and who will go for us? Then said I, Here am I; send me.",
-        "pt": "A quem enviarei, e quem há de ir por nós? Então, disse eu: Eis-me aqui, envia-me a mim.",
+        "text": "\"Whom shall I send, and who will go for us?\" Then I said, \"Here I am. Send me!\"",
+        "classic": "Whom shall I send, and who will go for us? Then said I, Here am I; send me.",
+        "pt": "\"Quem eu enviarei, e quem irá por nós?\" Então eu disse: \"Aqui estou. Envie-me!\"",
+        "classicPt": "A quem enviarei, e quem há de ir por nós? Então, disse eu: Eis-me aqui, envia-me a mim.",
         "ref": "Isaías 6:8",
-        "blank": "go",
-        "options": [
-          "go",
-          "stay",
-          "eat",
-          "sleep"
+        "blanks": [
+          {
+            "word": "go",
+            "options": [
+              "go",
+              "stay",
+              "sleep",
+              "speak"
+            ]
+          },
+          {
+            "word": "said",
+            "options": [
+              "said",
+              "asked",
+              "heard",
+              "called"
+            ]
+          },
+          {
+            "word": "Here",
+            "options": [
+              "Here",
+              "There",
+              "Now",
+              "Today"
+            ]
+          }
         ]
       },
       "reading": {
-        "text": "In the year that king Uzziah died, Isaiah saw the Lord on a high throne. Seraphim stood above him. Each one had six wings. They cried: Holy, holy, holy is the Lord of hosts.",
-        "pt": "No ano em que morreu o rei Uzias, Isaías viu o Senhor num alto trono. Serafins estavam acima dele. Cada um tinha seis asas. Eles clamavam: Santo, Santo, Santo é o Senhor dos Exércitos.",
-        "q": "How many wings did each seraph have?",
-        "options": [
-          "Six",
-          "Two",
-          "Twelve"
-        ],
-        "answer": "Six"
+        "text": "Isaiah saw the Lord on a throne, and the seraphim said, \"Holy, holy, holy is the Lord of Armies.\" Isaiah said, \"I am a man of unclean lips,\" but a seraph touched his lips with a coal and said, \"Your sin is forgiven.\" Then Isaiah heard the Lord ask, \"Who will go for us?\" He said, \"Here I am. Send me!\"",
+        "pt": "Isaías viu o Senhor num trono, e os serafins diziam: \"Santo, santo, santo é o Senhor dos Exércitos.\" Isaías disse: \"Eu sou um homem de lábios impuros\", mas um serafim tocou os lábios dele com uma brasa e disse: \"O seu pecado está perdoado.\" Então Isaías ouviu o Senhor perguntar: \"Quem irá por nós?\" Ele disse: \"Aqui estou. Envie-me!\"",
+        "questions": [
+          {
+            "kind": "literal",
+            "q": "What touched Isaiah's lips?",
+            "qPt": "O que tocou os lábios de Isaías?",
+            "options": [
+              "A hot coal in the hand of a seraph",
+              "One of the six wings of a seraph",
+              "The hand of the Lord on the throne"
+            ],
+            "answer": "A hot coal in the hand of a seraph"
+          },
+          {
+            "kind": "inference",
+            "q": "Why did Isaiah say, \"I am a man of unclean lips\"?",
+            "qPt": "Por que Isaías disse: \"Eu sou um homem de lábios impuros\"?",
+            "options": [
+              "He saw the holy Lord and felt his own sin",
+              "The seraphim had six wings and could fly",
+              "The Lord did not want to send him"
+            ],
+            "answer": "He saw the holy Lord and felt his own sin",
+            "explain": "Diante do Senhor santo, Isaías sentiu a sua impureza: \"os meus olhos viram o Rei, o Senhor dos Exércitos\" (Isaías 6:5). Só depois a brasa tirou o seu pecado (Isaías 6:7)."
+          }
+        ]
       },
-      "dialogue": {
-        "line": "Whom shall I send?",
-        "pt": "A quem enviarei?",
-        "options": [
-          "Here am I; send me.",
-          "Send the sheep.",
-          "Let there be light."
-        ],
-        "answer": "Here am I; send me.",
-        "answerPt": "Eis-me aqui, envia-me a mim."
+      "conversation": {
+        "with": "voice",
+        "turns": [
+          {
+            "who": "voice",
+            "en": "Who will go for us?",
+            "pt": "Quem irá por nós?",
+            "mood": "solene"
+          },
+          {
+            "who": "you",
+            "options": [
+              "Here I am. Send me!",
+              "Here I am. Send him!",
+              "Here I am. Wait for me!"
+            ],
+            "answer": "Here I am. Send me!",
+            "pt": "Aqui estou. Envie-me!",
+            "intent": "Responda ao chamado"
+          },
+          {
+            "who": "voice",
+            "en": "Go and speak to this people.",
+            "pt": "Vá e fale a este povo.",
+            "mood": "calmo"
+          },
+          {
+            "who": "you",
+            "options": [
+              "Lord, how long?",
+              "Lord, how many?",
+              "Lord, how old?"
+            ],
+            "answer": "Lord, how long?",
+            "pt": "Senhor, até quando?",
+            "intent": "Pergunte por quanto tempo",
+            "speak": true
+          }
+        ]
       },
-      "quiz": {
-        "q": "What did the seraph bring to Isaiah's lips?",
-        "options": [
-          "A live coal",
-          "A cup of water",
-          "A piece of bread"
-        ],
-        "answer": "A live coal",
-        "explain": "Um serafim tocou a boca de Isaías com uma brasa viva tirada do altar (Isaías 6:6-7)."
+      "fact": {
+        "pt": "A palavra \"serafim\" vem do hebraico \"saraf\", que tem a ver com fogo. Como seres celestiais de seis asas, os serafins aparecem na Bíblia somente em Isaías 6 (Isaías 6:2-6).",
+        "ref": "Isaías 6:2"
       }
     },
     {
       "id": "u5l2",
-      "title": "Emanuel, Deus conosco",
+      "title": "Emanuel e o Príncipe da Paz",
+      "ref": "Isaías 7:1-14; 9:2-7; Mateus 1:23",
+      "level": "A2.1",
+      "narrator": "isaias",
+      "guests": [
+        "acaz",
+        "voice"
+      ],
+      "names": [
+        {
+          "en": "Isaiah",
+          "pt": "Isaías",
+          "note": "o profeta; narra a unidade"
+        },
+        {
+          "en": "Ahaz",
+          "pt": "Acaz",
+          "note": "rei de Judá no tempo de Isaías"
+        },
+        {
+          "en": "Jerusalem",
+          "pt": "Jerusalém"
+        },
+        {
+          "en": "Immanuel",
+          "pt": "Emanuel",
+          "note": "significa Deus conosco (Mateus 1:23)"
+        },
+        {
+          "en": "the Lord",
+          "pt": "o Senhor"
+        },
+        {
+          "en": "Wonderful Counselor",
+          "pt": "Maravilhoso Conselheiro",
+          "note": "primeiro título do menino em Isaías 9:6"
+        },
+        {
+          "en": "Mighty God",
+          "pt": "Deus Forte",
+          "note": "a Almeida diz Deus Forte"
+        },
+        {
+          "en": "Everlasting Father",
+          "pt": "Pai Eterno",
+          "note": "a Almeida diz Pai da Eternidade"
+        },
+        {
+          "en": "Prince of Peace",
+          "pt": "Príncipe da Paz"
+        }
+      ],
+      "hints": {
+        "stay": "ficar, fique",
+        "virgin": "virgem",
+        "birth": "nascimento",
+        "born": "nascido, nasceu",
+        "end": "acabar, fim",
+        "mean": "significar, significa"
+      },
+      "tips": [
+        {
+          "part": 1,
+          "id": "will-future",
+          "grammar": "will-future",
+          "title": "will: falar do futuro",
+          "body": "Para falar do que vai acontecer, use will antes do verbo na forma básica: The Lord will give you a sign. A forma é igual para todas as pessoas (I will, he will, they will). A negativa é will not (won't): I will not ask.",
+          "examples": [
+            {
+              "en": "The Lord will give you a sign",
+              "pt": "O Senhor dará a você um sinal"
+            },
+            {
+              "en": "A virgin will have a son",
+              "pt": "Uma virgem terá um filho"
+            }
+          ],
+          "contrast": {
+            "a": "I will ask for a sign",
+            "b": "I will not ask for a sign",
+            "note": "will = vou; will not = não vou"
+          }
+        },
+        {
+          "part": 2,
+          "id": "verb-s-means",
+          "grammar": "verb-s-means",
+          "title": "It means, he calls: o -s da terceira pessoa",
+          "body": "No presente, com he, she ou it, o verbo ganha -s: Immanuel means God with us; she calls him Immanuel. Na pergunta, does fica com o -s e o verbo volta à forma básica: What does Immanuel mean? Nomes compostos como Prince of Peace são lidos como um só título.",
+          "examples": [
+            {
+              "en": "Immanuel means God with us",
+              "pt": "Emanuel significa Deus conosco"
+            },
+            {
+              "en": "She calls him Immanuel",
+              "pt": "Ela o chama de Emanuel"
+            }
+          ],
+          "contrast": {
+            "a": "The name means God with us",
+            "b": "What does the name mean?",
+            "note": "means (com -s) na afirmativa; does + mean (sem -s) na pergunta"
+          }
+        }
+      ],
       "vocab": [
+        {
+          "en": "calm",
+          "pt": "calmo",
+          "ptAlt": [
+            "calma",
+            "tranquilo"
+          ],
+          "pos": "adj",
+          "field": "feelings",
+          "tier": "core",
+          "part": 1,
+          "icon": "😊",
+          "example": 2
+        },
+        {
+          "en": "enemy",
+          "pt": "inimigo",
+          "plural": "enemies",
+          "pos": "noun",
+          "field": "people",
+          "tier": "core",
+          "part": 1,
+          "icon": "👹",
+          "example": 1
+        },
         {
           "en": "sign",
           "pt": "sinal",
-          "icon": "⭐"
+          "pos": "noun",
+          "field": "faith",
+          "tier": "core",
+          "part": 1,
+          "icon": "🚩",
+          "example": 5
+        },
+        {
+          "en": "to give",
+          "pt": "dar",
+          "pos": "verb",
+          "field": "actions",
+          "tier": "core",
+          "part": 1,
+          "icon": "💝",
+          "example": 5
+        },
+        {
+          "en": "Stay calm",
+          "pt": "Fique calmo",
+          "ptAlt": [
+            "Fique calma",
+            "Fique tranquilo",
+            "Tenha calma"
+          ],
+          "pos": "chunk",
+          "field": "speech",
+          "tier": "core",
+          "part": 1,
+          "icon": "🧘",
+          "iconic": true,
+          "example": 3
         },
         {
           "en": "child",
-          "pt": "menino (criança)",
-          "icon": "👶"
-        },
-        {
-          "en": "name",
-          "pt": "nome",
-          "icon": "🏷️"
-        },
-        {
-          "en": "with us",
-          "pt": "conosco",
-          "icon": "👫"
-        },
-        {
-          "en": "virgin",
-          "pt": "virgem",
-          "icon": "👰"
-        },
-        {
-          "en": "son",
-          "pt": "filho",
-          "icon": "👦"
-        },
-        {
-          "en": "honey",
-          "pt": "mel",
-          "icon": "🍯"
-        },
-        {
-          "en": "to ask",
-          "pt": "pedir",
-          "icon": "🙋"
-        },
-        {
-          "en": "to shine",
-          "pt": "resplandecer (brilhar)",
-          "icon": "🔆"
+          "pt": "menino",
+          "ptAlt": [
+            "criança"
+          ],
+          "plural": "children",
+          "pos": "noun",
+          "field": "family",
+          "tier": "core",
+          "part": 2,
+          "icon": "👶",
+          "example": 8
         },
         {
           "en": "great",
           "pt": "grande",
-          "icon": "🏔️"
-        }
-      ],
-      "sentences": [
-        {
-          "en": "The Lord will give you a sign",
-          "pt": "O Senhor vos dará um sinal"
+          "pos": "adj",
+          "field": "quality",
+          "tier": "core",
+          "part": 2,
+          "icon": "🔝",
+          "example": 7
         },
         {
-          "en": "Ask a sign of the Lord your God",
-          "pt": "Pede para ti ao Senhor, teu Deus, um sinal"
+          "en": "to call",
+          "pt": "chamar",
+          "pos": "verb",
+          "field": "speech",
+          "tier": "core",
+          "part": 2,
+          "icon": "📢",
+          "example": 9
         },
         {
-          "en": "King Ahaz said, I will not ask",
-          "pt": "O rei Acaz disse: Não pedirei"
-        },
-        {
-          "en": "A virgin shall conceive and bear a son",
-          "pt": "Uma virgem conceberá e dará à luz um filho"
-        },
-        {
-          "en": "His name is Immanuel",
-          "pt": "O seu nome é Emanuel"
+          "en": "peace",
+          "pt": "paz",
+          "pos": "noun",
+          "field": "faith",
+          "tier": "core",
+          "part": 2,
+          "icon": "☮️",
+          "example": 10
         },
         {
           "en": "God with us",
-          "pt": "Deus conosco"
-        },
+          "pt": "Deus conosco",
+          "pos": "chunk",
+          "field": "faith",
+          "tier": "core",
+          "part": 2,
+          "icon": "💞",
+          "iconic": true,
+          "example": 12
+        }
+      ],
+      "beats": [
         {
-          "en": "He shall eat butter and honey",
-          "pt": "Ele comerá manteiga e mel",
-          "alt": [
-            "Butter and honey shall he eat"
-          ]
-        },
-        {
-          "en": "The people that walked in darkness have seen a great light",
-          "pt": "O povo que andava em trevas viu uma grande luz"
-        },
-        {
-          "en": "The light has shined upon them",
-          "pt": "A luz resplandeceu sobre eles",
-          "alt": [
-            "Upon them the light has shined"
-          ]
-        },
-        {
-          "en": "A child is born",
-          "pt": "Um menino nasceu"
-        },
-        {
-          "en": "Unto us a son is given",
-          "alt": [
-            "To us a son is given"
+          "order": 1,
+          "en": "Two enemy kings came to fight against Jerusalem",
+          "pt": "Dois reis inimigos vieram lutar contra Jerusalém",
+          "altPt": [
+            "Dois reis subiram a Jerusalém para guerrear contra ela"
           ],
-          "pt": "Um filho se nos deu"
+          "kind": "statement",
+          "fact": true
         },
         {
-          "en": "The name Immanuel means God with us",
-          "pt": "O nome Emanuel significa Deus conosco"
+          "order": 2,
+          "en": "Was Ahaz calm? No, he was afraid of his enemies",
+          "pt": "Acaz estava calmo? Não, ele estava com medo dos seus inimigos",
+          "kind": "question",
+          "fact": true
+        },
+        {
+          "order": 3,
+          "en": "I said to Ahaz, \"Stay calm. Do not be afraid\"",
+          "pt": "Eu disse a Acaz: \"Fique calmo. Não tenha medo\"",
+          "alt": [
+            "I said to Ahaz, \"Keep calm. Do not be afraid\""
+          ],
+          "altPt": [
+            "Eu disse a Acaz: \"Tenha calma. Não tema\""
+          ],
+          "kind": "first-person",
+          "fact": true,
+          "iconic": true,
+          "speaker": "isaias"
+        },
+        {
+          "order": 4,
+          "en": "Ahaz did not ask the Lord for a sign",
+          "pt": "Acaz não pediu um sinal ao Senhor",
+          "kind": "negative",
+          "fact": true
+        },
+        {
+          "order": 5,
+          "en": "The Lord himself will give you a sign",
+          "pt": "O Senhor mesmo dará a você um sinal",
+          "altPt": [
+            "O mesmo Senhor vos dará um sinal"
+          ],
+          "kind": "quote",
+          "fact": true,
+          "speaker": "isaias",
+          "gap": {
+            "word": "will",
+            "kind": "grammar",
+            "options": [
+              "will",
+              "can",
+              "must"
+            ]
+          },
+          "grammar": "will-future"
+        },
+        {
+          "order": 6,
+          "en": "The virgin will give birth to a son called Immanuel",
+          "pt": "A virgem dará à luz um filho chamado Emanuel",
+          "altPt": [
+            "Uma virgem conceberá e dará à luz um filho, e será o seu nome Emanuel"
+          ],
+          "kind": "statement",
+          "fact": true,
+          "iconic": true,
+          "speaker": "isaias",
+          "alt": [
+            "The virgin will conceive, and bear a son, and shall call his name Immanuel"
+          ]
+        },
+        {
+          "order": 7,
+          "en": "The people in the dark saw a great light",
+          "pt": "O povo no escuro viu uma grande luz",
+          "altPt": [
+            "O povo que andava em trevas viu uma grande luz"
+          ],
+          "kind": "statement",
+          "fact": true,
+          "gap": {
+            "word": "great",
+            "kind": "lexical",
+            "options": [
+              "great",
+              "calm",
+              "afraid"
+            ]
+          },
+          "alt": [
+            "The people who walked in darkness have seen a great light"
+          ]
+        },
+        {
+          "order": 8,
+          "en": "Why this great light? A child is born to us",
+          "pt": "Por que esta grande luz? Um menino nos nasceu",
+          "altPt": [
+            "Por que esta grande luz? Um menino nasceu para nós"
+          ],
+          "kind": "question",
+          "fact": true
+        },
+        {
+          "order": 9,
+          "en": "The child will be called Wonderful Counselor, Mighty God",
+          "pt": "O menino será chamado Maravilhoso Conselheiro, Deus Forte",
+          "alt": [
+            "His name will be called Wonderful Counselor, Mighty God"
+          ],
+          "kind": "quote",
+          "fact": true,
+          "iconic": true,
+          "speaker": "isaias"
+        },
+        {
+          "order": 10,
+          "en": "He will be called Everlasting Father, Prince of Peace",
+          "pt": "Ele será chamado Pai Eterno, Príncipe da Paz",
+          "altPt": [
+            "Ele será chamado Pai da Eternidade, Príncipe da Paz"
+          ],
+          "kind": "quote",
+          "fact": true,
+          "iconic": true,
+          "speaker": "isaias"
+        },
+        {
+          "order": 11,
+          "en": "Will his peace end? No, his peace will never end",
+          "pt": "A paz dele vai acabar? Não, a paz dele nunca vai acabar",
+          "altPt": [
+            "Da sua paz não haverá fim"
+          ],
+          "kind": "question",
+          "fact": true
+        },
+        {
+          "order": 12,
+          "en": "What does Immanuel mean? It means God with us",
+          "pt": "O que significa Emanuel? Significa Deus conosco",
+          "kind": "question",
+          "fact": true,
+          "gap": {
+            "word": "means",
+            "kind": "grammar",
+            "options": [
+              "means",
+              "mean",
+              "meant"
+            ]
+          },
+          "grammar": "verb-s-means"
+        }
+      ],
+      "contrast": [
+        {
+          "a": "The Lord himself will give you a sign",
+          "b": "The Lord himself will not give you a sign",
+          "note": "will = vai dar; will not = não vai dar"
+        },
+        {
+          "a": "What does Immanuel mean? It means God with us",
+          "b": "What do the names mean? They mean God with us",
+          "note": "it means (com -s); they mean (sem -s)"
         }
       ],
       "verse": {
-        "text": "Behold, a virgin shall conceive, and bear a son, and shall call his name Immanuel.",
-        "pt": "Eis que uma virgem conceberá, e dará à luz um filho, e será o seu nome Emanuel.",
-        "ref": "Isaías 7:14",
-        "blank": "name",
-        "options": [
-          "name",
-          "land",
-          "word",
-          "sign"
+        "text": "His name will be called Wonderful Counselor, Mighty God, Everlasting Father, Prince of Peace.",
+        "classic": "And his name shall be called Wonderful, Counsellor, The mighty God, The everlasting Father, The Prince of Peace.",
+        "pt": "O seu nome será Maravilhoso Conselheiro, Deus Forte, Pai Eterno, Príncipe da Paz.",
+        "classicPt": "E o seu nome será Maravilhoso, Conselheiro, Deus Forte, Pai da Eternidade, Príncipe da Paz.",
+        "ref": "Isaías 9:6",
+        "blanks": [
+          {
+            "word": "Peace",
+            "options": [
+              "Peace",
+              "Light",
+              "Love",
+              "Life"
+            ]
+          },
+          {
+            "word": "name",
+            "options": [
+              "name",
+              "son",
+              "child",
+              "sign"
+            ]
+          },
+          {
+            "word": "called",
+            "options": [
+              "called",
+              "born",
+              "given",
+              "sent"
+            ]
+          }
         ]
       },
       "reading": {
-        "text": "Two kings came to fight against Jerusalem, and king Ahaz was afraid. Isaiah said: Do not fear. The Lord gave a sign: a virgin shall bear a son, Immanuel. The child shall eat butter and honey.",
-        "pt": "Dois reis vieram guerrear contra Jerusalém, e o rei Acaz teve medo. Isaías disse: Não temas. O Senhor deu um sinal: uma virgem dará à luz um filho, Emanuel. O menino comerá manteiga e mel.",
-        "q": "What shall the child eat?",
-        "options": [
-          "Butter and honey",
-          "Bread and fish",
-          "Fruit of the garden"
-        ],
-        "answer": "Butter and honey"
+        "text": "Two kings came to fight against Jerusalem, and King Ahaz was very afraid. Isaiah said to him, \"Stay calm and do not be afraid.\" Ahaz did not ask for a sign, but the Lord himself gave one: a virgin will have a son, Immanuel. Isaiah also said, \"The people in the dark will see a great light, because a child is born to us.\" He will be called Wonderful Counselor, Mighty God, Everlasting Father, Prince of Peace, and Immanuel means God with us.",
+        "pt": "Dois reis vieram lutar contra Jerusalém, e o rei Acaz estava com muito medo. Isaías disse a ele: \"Fique calmo e não tenha medo.\" Acaz não pediu um sinal, mas o Senhor mesmo deu um: uma virgem terá um filho, Emanuel. Isaías também disse: \"O povo no escuro verá uma grande luz, porque um menino nos nasceu.\" Ele será chamado Maravilhoso Conselheiro, Deus Forte, Pai Eterno, Príncipe da Paz, e Emanuel significa Deus conosco.",
+        "questions": [
+          {
+            "kind": "literal",
+            "q": "What sign did the Lord give to Ahaz?",
+            "qPt": "Que sinal o Senhor deu a Acaz?",
+            "options": [
+              "A son born to a virgin",
+              "A great light over Jerusalem",
+              "A new king for the two enemies"
+            ],
+            "answer": "A son born to a virgin"
+          },
+          {
+            "kind": "inference",
+            "q": "Why did Isaiah tell Ahaz to stay calm?",
+            "qPt": "Por que Isaías disse a Acaz para ficar calmo?",
+            "options": [
+              "Because the Lord was with Jerusalem",
+              "Because the two kings were his friends",
+              "Because Ahaz had asked for a sign"
+            ],
+            "answer": "Because the Lord was with Jerusalem",
+            "explain": "O Senhor mandou Isaías dizer a Acaz que não temesse: o plano dos dois reis não ficaria de pé (Isaías 7:4-7). Deus estava com Jerusalém, e o sinal foi dado mesmo sem Acaz pedir (Isaías 7:14)."
+          }
+        ]
       },
-      "dialogue": {
-        "line": "What is the name of the child?",
-        "pt": "Qual é o nome do menino?",
-        "options": [
-          "Immanuel: God with us.",
-          "Goliath the giant.",
-          "Noah of the ark."
-        ],
-        "answer": "Immanuel: God with us.",
-        "answerPt": "Emanuel: Deus conosco."
+      "conversation": {
+        "with": "acaz",
+        "turns": [
+          {
+            "who": "acaz",
+            "en": "Isaiah, two kings are coming against us! What do I do?",
+            "pt": "Isaías, dois reis estão vindo contra nós! O que eu faço?",
+            "mood": "assustado"
+          },
+          {
+            "who": "you",
+            "options": [
+              "Stay calm. Do not be afraid.",
+              "Stay here. Do not fight them.",
+              "Stay calm. Ask them for a sign."
+            ],
+            "answer": "Stay calm. Do not be afraid.",
+            "pt": "Fique calmo. Não tenha medo.",
+            "intent": "Acalme o rei com a palavra do Senhor"
+          },
+          {
+            "who": "acaz",
+            "en": "I will not ask the Lord for a sign.",
+            "pt": "Eu não vou pedir um sinal ao Senhor.",
+            "mood": "bravo"
+          },
+          {
+            "who": "you",
+            "options": [
+              "The Lord himself will give you a sign.",
+              "The Lord himself will fight for you.",
+              "The Lord himself will give you a son."
+            ],
+            "answer": "The Lord himself will give you a sign.",
+            "pt": "O Senhor mesmo dará a você um sinal.",
+            "intent": "Diga o que o Senhor fará mesmo assim",
+            "speak": true
+          }
+        ]
       },
-      "quiz": {
-        "q": "What did the people that walked in darkness see?",
-        "options": [
-          "A great light",
-          "A great flood",
-          "A great fire"
-        ],
-        "answer": "A great light",
-        "explain": "O povo que andava em trevas viu uma grande luz (Isaías 9:2)."
+      "fact": {
+        "pt": "O evangelho de Mateus cita Isaías 7:14 ao contar o nascimento de Jesus e explica o nome: \"Emanuel, que traduzido é: Deus conosco\" (Mateus 1:23).",
+        "ref": "Mateus 1:23"
       }
     },
     {
       "id": "u5l3",
-      "title": "O Príncipe da Paz",
-      "vocab": [
+      "title": "Ezequias e o anjo",
+      "ref": "Isaías 36:1-2; 37:9-38; 38:1-8",
+      "level": "A2.1",
+      "narrator": "isaias",
+      "guests": [
+        "ezequias",
+        "voice"
+      ],
+      "names": [
         {
-          "en": "peace",
-          "pt": "paz",
-          "icon": "☮️"
+          "en": "Isaiah",
+          "pt": "Isaías",
+          "note": "o profeta; narra a unidade"
         },
         {
-          "en": "prince",
-          "pt": "príncipe",
-          "icon": "🤴"
+          "en": "Hezekiah",
+          "pt": "Ezequias",
+          "note": "rei de Judá, filho de Acaz"
         },
         {
-          "en": "wonderful",
-          "pt": "maravilhoso",
-          "icon": "🌟"
+          "en": "Assyria",
+          "pt": "Assíria",
+          "note": "o grande império do norte"
         },
         {
-          "en": "counsellor",
-          "pt": "conselheiro",
-          "icon": "🧠"
+          "en": "Judah",
+          "pt": "Judá",
+          "note": "o reino do sul, com a capital Jerusalém"
         },
         {
-          "en": "mighty",
-          "pt": "forte (poderoso)",
-          "icon": "🦁"
+          "en": "the Lord",
+          "pt": "o Senhor"
         },
         {
-          "en": "everlasting",
-          "pt": "eterno",
-          "icon": "♾️"
-        },
-        {
-          "en": "government",
-          "pt": "governo (principado)",
-          "icon": "🏛️"
-        },
-        {
-          "en": "shoulder",
-          "pt": "ombro",
-          "icon": "💪"
-        },
-        {
-          "en": "justice",
-          "pt": "justiça",
-          "icon": "⚖️"
-        },
-        {
-          "en": "zeal",
-          "pt": "zelo",
-          "icon": "🔥"
+          "en": "God",
+          "pt": "Deus"
         }
       ],
-      "sentences": [
+      "hints": {
+        "attack": "atacar, atacou",
+        "house": "casa",
+        "angel": "anjo",
+        "strike": "ferir, feriu",
+        "death": "morte",
+        "prayer": "oração",
+        "life": "vida"
+      },
+      "tips": [
         {
-          "en": "The government shall be upon his shoulder",
-          "pt": "O principado está sobre os seus ombros"
-        },
-        {
-          "en": "His name is Wonderful",
-          "pt": "O seu nome é Maravilhoso"
-        },
-        {
-          "en": "His name shall be called Wonderful, Counsellor",
-          "alt": [
-            "His name shall be called Wonderful, Counselor"
+          "part": 1,
+          "id": "present-3rd",
+          "grammar": "present-3rd",
+          "title": "He prays, the Lord says: o -s da terceira pessoa",
+          "body": "No presente simples, com he, she ou it, o verbo ganha -s: the king prays, the Lord says, the sun goes back. Com I, you, we e they o verbo fica na forma básica: I pray, they say. A fórmula \"The Lord says\" (assim diz o Senhor) abre a palavra do profeta.",
+          "examples": [
+            {
+              "en": "The Lord says, \"Do not be afraid\"",
+              "pt": "O Senhor diz: \"Não tenha medo\""
+            },
+            {
+              "en": "The king prays to the Lord",
+              "pt": "O rei ora ao Senhor"
+            }
           ],
-          "pt": "O seu nome será Maravilhoso, Conselheiro"
+          "contrast": {
+            "a": "I pray to the Lord",
+            "b": "He prays to the Lord",
+            "note": "I pray (sem -s); he prays (com -s)"
+          }
         },
         {
-          "en": "The mighty God",
-          "pt": "O Deus Forte"
-        },
-        {
-          "en": "He is the everlasting Father",
-          "pt": "Ele é o Pai da Eternidade"
-        },
-        {
-          "en": "The Prince of Peace",
-          "pt": "O Príncipe da Paz"
-        },
-        {
-          "en": "He brings peace",
-          "pt": "Ele traz paz"
-        },
-        {
-          "en": "Of his government and peace there shall be no end",
-          "pt": "Do seu principado e da paz não haverá fim"
-        },
-        {
-          "en": "The Prince of Peace will sit on the throne of David",
-          "pt": "O Príncipe da Paz se assentará sobre o trono de Davi"
-        },
-        {
-          "en": "He will establish it with judgment and with justice",
-          "pt": "Ele o firmará em juízo e em justiça"
-        },
-        {
-          "en": "The zeal of the Lord of hosts will perform this",
-          "pt": "O zelo do Senhor dos Exércitos fará isto"
-        },
-        {
-          "en": "His kingdom will have peace for ever",
-          "alt": [
-            "His kingdom will have peace forever"
+          "part": 2,
+          "id": "how-many",
+          "grammar": "how-many",
+          "title": "How long? How many?: perguntas de quantidade",
+          "body": "How long pergunta por tempo (quanto tempo); how many pergunta por quantidade de coisas que se contam (years, days, people); how much é para o que não se conta (water, bread). A resposta pode ser só o número: How many years? Fifteen years.",
+          "examples": [
+            {
+              "en": "How long will I live?",
+              "pt": "Quanto tempo eu vou viver?"
+            },
+            {
+              "en": "How many years will God add?",
+              "pt": "Quantos anos Deus vai acrescentar?"
+            }
           ],
-          "pt": "O seu reino terá paz para sempre"
+          "contrast": {
+            "a": "How many years?",
+            "b": "How much water?",
+            "note": "many = coisas que se contam; much = o que não se conta"
+          }
+        }
+      ],
+      "vocab": [
+        {
+          "en": "to save",
+          "pt": "salvar",
+          "pos": "verb",
+          "field": "actions",
+          "tier": "core",
+          "part": 1,
+          "icon": "🆘",
+          "example": 2
+        },
+        {
+          "en": "city",
+          "pt": "cidade",
+          "pos": "noun",
+          "field": "places",
+          "tier": "core",
+          "part": 1,
+          "icon": "🏘️",
+          "example": 5
+        },
+        {
+          "en": "letter",
+          "pt": "carta",
+          "pos": "noun",
+          "field": "objects",
+          "tier": "core",
+          "part": 1,
+          "icon": "✉️",
+          "example": 2
+        },
+        {
+          "en": "to pray",
+          "pt": "orar",
+          "ptAlt": [
+            "rezar"
+          ],
+          "pos": "verb",
+          "field": "faith",
+          "tier": "core",
+          "part": 1,
+          "icon": "🧎",
+          "example": 3
+        },
+        {
+          "en": "Lord, save us!",
+          "pt": "Senhor, salve-nos!",
+          "ptAlt": [
+            "Senhor, nos salve!",
+            "Senhor, salva-nos!"
+          ],
+          "pos": "chunk",
+          "field": "speech",
+          "tier": "core",
+          "part": 1,
+          "icon": "🚨",
+          "iconic": true,
+          "example": 4
+        },
+        {
+          "en": "sick",
+          "pt": "doente",
+          "pos": "adj",
+          "field": "body",
+          "tier": "core",
+          "part": 2,
+          "icon": "🤒",
+          "example": 7
+        },
+        {
+          "en": "tear",
+          "pt": "lágrima",
+          "pos": "noun",
+          "field": "body",
+          "tier": "core",
+          "part": 2,
+          "icon": "💦",
+          "example": 9
+        },
+        {
+          "en": "to add",
+          "pt": "acrescentar",
+          "ptAlt": [
+            "adicionar",
+            "somar"
+          ],
+          "pos": "verb",
+          "field": "quantity",
+          "tier": "core",
+          "part": 2,
+          "icon": "➕",
+          "example": 12
+        },
+        {
+          "en": "fifteen",
+          "pt": "quinze",
+          "pos": "num",
+          "field": "quantity",
+          "tier": "core",
+          "part": 2,
+          "icon": "🧮",
+          "example": 11
+        },
+        {
+          "en": "Put your house in order",
+          "pt": "Ponha a sua casa em ordem",
+          "ptAlt": [
+            "Põe em ordem a tua casa",
+            "Coloque a sua casa em ordem"
+          ],
+          "alt": [
+            "Set your house in order"
+          ],
+          "pos": "chunk",
+          "field": "speech",
+          "tier": "core",
+          "part": 2,
+          "icon": "🏡",
+          "iconic": true,
+          "example": 8
+        }
+      ],
+      "beats": [
+        {
+          "order": 1,
+          "en": "The king of Assyria attacked the cities of Judah",
+          "pt": "O rei da Assíria atacou as cidades de Judá",
+          "altPt": [
+            "Senaqueribe, rei da Assíria, subiu contra todas as cidades fortes de Judá"
+          ],
+          "kind": "statement",
+          "fact": true
+        },
+        {
+          "order": 2,
+          "en": "His letter said, \"Your God cannot save you\"",
+          "pt": "A carta dele dizia: \"O seu Deus não pode salvar vocês\"",
+          "altPt": [
+            "A carta dele dizia: \"O teu Deus não pode te salvar\""
+          ],
+          "kind": "negative",
+          "fact": true
+        },
+        {
+          "order": 3,
+          "en": "King Hezekiah put the letter before the Lord and prayed",
+          "pt": "O rei Ezequias pôs a carta diante do Senhor e orou",
+          "altPt": [
+            "O rei Ezequias estendeu a carta perante o Senhor e orou"
+          ],
+          "kind": "statement",
+          "fact": true
+        },
+        {
+          "order": 4,
+          "en": "He prayed, \"Lord, save us! You alone are God\"",
+          "pt": "Ele orou: \"Senhor, salve-nos! Só você é Deus\"",
+          "altPt": [
+            "Ele orou: \"Senhor, salva-nos! Só tu és Deus\""
+          ],
+          "kind": "quote",
+          "fact": true,
+          "iconic": true,
+          "speaker": "ezequias"
+        },
+        {
+          "order": 5,
+          "en": "The Lord says, \"He will not come into this city\"",
+          "pt": "O Senhor diz: \"Ele não entrará nesta cidade\"",
+          "altPt": [
+            "Assim diz o Senhor: \"Ele não entrará nesta cidade\""
+          ],
+          "kind": "negative",
+          "fact": true,
+          "speaker": "voice",
+          "gap": {
+            "word": "says",
+            "kind": "grammar",
+            "options": [
+              "says",
+              "say",
+              "said"
+            ]
+          },
+          "grammar": "present-3rd"
+        },
+        {
+          "order": 6,
+          "en": "That night the angel of the Lord struck the army",
+          "pt": "Naquela noite o anjo do Senhor feriu o exército",
+          "altPt": [
+            "Naquela noite o anjo do Senhor atingiu o exército"
+          ],
+          "kind": "statement",
+          "fact": true
+        },
+        {
+          "order": 7,
+          "en": "Was Hezekiah sick? Yes, he was near death",
+          "pt": "Ezequias estava doente? Sim, ele estava perto da morte",
+          "kind": "question",
+          "fact": true
+        },
+        {
+          "order": 8,
+          "en": "The Lord said, \"Put your house in order\"",
+          "pt": "O Senhor disse: \"Ponha a sua casa em ordem\"",
+          "alt": [
+            "The Lord said, \"Set your house in order\""
+          ],
+          "altPt": [
+            "O Senhor disse: \"Põe em ordem a tua casa\""
+          ],
+          "kind": "quote",
+          "fact": true,
+          "iconic": true,
+          "speaker": "voice"
+        },
+        {
+          "order": 9,
+          "en": "The sick king prayed and cried with many tears",
+          "pt": "O rei doente orou e chorou com muitas lágrimas",
+          "altPt": [
+            "O rei doente orou e chorou muito"
+          ],
+          "kind": "statement",
+          "fact": true,
+          "gap": {
+            "word": "tears",
+            "kind": "lexical",
+            "options": [
+              "tears",
+              "letters",
+              "cities"
+            ]
+          }
+        },
+        {
+          "order": 10,
+          "en": "He said, \"I have heard your prayer. I have seen your tears\"",
+          "pt": "Ele disse: \"Eu ouvi a sua oração. Eu vi as suas lágrimas\"",
+          "altPt": [
+            "Ele disse: \"Ouvi a tua oração e vi as tuas lágrimas\""
+          ],
+          "kind": "quote",
+          "fact": true,
+          "iconic": true,
+          "prod": false,
+          "speaker": "voice"
+        },
+        {
+          "order": 11,
+          "en": "How many years will God add? Fifteen years",
+          "pt": "Quantos anos Deus vai acrescentar? Quinze anos",
+          "kind": "question",
+          "fact": true,
+          "gap": {
+            "word": "many",
+            "kind": "grammar",
+            "options": [
+              "many",
+              "much",
+              "few"
+            ]
+          },
+          "grammar": "how-many"
+        },
+        {
+          "order": 12,
+          "en": "God added fifteen years to his life",
+          "pt": "Deus acrescentou quinze anos à vida dele",
+          "altPt": [
+            "Deus acrescentou aos dias dele quinze anos"
+          ],
+          "kind": "statement",
+          "fact": true
+        }
+      ],
+      "contrast": [
+        {
+          "a": "The Lord says, \"He will not come into this city\"",
+          "b": "The Lord says, \"He will come into this city\"",
+          "note": "will not = negativa; o Senhor garante que o rei da Assíria não entra"
+        },
+        {
+          "a": "How many years will God add? Fifteen years",
+          "b": "How long will the king live? Fifteen more years",
+          "note": "how many = quantos (anos); how long = quanto tempo"
         }
       ],
       "verse": {
-        "text": "And his name shall be called Wonderful, Counsellor, The mighty God, The everlasting Father, The Prince of Peace.",
-        "pt": "E o seu nome será Maravilhoso, Conselheiro, Deus Forte, Pai da Eternidade, Príncipe da Paz.",
-        "ref": "Isaías 9:6",
-        "blank": "Peace",
-        "options": [
-          "Peace",
-          "Rain",
-          "Gold",
-          "Light"
+        "text": "I have heard your prayer. I have seen your tears. I will add fifteen years to your life.",
+        "classic": "I have heard thy prayer, I have seen thy tears: behold, I will add unto thy days fifteen years.",
+        "pt": "Eu ouvi a sua oração. Eu vi as suas lágrimas. Vou acrescentar quinze anos à sua vida.",
+        "classicPt": "Ouvi a tua oração e vi as tuas lágrimas; eis que acrescentarei aos teus dias quinze anos.",
+        "ref": "Isaías 38:5",
+        "blanks": [
+          {
+            "word": "tears",
+            "options": [
+              "tears",
+              "eyes",
+              "words",
+              "hands"
+            ]
+          },
+          {
+            "word": "prayer",
+            "options": [
+              "prayer",
+              "letter",
+              "song",
+              "city"
+            ]
+          },
+          {
+            "word": "fifteen",
+            "options": [
+              "fifteen",
+              "forty",
+              "seven",
+              "twelve"
+            ]
+          }
         ]
       },
       "reading": {
-        "text": "Isaiah spoke of a child that is born to us. He will sit on the throne of David. Of his peace there shall be no end. The zeal of the Lord of hosts will perform this.",
-        "pt": "Isaías falou de um menino que nos nasceu. Ele se assentará sobre o trono de Davi. Da sua paz não haverá fim. O zelo do Senhor dos Exércitos fará isto.",
-        "q": "On whose throne will the child sit?",
-        "options": [
-          "The throne of David",
-          "The throne of Pharaoh",
-          "The throne of Goliath"
-        ],
-        "answer": "The throne of David"
+        "text": "The army of Assyria came against Judah, and a letter came to King Hezekiah: \"Your God cannot save you.\" Hezekiah put the letter before the Lord and prayed, \"Lord, save us!\" The Lord said, \"He will not come into this city,\" and that night the angel of the Lord struck the army. Later the king was very sick, but he prayed with many tears. So God added fifteen years to his life.",
+        "pt": "O exército da Assíria veio contra Judá, e uma carta chegou ao rei Ezequias: \"O seu Deus não pode salvar vocês.\" Ezequias pôs a carta diante do Senhor e orou: \"Senhor, salve-nos!\" O Senhor disse: \"Ele não entrará nesta cidade\", e naquela noite o anjo do Senhor feriu o exército. Mais tarde o rei ficou muito doente, mas orou com muitas lágrimas. Então Deus acrescentou quinze anos à vida dele.",
+        "questions": [
+          {
+            "kind": "literal",
+            "q": "What did Hezekiah do with the letter?",
+            "qPt": "O que Ezequias fez com a carta?",
+            "options": [
+              "He took it to the Lord's house and prayed there",
+              "He sent it back to the king of Assyria",
+              "He read it to all the people of the city"
+            ],
+            "answer": "He took it to the Lord's house and prayed there"
+          },
+          {
+            "kind": "inference",
+            "q": "Why did the king of Assyria go home without the city?",
+            "qPt": "Por que o rei da Assíria foi embora sem a cidade?",
+            "options": [
+              "Because the Lord struck his army at night",
+              "Because Hezekiah was sick and near death",
+              "Because his letter never came to the king"
+            ],
+            "answer": "Because the Lord struck his army at night",
+            "explain": "O anjo do Senhor feriu o exército assírio durante a noite, e Senaqueribe voltou para Nínive (Isaías 37:36-37)."
+          }
+        ]
       },
-      "dialogue": {
-        "line": "Who is coming?",
-        "pt": "Quem está vindo?",
-        "options": [
-          "The Prince of Peace!",
-          "The king of Egypt!",
-          "A big river!"
-        ],
-        "answer": "The Prince of Peace!",
-        "answerPt": "O Príncipe da Paz!"
+      "conversation": {
+        "with": "ezequias",
+        "turns": [
+          {
+            "who": "ezequias",
+            "en": "Isaiah, I'm very sick. What does the Lord say?",
+            "pt": "Isaías, eu estou muito doente. O que o Senhor diz?",
+            "mood": "triste"
+          },
+          {
+            "who": "you",
+            "options": [
+              "Put your house in order, my king.",
+              "Put the letter before the Lord, my king.",
+              "Put your army at the city door, my king."
+            ],
+            "answer": "Put your house in order, my king.",
+            "pt": "Ponha a sua casa em ordem, meu rei.",
+            "intent": "Transmita a palavra do Senhor ao rei"
+          },
+          {
+            "who": "ezequias",
+            "en": "I prayed with many tears. Did the Lord hear me?",
+            "pt": "Eu orei com muitas lágrimas. O Senhor me ouviu?",
+            "mood": "sussurrando"
+          },
+          {
+            "who": "you",
+            "options": [
+              "Yes. He will add fifteen years to your life.",
+              "Yes. He will add ten steps to your house.",
+              "No. He will add fifteen days to your life."
+            ],
+            "answer": "Yes. He will add fifteen years to your life.",
+            "pt": "Sim. Ele vai acrescentar quinze anos à sua vida.",
+            "intent": "Dê a resposta do Senhor",
+            "speak": true
+          }
+        ]
       },
-      "quiz": {
-        "q": "What shall be upon the shoulder of the child?",
-        "options": [
-          "The government",
-          "A coat of many colors",
-          "A sling and five stones"
-        ],
-        "answer": "The government",
-        "explain": "O principado está sobre os seus ombros (Isaías 9:6)."
+      "fact": {
+        "pt": "Como sinal da cura, a sombra no relógio de sol de Acaz voltou dez degraus (Isaías 38:8). Depois de curado, Ezequias escreveu um cântico de gratidão (Isaías 38:9-20).",
+        "ref": "Isaías 38:8"
       }
     }
   ]
