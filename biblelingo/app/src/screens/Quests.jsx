@@ -1,191 +1,209 @@
-// Missões: meta diária (anel), missões do dia, semana de fidelidade e versículo bilíngue
-// Porta de renderQuests/renderWeek (screens.js/app.js) + renderDailyCard (features.js).
-import { useMemo, useState } from "react";
+// Missões (VISUAL_SPEC 6.6): banner roxo com personagem e baú, missões diárias com "FALTAM N HORAS" e baús,
+// missão mensal com medalha, card de ofensiva com a semana de chamas e versículo do dia em Pergaminho.
+// A meta diária (anel + engrenagem) saiu daqui: vive em Configurações.
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "motion/react";
 import { useAppState } from "../core/useStore.js";
 import { state, save } from "../core/store.js";
-import { ensureDaily, QUESTS, DAILY_GOALS, startErrorPractice } from "../core/session.js";
-import { verseOfDay, allVocab } from "../core/content.js";
+import { ensureDaily, QUESTS, startLesson } from "../core/session.js";
+import { verseOfDay, COURSE, UNIT_CAST, CHARACTERS, currentLessonId, unitSteps } from "../core/content.js";
 import { speak } from "../core/audio.js";
-import { today, dateKey, normalize } from "../core/util.js";
-import { toast, sfx } from "../core/events.js";
+import { today } from "../core/util.js";
+import { SPRING, STAGGER, list, item } from "../core/motion.js";
+import { sfx } from "../core/sfx.js";
+import { haptic } from "../core/haptics.js";
 import Icon from "../components/Icon.jsx";
+import { Card, CharacterStage, Chest, QuestRow, ProgressBar, Medal, Flame, StreakWeek, Sheet, EmptyState, Button3D } from "../components/ui/index.js";
+import { StreakCalendar } from "./Profile.jsx";
 
-const cardIn = (i) => ({
-  initial: { opacity: 0, y: 14 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.3, delay: i * 0.06, ease: "easeOut" },
-});
+const QUEST_ICON = { xp: "bolt", lessons: "book", perfect: "star", combo: "flame" };
+const MESES = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+const MONTHLY_XP = 300;
 
-// ---------- Meta diária + missões (renderDailyCard) ----------
+function currentUnit() {
+  const cur = currentLessonId();
+  return COURSE.find((u) => unitSteps(u).some((s) => s.id === cur)) || COURSE[COURSE.length - 1];
+}
+
+// Horas até a meia-noite local (as missões diárias renovam na virada do dia)
+function hoursLeft() {
+  const now = new Date();
+  const mid = new Date(now);
+  mid.setHours(24, 0, 0, 0);
+  return Math.max(1, Math.ceil((mid - now) / 3600000));
+}
+function useHoursLeft() {
+  const [h, setH] = useState(hoursLeft);
+  useEffect(() => {
+    const id = setInterval(() => setH(hoursLeft()), 60000);
+    return () => clearInterval(id);
+  }, []);
+  return h;
+}
+
+function SectionTitle({ children, aside }) {
+  return (
+    <div className="mb-3 flex items-baseline justify-between gap-3">
+      <h3 className="text-heading text-ink">{children}</h3>
+      {aside && <span className="shrink-0 text-caption uppercase tracking-[.8px] text-ink-soft">{aside}</span>}
+    </div>
+  );
+}
+
+// ---------- Banner ----------
+function Banner({ unit }) {
+  const hero = useMemo(() => {
+    const cast = (UNIT_CAST[unit.id] || []).filter((k) => CHARACTERS[k]);
+    const key = cast.length ? cast[Math.floor(Math.random() * cast.length)] : Object.keys(CHARACTERS)[0];
+    return { key, ...CHARACTERS[key] };
+  }, [unit.id]);
+  return (
+    <motion.div variants={item(SPRING.settle, 12)} className="relative mt-9 h-[120px] w-full rounded-lg text-white"
+      style={{ background: "linear-gradient(135deg, #ce82ff, #a560e8)" }}>
+      <div className="absolute inset-y-0 left-4 right-[176px] flex flex-col justify-center">
+        <h2 className="text-[22px] font-extrabold leading-7">Missões</h2>
+        <p className="mt-1 text-secondary leading-5 text-white/85" style={{ textWrap: "balance" }}>Complete missões e ganhe recompensas</p>
+      </div>
+      <div className="absolute bottom-0 right-[72px]"><CharacterStage ch={hero} variant="header" /></div>
+      <span className="pointer-events-none absolute bottom-3 right-3" aria-hidden><Chest size={56} state="ready" /></span>
+    </motion.div>
+  );
+}
+
+// ---------- Missões diárias ----------
 function DailyCard() {
   const d = ensureDaily();
   const goal = state.dailyGoal;
-  const pct = Math.min(100, Math.round((d.xp / goal) * 100));
-  const done = d.xp >= goal;
-
-  const cycleGoal = () => {
-    const i = DAILY_GOALS.indexOf(state.dailyGoal);
-    state.dailyGoal = DAILY_GOALS[(i + 1) % DAILY_GOALS.length];
+  const hours = useHoursLeft();
+  if (!Array.isArray(d.chests)) d.chests = [];
+  const open = (q) => {
+    d.chests.push(q.id);
+    haptic("mission");
     save();
-    toast(`🎯 Meta diária: ${state.dailyGoal} XP`);
   };
-
   return (
-    <motion.div className="card p-4" {...cardIn(0)}>
-      <h3 className="flex items-center justify-between font-display text-lg font-extrabold">
-        <span>🎯 Meta diária</span>
-        <button onClick={cycleGoal} title="Alterar meta" aria-label="Alterar meta diária"
-          className="rounded-lg px-1.5 py-0.5 text-base transition-transform hover:rotate-45">⚙️</button>
-      </h3>
-      <div className="mt-2 flex items-center gap-3.5">
-        <div className="flex h-[58px] w-[58px] flex-none items-center justify-center rounded-full"
-          style={{ background: `conic-gradient(var(--color-brand-bright) ${pct}%, var(--color-track) 0)` }}
-          role="img" aria-label={`Progresso da meta: ${pct}%`}>
-          <span className="flex h-[44px] w-[44px] items-center justify-center rounded-full bg-card text-[13px] font-black text-brand">
-            {done ? "✓" : `${pct}%`}
-          </span>
+    <motion.div variants={item(SPRING.settle, 12)}>
+      <Card>
+        <SectionTitle aside={`Faltam ${hours} ${hours === 1 ? "hora" : "horas"}`}>Missões diárias</SectionTitle>
+        <div className="flex flex-col divide-y-2 divide-line">
+          {QUESTS.map((q, i) => {
+            const target = q.target(goal);
+            const value = Math.min(d[q.key] || 0, target);
+            const claimed = d.claimed.includes(q.id);
+            const opened = d.chests.includes(q.id);
+            const st = claimed ? (opened ? "claimed" : "ready") : "progress";
+            return (
+              <QuestRow key={q.id} icon={QUEST_ICON[q.id] || "bolt"} title={q.label === "Ganhe XP" ? `Ganhe ${goal} XP` : q.label}
+                value={value} target={target} reward={q.reward} state={st} onClaim={() => open(q)} delay={i * STAGGER.week} className="py-1.5 first:pt-0 last:pb-0" />
+            );
+          })}
         </div>
-        <div>
-          <p className="font-bold"><b className="font-black">{d.xp}</b> / {goal} XP hoje</p>
-          <p className="text-sm font-bold text-ink-soft">{done ? "Meta batida! Continue firme." : `Faltam ${goal - d.xp} XP`}</p>
-        </div>
-      </div>
-
-      <div className="mt-3 flex flex-col gap-2">
-        {QUESTS.map((q) => {
-          const target = q.target(goal);
-          const val = Math.min(d[q.key] || 0, target);
-          const ok = d.claimed.includes(q.id);
-          return (
-            <div key={q.id} className="flex items-center gap-2.5">
-              <span className="w-[26px] flex-none text-center text-xl">{q.icon}</span>
-              <div className="min-w-0 flex-1">
-                <div className="text-[13px] font-extrabold">{q.label === "Ganhe XP" ? `Ganhe ${goal} XP` : q.label}</div>
-                <div className="mt-0.5 h-2 overflow-hidden rounded-md bg-track">
-                  <div className={`h-full rounded-md transition-[width] duration-500 ${ok ? "bg-brand-bright" : "bg-gradient-to-b from-[#ffd166] to-gold"}`}
-                    style={{ width: `${Math.round((val / target) * 100)}%` }} />
-                </div>
-              </div>
-              <span className={`min-w-[26px] text-right text-xs font-black ${ok ? "text-brand" : "text-gold-fg"}`}>
-                {ok ? "✓" : `+${q.reward}`}
-              </span>
-            </div>
-          );
-        })}
-      </div>
+      </Card>
     </motion.div>
   );
 }
 
-// ---------- Semana de fidelidade (renderWeek) ----------
-function WeekCard({ streak }) {
-  const labels = ["S", "T", "Q", "Q", "S", "S", "D"];
+// ---------- Missão mensal ----------
+function MonthlyCard({ unit }) {
   const now = new Date();
-  const monday = new Date(now);
-  monday.setDate(now.getDate() - ((now.getDay() + 6) % 7));
-  const hoje = today();
-  let feitos = 0;
-  const days = labels.map((lb, i) => {
-    const dt = new Date(monday);
-    dt.setDate(monday.getDate() + i);
-    const iso = dateKey(dt);
-    const studied = (state.days || {})[iso] > 0;
-    if (studied) feitos++;
-    const isToday = iso === hoje;
-    const future = iso > hoje;
-    return { lb, iso, studied, isToday, future, mark: studied ? "✓" : isToday ? "★" : future ? "🔒" : "·" };
-  });
-
+  const month = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+  const xp = Object.entries(state.days || {}).filter(([k]) => k.startsWith(month)).reduce((s, [, v]) => s + (Number(v) || 0), 0);
+  const last = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+  const daysLeft = last - now.getDate() + 1;
+  const value = Math.min(xp, MONTHLY_XP);
   return (
-    <motion.div className="card p-4" {...cardIn(1)}>
-      <h3 className="flex items-center justify-between font-display text-lg font-extrabold">
-        <span>🔥 Meta semanal de fidelidade</span>
-        <b className="text-sm text-ink-soft">{feitos} de 7</b>
-      </h3>
-      <div className="mt-3 flex justify-between">
-        {days.map((d, i) => (
-          <span key={i} className="flex flex-col items-center gap-1">
-            <i className={`flex h-8 w-8 items-center justify-center rounded-full text-sm font-black not-italic ${
-              d.studied ? "bg-brand-bright text-white shadow-[0_2px_0_var(--color-brand-shadow)]"
-              : d.isToday ? "animate-pulse bg-gold text-white shadow-[0_2px_0_#c9920c]"
-              : `bg-track text-ink-soft ${d.future ? "opacity-55" : ""}`}`}>
-              {d.mark}
-            </i>
-            <span className={`text-[11px] font-black ${d.isToday ? "text-gold-fg" : "text-ink-soft"}`}>{d.lb}</span>
-          </span>
-        ))}
-      </div>
-      <p className="mt-2.5 text-sm font-bold text-ink-soft">{streak} dias de sequência. Continue firme!</p>
+    <motion.div variants={item(SPRING.settle, 12)}>
+      <Card>
+        <SectionTitle aside={`Faltam ${daysLeft} ${daysLeft === 1 ? "dia" : "dias"}`}>Missão mensal</SectionTitle>
+        <div className="flex items-center gap-4">
+          <Medal unitId={unit.id} size={64} />
+          <div className="min-w-0 flex-1">
+            <div className="mb-2 text-body font-bold text-ink">{MESES[now.getMonth()]}: ganhe {MONTHLY_XP} XP</div>
+            <ProgressBar variant="labelled" value={value} max={MONTHLY_XP} label={`${value}/${MONTHLY_XP}`} done={xp >= MONTHLY_XP} delay={0.3} />
+          </div>
+        </div>
+      </Card>
     </motion.div>
   );
 }
 
-// ---------- Versículo bilíngue do dia ----------
+// ---------- Ofensiva ----------
+function StreakCard({ streak, onCalendar }) {
+  const lit = streak > 0;
+  const glow = lit && state.lastStudy === today();
+  return (
+    <motion.div variants={item(SPRING.settle, 12)}>
+      <Card>
+        <SectionTitle>Ofensiva</SectionTitle>
+        <div className="flex items-center gap-3">
+          <Flame size={48} lit={lit} glow={glow} />
+          <span className={`text-display-lg tabular-nums ${lit ? "text-orange-text" : "text-disabled"}`}>{streak} {streak === 1 ? "dia" : "dias"}</span>
+        </div>
+        <StreakWeek days={state.days || {}} className="mt-4" />
+        <button type="button" onClick={() => { sfx("tap"); onCalendar(); }}
+          className="mt-4 text-caption uppercase tracking-[.8px] text-blue-text">Ver calendário</button>
+      </Card>
+    </motion.div>
+  );
+}
+
+// ---------- Versículo do dia ----------
 function VerseCard() {
   const [open, setOpen] = useState(false);
   const v = useMemo(() => verseOfDay(), []);
-  const hints = useMemo(() => {
-    const pool = allVocab();
-    return v.text.replace(/[.,;:!?"']/g, "").split(" ")
-      .map((w) => pool.find((p) => normalize(p.en.replace(/^to /, "")) === normalize(w)))
-      .filter((p, i, arr) => p && arr.indexOf(p) === i).slice(0, 3);
-  }, [v]);
-
   return (
-    <motion.div className="card border-[#f3dc9a] bg-gold-soft p-4 shadow-[0_3px_0_#f3dc9a] dark:border-[#4a3c14] dark:shadow-[0_3px_0_#4a3c14]" {...cardIn(2)}>
-      <h3 className="flex items-center justify-between gap-2 font-display text-lg font-extrabold text-gold-fg">
-        <span>📖 Versículo bilíngue do dia</span>
-        <button onClick={() => speak(v.text)} aria-label="Ouvir em inglês"
-          className="flex h-9 w-9 flex-none items-center justify-center rounded-full border-2 border-[#f3dc9a] bg-card text-gold-fg dark:border-[#4a3c14]">
-          <Icon name="speaker" />
-        </button>
-      </h3>
-      <p className="mt-2 italic leading-relaxed">“{v.text}”</p>
-      <div className="mt-1 flex items-center justify-between gap-2">
-        <span className="text-[12.5px] font-extrabold text-gold-fg">{v.ref} (KJV)</span>
-        <button className="text-[12.5px] font-black text-gold-fg" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
-          {open ? "Ocultar tradução ▴" : "Ver tradução ▾"}
-        </button>
-      </div>
-      {open && (
-        <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} className="overflow-hidden">
-          <p className="mt-2 text-sm italic text-ink-soft">“{v.pt}”</p>
-          {hints.length > 0 && (
-            <p className="mt-1 text-[12.5px] font-bold text-ink-soft">
-              Dica: {hints.map((p, i) => (
-                <span key={p.en}>{i > 0 && " · "}<b>{p.en}</b> = {p.pt}</span>
-              ))}
-            </p>
-          )}
-        </motion.div>
-      )}
+    <motion.div variants={item(SPRING.settle, 12)}>
+      <Card variant="parchment">
+        <div className="mb-2 flex items-center justify-between gap-3">
+          <h3 className="text-heading text-parchment-text">Versículo do dia</h3>
+          <motion.button type="button" onClick={() => speak(v.text)} aria-label="Ouvir em inglês"
+            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-accent text-accent-text"
+            style={{ boxShadow: "0 4px 0 var(--color-accent-shadow)" }} whileTap={{ y: 4, boxShadow: "0 0 0 var(--color-accent-shadow)" }} transition={SPRING.snap}>
+            <Icon name="speaker" size={24} tone="mono" />
+          </motion.button>
+        </div>
+        <p className="text-body text-ink">“{v.text}”</p>
+        <div className="mt-2 flex items-center justify-between gap-3">
+          <span className="text-caption uppercase tracking-[.8px] text-parchment-text">{v.ref}</span>
+          <button type="button" aria-expanded={open} onClick={() => { sfx("tap"); setOpen((o) => !o); }}
+            className="text-caption uppercase tracking-[.8px] text-blue-text">{open ? "Ocultar tradução" : "Ver tradução"}</button>
+        </div>
+        {open && (
+          <motion.p initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} className="mt-2 overflow-hidden text-secondary text-ink-soft">“{v.pt}”</motion.p>
+        )}
+      </Card>
     </motion.div>
   );
 }
 
 export default function Quests() {
   const app = useAppState();
-  const d = ensureDaily();
-  const nErr = Object.keys(app.errors || {}).length;
+  ensureDaily();
+  const unit = currentUnit();
+  const [calendar, setCalendar] = useState(false);
+  const started = Object.keys(app.completed || {}).length > 0 || (app.xp || 0) > 0;
+  const begin = () => { const id = currentLessonId(); if (id) startLesson(id); };
 
   return (
-    <div className="mx-auto flex w-full max-w-[560px] flex-col gap-3 px-4 pb-6 pt-4">
-      <h2 className="mt-1.5 font-display text-[26px] font-extrabold">Missões</h2>
-      <p className="-mt-2.5 text-sm font-bold text-ink-soft">
-        {d.xp >= app.dailyGoal ? "Meta de hoje batida. Que tal mais uma etapa?" : `${d.xp} de ${app.dailyGoal} XP hoje`}
-      </p>
+    <motion.div className="mx-auto flex w-full max-w-[560px] flex-col gap-4 px-4 pb-6 pt-4" variants={list(0.08)} initial="hidden" animate="show">
+      <Banner unit={unit} />
       <DailyCard />
-      <WeekCard streak={app.streak} />
-      <VerseCard />
-      {nErr > 0 && (
-        <motion.button {...cardIn(3)} onClick={() => { sfx("tap"); startErrorPractice(); }}
-          className="card flex items-center gap-3 p-4 text-left transition-colors hover:bg-hover">
-          <span className="text-3xl">🩹</span>
-          <span><b className="block font-display font-extrabold">Praticar erros</b>
-          <small className="text-sm font-bold text-ink-soft">{nErr} palavra(s) para acertar</small></span>
-        </motion.button>
+      <MonthlyCard unit={unit} />
+      {started ? (
+        <StreakCard streak={app.streak || 0} onCalendar={() => setCalendar(true)} />
+      ) : (
+        <motion.div variants={item(SPRING.settle, 12)}>
+          <Card padding="none">
+            <EmptyState icon="flame-off" title="Sua ofensiva começa hoje" text="Faça sua primeira lição para acender a chama" action={{ label: "Começar", onClick: begin }} />
+          </Card>
+        </motion.div>
       )}
-    </div>
+      <VerseCard />
+
+      <Sheet open={calendar} onClose={() => setCalendar(false)} title="Calendário da ofensiva" closeButton
+        footer={<Button3D variant="primary" block onClick={() => setCalendar(false)}>Fechar</Button3D>}>
+        <StreakCalendar />
+      </Sheet>
+    </motion.div>
   );
 }
