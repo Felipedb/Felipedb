@@ -1,133 +1,188 @@
-// Formatos de escolha (imagem, significado, escuta, versículo, leitura, diálogo, quiz, lacuna).
-// Um único componente cobre todos: o que muda é o enunciado, a mídia e o formato das opções.
-import { useEffect } from "react";
-import { motion } from "motion/react";
-import { session, setAnswer, check } from "../../core/session.js";
+// Formatos de escolha (VISUAL_SPEC 6.3): image-choice, choice-en-pt, choice-pt-en, listen, listen-choice, read,
+// dialogue, quiz, verse e missing-word. Um só componente: muda o enunciado, a mídia e o formato das opções.
+// O estado da sessão chega por props (answer, checked, fb) para o exercício que sai na transição ficar congelado.
+import { useMemo, useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { session, setAnswer } from "../../core/session.js";
 import { useSessionVersion } from "../../core/useSession.js";
-import { normalize, blankRegex } from "../../core/util.js";
+import { blankRegex } from "../../core/util.js";
 import { speak } from "../../core/audio.js";
-import AudioButton, { WaveButton, SlowButton } from "./AudioButton.jsx";
-import CharacterBubble from "./CharacterBubble.jsx";
+import { SPRING, SHAKE, PULSE } from "../../core/motion.js";
+import { sfx } from "../../core/sfx.js";
+import { haptic } from "../../core/haptics.js";
+import Option, { OptionGroup, ImageCard } from "../ui/Option.jsx";
+import Card from "../ui/Card.jsx";
+import { Gap } from "../ui/TextCard.jsx";
+import Button3D from "../ui/Button3D.jsx";
+import CharacterBubble, { useExerciseChar } from "./CharacterBubble.jsx";
 import { Sayable } from "./Sayable.jsx";
+import { TITLES, Title, useAutoplay, optionState } from "./shared.jsx";
 
-const TITLES = {
-  "image-choice": "Selecione a palavra correta:",
-  "choice-en-pt": "O que significa esta palavra?",
-  "choice-pt-en": null,
-  "listen": "Toque no que escutar:",
-  "listen-choice": "Ouça e escolha a tradução:",
-  "read": "Leia e responda:",
-  "dialogue": "Complete a conversa:",
-  "quiz": "Responda sobre a história:",
-  "verse": "Complete o versículo:",
-  "missing-word": "Selecione a palavra que falta:",
-};
+// Formatos em que tocar a opção (em inglês) a fala
+const SPEAK_OPTION = ["choice-pt-en", "listen", "verse", "missing-word", "read", "dialogue", "quiz"];
+// Uma coluna (358) para frases e opções longas; duas (174) para palavras soltas
+const ONE_COL = ["choice-en-pt", "listen-choice", "read", "dialogue", "quiz", "missing-word"];
 
 function gapParts(text, blank) {
   const m = blankRegex(blank).exec(text);
   if (!m) return null;
-  return [text.slice(0, m.index), text.slice(m.index + m[0].length)];
+  return [text.slice(0, m.index).trim(), text.slice(m.index + m[0].length).trim()];
 }
 
-export default function ChoiceExercise({ ex }) {
-  useSessionVersion();
-  const t = ex.type;
-  const autoplayText = t === "listen" ? ex.word.en : ["listen-choice"].includes(t) ? ex.sentence.en : t === "dialogue" ? ex.dialogue.line : t === "quiz" ? ex.quiz.q : null;
-  useEffect(() => { if (autoplayText) speak(autoplayText); }, []); // eslint-disable-line
-
-  const cols = ["choice-en-pt", "listen-choice", "read", "dialogue", "quiz"].includes(t) ? 1 : 2;
-  const opts = ex.options.map((o) => (typeof o === "string" ? { value: o, label: o } : { value: o.pt, label: o.pt, icon: o.icon }));
-  const gap = t === "verse" ? gapParts(ex.verse.text, ex.verse.blank) : t === "missing-word" ? gapParts(ex.sentence.en, ex.blank) : null;
-  const chosen = session.answer;
-  const checked = session.checked;
-
+// Frase com lacuna: Sayable antes e depois, Gap no meio (preenchida pela opção escolhida)
+function GapSentence({ parts, value, blank, state, chosen, ch }) {
   return (
-    <div>
-      <h2 className="font-display mb-4 text-2xl font-extrabold">
-        {t === "choice-pt-en" ? <>Qual destas significa “{ex.word.pt}”?</> : TITLES[t]}
-      </h2>
-
-      {/* Enunciado / mídia */}
-      {(t === "image-choice" || t === "choice-en-pt") && (
-        <CharacterBubble big>
-          <AudioButton text={ex.word.en} />
-          <Sayable text={ex.word.en} className="text-xl font-bold" />
-        </CharacterBubble>
-      )}
-      {t === "choice-pt-en" && (
-        <CharacterBubble big><span className="text-xl font-bold">{ex.word.icon || ""} {ex.word.pt}</span></CharacterBubble>
-      )}
-      {(t === "listen" || t === "listen-choice") && (
-        <CharacterBubble big under={<SlowButton text={t === "listen" ? ex.word.en : ex.sentence.en} />}>
-          <WaveButton text={t === "listen" ? ex.word.en : ex.sentence.en} />
-        </CharacterBubble>
-      )}
-      {t === "read" && (
-        <div className="card mb-3 p-4">
-          <div className="text-lg leading-relaxed"><Sayable text={ex.reading.text} /></div>
-          <ReadingPt pt={ex.reading.pt} />
-          <div className="mt-3 border-t-2 border-line pt-3 font-bold"><Sayable text={ex.reading.q} /></div>
-        </div>
-      )}
-      {t === "dialogue" && (
-        <CharacterBubble big>
-          <div>
-            <div className="flex items-center gap-2"><AudioButton text={ex.dialogue.line} /><Sayable text={ex.dialogue.line} className="text-lg font-bold" /></div>
-            <div className="mt-1 text-sm text-ink-soft">{ex.dialogue.pt}</div>
-          </div>
-        </CharacterBubble>
-      )}
-      {t === "quiz" && (
-        <CharacterBubble big>
-          <div className="flex items-center gap-2"><AudioButton text={ex.quiz.q} /><Sayable text={ex.quiz.q} className="text-lg font-bold" /></div>
-        </CharacterBubble>
-      )}
-      {(t === "verse" || t === "missing-word") && gap && (
-        <div className="card mb-1 p-4 text-lg leading-relaxed">
-          <Sayable text={gap[0]} />
-          <span className="mx-1 inline-block min-w-16 rounded-lg border-b-4 border-line bg-cream px-2 text-center font-bold text-sky-fg">
-            {checked || chosen ? chosen : " "}
-          </span>
-          <Sayable text={gap[1]} />
-        </div>
-      )}
-      {t === "verse" && <div className="mb-3 text-sm italic text-ink-soft">{ex.verse.ref} — “{ex.verse.pt}”</div>}
-      {t === "missing-word" && <div className="mb-3 text-sm italic text-ink-soft">{ex.sentence.pt}</div>}
-
-      {/* Opções */}
-      <div className={`grid gap-2.5 ${cols === 2 ? "grid-cols-2" : "grid-cols-1"}`}>
-        {opts.map((o, i) => {
-          const isChosen = chosen === o.value;
-          const isCorrect = checked && normalize(o.value) === normalize(String(ex.correct));
-          const isWrong = checked && isChosen && !isCorrect;
-          return (
-            <motion.button key={o.value + i} whileTap={{ scale: 0.97 }} data-opt={i + 1} data-value={o.value}
-              onClick={() => {
-                if (session.checked) return;
-                setAnswer(o.value);
-                if (t === "verse" || t === "missing-word" || t === "read" || t === "dialogue" || t === "quiz" || t === "choice-pt-en" || t === "listen") speak(o.value);
-              }}
-              className={`rounded-2xl border-2 border-b-4 px-4 font-bold transition-colors ${
-                t === "image-choice" ? "flex flex-col items-center justify-center gap-2 py-5 text-center" : "py-3.5 text-left"} ${
-                isCorrect ? "border-ok-line bg-ok-bg text-brand" :
-                isWrong ? "animate-[shake_0.3s] border-bad-line bg-bad-bg text-bad-fg" :
-                isChosen ? "border-sky-line bg-sky-soft text-sky-fg" :
-                checked ? "border-line bg-card opacity-50" : "border-line bg-card hover:bg-hover"}`}>
-              {o.icon && <span className={`block ${t === "image-choice" ? "text-5xl" : "mb-1 text-3xl"}`}>{o.icon}</span>}
-              {o.label}
-            </motion.button>
-          );
-        })}
-      </div>
-    </div>
+    <p className="text-sentence text-ink">
+      {parts[0] && <><Sayable text={parts[0]} char={ch} />{" "}</>}
+      <Gap value={value} blank={blank} display state={state} className={state === "idle" && chosen ? "border-blue-line text-blue-text" : ""} />
+      {parts[1] && <>{" "}<Sayable text={parts[1]} char={ch} /></>}
+    </p>
   );
 }
 
-function ReadingPt({ pt }) {
+// Leitura: texto em inglês com dicas, tradução sob demanda, linha e pergunta
+function Reading({ r, ch }) {
+  const [pt, setPt] = useState(false);
   return (
-    <details className="mt-2 text-sm text-ink-soft">
-      <summary className="cursor-pointer font-bold">Ver em português</summary>
-      <p className="mt-1">{pt}</p>
-    </details>
+    <Card className="mb-6">
+      <p className="text-sentence text-ink"><Sayable text={r.text} char={ch} hints /></p>
+      <AnimatePresence initial={false}>
+        {pt && (
+          <motion.p key="pt" className="mt-2 text-secondary text-ink-soft" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0, transition: { duration: 0.15 } }}>
+            {r.pt}
+          </motion.p>
+        )}
+      </AnimatePresence>
+      <div className="-ml-3 mt-1">
+        <Button3D variant="ghost" tone="blue" size="sm" onClick={() => setPt((v) => !v)} sound={false} aria-expanded={pt}>
+          {pt ? "Ocultar tradução" : "Ver em português"}
+        </Button3D>
+      </div>
+      <p className="mt-3 border-t-2 border-line pt-3 text-heading text-ink"><Sayable text={r.q} char={ch} /></p>
+    </Card>
+  );
+}
+
+// Chip de palavra do versículo (44 px, borda 2 + 4), com os mesmos contratos de uma opção
+const CHIP = {
+  idle: "border-line bg-page text-ink hover:bg-raised",
+  selected: "border-blue-line bg-blue-soft text-blue-text dark:bg-raised",
+  correct: "border-green-line bg-green-soft text-green-text dark:bg-raised",
+  wrong: "border-red-line bg-red-soft text-red-text dark:bg-raised",
+  disabled: "border-line bg-page text-ink opacity-70",
+};
+function WordChip({ index, value, state, onSelect, children }) {
+  const interactive = state === "idle" || state === "selected";
+  return (
+    <motion.button type="button" role="radio" aria-checked={state === "selected" || state === "correct"} aria-disabled={!interactive || undefined}
+      data-opt={index + 1} data-value={value}
+      onClick={() => { if (!interactive) return; sfx("select"); haptic("select"); onSelect(value); }}
+      className={`inline-flex h-11 items-center rounded-md border-2 border-b-4 px-4 text-body font-bold ${CHIP[state] || CHIP.idle}`}
+      animate={state === "wrong" ? { x: SHAKE.x } : state === "correct" ? { scale: PULSE.scale } : { x: 0, scale: 1 }}
+      transition={state === "wrong" ? SHAKE.transition : state === "correct" ? PULSE.transition : SPRING.snap}
+      whileTap={interactive ? { y: 2, borderBottomWidth: 2 } : undefined}>
+      {children}
+    </motion.button>
+  );
+}
+
+export default function ChoiceExercise({ ex, answer = null, checked = false, fb = null }) {
+  useSessionVersion();
+  const t = ex.type;
+  const ok = !!(fb && fb.ok);
+  const ch = useExerciseChar();
+  const autoplay = t === "listen" ? ex.word.en
+    : t === "listen-choice" ? ex.sentence.en
+    : t === "dialogue" ? ex.dialogue.line
+    : t === "quiz" ? ex.quiz.q
+    : (t === "image-choice" || t === "choice-en-pt") ? ex.word.en
+    : null;
+  useAutoplay(autoplay, ch);
+  // Ao acertar diálogo ou quiz, a resposta é falada pela voz do personagem (6.3 #18)
+  if (t === "dialogue" || t === "quiz") {
+    ex.onChecked = (good) => { if (good && ex.audioAfter) setTimeout(() => speak(ex.audioAfter, { char: ch }), 350); };
+  }
+
+  const opts = useMemo(() => ex.options.map((o) => (typeof o === "string" ? { value: o, label: o } : { value: o.pt, label: o.pt, icon: o.icon })), [ex]);
+  const parts = t === "verse" ? gapParts(ex.verse.text, ex.verse.blank) : t === "missing-word" ? gapParts(ex.sentence.en, ex.blank) : null;
+  const gapState = checked ? (ok ? "ok" : "bad") : "idle";
+  const pick = (value) => {
+    if (session.checked) return;
+    setAnswer(value);
+    if (SPEAK_OPTION.includes(t)) speak(value, { char: ch });
+  };
+  const stateOf = (o) => optionState(o.value, { answer, checked, correct: ex.correct });
+  const cols = ONE_COL.includes(t) ? 1 : 2;
+
+  return (
+    <div>
+      <Title>{TITLES[t]}</Title>
+
+      {/* Enunciado e mídia */}
+      {(t === "image-choice" || t === "choice-en-pt") && (
+        <CharacterBubble ch={ch} audio={ex.word.en} checked={checked} ok={ok}><Sayable text={ex.word.en} char={ch} /></CharacterBubble>
+      )}
+      {t === "choice-pt-en" && (
+        <CharacterBubble ch={ch} checked={checked} ok={ok}>
+          <span className="inline-flex items-center gap-2">
+            {ex.word.icon && <span className="emoji text-2xl" aria-hidden>{ex.word.icon}</span>}
+            <span>{ex.word.pt}</span>
+          </span>
+        </CharacterBubble>
+      )}
+      {(t === "listen" || t === "listen-choice") && (
+        <CharacterBubble ch={ch} wave slow audio={t === "listen" ? ex.word.en : ex.sentence.en} checked={checked} ok={ok} />
+      )}
+      {t === "read" && <Reading r={ex.reading} ch={ch} />}
+      {t === "dialogue" && (
+        <CharacterBubble ch={ch} audio={ex.dialogue.line} checked={checked} ok={ok}>
+          <Sayable text={ex.dialogue.line} char={ch} hints />
+          <span className="mt-1 block text-secondary text-ink-soft">{ex.dialogue.pt}</span>
+        </CharacterBubble>
+      )}
+      {t === "quiz" && (
+        <CharacterBubble ch={ch} audio={ex.quiz.q} checked={checked} ok={ok}><Sayable text={ex.quiz.q} char={ch} hints /></CharacterBubble>
+      )}
+      {t === "missing-word" && (
+        <>
+          <CharacterBubble ch={ch} checked={checked} ok={ok}><span>{ex.sentence.pt}</span></CharacterBubble>
+          {parts && (
+            <Card className="mb-6 min-h-[134px]">
+              <GapSentence parts={parts} value={answer == null ? "" : String(answer)} blank={ex.blank} state={gapState} chosen={answer != null} ch={ch} />
+            </Card>
+          )}
+        </>
+      )}
+      {t === "verse" && parts && (
+        <Card variant="parchment" className="mb-6">
+          <GapSentence parts={parts} value={answer == null ? "" : String(answer)} blank={ex.verse.blank} state={gapState} chosen={answer != null} ch={ch} />
+          <p className="mt-2 text-secondary text-parchment-text">{ex.verse.ref}</p>
+        </Card>
+      )}
+
+      {/* Opções */}
+      {t === "image-choice" ? (
+        <OptionGroup cols={2} label="Opções">
+          {opts.map((o, i) => (
+            <ImageCard key={o.value + i} index={i} value={o.value} icon={o.icon} state={stateOf(o)} onSelect={pick}>{o.label}</ImageCard>
+          ))}
+        </OptionGroup>
+      ) : t === "verse" ? (
+        <div role="radiogroup" aria-label="Opções" className="flex flex-wrap gap-2.5">
+          {opts.map((o, i) => (
+            <WordChip key={o.value + i} index={i} value={o.value} state={stateOf(o)} onSelect={pick}>{o.label}</WordChip>
+          ))}
+        </div>
+      ) : (
+        <OptionGroup cols={cols} label="Opções">
+          {opts.map((o, i) => (
+            <Option key={o.value + i} index={i} value={o.value} state={stateOf(o)} onSelect={pick} cols={cols} shortcut>
+              {o.icon && <span className="emoji mr-2 text-2xl" aria-hidden>{o.icon}</span>}
+              {o.label}
+            </Option>
+          ))}
+        </OptionGroup>
+      )}
+    </div>
   );
 }

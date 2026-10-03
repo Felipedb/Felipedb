@@ -1,20 +1,12 @@
-// Despacho dos formatos de exercício. Cada componente vive em seu arquivo.
-// Contrato: recebe { ex } (já passado por prepareExercise); lê/muta a sessão via
-// setAnswer/check/registerMistakeSoft; `session.checked` diz se já foi conferido.
+// Despacho dos formatos de exercício (lições em ./registry.js, cenas em ../scenes/registry.js).
+// Contrato: recebe { ex } já passado por prepareExercise, mais o estado da sessão por props (answer, checked, fb):
+// assim o exercício que sai na transição (AnimatePresence popLayout) continua mostrando o que mostrava.
+// Os componentes mutam a sessão via setAnswer/check/registerMistakeSoft.
 import Placeholder from "./Placeholder.jsx";
 import { REGISTRY } from "./registry.js";
 import { SCENE_REGISTRY } from "../scenes/registry.js";
-import PracticeBar, { showPracticeBar } from "./PracticeBar.jsx";
 
-// Formatos que já exibem botão de áudio próprio: a barra de prática mostra só o microfone
-const HAS_AUDIO_BTN = ["build", "translate-en-pt", "listen-type", "listen-build", "dialogue", "quiz", "listen-choice"];
-
-export default function ExerciseView({ ex }) {
+export default function ExerciseView({ ex, answer = null, checked = false, fb = null }) {
   const C = REGISTRY[ex.type] || SCENE_REGISTRY[ex.type] || Placeholder;
-  return (
-    <>
-      <C ex={ex} />
-      {showPracticeBar(ex) && <PracticeBar ex={ex} micOnly={HAS_AUDIO_BTN.includes(ex.type)} />}
-    </>
-  );
+  return <C ex={ex} answer={answer} checked={checked} fb={fb} />;
 }

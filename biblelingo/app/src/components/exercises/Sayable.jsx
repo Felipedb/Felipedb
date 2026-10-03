@@ -1,39 +1,58 @@
-// Palavras clicáveis: toque para ouvir (e dica pt->en nas frases em português)
+// Palavras clicáveis (toque para ouvir) e palavras com dica (VISUAL_SPEC 5.12 e 5.25): sublinhado pontilhado
+// cinza no mesmo peso + tooltip com a tradução; a tooltip fala a palavra em inglês ao abrir.
 import { speak } from "../../core/audio.js";
-import { HINTS } from "../../core/content.js";
+import { HINTS, allVocab } from "../../core/content.js";
 import { normalize } from "../../core/util.js";
-import { useState } from "react";
+import HintTooltip from "../ui/HintTooltip.jsx";
+import { cleanWord } from "./shared.jsx";
 
-export function Sayable({ text, className = "" }) {
+// Dicas en -> pt (inverso de HINTS), só para palavras soltas do vocabulário
+let EN_HINTS = null;
+function enHints() {
+  if (EN_HINTS) return EN_HINTS;
+  EN_HINTS = {};
+  allVocab().forEach((v) => {
+    const k = normalize(v.en);
+    if (k && !k.includes(" ") && !EN_HINTS[k]) EN_HINTS[k] = v.pt;
+  });
+  return EN_HINTS;
+}
+
+const words = (text) => String(text == null ? "" : text).split(" ").filter(Boolean);
+
+// Frase em inglês: cada palavra fala ao toque; com `hints`, as palavras do vocabulário mostram a tradução
+export function Sayable({ text, char, hints = false, className = "" }) {
+  const map = hints ? enHints() : null;
+  const list = words(text);
   return (
     <span className={className}>
-      {String(text).split(" ").map((w, i) => (
-        <span key={i}>
-          <button type="button" className="cursor-pointer rounded hover:bg-sky-soft" onClick={() => speak(w.replace(/[.,;:!?'"]/g, ""))}>{w}</button>{" "}
-        </span>
-      ))}
+      {list.map((w, i) => {
+        const clean = cleanWord(w);
+        const hint = map ? map[normalize(clean)] : null;
+        return (
+          <span key={i}>
+            {hint
+              ? <HintTooltip word={w} hint={hint} onOpen={() => speak(clean, { char })} />
+              : <button type="button" className="rounded-sm" onClick={() => speak(clean, { char })}>{w}</button>}
+            {i < list.length - 1 ? " " : ""}
+          </span>
+        );
+      })}
     </span>
   );
 }
 
-export function HintedText({ pt, className = "" }) {
-  const [pop, setPop] = useState(null);
+// Frase em português com dicas pt -> en (banco de palavras): a tooltip mostra e fala a palavra em inglês
+export function HintedText({ pt, char, className = "" }) {
+  const list = words(pt);
   return (
     <span className={className}>
-      {pt.split(" ").map((w, i) => {
-        const hint = HINTS[normalize(w)];
+      {list.map((w, i) => {
+        const hint = HINTS[normalize(cleanWord(w))];
         return (
-          <span key={i} className="relative">
-            {hint ? (
-              <button type="button"
-                className="cursor-help border-b-2 border-dashed border-sky-line font-bold"
-                onClick={() => { setPop(pop === i ? null : i); speak(hint); }}>
-                {w}
-                {pop === i && <span className="absolute -top-8 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-lg bg-ink px-2 py-1 text-xs text-page">{hint}</span>}
-              </button>
-            ) : (
-              <span>{w}</span>
-            )}{" "}
+          <span key={i}>
+            {hint ? <HintTooltip word={w} hint={hint} onOpen={() => speak(hint, { char })} /> : <span>{w}</span>}
+            {i < list.length - 1 ? " " : ""}
           </span>
         );
       })}

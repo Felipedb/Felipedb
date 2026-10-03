@@ -1,30 +1,47 @@
-// "match" e "listen-match": combine os pares (en | pt). Par certo faz "pop" com
-// sfx; par errado treme e conta como erro leve. Trocar a seleção no mesmo lado
-// não é erro. Quando todos fecham, confere automaticamente.
-import { useMemo, useState } from "react";
-import { motion } from "motion/react";
+// "match" e "listen-match" (VISUAL_SPEC 5.15 e 6.3): combine os pares em células 166x87 (áudio 166x69).
+// Par certo: as duas acendem verde 300 ms com pop e depois desbotam; par errado: vermelho + tremor, conta
+// como erro leve sem perder coração. Ao fechar todos, confere sozinho (o rodapé mostra "Fez bonito!").
+import { useEffect, useMemo, useRef, useState } from "react";
 import { session, setAnswer, check, registerMistakeSoft } from "../../core/session.js";
 import { useSessionVersion } from "../../core/useSession.js";
-import { shuffle, buzz } from "../../core/util.js";
-import { speak } from "../../core/audio.js";
-import { sfx } from "../../core/events.js";
-import Icon from "../Icon.jsx";
+import { shuffle } from "../../core/util.js";
+import { speak, clipDuration } from "../../core/audio.js";
+import { sfx } from "../../core/sfx.js";
+import { haptic } from "../../core/haptics.js";
+import MatchCell, { MatchGrid } from "../ui/MatchCell.jsx";
+import { useExerciseChar } from "./CharacterBubble.jsx";
+import { TITLES, Title } from "./shared.jsx";
 
 export default function Match({ ex }) {
   useSessionVersion();
   const audioLeft = ex.type === "listen-match";
+  const ch = useExerciseChar();
   const cols = useMemo(() => [
     shuffle(ex.pairs.map((p) => ({ key: p.en, side: "en", label: p.en }))),
     shuffle(ex.pairs.map((p) => ({ key: p.en, side: "pt", label: p.pt }))),
   ], [ex]);
   const [selected, setSelected] = useState(null); // { key, side, id }
   const [matched, setMatched] = useState([]);     // chaves fechadas
-  const [wrong, setWrong] = useState([]);         // ids em erro (shake)
-  const [flash, setFlash] = useState([]);         // chaves recém-fechadas (brilho verde antes de apagar)
+  const [wrong, setWrong] = useState([]);         // ids em erro (tremor)
+  const [flash, setFlash] = useState([]);         // chaves recém-fechadas (verde antes de desbotar)
+  const [playing, setPlaying] = useState(null);   // id da célula de áudio tocando
+  const timers = useRef([]);
+  useEffect(() => () => timers.current.forEach(clearTimeout), []);
+  const later = (fn, ms) => timers.current.push(setTimeout(fn, ms));
+
+  const play = (item, id) => {
+    speak(item.label, { char: ch });
+    if (!audioLeft) return;
+    setPlaying(id);
+    const d = clipDuration(item.label, ch && ch.key) || Math.min(3, 0.4 + item.label.length * 0.06);
+    later(() => setPlaying((p) => (p === id ? null : p)), d * 1000);
+  };
 
   const onCell = (item, id) => {
     if (session.checked || matched.includes(item.key)) return;
-    if (item.side === "en") speak(item.label);
+    sfx("select");
+    haptic("select");
+    if (item.side === "en") play(item, id);
     if (!selected) { setSelected({ ...item, id }); return; }
     if (selected.id === id) { setSelected(null); return; }
     if (selected.side === item.side) { setSelected({ ...item, id }); return; }
@@ -33,8 +50,9 @@ export default function Match({ ex }) {
       setMatched(m);
       setSelected(null);
       setFlash((f) => [...f, item.key]);
-      setTimeout(() => setFlash((f) => f.filter((k) => k !== item.key)), 550);
+      later(() => setFlash((f) => f.filter((k) => k !== item.key)), 300);
       sfx("pop", m.length);
+      haptic("pair");
       if (m.length === ex.pairs.length) {
         setAnswer("__matched__");
         check();
@@ -42,48 +60,30 @@ export default function Match({ ex }) {
     } else {
       setWrong([selected.id, id]);
       setSelected(null);
-      buzz(60);
+      haptic("wrong");
       registerMistakeSoft();
-      setTimeout(() => setWrong([]), 600);
+      later(() => setWrong([]), 400);
     }
   };
 
-  const cell = (item, id) => {
-    const isMatched = matched.includes(item.key);
-    const isFlash = flash.includes(item.key);
-    const isSel = selected && selected.id === id;
-    const isWrong = wrong.includes(id);
-    return (
-      <motion.button key={id} data-side={item.side} data-key={item.key}
-        onClick={() => onCell(item, id)}
-        variants={{ idle: { scale: 1 }, matched: { scale: [1, 1.14, 1] } }}
-        animate={isMatched ? "matched" : "idle"}
-        transition={{ duration: 0.3 }}
-        aria-label={audioLeft && item.side === "en" ? "Ouvir" : item.label}
-        className={`flex min-h-[72px] items-center justify-center rounded-2xl border-2 border-b-4 px-3 py-4 text-center font-bold transition-colors ${
-          audioLeft && item.side === "en" ? "text-2xl text-sky " : ""}${
-          isFlash ? "border-ok-line bg-ok-bg text-brand" :
-          isMatched ? "border-line/60 text-locked opacity-60" :
-          isWrong ? "animate-[shake_0.3s] border-bad-line bg-bad-bg text-bad-fg" :
-          isSel ? "border-sky-line bg-sky-soft text-sky-fg" :
-          "border-line bg-card hover:bg-hover"}`}>
-        {audioLeft && item.side === "en" ? <Icon name="speaker" /> : item.label}
-      </motion.button>
-    );
-  };
+  const stateOf = (item, id) => matched.includes(item.key) ? (flash.includes(item.key) ? "correct" : "done")
+    : wrong.includes(id) ? "wrong"
+    : selected && selected.id === id ? "selected"
+    : "idle";
+
+  // Linhas: célula em inglês (ou áudio) à esquerda, português à direita
+  const cells = cols[0].flatMap((item, r) => [[item, `en:${r}`, r], [cols[1][r], `pt:${r}`, r]]);
 
   return (
     <div>
-      <h2 className="font-display mb-4 text-2xl font-extrabold">
-        {audioLeft ? "Toque no que você ouviu e no par:" : "Combine os pares:"}
-      </h2>
-      <div className="grid grid-cols-2 gap-3">
-        {cols.map((col, c) => (
-          <div key={c} className="flex flex-col gap-3">
-            {col.map((item, r) => cell(item, `${item.side}:${r}`))}
-          </div>
+      <Title>{TITLES[ex.type]}</Title>
+      <MatchGrid className="items-center">
+        {cells.map(([item, id, r]) => (
+          <MatchCell key={id} side={item.side} keyId={item.key} label={item.label} index={r}
+            audio={audioLeft && item.side === "en"} playing={playing === id}
+            state={stateOf(item, id)} onClick={() => onCell(item, id)} />
         ))}
-      </div>
+      </MatchGrid>
     </div>
   );
 }

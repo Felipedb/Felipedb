@@ -1,37 +1,40 @@
-// "speak": repita a frase em voz alta (reconhecimento de voz do navegador).
-// O resultado responde o exercício; "Não posso falar agora" pula por 15 min.
-import { useEffect, useMemo, useState } from "react";
-import { motion } from "motion/react";
-import { session, setAnswer, check, skipSpeaking } from "../../core/session.js";
+// "speak" (VISUAL_SPEC 5.17 e 6.3): repita a frase. SpeakPrompt (balão em cima, personagem 220x300, microfone
+// azul 186x80) é o componente compartilhado; o link "Não posso falar agora" vive no slot do rodapé da lição.
+// O resultado do reconhecimento responde o exercício; palavras não reconhecidas ficam em laranja no balão.
+import { useState } from "react";
+import { session, setAnswer, check } from "../../core/session.js";
 import { useSessionVersion } from "../../core/useSession.js";
-import { speak, recognizeOnce } from "../../core/audio.js";
-import { AudioPair } from "./AudioButton.jsx";
-import CharacterBubble, { currentChar } from "./CharacterBubble.jsx";
-import { Sayable } from "./Sayable.jsx";
-import Icon from "../Icon.jsx";
+import { recognizeOnce } from "../../core/audio.js";
+import { normalize } from "../../core/util.js";
+import SpeakPrompt from "../ui/MicButton.jsx";
+import { useExerciseChar } from "./CharacterBubble.jsx";
+import { Title, useAutoplay } from "./shared.jsx";
 
-export default function Speak({ ex }) {
+export default function Speak({ ex, checked = false }) {
   useSessionVersion();
-  const who = useMemo(() => currentChar(), []);
+  const ch = useExerciseChar();
   const [listening, setListening] = useState(false);
-  const [status, setStatus] = useState("");
-
-  useEffect(() => { speak(ex.sentence.en); }, []); // eslint-disable-line
+  const [error, setError] = useState("");
+  const [missed, setMissed] = useState([]);
+  useAutoplay(ex.sentence.en, ch);
+  const name = ch ? ch.name.split(" (")[0] : "o personagem";
 
   const onMic = () => {
     if (session.checked) return;
     if (session.recognizer) { try { session.recognizer.stop(); } catch (e) { /* já parou */ } return; }
     const s0 = session;
+    setError("");
     session.recognizer = recognizeOnce(ex.sentence.en, {
-      onStart: () => { setListening(true); setStatus("Ouvindo..."); },
+      onStart: () => setListening(true),
       onResult: (r) => {
         if (session !== s0) return;
-        setStatus(`Você disse: "${r.text}"`);
+        const said = normalize(r.text).split(" ");
+        setMissed(normalize(ex.sentence.en).split(" ").filter((w) => !said.includes(w)));
         setAnswer(r.ok ? ex.sentence.en : r.text);
         check();
       },
       onError: (err) => {
-        setStatus(err === "unsupported" ? "Reconhecimento de voz indisponível neste navegador."
+        setError(err === "unsupported" ? "Reconhecimento de voz indisponível neste navegador."
           : err === "not-allowed" ? "Permita o uso do microfone ou pule este exercício."
           : "Não consegui ouvir. Tente de novo ou pule.");
       },
@@ -41,35 +44,9 @@ export default function Speak({ ex }) {
 
   return (
     <div>
-      <h2 className="font-display mb-4 text-2xl font-extrabold">
-        Repita o que {who ? who.name.split(" (")[0] : "o personagem"} disse:
-      </h2>
-      <CharacterBubble big>
-        <div>
-          <div className="flex items-center gap-2">
-            <AudioPair text={ex.sentence.en} />
-            <Sayable text={ex.sentence.en} className="text-lg font-bold" />
-          </div>
-          <div className="mt-1 text-sm text-ink-soft">{ex.sentence.pt}</div>
-        </div>
-      </CharacterBubble>
-
-      <motion.button whileTap={{ scale: 0.93 }} onClick={onMic} disabled={session.checked}
-        aria-label="Toque para falar"
-        className={`mx-auto mt-6 flex h-24 w-24 items-center justify-center rounded-full border-b-8 text-4xl text-white transition-colors disabled:opacity-50 ${
-          listening ? "animate-pulse border-sky-fg bg-sky" : "border-brand-shadow bg-brand-bright"}`}>
-        <Icon name="mic" />
-      </motion.button>
-      <div className="mt-3 min-h-6 text-center text-sm font-bold text-ink-soft" aria-live="polite">
-        {status || (listening ? "Ouvindo..." : "Toque no microfone e fale a frase")}
-      </div>
-      {!session.checked && (
-        <div className="text-center">
-          <button onClick={skipSpeaking} className="mt-3 text-sm font-extrabold uppercase tracking-[0.14em] text-locked transition-colors hover:text-ink-soft">
-            Não posso falar agora
-          </button>
-        </div>
-      )}
+      <Title>Repita o que {name} disse:</Title>
+      <SpeakPrompt text={ex.sentence.en} pt={ex.sentence.pt} char={ch} recording={listening} onMic={onMic} disabled={checked}
+        missed={checked ? missed : []} error={error} />
     </div>
   );
 }
