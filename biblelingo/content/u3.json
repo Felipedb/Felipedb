@@ -1,0 +1,1523 @@
+{
+  "v": 2,
+  "id": "u3",
+  "lessons": [
+    {
+      "id": "u3l1",
+      "title": "O cesto e a sarça",
+      "ref": "Êxodo 1:8-22; 2:1-10; 3:1-14; 4:10-13",
+      "level": "A1.2",
+      "narrator": "moises",
+      "guests": [
+        "pharaoh",
+        "voice"
+      ],
+      "names": [
+        {
+          "en": "God",
+          "pt": "Deus",
+          "note": "sempre com maiúscula; os pronomes (he, his) ficam em minúscula"
+        },
+        {
+          "en": "the Lord",
+          "pt": "o Senhor"
+        },
+        {
+          "en": "Moses",
+          "pt": "Moisés"
+        },
+        {
+          "en": "Pharaoh",
+          "pt": "Faraó",
+          "note": "o rei do Egito"
+        },
+        {
+          "en": "Pharaoh's daughter",
+          "pt": "a filha de Faraó"
+        },
+        {
+          "en": "Egypt",
+          "pt": "Egito"
+        },
+        {
+          "en": "Israel",
+          "pt": "Israel",
+          "note": "o povo de Deus, também chamado de hebreus"
+        },
+        {
+          "en": "Joseph",
+          "pt": "José",
+          "note": "o José da unidade anterior; o novo rei não o conhecia"
+        },
+        {
+          "en": "Midian",
+          "pt": "Midiã",
+          "note": "a terra para onde Moisés fugiu"
+        }
+      ],
+      "hints": {
+        "new": "novo",
+        "know": "conhecia",
+        "hard": "duro, pesado",
+        "throw": "jogar, joguem",
+        "boy": "menino",
+        "mother": "mãe",
+        "saw": "viu",
+        "burn": "queimar, queimava",
+        "called": "chamou",
+        "sandals": "sandálias",
+        "later": "mais tarde"
+      },
+      "tips": [
+        {
+          "part": 1,
+          "id": "imperative",
+          "grammar": "imperative",
+          "title": "Take, Throw, Do not: dar ordens",
+          "body": "Para dar uma ordem ou instrução, use o verbo na forma básica, sem sujeito: Take the baby. Throw it into the river. Para proibir, ponha Do not (don't) antes do verbo: Do not come close. A forma é a mesma para você e para vocês.",
+          "examples": [
+            {
+              "en": "Take care of him",
+              "pt": "Cuide dele"
+            },
+            {
+              "en": "Do not come close",
+              "pt": "Não chegue perto"
+            }
+          ],
+          "contrast": {
+            "a": "Take off your sandals",
+            "b": "Do not take off your sandals",
+            "note": "Do not + verbo = ordem negativa"
+          }
+        },
+        {
+          "part": 2,
+          "id": "wh-questions",
+          "grammar": "wh-questions",
+          "title": "Who? What?: perguntar quem e o quê",
+          "body": "Who pergunta por pessoas (quem); what pergunta por coisas (o quê, qual). A palavra vem no começo da pergunta, antes do verbo: Who am I? Who are you? What is his name? What is that in your hand?",
+          "examples": [
+            {
+              "en": "Who am I?",
+              "pt": "Quem sou eu?"
+            },
+            {
+              "en": "What is his name?",
+              "pt": "Qual é o nome dele?"
+            }
+          ],
+          "contrast": {
+            "a": "Who is there?",
+            "b": "What is there?",
+            "note": "who = pessoa; what = coisa"
+          }
+        }
+      ],
+      "vocab": [
+        {
+          "en": "baby",
+          "pt": "bebê",
+          "ptAlt": [
+            "neném"
+          ],
+          "pos": "noun",
+          "field": "family",
+          "tier": "core",
+          "part": 1,
+          "icon": "🍼",
+          "example": 4
+        },
+        {
+          "en": "river",
+          "pt": "rio",
+          "pos": "noun",
+          "field": "places",
+          "tier": "core",
+          "part": 1,
+          "icon": "🏞️",
+          "example": 5
+        },
+        {
+          "en": "basket",
+          "pt": "cesto",
+          "ptAlt": [
+            "cesta"
+          ],
+          "pos": "noun",
+          "field": "objects",
+          "tier": "core",
+          "part": 1,
+          "icon": "🧺",
+          "example": 4
+        },
+        {
+          "en": "king",
+          "pt": "rei",
+          "pos": "noun",
+          "field": "people",
+          "tier": "core",
+          "part": 1,
+          "icon": "👑",
+          "example": 2
+        },
+        {
+          "en": "Take care of him",
+          "pt": "Cuide dele",
+          "ptAlt": [
+            "Cuida dele",
+            "Cuide dele para mim"
+          ],
+          "pos": "chunk",
+          "field": "speech",
+          "tier": "core",
+          "part": 1,
+          "icon": "🤱",
+          "example": 6
+        },
+        {
+          "en": "fire",
+          "pt": "fogo",
+          "pos": "noun",
+          "field": "nature",
+          "tier": "core",
+          "part": 2,
+          "icon": "🔥",
+          "example": 8
+        },
+        {
+          "en": "bush",
+          "pt": "sarça",
+          "ptAlt": [
+            "arbusto"
+          ],
+          "pos": "noun",
+          "field": "nature",
+          "tier": "bible",
+          "part": 2,
+          "icon": "🌿",
+          "example": 7,
+          "note": "um arbusto; a sarça ardente de Êxodo 3"
+        },
+        {
+          "en": "holy",
+          "pt": "santo",
+          "ptAlt": [
+            "santa",
+            "sagrado"
+          ],
+          "pos": "adj",
+          "field": "faith",
+          "tier": "core",
+          "part": 2,
+          "icon": "🕯️",
+          "example": 10
+        },
+        {
+          "en": "ground",
+          "pt": "chão",
+          "pos": "noun",
+          "field": "nature",
+          "tier": "core",
+          "part": 2,
+          "icon": "🟫",
+          "example": 10
+        },
+        {
+          "en": "Who am I?",
+          "pt": "Quem sou eu?",
+          "pos": "chunk",
+          "field": "speech",
+          "tier": "core",
+          "part": 2,
+          "icon": "🤷",
+          "iconic": true,
+          "example": 12
+        }
+      ],
+      "beats": [
+        {
+          "order": 1,
+          "en": "A new king did not know Joseph",
+          "pt": "Um novo rei não conhecia José",
+          "kind": "negative",
+          "fact": true
+        },
+        {
+          "order": 2,
+          "en": "The king made Israel work very hard",
+          "pt": "O rei fez Israel trabalhar muito",
+          "altPt": [
+            "O rei fez Israel trabalhar duro"
+          ],
+          "kind": "statement",
+          "fact": true
+        },
+        {
+          "order": 3,
+          "en": "The king said, \"Throw every baby boy into the river\"",
+          "pt": "O rei disse: \"Joguem no rio todo menino recém-nascido\"",
+          "altPt": [
+            "O rei disse: \"Joguem todo bebê menino no rio\""
+          ],
+          "kind": "quote",
+          "fact": true,
+          "speaker": "pharaoh",
+          "gap": {
+            "word": "Throw",
+            "kind": "grammar",
+            "options": [
+              "Throw",
+              "Throws",
+              "Throwing"
+            ]
+          },
+          "grammar": "imperative"
+        },
+        {
+          "order": 4,
+          "en": "A mother hid her baby in a basket",
+          "pt": "Uma mãe escondeu o bebê num cesto",
+          "altPt": [
+            "Uma mãe escondeu seu bebê em um cesto",
+            "Uma mãe escondeu o seu bebê numa cesta"
+          ],
+          "kind": "statement",
+          "fact": true
+        },
+        {
+          "order": 5,
+          "en": "Pharaoh's daughter saw the basket in the river",
+          "pt": "A filha de Faraó viu o cesto no rio",
+          "kind": "statement",
+          "fact": true,
+          "gap": {
+            "word": "basket",
+            "kind": "lexical",
+            "options": [
+              "basket",
+              "baby",
+              "river"
+            ]
+          }
+        },
+        {
+          "order": 6,
+          "en": "Pharaoh's daughter said, \"Take care of him for me\"",
+          "pt": "A filha de Faraó disse: \"Cuide dele para mim\"",
+          "kind": "quote",
+          "fact": true
+        },
+        {
+          "order": 7,
+          "en": "In Midian, Moses saw a bush on fire",
+          "pt": "Em Midiã, Moisés viu uma sarça em chamas",
+          "altPt": [
+            "Em Midiã, Moisés viu uma sarça pegando fogo"
+          ],
+          "kind": "statement",
+          "fact": true,
+          "gap": {
+            "word": "fire",
+            "kind": "lexical",
+            "options": [
+              "fire",
+              "bush",
+              "ground"
+            ]
+          }
+        },
+        {
+          "order": 8,
+          "en": "The bush was on fire, but it did not burn",
+          "pt": "A sarça estava em chamas, mas não se consumia",
+          "altPt": [
+            "A sarça ardia, mas não se consumia",
+            "A sarça estava pegando fogo, mas não queimava"
+          ],
+          "kind": "negative",
+          "fact": true
+        },
+        {
+          "order": 9,
+          "en": "God called from the bush, \"Moses! Moses!\"",
+          "pt": "Deus chamou do meio da sarça: \"Moisés! Moisés!\"",
+          "kind": "quote",
+          "fact": true,
+          "speaker": "voice"
+        },
+        {
+          "order": 10,
+          "en": "\"Take off your sandals. This is holy ground\"",
+          "pt": "\"Tire as sandálias. Este é chão santo\"",
+          "altPt": [
+            "\"Tira os teus sapatos. O lugar em que tu estás é terra santa\""
+          ],
+          "kind": "quote",
+          "fact": true,
+          "iconic": true,
+          "speaker": "voice",
+          "gap": {
+            "word": "Take",
+            "kind": "grammar",
+            "options": [
+              "Take",
+              "Takes",
+              "Taking"
+            ]
+          },
+          "grammar": "imperative"
+        },
+        {
+          "order": 11,
+          "en": "Was the ground holy? Yes, God was there",
+          "pt": "O chão era santo? Sim, Deus estava ali",
+          "kind": "question",
+          "fact": false
+        },
+        {
+          "order": 12,
+          "en": "Moses asked, \"Who am I to go to Pharaoh?\"",
+          "pt": "Moisés perguntou: \"Quem sou eu para ir a Faraó?\"",
+          "kind": "question",
+          "fact": true,
+          "iconic": true,
+          "speaker": "moises",
+          "gap": {
+            "word": "Who",
+            "kind": "grammar",
+            "options": [
+              "Who",
+              "What",
+              "Where"
+            ]
+          },
+          "grammar": "wh-questions"
+        }
+      ],
+      "contrast": [
+        {
+          "a": "The king said, \"Throw every baby boy into the river\"",
+          "b": "The king said, \"Do not throw the baby boys into the river\"",
+          "note": "Do not + verbo = ordem negativa (Dica 1)"
+        },
+        {
+          "a": "Was the ground holy? Yes, God was there",
+          "b": "Who was there? God was there",
+          "note": "pergunta de sim ou não com was; pergunta com who pede uma pessoa (Dica 2)"
+        }
+      ],
+      "verse": {
+        "text": "Take off your sandals, for the place you are standing on is holy ground.",
+        "classic": "Put off thy shoes from off thy feet, for the place whereon thou standest is holy ground.",
+        "pt": "Tire as sandálias, porque o lugar onde você está é chão santo.",
+        "classicPt": "Tira os teus sapatos de teus pés; porque o lugar em que tu estás é terra santa.",
+        "ref": "Êxodo 3:5",
+        "blanks": [
+          {
+            "word": "holy",
+            "options": [
+              "holy",
+              "dry",
+              "new",
+              "dark"
+            ]
+          },
+          {
+            "word": "sandals",
+            "options": [
+              "sandals",
+              "hands",
+              "eyes",
+              "feet"
+            ]
+          },
+          {
+            "word": "standing",
+            "options": [
+              "standing",
+              "sleeping",
+              "walking",
+              "eating"
+            ]
+          }
+        ]
+      },
+      "reading": {
+        "text": "A new king of Egypt made Israel work very hard. A woman hid her baby in a basket by the river, and Pharaoh's daughter saw him there and called him Moses. Later, in Midian, Moses saw a bush on fire, and God called him from the bush. God said, \"Take off your sandals, for this is holy ground. Now go, I will send you to Pharaoh.\"",
+        "pt": "Um novo rei do Egito fez Israel trabalhar muito. Uma mulher escondeu o bebê num cesto junto ao rio, e a filha de Faraó o viu ali e o chamou de Moisés. Mais tarde, em Midiã, Moisés viu uma sarça em chamas, e Deus o chamou do meio da sarça. Deus disse: \"Tire as sandálias, porque este é chão santo. Agora vá, eu envio você a Faraó.\"",
+        "questions": [
+          {
+            "kind": "literal",
+            "q": "Where did the woman hide her baby?",
+            "qPt": "Onde a mulher escondeu o bebê?",
+            "options": [
+              "In a basket near the water",
+              "In the house of the king",
+              "In a tree in the garden"
+            ],
+            "answer": "In a basket near the water"
+          },
+          {
+            "kind": "inference",
+            "q": "Why did the woman hide her baby?",
+            "qPt": "Por que a mulher escondeu o bebê?",
+            "options": [
+              "To keep him safe from the king",
+              "Because she did not want him",
+              "Because the water was good for him"
+            ],
+            "answer": "To keep him safe from the king",
+            "explain": "O rei mandou jogar no rio todos os meninos hebreus recém-nascidos; por isso a mãe escondeu Moisés (Êxodo 1:22; 2:2-3)."
+          }
+        ]
+      },
+      "conversation": {
+        "with": "voice",
+        "turns": [
+          {
+            "who": "voice",
+            "en": "Moses! Moses! Do not come close.",
+            "pt": "Moisés! Moisés! Não chegue perto.",
+            "mood": "solene"
+          },
+          {
+            "who": "you",
+            "options": [
+              "Here I am, Lord.",
+              "Who are you, Lord?",
+              "Come here, Lord."
+            ],
+            "answer": "Here I am, Lord.",
+            "pt": "Aqui estou, Senhor.",
+            "intent": "Responda ao chamado de Deus"
+          },
+          {
+            "who": "voice",
+            "en": "Take off your sandals. This is holy ground. Now go, I will send you to Pharaoh.",
+            "pt": "Tire as sandálias. Este é chão santo. Agora vá, eu envio você a Faraó.",
+            "mood": "solene"
+          },
+          {
+            "who": "you",
+            "options": [
+              "Who am I, Lord? Please send someone else.",
+              "Yes, Lord. I know Pharaoh very well.",
+              "No, Lord. Pharaoh is not in Egypt."
+            ],
+            "answer": "Who am I, Lord? Please send someone else.",
+            "pt": "Quem sou eu, Senhor? Por favor, mande outra pessoa.",
+            "intent": "Diga que não se sente capaz e peça para Deus mandar outro",
+            "speak": true
+          }
+        ]
+      },
+      "fact": {
+        "pt": "Quando Moisés perguntou qual era o nome de Deus, a resposta foi: \"EU SOU O QUE SOU\" (Êxodo 3:14). E o nome Moisés lembra o verbo hebraico \"tirar\": a filha de Faraó disse \"porque das águas o tirei\" (Êxodo 2:10).",
+        "ref": "Êxodo 3:14"
+      }
+    },
+    {
+      "id": "u3l2",
+      "title": "Deixe o meu povo ir",
+      "ref": "Êxodo 5:1-2; 7:14-21; 8:1-6; 12:1-33",
+      "level": "A1.2",
+      "narrator": "moises",
+      "guests": [
+        "pharaoh",
+        "voice"
+      ],
+      "names": [
+        {
+          "en": "God",
+          "pt": "Deus",
+          "note": "sempre com maiúscula; os pronomes (he, his) ficam em minúscula"
+        },
+        {
+          "en": "the Lord",
+          "pt": "o Senhor"
+        },
+        {
+          "en": "Moses",
+          "pt": "Moisés"
+        },
+        {
+          "en": "Aaron",
+          "pt": "Arão",
+          "note": "irmão de Moisés; falava por ele"
+        },
+        {
+          "en": "Pharaoh",
+          "pt": "Faraó",
+          "note": "o rei do Egito"
+        },
+        {
+          "en": "Egypt",
+          "pt": "Egito"
+        },
+        {
+          "en": "Israel",
+          "pt": "Israel",
+          "note": "o povo de Deus"
+        }
+      ],
+      "hints": {
+        "hard": "duro",
+        "houses": "casas",
+        "see": "vir, ver",
+        "pass": "passar, passarei",
+        "called": "chamou"
+      },
+      "tips": [
+        {
+          "part": 1,
+          "id": "negation-do",
+          "grammar": "negation-do",
+          "title": "do not / did not: dizer não",
+          "body": "Para negar, use do not (don't) antes do verbo: I do not know. No passado, use did not: The king did not let them go. O verbo fica na forma básica, sem -ed. Para perguntar no passado: Did the king know? No, he did not.",
+          "examples": [
+            {
+              "en": "I know the Lord",
+              "pt": "Eu conheço o Senhor"
+            },
+            {
+              "en": "I do not know the Lord",
+              "pt": "Eu não conheço o Senhor"
+            }
+          ],
+          "contrast": {
+            "a": "The king let the people go",
+            "b": "The king did not let the people go",
+            "note": "did not + verbo básico (let), nunca did not + passado"
+          }
+        },
+        {
+          "part": 2,
+          "id": "instructions",
+          "grammar": "instructions",
+          "title": "Put, Go, Get out: ordens e instruções",
+          "body": "Uma instrução é o verbo na forma básica, sem sujeito: Put the blood on the door. Get out! Para negar: Do not go. Para uma sequência, use then: Take a lamb, then put the blood on the door. Para pedir com educação, acrescente please.",
+          "examples": [
+            {
+              "en": "Put the blood on the door",
+              "pt": "Ponham o sangue na porta"
+            },
+            {
+              "en": "Get out of Egypt!",
+              "pt": "Saiam do Egito!"
+            }
+          ],
+          "contrast": {
+            "a": "Go!",
+            "b": "Do not go!",
+            "note": "negativa do imperativo = Do not + verbo"
+          }
+        }
+      ],
+      "vocab": [
+        {
+          "en": "people",
+          "pt": "povo",
+          "ptAlt": [
+            "pessoas"
+          ],
+          "pos": "noun",
+          "field": "people",
+          "tier": "core",
+          "part": 1,
+          "icon": "👥",
+          "example": 2
+        },
+        {
+          "en": "heart",
+          "pt": "coração",
+          "pos": "noun",
+          "field": "body",
+          "tier": "core",
+          "part": 1,
+          "icon": "❤️",
+          "example": 5
+        },
+        {
+          "en": "to go",
+          "pt": "ir",
+          "pos": "verb",
+          "field": "actions",
+          "tier": "core",
+          "part": 1,
+          "icon": "🚶",
+          "example": 2,
+          "forms": [
+            "went"
+          ]
+        },
+        {
+          "en": "to know",
+          "pt": "conhecer",
+          "ptAlt": [
+            "saber"
+          ],
+          "pos": "verb",
+          "field": "mind",
+          "tier": "core",
+          "part": 1,
+          "icon": "🤔",
+          "example": 4,
+          "forms": [
+            "knew"
+          ]
+        },
+        {
+          "en": "Let my people go",
+          "pt": "Deixe o meu povo ir",
+          "ptAlt": [
+            "Deixa ir o meu povo"
+          ],
+          "pos": "chunk",
+          "field": "speech",
+          "tier": "core",
+          "part": 1,
+          "icon": "✊",
+          "iconic": true,
+          "example": 2
+        },
+        {
+          "en": "blood",
+          "pt": "sangue",
+          "pos": "noun",
+          "field": "body",
+          "tier": "core",
+          "part": 2,
+          "icon": "🔴",
+          "example": 7
+        },
+        {
+          "en": "to put",
+          "pt": "pôr",
+          "ptAlt": [
+            "colocar"
+          ],
+          "pos": "verb",
+          "field": "actions",
+          "tier": "core",
+          "part": 2,
+          "icon": "🤲",
+          "example": 9
+        },
+        {
+          "en": "frog",
+          "pt": "rã",
+          "ptAlt": [
+            "sapo"
+          ],
+          "pos": "noun",
+          "field": "animals",
+          "tier": "bible",
+          "part": 2,
+          "icon": "🐸",
+          "example": 7
+        },
+        {
+          "en": "lamb",
+          "pt": "cordeiro",
+          "pos": "noun",
+          "field": "animals",
+          "tier": "bible",
+          "part": 2,
+          "icon": "🐑",
+          "example": 9,
+          "note": "filhote de ovelha; o cordeiro da Páscoa"
+        },
+        {
+          "en": "Get out!",
+          "pt": "Saiam!",
+          "ptAlt": [
+            "Saia!",
+            "Fora!"
+          ],
+          "pos": "chunk",
+          "field": "speech",
+          "tier": "core",
+          "part": 2,
+          "icon": "👉",
+          "example": 12
+        }
+      ],
+      "beats": [
+        {
+          "order": 1,
+          "en": "Moses and Aaron went to the king of Egypt",
+          "pt": "Moisés e Arão foram ao rei do Egito",
+          "kind": "statement",
+          "fact": true
+        },
+        {
+          "order": 2,
+          "en": "Moses said, \"Let my people go\"",
+          "pt": "Moisés disse: \"Deixe o meu povo ir\"",
+          "altPt": [
+            "Moisés disse: \"Deixa ir o meu povo\""
+          ],
+          "kind": "quote",
+          "fact": true,
+          "iconic": true,
+          "speaker": "moises"
+        },
+        {
+          "order": 3,
+          "en": "The king asked, \"Who is the Lord?\"",
+          "pt": "O rei perguntou: \"Quem é o Senhor?\"",
+          "kind": "question",
+          "fact": true,
+          "speaker": "pharaoh"
+        },
+        {
+          "order": 4,
+          "en": "\"I do not know the Lord,\" said the king",
+          "pt": "\"Eu não conheço o Senhor\", disse o rei",
+          "kind": "negative",
+          "fact": true,
+          "speaker": "pharaoh",
+          "gap": {
+            "word": "do",
+            "kind": "grammar",
+            "options": [
+              "do",
+              "does",
+              "did"
+            ]
+          },
+          "grammar": "negation-do"
+        },
+        {
+          "order": 5,
+          "en": "His heart was hard, and the people did not go",
+          "pt": "O coração dele era duro, e o povo não pôde ir",
+          "altPt": [
+            "O coração dele era duro, e o povo não foi",
+            "O seu coração se endureceu, e o povo não saiu"
+          ],
+          "kind": "negative",
+          "fact": true,
+          "grammar": "negation-do"
+        },
+        {
+          "order": 6,
+          "en": "Did the king know God? No, his heart was hard",
+          "pt": "O rei conhecia Deus? Não, o coração dele era duro",
+          "kind": "question",
+          "fact": true,
+          "grammar": "negation-do"
+        },
+        {
+          "order": 7,
+          "en": "The water was blood, and frogs were everywhere",
+          "pt": "A água era sangue, e havia rãs por toda parte",
+          "altPt": [
+            "A água virou sangue, e havia rãs em todo lugar"
+          ],
+          "kind": "statement",
+          "fact": true
+        },
+        {
+          "order": 8,
+          "en": "There were frogs in the river and in the houses",
+          "pt": "Havia rãs no rio e nas casas",
+          "kind": "statement",
+          "fact": true
+        },
+        {
+          "order": 9,
+          "en": "Put the blood of the lamb on the door",
+          "pt": "Ponham o sangue do cordeiro na porta",
+          "altPt": [
+            "Ponde o sangue do cordeiro nas ombreiras das portas",
+            "Coloquem o sangue do cordeiro na porta"
+          ],
+          "kind": "quote",
+          "fact": true,
+          "speaker": "voice",
+          "gap": {
+            "word": "Put",
+            "kind": "grammar",
+            "options": [
+              "Put",
+              "Puts",
+              "Putting"
+            ]
+          },
+          "grammar": "instructions"
+        },
+        {
+          "order": 10,
+          "en": "When I see the blood, I will pass over you",
+          "pt": "Quando eu vir o sangue, passarei por vocês",
+          "altPt": [
+            "Quando eu vir o sangue, passarei por cima de vós",
+            "Vendo eu sangue, passarei por cima de vós"
+          ],
+          "kind": "quote",
+          "fact": true,
+          "iconic": true,
+          "speaker": "voice",
+          "prod": false
+        },
+        {
+          "order": 11,
+          "en": "The people put the lamb's blood on their doors",
+          "pt": "O povo pôs o sangue do cordeiro nas suas portas",
+          "altPt": [
+            "O povo colocou o sangue do cordeiro em suas portas"
+          ],
+          "kind": "statement",
+          "fact": true,
+          "gap": {
+            "word": "doors",
+            "kind": "lexical",
+            "options": [
+              "doors",
+              "frogs",
+              "baskets"
+            ]
+          }
+        },
+        {
+          "order": 12,
+          "en": "That night, the king said, \"Get out of Egypt!\"",
+          "pt": "Naquela noite, o rei disse: \"Saiam do Egito!\"",
+          "kind": "quote",
+          "fact": true,
+          "speaker": "pharaoh"
+        }
+      ],
+      "contrast": [
+        {
+          "a": "\"I do not know the Lord,\" said the king",
+          "b": "\"I know the Lord,\" said the king",
+          "note": "do not + verbo básico = negativa no presente (Dica 1)"
+        },
+        {
+          "a": "Put the blood of the lamb on the door",
+          "b": "Do not put the blood on the door",
+          "note": "Do not + verbo = ordem negativa (Dica 2)"
+        }
+      ],
+      "verse": {
+        "text": "When I see the blood, I will pass over you.",
+        "classic": "And when I see the blood, I will pass over you.",
+        "pt": "Quando eu vir o sangue, passarei por vocês.",
+        "classicPt": "Vendo eu sangue, passarei por cima de vós.",
+        "ref": "Êxodo 12:13",
+        "blanks": [
+          {
+            "word": "blood",
+            "options": [
+              "blood",
+              "water",
+              "door",
+              "lamb"
+            ]
+          },
+          {
+            "word": "see",
+            "options": [
+              "see",
+              "hear",
+              "eat",
+              "make"
+            ]
+          },
+          {
+            "word": "pass",
+            "options": [
+              "pass",
+              "go",
+              "run",
+              "walk"
+            ]
+          }
+        ]
+      },
+      "reading": {
+        "text": "Moses went to the king of Egypt and said, \"Let my people go.\" But the king's heart was hard, and he said no. So the Lord sent blood and frogs on Egypt. At last, the people of Israel put the blood of a lamb on their doors. That night, the king called Moses and said, \"Get out!\"",
+        "pt": "Moisés foi ao rei do Egito e disse: \"Deixe o meu povo ir.\" Mas o coração do rei era duro, e ele disse não. Então o Senhor mandou sangue e rãs sobre o Egito. Por fim, o povo de Israel pôs o sangue de um cordeiro nas suas portas. Naquela noite, o rei chamou Moisés e disse: \"Saiam!\"",
+        "questions": [
+          {
+            "kind": "literal",
+            "q": "What did the people put on their doors?",
+            "qPt": "O que o povo pôs nas portas?",
+            "options": [
+              "Lamb's blood",
+              "River water",
+              "A green frog"
+            ],
+            "answer": "Lamb's blood"
+          },
+          {
+            "kind": "inference",
+            "q": "Why did the king let the people go in the end?",
+            "qPt": "Por que o rei deixou o povo ir no final?",
+            "options": [
+              "Because of the plagues on Egypt",
+              "Because he loved Moses",
+              "Because the people paid him"
+            ],
+            "answer": "Because of the plagues on Egypt",
+            "explain": "Só depois da última praga Faraó chamou Moisés de noite e mandou o povo sair (Êxodo 12:29-31)."
+          }
+        ]
+      },
+      "conversation": {
+        "with": "pharaoh",
+        "turns": [
+          {
+            "who": "pharaoh",
+            "en": "Moses, why are you here?",
+            "pt": "Moisés, por que você está aqui?",
+            "mood": "bravo"
+          },
+          {
+            "who": "you",
+            "options": [
+              "Let my people go.",
+              "Let my people work.",
+              "Let my people stay here."
+            ],
+            "answer": "Let my people go.",
+            "pt": "Deixe o meu povo ir.",
+            "intent": "Faça o pedido do Senhor"
+          },
+          {
+            "who": "pharaoh",
+            "en": "Who is the Lord? I don't know him.",
+            "pt": "Quem é o Senhor? Eu não o conheço.",
+            "mood": "irônico"
+          },
+          {
+            "who": "you",
+            "options": [
+              "He is the God of Israel.",
+              "He is the king of Egypt.",
+              "He is my brother Aaron."
+            ],
+            "answer": "He is the God of Israel.",
+            "pt": "Ele é o Deus de Israel.",
+            "intent": "Diga quem é o Senhor",
+            "speak": true
+          }
+        ]
+      },
+      "fact": {
+        "pt": "A Páscoa judaica (Pessach) lembra até hoje a noite em que o Senhor passou por cima das casas marcadas com sangue (Êxodo 12:14).",
+        "ref": "Êxodo 12:14"
+      }
+    },
+    {
+      "id": "u3l3",
+      "title": "O mar se abre",
+      "ref": "Êxodo 13:21-22; 14:5-31; 15:1-21",
+      "level": "A1.2",
+      "narrator": "moises",
+      "guests": [
+        "voice",
+        "povo"
+      ],
+      "names": [
+        {
+          "en": "God",
+          "pt": "Deus",
+          "note": "sempre com maiúscula; os pronomes (he, his) ficam em minúscula"
+        },
+        {
+          "en": "the Lord",
+          "pt": "o Senhor"
+        },
+        {
+          "en": "Moses",
+          "pt": "Moisés"
+        },
+        {
+          "en": "Miriam",
+          "pt": "Miriã",
+          "note": "irmã de Moisés e Arão; profetisa"
+        },
+        {
+          "en": "Pharaoh",
+          "pt": "Faraó",
+          "note": "o rei do Egito"
+        },
+        {
+          "en": "Egypt",
+          "pt": "Egito"
+        },
+        {
+          "en": "Israel",
+          "pt": "Israel",
+          "note": "o povo de Deus"
+        }
+      ],
+      "hints": {
+        "pillar": "coluna",
+        "saw": "viu, viram",
+        "stand": "ficar, fiquem",
+        "hand": "mão",
+        "covered": "cobriu",
+        "tambourine": "tamborim",
+        "walls": "muros, paredes"
+      },
+      "tips": [
+        {
+          "part": 1,
+          "id": "imperative-be",
+          "grammar": "imperative-be",
+          "title": "Do not be afraid: ordens com be",
+          "body": "O verbo be (ser, estar) também dá ordens: Be still (Fique quieto), Be good (Seja bom). Para proibir, use Do not be (don't be): Do not be afraid = Não tenha medo. Stand still = Fiquem parados.",
+          "examples": [
+            {
+              "en": "Be still",
+              "pt": "Fique quieto"
+            },
+            {
+              "en": "Do not be afraid",
+              "pt": "Não tenha medo"
+            }
+          ],
+          "contrast": {
+            "a": "Be afraid",
+            "b": "Do not be afraid",
+            "note": "Do not + be = proibição; a ordem fica negativa"
+          }
+        },
+        {
+          "part": 2,
+          "id": "prep-movement",
+          "grammar": "prep-movement",
+          "title": "through, into, over: por onde a gente passa",
+          "body": "through = através de, pelo meio de (walk through the sea); into = para dentro de (go into the sea); over = por cima de (over the sea); across = de um lado ao outro. Elas vêm depois do verbo de movimento e antes do lugar.",
+          "examples": [
+            {
+              "en": "We walked through the sea",
+              "pt": "Nós andamos pelo meio do mar"
+            },
+            {
+              "en": "The army went into the sea",
+              "pt": "O exército entrou no mar"
+            }
+          ],
+          "contrast": {
+            "a": "We walked through the sea",
+            "b": "We walked into the sea",
+            "note": "through = atravessar; into = entrar"
+          }
+        }
+      ],
+      "vocab": [
+        {
+          "en": "army",
+          "pt": "exército",
+          "pos": "noun",
+          "field": "people",
+          "tier": "core",
+          "part": 1,
+          "icon": "🏹",
+          "example": 2
+        },
+        {
+          "en": "chariot",
+          "pt": "carro de guerra",
+          "ptAlt": [
+            "carro",
+            "carruagem"
+          ],
+          "pos": "noun",
+          "field": "objects",
+          "tier": "bible",
+          "part": 1,
+          "icon": "🐎",
+          "example": 2,
+          "note": "carro de duas rodas puxado por cavalos"
+        },
+        {
+          "en": "to fight",
+          "pt": "lutar",
+          "ptAlt": [
+            "pelejar"
+          ],
+          "pos": "verb",
+          "field": "actions",
+          "tier": "core",
+          "part": 1,
+          "icon": "⚔️",
+          "example": 5,
+          "forms": [
+            "fought"
+          ]
+        },
+        {
+          "en": "to stand",
+          "pt": "ficar de pé",
+          "ptAlt": [
+            "ficar",
+            "parar"
+          ],
+          "pos": "verb",
+          "field": "actions",
+          "tier": "core",
+          "part": 1,
+          "icon": "🧍‍♂️",
+          "example": 4,
+          "forms": [
+            "stood"
+          ]
+        },
+        {
+          "en": "Do not be afraid",
+          "pt": "Não tenham medo",
+          "ptAlt": [
+            "Não tenha medo",
+            "Não temam"
+          ],
+          "pos": "chunk",
+          "field": "speech",
+          "tier": "core",
+          "part": 1,
+          "icon": "🤗",
+          "iconic": true,
+          "example": 4
+        },
+        {
+          "en": "sea",
+          "pt": "mar",
+          "pos": "noun",
+          "field": "places",
+          "tier": "core",
+          "part": 2,
+          "icon": "🌊",
+          "example": 9
+        },
+        {
+          "en": "dry",
+          "pt": "seco",
+          "ptAlt": [
+            "seca"
+          ],
+          "pos": "adj",
+          "field": "quality",
+          "tier": "core",
+          "part": 2,
+          "icon": "🏜️",
+          "example": 9
+        },
+        {
+          "en": "to walk",
+          "pt": "andar",
+          "ptAlt": [
+            "caminhar"
+          ],
+          "pos": "verb",
+          "field": "actions",
+          "tier": "core",
+          "part": 2,
+          "icon": "🦶",
+          "example": 9
+        },
+        {
+          "en": "to sing",
+          "pt": "cantar",
+          "pos": "verb",
+          "field": "actions",
+          "tier": "core",
+          "part": 2,
+          "icon": "🎤",
+          "example": 12,
+          "forms": [
+            "sang"
+          ]
+        },
+        {
+          "en": "Sing to the Lord",
+          "pt": "Cantem ao Senhor",
+          "ptAlt": [
+            "Cante ao Senhor",
+            "Cantai ao Senhor"
+          ],
+          "pos": "chunk",
+          "field": "speech",
+          "tier": "core",
+          "part": 2,
+          "icon": "🎼",
+          "iconic": true,
+          "example": 12
+        }
+      ],
+      "beats": [
+        {
+          "order": 1,
+          "en": "A pillar of cloud and fire went before Israel",
+          "pt": "Uma coluna de nuvem e de fogo ia adiante de Israel",
+          "altPt": [
+            "Uma coluna de nuvem e fogo ia na frente de Israel"
+          ],
+          "kind": "statement",
+          "fact": true
+        },
+        {
+          "order": 2,
+          "en": "Pharaoh came after them with his army and chariots",
+          "pt": "Faraó veio atrás deles com o seu exército e carros de guerra",
+          "altPt": [
+            "Faraó veio atrás deles com seu exército e seus carros"
+          ],
+          "kind": "statement",
+          "fact": true
+        },
+        {
+          "order": 3,
+          "en": "Israel saw the army and chariots and was very afraid",
+          "pt": "Israel viu o exército e os carros e ficou com muito medo",
+          "altPt": [
+            "Israel viu o exército e os carros de guerra e teve muito medo"
+          ],
+          "kind": "statement",
+          "fact": true
+        },
+        {
+          "order": 4,
+          "en": "Moses said, \"Do not be afraid. Stand still\"",
+          "pt": "Moisés disse: \"Não tenham medo. Fiquem parados\"",
+          "altPt": [
+            "Moisés disse: \"Não temais. Ficai firmes\""
+          ],
+          "kind": "negative",
+          "fact": true,
+          "iconic": true,
+          "speaker": "moises",
+          "gap": {
+            "word": "be",
+            "kind": "grammar",
+            "options": [
+              "be",
+              "is",
+              "are"
+            ]
+          },
+          "grammar": "imperative-be"
+        },
+        {
+          "order": 5,
+          "en": "Moses said, \"The Lord will fight for you\"",
+          "pt": "Moisés disse: \"O Senhor lutará por vocês\"",
+          "altPt": [
+            "Moisés disse: \"O Senhor pelejará por vós\"",
+            "Moisés disse: \"O Senhor vai lutar por vocês\""
+          ],
+          "kind": "quote",
+          "fact": true,
+          "iconic": true,
+          "speaker": "moises"
+        },
+        {
+          "order": 6,
+          "en": "Did Israel stand still? Yes, the Lord fought for them",
+          "pt": "Israel ficou parado? Sim, o Senhor lutou por eles",
+          "kind": "question",
+          "fact": true
+        },
+        {
+          "order": 7,
+          "en": "The Lord said, \"Put out your hand over the sea\"",
+          "pt": "O Senhor disse: \"Estenda a mão sobre o mar\"",
+          "altPt": [
+            "O Senhor disse: \"Estende a tua mão sobre o mar\""
+          ],
+          "kind": "quote",
+          "fact": true,
+          "speaker": "voice",
+          "gap": {
+            "word": "over",
+            "kind": "grammar",
+            "options": [
+              "over",
+              "into",
+              "through"
+            ]
+          },
+          "grammar": "prep-movement"
+        },
+        {
+          "order": 8,
+          "en": "All night a wind came, and the sea was dry",
+          "pt": "A noite toda veio um vento, e o mar ficou seco",
+          "altPt": [
+            "Um vento soprou a noite inteira, e o mar secou"
+          ],
+          "kind": "statement",
+          "fact": true
+        },
+        {
+          "order": 9,
+          "en": "We walked through the sea on dry ground",
+          "pt": "Nós andamos pelo meio do mar em chão seco",
+          "altPt": [
+            "Andamos pelo mar em terra seca",
+            "Nós atravessamos o mar em chão seco"
+          ],
+          "kind": "first-person",
+          "fact": true,
+          "speaker": "moises",
+          "gap": {
+            "word": "sea",
+            "kind": "lexical",
+            "options": [
+              "sea",
+              "army",
+              "river"
+            ]
+          }
+        },
+        {
+          "order": 10,
+          "en": "Did we walk through the water? No, on dry ground",
+          "pt": "Nós andamos pela água? Não, em chão seco",
+          "kind": "question",
+          "fact": true,
+          "speaker": "moises"
+        },
+        {
+          "order": 11,
+          "en": "The water covered the army. We sang to the Lord",
+          "pt": "A água cobriu o exército. Nós cantamos ao Senhor",
+          "altPt": [
+            "As águas cobriram o exército. Cantamos ao Senhor"
+          ],
+          "kind": "first-person",
+          "fact": true,
+          "speaker": "moises"
+        },
+        {
+          "order": 12,
+          "en": "Miriam sang with a tambourine, \"Sing to the Lord\"",
+          "pt": "Miriã cantou com um tamborim: \"Cantem ao Senhor\"",
+          "altPt": [
+            "Miriã cantou com um tamborim: \"Cantai ao Senhor\""
+          ],
+          "kind": "quote",
+          "fact": true,
+          "iconic": true
+        }
+      ],
+      "contrast": [
+        {
+          "a": "Moses said, \"Do not be afraid. Stand still\"",
+          "b": "Moses said, \"Do not be afraid. Do not run\"",
+          "note": "Do not + be (afraid) e Do not + verbo (run): a mesma forma de proibição (Dica 1)"
+        },
+        {
+          "a": "We walked through the sea on dry ground",
+          "b": "We walked across the sea on dry ground",
+          "note": "through = pelo meio; across = de um lado ao outro (Dica 2)"
+        }
+      ],
+      "verse": {
+        "text": "The Lord will fight for you, and you shall be still.",
+        "classic": "The LORD shall fight for you, and ye shall hold your peace.",
+        "pt": "O Senhor lutará por vocês; vocês só precisam ficar quietos.",
+        "classicPt": "O SENHOR pelejará por vós, e vos calareis.",
+        "ref": "Êxodo 14:14",
+        "blanks": [
+          {
+            "word": "fight",
+            "options": [
+              "fight",
+              "sing",
+              "walk",
+              "wait"
+            ]
+          },
+          {
+            "word": "still",
+            "options": [
+              "still",
+              "afraid",
+              "dry",
+              "alone"
+            ]
+          }
+        ]
+      },
+      "reading": {
+        "text": "The king of Egypt came after Israel with his army and chariots, and the people were very afraid. Moses said, \"Do not be afraid. The Lord will fight for you.\" Moses put out his hand, a wind came all night, and Israel walked through the sea on dry ground. Then the water came back and covered the army, and Miriam sang, \"Sing to the Lord!\"",
+        "pt": "O rei do Egito veio atrás de Israel com o seu exército e os carros de guerra, e o povo ficou com muito medo. Moisés disse: \"Não tenham medo. O Senhor lutará por vocês.\" Moisés estendeu a mão, um vento soprou a noite toda, e Israel andou pelo meio do mar em chão seco. Depois a água voltou e cobriu o exército, e Miriã cantou: \"Cantem ao Senhor!\"",
+        "questions": [
+          {
+            "kind": "literal",
+            "q": "What did Moses tell the people to do?",
+            "qPt": "O que Moisés disse ao povo para fazer?",
+            "options": [
+              "Not to be scared, because God would fight",
+              "To go back to Egypt",
+              "To fight the army with chariots"
+            ],
+            "answer": "Not to be scared, because God would fight"
+          },
+          {
+            "kind": "inference",
+            "q": "Who made the sea dry?",
+            "qPt": "Quem secou o mar?",
+            "options": [
+              "The Lord, with the wind",
+              "Moses, with his own hand",
+              "The army, with the chariots"
+            ],
+            "answer": "The Lord, with the wind",
+            "explain": "Moisés estendeu a mão, mas foi o Senhor quem fez o mar recuar com um forte vento leste a noite toda (Êxodo 14:21)."
+          }
+        ]
+      },
+      "conversation": {
+        "with": "povo",
+        "turns": [
+          {
+            "who": "povo",
+            "en": "Moses, look! Pharaoh's chariots are coming after us!",
+            "pt": "Moisés, olhe! Os carros de Faraó estão vindo atrás de nós!",
+            "mood": "assustado"
+          },
+          {
+            "who": "you",
+            "options": [
+              "Do not be afraid. The Lord will fight for you.",
+              "Do not be afraid. The army is very small.",
+              "Be afraid. Go back to Egypt now."
+            ],
+            "answer": "Do not be afraid. The Lord will fight for you.",
+            "pt": "Não tenham medo. O Senhor lutará por vocês.",
+            "intent": "Acalme o povo e diga quem vai lutar"
+          },
+          {
+            "who": "povo",
+            "en": "The sea is in front of us! Where can we go?",
+            "pt": "O mar está na nossa frente! Para onde podemos ir?",
+            "mood": "urgente"
+          },
+          {
+            "who": "you",
+            "options": [
+              "Through the sea, on dry ground. Let's go!",
+              "Back to Egypt, to the king. Let's go!",
+              "Into the chariots, with the army. Let's go!"
+            ],
+            "answer": "Through the sea, on dry ground. Let's go!",
+            "pt": "Pelo meio do mar, em chão seco. Vamos!",
+            "intent": "Diga por onde o povo vai passar",
+            "speak": true
+          }
+        ]
+      },
+      "fact": {
+        "pt": "Miriã, irmã de Moisés e Arão, é chamada de profetisa: ela pegou um tamborim, e todas as mulheres saíram atrás dela com tamborins e danças (Êxodo 15:20).",
+        "ref": "Êxodo 15:20"
+      }
+    }
+  ]
+}

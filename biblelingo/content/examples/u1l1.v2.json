@@ -1,0 +1,470 @@
+{
+  "v": 2,
+  "id": "u1",
+  "lessons": [
+    {
+      "id": "u1l1",
+      "title": "No princípio",
+      "ref": "Gênesis 1:1-19",
+      "level": "A1.1",
+      "narrator": "adao",
+      "guests": [
+        "eva",
+        "voice"
+      ],
+      "names": [
+        {
+          "en": "God",
+          "pt": "Deus",
+          "note": "sempre com maiúscula; os pronomes (he, his) ficam em minúscula"
+        }
+      ],
+      "hints": {
+        "beginning": "princípio",
+        "created": "criou",
+        "heavens": "céus",
+        "empty": "vazia",
+        "still": "ainda",
+        "called": "chamou",
+        "darkness": "escuridão",
+        "evening": "tarde",
+        "morning": "manhã",
+        "moon": "lua",
+        "stars": "estrelas",
+        "saw": "viu, vimos"
+      },
+      "tips": [
+        {
+          "part": 1,
+          "id": "past-be",
+          "grammar": "past-be",
+          "title": "was = passado de is",
+          "body": "Para falar do que já aconteceu, is vira was e are vira were. O resto da frase não muda.",
+          "examples": [
+            {
+              "en": "The earth is dark",
+              "pt": "A terra está escura"
+            },
+            {
+              "en": "The earth was dark",
+              "pt": "A terra estava escura"
+            }
+          ],
+          "contrast": {
+            "a": "The light is good",
+            "b": "The light was good",
+            "note": "is = agora; was = naquele momento"
+          }
+        },
+        {
+          "part": 2,
+          "id": "there-was",
+          "grammar": "there-was",
+          "title": "there was = havia",
+          "body": "Para dizer que algo existia, use there was (uma coisa) ou there were (várias). No presente: there is e there are.",
+          "examples": [
+            {
+              "en": "There was light",
+              "pt": "Havia luz"
+            },
+            {
+              "en": "There were two great lights",
+              "pt": "Havia dois grandes luminares"
+            }
+          ],
+          "contrast": {
+            "a": "There is light",
+            "b": "There was light",
+            "note": "there is = há; there was = havia"
+          }
+        }
+      ],
+      "vocab": [
+        {
+          "en": "earth",
+          "pt": "terra",
+          "pos": "noun",
+          "field": "creation",
+          "tier": "core",
+          "part": 1,
+          "icon": "🌍",
+          "image": "earth.png",
+          "example": 2
+        },
+        {
+          "en": "light",
+          "pt": "luz",
+          "pos": "noun",
+          "field": "creation",
+          "tier": "core",
+          "part": 1,
+          "icon": "💡",
+          "image": "light.png",
+          "example": 4
+        },
+        {
+          "en": "dark",
+          "pt": "escuro",
+          "ptAlt": [
+            "escura"
+          ],
+          "pos": "adj",
+          "field": "quality",
+          "tier": "core",
+          "part": 1,
+          "icon": "🌑",
+          "example": 2
+        },
+        {
+          "en": "good",
+          "pt": "bom",
+          "ptAlt": [
+            "boa"
+          ],
+          "pos": "adj",
+          "field": "quality",
+          "tier": "core",
+          "part": 1,
+          "icon": "👍",
+          "example": 5
+        },
+        {
+          "en": "Let there be light",
+          "pt": "Haja luz",
+          "pos": "chunk",
+          "field": "speech",
+          "tier": "core",
+          "part": 1,
+          "icon": "✨",
+          "iconic": true,
+          "example": 3
+        },
+        {
+          "en": "day",
+          "pt": "dia",
+          "pos": "noun",
+          "field": "time",
+          "tier": "core",
+          "part": 2,
+          "icon": "📅",
+          "image": "day.png",
+          "example": 9
+        },
+        {
+          "en": "night",
+          "pt": "noite",
+          "pos": "noun",
+          "field": "time",
+          "tier": "core",
+          "part": 2,
+          "icon": "🌃",
+          "image": "night.png",
+          "example": 10
+        },
+        {
+          "en": "sun",
+          "pt": "sol",
+          "pos": "noun",
+          "field": "nature",
+          "tier": "core",
+          "part": 2,
+          "icon": "☀️",
+          "image": "sun.png",
+          "example": 9
+        },
+        {
+          "en": "to make",
+          "pt": "fazer",
+          "pos": "verb",
+          "field": "actions",
+          "tier": "core",
+          "part": 2,
+          "icon": "🔨",
+          "image": "make.png",
+          "example": 9
+        },
+        {
+          "en": "It was good",
+          "pt": "Era bom",
+          "ptAlt": [
+            "Foi bom"
+          ],
+          "pos": "chunk",
+          "field": "speech",
+          "tier": "core",
+          "part": 2,
+          "icon": "🙌",
+          "iconic": true,
+          "example": 11
+        }
+      ],
+      "beats": [
+        {
+          "order": 1,
+          "en": "In the beginning, God created the heavens and the earth",
+          "pt": "No princípio, Deus criou os céus e a terra",
+          "alt": [
+            "In the beginning God created the heaven and the earth"
+          ],
+          "altPt": [
+            "No princípio, criou Deus os céus e a terra",
+            "No princípio, Deus criou o céu e a terra"
+          ],
+          "kind": "quote",
+          "fact": true,
+          "iconic": true,
+          "prod": false
+        },
+        {
+          "order": 2,
+          "en": "The earth was empty and dark",
+          "pt": "A terra estava vazia e escura",
+          "alt": [
+            "The earth was formless and empty"
+          ],
+          "altPt": [
+            "A terra era sem forma e vazia"
+          ],
+          "kind": "statement",
+          "fact": true,
+          "gap": {
+            "word": "was",
+            "kind": "grammar",
+            "options": [
+              "was",
+              "is",
+              "were"
+            ]
+          },
+          "grammar": "past-be"
+        },
+        {
+          "order": 3,
+          "en": "God said, \"Let there be light\"",
+          "pt": "Deus disse: \"Haja luz\"",
+          "kind": "quote",
+          "fact": true,
+          "iconic": true,
+          "speaker": "voice"
+        },
+        {
+          "order": 4,
+          "en": "And there was light",
+          "pt": "E houve luz",
+          "alt": [
+            "There was light"
+          ],
+          "kind": "statement",
+          "fact": true,
+          "gap": {
+            "word": "light",
+            "kind": "lexical",
+            "options": [
+              "light",
+              "earth",
+              "sun"
+            ]
+          }
+        },
+        {
+          "order": 5,
+          "en": "God saw that the light was good",
+          "pt": "Deus viu que a luz era boa",
+          "alt": [
+            "God saw the light, and it was good"
+          ],
+          "kind": "statement",
+          "fact": true
+        },
+        {
+          "order": 6,
+          "en": "Was the earth still dark? No, the light was good",
+          "pt": "A terra ainda estava escura? Não, a luz era boa",
+          "kind": "question",
+          "fact": false,
+          "grammar": "past-be"
+        },
+        {
+          "order": 7,
+          "en": "He called the light Day and the darkness Night",
+          "pt": "Ele chamou a luz de Dia e a escuridão de Noite",
+          "kind": "statement",
+          "fact": true
+        },
+        {
+          "order": 8,
+          "en": "There was evening and morning: the first day",
+          "pt": "Houve tarde e manhã: o primeiro dia",
+          "alt": [
+            "There was evening, and there was morning, the first day"
+          ],
+          "kind": "quote",
+          "fact": true,
+          "iconic": true,
+          "prod": false,
+          "gap": {
+            "word": "was",
+            "kind": "grammar",
+            "options": [
+              "was",
+              "were",
+              "is"
+            ]
+          },
+          "grammar": "there-was"
+        },
+        {
+          "order": 9,
+          "en": "God made the sun for the day",
+          "pt": "Deus fez o sol para o dia",
+          "kind": "statement",
+          "fact": false
+        },
+        {
+          "order": 10,
+          "en": "God made the moon for the night",
+          "pt": "Deus fez a lua para a noite",
+          "kind": "statement",
+          "fact": false
+        },
+        {
+          "order": 11,
+          "en": "At night we saw the moon, and it was good",
+          "pt": "À noite vimos a lua, e era bom",
+          "kind": "first-person",
+          "fact": false,
+          "speaker": "adao"
+        },
+        {
+          "order": 12,
+          "en": "Was the sun there at night? No, only the moon",
+          "pt": "O sol estava lá à noite? Não, só a lua",
+          "kind": "question",
+          "fact": false,
+          "speaker": "adao"
+        }
+      ],
+      "contrast": [
+        {
+          "a": "God made the sun for the day",
+          "b": "God made the moon for the night",
+          "note": "só mudam sun/day por moon/night"
+        },
+        {
+          "a": "The earth was empty and dark",
+          "b": "The earth is empty and dark",
+          "note": "was = passado; is = presente"
+        }
+      ],
+      "verse": {
+        "text": "In the beginning, God created the heavens and the earth.",
+        "classic": "In the beginning God created the heaven and the earth.",
+        "pt": "No princípio, Deus criou os céus e a terra.",
+        "classicPt": "No princípio, criou Deus os céus e a terra.",
+        "ref": "Gênesis 1:1",
+        "blanks": [
+          {
+            "word": "created",
+            "options": [
+              "created",
+              "saw",
+              "said",
+              "called"
+            ]
+          },
+          {
+            "word": "beginning",
+            "options": [
+              "beginning",
+              "garden",
+              "evening",
+              "night"
+            ]
+          },
+          {
+            "word": "earth",
+            "options": [
+              "earth",
+              "water",
+              "sky",
+              "light"
+            ]
+          }
+        ]
+      },
+      "reading": {
+        "text": "In the beginning, the earth was empty and dark. Then God said, \"Let there be light.\" And there was light. God called the light Day and the darkness Night. Then he made the sun, the moon and the stars.",
+        "pt": "No princípio, a terra estava vazia e escura. Então Deus disse: \"Haja luz.\" E houve luz. Deus chamou a luz de Dia e a escuridão de Noite. Depois ele fez o sol, a lua e as estrelas.",
+        "questions": [
+          {
+            "kind": "literal",
+            "q": "What was the earth like at first?",
+            "qPt": "Como era a terra no começo?",
+            "options": [
+              "Dark, with nothing in it",
+              "Full of light",
+              "Full of trees"
+            ],
+            "answer": "Dark, with nothing in it"
+          },
+          {
+            "kind": "inference",
+            "q": "Which came first, the light or the sun?",
+            "qPt": "O que veio primeiro, a luz ou o sol?",
+            "options": [
+              "The light",
+              "The sun",
+              "They came together"
+            ],
+            "answer": "The light",
+            "explain": "A luz é do primeiro dia (Gênesis 1:3); o sol e a lua são do quarto dia (Gênesis 1:16)."
+          }
+        ]
+      },
+      "conversation": {
+        "with": "eva",
+        "turns": [
+          {
+            "who": "eva",
+            "en": "Adam, look! What is that?",
+            "pt": "Adão, olhe! O que é aquilo?",
+            "mood": "surpreso"
+          },
+          {
+            "who": "you",
+            "options": [
+              "It is the light. God made it.",
+              "It is the night. It is dark.",
+              "It is the earth. It is empty."
+            ],
+            "answer": "It is the light. God made it.",
+            "pt": "É a luz. Deus a fez.",
+            "intent": "Diga o que é e quem fez"
+          },
+          {
+            "who": "eva",
+            "en": "Is the light good?",
+            "pt": "A luz é boa?",
+            "mood": "animado"
+          },
+          {
+            "who": "you",
+            "options": [
+              "Yes, it is very good.",
+              "No, it is very dark.",
+              "Yes, it is the moon."
+            ],
+            "answer": "Yes, it is very good.",
+            "pt": "Sim, é muito boa.",
+            "intent": "Responda se a luz é boa",
+            "speak": true
+          }
+        ]
+      },
+      "fact": {
+        "pt": "A palavra hebraica para \"princípio\" (bereshit) é o nome do livro de Gênesis na Bíblia hebraica.",
+        "ref": "Gênesis 1:1"
+      }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+// Componentes base da reformulação visual (VISUAL_SPEC seção 5). Importe daqui:
+//   import { Button3D, Card, ProgressBar, FeedbackFooter } from "../components/ui/index.js";
+export { default as Button3D } from "./Button3D.jsx";
+export { default as Card, CardList, CardItem } from "./Card.jsx";
+export { default as ProgressBar, ComboLabel } from "./ProgressBar.jsx";
+export { default as SegmentRing } from "./SegmentRing.jsx";
+export { default as Bubble } from "./Bubble.jsx";
+export { default as WordBankCore, Tile, AnswerLines } from "./WordBankCore.jsx";
+export { default as Option, OptionGroup, ImageCard } from "./Option.jsx";
+export { default as MatchCell, MatchGrid } from "./MatchCell.jsx";
+export { default as AudioButton, SlowLink, WaveBars, usePlaying } from "./AudioButton.jsx";
+export { default as SpeakPrompt, MicButton } from "./MicButton.jsx";
+export { default as TextCard, Gap } from "./TextCard.jsx";
+export { default as FeedbackFooter, useFooterHeight } from "./FeedbackFooter.jsx";
+export { default as CharacterStage } from "./CharacterStage.jsx";
+export { default as Avatar, CharFace, useTalking, useAsset, charAsset } from "./Avatar.jsx";
+export { default as StatCard, CountUp } from "./StatCard.jsx";
+export { default as Chest } from "./Chest.jsx";
+export { default as Sheet, Modal, ConfirmSheet } from "./Sheet.jsx";
+export { default as Snackbar, LessonBanner } from "./Snackbar.jsx";
+export { default as HintTooltip } from "./HintTooltip.jsx";
+export { default as Badge, Pill, Chip } from "./Badge.jsx";
+export { default as Toggle } from "./Toggle.jsx";
+export { default as QuestRow, QuestBar } from "./QuestRow.jsx";
+export { default as StreakWeek, Flame, weekOf } from "./Streak.jsx";
+export { default as Medal, Shield, EmptyState } from "./Medal.jsx";

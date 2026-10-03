@@ -1,0 +1,1481 @@
+{
+  "v": 2,
+  "id": "u2",
+  "lessons": [
+    {
+      "id": "u2l1",
+      "title": "A arca",
+      "ref": "Gênesis 6:5-22; 7:1-16",
+      "level": "A1.1",
+      "narrator": "noe",
+      "guests": [
+        "sem",
+        "esposa",
+        "voice"
+      ],
+      "names": [
+        {
+          "en": "God",
+          "pt": "Deus",
+          "note": "sempre com maiúscula; os pronomes (he, his) ficam em minúscula"
+        },
+        {
+          "en": "the Lord",
+          "pt": "o Senhor"
+        },
+        {
+          "en": "Noah",
+          "pt": "Noé"
+        },
+        {
+          "en": "Shem",
+          "pt": "Sem",
+          "note": "um dos três filhos de Noé"
+        },
+        {
+          "en": "Ham",
+          "pt": "Cam",
+          "note": "filho de Noé"
+        },
+        {
+          "en": "Japheth",
+          "pt": "Jafé",
+          "note": "filho de Noé"
+        }
+      ],
+      "hints": {
+        "bad": "maus",
+        "good": "bom",
+        "man": "homem",
+        "walked": "andou",
+        "floors": "andares",
+        "father": "pai",
+        "animals": "animais",
+        "open": "aberta",
+        "commanded": "mandou"
+      },
+      "tips": [
+        {
+          "part": 1,
+          "id": "past-ed",
+          "grammar": "past-ed",
+          "title": "walked = passado com -ed",
+          "body": "Para contar o que já aconteceu, muitos verbos ganham -ed no fim: walk vira walked, close vira closed, rain vira rained. A forma é a mesma para todas as pessoas: I walked, he walked, they walked.",
+          "examples": [
+            {
+              "en": "Noah walks with God",
+              "pt": "Noé anda com Deus"
+            },
+            {
+              "en": "Noah walked with God",
+              "pt": "Noé andou com Deus"
+            }
+          ],
+          "contrast": {
+            "a": "I look at the ark",
+            "b": "I looked at the ark",
+            "note": "look = agora; looked = naquele momento (look + ed)"
+          }
+        },
+        {
+          "part": 2,
+          "id": "prep-place",
+          "grammar": "prep-place",
+          "title": "in, on, into, out of: onde e para onde",
+          "body": "in = dentro de (parado); on = em cima de; into = para dentro de (movimento); out of = para fora de. Com verbos de movimento como come e go, use into e out of: come into the ark, go out of the ark.",
+          "examples": [
+            {
+              "en": "The animals are in the ark",
+              "pt": "Os animais estão na arca"
+            },
+            {
+              "en": "The animals came into the ark",
+              "pt": "Os animais entraram na arca"
+            }
+          ],
+          "contrast": {
+            "a": "Come into the ark",
+            "b": "Go out of the ark",
+            "note": "into = para dentro; out of = para fora"
+          }
+        }
+      ],
+      "vocab": [
+        {
+          "en": "ark",
+          "pt": "arca",
+          "alt": [
+            "ship",
+            "boat"
+          ],
+          "pos": "noun",
+          "field": "objects",
+          "tier": "bible",
+          "part": 1,
+          "icon": "🚢",
+          "example": 3,
+          "note": "o grande barco de Noé"
+        },
+        {
+          "en": "wood",
+          "pt": "madeira",
+          "pos": "noun",
+          "field": "nature",
+          "tier": "core",
+          "part": 1,
+          "icon": "🌲",
+          "example": 3
+        },
+        {
+          "en": "long",
+          "pt": "comprido",
+          "ptAlt": [
+            "comprida",
+            "longo",
+            "longa"
+          ],
+          "pos": "adj",
+          "field": "quality",
+          "tier": "core",
+          "part": 1,
+          "icon": "📏",
+          "example": 4
+        },
+        {
+          "en": "to build",
+          "pt": "construir",
+          "pos": "verb",
+          "field": "work",
+          "tier": "core",
+          "part": 1,
+          "icon": "🏗️",
+          "example": 4
+        },
+        {
+          "en": "What are you making?",
+          "pt": "O que você está fazendo?",
+          "ptAlt": [
+            "O que você está construindo?"
+          ],
+          "pos": "chunk",
+          "field": "speech",
+          "tier": "core",
+          "part": 1,
+          "icon": "🗨️",
+          "example": 5
+        },
+        {
+          "en": "door",
+          "pt": "porta",
+          "pos": "noun",
+          "field": "objects",
+          "tier": "core",
+          "part": 2,
+          "icon": "🚪",
+          "example": 11
+        },
+        {
+          "en": "wife",
+          "pt": "esposa",
+          "ptAlt": [
+            "mulher"
+          ],
+          "pos": "noun",
+          "field": "family",
+          "tier": "core",
+          "part": 2,
+          "icon": "👩‍🦳",
+          "plural": "wives",
+          "example": 8
+        },
+        {
+          "en": "son",
+          "pt": "filho",
+          "pos": "noun",
+          "field": "family",
+          "tier": "core",
+          "part": 2,
+          "icon": "👦",
+          "example": 9
+        },
+        {
+          "en": "to close",
+          "pt": "fechar",
+          "alt": [
+            "to shut"
+          ],
+          "pos": "verb",
+          "field": "actions",
+          "tier": "core",
+          "part": 2,
+          "icon": "🔒",
+          "example": 11
+        },
+        {
+          "en": "Come into the ark",
+          "pt": "Entre na arca",
+          "ptAlt": [
+            "Entra na arca",
+            "Venha para a arca"
+          ],
+          "pos": "chunk",
+          "field": "speech",
+          "tier": "core",
+          "part": 2,
+          "icon": "📥",
+          "iconic": true,
+          "example": 7
+        }
+      ],
+      "beats": [
+        {
+          "order": 1,
+          "en": "Everyone on the earth was very bad",
+          "pt": "Todos na terra eram muito maus",
+          "altPt": [
+            "A maldade do homem era grande sobre a terra"
+          ],
+          "kind": "statement",
+          "fact": true
+        },
+        {
+          "order": 2,
+          "en": "But Noah was a good man and walked with God",
+          "pt": "Mas Noé era um homem bom e andava com Deus",
+          "alt": [
+            "But Noah was a righteous man and walked with God"
+          ],
+          "altPt": [
+            "Mas Noé era um homem justo e andava com Deus"
+          ],
+          "kind": "statement",
+          "fact": true,
+          "gap": {
+            "word": "walked",
+            "kind": "grammar",
+            "options": [
+              "walked",
+              "walk",
+              "walks"
+            ]
+          },
+          "grammar": "past-ed"
+        },
+        {
+          "order": 3,
+          "en": "God said, \"Make an ark of wood\"",
+          "pt": "Deus disse: \"Faça uma arca de madeira\"",
+          "alt": [
+            "God said, Make an ark of gopher wood",
+            "God said, Make a ship of gopher wood"
+          ],
+          "altPt": [
+            "Deus disse: Faze para ti uma arca de madeira de gofer"
+          ],
+          "kind": "quote",
+          "fact": true,
+          "iconic": true,
+          "speaker": "voice"
+        },
+        {
+          "order": 4,
+          "en": "Noah built a very long ark with three floors",
+          "pt": "Noé construiu uma arca muito comprida com três andares",
+          "altPt": [
+            "Noé construiu uma arca muito longa com três andares"
+          ],
+          "kind": "statement",
+          "fact": true
+        },
+        {
+          "order": 5,
+          "en": "Shem asked me, \"What are you making?\"",
+          "pt": "Sem me perguntou: \"O que você está fazendo?\"",
+          "kind": "question",
+          "fact": false,
+          "speaker": "sem"
+        },
+        {
+          "order": 6,
+          "en": "I am building a long ark of wood",
+          "pt": "Eu estou construindo uma arca comprida de madeira",
+          "altPt": [
+            "Estou construindo uma arca longa de madeira"
+          ],
+          "kind": "first-person",
+          "fact": false,
+          "speaker": "noe",
+          "gap": {
+            "word": "wood",
+            "kind": "lexical",
+            "options": [
+              "wood",
+              "ark",
+              "wife"
+            ]
+          }
+        },
+        {
+          "order": 7,
+          "en": "God said, \"Come into the ark with your sons\"",
+          "pt": "Deus disse: \"Entre na arca com os seus filhos\"",
+          "alt": [
+            "God said, Come into the ship with your sons"
+          ],
+          "altPt": [
+            "Deus disse: Entra na arca com os teus filhos"
+          ],
+          "kind": "quote",
+          "fact": true,
+          "iconic": true,
+          "speaker": "voice"
+        },
+        {
+          "order": 8,
+          "en": "Noah went into the ark with his wife",
+          "pt": "Noé entrou na arca com a sua esposa",
+          "altPt": [
+            "Noé entrou na arca com a sua mulher"
+          ],
+          "kind": "statement",
+          "fact": true,
+          "gap": {
+            "word": "into",
+            "kind": "grammar",
+            "options": [
+              "into",
+              "on",
+              "out"
+            ]
+          },
+          "grammar": "prep-place"
+        },
+        {
+          "order": 9,
+          "en": "His three sons and their wives came too",
+          "pt": "Os seus três filhos e as esposas deles também entraram",
+          "altPt": [
+            "Seus três filhos e as mulheres deles também vieram"
+          ],
+          "kind": "statement",
+          "fact": true
+        },
+        {
+          "order": 10,
+          "en": "The animals came into the ark two by two",
+          "pt": "Os animais entraram na arca dois a dois",
+          "altPt": [
+            "Os animais entraram na arca aos pares"
+          ],
+          "kind": "statement",
+          "fact": true,
+          "grammar": "prep-place"
+        },
+        {
+          "order": 11,
+          "en": "Then the Lord closed the door behind him",
+          "pt": "Então o Senhor fechou a porta atrás dele",
+          "alt": [
+            "Then the Lord shut the door behind him",
+            "Then the Lord shut him in"
+          ],
+          "altPt": [
+            "E o Senhor o fechou por fora"
+          ],
+          "kind": "statement",
+          "fact": true
+        },
+        {
+          "order": 12,
+          "en": "Did Noah close the door? No, the Lord closed it",
+          "pt": "Noé fechou a porta? Não, o Senhor a fechou",
+          "altPt": [
+            "Noé fechou a porta? Não, o Senhor fechou ela"
+          ],
+          "kind": "question",
+          "fact": true
+        }
+      ],
+      "contrast": [
+        {
+          "a": "But Noah was a good man and walked with God",
+          "b": "But Noah is a good man and walks with God",
+          "note": "walked = passado (com -ed); walks = presente"
+        },
+        {
+          "a": "Noah went into the ark with his wife",
+          "b": "Noah went out of the ark with his wife",
+          "note": "into = para dentro; out of = para fora"
+        }
+      ],
+      "verse": {
+        "text": "Thus Noah did. He did all that God commanded him.",
+        "classic": "Thus did Noah; according to all that God commanded him, so did he.",
+        "pt": "Assim fez Noé. Ele fez tudo o que Deus mandou.",
+        "classicPt": "E fê-lo Noé; conforme a tudo o que Deus lhe mandou, assim o fez.",
+        "ref": "Gênesis 6:22",
+        "blanks": [
+          {
+            "word": "commanded",
+            "options": [
+              "commanded",
+              "asked",
+              "showed",
+              "gave"
+            ]
+          },
+          {
+            "word": "all",
+            "options": [
+              "all",
+              "some",
+              "none",
+              "half"
+            ]
+          }
+        ]
+      },
+      "reading": {
+        "text": "Everyone on the earth was very bad, but Noah was a good man and walked with God. God said to him, \"Make an ark of wood.\" Noah built a long ark with a door. The animals came into the ark two by two, and Noah went in with his wife and his sons. Then the Lord closed the door behind him.",
+        "pt": "Todos na terra eram muito maus, mas Noé era um homem bom e andava com Deus. Deus disse a ele: \"Faça uma arca de madeira.\" Noé construiu uma arca comprida com uma porta. Os animais entraram na arca dois a dois, e Noé entrou com a sua esposa e os seus filhos. Então o Senhor fechou a porta atrás dele.",
+        "questions": [
+          {
+            "kind": "literal",
+            "q": "Who closed the door of the ark?",
+            "qPt": "Quem fechou a porta da arca?",
+            "options": [
+              "The Lord did it",
+              "Noah did it",
+              "His sons did it"
+            ],
+            "answer": "The Lord did it"
+          },
+          {
+            "kind": "inference",
+            "q": "Why did Noah build the ark?",
+            "qPt": "Por que Noé construiu a arca?",
+            "options": [
+              "Because God told him to",
+              "Because he had three sons",
+              "Because he wanted a long house"
+            ],
+            "answer": "Because God told him to",
+            "explain": "Deus mandou Noé fazer a arca, e Noé fez tudo como Deus ordenou (Gênesis 6:14, 22)."
+          }
+        ]
+      },
+      "conversation": {
+        "with": "sem",
+        "turns": [
+          {
+            "who": "sem",
+            "en": "Father, what are you making? It's very long!",
+            "pt": "Pai, o que você está fazendo? É muito comprido!",
+            "mood": "surpreso"
+          },
+          {
+            "who": "you",
+            "options": [
+              "An ark of wood. God wants it.",
+              "A door of wood. It's for you.",
+              "A long bed. It's for the animals."
+            ],
+            "answer": "An ark of wood. God wants it.",
+            "pt": "Uma arca de madeira. Deus quer isso.",
+            "intent": "Diga o que é e por que"
+          },
+          {
+            "who": "sem",
+            "en": "And how do we go in? Is there a door?",
+            "pt": "E como a gente entra? Tem uma porta?",
+            "mood": "animado"
+          },
+          {
+            "who": "you",
+            "options": [
+              "Yes. Come into the ark with me.",
+              "No. Go out of the ark with me.",
+              "Yes. Close the door behind me."
+            ],
+            "answer": "Yes. Come into the ark with me.",
+            "pt": "Sim. Entre na arca comigo.",
+            "intent": "Convide Sem para entrar",
+            "speak": true
+          }
+        ]
+      },
+      "fact": {
+        "pt": "A arca tinha trezentos côvados de comprimento, cinquenta de largura e trinta de altura: cerca de 135 metros por 22 por 13, com três andares e uma porta na lateral.",
+        "ref": "Gênesis 6:15-16"
+      }
+    },
+    {
+      "id": "u2l2",
+      "title": "O dilúvio",
+      "ref": "Gênesis 7:10 a 8:5",
+      "level": "A1.1",
+      "narrator": "noe",
+      "guests": [
+        "sem",
+        "esposa"
+      ],
+      "names": [
+        {
+          "en": "God",
+          "pt": "Deus"
+        },
+        {
+          "en": "Noah",
+          "pt": "Noé"
+        },
+        {
+          "en": "Shem",
+          "pt": "Sem",
+          "note": "filho de Noé"
+        },
+        {
+          "en": "Ararat",
+          "pt": "Ararate",
+          "note": "região de montanhas onde a arca parou"
+        }
+      ],
+      "hints": {
+        "look": "olhe",
+        "high": "alto",
+        "covered": "cobriu",
+        "remembered": "lembrou-se de",
+        "rested": "parou",
+        "blew": "soprou",
+        "years": "anos",
+        "old": "de idade",
+        "animals": "animais"
+      },
+      "tips": [
+        {
+          "part": 1,
+          "id": "numbers",
+          "grammar": "numbers",
+          "title": "seven, forty, many: números e quantidades",
+          "body": "O número vem antes do substantivo e não muda de forma: seven days, forty days, two animals. Para quantidades sem número, use many (muitos), all (todos) e only (só): many days, all the animals, only Noah.",
+          "examples": [
+            {
+              "en": "It rained for forty days",
+              "pt": "Choveu por quarenta dias"
+            },
+            {
+              "en": "The animals came in two by two",
+              "pt": "Os animais entraram dois a dois"
+            }
+          ],
+          "contrast": {
+            "a": "It rained for seven days",
+            "b": "It rained for forty days",
+            "note": "seven = 7; forty = 40; só o número muda"
+          }
+        },
+        {
+          "part": 2,
+          "id": "for-duration",
+          "grammar": "for-duration",
+          "title": "for + tempo: por quanto tempo",
+          "body": "Para dizer quanto tempo algo durou, use for antes do período: for forty days, for many days, for a long time. Em inglês não se usa during nem by nesse caso.",
+          "examples": [
+            {
+              "en": "It rained for forty days and forty nights",
+              "pt": "Choveu por quarenta dias e quarenta noites"
+            },
+            {
+              "en": "We waited in the ark for many days",
+              "pt": "Esperamos na arca por muitos dias"
+            }
+          ],
+          "contrast": {
+            "a": "We waited for one day",
+            "b": "We waited for many days",
+            "note": "for + período: for one day, for many days"
+          }
+        }
+      ],
+      "vocab": [
+        {
+          "en": "flood",
+          "pt": "dilúvio",
+          "ptAlt": [
+            "enchente"
+          ],
+          "pos": "noun",
+          "field": "nature",
+          "tier": "core",
+          "part": 1,
+          "icon": "⛈️",
+          "example": 1
+        },
+        {
+          "en": "forty",
+          "pt": "quarenta",
+          "pos": "num",
+          "field": "quantity",
+          "tier": "core",
+          "part": 1,
+          "icon": "🔢",
+          "example": 3
+        },
+        {
+          "en": "to rain",
+          "pt": "chover",
+          "pos": "verb",
+          "field": "nature",
+          "tier": "core",
+          "part": 1,
+          "icon": "🌧️",
+          "example": 3,
+          "note": "rain também é a chuva"
+        },
+        {
+          "en": "water",
+          "pt": "água",
+          "pos": "noun",
+          "field": "nature",
+          "tier": "core",
+          "part": 1,
+          "icon": "💧",
+          "example": 4
+        },
+        {
+          "en": "It is raining!",
+          "pt": "Está chovendo!",
+          "pos": "chunk",
+          "field": "speech",
+          "tier": "core",
+          "part": 1,
+          "icon": "☔",
+          "example": 2
+        },
+        {
+          "en": "mountain",
+          "pt": "montanha",
+          "ptAlt": [
+            "monte"
+          ],
+          "pos": "noun",
+          "field": "places",
+          "tier": "core",
+          "part": 2,
+          "icon": "⛰️",
+          "example": 7
+        },
+        {
+          "en": "alive",
+          "pt": "vivo",
+          "ptAlt": [
+            "viva",
+            "vivos"
+          ],
+          "pos": "adj",
+          "field": "quality",
+          "tier": "core",
+          "part": 2,
+          "icon": "💓",
+          "example": 8
+        },
+        {
+          "en": "to wait",
+          "pt": "esperar",
+          "pos": "verb",
+          "field": "actions",
+          "tier": "core",
+          "part": 2,
+          "icon": "⏳",
+          "example": 9
+        },
+        {
+          "en": "wind",
+          "pt": "vento",
+          "pos": "noun",
+          "field": "nature",
+          "tier": "core",
+          "part": 2,
+          "icon": "💨",
+          "example": 11
+        },
+        {
+          "en": "We are safe",
+          "pt": "Estamos seguros",
+          "ptAlt": [
+            "Nós estamos seguros",
+            "Estamos a salvo"
+          ],
+          "pos": "chunk",
+          "field": "speech",
+          "tier": "core",
+          "part": 2,
+          "icon": "😌",
+          "example": 10
+        }
+      ],
+      "beats": [
+        {
+          "order": 1,
+          "en": "The flood came on the earth after seven days",
+          "pt": "O dilúvio veio sobre a terra depois de sete dias",
+          "altPt": [
+            "As águas do dilúvio vieram sobre a terra depois de sete dias"
+          ],
+          "kind": "statement",
+          "fact": true,
+          "gap": {
+            "word": "seven",
+            "kind": "grammar",
+            "options": [
+              "seven",
+              "six",
+              "forty"
+            ]
+          },
+          "grammar": "numbers"
+        },
+        {
+          "order": 2,
+          "en": "Shem said, \"Look! It is raining!\"",
+          "pt": "Sem disse: \"Olhe! Está chovendo!\"",
+          "kind": "quote",
+          "fact": false,
+          "speaker": "sem"
+        },
+        {
+          "order": 3,
+          "en": "It rained for forty days and forty nights",
+          "pt": "Choveu por quarenta dias e quarenta noites",
+          "alt": [
+            "It rained on the earth forty days and forty nights",
+            "The rain was on the earth forty days and forty nights"
+          ],
+          "altPt": [
+            "Choveu quarenta dias e quarenta noites",
+            "E houve chuva sobre a terra quarenta dias e quarenta noites"
+          ],
+          "kind": "statement",
+          "fact": true,
+          "iconic": true
+        },
+        {
+          "order": 4,
+          "en": "The water went up very high on the earth",
+          "pt": "A água subiu muito alto sobre a terra",
+          "altPt": [
+            "As águas subiram muito sobre a terra"
+          ],
+          "kind": "statement",
+          "fact": true
+        },
+        {
+          "order": 5,
+          "en": "Our ark went up high on the water",
+          "pt": "A nossa arca subiu alto sobre a água",
+          "altPt": [
+            "Nossa arca flutuava sobre as águas"
+          ],
+          "kind": "first-person",
+          "fact": true,
+          "speaker": "noe"
+        },
+        {
+          "order": 6,
+          "en": "Was the flood forty days on the earth? Yes",
+          "pt": "O dilúvio ficou quarenta dias sobre a terra? Sim",
+          "kind": "question",
+          "fact": true
+        },
+        {
+          "order": 7,
+          "en": "The water covered all the mountains",
+          "pt": "A água cobriu todas as montanhas",
+          "altPt": [
+            "As águas cobriram todos os altos montes"
+          ],
+          "kind": "statement",
+          "fact": true,
+          "gap": {
+            "word": "water",
+            "kind": "lexical",
+            "options": [
+              "water",
+              "wind",
+              "ark"
+            ]
+          }
+        },
+        {
+          "order": 8,
+          "en": "Was anyone alive outside the ark? No, nobody",
+          "pt": "Alguém estava vivo fora da arca? Não, ninguém",
+          "kind": "question",
+          "fact": true
+        },
+        {
+          "order": 9,
+          "en": "We waited in the ark for many days",
+          "pt": "Esperamos na arca por muitos dias",
+          "altPt": [
+            "Nós esperamos na arca por muitos dias"
+          ],
+          "kind": "first-person",
+          "fact": false,
+          "speaker": "noe",
+          "gap": {
+            "word": "for",
+            "kind": "grammar",
+            "options": [
+              "for",
+              "at",
+              "by"
+            ]
+          },
+          "grammar": "for-duration"
+        },
+        {
+          "order": 10,
+          "en": "I said, \"Wait. We are safe and alive\"",
+          "pt": "Eu disse: \"Esperem. Estamos seguros e vivos\"",
+          "altPt": [
+            "Eu disse: Esperem. Nós estamos seguros e vivos"
+          ],
+          "kind": "first-person",
+          "fact": false,
+          "speaker": "noe"
+        },
+        {
+          "order": 11,
+          "en": "God remembered Noah and the wind came",
+          "pt": "Deus se lembrou de Noé, e o vento veio",
+          "altPt": [
+            "Deus lembrou-se de Noé e fez passar um vento sobre a terra"
+          ],
+          "kind": "statement",
+          "fact": true
+        },
+        {
+          "order": 12,
+          "en": "The wind blew and the ark rested on the mountains",
+          "pt": "O vento soprou e a arca parou sobre as montanhas",
+          "altPt": [
+            "O vento soprou e a arca repousou sobre os montes"
+          ],
+          "kind": "statement",
+          "fact": true
+        }
+      ],
+      "contrast": [
+        {
+          "a": "It rained for forty days and forty nights",
+          "b": "It rained for seven days and seven nights",
+          "note": "só muda o número: forty / seven"
+        },
+        {
+          "a": "We waited in the ark for many days",
+          "b": "We waited in the ark for one day",
+          "note": "for + tempo: for many days, for one day"
+        }
+      ],
+      "verse": {
+        "text": "It rained on the earth forty days and forty nights.",
+        "classic": "And the rain was upon the earth forty days and forty nights.",
+        "pt": "Choveu sobre a terra quarenta dias e quarenta noites.",
+        "classicPt": "E houve chuva sobre a terra quarenta dias e quarenta noites.",
+        "ref": "Gênesis 7:12",
+        "blanks": [
+          {
+            "word": "rained",
+            "options": [
+              "rained",
+              "waited",
+              "walked",
+              "closed"
+            ]
+          },
+          {
+            "word": "nights",
+            "options": [
+              "nights",
+              "years",
+              "weeks",
+              "months"
+            ]
+          },
+          {
+            "word": "earth",
+            "options": [
+              "earth",
+              "ark",
+              "mountain",
+              "sea"
+            ]
+          }
+        ]
+      },
+      "reading": {
+        "text": "It rained for forty days and forty nights, and the water covered all the mountains. Nobody outside the ark was alive, but Noah and his sons were safe. Then God remembered Noah, and a wind came over the earth. The water went down, and the ark rested on the mountains of Ararat.",
+        "pt": "Choveu por quarenta dias e quarenta noites, e a água cobriu todas as montanhas. Ninguém fora da arca estava vivo, mas Noé e os seus filhos estavam seguros. Então Deus se lembrou de Noé, e um vento veio sobre a terra. A água baixou, e a arca parou sobre as montanhas de Ararate.",
+        "questions": [
+          {
+            "kind": "literal",
+            "q": "Where did the ark stop?",
+            "qPt": "Onde a arca parou?",
+            "options": [
+              "On a high mountain",
+              "On the dry earth",
+              "In the deep water"
+            ],
+            "answer": "On a high mountain"
+          },
+          {
+            "kind": "inference",
+            "q": "Why did the water go down?",
+            "qPt": "Por que a água baixou?",
+            "options": [
+              "Because God did not forget Noah",
+              "Because it rained for many days",
+              "Because the ark was very long"
+            ],
+            "answer": "Because God did not forget Noah",
+            "explain": "Deus se lembrou de Noé e fez passar um vento sobre a terra; então as águas baixaram (Gênesis 8:1)."
+          }
+        ]
+      },
+      "conversation": {
+        "with": "esposa",
+        "turns": [
+          {
+            "who": "esposa",
+            "en": "Noah, it is raining a lot! Are we safe?",
+            "pt": "Noé, está chovendo muito! Estamos seguros?",
+            "mood": "assustado"
+          },
+          {
+            "who": "you",
+            "options": [
+              "Yes, we are safe in the ark.",
+              "No, we are not in the ark.",
+              "Yes, we are safe on the mountain."
+            ],
+            "answer": "Yes, we are safe in the ark.",
+            "pt": "Sim, estamos seguros na arca.",
+            "intent": "Acalme a sua esposa"
+          },
+          {
+            "who": "esposa",
+            "en": "How many days will it rain?",
+            "pt": "Quantos dias vai chover?",
+            "mood": "calmo"
+          },
+          {
+            "who": "you",
+            "options": [
+              "Forty days and forty nights.",
+              "Seven days and seven nights.",
+              "One day and one night."
+            ],
+            "answer": "Forty days and forty nights.",
+            "pt": "Quarenta dias e quarenta noites.",
+            "intent": "Diga quanto tempo vai chover",
+            "speak": true
+          }
+        ]
+      },
+      "fact": {
+        "pt": "Noé tinha seiscentos anos quando veio o dilúvio, e as águas ficaram altas sobre a terra por cento e cinquenta dias.",
+        "ref": "Gênesis 7:6, 24"
+      }
+    },
+    {
+      "id": "u2l3",
+      "title": "A pomba e o arco",
+      "ref": "Gênesis 8:6 a 9:17",
+      "level": "A1.1",
+      "narrator": "noe",
+      "guests": [
+        "sem",
+        "esposa",
+        "voice"
+      ],
+      "names": [
+        {
+          "en": "God",
+          "pt": "Deus"
+        },
+        {
+          "en": "the Lord",
+          "pt": "o Senhor"
+        },
+        {
+          "en": "Noah",
+          "pt": "Noé"
+        },
+        {
+          "en": "Shem",
+          "pt": "Sem",
+          "note": "filho de Noé"
+        }
+      ],
+      "hints": {
+        "raven": "corvo",
+        "found": "encontrou",
+        "place": "lugar",
+        "rest": "descansar",
+        "altar": "altar",
+        "made": "fez",
+        "destroy": "destruir",
+        "sign": "sinal",
+        "promised": "prometeu",
+        "animals": "animais"
+      },
+      "tips": [
+        {
+          "part": 1,
+          "id": "connectors",
+          "grammar": "connectors",
+          "title": "and, but, then: ligando as frases",
+          "body": "and liga duas ideias (e); but mostra um contraste (mas); then marca o passo seguinte (então, depois). Com then, a frase costuma começar por ele: Then he sent out a dove.",
+          "examples": [
+            {
+              "en": "First Noah sent out a raven",
+              "pt": "Primeiro Noé soltou um corvo"
+            },
+            {
+              "en": "Then he sent out a dove",
+              "pt": "Depois ele soltou uma pomba"
+            }
+          ],
+          "contrast": {
+            "a": "The dove came back and it had a leaf",
+            "b": "The dove went out but it did not come back",
+            "note": "and = soma; but = contraste"
+          }
+        },
+        {
+          "part": 2,
+          "id": "there-is",
+          "grammar": "there-is",
+          "title": "there is / there are = há",
+          "body": "Para dizer que algo existe agora, use there is (uma coisa) ou there are (várias): There is a rainbow in the cloud. There are many animals in the ark. No passado, você já viu there was e there were na unidade 1.",
+          "examples": [
+            {
+              "en": "There is a rainbow in the cloud",
+              "pt": "Há um arco-íris na nuvem"
+            },
+            {
+              "en": "There are many animals in the ark",
+              "pt": "Há muitos animais na arca"
+            }
+          ],
+          "contrast": {
+            "a": "There is a rainbow",
+            "b": "There was a rainbow",
+            "note": "is = agora; was = antes"
+          }
+        }
+      ],
+      "vocab": [
+        {
+          "en": "dove",
+          "pt": "pomba",
+          "pos": "noun",
+          "field": "animals",
+          "tier": "bible",
+          "part": 1,
+          "icon": "🕊️",
+          "example": 2
+        },
+        {
+          "en": "to send",
+          "pt": "enviar",
+          "ptAlt": [
+            "mandar",
+            "soltar"
+          ],
+          "pos": "verb",
+          "field": "actions",
+          "tier": "core",
+          "part": 1,
+          "icon": "📨",
+          "example": 1,
+          "note": "send out = soltar, mandar para fora"
+        },
+        {
+          "en": "to come back",
+          "pt": "voltar",
+          "pos": "verb",
+          "field": "actions",
+          "tier": "core",
+          "part": 1,
+          "icon": "🔙",
+          "example": 5
+        },
+        {
+          "en": "again",
+          "pt": "de novo",
+          "ptAlt": [
+            "novamente",
+            "outra vez"
+          ],
+          "pos": "adv",
+          "field": "time",
+          "tier": "core",
+          "part": 1,
+          "icon": "🔁",
+          "example": 4
+        },
+        {
+          "en": "an olive leaf",
+          "pt": "uma folha de oliveira",
+          "pos": "chunk",
+          "field": "nature",
+          "tier": "core",
+          "part": 1,
+          "icon": "🍃",
+          "example": 5
+        },
+        {
+          "en": "family",
+          "pt": "família",
+          "pos": "noun",
+          "field": "family",
+          "tier": "core",
+          "part": 2,
+          "icon": "👨‍👩‍👧‍👦",
+          "example": 7
+        },
+        {
+          "en": "rainbow",
+          "pt": "arco-íris",
+          "ptAlt": [
+            "arco"
+          ],
+          "alt": [
+            "bow"
+          ],
+          "pos": "noun",
+          "field": "nature",
+          "tier": "core",
+          "part": 2,
+          "icon": "🌈",
+          "example": 11
+        },
+        {
+          "en": "cloud",
+          "pt": "nuvem",
+          "pos": "noun",
+          "field": "nature",
+          "tier": "core",
+          "part": 2,
+          "icon": "☁️",
+          "example": 11
+        },
+        {
+          "en": "covenant",
+          "pt": "aliança",
+          "pos": "noun",
+          "field": "faith",
+          "tier": "bible",
+          "part": 2,
+          "icon": "🤝",
+          "example": 9,
+          "note": "um acordo solene; na Almeida, concerto"
+        },
+        {
+          "en": "never again",
+          "pt": "nunca mais",
+          "pos": "chunk",
+          "field": "speech",
+          "tier": "core",
+          "part": 2,
+          "icon": "🙅",
+          "iconic": true,
+          "example": 10
+        }
+      ],
+      "beats": [
+        {
+          "order": 1,
+          "en": "First Noah sent out a raven",
+          "pt": "Primeiro Noé soltou um corvo",
+          "altPt": [
+            "Primeiro Noé enviou um corvo"
+          ],
+          "kind": "statement",
+          "fact": true
+        },
+        {
+          "order": 2,
+          "en": "Then he sent out a dove",
+          "pt": "Depois ele soltou uma pomba",
+          "altPt": [
+            "Então ele enviou uma pomba"
+          ],
+          "kind": "statement",
+          "fact": true
+        },
+        {
+          "order": 3,
+          "en": "Was there a place for the dove? No",
+          "pt": "Havia um lugar para a pomba? Não",
+          "altPt": [
+            "Tinha um lugar para a pomba? Não"
+          ],
+          "kind": "question",
+          "fact": true
+        },
+        {
+          "order": 4,
+          "en": "Noah waited seven days and then sent the dove again",
+          "pt": "Noé esperou sete dias e então soltou a pomba de novo",
+          "altPt": [
+            "Noé esperou sete dias e depois enviou a pomba outra vez"
+          ],
+          "kind": "statement",
+          "fact": true,
+          "gap": {
+            "word": "then",
+            "kind": "grammar",
+            "options": [
+              "then",
+              "but",
+              "so"
+            ]
+          },
+          "grammar": "connectors"
+        },
+        {
+          "order": 5,
+          "en": "The dove came back with an olive leaf",
+          "pt": "A pomba voltou com uma folha de oliveira",
+          "altPt": [
+            "A pomba voltou com uma folha de oliveira no bico"
+          ],
+          "kind": "statement",
+          "fact": true,
+          "iconic": true,
+          "gap": {
+            "word": "dove",
+            "kind": "lexical",
+            "options": [
+              "dove",
+              "ark",
+              "cloud"
+            ]
+          }
+        },
+        {
+          "order": 6,
+          "en": "He sent it again and it did not come back",
+          "pt": "Ele a soltou de novo e ela não voltou",
+          "altPt": [
+            "Ele enviou a pomba outra vez e ela não voltou mais"
+          ],
+          "kind": "negative",
+          "fact": true
+        },
+        {
+          "order": 7,
+          "en": "God said, \"Go out of the ark with your family\"",
+          "pt": "Deus disse: \"Saia da arca com a sua família\"",
+          "alt": [
+            "God said, Go out of the ship with your family"
+          ],
+          "altPt": [
+            "Deus disse: Sai da arca com a tua família"
+          ],
+          "kind": "quote",
+          "fact": true,
+          "iconic": true,
+          "speaker": "voice"
+        },
+        {
+          "order": 8,
+          "en": "My family and I went out of the ark",
+          "pt": "A minha família e eu saímos da arca",
+          "altPt": [
+            "Eu e a minha família saímos da arca"
+          ],
+          "kind": "first-person",
+          "fact": true,
+          "speaker": "noe"
+        },
+        {
+          "order": 9,
+          "en": "God made a covenant with Noah and the animals",
+          "pt": "Deus fez uma aliança com Noé e com os animais",
+          "altPt": [
+            "Deus fez um concerto com Noé e com os animais"
+          ],
+          "kind": "statement",
+          "fact": true
+        },
+        {
+          "order": 10,
+          "en": "Will a flood destroy the earth again? Never again",
+          "pt": "Um dilúvio vai destruir a terra de novo? Nunca mais",
+          "altPt": [
+            "Um dilúvio destruirá a terra outra vez? Nunca mais"
+          ],
+          "kind": "question",
+          "fact": true
+        },
+        {
+          "order": 11,
+          "en": "There is a rainbow in the cloud",
+          "pt": "Há um arco-íris na nuvem",
+          "altPt": [
+            "Tem um arco-íris na nuvem",
+            "Há um arco na nuvem"
+          ],
+          "kind": "statement",
+          "fact": true,
+          "gap": {
+            "word": "is",
+            "kind": "grammar",
+            "options": [
+              "is",
+              "are",
+              "was"
+            ]
+          },
+          "grammar": "there-is"
+        },
+        {
+          "order": 12,
+          "en": "The rainbow in the cloud is the sign of the covenant",
+          "pt": "O arco-íris na nuvem é o sinal da aliança",
+          "altPt": [
+            "O arco nas nuvens é o sinal do concerto"
+          ],
+          "kind": "statement",
+          "fact": true,
+          "iconic": true,
+          "prod": false
+        }
+      ],
+      "contrast": [
+        {
+          "a": "He sent it again and it did not come back",
+          "b": "He sent it again but it did not come back",
+          "note": "and = e (sequência); but = mas (contraste)"
+        },
+        {
+          "a": "There is a rainbow in the cloud",
+          "b": "There was a rainbow in the cloud",
+          "note": "there is = há (agora); there was = havia"
+        }
+      ],
+      "verse": {
+        "text": "I set my rainbow in the cloud, and it will be a sign of a covenant.",
+        "classic": "I do set my bow in the cloud, and it shall be for a token of a covenant.",
+        "pt": "Eu ponho o meu arco-íris na nuvem, e ele será o sinal de uma aliança.",
+        "classicPt": "O meu arco tenho posto nas nuvens; este será por sinal do concerto.",
+        "ref": "Gênesis 9:13",
+        "blanks": [
+          {
+            "word": "rainbow",
+            "options": [
+              "rainbow",
+              "dove",
+              "raven",
+              "leaf"
+            ]
+          },
+          {
+            "word": "cloud",
+            "options": [
+              "cloud",
+              "sea",
+              "mountain",
+              "ark"
+            ]
+          },
+          {
+            "word": "sign",
+            "options": [
+              "sign",
+              "door",
+              "window",
+              "flood"
+            ]
+          }
+        ]
+      },
+      "reading": {
+        "text": "Noah sent out a dove, but it came back. Seven days later, he sent the dove again, and it came back with an olive leaf. Then God said, \"Go out of the ark with your family.\" Noah went out and built an altar to the Lord. God made a covenant with Noah, and the rainbow in the cloud is the sign: never again will a flood destroy the earth.",
+        "pt": "Noé soltou uma pomba, mas ela voltou. Sete dias depois, ele soltou a pomba de novo, e ela voltou com uma folha de oliveira. Então Deus disse: \"Saia da arca com a sua família.\" Noé saiu e construiu um altar ao Senhor. Deus fez uma aliança com Noé, e o arco-íris na nuvem é o sinal: nunca mais um dilúvio destruirá a terra.",
+        "questions": [
+          {
+            "kind": "literal",
+            "q": "What did the dove bring back?",
+            "qPt": "O que a pomba trouxe de volta?",
+            "options": [
+              "A leaf from an olive tree",
+              "A place to rest",
+              "A small white cloud"
+            ],
+            "answer": "A leaf from an olive tree"
+          },
+          {
+            "kind": "inference",
+            "q": "What does the rainbow mean?",
+            "qPt": "O que o arco-íris significa?",
+            "options": [
+              "God will not send a flood again",
+              "The dove will come back again",
+              "Noah must build another altar"
+            ],
+            "answer": "God will not send a flood again",
+            "explain": "O arco-íris é o sinal da aliança: nunca mais um dilúvio destruirá a terra (Gênesis 9:11-13)."
+          }
+        ]
+      },
+      "conversation": {
+        "with": "sem",
+        "turns": [
+          {
+            "who": "sem",
+            "en": "Father, look! There is something in the cloud!",
+            "pt": "Pai, olhe! Há algo na nuvem!",
+            "mood": "surpreso"
+          },
+          {
+            "who": "you",
+            "options": [
+              "It's a rainbow. It's God's promise to us.",
+              "It's a dove. It's coming back to us.",
+              "It's the rain. It's coming back to us."
+            ],
+            "answer": "It's a rainbow. It's God's promise to us.",
+            "pt": "É um arco-íris. É a promessa de Deus para nós.",
+            "intent": "Diga o que é e o que significa"
+          },
+          {
+            "who": "sem",
+            "en": "Will there be another flood?",
+            "pt": "Vai haver outro dilúvio?",
+            "mood": "assustado"
+          },
+          {
+            "who": "you",
+            "options": [
+              "No. Never again. God promised.",
+              "Yes. Very soon. God promised.",
+              "No. Not today. Maybe later."
+            ],
+            "answer": "No. Never again. God promised.",
+            "pt": "Não. Nunca mais. Deus prometeu.",
+            "intent": "Tranquilize Sem com a promessa de Deus",
+            "speak": true
+          }
+        ]
+      },
+      "fact": {
+        "pt": "A pomba voltou à tarde com uma folha de oliveira recém-arrancada no bico; por isso Noé soube que as águas tinham baixado.",
+        "ref": "Gênesis 8:11"
+      }
+    }
+  ]
+}

@@ -1,0 +1,701 @@
+{
+  "v": 2,
+  "id": "u4",
+  "lessons": [
+    {
+      "id": "u4l1",
+      "title": "O pastor escolhido",
+      "ref": "1 Samuel 16:1-23",
+      "level": "A1.2",
+      "narrator": "davi",
+      "guests": ["voice", "samuel", "jesse", "saul"],
+      "names": [
+        { "en": "the Lord", "pt": "o Senhor" },
+        { "en": "Samuel", "pt": "Samuel", "note": "profeta de Israel; ungiu Saul e depois Davi" },
+        { "en": "Jesse", "pt": "Jessé", "note": "pai de Davi, de Belém" },
+        { "en": "David", "pt": "Davi", "note": "o caçula de Jessé; pastor de ovelhas" },
+        { "en": "Saul", "pt": "Saul", "note": "o primeiro rei de Israel" },
+        { "en": "Bethlehem", "pt": "Belém" }
+      ],
+      "hints": {
+        "oldest": "mais velho",
+        "face": "rosto",
+        "anointed": "ungiu",
+        "well": "bem",
+        "left": "deixou"
+      },
+      "tips": [
+        {
+          "part": 1,
+          "id": "past-irregular",
+          "grammar": "past-irregular",
+          "title": "took, went, chose: passados sem -ed",
+          "body": "Muitos verbos comuns não ganham -ed no passado: a palavra muda. take vira took, go vira went, choose vira chose, see vira saw, come vira came. A forma é a mesma para I, you, he e they: I took, he took.",
+          "examples": [
+            { "en": "Samuel takes the oil", "pt": "Samuel pega o azeite" },
+            { "en": "Samuel took the oil", "pt": "Samuel pegou o azeite" }
+          ],
+          "contrast": { "a": "I choose a king", "b": "I chose a king", "note": "choose = escolho (agora); chose = escolhi (passado)" }
+        },
+        {
+          "part": 2,
+          "id": "possessives",
+          "grammar": "possessives",
+          "title": "my, your, his: de quem é?",
+          "body": "Para dizer de quem é algo, use my (meu, minha), your (seu, sua, de você), his (dele) e her (dela) antes do nome: my son, your sons, his sheep. Eles não mudam no plural: my sons. E o mais novo de todos é the youngest: -est no fim do adjetivo com the na frente.",
+          "examples": [
+            { "en": "My youngest son is with the sheep", "pt": "O meu filho mais novo está com as ovelhas" },
+            { "en": "His sheep are in the field", "pt": "As ovelhas dele estão no campo" }
+          ],
+          "contrast": { "a": "Are all your sons here?", "b": "Are all his sons here?", "note": "your = seus (de você); his = dele" }
+        }
+      ],
+      "vocab": [
+        { "en": "oil", "pt": "azeite", "ptAlt": ["óleo"], "pos": "noun", "field": "food", "tier": "core", "part": 1, "icon": "🏺", "example": 2, "note": "azeite de oliva; o mesmo nome para o óleo" },
+        { "en": "father", "pt": "pai", "pos": "noun", "field": "family", "tier": "core", "part": 1, "icon": "👨", "example": 2 },
+        { "en": "to look", "pt": "olhar", "pos": "verb", "field": "actions", "tier": "core", "part": 1, "icon": "🧐", "example": 3, "note": "look at = olhar para" },
+        { "en": "to choose", "pt": "escolher", "pos": "verb", "field": "mind", "tier": "core", "part": 1, "icon": "✅", "example": 6, "forms": ["chose", "chosen"] },
+        { "en": "The Lord looks at the heart", "pt": "O Senhor olha para o coração", "pos": "chunk", "field": "speech", "tier": "core", "part": 1, "icon": "🔍", "iconic": true, "example": 5 },
+        { "en": "sheep", "pt": "ovelha", "ptAlt": ["ovelhas"], "pos": "noun", "field": "animals", "tier": "core", "part": 2, "icon": "🐏", "example": 8, "plural": "sheep", "note": "singular e plural iguais: one sheep, two sheep" },
+        { "en": "harp", "pt": "harpa", "pos": "noun", "field": "objects", "tier": "bible", "part": 2, "icon": "🎻", "example": 11 },
+        { "en": "to play", "pt": "tocar música", "ptAlt": ["tocar"], "pos": "verb", "field": "actions", "tier": "core", "part": 2, "icon": "🎹", "example": 11, "note": "tocar um instrumento; também brincar, jogar" },
+        { "en": "young", "pt": "jovem", "ptAlt": ["novo", "nova"], "pos": "adj", "field": "quality", "tier": "core", "part": 2, "icon": "🧒", "example": 8, "note": "the youngest = o mais novo, o caçula" },
+        { "en": "Bring him to me", "pt": "Tragam ele para mim", "ptAlt": ["Tragam-no a mim", "Traga ele para mim"], "pos": "chunk", "field": "speech", "tier": "core", "part": 2, "icon": "👋", "iconic": true, "example": 10 }
+      ],
+      "beats": [
+        {
+          "order": 1,
+          "en": "The Lord said, \"Take oil. I chose a king\"",
+          "pt": "O Senhor disse: \"Pegue azeite. Eu escolhi um rei\"",
+          "altPt": ["O Senhor disse: \"Leve azeite. Eu escolhi um rei\""],
+          "kind": "quote",
+          "fact": true,
+          "speaker": "voice"
+        },
+        {
+          "order": 2,
+          "en": "Samuel took the oil to Jesse, a father of eight",
+          "pt": "Samuel levou o azeite a Jessé, um pai de oito filhos",
+          "altPt": ["Samuel levou o azeite para Jessé, pai de oito filhos"],
+          "kind": "statement",
+          "fact": true,
+          "gap": { "word": "took", "kind": "grammar", "options": ["took", "take", "takes"] },
+          "grammar": "past-irregular"
+        },
+        {
+          "order": 3,
+          "en": "Samuel looked at the oldest son first",
+          "pt": "Samuel olhou primeiro para o filho mais velho",
+          "kind": "statement",
+          "fact": true
+        },
+        {
+          "order": 4,
+          "en": "The Lord said, \"Do not look at his face\"",
+          "pt": "O Senhor disse: \"Não olhe para o rosto dele\"",
+          "altPt": ["O Senhor disse: \"Não olhe para a aparência dele\""],
+          "kind": "negative",
+          "fact": true,
+          "speaker": "voice"
+        },
+        {
+          "order": 5,
+          "en": "But the Lord looks at the heart, not the outside",
+          "pt": "Mas o Senhor olha para o coração, não para o exterior",
+          "alt": ["But the Lord looks at the heart, not at the outside", "But the Lord looks at the heart, not the outward appearance"],
+          "altPt": ["Mas o Senhor olha para o coração, não para a aparência", "Mas o Senhor olha para o coração, e não para o que está diante dos olhos"],
+          "kind": "negative",
+          "fact": true,
+          "iconic": true
+        },
+        {
+          "order": 6,
+          "en": "But the Lord did not choose the father's seven sons",
+          "pt": "Mas o Senhor não escolheu os sete filhos daquele pai",
+          "altPt": ["Mas o Senhor não escolheu os sete filhos do pai"],
+          "kind": "negative",
+          "fact": true
+        },
+        {
+          "order": 7,
+          "en": "Samuel asked, \"Are all your sons here?\"",
+          "pt": "Samuel perguntou: \"Todos os seus filhos estão aqui?\"",
+          "alt": ["Samuel asked, \"Are all your children here?\""],
+          "altPt": ["Samuel perguntou: \"Estão aqui todos os seus filhos?\""],
+          "kind": "question",
+          "fact": true,
+          "speaker": "samuel"
+        },
+        {
+          "order": 8,
+          "en": "Jesse said, \"My youngest son is with the sheep\"",
+          "pt": "Jessé disse: \"O meu filho mais novo está com as ovelhas\"",
+          "altPt": ["Jessé disse: \"O meu caçula está com as ovelhas\""],
+          "kind": "quote",
+          "fact": true,
+          "speaker": "jesse",
+          "gap": { "word": "My", "kind": "grammar", "options": ["My", "Your", "His"] },
+          "grammar": "possessives"
+        },
+        {
+          "order": 9,
+          "en": "Samuel anointed the youngest son with oil",
+          "pt": "Samuel ungiu o filho mais novo com azeite",
+          "altPt": ["Samuel ungiu o caçula com azeite"],
+          "kind": "statement",
+          "fact": true
+        },
+        {
+          "order": 10,
+          "en": "Saul was not well. He said, \"Bring him to me\"",
+          "pt": "Saul não estava bem. Ele disse: \"Tragam ele para mim\"",
+          "altPt": ["Saul não estava bem. Ele disse: \"Tragam-no a mim\""],
+          "kind": "negative",
+          "fact": true,
+          "speaker": "saul"
+        },
+        {
+          "order": 11,
+          "en": "David left the sheep and played the harp for Saul",
+          "pt": "Davi deixou as ovelhas e tocou harpa para Saul",
+          "altPt": ["Davi deixou as ovelhas e tocou a harpa para Saul"],
+          "kind": "statement",
+          "fact": true,
+          "gap": { "word": "harp", "kind": "lexical", "options": ["harp", "sheep", "oil"] }
+        },
+        {
+          "order": 12,
+          "en": "Was Saul well when David played the harp? Yes",
+          "pt": "Saul ficava bem quando Davi tocava harpa? Sim",
+          "kind": "question",
+          "fact": true
+        }
+      ],
+      "contrast": [
+        { "a": "Samuel took the oil to Jesse, a father of eight", "b": "Samuel takes the oil to Jesse, a father of eight", "note": "took = levou (passado irregular); takes = leva (Dica 1)" },
+        { "a": "Jesse said, \"My youngest son is with the sheep\"", "b": "Jesse said, \"His youngest son is with the sheep\"", "note": "my = meu; his = dele (Dica 2)" }
+      ],
+      "verse": {
+        "text": "Man looks at the outward appearance, but the Lord looks at the heart.",
+        "classic": "Man looketh on the outward appearance, but the LORD looketh on the heart.",
+        "pt": "As pessoas olham para a aparência, mas o Senhor olha para o coração.",
+        "classicPt": "Pois o homem vê o que está diante dos olhos, porém o Senhor olha para o coração.",
+        "ref": "1 Samuel 16:7",
+        "blanks": [
+          { "word": "heart", "options": ["heart", "face", "hand", "head"] },
+          { "word": "appearance", "options": ["appearance", "family", "house", "work"] }
+        ]
+      },
+      "reading": {
+        "text": "Samuel took oil and went to Bethlehem. Seven sons of Jesse came to him, but the Lord did not choose them. Samuel asked, \"Are all your sons here?\" Jesse said, \"My youngest son is with the sheep.\" Samuel anointed him with oil, and later David played the harp for King Saul.",
+        "pt": "Samuel pegou azeite e foi a Belém. Sete filhos de Jessé vieram até ele, mas o Senhor não os escolheu. Samuel perguntou: \"Todos os seus filhos estão aqui?\" Jessé disse: \"O meu filho mais novo está com as ovelhas.\" Samuel o ungiu com azeite, e mais tarde Davi tocou harpa para o rei Saul.",
+        "questions": [
+          {
+            "kind": "literal",
+            "q": "Where was the youngest son when Samuel came?",
+            "qPt": "Onde estava o filho mais novo quando Samuel chegou?",
+            "options": ["Out with the animals", "At home with his father", "At the house of the king"],
+            "answer": "Out with the animals"
+          },
+          {
+            "kind": "inference",
+            "q": "Why did the Lord not choose the seven older sons?",
+            "qPt": "Por que o Senhor não escolheu os sete filhos mais velhos?",
+            "options": ["Because he looks at the heart, not at the outside", "Because they were the sons of Jesse", "Because they were too young to be king"],
+            "answer": "Because he looks at the heart, not at the outside",
+            "explain": "O Senhor disse a Samuel que não vê como o homem vê: o homem olha para a aparência, mas o Senhor olha para o coração (1 Samuel 16:7)."
+          }
+        ]
+      },
+      "conversation": {
+        "with": "jesse",
+        "turns": [
+          { "who": "jesse", "en": "David, Samuel chose you, not your brothers. Why?", "pt": "Davi, Samuel escolheu você, não os seus irmãos. Por quê?", "mood": "surpreso" },
+          {
+            "who": "you",
+            "options": ["I don't know, Father. The Lord looks at the heart.", "I don't know, Father. The Lord looks at the face.", "I know, Father. I am the oldest son."],
+            "answer": "I don't know, Father. The Lord looks at the heart.",
+            "pt": "Não sei, pai. O Senhor olha para o coração.",
+            "intent": "Diga para onde o Senhor olha"
+          },
+          { "who": "jesse", "en": "Now King Saul wants you. Take your harp and go.", "pt": "Agora o rei Saul quer você. Pegue a sua harpa e vá.", "mood": "urgente" },
+          {
+            "who": "you",
+            "options": ["Yes, Father. I can play for the king.", "No, Father. I can play for the sheep.", "Yes, Father. I can fight for the king."],
+            "answer": "Yes, Father. I can play for the king.",
+            "pt": "Sim, pai. Eu posso tocar para o rei.",
+            "intent": "Aceite e diga o que você vai fazer na casa do rei",
+            "speak": true
+          }
+        ]
+      },
+      "fact": {
+        "pt": "Davi era o caçula de oito irmãos (1 Samuel 17:12). Quando Samuel chegou a Belém, ninguém o chamou para o sacrifício: ele estava no campo, cuidando das ovelhas, e Samuel não quis se sentar até que ele viesse (1 Samuel 16:11).",
+        "ref": "1 Samuel 16:11"
+      }
+    },
+    {
+      "id": "u4l2",
+      "title": "Davi e Golias",
+      "ref": "1 Samuel 17:4-51",
+      "level": "A1.2",
+      "narrator": "davi",
+      "guests": ["goliath", "saul"],
+      "names": [
+        { "en": "the Lord", "pt": "o Senhor" },
+        { "en": "David", "pt": "Davi" },
+        { "en": "Saul", "pt": "Saul", "note": "o rei de Israel" },
+        { "en": "Goliath", "pt": "Golias", "note": "o gigante filisteu de Gate" },
+        { "en": "Gath", "pt": "Gate", "note": "cidade dos filisteus" },
+        { "en": "Israel", "pt": "Israel", "note": "o povo de Deus" }
+      ],
+      "hints": {
+        "ran": "correram, fugiram",
+        "lion": "leão",
+        "dog": "cachorro",
+        "threw": "atirou, lançou",
+        "name": "nome"
+      },
+      "tips": [
+        {
+          "part": 1,
+          "id": "comparatives",
+          "grammar": "comparatives",
+          "title": "taller, the tallest: comparar",
+          "body": "Para comparar duas pessoas, acrescente -er ao adjetivo curto e use than: The giant was taller than Saul. Para dizer que é o maior de todos, use the e -est: the tallest man. Assim: tall, taller, the tallest; young, younger, the youngest; old, older, the oldest.",
+          "examples": [
+            { "en": "Saul was tall", "pt": "Saul era alto" },
+            { "en": "The giant was taller than Saul", "pt": "O gigante era mais alto que Saul" }
+          ],
+          "contrast": { "a": "The giant was taller than Saul", "b": "The giant was the tallest man", "note": "taller than = mais alto que (dois); the tallest = o mais alto (de todos)" }
+        },
+        {
+          "part": 2,
+          "id": "present-simple",
+          "grammar": "present-simple",
+          "title": "You come, I come: o presente com I e you",
+          "body": "No presente simples, com I, you, we e they o verbo fica na forma básica, sem -s: You come with a sword. I come in the name of the Lord. Só com he, she e it o verbo ganha -s: He comes with a sword. Para negar com I e you, use do not: I do not come with a sword.",
+          "examples": [
+            { "en": "You come to me with a sword", "pt": "Você vem a mim com uma espada" },
+            { "en": "I come to you in the name of the Lord", "pt": "Eu venho a você em nome do Senhor" }
+          ],
+          "contrast": { "a": "You come with a sword", "b": "He comes with a sword", "note": "I e you: come; he, she e it: comes" }
+        }
+      ],
+      "vocab": [
+        { "en": "giant", "pt": "gigante", "pos": "noun", "field": "people", "tier": "core", "part": 1, "icon": "🏋️", "example": 1 },
+        { "en": "tall", "pt": "alto", "ptAlt": ["alta"], "pos": "adj", "field": "quality", "tier": "core", "part": 1, "icon": "🦒", "example": 1, "note": "altura de pessoa ou coisa; o som alto é loud" },
+        { "en": "to kill", "pt": "matar", "pos": "verb", "field": "actions", "tier": "core", "part": 1, "icon": "💀", "example": 6 },
+        { "en": "bear", "pt": "urso", "pos": "noun", "field": "animals", "tier": "core", "part": 1, "icon": "🐻", "example": 6 },
+        { "en": "I am not afraid", "pt": "Eu não tenho medo", "ptAlt": ["Não tenho medo", "Eu não estou com medo"], "pos": "chunk", "field": "speech", "tier": "core", "part": 1, "icon": "😎", "example": 5 },
+        { "en": "stone", "pt": "pedra", "pos": "noun", "field": "nature", "tier": "core", "part": 2, "icon": "🔘", "example": 7 },
+        { "en": "sling", "pt": "funda", "ptAlt": ["estilingue"], "pos": "noun", "field": "objects", "tier": "bible", "part": 2, "icon": "🎯", "example": 7, "note": "tira de couro para lançar pedras" },
+        { "en": "sword", "pt": "espada", "pos": "noun", "field": "objects", "tier": "core", "part": 2, "icon": "🗡️", "example": 9 },
+        { "en": "to fall", "pt": "cair", "pos": "verb", "field": "actions", "tier": "core", "part": 2, "icon": "🍂", "example": 12, "forms": ["fell", "fallen"] },
+        { "en": "The battle is the Lord's", "pt": "A batalha é do Senhor", "ptAlt": ["A guerra é do Senhor", "Do Senhor é a guerra"], "pos": "chunk", "field": "speech", "tier": "core", "part": 2, "icon": "🎺", "iconic": true, "example": 10 }
+      ],
+      "beats": [
+        {
+          "order": 1,
+          "en": "Goliath was a giant from Gath. He was very tall",
+          "pt": "Golias era um gigante de Gate. Ele era muito alto",
+          "kind": "statement",
+          "fact": true
+        },
+        {
+          "order": 2,
+          "en": "Who was taller, Saul or the giant? The giant",
+          "pt": "Quem era mais alto, Saul ou o gigante? O gigante",
+          "kind": "question",
+          "fact": true,
+          "gap": { "word": "taller", "kind": "grammar", "options": ["taller", "tall", "tallest"] },
+          "grammar": "comparatives"
+        },
+        {
+          "order": 3,
+          "en": "For forty days the giant said, \"Choose a man!\"",
+          "pt": "Durante quarenta dias o gigante dizia: \"Escolham um homem!\"",
+          "altPt": ["Por quarenta dias o gigante dizia: \"Escolham um homem!\""],
+          "kind": "quote",
+          "fact": true,
+          "speaker": "goliath"
+        },
+        {
+          "order": 4,
+          "en": "The men of Israel ran from him. They were afraid",
+          "pt": "Os homens de Israel fugiram dele. Eles tinham medo",
+          "altPt": ["Os homens de Israel correram dele. Eles estavam com medo"],
+          "kind": "statement",
+          "fact": true
+        },
+        {
+          "order": 5,
+          "en": "\"I am not afraid. I killed a bear,\" said David",
+          "pt": "\"Eu não tenho medo. Eu matei um urso\", disse Davi",
+          "altPt": ["\"Não tenho medo. Matei um urso\", disse Davi"],
+          "kind": "first-person",
+          "fact": true,
+          "speaker": "davi"
+        },
+        {
+          "order": 6,
+          "en": "A lion and a bear came, and David killed them",
+          "pt": "Um leão e um urso vieram, e Davi os matou",
+          "altPt": ["Um leão e um urso vieram, e Davi matou os dois"],
+          "kind": "statement",
+          "fact": true,
+          "gap": { "word": "bear", "kind": "lexical", "options": ["bear", "giant", "sheep"] }
+        },
+        {
+          "order": 7,
+          "en": "David took five stones and his sling, not a sword",
+          "pt": "Davi pegou cinco pedras e a sua funda, não uma espada",
+          "altPt": ["Davi pegou cinco pedras e a funda, e não uma espada"],
+          "kind": "negative",
+          "fact": true
+        },
+        {
+          "order": 8,
+          "en": "The giant looked at young David. \"Am I a dog?\"",
+          "pt": "O gigante olhou para o jovem Davi: \"Eu sou um cachorro?\"",
+          "altPt": ["O gigante olhou para o jovem Davi: \"Sou eu algum cão?\""],
+          "kind": "question",
+          "fact": true
+        },
+        {
+          "order": 9,
+          "en": "David said, \"You come to me with a sword\"",
+          "pt": "Davi disse: \"Você vem a mim com uma espada\"",
+          "altPt": ["Davi disse: \"Você vem contra mim com espada\""],
+          "kind": "quote",
+          "fact": true,
+          "speaker": "davi",
+          "gap": { "word": "come", "kind": "grammar", "options": ["come", "comes", "coming"] },
+          "grammar": "present-simple"
+        },
+        {
+          "order": 10,
+          "en": "David said, \"The battle is the Lord's\"",
+          "pt": "Davi disse: \"A batalha é do Senhor\"",
+          "altPt": ["Davi disse: \"Do Senhor é a guerra\"", "Davi disse: \"A guerra é do Senhor\""],
+          "kind": "quote",
+          "fact": true,
+          "iconic": true,
+          "speaker": "davi"
+        },
+        {
+          "order": 11,
+          "en": "David threw a stone with his sling. The giant fell",
+          "pt": "Davi atirou uma pedra com a funda. O gigante caiu",
+          "altPt": ["Davi lançou uma pedra com a sua funda. O gigante caiu"],
+          "kind": "statement",
+          "fact": true
+        },
+        {
+          "order": 12,
+          "en": "The giant fell down, and David took the giant's sword",
+          "pt": "O gigante caiu no chão, e Davi pegou a espada do gigante",
+          "altPt": ["O gigante caiu, e Davi tomou a espada do gigante"],
+          "kind": "statement",
+          "fact": true
+        }
+      ],
+      "contrast": [
+        { "a": "Goliath was a giant from Gath. He was very tall", "b": "Goliath was a giant from Gath. He was the tallest", "note": "very tall = muito alto; the tallest = o mais alto de todos (Dica 1)" },
+        { "a": "David said, \"You come to me with a sword\"", "b": "David said, \"I come to you with a sling\"", "note": "You come / I come: com I e you o verbo fica sem -s (Dica 2)" }
+      ],
+      "verse": {
+        "text": "The battle is the Lord's, and he will give you into our hand.",
+        "classic": "For the battle is the LORD's, and he will give you into our hands.",
+        "pt": "A batalha é do Senhor, e ele vai entregar vocês nas nossas mãos.",
+        "classicPt": "Porque do Senhor é a guerra, e ele vos entregará na nossa mão.",
+        "ref": "1 Samuel 17:47",
+        "blanks": [
+          { "word": "battle", "options": ["battle", "army", "sword", "stone"] },
+          { "word": "hand", "options": ["hand", "head", "heart", "face"] },
+          { "word": "give", "options": ["give", "take", "send", "put"] }
+        ]
+      },
+      "reading": {
+        "text": "Goliath was a very tall giant from Gath, and for forty days he came out and said, \"Choose a man and send him to me!\" The men of Israel were afraid, but David said to Saul, \"I am not afraid. I killed a lion and a bear.\" David did not take Saul's sword. He took his sling and five stones, and he said to the giant, \"You come with a sword, but I come in the name of the Lord.\"",
+        "pt": "Golias era um gigante muito alto de Gate, e durante quarenta dias ele saía e dizia: \"Escolham um homem e mandem ele até mim!\" Os homens de Israel tinham medo, mas Davi disse a Saul: \"Eu não tenho medo. Eu matei um leão e um urso.\" Davi não pegou a espada de Saul. Ele pegou a sua funda e cinco pedras, e disse ao gigante: \"Você vem com uma espada, mas eu venho em nome do Senhor.\"",
+        "questions": [
+          {
+            "kind": "literal",
+            "q": "What did David take to fight the giant?",
+            "qPt": "O que Davi levou para lutar com o gigante?",
+            "options": ["Five small stones and a sling", "The sword and the armor of King Saul", "Bread and cheese for his brothers"],
+            "answer": "Five small stones and a sling"
+          },
+          {
+            "kind": "inference",
+            "q": "Why was David not afraid of the giant?",
+            "qPt": "Por que Davi não tinha medo do gigante?",
+            "options": ["Because the Lord helped him before", "Because he was taller than the giant", "Because he had the sword of the king"],
+            "answer": "Because the Lord helped him before",
+            "explain": "Davi lembrou que o Senhor o livrou do leão e do urso e disse que o mesmo Senhor o livraria da mão do gigante (1 Samuel 17:37)."
+          }
+        ]
+      },
+      "conversation": {
+        "with": "goliath",
+        "turns": [
+          { "who": "goliath", "en": "Am I a dog? You come to me with sticks!", "pt": "Eu sou um cachorro? Você vem a mim com paus!", "mood": "irônico" },
+          {
+            "who": "you",
+            "options": ["You come with a sword, but I come in the name of the Lord.", "You come with a sword, but I come with a bigger sword.", "You come with a sword, and I come with my sheep."],
+            "answer": "You come with a sword, but I come in the name of the Lord.",
+            "pt": "Você vem com uma espada, mas eu venho em nome do Senhor.",
+            "intent": "Diga em nome de quem você vem"
+          },
+          { "who": "goliath", "en": "Come here, boy! I will give you to the birds!", "pt": "Venha aqui, garoto! Vou dar você aos pássaros!", "mood": "bravo" },
+          {
+            "who": "you",
+            "options": ["The battle is the Lord's! I am not afraid of you.", "The battle is yours! I am very afraid of you.", "The battle is mine! I am stronger than you."],
+            "answer": "The battle is the Lord's! I am not afraid of you.",
+            "pt": "A batalha é do Senhor! Eu não tenho medo de você.",
+            "intent": "Diga de quem é a batalha",
+            "speak": true
+          }
+        ]
+      },
+      "fact": {
+        "pt": "Golias media \"seis côvados e um palmo\" (1 Samuel 17:4), quase três metros de altura. Davi venceu sem espada: o texto diz que \"não havia espada na mão de Davi\" (1 Samuel 17:50).",
+        "ref": "1 Samuel 17:4"
+      }
+    },
+    {
+      "id": "u4l3",
+      "title": "O rei cantor",
+      "ref": "1 Samuel 18:1-4; 19:1; 24:1-12; 2 Samuel 22:1-3, 50; Salmo 23",
+      "level": "A1.2",
+      "narrator": "davi",
+      "guests": ["jonatas", "saul"],
+      "names": [
+        { "en": "God", "pt": "Deus", "note": "sempre com maiúscula; os pronomes (he, his) ficam em minúscula" },
+        { "en": "the Lord", "pt": "o Senhor" },
+        { "en": "David", "pt": "Davi" },
+        { "en": "Jonathan", "pt": "Jônatas", "note": "filho do rei Saul e amigo de Davi" },
+        { "en": "Saul", "pt": "Saul", "note": "o rei de Israel" }
+      ],
+      "hints": {
+        "gave": "deu",
+        "saved": "salvou, livrou",
+        "lie": "deitar",
+        "pastures": "pastos"
+      },
+      "tips": [
+        {
+          "part": 1,
+          "id": "will",
+          "grammar": "will",
+          "title": "will: o que vai acontecer",
+          "body": "Para falar do futuro ou de uma decisão, use will antes do verbo na forma básica: I will sing (Eu vou cantar). Para negar, use will not (won't): I will not kill the king. O verbo não muda: I will sing, he will sing, they will sing.",
+          "examples": [
+            { "en": "I will sing to the Lord", "pt": "Eu vou cantar ao Senhor" },
+            { "en": "I will not kill the king", "pt": "Eu não vou matar o rei" }
+          ],
+          "contrast": { "a": "I sing to the Lord", "b": "I will sing to the Lord", "note": "sem will = agora, sempre; com will = depois, uma decisão" }
+        },
+        {
+          "part": 2,
+          "id": "no-noun",
+          "grammar": "no-noun",
+          "title": "no + nome: negar sem not",
+          "body": "Em inglês dá para negar colocando no antes do substantivo, sem not e sem do: I fear no evil (Não temo mal nenhum). I lack nothing (Nada me falta). Com not, o verbo precisa de do: I do not fear evil. Nunca junte as duas formas: I do not fear no evil está errado.",
+          "examples": [
+            { "en": "I will fear no evil", "pt": "Não vou temer mal nenhum" },
+            { "en": "I lack nothing", "pt": "Nada me falta" }
+          ],
+          "contrast": { "a": "I fear no evil", "b": "I do not fear evil", "note": "no + substantivo ou do not + verbo: uma negação só, nunca as duas" }
+        }
+      ],
+      "vocab": [
+        { "en": "friend", "pt": "amigo", "ptAlt": ["amiga"], "pos": "noun", "field": "people", "tier": "core", "part": 1, "icon": "🧑‍🤝‍🧑", "example": 1 },
+        { "en": "cave", "pt": "caverna", "ptAlt": ["gruta"], "pos": "noun", "field": "places", "tier": "core", "part": 1, "icon": "🕳️", "example": 4 },
+        { "en": "rock", "pt": "rocha", "ptAlt": ["rochedo"], "pos": "noun", "field": "nature", "tier": "core", "part": 1, "icon": "🗻", "example": 5 },
+        { "en": "song", "pt": "cântico", "ptAlt": ["canção", "música"], "pos": "noun", "field": "faith", "tier": "core", "part": 1, "icon": "🎵", "example": 5 },
+        { "en": "I will sing to the Lord", "pt": "Eu vou cantar ao Senhor", "ptAlt": ["Cantarei ao Senhor", "Vou cantar ao Senhor"], "pos": "chunk", "field": "speech", "tier": "core", "part": 1, "icon": "🎙️", "example": 6 },
+        { "en": "shepherd", "pt": "pastor", "ptAlt": ["pastora"], "pos": "noun", "field": "work", "tier": "core", "part": 2, "icon": "🧑‍🌾", "example": 7, "note": "quem cuida das ovelhas" },
+        { "en": "green", "pt": "verde", "ptAlt": ["verdes"], "pos": "adj", "field": "quality", "tier": "core", "part": 2, "icon": "🟢", "example": 8 },
+        { "en": "valley", "pt": "vale", "pos": "noun", "field": "places", "tier": "core", "part": 2, "icon": "🌄", "example": 10 },
+        { "en": "to fear", "pt": "temer", "ptAlt": ["ter medo de"], "pos": "verb", "field": "feelings", "tier": "core", "part": 2, "icon": "😰", "example": 10, "note": "afraid = com medo (adjetivo); to fear = temer (verbo)" },
+        { "en": "You are with me", "pt": "Você está comigo", "ptAlt": ["Tu estás comigo", "Está comigo"], "pos": "chunk", "field": "speech", "tier": "core", "part": 2, "icon": "👫", "iconic": true, "example": 12 }
+      ],
+      "beats": [
+        {
+          "order": 1,
+          "en": "Jonathan loved David and was his friend",
+          "pt": "Jônatas amava Davi e era seu amigo",
+          "altPt": ["Jônatas amava Davi e era amigo dele"],
+          "kind": "statement",
+          "fact": true
+        },
+        {
+          "order": 2,
+          "en": "Jonathan gave his sword to his friend",
+          "pt": "Jônatas deu a sua espada ao amigo",
+          "altPt": ["Jônatas deu a espada dele ao seu amigo"],
+          "kind": "statement",
+          "fact": true,
+          "gap": { "word": "friend", "kind": "lexical", "options": ["friend", "rock", "cave"] }
+        },
+        {
+          "order": 3,
+          "en": "David hid from Saul in a cave in the rocks",
+          "pt": "Davi se escondeu de Saul numa caverna nas rochas",
+          "altPt": ["Davi se escondeu de Saul em uma caverna entre as rochas"],
+          "kind": "statement",
+          "fact": true
+        },
+        {
+          "order": 4,
+          "en": "In the cave, David said, \"I will not kill Saul\"",
+          "pt": "Na caverna, Davi disse: \"Eu não vou matar Saul\"",
+          "altPt": ["Na caverna, Davi disse: \"Não vou matar Saul\""],
+          "kind": "negative",
+          "fact": true,
+          "speaker": "davi"
+        },
+        {
+          "order": 5,
+          "en": "David sang this song, \"The Lord is my rock\"",
+          "pt": "Davi cantou este cântico: \"O Senhor é a minha rocha\"",
+          "altPt": ["Davi cantou esta canção: \"O Senhor é a minha rocha\"", "Davi cantou este cântico: \"O Senhor é o meu rochedo\""],
+          "kind": "quote",
+          "fact": true,
+          "iconic": true,
+          "speaker": "davi"
+        },
+        {
+          "order": 6,
+          "en": "The song said, \"I will sing to the Lord\"",
+          "pt": "O cântico dizia: \"Eu vou cantar ao Senhor\"",
+          "altPt": ["A canção dizia: \"Cantarei ao Senhor\""],
+          "kind": "first-person",
+          "fact": true,
+          "speaker": "davi",
+          "gap": { "word": "will", "kind": "grammar", "options": ["will", "can", "must"] },
+          "grammar": "will"
+        },
+        {
+          "order": 7,
+          "en": "David also sang, \"The Lord is my shepherd\"",
+          "pt": "Davi também cantou: \"O Senhor é o meu pastor\"",
+          "kind": "quote",
+          "fact": true,
+          "iconic": true,
+          "speaker": "davi"
+        },
+        {
+          "order": 8,
+          "en": "My shepherd makes me lie down in green pastures",
+          "pt": "O meu pastor me faz deitar em pastos verdes",
+          "altPt": ["Deitar-me faz em verdes pastos", "O meu pastor me faz descansar em pastos verdes"],
+          "kind": "first-person",
+          "fact": true,
+          "speaker": "davi"
+        },
+        {
+          "order": 9,
+          "en": "Where do I rest? In green pastures",
+          "pt": "Onde eu descanso? Em pastos verdes",
+          "kind": "question",
+          "fact": true,
+          "speaker": "davi"
+        },
+        {
+          "order": 10,
+          "en": "In the dark valley, I will fear no evil",
+          "pt": "No vale escuro, não vou temer mal nenhum",
+          "altPt": ["Ainda que eu ande pelo vale da sombra da morte, não temerei mal algum", "No vale escuro, não temerei mal nenhum"],
+          "kind": "negative",
+          "fact": true,
+          "speaker": "davi",
+          "gap": { "word": "no", "kind": "grammar", "options": ["no", "not", "never"] },
+          "grammar": "no-noun"
+        },
+        {
+          "order": 11,
+          "en": "Did David fear the valley? No, God was with him",
+          "pt": "Davi temeu o vale? Não, Deus estava com ele",
+          "kind": "question",
+          "fact": true
+        },
+        {
+          "order": 12,
+          "en": "David sang to the Lord, \"You are with me\"",
+          "pt": "Davi cantou ao Senhor: \"Você está comigo\"",
+          "altPt": ["Davi cantou ao Senhor: \"Tu estás comigo\""],
+          "kind": "quote",
+          "fact": true,
+          "iconic": true,
+          "speaker": "davi"
+        }
+      ],
+      "contrast": [
+        { "a": "The song said, \"I will sing to the Lord\"", "b": "The song said, \"I sing to the Lord\"", "note": "will sing = vou cantar (decisão, futuro); sing = canto (Dica 1)" },
+        { "a": "In the dark valley, I will fear no evil", "b": "In the dark valley, I do not fear evil", "note": "no + substantivo ou do not + verbo: a mesma negação, uma forma só (Dica 2)" }
+      ],
+      "verse": {
+        "text": "The Lord is my shepherd: I shall lack nothing.",
+        "classic": "The LORD is my shepherd; I shall not want.",
+        "pt": "O Senhor é o meu pastor; nada vai me faltar.",
+        "classicPt": "O Senhor é o meu pastor; nada me faltará.",
+        "ref": "Salmo 23:1",
+        "blanks": [
+          { "word": "shepherd", "options": ["shepherd", "father", "friend", "king"] },
+          { "word": "nothing", "options": ["nothing", "everything", "something", "anything"] },
+          { "word": "lack", "options": ["lack", "have", "give", "see"] }
+        ]
+      },
+      "reading": {
+        "text": "Jonathan loved David and gave him his sword. King Saul hated David, but David did not kill him in the cave. He said, \"I will not kill the king.\" Later, David sang, \"The Lord is my rock.\" He also sang, \"The Lord is my shepherd, and you are with me.\"",
+        "pt": "Jônatas amava Davi e deu a ele a sua espada. O rei Saul odiava Davi, mas Davi não o matou na caverna. Ele disse: \"Eu não vou matar o rei.\" Mais tarde, Davi cantou: \"O Senhor é a minha rocha.\" Ele também cantou: \"O Senhor é o meu pastor, e você está comigo.\"",
+        "questions": [
+          {
+            "kind": "literal",
+            "q": "What did Jonathan give to David?",
+            "qPt": "O que Jônatas deu a Davi?",
+            "options": ["The sword that was his", "The house of his father", "A song for the Lord"],
+            "answer": "The sword that was his"
+          },
+          {
+            "kind": "inference",
+            "q": "Why did David not kill Saul in the cave?",
+            "qPt": "Por que Davi não matou Saul na caverna?",
+            "options": ["Because the Lord chose Saul as king", "Because Jonathan was David's friend", "Because David did not have a sword"],
+            "answer": "Because the Lord chose Saul as king",
+            "explain": "Davi disse aos seus homens que não estenderia a mão contra Saul, porque ele era o ungido do Senhor, o rei que o Senhor escolheu (1 Samuel 24:6, 10)."
+          }
+        ]
+      },
+      "conversation": {
+        "with": "jonatas",
+        "turns": [
+          { "who": "jonatas", "en": "David, my father wants to kill you. What will you do?", "pt": "Davi, o meu pai quer matar você. O que você vai fazer?", "mood": "assustado" },
+          {
+            "who": "you",
+            "options": ["I will not kill the king. The Lord is with me.", "I will kill the king. The Lord is with me.", "I will not go. My father is with me."],
+            "answer": "I will not kill the king. The Lord is with me.",
+            "pt": "Eu não vou matar o rei. O Senhor está comigo.",
+            "intent": "Diga o que você não vai fazer e quem está com você"
+          },
+          { "who": "jonatas", "en": "You're my friend. Take my sword and go.", "pt": "Você é meu amigo. Pegue a minha espada e vá.", "mood": "carinhoso" },
+          {
+            "who": "you",
+            "options": ["Thank you, my friend. I will sing to the Lord.", "Thank you, my friend. I will kill the king.", "No, my friend. I will take your father's sword."],
+            "answer": "Thank you, my friend. I will sing to the Lord.",
+            "pt": "Obrigado, meu amigo. Eu vou cantar ao Senhor.",
+            "intent": "Agradeça e diga o que você vai fazer",
+            "speak": true
+          }
+        ]
+      },
+      "fact": {
+        "pt": "Davi tinha trinta anos quando começou a reinar, e reinou quarenta anos (2 Samuel 5:4). O Salmo 23 traz o título \"Salmo de Davi\", e o cântico de 2 Samuel 22 foi cantado por ele no dia em que o Senhor o livrou de todos os seus inimigos e da mão de Saul (2 Samuel 22:1).",
+        "ref": "2 Samuel 5:4"
+      }
+    }
+  ]
+}
