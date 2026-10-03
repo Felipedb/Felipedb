@@ -87,8 +87,10 @@ export default function App() {
     setScreen(id);
   }, []);
 
-  // Em desenvolvimento, atalho dos testes de ponta a ponta: abre uma etapa da trilha sem passar pelo popover do nó
+  // Em desenvolvimento, atalhos dos testes de ponta a ponta (VISUAL_SPEC 10.1): window.__session espelha a sessão viva
+  // (null fora da lição, para o driver não ler a sessão encerrada) e window.__blOpenNode(id) abre uma etapa sem o popover do nó
   if (import.meta.env.DEV && typeof window !== "undefined") {
+    window.__session = session || null;
     window.__blOpenNode = (id) => { startLesson(id); return !!session; };
   }
 

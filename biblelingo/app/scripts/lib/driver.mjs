@@ -6,7 +6,11 @@
 export const LAUNCH_ARGS = ["--no-sandbox", "--autoplay-policy=no-user-gesture-required", "--mute-audio"];
 export const PHONE = { width: 390, height: 844 };
 
-export const sessionStarted = (page) => page.evaluate(() => !!(window.__session && window.__session.exercises));
+// Sessão viva em andamento (uma sessão já no resultado não conta: pode ser a etapa anterior ainda espelhada em window.__session)
+export const sessionStarted = (page) => page.evaluate(() => {
+  const s = window.__session;
+  return !!(s && s.exercises && s.phase !== "result");
+});
 
 // Abre uma etapa da trilha: clica [data-node="<id>"] button e, se aparecer o popover do nó, clica [data-popover-start].
 // waitSession=false serve aos casos em que a etapa não abre (ex.: modal de corações).
@@ -20,7 +24,7 @@ export async function openNode(page, id, { timeout = 10000, waitSession = true }
     if (!waitSession && i >= 6) return "direct";
     await page.waitForTimeout(100);
   }
-  if (waitSession) await page.waitForFunction(() => window.__session && window.__session.exercises, null, { timeout });
+  if (waitSession) await page.waitForFunction(() => { const s = window.__session; return !!(s && s.exercises && s.phase !== "result"); }, null, { timeout });
   return "popover";
 }
 
