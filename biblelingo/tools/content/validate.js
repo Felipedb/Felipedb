@@ -139,12 +139,16 @@ function loadWorld() {
     const src = fs.readFileSync(file, "utf8").replace(/^const (CHARACTERS|CHARACTER_ORDER|UNIT_CAST|CHARACTER_UNIT|SCENES|SCENE_EXTRAS|STORIES) =/gm, "var $1 =");
     vm.runInContext(src, ctx, { filename: f });
   }
-  // vozes ElevenLabs por personagem (tools/gen-audio.mjs), só para checar duplicidade dentro de uma cena
+  // vozes ElevenLabs por personagem (tools/voices.json: cast apelido -> id; extras usam SCENE_EXTRAS[*].voice),
+  // só para checar duplicidade dentro de uma cena
   let voiceByChar = {};
-  const ga = ROOT + "tools/gen-audio.mjs";
-  if (fs.existsSync(ga)) {
-    const m = /const VOICE_BY_CHAR = \{([\s\S]*?)\};/.exec(fs.readFileSync(ga, "utf8"));
-    if (m) { const re = /(\w+):\s*"(\w+)"/g; let x; while ((x = re.exec(m[1]))) voiceByChar[x[1]] = x[2]; }
+  const vj = ROOT + "tools/voices.json";
+  if (fs.existsSync(vj)) {
+    const vz = optJson(vj, {}) || {};
+    const voices = vz.voices || {};
+    for (const [ch, alias] of Object.entries(vz.cast || {})) voiceByChar[ch] = alias;
+    voiceByChar = Object.fromEntries(Object.entries(voiceByChar).map(([ch, a]) => [ch, (voices[a] && voices[a].id) || a]));
+    for (const [k, e] of Object.entries(ctx.SCENE_EXTRAS || {})) if (e && e.voice && !voiceByChar[k]) voiceByChar[k] = (voices[e.voice] && voices[e.voice].id) || e.voice;
   }
   return { CHARACTERS: ctx.CHARACTERS || {}, SCENE_EXTRAS: ctx.SCENE_EXTRAS || {}, SCENES: ctx.SCENES || [], STORIES: ctx.STORIES || [], voiceByChar };
 }
@@ -803,7 +807,7 @@ function validateScenes(ctx, probs, warns) {
     if (total && out.length / total > 0.1) P(`7.3.3: ${out.length} de ${total} tokens (${Math.round((100 * out.length) / total)}%) fora do vocabulário acumulado: ${uniq(out).slice(0, 12).join(", ")}${out.length > 12 ? "..." : ""}`);
     // 7.3.6: vozes únicas na cena
     const speakers = uniq([...(sc.cast || []), ...lines.map((x) => x.who)].filter(Boolean));
-    const voiceOf = (k) => (world.SCENE_EXTRAS[k] ? world.SCENE_EXTRAS[k].voice : world.voiceByChar[k]) || null;
+    const voiceOf = (k) => world.voiceByChar[k] || (world.SCENE_EXTRAS[k] ? world.SCENE_EXTRAS[k].voice : null) || null;
     const byVoice = {};
     speakers.forEach((k) => { const v = voiceOf(k); if (!v) return; (byVoice[v] = byVoice[v] || []).push(k); });
     Object.entries(byVoice).forEach(([v, ks]) => { if (ks.length > 1) P(`7.3.6: ${ks.join(" e ")} partilham a voz "${v}" na mesma cena (CS-18)`); });
