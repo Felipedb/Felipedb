@@ -147,7 +147,7 @@
   /* Balão de fala (5.12): abraça o conteúdo, rabinho de 12 px à esquerda a 60% da altura */
   .bubble { @apply relative rounded-lg border-2 border-line bg-page; width: fit-content; max-width: 100%; padding: 14px 16px; }
   .bubble::before { content: ""; position: absolute; left: -8px; top: 60%; width: 12px; height: 12px; transform: translateY(-50%) rotate(45deg); background: var(--color-page); border-left: 2px solid var(--color-line); border-bottom: 2px solid var(--color-line); }
-  .bubble-bottom::before { left: 50%; top: auto; bottom: -8px; transform: translateX(-50%) rotate(-45deg); border-left: 0; border-top: 0; border-right: 2px solid var(--color-line); border-bottom: 2px solid var(--color-line); }
+  .bubble-bottom::before { left: 50%; top: auto; bottom: -8px; transform: translateX(-50%) rotate(45deg); border-left: 0; border-top: 0; border-right: 2px solid var(--color-line); border-bottom: 2px solid var(--color-line); }
   .bubble-right::before { left: auto; right: -8px; transform: translateY(-50%) rotate(-135deg); }
   /* Palavra com dica: sublinhado pontilhado sem mudar o peso (3.2) */
   .hint { text-decoration: underline dotted 2px var(--color-line); text-underline-offset: 6px; }

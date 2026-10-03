@@ -1,9 +1,10 @@
-// Preenchido pelos componentes de exercício (lições e cenas)
+// Formatos de exercício das lições (VISUAL_SPEC 6.3): tipo -> componente. As cenas ficam em ../scenes/registry.js.
 import Choice from "./Choice.jsx";
 import TypeInput from "./TypeInput.jsx";
 import WordBank from "./WordBank.jsx";
 import Match from "./Match.jsx";
 import Speak from "./Speak.jsx";
+import WordCard from "./WordCard.jsx";
 export const REGISTRY = {
   "image-choice": Choice,
   "choice-en-pt": Choice,
@@ -24,4 +25,5 @@ export const REGISTRY = {
   "match": Match,
   "listen-match": Match,
   "speak": Speak,
+  "word-card": WordCard,
 };

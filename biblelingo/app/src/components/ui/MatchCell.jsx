@@ -33,7 +33,7 @@ export default function MatchCell({ side, keyId, label, audio = false, playing =
       className={`flex w-full items-center justify-center rounded-lg border-2 border-b-4 px-3 text-center text-sentence ${audio ? "h-[69px] gap-3" : "h-[87px]"} ${STATE[state] || STATE.idle} ${className}`}
       animate={anim} transition={trans} whileTap={interactive ? { y: 2, borderBottomWidth: 2 } : undefined} {...rest}>
       {audio ? (
-        <span className={`flex items-center gap-2 text-accent ${playing ? "speaker-playing wave-playing" : ""}`}>
+        <span className={`flex items-center gap-2 ${state === "done" || state === "gone" ? "text-disabled" : "text-accent"} ${playing ? "speaker-playing wave-playing" : ""}`}>
           <Icon name="speaker" size={24} />
           <span className="flex h-7 items-center gap-[3px]" aria-hidden>
             {BARS.map((h, i) => <span key={i} className="wave-bar w-[3px] rounded-[2px] bg-current" style={{ height: h, animationDelay: `${i * 60}ms` }} />)}
