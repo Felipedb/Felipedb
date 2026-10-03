@@ -25,7 +25,8 @@
         "sleep": "dormir",
         "statue": "estátua",
         "gold": "ouro",
-        "break": "quebrar, quebrou"
+        "break": "quebrar, quebrou",
+        "better": "melhor"
       },
       "tips": [
         {
@@ -331,7 +332,7 @@
         { "en": "We will not bow", "pt": "Nós não vamos nos curvar", "ptAlt": ["Não vamos nos curvar"], "pos": "chunk", "field": "speech", "tier": "core", "part": 1, "icon": "👊", "iconic": true, "example": 6 },
         { "en": "hot", "pt": "quente", "pos": "adj", "field": "quality", "tier": "core", "part": 2, "icon": "🥵", "example": 8 },
         { "en": "to burn", "pt": "queimar", "pos": "verb", "field": "actions", "tier": "core", "part": 2, "icon": "🧨", "image": "burn.png", "example": 11 },
-        { "en": "to throw", "pt": "lançar", "ptAlt": ["jogar", "atirar"], "pos": "verb", "field": "actions", "tier": "core", "part": 2, "icon": "🤾", "image": "throw.png", "example": 9 },
+        { "en": "to throw", "pt": "jogar", "ptAlt": ["lançar", "atirar"], "pos": "verb", "field": "actions", "tier": "core", "part": 2, "icon": "🤾", "image": "throw.png", "example": 9 },
         { "en": "furnace", "pt": "fornalha", "pos": "noun", "field": "objects", "tier": "bible", "part": 2, "icon": "🌋", "image": "furnace.png", "example": 8 },
         { "en": "Look! I see four men", "pt": "Olhem! Eu vejo quatro homens", "ptAlt": ["Olha! Eu vejo quatro homens"], "pos": "chunk", "field": "speech", "tier": "core", "part": 2, "icon": "4️⃣", "iconic": true, "example": 10 }
       ],
@@ -391,9 +392,9 @@
         },
         {
           "order": 7,
-          "en": "The furnace was made seven times hotter than before",
-          "pt": "A fornalha foi feita sete vezes mais quente do que antes",
-          "altPt": ["A fornalha foi aquecida sete vezes mais do que antes"],
+          "en": "So the furnace was made seven times hotter than before",
+          "pt": "Então a fornalha foi feita sete vezes mais quente do que antes",
+          "altPt": ["Então a fornalha foi aquecida sete vezes mais do que antes"],
           "kind": "statement",
           "fact": true,
           "grammar": "passive-past"
@@ -401,8 +402,8 @@
         {
           "order": 8,
           "en": "The three men were thrown into the hot burning furnace",
-          "pt": "Os três homens foram lançados na fornalha quente e ardente",
-          "altPt": ["Os três homens foram jogados na fornalha quente e ardente"],
+          "pt": "Os três homens foram jogados na fornalha quente e ardente",
+          "altPt": ["Os três homens foram lançados na fornalha quente e ardente"],
           "kind": "statement",
           "fact": true,
           "gap": { "word": "were", "kind": "grammar", "options": ["were", "was", "are"] },
@@ -410,11 +411,12 @@
         },
         {
           "order": 9,
-          "en": "The fire killed the soldiers who threw them in",
-          "pt": "O fogo matou os soldados que os lançaram lá dentro",
-          "altPt": ["O fogo matou os soldados que os jogaram lá dentro"],
+          "en": "Even the soldiers who threw them in were killed",
+          "pt": "Até os soldados que os jogaram lá dentro foram mortos",
+          "altPt": ["Até os soldados que os lançaram lá dentro morreram"],
           "kind": "statement",
-          "fact": true
+          "fact": true,
+          "grammar": "passive-past"
         },
         {
           "order": 10,
@@ -521,7 +523,7 @@
           {
             "who": "nabucodonosor",
             "en": "Then I will throw you into the hot furnace! Who can save you from my hands?",
-            "pt": "Então eu vou lançar vocês na fornalha quente! Quem pode salvar vocês das minhas mãos?",
+            "pt": "Então eu vou jogar vocês na fornalha quente! Quem pode salvar vocês das minhas mãos?",
             "mood": "urgente"
           },
           {
@@ -623,9 +625,9 @@
         },
         {
           "order": 3,
-          "en": "They asked the king for a new law in his kingdom",
-          "pt": "Eles pediram ao rei uma nova lei no reino dele",
-          "altPt": ["Eles pediram ao rei uma lei nova no reino dele"],
+          "en": "They asked the king for a law in his kingdom",
+          "pt": "Eles pediram ao rei uma lei no reino dele",
+          "altPt": ["Eles pediram ao rei uma nova lei no reino dele"],
           "kind": "statement",
           "fact": true
         },
@@ -671,8 +673,8 @@
         {
           "order": 8,
           "en": "They threw me into the den of lions",
-          "pt": "Eles me lançaram na cova dos leões",
-          "altPt": ["Eles me jogaram na cova dos leões"],
+          "pt": "Eles me jogaram na cova dos leões",
+          "altPt": ["Eles me lançaram na cova dos leões"],
           "kind": "first-person",
           "fact": true,
           "speaker": "daniel"
@@ -740,19 +742,19 @@
         ]
       },
       "reading": {
-        "text": "King Darius made Daniel a leader in his kingdom. The other men could not find anything against him, so they asked the king for a law: for thirty days, pray only to the king. Daniel prayed three times a day with his windows open, as before. The king could not change the law, and Daniel was thrown into the den of lions. But God sent his angel and closed the lions' mouths.",
-        "pt": "O rei Dario fez de Daniel um líder no reino dele. Os outros homens não conseguiram achar nada contra ele, então pediram ao rei uma lei: por trinta dias, orar só ao rei. Daniel orava três vezes por dia com as janelas abertas, como antes. O rei não podia mudar a lei, e Daniel foi lançado na cova dos leões. Mas Deus enviou o seu anjo e fechou a boca dos leões.",
+        "text": "King Darius put Daniel over many men in his kingdom. The other men could not find anything against him, so they asked the king for a law: for thirty days, pray only to the king. Daniel prayed three times a day with his windows open, as before. The king could do nothing, and Daniel was thrown into the den of lions. But God sent his angel and closed the lions' mouths.",
+        "pt": "O rei Dario pôs Daniel acima de muitos homens no reino dele. Os outros homens não conseguiram achar nada contra ele, então pediram ao rei uma lei: por trinta dias, orar só ao rei. Daniel orava três vezes por dia com as janelas abertas, como antes. O rei não pôde fazer nada, e Daniel foi jogado na cova dos leões. Mas Deus enviou o seu anjo e fechou a boca dos leões.",
         "questions": [
           {
             "kind": "literal",
             "q": "What did the new law say?",
             "qPt": "O que a nova lei dizia?",
             "options": [
-              "Pray to no one but the king for a month",
+              "Pray to the king alone for a month",
               "Open your windows toward Jerusalem every day",
-              "Throw every leader into the den of lions"
+              "Throw every leader to the lions"
             ],
-            "answer": "Pray to no one but the king for a month"
+            "answer": "Pray to the king alone for a month"
           },
           {
             "kind": "inference",

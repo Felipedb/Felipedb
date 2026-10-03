@@ -82,7 +82,8 @@ const lemmaOf = (en) => norm(String(en).replace(/^to /i, "").replace(/\s*\(.*?\)
 const ARCHAIC = /\b(thee|thou|thy|thine|ye|unto|hath|saith|doth|shalt|art|hast|whereon|standest|looketh|saveth|shewed|stedfast|brethren|lest|verily|midst|upon|purposed|trespass|void)\b/i;
 const ARCHAIC_SOFT = /\b(behold|whom|shall|for ever)\b/i;
 const BRITISH = { colour: "color", counsellor: "counselor", "for ever": "forever", kneeled: "knelt", shewed: "showed", stedfast: "steadfast", neighbour: "neighbor", saviour: "savior", honour: "honor", favour: "favor", centre: "center", grey: "gray", travelling: "traveling", realise: "realize" };
-const TU_VOS = /\b(tu|te|ti|teu|teus|tua|tuas|vós|vos|vosso|vossos|vossa|vossas|contigo|convosco)\b/i;
+// Fronteira de palavra consciente de acentos (\b trataria "estátua" como "está" + "tua")
+const TU_VOS = /(?<![\p{L}])(tu|te|ti|teu|teus|tua|tuas|vós|vos|vosso|vossos|vossa|vossas|contigo|convosco)(?![\p{L}])/iu;
 const VOS_VERB = /\b([a-z]+(?:ais|eis))\b/gi;
 const VOS_WHITE = new Set(["pais", "mais", "reis", "leis", "seis", "dezesseis", "jamais", "demais", "cais", "sais", "tais", "quais", "animais", "sinais", "canais", "reais", "iguais", "especiais", "naturais", "finais", "gerais", "locais", "totais", "legais", "sociais", "principais", "materiais", "ideais", "hospitais", "metais", "jornais", "cristais", "oficiais", "manuais", "anuais", "atuais", "casais", "rituais", "vitrais", "varais", "ancestrais", "funerais", "morais", "mortais", "imortais", "centrais", "mundiais", "nacionais", "regionais", "pessoais", "quintais", "pardais", "cereais"]);
 const NEGATIVE = /\b(not|don't|doesn't|didn't|cannot|can't|never|no)\b/i;
