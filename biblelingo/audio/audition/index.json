@@ -1,0 +1,1562 @@
+{
+ "adam-1.mp3": {
+  "voice": "adam",
+  "voice_id": "pNInz6obpgDQGcFmaJgB",
+  "char": "voice",
+  "text": "A voz do Senhor",
+  "kind": "name",
+  "hash": "560c71db21531c29",
+  "qa": {
+   "dur": 1.437,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "adam-2.mp3": {
+  "voice": "adam",
+  "voice_id": "pNInz6obpgDQGcFmaJgB",
+  "char": "voice",
+  "text": "Grass dries and flowers fall, but my word stands forever.",
+  "kind": "line",
+  "hash": "833d9c6de0cc18f3",
+  "qa": {
+   "dur": 4.598,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "adam-3.mp3": {
+  "voice": "adam",
+  "voice_id": "pNInz6obpgDQGcFmaJgB",
+  "char": "voice",
+  "text": "Noah, go out of the ark with your family.",
+  "kind": "line",
+  "hash": "b6c1009aa4b376c4",
+  "qa": {
+   "dur": 5.094,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "antoni-1.mp3": {
+  "voice": "antoni",
+  "voice_id": "ErXwobaYiN019PkySvjV",
+  "char": "sem",
+  "text": "Sem",
+  "kind": "name",
+  "hash": "6a617b38ff1c2f65",
+  "qa": {
+   "dur": 0.731,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "antoni-2.mp3": {
+  "voice": "antoni",
+  "voice_id": "ErXwobaYiN019PkySvjV",
+  "char": "sem",
+  "text": "The dove came back. There is no dry land.",
+  "kind": "line",
+  "hash": "b52c12b592442364",
+  "qa": {
+   "dur": 3.37,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "adam-4.mp3": {
+  "voice": "adam",
+  "voice_id": "pNInz6obpgDQGcFmaJgB",
+  "char": "voice",
+  "text": "Nebuchadnezzar, Belshazzar and Mephibosheth met Zacchaeus, Bartimaeus and Isaiah in Capernaum, near Nineveh and Gethsemane.",
+  "kind": "sentence",
+  "hash": "b72d2c46e6809c90",
+  "qa": {
+   "dur": 12.957,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "antoni-3.mp3": {
+  "voice": "antoni",
+  "voice_id": "ErXwobaYiN019PkySvjV",
+  "char": "sem",
+  "text": "Here come two lions and two elephants.",
+  "kind": "line",
+  "hash": "dc0515a90484c1e2",
+  "qa": {
+   "dur": 2.325,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "aria-1.mp3": {
+  "voice": "aria",
+  "voice_id": "9BWtsMINqrJLrRacOk9x",
+  "char": "debora",
+  "text": "Débora",
+  "kind": "name",
+  "hash": "42fcad91a26aadbc",
+  "qa": {
+   "dur": 0.914,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "aria-3.mp3": {
+  "voice": "aria",
+  "voice_id": "9BWtsMINqrJLrRacOk9x",
+  "char": "debora",
+  "text": "The Lord is my shepherd; I shall not want.",
+  "kind": "sentence",
+  "hash": "9d388c6168769a0d",
+  "qa": {
+   "dur": 2.403,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "aria-2.mp3": {
+  "voice": "aria",
+  "voice_id": "9BWtsMINqrJLrRacOk9x",
+  "char": "debora",
+  "text": "In the beginning God created the heaven and the earth.",
+  "kind": "sentence",
+  "hash": "ee30d3ba68143f91",
+  "qa": {
+   "dur": 2.691,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "antoni-4.mp3": {
+  "voice": "antoni",
+  "voice_id": "ErXwobaYiN019PkySvjV",
+  "char": "sem",
+  "text": "Nebuchadnezzar, Belshazzar and Mephibosheth met Zacchaeus, Bartimaeus and Isaiah in Capernaum, near Nineveh and Gethsemane.",
+  "kind": "sentence",
+  "hash": "e848cf094280eac7",
+  "qa": {
+   "dur": 12.199,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "arnold-1.mp3": {
+  "voice": "arnold",
+  "voice_id": "VR6AewLTigWG4xSOukaG",
+  "char": "isaias",
+  "text": "Isaías",
+  "kind": "name",
+  "hash": "58e67f412acad1cd",
+  "qa": {
+   "dur": 0.967,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "arnold-3.mp3": {
+  "voice": "arnold",
+  "voice_id": "VR6AewLTigWG4xSOukaG",
+  "char": "isaias",
+  "text": "The Prince of Peace will sit on the throne of David",
+  "kind": "sentence",
+  "hash": "0cfb70647ba85e7c",
+  "qa": {
+   "dur": 2.743,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "arnold-2.mp3": {
+  "voice": "arnold",
+  "voice_id": "VR6AewLTigWG4xSOukaG",
+  "char": "isaias",
+  "text": "Then the Lord himself will give you a sign: a virgin will have a son, and his name will be Immanuel.",
+  "kind": "line",
+  "hash": "5e3eb5f3bcc7341b",
+  "qa": {
+   "dur": 6.87,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "aria-4.mp3": {
+  "voice": "aria",
+  "voice_id": "9BWtsMINqrJLrRacOk9x",
+  "char": "debora",
+  "text": "Nebuchadnezzar, Belshazzar and Mephibosheth met Zacchaeus, Bartimaeus and Isaiah in Capernaum, near Nineveh and Gethsemane.",
+  "kind": "sentence",
+  "hash": "7f4bd147258d1134",
+  "qa": {
+   "dur": 11.128,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "bill-1.mp3": {
+  "voice": "bill",
+  "voice_id": "pqHfZKP75CvOlQylNhV4",
+  "char": "moises",
+  "text": "Moisés",
+  "kind": "name",
+  "hash": "f1603505132e6381",
+  "qa": {
+   "dur": 0.967,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "arnold-4.mp3": {
+  "voice": "arnold",
+  "voice_id": "VR6AewLTigWG4xSOukaG",
+  "char": "isaias",
+  "text": "Nebuchadnezzar, Belshazzar and Mephibosheth met Zacchaeus, Bartimaeus and Isaiah in Capernaum, near Nineveh and Gethsemane.",
+  "kind": "sentence",
+  "hash": "4ca06d35c8957ef6",
+  "qa": {
+   "dur": 10.109,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "bill-3.mp3": {
+  "voice": "bill",
+  "voice_id": "pqHfZKP75CvOlQylNhV4",
+  "char": "moises",
+  "text": "I will tell them. Lord, here I am.",
+  "kind": "line",
+  "hash": "e94d9c3798754b9b",
+  "qa": {
+   "dur": 3.187,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "bill-2.mp3": {
+  "voice": "bill",
+  "voice_id": "pqHfZKP75CvOlQylNhV4",
+  "char": "moises",
+  "text": "No. Eat quickly, with your shoes on. Tonight we leave!",
+  "kind": "line",
+  "hash": "5716c9bd16997c86",
+  "qa": {
+   "dur": 4.833,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "brian-1.mp3": {
+  "voice": "brian",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "char": "narrator",
+  "text": "Narrador",
+  "kind": "name",
+  "hash": "381f43fda1d0772c",
+  "qa": {
+   "dur": 0.914,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "brian-3.mp3": {
+  "voice": "brian",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "char": "narrator",
+  "text": "The king made a law: pray only to the king.",
+  "kind": "story",
+  "hash": "1d8546df5552ba9a",
+  "qa": {
+   "dur": 2.403,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "brian-2.mp3": {
+  "voice": "brian",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "char": "narrator",
+  "text": "His brothers were jealous and sold him to merchants going to Egypt.",
+  "kind": "story",
+  "hash": "562d940d096c7cdd",
+  "qa": {
+   "dur": 3.37,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "chris-1.mp3": {
+  "voice": "chris",
+  "voice_id": "iP95p4xoKVk53GoZ742B",
+  "char": "pedro",
+  "text": "Pedro",
+  "kind": "name",
+  "hash": "782f6b61ae7eee54",
+  "qa": {
+   "dur": 0.784,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "brian-4.mp3": {
+  "voice": "brian",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "char": "narrator",
+  "text": "Nebuchadnezzar, Belshazzar and Mephibosheth met Zacchaeus, Bartimaeus and Isaiah in Capernaum, near Nineveh and Gethsemane.",
+  "kind": "sentence",
+  "hash": "66ec75c7b3551866",
+  "qa": {
+   "dur": 10.109,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "bill-4.mp3": {
+  "voice": "bill",
+  "voice_id": "pqHfZKP75CvOlQylNhV4",
+  "char": "moises",
+  "text": "Nebuchadnezzar, Belshazzar and Mephibosheth met Zacchaeus, Bartimaeus and Isaiah in Capernaum, near Nineveh and Gethsemane.",
+  "kind": "sentence",
+  "hash": "ab96cb46f04df7d3",
+  "qa": {
+   "dur": 17.972,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "chris-2.mp3": {
+  "voice": "chris",
+  "voice_id": "iP95p4xoKVk53GoZ742B",
+  "char": "pedro",
+  "text": "But what I have, I give you: in the name of Jesus Christ of Nazareth, get up and walk!",
+  "kind": "line",
+  "hash": "95822c72a961eef7",
+  "qa": {
+   "dur": 5.851,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "chris-3.mp3": {
+  "voice": "chris",
+  "voice_id": "iP95p4xoKVk53GoZ742B",
+  "char": "pedro",
+  "text": "Give me five loaves and two fishes.",
+  "kind": "line",
+  "hash": "d06ea6ee9ee63fcc",
+  "qa": {
+   "dur": 1.855,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "clyde-1.mp3": {
+  "voice": "clyde",
+  "voice_id": "2EiwWnXFnvU5JabPnv8n",
+  "char": "pharaoh",
+  "text": "Faraó",
+  "kind": "name",
+  "hash": "c1ad5921dd91373c",
+  "qa": {
+   "dur": 0.862,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "chris-4.mp3": {
+  "voice": "chris",
+  "voice_id": "iP95p4xoKVk53GoZ742B",
+  "char": "pedro",
+  "text": "Nebuchadnezzar, Belshazzar and Mephibosheth met Zacchaeus, Bartimaeus and Isaiah in Capernaum, near Nineveh and Gethsemane.",
+  "kind": "sentence",
+  "hash": "fc071470ac9c27e3",
+  "qa": {
+   "dur": 10.867,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "clyde-2.mp3": {
+  "voice": "clyde",
+  "voice_id": "2EiwWnXFnvU5JabPnv8n",
+  "char": "pharaoh",
+  "text": "Seven fat cows came out of the river. Then seven thin cows ate them.",
+  "kind": "line",
+  "hash": "cf58c30304a6c141",
+  "qa": {
+   "dur": 5.016,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "clyde-3.mp3": {
+  "voice": "clyde",
+  "voice_id": "2EiwWnXFnvU5JabPnv8n",
+  "char": "pharaoh",
+  "text": "In my bed, in my kitchen, in my bread!",
+  "kind": "line",
+  "hash": "71f0b1edcf62214c",
+  "qa": {
+   "dur": 3.344,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "domi-1.mp3": {
+  "voice": "domi",
+  "voice_id": "AZnzlk1XvdvUeBnXmlld",
+  "char": "madalena",
+  "text": "Maria Madalena",
+  "kind": "name",
+  "hash": "d12533a8f253b8c1",
+  "qa": {
+   "dur": 1.202,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "domi-2.mp3": {
+  "voice": "domi",
+  "voice_id": "AZnzlk1XvdvUeBnXmlld",
+  "char": "madalena",
+  "text": "Lord, we have only five loaves and two fishes.",
+  "kind": "line",
+  "hash": "a19b39e4b90106bc",
+  "qa": {
+   "dur": 2.638,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "domi-3.mp3": {
+  "voice": "domi",
+  "voice_id": "AZnzlk1XvdvUeBnXmlld",
+  "char": "madalena",
+  "text": "O you of little faith, why did you doubt?",
+  "kind": "sentence",
+  "hash": "ebe987d0d7e455bf",
+  "qa": {
+   "dur": 2.325,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "clyde-4.mp3": {
+  "voice": "clyde",
+  "voice_id": "2EiwWnXFnvU5JabPnv8n",
+  "char": "pharaoh",
+  "text": "Nebuchadnezzar, Belshazzar and Mephibosheth met Zacchaeus, Bartimaeus and Isaiah in Capernaum, near Nineveh and Gethsemane.",
+  "kind": "sentence",
+  "hash": "41a49939b1098697",
+  "qa": {
+   "dur": 10.945,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "drew-1.mp3": {
+  "voice": "drew",
+  "voice_id": "29vD33N1CtxCmqQRPOHJ",
+  "char": "arao",
+  "text": "Arão",
+  "kind": "name",
+  "hash": "30885e0efcf416c2",
+  "qa": {
+   "dur": 0.784,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "drew-2.mp3": {
+  "voice": "drew",
+  "voice_id": "29vD33N1CtxCmqQRPOHJ",
+  "char": "arao",
+  "text": "The dinner is ready. Can we sit down?",
+  "kind": "line",
+  "hash": "25965b0a1c201196",
+  "qa": {
+   "dur": 2.403,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "drew-3.mp3": {
+  "voice": "drew",
+  "voice_id": "29vD33N1CtxCmqQRPOHJ",
+  "char": "arao",
+  "text": "Moses hid his face, for he was afraid to look at God",
+  "kind": "sentence",
+  "hash": "4170242d7a37e39f",
+  "qa": {
+   "dur": 4.023,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "domi-4.mp3": {
+  "voice": "domi",
+  "voice_id": "AZnzlk1XvdvUeBnXmlld",
+  "char": "madalena",
+  "text": "Nebuchadnezzar, Belshazzar and Mephibosheth met Zacchaeus, Bartimaeus and Isaiah in Capernaum, near Nineveh and Gethsemane.",
+  "kind": "sentence",
+  "hash": "1a00304f6a211f4a",
+  "qa": {
+   "dur": 10.397,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "elli-1.mp3": {
+  "voice": "elli",
+  "voice_id": "MF3mGyEYCl7XYWbV9V6O",
+  "char": "eva",
+  "text": "Eva",
+  "kind": "name",
+  "hash": "2d5565209c2ab011",
+  "qa": {
+   "dur": 0.784,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "elli-2.mp3": {
+  "voice": "elli",
+  "voice_id": "MF3mGyEYCl7XYWbV9V6O",
+  "char": "eva",
+  "text": "What did God make on the fourth day?",
+  "kind": "line",
+  "hash": "833caa44cde269e6",
+  "qa": {
+   "dur": 2.456,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "elli-3.mp3": {
+  "voice": "elli",
+  "voice_id": "MF3mGyEYCl7XYWbV9V6O",
+  "char": "eva",
+  "text": "God said, Let there be light",
+  "kind": "sentence",
+  "hash": "aee939f7747a66b6",
+  "qa": {
+   "dur": 1.933,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "emily-1.mp3": {
+  "voice": "emily",
+  "voice_id": "LcfcDJNUP1GQjkzn1xUU",
+  "char": "marta",
+  "text": "Marta",
+  "kind": "name",
+  "hash": "10b0ff25e7cf8d50",
+  "qa": {
+   "dur": 1.071,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "emily-2.mp3": {
+  "voice": "emily",
+  "voice_id": "LcfcDJNUP1GQjkzn1xUU",
+  "char": "marta",
+  "text": "Lord, I am cooking and cleaning all alone!",
+  "kind": "line",
+  "hash": "9dffdeb42238e996",
+  "qa": {
+   "dur": 2.273,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "drew-4.mp3": {
+  "voice": "drew",
+  "voice_id": "29vD33N1CtxCmqQRPOHJ",
+  "char": "arao",
+  "text": "Nebuchadnezzar, Belshazzar and Mephibosheth met Zacchaeus, Bartimaeus and Isaiah in Capernaum, near Nineveh and Gethsemane.",
+  "kind": "sentence",
+  "hash": "272d1824e8329daf",
+  "qa": {
+   "dur": 13.976,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "elli-4.mp3": {
+  "voice": "elli",
+  "voice_id": "MF3mGyEYCl7XYWbV9V6O",
+  "char": "eva",
+  "text": "Nebuchadnezzar, Belshazzar and Mephibosheth met Zacchaeus, Bartimaeus and Isaiah in Capernaum, near Nineveh and Gethsemane.",
+  "kind": "sentence",
+  "hash": "7d109c4dbec18286",
+  "qa": {
+   "dur": 10.867,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "emily-3.mp3": {
+  "voice": "emily",
+  "voice_id": "LcfcDJNUP1GQjkzn1xUU",
+  "char": "marta",
+  "text": "Yes! Tell my sister to help me.",
+  "kind": "line",
+  "hash": "a3b5dbe1829cdcc4",
+  "qa": {
+   "dur": 1.698,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "eric-1.mp3": {
+  "voice": "eric",
+  "voice_id": "cjVigY5qzO86Huf0OWal",
+  "char": "jesus",
+  "text": "Jesus",
+  "kind": "name",
+  "hash": "608c323e3a80c847",
+  "qa": {
+   "dur": 0.862,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "emily-4.mp3": {
+  "voice": "emily",
+  "voice_id": "LcfcDJNUP1GQjkzn1xUU",
+  "char": "marta",
+  "text": "Nebuchadnezzar, Belshazzar and Mephibosheth met Zacchaeus, Bartimaeus and Isaiah in Capernaum, near Nineveh and Gethsemane.",
+  "kind": "sentence",
+  "hash": "fc225eebaa710c6b",
+  "qa": {
+   "dur": 8.307,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "eric-2.mp3": {
+  "voice": "eric",
+  "voice_id": "cjVigY5qzO86Huf0OWal",
+  "char": "jesus",
+  "text": "Yes. And I say to you: you are Peter, and on this rock I will build my church.",
+  "kind": "line",
+  "hash": "1220c202da10bf28",
+  "qa": {
+   "dur": 4.415,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "eric-3.mp3": {
+  "voice": "eric",
+  "voice_id": "cjVigY5qzO86Huf0OWal",
+  "char": "jesus",
+  "text": "Thank you, Father, for this food.",
+  "kind": "line",
+  "hash": "eab2aba2a0f8228b",
+  "qa": {
+   "dur": 1.62,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "eric-4.mp3": {
+  "voice": "eric",
+  "voice_id": "cjVigY5qzO86Huf0OWal",
+  "char": "jesus",
+  "text": "Nebuchadnezzar, Belshazzar and Mephibosheth met Zacchaeus, Bartimaeus and Isaiah in Capernaum, near Nineveh and Gethsemane.",
+  "kind": "sentence",
+  "hash": "dc18712ac3d3ddc0",
+  "qa": {
+   "dur": 10.057,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "ethan-1.mp3": {
+  "voice": "ethan",
+  "voice_id": "g5CIjZEefAph4nQFvHAz",
+  "char": "copeiro",
+  "text": "Copeiro do rei",
+  "kind": "name",
+  "hash": "87518513bf5a6343",
+  "qa": {
+   "dur": 1.254,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "ethan-2.mp3": {
+  "voice": "ethan",
+  "voice_id": "g5CIjZEefAph4nQFvHAz",
+  "char": "copeiro",
+  "text": "I saw a vine with three branches. I pressed the grapes into Pharaoh's cup.",
+  "kind": "line",
+  "hash": "4040c21eb38e9137",
+  "qa": {
+   "dur": 5.042,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "ethan-3.mp3": {
+  "voice": "ethan",
+  "voice_id": "g5CIjZEefAph4nQFvHAz",
+  "char": "copeiro",
+  "text": "Back to the palace? In three days? Thank God!",
+  "kind": "line",
+  "hash": "3250bae072b1d398",
+  "qa": {
+   "dur": 3.474,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "freya-1.mp3": {
+  "voice": "freya",
+  "voice_id": "jsCqWAovK2LkecY7zXl4",
+  "char": "serva",
+  "text": "Serva",
+  "kind": "name",
+  "hash": "d4568c42d64aef61",
+  "qa": {
+   "dur": 0.862,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "freya-2.mp3": {
+  "voice": "freya",
+  "voice_id": "jsCqWAovK2LkecY7zXl4",
+  "char": "serva",
+  "text": "Wait. I know you. You were with that man, Jesus.",
+  "kind": "line",
+  "hash": "2e0f7d255119be87",
+  "qa": {
+   "dur": 3.004,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "freya-3.mp3": {
+  "voice": "freya",
+  "voice_id": "jsCqWAovK2LkecY7zXl4",
+  "char": "serva",
+  "text": "Yes, you were! You are one of his friends.",
+  "kind": "line",
+  "hash": "1f0a244b89c1d271",
+  "qa": {
+   "dur": 2.273,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "harry-1.mp3": {
+  "voice": "harry",
+  "voice_id": "SOYHLrjzK2X1ezoPC6cr",
+  "char": "jose",
+  "text": "José",
+  "kind": "name",
+  "hash": "728d1636aa4404a9",
+  "qa": {
+   "dur": 0.914,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "harry-2.mp3": {
+  "voice": "harry",
+  "voice_id": "SOYHLrjzK2X1ezoPC6cr",
+  "char": "jose",
+  "text": "The seven fat cows are seven good years. The seven thin cows are seven years of famine.",
+  "kind": "line",
+  "hash": "36ff047d10142e8f",
+  "qa": {
+   "dur": 5.851,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "ethan-4.mp3": {
+  "voice": "ethan",
+  "voice_id": "g5CIjZEefAph4nQFvHAz",
+  "char": "copeiro",
+  "text": "Nebuchadnezzar, Belshazzar and Mephibosheth met Zacchaeus, Bartimaeus and Isaiah in Capernaum, near Nineveh and Gethsemane.",
+  "kind": "sentence",
+  "hash": "6fb6fa85f4216363",
+  "qa": {
+   "dur": 13.74,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "freya-4.mp3": {
+  "voice": "freya",
+  "voice_id": "jsCqWAovK2LkecY7zXl4",
+  "char": "serva",
+  "text": "Nebuchadnezzar, Belshazzar and Mephibosheth met Zacchaeus, Bartimaeus and Isaiah in Capernaum, near Nineveh and Gethsemane.",
+  "kind": "sentence",
+  "hash": "ce6e636aacde2e77",
+  "qa": {
+   "dur": 9.378,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "harry-3.mp3": {
+  "voice": "harry",
+  "voice_id": "SOYHLrjzK2X1ezoPC6cr",
+  "char": "jose",
+  "text": "Yes, sir. I will do my best.",
+  "kind": "line",
+  "hash": "ad16a970f7d861bc",
+  "qa": {
+   "dur": 2.09,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "jessica-1.mp3": {
+  "voice": "jessica",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "char": "maria",
+  "text": "Maria",
+  "kind": "name",
+  "hash": "5ccbc36469100b18",
+  "qa": {
+   "dur": 0.862,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "jessica-2.mp3": {
+  "voice": "jessica",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "char": "maria",
+  "text": "In the beginning God created the heaven and the earth.",
+  "kind": "sentence",
+  "hash": "42ccb1724b3c084b",
+  "qa": {
+   "dur": 2.926,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "jessica-3.mp3": {
+  "voice": "jessica",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "char": "maria",
+  "text": "The Lord is my shepherd; I shall not want.",
+  "kind": "sentence",
+  "hash": "793328b043d13d43",
+  "qa": {
+   "dur": 2.403,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "harry-4.mp3": {
+  "voice": "harry",
+  "voice_id": "SOYHLrjzK2X1ezoPC6cr",
+  "char": "jose",
+  "text": "Nebuchadnezzar, Belshazzar and Mephibosheth met Zacchaeus, Bartimaeus and Isaiah in Capernaum, near Nineveh and Gethsemane.",
+  "kind": "sentence",
+  "hash": "d14a21117872c5b4",
+  "qa": {
+   "dur": 10.762,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "josh-1.mp3": {
+  "voice": "josh",
+  "voice_id": "TxGEqnHWrfWFTfGW9XjX",
+  "char": "daniel",
+  "text": "Daniel",
+  "kind": "name",
+  "hash": "3cd7311ebe35797a",
+  "qa": {
+   "dur": 0.862,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "josh-3.mp3": {
+  "voice": "josh",
+  "voice_id": "TxGEqnHWrfWFTfGW9XjX",
+  "char": "daniel",
+  "text": "Three years? What will we learn?",
+  "kind": "line",
+  "hash": "15b990d56b5f395f",
+  "qa": {
+   "dur": 2.351,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "josh-2.mp3": {
+  "voice": "josh",
+  "voice_id": "TxGEqnHWrfWFTfGW9XjX",
+  "char": "daniel",
+  "text": "You saw a big statue. Its head was gold, the chest silver, the belly bronze, the legs iron.",
+  "kind": "line",
+  "hash": "076c0fb61de15c34",
+  "qa": {
+   "dur": 7.549,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "jessica-4.mp3": {
+  "voice": "jessica",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "char": "maria",
+  "text": "Nebuchadnezzar, Belshazzar and Mephibosheth met Zacchaeus, Bartimaeus and Isaiah in Capernaum, near Nineveh and Gethsemane.",
+  "kind": "sentence",
+  "hash": "34fe273d06bebced",
+  "qa": {
+   "dur": 16.144,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "laura-1.mp3": {
+  "voice": "laura",
+  "voice_id": "FGY2WhTYpPnrIDTdsKH5",
+  "char": "rute",
+  "text": "Rute",
+  "kind": "name",
+  "hash": "cab040f21046ba37",
+  "qa": {
+   "dur": 0.679,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "josh-4.mp3": {
+  "voice": "josh",
+  "voice_id": "TxGEqnHWrfWFTfGW9XjX",
+  "char": "daniel",
+  "text": "Nebuchadnezzar, Belshazzar and Mephibosheth met Zacchaeus, Bartimaeus and Isaiah in Capernaum, near Nineveh and Gethsemane.",
+  "kind": "sentence",
+  "hash": "8d389090ba618cc4",
+  "qa": {
+   "dur": 11.729,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "laura-2.mp3": {
+  "voice": "laura",
+  "voice_id": "FGY2WhTYpPnrIDTdsKH5",
+  "char": "rute",
+  "text": "In the beginning God created the heaven and the earth.",
+  "kind": "sentence",
+  "hash": "5b1acbe955db6186",
+  "qa": {
+   "dur": 2.638,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "laura-3.mp3": {
+  "voice": "laura",
+  "voice_id": "FGY2WhTYpPnrIDTdsKH5",
+  "char": "rute",
+  "text": "The Lord is my shepherd; I shall not want.",
+  "kind": "sentence",
+  "hash": "ff0a198d54d52f2c",
+  "qa": {
+   "dur": 2.508,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "liam-1.mp3": {
+  "voice": "liam",
+  "voice_id": "TX3LPaxmHKxFdv7VOQHJ",
+  "char": "davi",
+  "text": "Davi",
+  "kind": "name",
+  "hash": "d325ee9a350968e0",
+  "qa": {
+   "dur": 0.967,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "liam-2.mp3": {
+  "voice": "liam",
+  "voice_id": "TX3LPaxmHKxFdv7VOQHJ",
+  "char": "davi",
+  "text": "Today everyone will know that there is a God in Israel.",
+  "kind": "line",
+  "hash": "921d92dc2575a218",
+  "qa": {
+   "dur": 3.422,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "laura-4.mp3": {
+  "voice": "laura",
+  "voice_id": "FGY2WhTYpPnrIDTdsKH5",
+  "char": "rute",
+  "text": "Nebuchadnezzar, Belshazzar and Mephibosheth met Zacchaeus, Bartimaeus and Isaiah in Capernaum, near Nineveh and Gethsemane.",
+  "kind": "sentence",
+  "hash": "c9a1d3ef402c0c2d",
+  "qa": {
+   "dur": 9.43,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "liam-3.mp3": {
+  "voice": "liam",
+  "voice_id": "TX3LPaxmHKxFdv7VOQHJ",
+  "char": "davi",
+  "text": "I am glad. Music brings peace.",
+  "kind": "line",
+  "hash": "700dfa2939b38322",
+  "qa": {
+   "dur": 2.508,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "matilda-1.mp3": {
+  "voice": "matilda",
+  "voice_id": "XrExE9yKIg1WjnnlVkGX",
+  "char": "esposa",
+  "text": "Esposa de Noé",
+  "kind": "name",
+  "hash": "b1c9d8fa852cb1a9",
+  "qa": {
+   "dur": 1.332,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "matilda-2.mp3": {
+  "voice": "matilda",
+  "voice_id": "XrExE9yKIg1WjnnlVkGX",
+  "char": "esposa",
+  "text": "Noah, look at the sky! Black clouds!",
+  "kind": "line",
+  "hash": "e1b2ef7859e75b9f",
+  "qa": {
+   "dur": 2.638,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "matilda-3.mp3": {
+  "voice": "matilda",
+  "voice_id": "XrExE9yKIg1WjnnlVkGX",
+  "char": "esposa",
+  "text": "The rain is very strong now!",
+  "kind": "line",
+  "hash": "4e7f0df6cb54671b",
+  "qa": {
+   "dur": 1.933,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "liam-4.mp3": {
+  "voice": "liam",
+  "voice_id": "TX3LPaxmHKxFdv7VOQHJ",
+  "char": "davi",
+  "text": "Nebuchadnezzar, Belshazzar and Mephibosheth met Zacchaeus, Bartimaeus and Isaiah in Capernaum, near Nineveh and Gethsemane.",
+  "kind": "sentence",
+  "hash": "bd4e389ff399b5e2",
+  "qa": {
+   "dur": 13.871,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "michael-1.mp3": {
+  "voice": "michael",
+  "voice_id": "flq6f7yk4E4fJM5XTYuZ",
+  "char": "noe",
+  "text": "Noé",
+  "kind": "name",
+  "hash": "3c2ca0755acd9246",
+  "qa": {
+   "dur": 0.731,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "michael-2.mp3": {
+  "voice": "michael",
+  "voice_id": "flq6f7yk4E4fJM5XTYuZ",
+  "char": "noe",
+  "text": "That is expensive. Eight pieces, and I take fifty trees.",
+  "kind": "line",
+  "hash": "229e3a36ab6a9459",
+  "qa": {
+   "dur": 3.422,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "michael-3.mp3": {
+  "voice": "michael",
+  "voice_id": "flq6f7yk4E4fJM5XTYuZ",
+  "char": "noe",
+  "text": "The animals went in two by two, male and female",
+  "kind": "sentence",
+  "hash": "76ac161395164658",
+  "qa": {
+   "dur": 2.873,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "matilda-4.mp3": {
+  "voice": "matilda",
+  "voice_id": "XrExE9yKIg1WjnnlVkGX",
+  "char": "esposa",
+  "text": "Nebuchadnezzar, Belshazzar and Mephibosheth met Zacchaeus, Bartimaeus and Isaiah in Capernaum, near Nineveh and Gethsemane.",
+  "kind": "sentence",
+  "hash": "a517b2a209b0407c",
+  "qa": {
+   "dur": 11.05,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "patrick-1.mp3": {
+  "voice": "patrick",
+  "voice_id": "ODq5zmih8GrVes37Dizd",
+  "char": "belsazar",
+  "text": "Rei Belsazar",
+  "kind": "name",
+  "hash": "a0223534f634364a",
+  "qa": {
+   "dur": 1.28,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "michael-4.mp3": {
+  "voice": "michael",
+  "voice_id": "flq6f7yk4E4fJM5XTYuZ",
+  "char": "noe",
+  "text": "Nebuchadnezzar, Belshazzar and Mephibosheth met Zacchaeus, Bartimaeus and Isaiah in Capernaum, near Nineveh and Gethsemane.",
+  "kind": "sentence",
+  "hash": "0e05045829c6ec00",
+  "qa": {
+   "dur": 11.729,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "patrick-2.mp3": {
+  "voice": "patrick",
+  "voice_id": "ODq5zmih8GrVes37Dizd",
+  "char": "belsazar",
+  "text": "Bring the purple robe and the gold chain. He is now third in the kingdom.",
+  "kind": "line",
+  "hash": "90a38fcf6f96cad5",
+  "qa": {
+   "dur": 4.127,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "patrick-3.mp3": {
+  "voice": "patrick",
+  "voice_id": "ODq5zmih8GrVes37Dizd",
+  "char": "belsazar",
+  "text": "Are you Daniel? A hand wrote on the wall and nobody can read it.",
+  "kind": "line",
+  "hash": "a9626f5be33bc3eb",
+  "qa": {
+   "dur": 3.709,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "paul-1.mp3": {
+  "voice": "paul",
+  "voice_id": "5Q0t7uMcjvnagumLfvZi",
+  "char": "coxo",
+  "text": "Homem coxo",
+  "kind": "name",
+  "hash": "dcbd078b2db4db38",
+  "qa": {
+   "dur": 1.202,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "paul-2.mp3": {
+  "voice": "paul",
+  "voice_id": "5Q0t7uMcjvnagumLfvZi",
+  "char": "coxo",
+  "text": "My feet... my legs are strong! I can walk! I can jump!",
+  "kind": "line",
+  "hash": "ccd5940ffd708d95",
+  "qa": {
+   "dur": 4.728,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "paul-3.mp3": {
+  "voice": "paul",
+  "voice_id": "5Q0t7uMcjvnagumLfvZi",
+  "char": "coxo",
+  "text": "I am looking. Do you have something for me?",
+  "kind": "line",
+  "hash": "69f9b3383bdf9d05",
+  "qa": {
+   "dur": 2.769,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "patrick-4.mp3": {
+  "voice": "patrick",
+  "voice_id": "ODq5zmih8GrVes37Dizd",
+  "char": "belsazar",
+  "text": "Nebuchadnezzar, Belshazzar and Mephibosheth met Zacchaeus, Bartimaeus and Isaiah in Capernaum, near Nineveh and Gethsemane.",
+  "kind": "sentence",
+  "hash": "19ce9963ec5a0a67",
+  "qa": {
+   "dur": 10.266,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "rachel-1.mp3": {
+  "voice": "rachel",
+  "voice_id": "21m00Tcm4TlvDq8ikWAM",
+  "char": "rebeca",
+  "text": "Rebeca",
+  "kind": "name",
+  "hash": "0c0ea0835d07b78a",
+  "qa": {
+   "dur": 0.862,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "rachel-2.mp3": {
+  "voice": "rachel",
+  "voice_id": "21m00Tcm4TlvDq8ikWAM",
+  "char": "rebeca",
+  "text": "In the beginning God created the heaven and the earth.",
+  "kind": "sentence",
+  "hash": "024eb96149ad9a9f",
+  "qa": {
+   "dur": 3.37,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "rachel-3.mp3": {
+  "voice": "rachel",
+  "voice_id": "21m00Tcm4TlvDq8ikWAM",
+  "char": "rebeca",
+  "text": "The Lord is my shepherd; I shall not want.",
+  "kind": "sentence",
+  "hash": "0d44ebaa409df207",
+  "qa": {
+   "dur": 2.351,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "paul-4.mp3": {
+  "voice": "paul",
+  "voice_id": "5Q0t7uMcjvnagumLfvZi",
+  "char": "coxo",
+  "text": "Nebuchadnezzar, Belshazzar and Mephibosheth met Zacchaeus, Bartimaeus and Isaiah in Capernaum, near Nineveh and Gethsemane.",
+  "kind": "sentence",
+  "hash": "b6ba8ee34934e0de",
+  "qa": {
+   "dur": 13.322,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "roger-1.mp3": {
+  "voice": "roger",
+  "voice_id": "CwhRBWXzGAHq8TQ4Fs17",
+  "char": "acaz",
+  "text": "Rei Acaz",
+  "kind": "name",
+  "hash": "ef37e3e6ad5594f8",
+  "qa": {
+   "dur": 1.071,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "roger-2.mp3": {
+  "voice": "roger",
+  "voice_id": "CwhRBWXzGAHq8TQ4Fs17",
+  "char": "acaz",
+  "text": "Isaiah, two kings are coming to attack us. I am afraid.",
+  "kind": "line",
+  "hash": "0a8040e3da370094",
+  "qa": {
+   "dur": 3.944,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "roger-3.mp3": {
+  "voice": "roger",
+  "voice_id": "CwhRBWXzGAHq8TQ4Fs17",
+  "char": "acaz",
+  "text": "How can I be calm? Their armies are big.",
+  "kind": "line",
+  "hash": "eef72a62fd963935",
+  "qa": {
+   "dur": 2.691,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "sam-1.mp3": {
+  "voice": "sam",
+  "voice_id": "yoZ06aMxZJJ28mfd3POQ",
+  "char": "adao",
+  "text": "Adão",
+  "kind": "name",
+  "hash": "d4552b312868089f",
+  "qa": {
+   "dur": 0.784,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "sam-2.mp3": {
+  "voice": "sam",
+  "voice_id": "yoZ06aMxZJJ28mfd3POQ",
+  "char": "adao",
+  "text": "The tree of life is beautiful.",
+  "kind": "line",
+  "hash": "23b3061c731a87bb",
+  "qa": {
+   "dur": 2.403,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "rachel-4.mp3": {
+  "voice": "rachel",
+  "voice_id": "21m00Tcm4TlvDq8ikWAM",
+  "char": "rebeca",
+  "text": "Nebuchadnezzar, Belshazzar and Mephibosheth met Zacchaeus, Bartimaeus and Isaiah in Capernaum, near Nineveh and Gethsemane.",
+  "kind": "sentence",
+  "hash": "fbba31cbb0a9ad1d",
+  "qa": {
+   "dur": 17.816,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "roger-4.mp3": {
+  "voice": "roger",
+  "voice_id": "CwhRBWXzGAHq8TQ4Fs17",
+  "char": "acaz",
+  "text": "Nebuchadnezzar, Belshazzar and Mephibosheth met Zacchaeus, Bartimaeus and Isaiah in Capernaum, near Nineveh and Gethsemane.",
+  "kind": "sentence",
+  "hash": "c666c6f0ee98a814",
+  "qa": {
+   "dur": 9.326,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "sarah-1.mp3": {
+  "voice": "sarah",
+  "voice_id": "EXAVITQu4vr4xnSDxMaL",
+  "char": "ester",
+  "text": "Ester",
+  "kind": "name",
+  "hash": "22715212fee85e3e",
+  "qa": {
+   "dur": 0.862,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "sarah-2.mp3": {
+  "voice": "sarah",
+  "voice_id": "EXAVITQu4vr4xnSDxMaL",
+  "char": "ester",
+  "text": "In the beginning God created the heaven and the earth.",
+  "kind": "sentence",
+  "hash": "0f9e657403b53f53",
+  "qa": {
+   "dur": 3.239,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "sam-3.mp3": {
+  "voice": "sam",
+  "voice_id": "yoZ06aMxZJJ28mfd3POQ",
+  "char": "adao",
+  "text": "God made the fish and the birds",
+  "kind": "sentence",
+  "hash": "78c1681108281c5f",
+  "qa": {
+   "dur": 2.821,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "sarah-3.mp3": {
+  "voice": "sarah",
+  "voice_id": "EXAVITQu4vr4xnSDxMaL",
+  "char": "ester",
+  "text": "The Lord is my shepherd; I shall not want.",
+  "kind": "sentence",
+  "hash": "c79f69973c40db7f",
+  "qa": {
+   "dur": 2.691,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "sam-4.mp3": {
+  "voice": "sam",
+  "voice_id": "yoZ06aMxZJJ28mfd3POQ",
+  "char": "adao",
+  "text": "Nebuchadnezzar, Belshazzar and Mephibosheth met Zacchaeus, Bartimaeus and Isaiah in Capernaum, near Nineveh and Gethsemane.",
+  "kind": "sentence",
+  "hash": "77c6f86f2733d6be",
+  "qa": {
+   "dur": 14.158,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "serena-1.mp3": {
+  "voice": "serena",
+  "voice_id": "pMsXgVXv3BLzUgSXRplE",
+  "char": "lidia",
+  "text": "Lídia",
+  "kind": "name",
+  "hash": "34901c12ab25dbff",
+  "qa": {
+   "dur": 0.836,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "sarah-4.mp3": {
+  "voice": "sarah",
+  "voice_id": "EXAVITQu4vr4xnSDxMaL",
+  "char": "ester",
+  "text": "Nebuchadnezzar, Belshazzar and Mephibosheth met Zacchaeus, Bartimaeus and Isaiah in Capernaum, near Nineveh and Gethsemane.",
+  "kind": "sentence",
+  "hash": "e7e3e06bd98fd723",
+  "qa": {
+   "dur": 11.311,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "serena-2.mp3": {
+  "voice": "serena",
+  "voice_id": "pMsXgVXv3BLzUgSXRplE",
+  "char": "lidia",
+  "text": "In the beginning God created the heaven and the earth.",
+  "kind": "sentence",
+  "hash": "872b7505935b8e9b",
+  "qa": {
+   "dur": 2.952,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "serena-3.mp3": {
+  "voice": "serena",
+  "voice_id": "pMsXgVXv3BLzUgSXRplE",
+  "char": "lidia",
+  "text": "The Lord is my shepherd; I shall not want.",
+  "kind": "sentence",
+  "hash": "eca2fb43070aeb68",
+  "qa": {
+   "dur": 2.691,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "thomas-1.mp3": {
+  "voice": "thomas",
+  "voice_id": "GBv7mTt0atIp3Br8iCZE",
+  "char": "anjo",
+  "text": "Anjo",
+  "kind": "name",
+  "hash": "164b46b0d2f66493",
+  "qa": {
+   "dur": 0.862,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "serena-4.mp3": {
+  "voice": "serena",
+  "voice_id": "pMsXgVXv3BLzUgSXRplE",
+  "char": "lidia",
+  "text": "Nebuchadnezzar, Belshazzar and Mephibosheth met Zacchaeus, Bartimaeus and Isaiah in Capernaum, near Nineveh and Gethsemane.",
+  "kind": "sentence",
+  "hash": "dd00dcf6da071c1e",
+  "qa": {
+   "dur": 10.527,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "thomas-3.mp3": {
+  "voice": "thomas",
+  "voice_id": "GBv7mTt0atIp3Br8iCZE",
+  "char": "anjo",
+  "text": "In the beginning God created the heaven and the earth.",
+  "kind": "sentence",
+  "hash": "25a0c3dd16177ef1",
+  "qa": {
+   "dur": 3.605,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "thomas-2.mp3": {
+  "voice": "thomas",
+  "voice_id": "GBv7mTt0atIp3Br8iCZE",
+  "char": "anjo",
+  "text": "This coal touched your lips. Your sin is gone.",
+  "kind": "line",
+  "hash": "2365012fdac2bbb0",
+  "qa": {
+   "dur": 3.579,
+   "attempts": 1,
+   "ok": true
+  }
+ },
+ "thomas-4.mp3": {
+  "voice": "thomas",
+  "voice_id": "GBv7mTt0atIp3Br8iCZE",
+  "char": "anjo",
+  "text": "Nebuchadnezzar, Belshazzar and Mephibosheth met Zacchaeus, Bartimaeus and Isaiah in Capernaum, near Nineveh and Gethsemane.",
+  "kind": "sentence",
+  "hash": "a89e7217f9876b50",
+  "qa": {
+   "dur": 14.393,
+   "attempts": 1,
+   "ok": true
+  }
+ }
+}
