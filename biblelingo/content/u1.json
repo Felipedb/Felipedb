@@ -76,7 +76,7 @@
           "kind": "statement", "fact": true, "gap": { "word": "light", "kind": "lexical", "options": ["light", "earth", "sun"] } },
         { "order": 5, "en": "God saw that the light was good", "pt": "Deus viu que a luz era boa",
           "alt": ["God saw the light, and it was good"], "kind": "statement", "fact": true },
-        { "order": 6, "en": "Was the earth still dark? No, the light was good", "pt": "A terra ainda estava escura? Não, a luz era boa",
+        { "order": 6, "en": "Was the light good? Yes, the earth was not dark", "pt": "A luz era boa? Sim, a terra não estava escura",
           "kind": "question", "fact": false, "grammar": "past-be" },
         { "order": 7, "en": "He called the light Day and the darkness Night", "pt": "Ele chamou a luz de Dia e a escuridão de Noite",
           "altPt": ["E Deus chamou à luz Dia, e às trevas chamou Noite"], "kind": "statement", "fact": true },
@@ -99,7 +99,7 @@
         "text": "In the beginning, God created the heavens and the earth.",
         "classic": "In the beginning God created the heaven and the earth.",
         "pt": "No princípio, Deus criou os céus e a terra.",
-        "classicPt": "No princípio, criou Deus os céus e a terra.",
+        "classicPt": "No princípio criou Deus os céus e a terra.",
         "ref": "Gênesis 1:1",
         "blanks": [
           { "word": "created", "options": ["created", "saw", "said", "called"] },
@@ -108,8 +108,8 @@
         ]
       },
       "reading": {
-        "text": "At first, the earth was dark. Then God said, \"Let there be light.\" And there was light. God called the light Day and the darkness Night. Then he made the sun and the moon.",
-        "pt": "No começo, a terra estava escura. Então Deus disse: \"Haja luz.\" E houve luz. Deus chamou a luz de Dia e a escuridão de Noite. Depois ele fez o sol e a lua.",
+        "text": "At first, the earth was empty and dark. Then God said, \"Let there be light.\" And there was light. God called the light Day and the darkness Night. Then he made the sun and the moon.",
+        "pt": "No começo, a terra estava vazia e escura. Então Deus disse: \"Haja luz.\" E houve luz. Deus chamou a luz de Dia e a escuridão de Noite. Depois ele fez o sol e a lua.",
         "questions": [
           { "kind": "literal", "q": "What was the earth like at first?", "qPt": "Como era a terra no começo?",
             "options": ["Dark, with nothing in it", "Full of light", "Full of trees"], "answer": "Dark, with nothing in it" },
@@ -129,7 +129,7 @@
             "answer": "Yes, it was good.", "pt": "Sim, era boa.", "intent": "Responda se a luz era boa", "speak": true }
         ]
       },
-      "fact": { "pt": "A palavra hebraica para \"princípio\" (bereshit) é o nome do livro de Gênesis na Bíblia hebraica.", "ref": "Gênesis 1:1" }
+      "fact": { "pt": "A primeira palavra da Bíblia em hebraico, bereshit (\"no princípio\"), dá nome ao livro de Gênesis na Bíblia hebraica.", "ref": "Gênesis 1:1" }
     },
     {
       "id": "u1l2",
@@ -144,6 +144,7 @@
       "hints": {
         "fish": "peixes",
         "fly": "voar",
+        "sky": "céu",
         "created": "criou",
         "fill": "encham",
         "saw": "viu",
@@ -155,7 +156,7 @@
           "id": "ordinals",
           "grammar": "ordinals",
           "title": "fifth, sixth, seventh: contando os dias",
-          "body": "Para dizer a ordem, o número ganha -th: fifth (quinto), sixth (sexto), seventh (sétimo). Só first (primeiro) e second (segundo) são diferentes. E para falar de mais de um, a palavra ganha -s: bird, birds; animal, animals.",
+          "body": "Para dizer a ordem, o número ganha -th: fifth (quinto), sixth (sexto), seventh (sétimo). Só first (primeiro), second (segundo) e third (terceiro) têm forma própria, e five vira fifth. E para falar de mais de um, a palavra ganha -s: bird, birds; animal, animals.",
           "examples": [
             { "en": "On the fifth day God made the birds", "pt": "No quinto dia Deus fez os pássaros" },
             { "en": "On the sixth day God made the animals", "pt": "No sexto dia Deus fez os animais" }
@@ -245,8 +246,8 @@
       "conversation": {
         "with": "eva",
         "turns": [
-          { "who": "eva", "en": "Adam, look! What are those in the sky?", "pt": "Adão, olhe! O que são aqueles no céu?", "mood": "surpreso" },
-          { "who": "you", "options": ["They are birds. God made them on the fifth day.", "They are animals. God made them on the sixth day.", "They are stars. God made them on the fourth day."],
+          { "who": "eva", "en": "Adam, look! What are those flying in the sky?", "pt": "Adão, olhe! O que são aqueles, voando no céu?", "mood": "surpreso" },
+          { "who": "you", "options": ["They are birds. God made them on the fifth day.", "They are animals. God made them on the sixth day.", "They are fish. God made them on the fifth day."],
             "answer": "They are birds. God made them on the fifth day.", "pt": "São pássaros. Deus os fez no quinto dia.", "intent": "Diga o que são e em que dia Deus os fez" },
           { "who": "eva", "en": "And is everything good?", "pt": "E tudo é bom?", "mood": "animado" },
           { "who": "you", "options": ["Yes, everything is very good.", "No, everything is very dark.", "Yes, everything is very big."],
@@ -285,7 +286,7 @@
           "id": "articles",
           "grammar": "articles",
           "title": "a garden, the garden: um e o",
-          "body": "a = um, uma (um qualquer); the = o, a (aquele que já conhecemos). Antes de som de vogal, a vira an: an animal. Para dizer de quem é, use my (meu), your (seu) e his (dele): his wife.",
+          "body": "a = um, uma (um qualquer); the = o, a (aquele que já conhecemos). Antes de som de vogal, a vira an: an animal. Para dizer de quem é, use my (meu), your (seu) e his (dele): his garden, o jardim dele.",
           "examples": [
             { "en": "God planted a garden", "pt": "Deus plantou um jardim" },
             { "en": "The garden was in Eden", "pt": "O jardim ficava no Éden" }
@@ -327,7 +328,7 @@
           "alt": ["You may freely eat of every tree of the garden"], "altPt": ["De toda árvore do jardim comerás livremente"],
           "kind": "quote", "fact": true, "speaker": "voice" },
         { "order": 4, "en": "\"Do not eat from the tree of good and evil\"", "pt": "\"Não coma da árvore do bem e do mal\"",
-          "alt": ["You shall not eat of the tree of the knowledge of good and evil"], "altPt": ["Da árvore do conhecimento do bem e do mal não comerás"],
+          "alt": ["Do not eat from the tree of the knowledge of good and evil", "You shall not eat of the tree of the knowledge of good and evil"], "altPt": ["Da árvore do conhecimento do bem e do mal não comerás"],
           "kind": "negative", "fact": true, "speaker": "voice", "gap": { "word": "eat", "kind": "lexical", "options": ["eat", "hide", "rest"] } },
         { "order": 5, "en": "God said, \"It is not good for the man to be alone\"", "pt": "Deus disse: \"Não é bom que o homem esteja sozinho\"",
           "altPt": ["Deus disse: \"Não é bom que o homem esteja só\""], "kind": "quote", "fact": true, "iconic": true, "prod": false, "speaker": "voice" },
@@ -367,10 +368,10 @@
         ]
       },
       "reading": {
-        "text": "In the garden of Eden, God said to the man, \"Do not eat from the tree of good and evil.\" But the snake said to the woman, \"You will not die.\" So she ate the fruit, and the man ate too. They hid from God, but he said, \"Where are you?\" At last, God sent them out of the garden.",
-        "pt": "No jardim do Éden, Deus disse ao homem: \"Não coma da árvore do bem e do mal.\" Mas a cobra disse à mulher: \"Vocês não vão morrer.\" Então ela comeu o fruto, e o homem comeu também. Eles se esconderam de Deus, mas ele disse: \"Onde você está?\" No fim, Deus os mandou para fora do jardim.",
+        "text": "In the garden of Eden, God said to the man, \"Do not eat from the tree of good and evil.\" But the snake said to the woman, \"You will not die.\" So she ate the fruit, and the man ate too. They hid from God, and he called, \"Where are you?\" At last, God sent them out of the garden.",
+        "pt": "No jardim do Éden, Deus disse ao homem: \"Não coma da árvore do bem e do mal.\" Mas a cobra disse à mulher: \"Vocês não vão morrer.\" Então ela comeu o fruto, e o homem comeu também. Eles se esconderam de Deus, e ele chamou: \"Onde você está?\" No fim, Deus os mandou para fora do jardim.",
         "questions": [
-          { "kind": "literal", "q": "Who told the woman that she would not die?", "qPt": "Quem disse à mulher que ela não morreria?",
+          { "kind": "literal", "q": "Who said, \"You will not die\"?", "qPt": "Quem disse: \"Vocês não vão morrer\"?",
             "options": ["The snake", "The man", "God"], "answer": "The snake" },
           { "kind": "inference", "q": "Why did the man and the woman hide?", "qPt": "Por que o homem e a mulher se esconderam?",
             "options": ["They were afraid after eating the fruit", "The snake talked to the woman", "They wanted to see God"], "answer": "They were afraid after eating the fruit",
@@ -381,7 +382,7 @@
         "with": "eva",
         "turns": [
           { "who": "eva", "en": "Adam, look at this tree! Can we eat its fruit?", "pt": "Adão, olhe esta árvore! Podemos comer o fruto dela?", "mood": "animado" },
-          { "who": "you", "options": ["No. God said, \"Do not eat from that tree.\"", "Yes. God said, \"Eat from every tree.\"", "No. God said, \"Do not hide from me.\""],
+          { "who": "you", "options": ["No. God said, \"Do not eat from that tree.\"", "Yes. God said, \"Eat from every tree.\"", "No. God said, \"Do not eat from any tree.\""],
             "answer": "No. God said, \"Do not eat from that tree.\"", "pt": "Não. Deus disse: \"Não coma daquela árvore.\"", "intent": "Diga o que Deus mandou sobre essa árvore" },
           { "who": "eva", "en": "And the other trees in the garden?", "pt": "E as outras árvores do jardim?", "mood": "calmo" },
           { "who": "you", "options": ["We may eat from every other tree.", "We may not eat from any tree.", "We may eat only from that tree."],
