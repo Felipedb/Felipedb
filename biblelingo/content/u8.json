@@ -140,8 +140,7 @@
       ],
       "hints": {
         "heaven": "céu",
-        "empty": "vazias, vazio",
-        "bread": "pão",
+        "secret": "segredo",
         "lead": "levar, conduzir",
         "temptation": "tentação",
         "deliver": "livrar"
@@ -173,25 +172,25 @@
         }
       ],
       "vocab": [
-        { "en": "room", "pt": "quarto", "ptAlt": ["sala", "cômodo"], "pos": "noun", "field": "places", "tier": "core", "part": 1, "icon": "🛋️", "example": 2 },
-        { "en": "secret", "pt": "segredo", "pos": "noun", "field": "mind", "tier": "core", "part": 1, "icon": "🤫", "example": 4, "recycle": true },
+        { "en": "room", "pt": "quarto", "ptAlt": ["sala", "cômodo"], "pos": "noun", "field": "places", "tier": "core", "part": 1, "icon": "🛋️", "example": 3 },
+        { "en": "street", "pt": "rua", "pos": "noun", "field": "places", "tier": "core", "part": 1, "icon": "🛣️", "example": 2 },
         { "en": "to need", "pt": "precisar", "pos": "verb", "field": "mind", "tier": "core", "part": 1, "icon": "🥺", "example": 4 },
         { "en": "to teach", "pt": "ensinar", "pos": "verb", "field": "mind", "tier": "core", "part": 1, "icon": "👨‍🏫", "example": 1 },
         { "en": "Lord, teach us to pray", "pt": "Senhor, ensine-nos a orar", "ptAlt": ["Senhor, nos ensine a orar", "Senhor, ensina-nos a orar"], "pos": "chunk", "field": "speech", "tier": "core", "part": 1, "icon": "📖", "iconic": true, "example": 1 },
         { "en": "daily", "pt": "diário", "ptAlt": ["de cada dia"], "pos": "adj", "field": "time", "tier": "core", "part": 2, "icon": "🗓️", "example": 8 },
         { "en": "debt", "pt": "dívida", "pos": "noun", "field": "work", "tier": "core", "part": 2, "icon": "💳", "example": 10 },
         { "en": "debtor", "pt": "devedor", "pos": "noun", "field": "people", "tier": "bible", "part": 2, "icon": "🧾", "example": 10, "note": "quem deve algo a alguém" },
-        { "en": "to forgive", "pt": "perdoar", "pos": "verb", "field": "faith", "tier": "core", "part": 2, "icon": "🤍", "example": 10, "recycle": true },
+        { "en": "bread", "pt": "pão", "pos": "noun", "field": "food", "tier": "core", "part": 2, "icon": "🍞", "example": 8 },
         { "en": "Give us today our daily bread", "pt": "Dê-nos hoje o nosso pão de cada dia", "ptAlt": ["O pão nosso de cada dia nos dá hoje", "Nos dê hoje o nosso pão de cada dia"], "pos": "chunk", "field": "speech", "tier": "core", "part": 2, "icon": "🥐", "iconic": true, "example": 8 }
       ],
       "beats": [
         { "order": 1, "en": "We asked Jesus, \"Lord, teach us to pray\"", "pt": "Nós pedimos a Jesus: \"Senhor, ensine-nos a orar\"", "altPt": ["Pedimos a Jesus: \"Senhor, ensina-nos a orar\"", "Nós pedimos a Jesus: \"Senhor, nos ensine a orar\""], "kind": "first-person", "fact": true, "iconic": true, "speaker": "pedro" },
-        { "order": 2, "en": "Jesus taught, \"Go into your room and close the door\"", "pt": "Jesus ensinou: \"Entre no seu quarto e feche a porta\"", "altPt": ["Jesus ensinou: \"Entra no teu aposento e fecha a tua porta\""],
+        { "order": 2, "en": "He taught us not to pray in the street", "pt": "Ele nos ensinou a não orar na rua", "altPt": ["Ele nos ensinou a não orar nas ruas"], "kind": "negative", "fact": true, "speaker": "pedro" },
+        { "order": 3, "en": "Go into your room and close the door", "pt": "Entre no seu quarto e feche a porta", "altPt": ["Entra no teu aposento e fecha a tua porta", "Entre no seu quarto e feche a sua porta"],
           "kind": "quote", "fact": true, "speaker": "jesus", "gap": { "word": "room", "kind": "lexical", "options": ["room", "boat", "city"] } },
-        { "order": 3, "en": "Where should we pray? In our room in secret", "pt": "Onde devemos orar? No nosso quarto, em segredo", "kind": "question", "fact": true, "speaker": "pedro" },
         { "order": 4, "en": "Your Father sees in secret and knows what you need", "pt": "O seu Pai vê em segredo e sabe do que você precisa", "altPt": ["O Pai de vocês vê em segredo e sabe do que vocês precisam"],
           "kind": "quote", "fact": true, "speaker": "jesus", "gap": { "word": "Your", "kind": "grammar", "options": ["Your", "Our", "Their"] }, "grammar": "possessive-our-your" },
-        { "order": 5, "en": "Do not say many empty words", "pt": "Não digam muitas palavras vazias", "altPt": ["Não useis de vãs repetições", "Não digam muitas palavras vãs"], "kind": "negative", "fact": true, "speaker": "jesus" },
+        { "order": 5, "en": "Do we pray in the street? No, in our room", "pt": "Nós oramos na rua? Não, no nosso quarto", "kind": "question", "fact": true, "speaker": "pedro" },
         { "order": 6, "en": "Who knows what we need? Our Father in heaven", "pt": "Quem sabe do que precisamos? O nosso Pai que está no céu", "altPt": ["Quem sabe do que nós precisamos? Nosso Pai no céu"],
           "kind": "question", "fact": true, "speaker": "pedro", "gap": { "word": "Our", "kind": "grammar", "options": ["Our", "Your", "Their"] }, "grammar": "possessive-our-your" },
         { "order": 7, "en": "Let your Kingdom come, let your will be done", "pt": "Venha o seu Reino, seja feita a sua vontade", "altPt": ["Venha o teu Reino, seja feita a tua vontade", "Venha o seu Reino, seja feita a sua vontade"], "alt": ["Your Kingdom come, your will be done"], "kind": "quote", "fact": true, "iconic": true, "speaker": "jesus" },
@@ -260,10 +259,8 @@
       ],
       "hints": {
         "late": "tarde",
-        "loaves": "pães",
         "left": "sobrou, sobraram",
         "big": "grande, grandes",
-        "began": "comecei, começou",
         "doubt": "duvidar, duvidou"
       },
       "tips": [
@@ -295,13 +292,13 @@
       "vocab": [
         { "en": "crowd", "pt": "multidão", "pos": "noun", "field": "people", "tier": "core", "part": 1, "icon": "👭", "example": 1 },
         { "en": "hungry", "pt": "com fome", "ptAlt": ["faminto", "faminta"], "pos": "adj", "field": "feelings", "tier": "core", "part": 1, "icon": "🤤", "example": 2 },
-        { "en": "bread", "pt": "pão", "pos": "noun", "field": "food", "tier": "core", "part": 1, "icon": "🍞", "example": 5 },
+        { "en": "loaf", "pt": "um pão", "ptAlt": ["pão", "pães"], "plural": "loaves", "forms": ["loaves"], "pos": "noun", "field": "food", "tier": "core", "part": 1, "icon": "🥯", "example": 3, "note": "um pão inteiro; plural loaves" },
         { "en": "to feed", "pt": "alimentar", "ptAlt": ["dar de comer"], "pos": "verb", "field": "actions", "tier": "core", "part": 1, "icon": "🥄", "example": 5 },
         { "en": "Bring them to me", "pt": "Tragam para mim", "ptAlt": ["Tragam-nos a mim", "Traga para mim", "Tragam eles para mim"], "pos": "chunk", "field": "speech", "tier": "core", "part": 1, "icon": "🥡", "iconic": true, "example": 4 },
         { "en": "wave", "pt": "onda", "pos": "noun", "field": "nature", "tier": "core", "part": 2, "icon": "🏄", "example": 8 },
         { "en": "hand", "pt": "mão", "pos": "noun", "field": "body", "tier": "core", "part": 2, "icon": "✋", "example": 11 },
         { "en": "to sink", "pt": "afundar", "pos": "verb", "field": "actions", "tier": "core", "part": 2, "icon": "⬇️", "example": 10 },
-        { "en": "to save", "pt": "salvar", "pos": "verb", "field": "faith", "tier": "core", "part": 2, "icon": "🆘", "example": 11, "recycle": true },
+        { "en": "to begin", "pt": "começar", "pos": "verb", "field": "time", "tier": "core", "part": 2, "icon": "▶️", "example": 10 },
         { "en": "Lord, save me!", "pt": "Senhor, salve-me!", "ptAlt": ["Senhor, salva-me!", "Senhor, me salve!"], "pos": "chunk", "field": "speech", "tier": "core", "part": 2, "icon": "😱", "iconic": true, "example": 11 }
       ],
       "beats": [
@@ -310,10 +307,10 @@
         { "order": 3, "en": "We only have five loaves and two fish", "pt": "Nós só temos cinco pães e dois peixes", "altPt": ["Temos só cinco pães e dois peixes", "Não temos aqui senão cinco pães e dois peixes"],
           "kind": "first-person", "fact": true, "iconic": true, "speaker": "pedro", "gap": { "word": "only", "kind": "grammar", "options": ["only", "also", "all"] }, "grammar": "only-howmany" },
         { "order": 4, "en": "Jesus said, \"Bring them to me\"", "pt": "Jesus disse: \"Tragam para mim\"", "altPt": ["Jesus disse: \"Trazei-mos aqui\"", "Jesus disse: \"Tragam-nos a mim\""], "alt": ["Jesus said, \"Bring them here to me\""], "kind": "quote", "fact": true, "iconic": true, "speaker": "jesus" },
-        { "order": 5, "en": "He blessed the bread and fed the hungry crowd", "pt": "Ele abençoou o pão e alimentou a multidão faminta", "altPt": ["Ele abençoou o pão e deu de comer à multidão com fome"],
-          "kind": "statement", "fact": true, "gap": { "word": "bread", "kind": "lexical", "options": ["bread", "crowd", "fish"] } },
+        { "order": 5, "en": "He blessed the loaves and fed the hungry crowd", "pt": "Ele abençoou os pães e alimentou a multidão faminta", "altPt": ["Ele abençoou os pães e deu de comer à multidão com fome"],
+          "kind": "statement", "fact": true, "gap": { "word": "loaves", "kind": "lexical", "options": ["loaves", "fish", "crowd"] } },
         { "order": 6, "en": "Did he feed everyone? Yes, and there was bread left", "pt": "Ele alimentou todos? Sim, e ainda sobrou pão", "kind": "question", "fact": true },
-        { "order": 7, "en": "That night we were in a boat on the sea", "pt": "Naquela noite nós estávamos num barco no mar", "kind": "first-person", "fact": true, "speaker": "pedro" },
+        { "order": 7, "en": "That night we began to go across the sea", "pt": "Naquela noite começamos a atravessar o mar", "altPt": ["Naquela noite nós começamos a cruzar o mar de barco"], "kind": "first-person", "fact": true, "speaker": "pedro" },
         { "order": 8, "en": "The wind was against us and the waves were big", "pt": "O vento estava contra nós e as ondas eram grandes", "altPt": ["O vento era contrário e as ondas eram grandes"], "kind": "statement", "fact": true },
         { "order": 9, "en": "Did Jesus walk on the waves? Yes, he did", "pt": "Jesus andou sobre as ondas? Sim, andou", "kind": "question", "fact": true, "gap": { "word": "Did", "kind": "grammar", "options": ["Did", "Does", "Do"] }, "grammar": "past-did" },
         { "order": 10, "en": "I walked on the water but began to sink", "pt": "Eu andei sobre a água, mas comecei a afundar", "altPt": ["Andei sobre as águas, mas comecei a afundar"], "kind": "first-person", "fact": true, "speaker": "pedro" },
