@@ -1,488 +1,363 @@
 {
+  "v": 2,
   "id": "u8",
   "lessons": [
     {
       "id": "u8l1",
       "title": "Pescadores de homens",
-      "vocab": [
+      "ref": "Mateus 4:18-23; Lucas 5:1-11",
+      "level": "A2.1",
+      "narrator": "pedro",
+      "guests": ["jesus"],
+      "names": [
+        { "en": "Jesus", "pt": "Jesus" },
+        { "en": "Simon", "pt": "Simão", "note": "o nome de Pedro antes de Jesus o chamar de Pedro (João 1:42)" },
+        { "en": "Peter", "pt": "Pedro", "note": "narra a unidade" },
+        { "en": "Andrew", "pt": "André", "note": "irmão de Pedro" },
+        { "en": "James", "pt": "Tiago", "note": "filho de Zebedeu" },
+        { "en": "John", "pt": "João", "note": "irmão de Tiago" },
+        { "en": "Zebedee", "pt": "Zebedeu", "note": "pai de Tiago e João" },
+        { "en": "Sea of Galilee", "pt": "mar da Galileia" },
+        { "en": "God", "pt": "Deus" },
+        { "en": "the Lord", "pt": "o Senhor" }
+      ],
+      "hints": {
+        "casting": "lançando",
+        "fishers": "pescadores",
+        "immediately": "imediatamente, na hora",
+        "taught": "ensinou",
+        "full": "cheio, cheios",
+        "Master": "Mestre"
+      },
+      "tips": [
         {
-          "en": "fisherman",
-          "pt": "pescador",
-          "icon": "🎣"
+          "part": 1,
+          "id": "imperative-will",
+          "grammar": "imperative-will",
+          "title": "Follow me, and I will...: ordem + promessa",
+          "body": "O imperativo é o verbo sem sujeito: Follow me (Siga-me), Come (Venha). Para dizer o que vai acontecer depois, use will + verbo: I will make you fishers of men. Juntos, formam um convite com promessa: faça isto, e eu farei aquilo.",
+          "examples": [
+            { "en": "Follow me", "pt": "Siga-me" },
+            { "en": "Follow me, and I will make you fishers of men", "pt": "Sigam-me, e eu farei de vocês pescadores de homens" }
+          ],
+          "contrast": { "a": "I will make you fishers of men", "b": "I make you fishers of men", "note": "will = promessa para depois; sem will = agora, hábito" }
         },
         {
-          "en": "net",
-          "pt": "rede",
-          "icon": "🥅"
-        },
-        {
-          "en": "to follow",
-          "pt": "seguir",
-          "icon": "👣"
-        },
-        {
-          "en": "disciple",
-          "pt": "discípulo",
-          "icon": "🧑"
-        },
-        {
-          "en": "boat",
-          "pt": "barco",
-          "icon": "⛵"
-        },
-        {
-          "en": "to leave",
-          "pt": "deixar",
-          "icon": "🏃"
-        },
-        {
-          "en": "to cast",
-          "pt": "lançar (a rede)",
-          "icon": "🎯"
-        },
-        {
-          "en": "Galilee",
-          "pt": "Galileia",
-          "icon": "🌊"
-        },
-        {
-          "en": "to mend",
-          "pt": "consertar",
-          "icon": "🧵"
-        },
-        {
-          "en": "immediately",
-          "pt": "imediatamente (logo)",
-          "icon": "⚡"
+          "part": 2,
+          "id": "time-expressions",
+          "grammar": "time-expressions",
+          "title": "all night, now, immediately: quando aconteceu",
+          "body": "Expressões de tempo dizem quando algo acontece: all night (a noite toda), all day (o dia todo), now (agora), from now on (de agora em diante), immediately (imediatamente). Em geral ficam no fim ou no começo da frase: We worked all night. From now on you will catch people.",
+          "examples": [
+            { "en": "We worked all night", "pt": "Trabalhamos a noite toda" },
+            { "en": "From now on you will catch people", "pt": "De agora em diante você vai pescar pessoas" }
+          ],
+          "contrast": { "a": "We worked all night", "b": "We worked all day", "note": "night/day: só muda o período do dia" }
         }
       ],
-      "sentences": [
-        {
-          "en": "Jesus walked by the sea of Galilee",
-          "pt": "Jesus andava junto ao mar da Galileia"
-        },
-        {
-          "en": "Peter was a fisherman",
-          "pt": "Pedro era um pescador"
-        },
-        {
-          "en": "Jesus called four fishermen to be his disciples",
-          "pt": "Jesus chamou quatro pescadores para serem seus discípulos"
-        },
-        {
-          "en": "Simon and Andrew were casting a net into the sea",
-          "pt": "Simão e André lançavam a rede ao mar"
-        },
-        {
-          "en": "Follow me",
-          "pt": "Vinde após mim"
-        },
-        {
-          "en": "I will make you fishers of men",
-          "pt": "Eu vos farei pescadores de homens"
-        },
-        {
-          "en": "They left their nets and followed him",
-          "pt": "Eles deixaram as redes e o seguiram"
-        },
-        {
-          "en": "James and John were in a boat with Zebedee",
-          "alt": [
-            "James and John were in a ship with Zebedee"
-          ],
-          "pt": "Tiago e João estavam num barco com Zebedeu"
-        },
-        {
-          "en": "Jesus saw them mending their nets and called them",
-          "pt": "Jesus os viu consertando as redes e chamou-os"
-        },
-        {
-          "en": "They immediately left the boat and their father",
-          "alt": [
-            "They immediately left the ship and their father"
-          ],
-          "pt": "Eles deixaram imediatamente o barco e seu pai"
-        },
-        {
-          "en": "The disciples followed Jesus",
-          "pt": "Os discípulos seguiram Jesus"
-        },
-        {
-          "en": "Jesus went about all Galilee, teaching and healing",
-          "pt": "Jesus percorria toda a Galileia, ensinando e curando"
-        }
+      "vocab": [
+        { "en": "net", "pt": "rede", "pos": "noun", "field": "work", "tier": "core", "part": 1, "icon": "🕸️", "example": 2 },
+        { "en": "fisherman", "pt": "pescador", "plural": "fishermen", "forms": ["fishermen"], "pos": "noun", "field": "work", "tier": "core", "part": 1, "icon": "🚣", "example": 3 },
+        { "en": "to follow", "pt": "seguir", "pos": "verb", "field": "actions", "tier": "core", "part": 1, "icon": "👣", "example": 5 },
+        { "en": "to leave", "pt": "deixar", "ptAlt": ["sair", "partir"], "pos": "verb", "field": "actions", "tier": "core", "part": 1, "icon": "🏃", "example": 5 },
+        { "en": "Follow me", "pt": "Siga-me", "ptAlt": ["Sigam-me", "Me siga", "Venha comigo"], "pos": "chunk", "field": "speech", "tier": "core", "part": 1, "icon": "➡️", "iconic": true, "example": 4 },
+        { "en": "boat", "pt": "barco", "pos": "noun", "field": "objects", "tier": "core", "part": 2, "icon": "⛵", "example": 8 },
+        { "en": "fish", "pt": "peixe", "ptAlt": ["peixes"], "pos": "noun", "field": "animals", "tier": "core", "part": 2, "icon": "🐟", "example": 7, "note": "o plural também é fish" },
+        { "en": "word", "pt": "palavra", "pos": "noun", "field": "speech", "tier": "core", "part": 2, "icon": "🔤", "example": 10 },
+        { "en": "to catch", "pt": "pegar", "ptAlt": ["pescar", "apanhar"], "pos": "verb", "field": "actions", "tier": "core", "part": 2, "icon": "🤏", "example": 7 },
+        { "en": "We worked all night", "pt": "Trabalhamos a noite toda", "ptAlt": ["Nós trabalhamos a noite inteira", "Trabalhamos a noite inteira"], "pos": "chunk", "field": "speech", "tier": "core", "part": 2, "icon": "🕛", "iconic": true, "example": 7 }
+      ],
+      "beats": [
+        { "order": 1, "en": "Jesus walked by the Sea of Galilee", "pt": "Jesus andava à beira do mar da Galileia", "altPt": ["Jesus andava junto ao mar da Galileia"], "kind": "statement", "fact": true },
+        { "order": 2, "en": "Who did he see? Two fishermen casting a net", "pt": "Quem ele viu? Dois pescadores lançando uma rede", "kind": "question", "fact": true },
+        { "order": 3, "en": "My brother Andrew and I were fishermen", "pt": "Meu irmão André e eu éramos pescadores", "kind": "first-person", "fact": true, "speaker": "pedro" },
+        { "order": 4, "en": "Follow me, and I will make you fishers of men", "pt": "Sigam-me, e eu farei de vocês pescadores de homens", "alt": ["Come after me, and I will make you fishers for men"], "altPt": ["Vinde após mim, e eu vos farei pescadores de homens", "Venham comigo, e eu farei de vocês pescadores de homens"],
+          "kind": "quote", "fact": true, "iconic": true, "speaker": "jesus", "gap": { "word": "will", "kind": "grammar", "options": ["will", "can", "must"] }, "grammar": "imperative-will" },
+        { "order": 5, "en": "We left our nets and followed him immediately", "pt": "Nós deixamos as redes e o seguimos imediatamente", "altPt": ["Deixamos as redes e seguimos Jesus na hora", "Nós deixamos as nossas redes e o seguimos na hora"], "kind": "first-person", "fact": true, "speaker": "pedro" },
+        { "order": 6, "en": "James and John also left their boat and their father", "pt": "Tiago e João também deixaram o barco e o pai deles", "altPt": ["Tiago e João também deixaram o barco e o seu pai"], "kind": "statement", "fact": true },
+        { "order": 7, "en": "We worked all night and did not catch any fish", "pt": "Trabalhamos a noite toda e não pegamos nenhum peixe", "altPt": ["Nós trabalhamos a noite inteira e não pescamos nada", "Trabalhamos a noite toda e não pescamos nenhum peixe"],
+          "kind": "negative", "fact": true, "iconic": true, "speaker": "pedro", "gap": { "word": "all", "kind": "grammar", "options": ["all", "only", "also"] }, "grammar": "time-expressions" },
+        { "order": 8, "en": "Then Jesus taught the word of God from my boat", "pt": "Depois Jesus ensinou a palavra de Deus do meu barco", "kind": "statement", "fact": true, "speaker": "pedro" },
+        { "order": 9, "en": "He said, \"Let down your nets for a catch\"", "pt": "Ele disse: \"Lancem as redes para pescar\"", "altPt": ["Ele disse: \"Lançai as vossas redes para pescar\"", "Ele disse: \"Soltem as redes para a pesca\""], "kind": "quote", "fact": true, "speaker": "jesus" },
+        { "order": 10, "en": "At your word I will let down the net", "pt": "Pela sua palavra eu vou lançar a rede", "altPt": ["Sobre a tua palavra lançarei a rede", "Pela sua palavra lançarei a rede"], "kind": "first-person", "fact": true, "iconic": true, "speaker": "pedro" },
+        { "order": 11, "en": "Did we catch fish? Yes, both boats were full", "pt": "Nós pegamos peixes? Sim, os dois barcos ficaram cheios", "altPt": ["Pescamos alguma coisa? Sim, os dois barcos ficaram cheios"], "kind": "question", "fact": true, "speaker": "pedro" },
+        { "order": 12, "en": "Don't be afraid. From now on you will catch people", "pt": "Não tenha medo. De agora em diante você vai pescar pessoas", "alt": ["Do not be afraid. From now on you will catch people"], "altPt": ["Não temas; de agora em diante serás pescador de homens", "Não tenha medo. De agora em diante você vai pescar gente"], "kind": "quote", "fact": true, "iconic": true, "speaker": "jesus" }
+      ],
+      "contrast": [
+        { "a": "We worked all night and did not catch any fish", "b": "We worked all night and caught many fish", "note": "did not catch = negativa no passado; caught = afirmativa no passado (a expressão de tempo não muda, Dica 2)" },
+        { "a": "Follow me, and I will make you fishers of men", "b": "Come with me, and I will make you fishers of men", "note": "Follow me / Come with me: dois imperativos com o mesmo convite (Dica 1)" }
       ],
       "verse": {
         "text": "Follow me, and I will make you fishers of men.",
-        "pt": "Vinde após mim, e eu vos farei pescadores de homens.",
+        "classic": "Follow me, and I will make you fishers of men.",
+        "alt": ["Come after me, and I will make you fishers for men."],
+        "pt": "Sigam-me, e eu farei de vocês pescadores de homens.",
+        "classicPt": "Vinde após mim, e eu vos farei pescadores de homens.",
         "ref": "Mateus 4:19",
-        "blank": "Follow",
-        "options": [
-          "Follow",
-          "Leave",
-          "Send",
-          "Build"
+        "blanks": [
+          { "word": "Follow", "options": ["Follow", "Leave", "Call", "Send"] },
+          { "word": "fishers", "options": ["fishers", "friends", "servants", "brothers"] },
+          { "word": "men", "options": ["men", "fish", "boats", "nets"] }
         ]
       },
       "reading": {
-        "text": "Jesus walked by the sea of Galilee. He saw Simon, called Peter, and Andrew his brother. Then he saw James and John in a boat with their father Zebedee. He called them, and they followed him.",
-        "pt": "Jesus andava junto ao mar da Galileia. Viu Simão, chamado Pedro, e André, seu irmão. Depois viu Tiago e João num barco com seu pai, Zebedeu. Ele os chamou, e eles o seguiram.",
-        "q": "Who was in the boat with James and John?",
-        "options": [
-          "Zebedee, their father",
-          "Peter and Andrew",
-          "Their mother"
-        ],
-        "answer": "Zebedee, their father"
+        "text": "Jesus walked by the Sea of Galilee and saw two fishermen, Simon and Andrew. He said, \"Follow me, and I will make you fishers of men.\" They left their nets and followed him. Later, Simon worked all night and caught nothing, but at the word of Jesus he let down the net again. He caught so many fish that two boats were full.",
+        "pt": "Jesus andava à beira do mar da Galileia e viu dois pescadores, Simão e André. Ele disse: \"Sigam-me, e eu farei de vocês pescadores de homens.\" Eles deixaram as redes e o seguiram. Mais tarde, Simão trabalhou a noite toda e não pegou nada, mas pela palavra de Jesus ele lançou a rede de novo. Ele pegou tantos peixes que dois barcos ficaram cheios.",
+        "questions": [
+          { "kind": "literal", "q": "What did Simon and Andrew do when Jesus called them?", "qPt": "O que Simão e André fizeram quando Jesus os chamou?",
+            "options": ["They stopped fishing and went with him", "They finished their work and went home", "They asked him to get into their boat"], "answer": "They stopped fishing and went with him" },
+          { "kind": "inference", "q": "Why did Simon let down the net again?", "qPt": "Por que Simão lançou a rede de novo?",
+            "options": ["Because he trusted what Jesus said", "Because he saw many fish in the water", "Because the night was over and it was day"], "answer": "Because he trusted what Jesus said",
+            "explain": "Simão disse que tinham trabalhado a noite toda sem pegar nada, mas que lançaria a rede pela palavra de Jesus (Lucas 5:5)." }
+        ]
       },
-      "dialogue": {
-        "line": "Peter, leave your nets and follow me.",
-        "pt": "Pedro, deixe as redes e siga-me.",
-        "options": [
-          "Yes, Lord! I will follow you.",
-          "No, I must mend my net first.",
-          "The lions are hungry."
-        ],
-        "answer": "Yes, Lord! I will follow you.",
-        "answerPt": "Sim, Senhor! Eu te seguirei."
+      "conversation": {
+        "with": "jesus",
+        "turns": [
+          { "who": "jesus", "en": "Simon, follow me, and I will make you fishers of men.", "pt": "Simão, siga-me, e eu farei de vocês pescadores de homens.", "mood": "calmo", "fact": true, "ref": "Mateus 4:19" },
+          { "who": "you", "options": ["Yes, Lord. I will leave my net and follow you.", "Yes, Lord. I will catch more fish for you.", "Not now, Lord. I will finish my work first."],
+            "answer": "Yes, Lord. I will leave my net and follow you.", "pt": "Sim, Senhor. Vou deixar a minha rede e seguir você.", "intent": "Aceite o convite e diga o que vai deixar" },
+          { "who": "jesus", "en": "Let down your nets for a catch.", "pt": "Lancem as redes para pescar.", "mood": "calmo", "fact": true, "ref": "Lucas 5:4" },
+          { "who": "you", "options": ["We worked all night and caught nothing. But at your word, I will.", "We worked all night and caught many fish. The boats are full.", "We worked all night, Master. Now we need to sleep."],
+            "answer": "We worked all night and caught nothing. But at your word, I will.", "pt": "Trabalhamos a noite toda e não pegamos nada. Mas pela sua palavra, eu vou lançar.", "intent": "Conte como foi a noite e obedeça mesmo assim", "speak": true }
+        ]
       },
-      "quiz": {
-        "q": "What were Peter and Andrew doing when Jesus saw them?",
-        "options": [
-          "Casting a net into the sea",
-          "Building a boat",
-          "Selling bread"
-        ],
-        "answer": "Casting a net into the sea",
-        "explain": "Simão e André lançavam as redes ao mar, porque eram pescadores (Mateus 4:18)."
-      }
+      "fact": { "pt": "Foi Jesus quem deu a Simão o nome Pedro, que quer dizer \"pedra\" (João 1:42). Na pesca que Lucas conta, a rede começou a se romper e os dois barcos ficaram tão cheios que começaram a afundar (Lucas 5:6-7).", "ref": "Lucas 5:6-7" }
     },
     {
       "id": "u8l2",
       "title": "O Pai Nosso",
-      "vocab": [
+      "ref": "Mateus 6:5-15; Lucas 11:1",
+      "level": "A2.1",
+      "narrator": "pedro",
+      "guests": ["jesus"],
+      "names": [
+        { "en": "Jesus", "pt": "Jesus" },
+        { "en": "Peter", "pt": "Pedro", "note": "narra a unidade; aqui fala por todos os discípulos" },
+        { "en": "Our Father", "pt": "Pai nosso", "note": "Deus, o Pai que está no céu" },
+        { "en": "God", "pt": "Deus" },
+        { "en": "the Lord", "pt": "o Senhor" }
+      ],
+      "hints": {
+        "heaven": "céu",
+        "empty": "vazias, vazio",
+        "bread": "pão",
+        "lead": "levar, conduzir",
+        "temptation": "tentação",
+        "deliver": "livrar"
+      },
+      "tips": [
         {
-          "en": "father",
-          "pt": "pai",
-          "icon": "👨"
+          "part": 1,
+          "id": "possessive-our-your",
+          "grammar": "possessive-our-your",
+          "title": "our e your: nosso e seu",
+          "body": "Os possessivos vêm antes do substantivo e não mudam no plural: our Father (nosso Pai), our debts (nossas dívidas), your room (seu quarto), your Father (o Pai de vocês). Repare que your serve para você e para vocês.",
+          "examples": [
+            { "en": "Our Father in heaven", "pt": "Pai nosso que está no céu" },
+            { "en": "Go into your room", "pt": "Entre no seu quarto" }
+          ],
+          "contrast": { "a": "Our Father knows what we need", "b": "Your Father knows what you need", "note": "our/we (nós) e your/you (você, vocês) mudam juntos" }
         },
         {
-          "en": "bread",
-          "pt": "pão",
-          "icon": "🍞"
-        },
-        {
-          "en": "to forgive",
-          "pt": "perdoar",
-          "icon": "🤲"
-        },
-        {
-          "en": "daily",
-          "pt": "diário (de cada dia)",
-          "icon": "🗓️"
-        },
-        {
-          "en": "debts",
-          "pt": "dívidas",
-          "icon": "💸"
-        },
-        {
-          "en": "will",
-          "pt": "vontade",
-          "icon": "📜"
-        },
-        {
-          "en": "hallowed",
-          "pt": "santificado",
-          "icon": "✨"
-        },
-        {
-          "en": "temptation",
-          "pt": "tentação",
-          "icon": "🍬"
-        },
-        {
-          "en": "kingdom",
-          "pt": "reino",
-          "icon": "👑"
-        },
-        {
-          "en": "prayer",
-          "pt": "oração",
-          "icon": "🙏"
+          "part": 2,
+          "id": "object-pronoun-request",
+          "grammar": "object-pronoun-request",
+          "title": "Give us, forgive us: pedidos com pronome objeto",
+          "body": "Depois do verbo, quem recebe a ação aparece como pronome objeto: me, you, him, her, us, them. Nos pedidos da oração, o verbo vem primeiro e o pronome logo depois: Give us (Dê-nos), Forgive us (Perdoe-nos), Deliver us (Livre-nos). Em português, o pronome pode vir antes ou depois do verbo; em inglês, sempre depois.",
+          "examples": [
+            { "en": "Give us today our daily bread", "pt": "Dê-nos hoje o nosso pão de cada dia" },
+            { "en": "Forgive us our debts", "pt": "Perdoe-nos as nossas dívidas" }
+          ],
+          "contrast": { "a": "Forgive us", "b": "Forgive them", "note": "us = nós (quem pede); them = eles (os outros)" }
         }
       ],
-      "sentences": [
-        {
-          "en": "Jesus taught his disciples to pray",
-          "pt": "Jesus ensinou os seus discípulos a orar"
-        },
-        {
-          "en": "When you pray, go into your room and shut the door",
-          "alt": [
-            "When you pray, enter into your room and shut the door"
-          ],
-          "pt": "Quando orares, entra no teu aposento e fecha a tua porta"
-        },
-        {
-          "en": "Our Father in heaven",
-          "pt": "Pai nosso que estás nos céus"
-        },
-        {
-          "en": "Hallowed be thy name",
-          "alt": [
-            "Hallowed be your name"
-          ],
-          "pt": "Santificado seja o teu nome"
-        },
-        {
-          "en": "Thy kingdom come",
-          "pt": "Venha o teu Reino",
-          "alt": [
-            "Your kingdom come"
-          ]
-        },
-        {
-          "en": "Thy will be done",
-          "alt": [
-            "Your will be done"
-          ],
-          "pt": "Seja feita a tua vontade"
-        },
-        {
-          "en": "Give us this day our daily bread",
-          "pt": "O pão nosso de cada dia nos dá hoje"
-        },
-        {
-          "en": "Forgive us our debts",
-          "pt": "Perdoa-nos as nossas dívidas"
-        },
-        {
-          "en": "As we forgive our debtors",
-          "pt": "Assim como nós perdoamos aos nossos devedores"
-        },
-        {
-          "en": "Lead us not into temptation, but deliver us from evil",
-          "alt": [
-            "Do not lead us into temptation, but deliver us from evil"
-          ],
-          "pt": "Não nos induzas à tentação, mas livra-nos do mal"
-        },
-        {
-          "en": "For thine is the kingdom, the power, and the glory",
-          "alt": [
-            "For yours is the kingdom, the power, and the glory"
-          ],
-          "pt": "Porque teu é o Reino, e o poder, e a glória"
-        },
-        {
-          "en": "If you forgive men, your Father will also forgive you",
-          "pt": "Se perdoardes aos homens, vosso Pai também vos perdoará"
-        }
+      "vocab": [
+        { "en": "room", "pt": "quarto", "ptAlt": ["sala", "cômodo"], "pos": "noun", "field": "places", "tier": "core", "part": 1, "icon": "🛋️", "example": 2 },
+        { "en": "secret", "pt": "segredo", "pos": "noun", "field": "mind", "tier": "core", "part": 1, "icon": "🤫", "example": 4, "recycle": true },
+        { "en": "to need", "pt": "precisar", "pos": "verb", "field": "mind", "tier": "core", "part": 1, "icon": "🥺", "example": 4 },
+        { "en": "to teach", "pt": "ensinar", "pos": "verb", "field": "mind", "tier": "core", "part": 1, "icon": "👨‍🏫", "example": 1 },
+        { "en": "Lord, teach us to pray", "pt": "Senhor, ensine-nos a orar", "ptAlt": ["Senhor, nos ensine a orar", "Senhor, ensina-nos a orar"], "pos": "chunk", "field": "speech", "tier": "core", "part": 1, "icon": "📖", "iconic": true, "example": 1 },
+        { "en": "daily", "pt": "diário", "ptAlt": ["de cada dia"], "pos": "adj", "field": "time", "tier": "core", "part": 2, "icon": "🗓️", "example": 8 },
+        { "en": "debt", "pt": "dívida", "pos": "noun", "field": "work", "tier": "core", "part": 2, "icon": "💳", "example": 10 },
+        { "en": "debtor", "pt": "devedor", "pos": "noun", "field": "people", "tier": "bible", "part": 2, "icon": "🧾", "example": 10, "note": "quem deve algo a alguém" },
+        { "en": "to forgive", "pt": "perdoar", "pos": "verb", "field": "faith", "tier": "core", "part": 2, "icon": "🤍", "example": 10, "recycle": true },
+        { "en": "Give us today our daily bread", "pt": "Dê-nos hoje o nosso pão de cada dia", "ptAlt": ["O pão nosso de cada dia nos dá hoje", "Nos dê hoje o nosso pão de cada dia"], "pos": "chunk", "field": "speech", "tier": "core", "part": 2, "icon": "🥐", "iconic": true, "example": 8 }
+      ],
+      "beats": [
+        { "order": 1, "en": "We asked Jesus, \"Lord, teach us to pray\"", "pt": "Nós pedimos a Jesus: \"Senhor, ensine-nos a orar\"", "altPt": ["Pedimos a Jesus: \"Senhor, ensina-nos a orar\"", "Nós pedimos a Jesus: \"Senhor, nos ensine a orar\""], "kind": "first-person", "fact": true, "iconic": true, "speaker": "pedro" },
+        { "order": 2, "en": "Jesus taught, \"Go into your room and close the door\"", "pt": "Jesus ensinou: \"Entre no seu quarto e feche a porta\"", "altPt": ["Jesus ensinou: \"Entra no teu aposento e fecha a tua porta\""],
+          "kind": "quote", "fact": true, "speaker": "jesus", "gap": { "word": "room", "kind": "lexical", "options": ["room", "boat", "city"] } },
+        { "order": 3, "en": "Where should we pray? In our room in secret", "pt": "Onde devemos orar? No nosso quarto, em segredo", "kind": "question", "fact": true, "speaker": "pedro" },
+        { "order": 4, "en": "Your Father sees in secret and knows what you need", "pt": "O seu Pai vê em segredo e sabe do que você precisa", "altPt": ["O Pai de vocês vê em segredo e sabe do que vocês precisam"],
+          "kind": "quote", "fact": true, "speaker": "jesus", "gap": { "word": "Your", "kind": "grammar", "options": ["Your", "Our", "Their"] }, "grammar": "possessive-our-your" },
+        { "order": 5, "en": "Do not say many empty words", "pt": "Não digam muitas palavras vazias", "altPt": ["Não useis de vãs repetições", "Não digam muitas palavras vãs"], "kind": "negative", "fact": true, "speaker": "jesus" },
+        { "order": 6, "en": "Who knows what we need? Our Father in heaven", "pt": "Quem sabe do que precisamos? O nosso Pai que está no céu", "altPt": ["Quem sabe do que nós precisamos? Nosso Pai no céu"],
+          "kind": "question", "fact": true, "speaker": "pedro", "gap": { "word": "Our", "kind": "grammar", "options": ["Our", "Your", "Their"] }, "grammar": "possessive-our-your" },
+        { "order": 7, "en": "Let your Kingdom come, let your will be done", "pt": "Venha o seu Reino, seja feita a sua vontade", "altPt": ["Venha o teu Reino, seja feita a tua vontade", "Venha o seu Reino, seja feita a sua vontade"], "alt": ["Your Kingdom come, your will be done"], "kind": "quote", "fact": true, "iconic": true, "speaker": "jesus" },
+        { "order": 8, "en": "Give us today our daily bread", "pt": "Dê-nos hoje o nosso pão de cada dia", "altPt": ["O pão nosso de cada dia nos dá hoje", "Nos dê hoje o nosso pão de cada dia"], "alt": ["Give us this day our daily bread"],
+          "kind": "quote", "fact": true, "iconic": true, "gap": { "word": "us", "kind": "grammar", "options": ["us", "me", "them"] }, "grammar": "object-pronoun-request" },
+        { "order": 9, "en": "What do we ask for? Our daily bread", "pt": "O que nós pedimos? O nosso pão de cada dia", "kind": "question", "fact": true, "speaker": "pedro" },
+        { "order": 10, "en": "Forgive us our debts, as we forgive our debtors", "pt": "Perdoe-nos as nossas dívidas, assim como perdoamos os nossos devedores", "altPt": ["Perdoa-nos as nossas dívidas, assim como nós perdoamos aos nossos devedores", "Perdoe as nossas dívidas, assim como nós perdoamos os nossos devedores"], "alt": ["Forgive us our debts, as we also forgive our debtors"],
+          "kind": "quote", "fact": true, "iconic": true, "gap": { "word": "us", "kind": "grammar", "options": ["us", "me", "him"] }, "grammar": "object-pronoun-request" },
+        { "order": 11, "en": "Do not lead us into temptation, but deliver us from evil", "pt": "Não nos deixe cair em tentação, mas livre-nos do mal", "altPt": ["Não nos induzas à tentação, mas livra-nos do mal", "Não nos leve à tentação, mas livre-nos do mal"], "alt": ["Bring us not into temptation, but deliver us from the evil one", "Lead us not into temptation, but deliver us from evil"],
+          "kind": "negative", "fact": true, "iconic": true, "prod": false },
+        { "order": 12, "en": "Our Father forgives our debts if we forgive our debtors", "pt": "O nosso Pai perdoa as nossas dívidas se perdoamos os nossos devedores", "altPt": ["Nosso Pai perdoa as nossas dívidas se nós perdoamos os nossos devedores"], "kind": "first-person", "fact": true, "speaker": "pedro" }
+      ],
+      "contrast": [
+        { "a": "Who knows what we need? Our Father in heaven", "b": "Who knows what you need? Your Father in heaven", "note": "we/our (nós) viram you/your (vocês): o possessivo acompanha o pronome (Dica 1)" },
+        { "a": "Give us today our daily bread", "b": "Give me today my daily bread", "note": "us/our (nós) viram me/my (eu): o pedido muda de pessoa (Dica 2)" }
       ],
       "verse": {
-        "text": "Our Father which art in heaven, Hallowed be thy name.",
-        "pt": "Pai nosso que estás nos céus, santificado seja o teu nome.",
+        "text": "Our Father in heaven, may your name be kept holy.",
+        "classic": "Our Father which art in heaven, Hallowed be thy name.",
+        "pt": "Pai nosso, que está no céu, santificado seja o seu nome.",
+        "classicPt": "Pai nosso, que estás nos céus, santificado seja o teu nome.",
         "ref": "Mateus 6:9",
-        "blank": "Father",
-        "options": [
-          "Father",
-          "Brother",
-          "King",
-          "Servant"
+        "blanks": [
+          { "word": "Father", "options": ["Father", "Brother", "King", "Friend"] },
+          { "word": "holy", "options": ["holy", "good", "great", "true"] },
+          { "word": "name", "options": ["name", "word", "house", "love"] }
         ]
       },
       "reading": {
-        "text": "Jesus said: When you pray, do not use many vain words. Your Father knows what you need before you ask him. Then he taught them: Our Father which art in heaven, hallowed be thy name.",
-        "pt": "Jesus disse: Quando orardes, não useis de vãs repetições. Vosso Pai sabe o que vos é necessário antes de vós lho pedirdes. Depois ele os ensinou: Pai nosso, que estás nos céus, santificado seja o teu nome.",
-        "q": "What does the Father know before we ask him?",
-        "options": [
-          "What we need",
-          "The name of the king",
-          "How many fish we have"
-        ],
-        "answer": "What we need"
+        "text": "Jesus taught us how to pray. He said, \"Go into your room, close the door, and pray to your Father in secret. Your Father knows what you need before you ask him.\" Then he taught us the Lord's Prayer: \"Our Father in heaven, give us today our daily bread, and forgive us our debts.\"",
+        "pt": "Jesus nos ensinou a orar. Ele disse: \"Entre no seu quarto, feche a porta e ore ao seu Pai em segredo. O seu Pai sabe do que você precisa antes de você pedir.\" Depois ele nos ensinou a oração do Pai Nosso: \"Pai nosso que está no céu, dê-nos hoje o nosso pão de cada dia, e perdoe-nos as nossas dívidas.\"",
+        "questions": [
+          { "kind": "literal", "q": "Where did Jesus say we should pray?", "qPt": "Onde Jesus disse que devemos orar?",
+            "options": ["Alone, in a closed room", "In the city, in front of many people", "By the sea, in a boat"], "answer": "Alone, in a closed room" },
+          { "kind": "inference", "q": "Why do we not need many words when we pray?", "qPt": "Por que não precisamos de muitas palavras quando oramos?",
+            "options": ["Because our Father already knows what we need", "Because we pray in secret, and nobody hears us", "Because the Lord's Prayer is very short"], "answer": "Because our Father already knows what we need",
+            "explain": "Jesus mandou não usar repetições vazias, porque o Pai sabe do que precisamos antes de pedirmos (Mateus 6:7-8)." }
+        ]
       },
-      "dialogue": {
-        "line": "Lord, teach us to pray.",
-        "pt": "Senhor, ensina-nos a orar.",
-        "options": [
-          "Our Father which art in heaven...",
-          "Give me five loaves and two fishes.",
-          "Follow me to Galilee."
-        ],
-        "answer": "Our Father which art in heaven...",
-        "answerPt": "Pai nosso que estás nos céus..."
+      "conversation": {
+        "with": "jesus",
+        "turns": [
+          { "who": "jesus", "en": "Peter, do you know how to pray?", "pt": "Pedro, você sabe orar?", "mood": "carinhoso", "fact": false },
+          { "who": "you", "options": ["Lord, teach us to pray.", "Lord, we already pray every day.", "Lord, I pray with many words."],
+            "answer": "Lord, teach us to pray.", "pt": "Senhor, ensine-nos a orar.", "intent": "Peça para aprender" },
+          { "who": "jesus", "en": "Go into your room and pray to your Father in secret. He knows what you need.", "pt": "Entre no seu quarto e ore ao seu Pai em segredo. Ele sabe do que você precisa.", "mood": "calmo", "fact": true, "ref": "Mateus 6:6-8" },
+          { "who": "you", "options": ["Our Father in heaven, give us today our daily bread.", "Our Father in heaven, give us a big boat today.", "Our Father in heaven, send us many fish today."],
+            "answer": "Our Father in heaven, give us today our daily bread.", "pt": "Pai nosso que está no céu, dê-nos hoje o nosso pão de cada dia.", "intent": "Ore como Jesus ensinou", "speak": true }
+        ]
       },
-      "quiz": {
-        "q": "What do we ask God to give us this day?",
-        "options": [
-          "Our daily bread",
-          "A new boat",
-          "Silver and gold"
-        ],
-        "answer": "Our daily bread",
-        "explain": "O pão nosso de cada dia nos dá hoje (Mateus 6:11)."
-      }
+      "fact": { "pt": "A frase final \"Porque seu é o Reino, o poder e a glória para sempre. Amém\" (Mateus 6:13) não aparece nos manuscritos mais antigos de Mateus; por isso muitas Bíblias modernas a trazem em nota de rodapé. Lucas registra uma versão mais curta da mesma oração (Lucas 11:2-4).", "ref": "Mateus 6:13" }
     },
     {
       "id": "u8l3",
-      "title": "Pães e peixes",
-      "vocab": [
+      "title": "Pães, peixes e o mar",
+      "ref": "Mateus 14:13-33",
+      "level": "A2.1",
+      "narrator": "pedro",
+      "guests": ["jesus"],
+      "names": [
+        { "en": "Jesus", "pt": "Jesus" },
+        { "en": "Peter", "pt": "Pedro", "note": "narra a unidade" },
+        { "en": "disciples", "pt": "discípulos", "note": "os seguidores de Jesus" },
+        { "en": "the Lord", "pt": "o Senhor" },
+        { "en": "God", "pt": "Deus" }
+      ],
+      "hints": {
+        "late": "tarde",
+        "loaves": "pães",
+        "left": "sobrou, sobraram",
+        "big": "grande, grandes",
+        "began": "comecei, começou",
+        "doubt": "duvidar, duvidou"
+      },
+      "tips": [
         {
-          "en": "fish",
-          "pt": "peixe",
-          "icon": "🐟"
+          "part": 1,
+          "id": "only-howmany",
+          "grammar": "only-howmany",
+          "title": "only e how many: quantidades",
+          "body": "only = só, apenas; vem antes do verbo principal ou do número: We only have five loaves. Para perguntar a quantidade de coisas que se contam, use how many + plural: How many loaves? Para coisas que não se contam, how much: How much bread?",
+          "examples": [
+            { "en": "We have five loaves", "pt": "Temos cinco pães" },
+            { "en": "We only have five loaves", "pt": "Temos só cinco pães" }
+          ],
+          "contrast": { "a": "How many fish?", "b": "How much bread?", "note": "how many para contáveis (fish, loaves, baskets); how much para incontáveis (bread, water)" }
         },
         {
-          "en": "five",
-          "pt": "cinco",
-          "icon": "5️⃣"
-        },
-        {
-          "en": "crowd",
-          "pt": "multidão",
-          "icon": "👥"
-        },
-        {
-          "en": "to bless",
-          "pt": "abençoar",
-          "icon": "🙌"
-        },
-        {
-          "en": "loaves",
-          "pt": "pães",
-          "icon": "🥖"
-        },
-        {
-          "en": "basket",
-          "pt": "cesto",
-          "icon": "🧺"
-        },
-        {
-          "en": "faith",
-          "pt": "fé",
-          "icon": "🙏"
-        },
-        {
-          "en": "to sink",
-          "pt": "afundar",
-          "icon": "⬇️"
-        },
-        {
-          "en": "afraid",
-          "pt": "com medo",
-          "icon": "😨"
-        },
-        {
-          "en": "to walk",
-          "pt": "andar",
-          "icon": "🚶"
+          "part": 2,
+          "id": "past-did",
+          "grammar": "past-did",
+          "title": "Did...? perguntas no passado",
+          "body": "Para perguntar sobre o passado, use Did + sujeito + verbo básico: Did Jesus walk on the waves? A resposta curta é Yes, he did ou No, he did not. O verbo principal fica sem -ed.",
+          "examples": [
+            { "en": "Jesus walked on the waves", "pt": "Jesus andou sobre as ondas" },
+            { "en": "Did Jesus walk on the waves?", "pt": "Jesus andou sobre as ondas?" }
+          ],
+          "contrast": { "a": "Why did you doubt?", "b": "Why do you doubt?", "note": "did = passado; do = presente" }
         }
       ],
-      "sentences": [
-        {
-          "en": "A great crowd followed Jesus",
-          "pt": "Uma grande multidão seguiu Jesus"
-        },
-        {
-          "en": "Jesus told the disciples to feed the crowd",
-          "pt": "Jesus mandou os discípulos dar de comer à multidão"
-        },
-        {
-          "en": "Five loaves and two fishes",
-          "alt": [
-            "Five loaves and two fish"
-          ],
-          "pt": "Cinco pães e dois peixes"
-        },
-        {
-          "en": "He commanded the crowd to sit down on the grass",
-          "pt": "Mandou que a multidão se assentasse sobre a erva"
-        },
-        {
-          "en": "Jesus blessed the bread and the fish",
-          "pt": "Jesus abençoou o pão e o peixe"
-        },
-        {
-          "en": "About five thousand men ate and were filled",
-          "pt": "Quase cinco mil homens comeram e ficaram saciados"
-        },
-        {
-          "en": "Twelve baskets were left",
-          "pt": "Sobraram doze cestos"
-        },
-        {
-          "en": "Jesus came to them, walking on the sea",
-          "pt": "Jesus foi ter com eles, andando por cima do mar"
-        },
-        {
-          "en": "Be of good cheer, it is I, be not afraid",
-          "alt": [
-            "Be of good cheer, it is I, do not be afraid"
-          ],
-          "pt": "Tende bom ânimo, sou eu, não temais"
-        },
-        {
-          "en": "Peter walked on the water to go to Jesus",
-          "pt": "Pedro andou sobre as águas para ir ter com Jesus"
-        },
-        {
-          "en": "Peter began to sink and cried, Lord, save me",
-          "pt": "Pedro começou a afundar e clamou: Senhor, salva-me!"
-        },
-        {
-          "en": "O you of little faith, why did you doubt?",
-          "alt": [
-            "You of little faith, why did you doubt?"
-          ],
-          "pt": "Homem de pequena fé, por que duvidaste?"
-        }
+      "vocab": [
+        { "en": "crowd", "pt": "multidão", "pos": "noun", "field": "people", "tier": "core", "part": 1, "icon": "👭", "example": 1 },
+        { "en": "hungry", "pt": "com fome", "ptAlt": ["faminto", "faminta"], "pos": "adj", "field": "feelings", "tier": "core", "part": 1, "icon": "🤤", "example": 2 },
+        { "en": "bread", "pt": "pão", "pos": "noun", "field": "food", "tier": "core", "part": 1, "icon": "🍞", "example": 5 },
+        { "en": "to feed", "pt": "alimentar", "ptAlt": ["dar de comer"], "pos": "verb", "field": "actions", "tier": "core", "part": 1, "icon": "🥄", "example": 5 },
+        { "en": "Bring them to me", "pt": "Tragam para mim", "ptAlt": ["Tragam-nos a mim", "Traga para mim", "Tragam eles para mim"], "pos": "chunk", "field": "speech", "tier": "core", "part": 1, "icon": "🥡", "iconic": true, "example": 4 },
+        { "en": "wave", "pt": "onda", "pos": "noun", "field": "nature", "tier": "core", "part": 2, "icon": "🏄", "example": 8 },
+        { "en": "hand", "pt": "mão", "pos": "noun", "field": "body", "tier": "core", "part": 2, "icon": "✋", "example": 11 },
+        { "en": "to sink", "pt": "afundar", "pos": "verb", "field": "actions", "tier": "core", "part": 2, "icon": "⬇️", "example": 10 },
+        { "en": "to save", "pt": "salvar", "pos": "verb", "field": "faith", "tier": "core", "part": 2, "icon": "🆘", "example": 11, "recycle": true },
+        { "en": "Lord, save me!", "pt": "Senhor, salve-me!", "ptAlt": ["Senhor, salva-me!", "Senhor, me salve!"], "pos": "chunk", "field": "speech", "tier": "core", "part": 2, "icon": "😱", "iconic": true, "example": 11 }
+      ],
+      "beats": [
+        { "order": 1, "en": "A great crowd followed Jesus", "pt": "Uma grande multidão seguiu Jesus", "kind": "statement", "fact": true },
+        { "order": 2, "en": "It was late and the crowd was hungry", "pt": "Era tarde e a multidão estava com fome", "kind": "statement", "fact": true },
+        { "order": 3, "en": "We only have five loaves and two fish", "pt": "Nós só temos cinco pães e dois peixes", "altPt": ["Temos só cinco pães e dois peixes", "Não temos aqui senão cinco pães e dois peixes"],
+          "kind": "first-person", "fact": true, "iconic": true, "speaker": "pedro", "gap": { "word": "only", "kind": "grammar", "options": ["only", "also", "all"] }, "grammar": "only-howmany" },
+        { "order": 4, "en": "Jesus said, \"Bring them to me\"", "pt": "Jesus disse: \"Tragam para mim\"", "altPt": ["Jesus disse: \"Trazei-mos aqui\"", "Jesus disse: \"Tragam-nos a mim\""], "alt": ["Jesus said, \"Bring them here to me\""], "kind": "quote", "fact": true, "iconic": true, "speaker": "jesus" },
+        { "order": 5, "en": "He blessed the bread and fed the hungry crowd", "pt": "Ele abençoou o pão e alimentou a multidão faminta", "altPt": ["Ele abençoou o pão e deu de comer à multidão com fome"],
+          "kind": "statement", "fact": true, "gap": { "word": "bread", "kind": "lexical", "options": ["bread", "crowd", "fish"] } },
+        { "order": 6, "en": "Did he feed everyone? Yes, and there was bread left", "pt": "Ele alimentou todos? Sim, e ainda sobrou pão", "kind": "question", "fact": true },
+        { "order": 7, "en": "That night we were in a boat on the sea", "pt": "Naquela noite nós estávamos num barco no mar", "kind": "first-person", "fact": true, "speaker": "pedro" },
+        { "order": 8, "en": "The wind was against us and the waves were big", "pt": "O vento estava contra nós e as ondas eram grandes", "altPt": ["O vento era contrário e as ondas eram grandes"], "kind": "statement", "fact": true },
+        { "order": 9, "en": "Did Jesus walk on the waves? Yes, he did", "pt": "Jesus andou sobre as ondas? Sim, andou", "kind": "question", "fact": true, "gap": { "word": "Did", "kind": "grammar", "options": ["Did", "Does", "Do"] }, "grammar": "past-did" },
+        { "order": 10, "en": "I walked on the water but began to sink", "pt": "Eu andei sobre a água, mas comecei a afundar", "altPt": ["Andei sobre as águas, mas comecei a afundar"], "kind": "first-person", "fact": true, "speaker": "pedro" },
+        { "order": 11, "en": "I cried, \"Lord, save me!\" and he took my hand", "pt": "Eu gritei: \"Senhor, salve-me!\" e ele segurou a minha mão", "altPt": ["Eu clamei: \"Senhor, salva-me!\" e ele me segurou pela mão"], "kind": "first-person", "fact": true, "iconic": true, "speaker": "pedro" },
+        { "order": 12, "en": "His hand saved me and I did not sink", "pt": "A mão dele me salvou e eu não afundei", "altPt": ["Ele me salvou com a mão e eu não afundei"], "kind": "negative", "fact": true, "speaker": "pedro", "grammar": "past-did" }
+      ],
+      "contrast": [
+        { "a": "We only have five loaves and two fish", "b": "We have five loaves and two fish", "note": "only = só; sem only a frase perde a ideia de pouco (Dica 1)" },
+        { "a": "Did Jesus walk on the waves? Yes, he did", "b": "Did Peter walk on the waves? Yes, but he began to sink", "note": "mesma pergunta com did, sujeito diferente (Dica 2)" }
       ],
       "verse": {
-        "text": "He took the five loaves, and the two fishes, and looking up to heaven, he blessed.",
-        "pt": "Tomou os cinco pães e os dois peixes e, olhando para o céu, abençoou.",
-        "ref": "Mateus 14:19",
-        "blank": "blessed",
-        "options": [
-          "blessed",
-          "sold",
-          "hid",
-          "cut"
+        "text": "Cheer up! It is I! Don't be afraid.",
+        "classic": "Be of good cheer; it is I; be not afraid.",
+        "pt": "Coragem! Sou eu! Não tenham medo.",
+        "classicPt": "Tende bom ânimo; sou eu, não temais.",
+        "ref": "Mateus 14:27",
+        "blanks": [
+          { "word": "afraid", "options": ["afraid", "hungry", "alone", "sick"] },
+          { "word": "Cheer", "options": ["Cheer", "Wake", "Hurry", "Come"] }
         ]
       },
       "reading": {
-        "text": "In the night, the disciples were in a boat, and the wind was contrary. Jesus came to them, walking on the sea. Peter walked on the water, but he was afraid and began to sink. Jesus stretched out his hand and caught him.",
-        "pt": "De noite, os discípulos estavam num barco, e o vento era contrário. Jesus foi ter com eles, andando sobre o mar. Pedro andou sobre as águas, mas teve medo e começou a afundar. Jesus estendeu a mão e o segurou.",
-        "q": "What did Jesus do when Peter began to sink?",
-        "options": [
-          "He stretched out his hand and caught him",
-          "He sent an angel",
-          "He went back to the boat"
-        ],
-        "answer": "He stretched out his hand and caught him"
+        "text": "Jesus fed five thousand people with five loaves and two fish. That night, the disciples were in a boat, and the wind was against them. Jesus came to them, walking on the sea. Peter walked on the water too, but he saw the wind and began to sink. Jesus took his hand and said, \"Why did you doubt?\"",
+        "pt": "Jesus alimentou cinco mil pessoas com cinco pães e dois peixes. Naquela noite, os discípulos estavam num barco, e o vento estava contra eles. Jesus foi até eles, andando sobre o mar. Pedro também andou sobre a água, mas viu o vento e começou a afundar. Jesus segurou a mão dele e disse: \"Por que você duvidou?\"",
+        "questions": [
+          { "kind": "literal", "q": "What did Peter do when he saw the wind?", "qPt": "O que Pedro fez quando viu o vento?",
+            "options": ["He started to go down into the water", "He got back into the boat", "He swam to Jesus"], "answer": "He started to go down into the water" },
+          { "kind": "inference", "q": "Why did Peter begin to sink?", "qPt": "Por que Pedro começou a afundar?",
+            "options": ["Because he was afraid and stopped trusting", "Because the boat was too far away", "Because he could not swim"], "answer": "Because he was afraid and stopped trusting",
+            "explain": "Pedro olhou para o vento, teve medo e duvidou; Jesus o segurou e perguntou por que ele duvidou (Mateus 14:30-31)." }
+        ]
       },
-      "dialogue": {
-        "line": "Lord, we have only five loaves and two fishes.",
-        "pt": "Senhor, temos só cinco pães e dois peixes.",
-        "options": [
-          "Bring them to me.",
-          "Send the crowd to Egypt.",
-          "Close the window."
-        ],
-        "answer": "Bring them to me.",
-        "answerPt": "Tragam-nos a mim."
+      "conversation": {
+        "with": "jesus",
+        "turns": [
+          { "who": "jesus", "en": "Peter, how many loaves do you have?", "pt": "Pedro, quantos pães vocês têm?", "mood": "calmo", "fact": true, "ref": "Marcos 6:38" },
+          { "who": "you", "options": ["Only five, Lord. And two fish.", "Twelve baskets, Lord.", "Five thousand, Lord."],
+            "answer": "Only five, Lord. And two fish.", "pt": "Só cinco, Senhor. E dois peixes.", "intent": "Diga quantos pães e peixes vocês têm" },
+          { "who": "jesus", "en": "Come, Peter. Walk on the water.", "pt": "Venha, Pedro. Ande sobre a água.", "mood": "solene", "fact": true, "ref": "Mateus 14:29" },
+          { "who": "you", "options": ["Lord, save me! I am sinking!", "Lord, the wind is too strong. I cannot come.", "Lord, the boat is far. Wait for me."],
+            "answer": "Lord, save me! I am sinking!", "pt": "Senhor, salve-me! Estou afundando!", "intent": "Peça socorro", "speak": true }
+        ]
       },
-      "quiz": {
-        "q": "How many men ate of the loaves and fishes?",
-        "options": [
-          "About five thousand",
-          "Twelve",
-          "Forty"
-        ],
-        "answer": "About five thousand",
-        "explain": "Os que comeram foram quase cinco mil homens, além das mulheres e crianças (Mateus 14:21)."
-      }
+      "fact": { "pt": "Mateus conta que comeram cerca de cinco mil homens, \"além das mulheres e crianças\" (Mateus 14:21): a multidão era bem maior. Depois que Jesus e Pedro subiram no barco, o vento parou, e os discípulos disseram: \"Você é mesmo o Filho de Deus\" (Mateus 14:32-33).", "ref": "Mateus 14:21" }
     }
   ]
 }
