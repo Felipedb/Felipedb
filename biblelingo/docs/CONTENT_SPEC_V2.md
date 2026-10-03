@@ -201,8 +201,8 @@ item (vocab) = {
   ptAlt: ["chão"],        // opcional, aceitas ao digitar PT
   alt: ["heavens"],       // opcional, aceitas ao digitar EN
   pos: "noun",            // noun | verb | adj | adv | num | chunk | func
-  field: "creation",      // creation | nature | family | food | body | feelings | actions | places | time |
-                          // objects | work | faith | animals | speech | quantity
+  field: "creation",      // creation | nature | animals | people | family | food | body | feelings | mind | quality |
+                          // actions | places | time | objects | work | faith | speech | quantity
   tier: "core",           // core (NGSL top 2000) | bible (máximo 2 por lição, só receptivo)
   part: 1,                // 1 ou 2
   icon: "🌍",             // emoji até 12.0, único por conceito no curso (tools/content/icons.json)
@@ -279,12 +279,12 @@ Bloco A, estrutura:
 
 Bloco B, vocabulário:
 - B1. 10 itens: por parte, 4 com `pos` em {noun, verb, adj, adv, num} e 1 com `pos: "chunk"`. Bloqueia.
-- B2. Campos obrigatórios: `en`, `pt`, `pos`, `field`, `tier`, `part`, `icon`, `example`; `image` obrigatório quando `pos` é noun ou verb e `field` não é feelings/faith/quantity/speech. Bloqueia.
+- B2. Campos obrigatórios: `en`, `pt`, `pos`, `field`, `tier`, `part`, `icon`, `example`; `image` obrigatório quando `pos` é noun ou verb e `field` não é feelings/mind/quality/faith/quantity/speech. Bloqueia.
 - B3. `pt` sem parênteses e sem barra; `en` sem parênteses e sem barra; `en` de substantivo no singular (regex `/s$/` com lista de exceções: `vegetables`, `lips`, `clothes`, `news`); verbo começa com "to "; chunk tem pelo menos 2 palavras. Bloqueia.
 - B4. `tier: "core"` em pelo menos 70% dos 8 itens de conteúdo (7 de 8 ou 6 de 8 arredondando: exigir >= 6); `tier: "bible"` em no máximo 2. A lista NGSL (2800 lemas) entra em `tools/content/ngsl.json`; o validador avisa quando `tier: "core"` não está na lista. Bloqueia a proporção, avisa a lista.
 - B5. `en` não é nome próprio (não começa com maiúscula, salvo chunk) e não está em `names`. Bloqueia.
 - B6. `en` não repete dentro da unidade; entre unidades só com `recycle: true` (compara com todas as unidades v2 carregadas). Bloqueia a repetição sem `recycle`.
-- B7. Cada item com `part: p` aparece verbatim (ignorando "to " e caixa; verbos aceitam as formas de `IRR` e sufixos, como hoje na linha 39-41) em pelo menos 2 beats da mesma parte. Chunk: em pelo menos 1 beat. Bloqueia.
+- B7. Cada item com `part: p` aparece verbatim (ignorando "to " e caixa; verbos aceitam as formas de `IRR` e sufixos, como hoje nas linhas 39-41) em pelo menos 2 beats da mesma parte. Chunk: em pelo menos 1 beat. Como o `stem` da linha 40 corta em 4 letras e exige 3 (então `went` não casa com `to go`), o item pode declarar `forms: ["went", "goes", "going"]` e o validador conta essas formas como ocorrências. Bloqueia.
 - B8. Glosa básica (`pt` sem acentos) não coincide com a de outro item do curso que tenha `en` diferente, salvo `recycle` (CL-17): woman/wife, earth/ground, to shut/to close, pit/den. Avisa.
 - B9. Ícone único por conceito: `icon` não pode estar associado a outro `en` em `tools/content/icons.json`; o validador adiciona pares novos ao arquivo com `--write-icons`. Bloqueia duplicidade; mantém a regra de emoji até 12.0 (`/[\u{1FA70}-\u{1FAFF}]/u`).
 - B10. `example` aponta para um beat da mesma parte que contém a palavra. Bloqueia.
@@ -294,7 +294,7 @@ Bloco C, beats:
 - C2. `en` com 4 a 10 palavras quando `prod !== false` (até 12 quando `prod: false`); começa com maiúscula; sem ponto final; sem vírgula, dois-pontos ou ponto e vírgula internos quando `prod !== false` (aspas de discurso direto permitidas: `God said, "Let there be light"` conta como 1 vírgula tolerada se `iconic: true`). Bloqueia tamanho; avisa pontuação.
 - C3. Arcaísmos: regex `\b(thee|thou|thy|thine|ye|unto|hath|saith|doth|shalt|art|hast|whereon|standest|looketh|saveth|shewed|stedfast|brethren|lest|verily|midst|upon|purposed|trespass|void)\b` proibida em `en` de beats, reading, conversation e vocab. `behold`, `whom`, `shall`, `for ever` proibidos em beats com `prod !== false`; tolerados em `verse.text` só quando a WEB os traz. Bloqueia.
 - C4. Grafia americana: lista `{ colour: color, counsellor: counselor, "for ever": forever, kneeled: knelt, shewed: showed, stedfast: steadfast, neighbour: neighbor, saviour: savior, honour: honor }` aplicada a `en` de beats e vocab. Bloqueia.
-- C5. Palavras de conteúdo fora do vocabulário: para cada beat com `prod !== false`, as palavras que não estão (a) no vocabulário da lição, (b) no vocabulário de lições anteriores em `course.json.order`, (c) na lista funcional `tools/content/function-words.json` (cerca de 150: artigos, pronomes, preposições, auxiliares, numerais, dias, "yes", "no", "very", "also"...), (d) em `names` ou (e) em `hints` geram bloqueio; mais de 1 palavra do beat em `hints` gera aviso.
+- C5. Palavras de conteúdo fora do vocabulário: para cada beat com `prod !== false`, as palavras que não estão (a) no vocabulário da lição, (b) no vocabulário de lições anteriores em `course.json.order`, (c) na lista funcional `tools/content/function-words.json` (cerca de 160: artigos, pronomes, preposições, auxiliares, numerais, dias, "yes", "no", "very", "also", "everyone", mais os verbos de ligação narrativa say/said, ask/asked, come/came, go/went, com glosa), (d) em `names` ou (e) em `hints` geram bloqueio; mais de 1 palavra do beat em `hints` gera aviso.
 - C6. Por lição: >= 2 beats com `kind: "question"` (ou `en` terminando em "?"), >= 1 `negative` (regex `\b(not|don't|doesn't|didn't|cannot|can't|never|no)\b`), >= 1 `first-person` (regex `\b(I|we|my|our|me|us)\b`), e os 2 pares de `contrast` com `a` igual a um beat. Bloqueia.
 - C7. `gap`: `word` ocorre exatamente uma vez como palavra inteira no `en`; `kind: "grammar"` exige que as `options` sejam variantes morfológicas da mesma palavra ou da mesma classe funcional (lista `tools/content/grammar-sets.json`: `[is, are, was, were]`, `[a, an, the]`, `[do, does, did]`, `[go, goes, went, going]`, ...); `kind: "lexical"` exige que todas as `options` estejam no vocabulário da lição com a mesma `pos` e nunca sejam vizinhos ortográficos (distância de edição > 2 ou comprimento diferente). Bloqueia.
 - C8. `pt` em registro "você": regex `\b(tu|te|ti|teu|teus|tua|tuas|vós|vos|vosso|vossos|vossa|vossas|contigo|convosco)\b` e verbos em -ais/-eis/-is de 2ª do plural (`\b\w+(ais|eis)\b` com lista branca: "pais", "mais", "reis", "leis", "seis", "dez", "jamais", "depois") proibidos em `pt` de beats, reading, conversation, vocab e tips; permitidos só em `altPt` e `classicPt`. Bloqueia.
@@ -304,7 +304,7 @@ Bloco C, beats:
 
 Bloco D, versículo, leitura, conversa, fato:
 - D1. `verse.text`, `classic`, `pt`, `classicPt`, `ref` presentes; `text` com no máximo 18 palavras; cada `blanks[i].word` aparece exatamente uma vez em `text` (reaproveita a regex da linha 47) e está em `options`; 4 opções únicas; 2 a 3 lacunas; nenhuma `option` aparece no `text` fora da lacuna (CB-23); nenhuma `option` é sinônimo listado da resposta (`tools/content/synonyms.json`, pequeno). Bloqueia.
-- D2. `reading.text` com 3 a 5 frases (contagem por `[.!?]`), discurso direto entre aspas, sem arcaísmos (C3), palavras de conteúdo cobertas (C5 com tolerância de 1 glosa); `questions` com exatamente 2, `kind` literal e inference; nenhuma `option` é substring literal de 4+ palavras do `text` (CP-09); `answer` em `options`; `qPt` presente. Bloqueia.
+- D2. `reading.text` com 3 a 5 frases (contagem por `[.!?]`), discurso direto entre aspas, sem arcaísmos (C3), palavras de conteúdo cobertas (C5 com tolerância de até 3 palavras glosadas em `hints`, porque a leitura é receptiva e tem dica por toque); `questions` com exatamente 2, `kind` literal e inference; nenhuma `option` é substring literal de 4+ palavras do `text` (CP-09); `answer` em `options`; `qPt` presente. Bloqueia.
 - D3. `conversation.turns`: 3 a 4 turnos; exatamente 2 com `who: "you"`; cada um com 3 `options` únicas, `answer` em `options`, todas as opções com o mesmo número de frases (±1) e comprimento parecido (±4 palavras); nenhuma opção contém palavra de vocabulário de outra unidade que ainda não foi ensinada na ordem de `course.json` (CP-08, CL-09); nenhuma opção cita nome de `names` de outra unidade. Bloqueia.
 - D4. `fact.pt` com referência em `fact.ref`; sem travessão. Bloqueia.
 - D5. Sem `quiz` e sem `dialogue` em v2 (campos legados são gerados pelo merge). Avisa se existirem.
@@ -366,7 +366,7 @@ Comando de verificação de ponta a ponta: `node tools/content/validate.js --all
 
 ### 4.4 Leitura (`reading`)
 
-- 3 a 5 frases em inglês atual que recontam os beats em ordem (pode incluir 1 detalhe a mais da passagem), discurso direto com vírgula e aspas, só vocabulário já ensinado mais no máximo 1 palavra glosada em `hints`.
+- 3 a 5 frases em inglês atual que recontam os beats em ordem (pode incluir 1 detalhe a mais da passagem), discurso direto com vírgula e aspas, só vocabulário já ensinado mais no máximo 3 palavras glosadas em `hints` (com dica por toque).
 - 2 perguntas: `q1` literal (a resposta está no texto, mas as opções são parafraseadas, nunca copiadas: "began to sink" vira "started to go down into the water"), `q2` de inferência (why, what happens next, who is speaking, which came first), com 1 distrator verdadeiro que não responde à pergunta e 1 falso plausível. `qPt` sempre presente; o `explain` da q2 fica em português e cita a referência.
 - O português do texto só aparece depois de verificar (`Choice.jsx:126-131` passa a renderizar `ReadingPt` apenas quando `session.checked`). Perguntas lidas pelo narrador.
 
@@ -399,8 +399,8 @@ O validador rejeita: mistura de `pos` nas opções de palavra, opção de conver
 
 ### 4.8 Ícones e ilustrações
 
-- Emoji até a versão 12.0 em lições, cenas e histórias (validador já bloqueia U+1FA70 a U+1FAFF; passa a rodar também em `scenes.js`, `scenes2.js` e `stories.js`, CL-15). Substituições: 🪵 wood por 🌲, 🪟 window por 🖼️, 🪨 rock por 🗻 e stone por 🔘, 🪑 table por 🍽️, 🩺 por 🤒, 🩹 por 🤕, 🪙 coin por 💰.
-- Um ícone representa um só conceito em todo o curso (`tools/content/icons.json`, regra B9). Resolução dos conflitos atuais (CL-13, CL-14): fire 🔥, coal ♨️, altar ⛪, furnace 🌋, zeal 💥; throne 💺, to reign 👑, kingdom 🏰, ruler 🎖️, Pharaoh 🧔 (como nome, no card), to anoint 🧴; prophet 🗣️, covenant 🤝, decree 📣; God 🙏, grace 🎁, prayer 🛐, faith 💗; mountain ⛰️, rock 🗻; star ⭐, sign 🚩; shield 🛡️, faithful 💙, to deliver 🆓; afraid 😨, to fear 😰; stone 🔘, giant 🏋️, statue 🗿, net 🕸️, sack 🎒, cup 🥤, great 🔝, disciple 🧑‍🎓, virgin 👧, sling 🎯, to cast 🎣. Verbos mostram a ação, não o objeto.
+- Emoji até a versão 12.0 em lições, cenas e histórias (validador já bloqueia U+1FA70 a U+1FAFF; passa a rodar também em `scenes.js`, `scenes2.js` e `stories.js`, CL-15). Substituições (os sete glifos proibidos citados pelo code point): wood U+1FAB5 por 🌲, window U+1FA9F por 🖼️, rock U+1FAA8 por 🗻 e stone por 🔘, chair U+1FA91 (table) por 🍽️, stethoscope U+1FA7A (How do you feel?) por 🤒, bandage U+1FA79 (Are you hurt?) por 🤕, coin U+1FA99 por 💰.
+- Um ícone representa um só conceito em todo o curso (`tools/content/icons.json`, regra B9). Resolução dos conflitos atuais (CL-13, CL-14): fire 🔥, coal ♨️, altar ⛪, furnace 🌋, zeal 💥; king 👑, throne 💺, to reign 🏛️, kingdom 🏰, ruler 🎖️, Pharaoh 🧔 (como nome, no card), to anoint 🧴; prophet 🗣️, covenant 🤝, decree 📣; God 🙏, grace 🎁, prayer 🛐, faith 💗; mountain ⛰️, rock 🗻; star ⭐, sign 🚩; shield 🛡️, faithful 💙, to deliver 🆓; afraid 😨, to fear 😰; stone 🔘, giant 🏋️, statue 🗿, net 🕸️, sack 🎒, cup 🥤, great 🔝, disciple 🧑‍🎓, virgin 👧, sling 🎯, to cast 🎣. Verbos mostram a ação, não o objeto.
 - `image-choice` só para substantivos concretos e verbos de ação com ilustração própria (`image`, conjunto gerado no mesmo estilo dos retratos, 1 PNG de 256 x 256 px por palavra em `app/public/img/vocab/`); abstratos (`grace`, `mercy`, `faith`, `likeness`) usam `choice-en-pt` com a frase-exemplo (CP-20). Enquanto a ilustração não existir, o card usa o emoji e o validador avisa.
 
 ---
@@ -427,7 +427,7 @@ O validador rejeita: mistura de `pos` nas opções de palavra, opção de conver
 ### 5.3 Português
 
 - Registro único "você/vocês" em beats, leituras, conversas, dicas, cenas, histórias e interface; imperativo em -e/-a (Tire, Deixe, Venha, Tragam, Ponham); "Olha!" e "Vem!" aceitos só como interjeição coloquial em cenas; ênclise só quando natural ("Perdoe-nos" sim; "Tragam-nos a mim" vira "Tragam para mim") (CL-36).
-- Acentos e cedilha obrigatórios em tudo (conteúdo e interface). Sem travessão em nenhum texto: `Choice.jsx:94` troca `{ex.verse.ref} — “{ex.verse.pt}”` por `{ex.verse.ref}: “{ex.verse.pt}”`; `checker.js:25`, `:34` e `:49` trocam `"${s.en}" — ${s.pt}` por `"${s.en}" = ${s.pt}` (CL-31, CP-14).
+- Acentos e cedilha obrigatórios em tudo (conteúdo e interface). Sem travessão (U+2014) em nenhum texto: `Choice.jsx:94` troca o travessão entre `{ex.verse.ref}` e `“{ex.verse.pt}”` por dois-pontos; `checker.js:25`, `:34` e `:49` trocam o travessão entre `"${s.en}"` e `${s.pt}` pelo sinal de igual, como já fazem as linhas 12 a 23 (CL-31, CP-14).
 - Discurso direto: português com dois-pontos e aspas, maiúscula após os dois-pontos ("Deus disse: "Haja luz.""); inglês com vírgula e aspas (God said, "Let there be light.").
 - Vocabulário moderno nas glosas e nas frases (seção 4.1); o termo da Almeida em `altPt` e `classicPt`.
 - Traduções sem contrassenso: "The Lord shut the door behind him" / "O Senhor fechou a porta atrás dele" (não "por fora", CL-34).
@@ -456,13 +456,13 @@ Regras do arco: ordem cronológica (u1, u2, u6, u3, u4, u5, u7, u8), ids mantido
 
 **u1l1 "No princípio" (Gênesis 1:1-19).** Fatos-chave: terra vazia e escura, Espírito sobre as águas (1:2); "Haja luz", a luz era boa, Dia e Noite (1:3-5); céu, mares e terra seca, plantas (1:6-13); quarto dia: sol, lua e estrelas (1:14-19). Versículo: Gênesis 1:1 WEB "In the beginning, God created the heavens and the earth." (lacunas created, beginning, earth; KJV "In the beginning God created the heaven and the earth."). Dicas: P1 was/were (passado de to be); P2 there was / there were. Chunks: "Let there be light"; "It was good". Modelo completo no Anexo A.
 
-**u1l2 "Os sete dias" (Gênesis 1:20 a 2:3).** Fatos-chave: quinto dia, peixes e aves (1:20-23); sexto dia, animais e o ser humano à imagem de Deus, homem e mulher (1:24-27); "era muito bom" (1:31); sétimo dia, Deus descansou e abençoou o dia (2:2-3). Versículo: Gênesis 1:31 (trecho) WEB "God saw everything that he had made, and, behold, it was very good." (lacunas good, everything, saw; KJV "And God saw every thing that he had made, and, behold, it was very good."); alternativa Gênesis 2:2 (trecho) "He rested on the seventh day from all his work which he had done." (lacuna rested). Dicas: P1 plural regular (-s) e ordinais (first, sixth, seventh); P2 adjetivos com very (very good, very big). Chunks: "very good"; "It is time to rest". Vocabulário sugerido: fish, bird, animal, man, woman, seven, to rest, sky; nomes: Day, Night. Narrador Adão; Eva no sexto dia.
+**u1l2 "Os sete dias" (Gênesis 1:20 a 2:3).** Fatos-chave: quinto dia, peixes e aves (1:20-23); sexto dia, animais e o ser humano à imagem de Deus, homem e mulher (1:24-27); "era muito bom" (1:31); sétimo dia, Deus descansou e abençoou o dia (2:2-3). Versículo: Gênesis 1:31 (trecho) WEB "God saw everything that he had made, and, behold, it was very good." (lacunas good, everything, saw; KJV "And God saw every thing that he had made, and, behold, it was very good."); alternativa Gênesis 2:2 (trecho) "He rested on the seventh day from all his work which he had done." (lacuna rested). Dicas: P1 plural regular (-s) e ordinais (first, sixth, seventh); P2 adjetivos com very (very good, very big). Chunks: "very good"; "It is time to rest". Vocabulário sugerido: bird, animal, man, woman, seven, to rest, sky, to bless (fish fica para u8l3); nomes: Day, Night. Narrador Adão; Eva no sexto dia.
 
 **u1l3 "O jardim e a queda" (Gênesis 2:4 a 3:24).** Fatos-chave: pó da terra e sopro de vida; jardim no Éden, árvore da vida e a ordem "não coma" (2:7-9, 16-17); "não é bom que o homem esteja só", a mulher (2:18-23); a serpente, "Deus disse mesmo?", os dois comem e se escondem (3:1-8); "Onde você está?" e as consequências (3:9-19); túnicas de peles e saída do jardim (3:21-24). Versículo: Gênesis 3:9 WEB "The Lord God called to the man, and said to him, 'Where are you?'" (lacunas Where, man, called; KJV "And the LORD God called unto Adam, and said unto him, Where art thou?"); alternativa Gênesis 2:18 (trecho) "It is not good for the man to be alone." (lacuna alone). Dicas: P1 artigos the/a e possessivos my/your/his; P2 perguntas com where (Where are you? Where is the tree?). Chunks: "Where are you?"; "Do not eat". Vocabulário: garden, tree, fruit, to eat, snake (bible), alone, to hide, afraid (recycle não: primeira ocorrência aqui; u3l1 marca recycle). Narradora Eva (protagonista do capítulo 3); Adão responde; a voz do Senhor pergunta. Corrige CB-03 (a queda não existia).
 
 ### Unidade 2: Noé e a arca (Gênesis 6-9). Narrador Noé; convidados Sem, Naamá (esposa de Noé, promovida à galeria) e a voz do Senhor.
 
-**u2l1 "A arca" (Gênesis 6:5-22; 7:1-16).** Fatos-chave: maldade grande, "Noé achou graça", justo, andava com Deus (6:5-9); arca de madeira de gofer, 300 x 50 x 30 côvados, betume, porta, janela, três andares (6:14-16); animais aos pares e sete pares dos limpos; Sem, Cam e Jafé; Noé, a esposa, os filhos e as noras, oito pessoas (6:10, 19-20; 7:2, 7, 13; corrige CB-30); "o Senhor fechou a porta atrás dele" (7:16); "Noé fez tudo o que Deus mandou" (6:22). Versículo: Gênesis 6:22 WEB "Thus Noah did. He did all that God commanded him." (lacunas commanded, all; KJV "Thus did Noah; according to all that God commanded him, so did he."); alternativa 6:14 "Make an ark of gopher wood." (lacunas ark, wood; WEB traz "ship", adaptado). Dicas: P1 passado regular -ed (walked, closed, covered); P2 preposições de lugar (in, on, into, out of). Chunks: "What are you making?"; "Come into the ark". Vocabulário: wood, door, window, animal (recycle de u1l2) ou pair, to build, to close, wife, son.
+**u2l1 "A arca" (Gênesis 6:5-22; 7:1-16).** Fatos-chave: maldade grande, "Noé achou graça", justo, andava com Deus (6:5-9); arca de madeira de gofer, 300 x 50 x 30 côvados, betume, porta, janela, três andares (6:14-16); animais aos pares e sete pares dos limpos; Sem, Cam e Jafé; Noé, a esposa, os filhos e as noras, oito pessoas (6:10, 19-20; 7:2, 7, 13; corrige CB-30); "o Senhor fechou a porta atrás dele" (7:16); "Noé fez tudo o que Deus mandou" (6:22). Versículo: Gênesis 6:22 WEB "Thus Noah did. He did all that God commanded him." (lacunas commanded, all; KJV "Thus did Noah; according to all that God commanded him, so did he."); alternativa 6:14 "Make an ark of gopher wood." (lacunas ark, wood; WEB traz "ship", adaptado). Dicas: P1 passado regular -ed (walked, closed, covered); P2 preposições de lugar (in, on, into, out of). Chunks: "What are you making?"; "Come into the ark". Vocabulário: wood, door, big, to build, animal (recycle de u1l2), wife, son, to close (window fica como glosa e nas cenas).
 
 **u2l2 "O dilúvio" (Gênesis 7:11 a 8:5).** Fatos-chave: Noé com 600 anos; fontes do abismo e janelas do céu (7:6, 11); chuva por quarenta dias e quarenta noites (7:12); águas acima dos montes por 150 dias (7:20, 24); só Noé e os da arca sobreviveram (7:21-23); "Deus se lembrou de Noé", vento, as águas baixam, a arca para no Ararate (8:1-4). Versículo: Gênesis 8:1 (trecho) WEB "God remembered Noah, all the animals, and all the livestock that were with him in the ark" (lacunas remembered, animals; "ship" adaptado; KJV "And God remembered Noah, and every living thing, and all the cattle that was with him in the ark"); alternativa 7:12 "It rained on the earth forty days and forty nights." (lacunas rained, nights, earth). Dicas: P1 números e quantidades (two, eight, forty, many, all); P2 for + duração (for forty days, for a long time). Chunks: "It is raining!"; "We are safe". Vocabulário: rain, water, mountain, forty, to rain, alive, wind, to wait.
 
@@ -478,7 +478,7 @@ Regras do arco: ordem cronológica (u1, u2, u6, u3, u4, u5, u7, u8), ids mantido
 
 ### Unidade 4 (nova posição): Moisés e o Êxodo (Êxodo 1-15). Narrador Moisés; convidados Arão, Miriã (promovida), Faraó, Josué, a voz do Senhor.
 
-**u3l1 "O cesto e a sarça" (Êxodo 1:8 a 2:10; 3:1 a 4:17).** Fatos-chave: um novo rei, escravidão, ordem contra os meninos (1:8-22); escondido três meses, cesto no rio, Miriã vigia, a filha de Faraó o tira da água (2:1-10; corrige CB-08); fuga para Midiã, pastor (2:15-21); sarça que queima e não se consome, "tire as sandálias", "EU SOU O QUE SOU" (3:1-14); "Arão falará por você" (4:1-17). Versículo: Êxodo 3:5 (trecho) WEB "Take off your sandals, for the place you are standing on is holy ground." (lacunas holy, sandals, standing; KJV "Put off thy shoes from off thy feet, for the place whereon thou standest is holy ground."); alternativa 3:14 (trecho) "I AM has sent me to you." (lacuna sent). Dicas: P1 imperativo afirmativo e negativo (Take off, Do not come close); P2 perguntas com who e what (Who are you? What is your name?). Chunks: "Take off your sandals"; "Who are you?". Vocabulário: baby, river, basket (recycle não: primeira ocorrência; u8l3 marca recycle), fire, bush (bible), sandal, holy, name.
+**u3l1 "O cesto e a sarça" (Êxodo 1:8 a 2:10; 3:1 a 4:17).** Fatos-chave: um novo rei, escravidão, ordem contra os meninos (1:8-22); escondido três meses, cesto no rio, Miriã vigia, a filha de Faraó o tira da água (2:1-10; corrige CB-08); fuga para Midiã, pastor (2:15-21); sarça que queima e não se consome, "tire as sandálias", "EU SOU O QUE SOU" (3:1-14); "Arão falará por você" (4:1-17). Versículo: Êxodo 3:5 (trecho) WEB "Take off your sandals, for the place you are standing on is holy ground." (lacunas holy, sandals, standing; KJV "Put off thy shoes from off thy feet, for the place whereon thou standest is holy ground."); alternativa 3:14 (trecho) "I AM has sent me to you." (lacuna sent). Dicas: P1 imperativo afirmativo e negativo (Take off, Do not come close); P2 perguntas com who e what (Who are you? What is your name?). Chunks: "Take off your sandals"; "Who are you?". Vocabulário: baby, river, basket, fire, bush (bible), sandal, holy, name.
 
 **u3l2 "Deixe o meu povo ir" (Êxodo 5-12).** Fatos-chave: "Quem é o Senhor?" e mais trabalho para o povo (5:1-9); coração endurecido e as pragas: sangue, rãs, trevas (7-10); Páscoa: cordeiro, sangue na porta (12:3-11); "quando eu vir o sangue, passarei por vocês" (12:13); meia-noite, Faraó chama Moisés de noite: "Saiam!" (12:29-33); 430 anos (12:40-41). Versículo: Êxodo 12:13 (trecho) WEB "When I see the blood, I will pass over you." (lacunas blood, see, pass; KJV idêntica); alternativa 5:1 (trecho) "This is what the Lord, the God of Israel, says: Let my people go." (lacunas people, go). Dicas: P1 negativa com do not / did not; P2 ordens e instruções (Put, Get out). Chunks: "Let my people go"; "Get out!". Modelo completo no Anexo A.
 
@@ -494,7 +494,7 @@ Regras do arco: ordem cronológica (u1, u2, u6, u3, u4, u5, u7, u8), ids mantido
 
 ### Unidade 6: Isaías, o profeta (Isaías 6-9; 36-38). Narrador Isaías; convidados Acaz, Ezequias (promovido), o anjo e a voz do Senhor.
 
-**u5l1 "Santo, santo, santo" (Isaías 6).** Fatos-chave: no ano da morte de Uzias, o Senhor no trono alto; serafins de seis asas (6:1-2); "Santo, santo, santo", os umbrais tremem à voz do que clamava (6:3-4; corrige CB-13); "estou perdido, homem de lábios impuros" (6:5); brasa do altar, pecado perdoado (6:6-7); "a quem enviarei?", "Aqui estou. Envie-me!" (6:8). Versículo: Isaías 6:8 (trecho) WEB "Whom shall I send, and who will go for us? Then I said, 'Here I am. Send me!'" (lacunas go, said, Here; KJV "Whom shall I send, and who will go for us? Then said I, Here am I; send me."). Dicas: P1 passado irregular de percepção (saw, heard) e Here I am; P2 will em perguntas (Who will go? Will you go?). Chunks: "Here I am. Send me!"; "Holy, holy, holy". Vocabulário: throne, wing, lip, coal, seraph (bible), to see (recycle), to hear, to send. "Here am I; send me" vira apenas `alt` (CL-03).
+**u5l1 "Santo, santo, santo" (Isaías 6).** Fatos-chave: no ano da morte de Uzias, o Senhor no trono alto; serafins de seis asas (6:1-2); "Santo, santo, santo", os umbrais tremem à voz do que clamava (6:3-4; corrige CB-13); "estou perdido, homem de lábios impuros" (6:5); brasa do altar, pecado perdoado (6:6-7); "a quem enviarei?", "Aqui estou. Envie-me!" (6:8). Versículo: Isaías 6:8 (trecho) WEB "Whom shall I send, and who will go for us? Then I said, 'Here I am. Send me!'" (lacunas go, said, Here; KJV "Whom shall I send, and who will go for us? Then said I, Here am I; send me."). Dicas: P1 passado irregular de percepção (saw, heard) e Here I am; P2 will em perguntas (Who will go? Will you go?). Chunks: "Here I am. Send me!"; "Holy, holy, holy". Vocabulário: throne, wing, lip, coal, seraph (bible), to see, to hear, to send. "Here am I; send me" vira apenas `alt` (CL-03).
 
 **u5l2 "Emanuel e o Príncipe da Paz" (Isaías 7:1-16; 9:1-7; Mateus 1:23).** Fatos-chave: dois reis marcham contra Jerusalém; o coração de Acaz treme como árvores ao vento (7:1-2); "fique calmo, não tenha medo" (7:3-9); sinal: "a virgem conceberá... Emanuel" (7:14); o povo em trevas vê grande luz (9:2); "um menino nos nasceu": Maravilhoso Conselheiro, Deus Forte, Pai Eterno, Príncipe da Paz (9:6); Mateus 1:23 explica "Deus conosco" (CB-27). Versículo: Isaías 9:6 (trecho) WEB "His name will be called Wonderful Counselor, Mighty God, Everlasting Father, Prince of Peace." (lacunas Peace, name, called; KJV "And his name shall be called Wonderful, Counsellor, The mighty God, The everlasting Father, The Prince of Peace."). Dicas: P1 futuro com will (A child will be born. His name will be called); P2 títulos compostos e means (Immanuel means God with us). Chunks: "Stay calm"; "God with us". Vocabulário: child, son, sign, peace, counselor, mighty (bible), to be born, to mean. Elimina a repetição de Isaías 9 em duas lições (CB-09).
 
@@ -512,7 +512,7 @@ Regras do arco: ordem cronológica (u1, u2, u6, u3, u4, u5, u7, u8), ids mantido
 
 **u8l1 "Pescadores de homens" (Mateus 4:18-25; Lucas 5:1-11).** Fatos-chave: mar da Galileia; Simão e André lançando a rede (Mateus 4:18); "venham comigo, e eu farei de vocês pescadores de homens"; deixaram as redes na hora (4:19-20); Tiago e João com Zebedeu consertando as redes (4:21-22); Lucas: noite sem pescar, "pela sua palavra lançarei a rede", dois barcos cheios (Lucas 5:4-10); Jesus percorre a Galileia ensinando e curando (Mateus 4:23). Versículo: Mateus 4:19 KJV "Follow me, and I will make you fishers of men." (sem arcaísmo; lacunas Follow, fishers, men; WEB "Come after me, and I will make you fishers for men." em `alt`). Dicas: P1 imperativo + will (Follow me, and I will make you); P2 expressões de tempo (all night, right now, immediately). Chunks: "Follow me"; "We worked all night". Vocabulário: net, boat, sea (recycle de u3l3), fisherman, to follow, to leave, to work, to catch. c-jesus-1 "Vem, segue-me" migra para esta unidade como cena de Pedro (seção 7).
 
-**u8l2 "O Pai Nosso" (Mateus 6:5-15).** Fatos-chave: orar no quarto com a porta fechada; sem repetições vazias (6:5-8); "o Pai de vocês sabe do que vocês precisam" (6:8); Pai nosso: nome santo, reino, vontade (6:9-10); pão de cada dia, dívidas e devedores, livramento do mal (6:11-13); "se vocês perdoarem, o Pai de vocês perdoará" (6:14). Versículo: Mateus 6:9 (trecho) WEB "Our Father in heaven, may your name be kept holy." (lacunas Father, holy, name; KJV "Our Father which art in heaven, Hallowed be thy name."); alternativa 6:11 WEB "Give us today our daily bread." (lacuna bread). Dicas: P1 pedidos com pronome objeto (Give us, Forgive us, Lead us); P2 possessivos plurais our/your e daily. Chunks: "Lord, teach us to pray"; "Give us today our daily bread". Vocabulário: father, bread (recycle não: primeira ocorrência; u8l3 marca recycle), daily, debt, debtor (bible), room, to ask, to forgive (recycle de u6l3). O vocab "will = vontade" sai (CL-05); "hallowed" sai (CL-04); a doxologia fica fora de lacuna (CB-32).
+**u8l2 "O Pai Nosso" (Mateus 6:5-15).** Fatos-chave: orar no quarto com a porta fechada; sem repetições vazias (6:5-8); "o Pai de vocês sabe do que vocês precisam" (6:8); Pai nosso: nome santo, reino, vontade (6:9-10); pão de cada dia, dívidas e devedores, livramento do mal (6:11-13); "se vocês perdoarem, o Pai de vocês perdoará" (6:14). Versículo: Mateus 6:9 (trecho) WEB "Our Father in heaven, may your name be kept holy." (lacunas Father, holy, name; KJV "Our Father which art in heaven, Hallowed be thy name."); alternativa 6:11 WEB "Give us today our daily bread." (lacuna bread). Dicas: P1 pedidos com pronome objeto (Give us, Forgive us, Lead us); P2 possessivos plurais our/your e daily. Chunks: "Lord, teach us to pray"; "Give us today our daily bread". Vocabulário: father, to give, daily, debt, debtor (bible), room, to ask, to forgive (recycle de u6l3); bread fica como glosa no chunk e é ensinado em u8l3. O vocab "will = vontade" sai (CL-05); "hallowed" sai (CL-04); a doxologia fica fora de lacuna (CB-32).
 
 **u8l3 "Pães, peixes e o mar" (Mateus 14:13-33).** Fatos-chave: a multidão; "deem vocês de comer"; cinco pães e dois peixes (14:15-17); "Tragam para mim"; sentar na grama; abençoou e partiu; cinco mil homens; doze cestos (14:18-21); o barco à noite, vento contrário; Jesus anda sobre o mar: "Sou eu, não tenham medo" (14:22-27); Pedro anda sobre as águas, teme o vento, afunda, "Senhor, salve-me!", a mão estendida (14:28-31); o vento para; "você é mesmo o Filho de Deus" (14:32-33). Versículo: Mateus 14:27 (trecho) WEB "Cheer up! It is I! Don't be afraid." (lacunas afraid, Cheer; KJV "Be of good cheer; it is I; be not afraid."); alternativa 14:19 (trecho) "He took the five loaves and the two fish, and looking up to heaven, he blessed." (lacuna blessed). Dicas: P1 only e how many / how much; P2 perguntas no passado com did. Chunks: "Bring them to me"; "Lord, save me!". Modelo completo no Anexo A.
 
@@ -840,3 +840,440 @@ exPtDistractors(beat, lesson):
 8. Scripts Playwright (`app/scripts/e2e-course.mjs`) com as asserções da seção 9.3.
 
 ---
+## 9. Critérios de aceitação e checklist de revisão
+
+### 9.1 Métricas de aceite por lição (medidas pelo validador e pelo planejador)
+
+- 10 itens de vocabulário (4 + 1 chunk por parte), >= 6 dos 8 de conteúdo no top 2000, <= 2 `tier: "bible"`, 0 nomes próprios como vocabulário, 0 parênteses em `en` e `pt`.
+- 12 beats em ordem, 4 a 10 palavras em produção, 0 arcaísmos, 0 tu/vós, 0 travessão, >= 2 perguntas, >= 1 negativa, >= 1 fala em 1ª pessoa, 2 pares de contraste, 1 lacuna gramatical por parte ligada à Dica, cada palavra nova em >= 2 beats da sua parte, cada chunk em >= 1 beat.
+- 2 Dicas, 1 versículo WEB (<= 18 palavras) com 2 ou 3 lacunas e `classic`/`classicPt`, 1 leitura de 3 a 5 frases com 2 perguntas (literal e inferência, opções parafraseadas), 1 conversa de 3 a 4 turnos com 2 respostas cobradas e distratores da mesma cena, 1 fato com referência.
+- Plano da primeira visita: 16 cobrados + 2 reserva + 8 cards; >= 4 produção; palavra por escolha <= 5; 1 conversa; 1 leitura; 1 fala; cada palavra nova com card e >= 4 toques; 0 cobrança antes da apresentação (inclusive pares e beats).
+- Replays: palavras sem `intro` recebem card; o versículo muda de lacuna e de modo; produção cresce (>= 7 na 2ª, >= 10 na 3ª).
+- Duração 3 a 4 minutos; precisão média alvo entre 75% e 90%; taxa de conclusão > 85% (medir com `session.log` e `accuracy` em `finishLesson`).
+
+### 9.2 Métricas de aceite por curso
+
+- 24 lições na ordem u1, u2, u6, u3, u4, u5, u7, u8; 240 itens de lição + ~50 funcionais via Dica + 240 expressões de cena; lista mínima de alta frequência (4.1) coberta.
+- Toda palavra nova volta em >= 3 lições posteriores (ou cenas); 0 repetição de `en` entre unidades sem `recycle`.
+- 24 versículos conferidos contra a WEB (`web.mjs`) e 24 `classicPt` conferidos contra a ARC; 0 opções de versículo presentes no texto.
+- 48 cenas (12 com heroínas, 2 por unidade na trilha), 16 histórias (2 por unidade) nos formatos v2; 100% das falas com clipe no manifesto; 0 pares de falantes com a mesma voz na mesma cena.
+- Áudio regenerado para todo `en` alterado (o manifesto indexa pelo texto exato) a 44,1 kHz/128 kbps, com `mood` aplicado.
+
+### 9.3 Asserções automáticas (Playwright, a partir de `app/scripts/e2e-course.mjs`)
+
+1. Em toda jogada, nenhum exercício cobrado contém palavra nova (`word`, `pairs`, `newWordsIn(sentence)`) sem `intro-word` anterior na mesma sessão ou `state.words[en].intro` já gravado.
+2. Nenhum `match` antes do último `intro-word` da parte.
+3. Beats cobrados em ordem crescente de `order` dentro da visita.
+4. Contagem por família dentro dos tetos da seção 8.5; exatamente 1 `conversation`, 1 `read`, 1 `verse*`.
+5. `type` e `type-sentence` só em palavras/frases com `seen >= 3`; nunca em `tier: "bible"`.
+6. Nenhum coração descontado em `newWord`, `isReview`, cena ou história (comparar `state.hearts` antes e depois de forçar erro).
+7. Em replays, `verse.blank` difere entre visitas consecutivas e o modo progride (`verse`, `verse-build`, `verse-type`).
+8. Cena: nenhuma cobrança visível a menos de 3 passos da revelação da fala; nenhuma fala cobrada duas vezes; `tap-heard` só com `alt` presente.
+9. História: toda resposta de interação aparece verbatim em beat anterior.
+10. Capturas em 390 x 844 nos temas claro e escuro de: `lesson-intro`, `intro-word`, `tip-card`, `fill-bank`, `conversation`, `read` (2 perguntas), `fact-card`, `verse` com toggle clássico; nenhuma string com travessão (`grep -rP "\x{2014}" app/src content scenes.js scenes2.js stories.js` vazio).
+
+### 9.4 Checklist de revisão humana (antes de gerar áudio)
+
+Fidelidade bíblica (revisor com Bíblia aberta na WEB e na ARC):
+- [ ] Cada fato cobrado em leitura ou conversa aparece em beat; nenhuma pergunta sobre fato não lido (CB-04).
+- [ ] Quem fala cada fala está certo (Moisés fala ao povo em Êxodo 14:13-14; o Senhor fala a Moisés em 14:16); o aluno nunca fala por Jesus nem pela voz do Senhor.
+- [ ] Nomes, lugares e números conferem (ismaelitas, vinte moedas, quarenta dias, doze cestos, cinco mil homens, oito pessoas na arca, três vezes ao dia).
+- [ ] Frases `fact: false` são plausíveis e inofensivas; `truth.imagined` declara o que foi imaginado.
+- [ ] Versículo: `text` literal da WEB (adaptações "the Lord" e "ark" declaradas), `classic` literal da KJV, `classicPt` literal da ARC, `pt` fiel ao sentido.
+- [ ] Nada doutrinário ou sectário; a doxologia de Mateus 6:13b fora de lacuna.
+- [ ] Referências no formato "Livro c:v-v" em português (Gênesis, Êxodo, 1 Samuel, Salmo, Isaías, Daniel, Mateus, Lucas, João).
+
+Naturalidade do inglês (falante nativo ou revisor C2):
+- [ ] Toda frase soa como inglês falado hoje; 0 tokens da lista proibida; grafia americana.
+- [ ] Contrações nas conversas, cenas e histórias; formas plenas nos beats narrados.
+- [ ] Distratores gramaticais e plausíveis; nenhuma resposta correta de nativo seria recusada (`alt` completo).
+- [ ] Chunks são expressões que um brasileiro usaria em viagem ou trabalho ("Bring them to me", "Get out!", "Lord, save me!", "I need", "How much is it?").
+- [ ] Nível: até u4 sem will, modais ou passiva; de u5 em diante, uma estrutura nova por Dica.
+
+Português do Brasil (revisor com o guia da seção 5.3):
+- [ ] Acentos e cedilha em 100% das strings (`grep -P "[a-z]ao\b|cao\b|nao\b" content/*.json` vazio como primeiro filtro).
+- [ ] Registro "você" em beats, leituras, conversas, dicas, cenas e histórias; tu/vós só em `altPt` e `classicPt`.
+- [ ] Imperativos em -e/-a; sem ênclise artificial; sem "concerto", "pelejar", "manjar", "molho" fora de `classicPt`.
+- [ ] Sem travessão em nenhum campo; discurso direto com dois-pontos e aspas e maiúscula.
+- [ ] Glosas curtas (1 a 2 palavras) sem parênteses; o complemento vai para `note`.
+
+Pedagogia (revisor com o plano impresso pelo planejador em modo `--dry`):
+- [ ] Nenhuma cobrança antes da apresentação; cada palavra nova com >= 4 toques e em >= 2 beats.
+- [ ] A Dica aparece antes do primeiro beat que usa a estrutura; o `explain` do erro cita a Dica.
+- [ ] Leitura com inferência real; conversa decidida por pragmática, não por eliminação.
+- [ ] Ícone único por conceito; ilustrações presentes para substantivos e verbos concretos.
+
+### 9.5 Processo
+
+1. Autor escreve `content/uX.json` v2 seguindo o Anexo A; roda `node tools/content/validate.js content/uX.json` até "OK".
+2. Revisão bíblica, de inglês e de português com a checklist 9.4; correções no JSON.
+3. `node tools/content/validate.js --all --scenes --stories && node tools/content/merge.js`.
+4. `ELEVENLABS_API_KEY=... node tools/gen-audio.mjs --dry` para contar créditos do lote; depois a geração real pelo workflow `.github/workflows/gen-audio.yml`; `tools/align-words.py` e `tools/build-sprites.mjs` como hoje (`docs/AUDIO.md`).
+5. `node app/scripts/e2e-course.mjs` com as asserções 9.3; capturas revisadas; publicação.
+
+---
+
+## 10. Anexo A: três lições-modelo em JSON v2 (modelo de ouro)
+
+As três lições abaixo são o padrão a copiar. Os textos dos versículos foram extraídos com `tools/content/web.mjs`; os `classicPt` são a ARC já presente nos JSON atuais. Cada JSON abaixo é um elemento de `lessons` dentro de `{ "v": 2, "id": "uX", "lessons": [ ... ] }`.
+
+### 10.1 u1l1 "No princípio" (Gênesis 1:1-19)
+
+```json
+{
+  "id": "u1l1",
+  "title": "No princípio",
+  "ref": "Gênesis 1:1-19",
+  "level": "A1.1",
+  "narrator": "adao",
+  "guests": ["eva", "voice"],
+  "names": [
+    { "en": "God", "pt": "Deus", "note": "sempre com maiúscula; os pronomes (he, his) ficam em minúscula" }
+  ],
+  "hints": {
+    "beginning": "princípio", "created": "criou", "heavens": "céus", "empty": "vazia", "still": "ainda",
+    "called": "chamou", "darkness": "escuridão", "evening": "tarde", "morning": "manhã", "moon": "lua", "stars": "estrelas", "saw": "viu, vimos"
+  },
+  "tips": [
+    {
+      "part": 1, "id": "past-be", "grammar": "past-be",
+      "title": "was = passado de is",
+      "body": "Para falar do que já aconteceu, is vira was e are vira were. O resto da frase não muda.",
+      "examples": [
+        { "en": "The earth is dark", "pt": "A terra está escura" },
+        { "en": "The earth was dark", "pt": "A terra estava escura" }
+      ],
+      "contrast": { "a": "The light is good", "b": "The light was good", "note": "is = agora; was = naquele momento" }
+    },
+    {
+      "part": 2, "id": "there-was", "grammar": "there-was",
+      "title": "there was = havia",
+      "body": "Para dizer que algo existia, use there was (uma coisa) ou there were (várias). No presente: there is e there are.",
+      "examples": [
+        { "en": "There was light", "pt": "Havia luz" },
+        { "en": "There were two great lights", "pt": "Havia dois grandes luminares" }
+      ],
+      "contrast": { "a": "There is light", "b": "There was light", "note": "there is = há; there was = havia" }
+    }
+  ],
+  "vocab": [
+    { "en": "earth", "pt": "terra", "pos": "noun", "field": "creation", "tier": "core", "part": 1, "icon": "🌍", "image": "earth.png", "example": 2 },
+    { "en": "light", "pt": "luz", "pos": "noun", "field": "creation", "tier": "core", "part": 1, "icon": "💡", "image": "light.png", "example": 4 },
+    { "en": "dark", "pt": "escuro", "ptAlt": ["escura"], "pos": "adj", "field": "quality", "tier": "core", "part": 1, "icon": "🌑", "example": 2 },
+    { "en": "good", "pt": "bom", "ptAlt": ["boa"], "pos": "adj", "field": "quality", "tier": "core", "part": 1, "icon": "👍", "example": 5 },
+    { "en": "Let there be light", "pt": "Haja luz", "pos": "chunk", "field": "speech", "tier": "core", "part": 1, "icon": "✨", "iconic": true, "example": 3 },
+    { "en": "day", "pt": "dia", "pos": "noun", "field": "time", "tier": "core", "part": 2, "icon": "📅", "image": "day.png", "example": 9 },
+    { "en": "night", "pt": "noite", "pos": "noun", "field": "time", "tier": "core", "part": 2, "icon": "🌃", "image": "night.png", "example": 10 },
+    { "en": "sun", "pt": "sol", "pos": "noun", "field": "nature", "tier": "core", "part": 2, "icon": "☀️", "image": "sun.png", "example": 9 },
+    { "en": "to make", "pt": "fazer", "pos": "verb", "field": "actions", "tier": "core", "part": 2, "icon": "🔨", "image": "make.png", "example": 9 },
+    { "en": "It was good", "pt": "Era bom", "ptAlt": ["Foi bom"], "pos": "chunk", "field": "speech", "tier": "core", "part": 2, "icon": "🙌", "iconic": true, "example": 11 }
+  ],
+  "beats": [
+    { "order": 1, "en": "In the beginning, God created the heavens and the earth", "pt": "No princípio, Deus criou os céus e a terra",
+      "alt": ["In the beginning God created the heaven and the earth"], "altPt": ["No princípio, criou Deus os céus e a terra", "No princípio, Deus criou o céu e a terra"],
+      "kind": "quote", "fact": true, "iconic": true, "prod": false },
+    { "order": 2, "en": "The earth was empty and dark", "pt": "A terra estava vazia e escura",
+      "alt": ["The earth was formless and empty"], "altPt": ["A terra era sem forma e vazia"],
+      "kind": "statement", "fact": true, "gap": { "word": "was", "kind": "grammar", "options": ["was", "is", "were"] }, "grammar": "past-be" },
+    { "order": 3, "en": "God said, \"Let there be light\"", "pt": "Deus disse: \"Haja luz\"",
+      "kind": "quote", "fact": true, "iconic": true, "speaker": "voice" },
+    { "order": 4, "en": "And there was light", "pt": "E houve luz", "alt": ["There was light"],
+      "kind": "statement", "fact": true, "gap": { "word": "light", "kind": "lexical", "options": ["light", "earth", "sun"] } },
+    { "order": 5, "en": "God saw that the light was good", "pt": "Deus viu que a luz era boa",
+      "alt": ["God saw the light, and it was good"], "kind": "statement", "fact": true },
+    { "order": 6, "en": "Was the earth still dark? No, the light was good", "pt": "A terra ainda estava escura? Não, a luz era boa",
+      "kind": "question", "fact": false, "grammar": "past-be" },
+    { "order": 7, "en": "He called the light Day and the darkness Night", "pt": "Ele chamou a luz de Dia e a escuridão de Noite",
+      "kind": "statement", "fact": true },
+    { "order": 8, "en": "There was evening and morning: the first day", "pt": "Houve tarde e manhã: o primeiro dia",
+      "alt": ["There was evening, and there was morning, the first day"], "kind": "quote", "fact": true, "iconic": true, "prod": false,
+      "gap": { "word": "was", "kind": "grammar", "options": ["was", "were", "is"] }, "grammar": "there-was" },
+    { "order": 9, "en": "God made the sun for the day", "pt": "Deus fez o sol para o dia", "kind": "statement", "fact": false },
+    { "order": 10, "en": "God made the moon for the night", "pt": "Deus fez a lua para a noite", "kind": "statement", "fact": false },
+    { "order": 11, "en": "At night we saw the moon, and it was good", "pt": "À noite vimos a lua, e era bom", "kind": "first-person", "fact": false, "speaker": "adao" },
+    { "order": 12, "en": "Was the sun there at night? No, only the moon", "pt": "O sol estava lá à noite? Não, só a lua",
+      "kind": "question", "fact": false, "speaker": "adao" }
+  ],
+  "contrast": [
+    { "a": "God made the sun for the day", "b": "God made the moon for the night", "note": "só mudam sun/day por moon/night" },
+    { "a": "The earth was empty and dark", "b": "The earth is empty and dark", "note": "was = passado; is = presente" }
+  ],
+  "verse": {
+    "text": "In the beginning, God created the heavens and the earth.",
+    "classic": "In the beginning God created the heaven and the earth.",
+    "pt": "No princípio, Deus criou os céus e a terra.",
+    "classicPt": "No princípio, criou Deus os céus e a terra.",
+    "ref": "Gênesis 1:1",
+    "blanks": [
+      { "word": "created", "options": ["created", "saw", "said", "called"] },
+      { "word": "beginning", "options": ["beginning", "garden", "evening", "night"] },
+      { "word": "earth", "options": ["earth", "water", "sky", "light"] }
+    ]
+  },
+  "reading": {
+    "text": "In the beginning, the earth was empty and dark. Then God said, \"Let there be light.\" And there was light. God called the light Day and the darkness Night. Then he made the sun, the moon and the stars.",
+    "pt": "No princípio, a terra estava vazia e escura. Então Deus disse: \"Haja luz.\" E houve luz. Deus chamou a luz de Dia e a escuridão de Noite. Depois ele fez o sol, a lua e as estrelas.",
+    "questions": [
+      { "kind": "literal", "q": "What was the earth like at first?", "qPt": "Como era a terra no começo?",
+        "options": ["Dark, with nothing in it", "Full of light", "Full of trees"], "answer": "Dark, with nothing in it" },
+      { "kind": "inference", "q": "Which came first, the light or the sun?", "qPt": "O que veio primeiro, a luz ou o sol?",
+        "options": ["The light", "The sun", "They came together"], "answer": "The light",
+        "explain": "A luz é do primeiro dia (Gênesis 1:3); o sol e a lua são do quarto dia (Gênesis 1:16)." }
+    ]
+  },
+  "conversation": {
+    "with": "eva",
+    "turns": [
+      { "who": "eva", "en": "Adam, look! What is that?", "pt": "Adão, olhe! O que é aquilo?", "mood": "surpreso" },
+      { "who": "you", "options": ["It is the light. God made it.", "It is the night. It is dark.", "It is the earth. It is empty."],
+        "answer": "It is the light. God made it.", "pt": "É a luz. Deus a fez.", "intent": "Diga o que é e quem fez" },
+      { "who": "eva", "en": "Is the light good?", "pt": "A luz é boa?", "mood": "animado" },
+      { "who": "you", "options": ["Yes, it is very good.", "No, it is very dark.", "Yes, it is the moon."],
+        "answer": "Yes, it is very good.", "pt": "Sim, é muito boa.", "intent": "Responda se a luz é boa", "speak": true }
+    ]
+  },
+  "fact": { "pt": "A palavra hebraica para \"princípio\" (bereshit) é o nome do livro de Gênesis na Bíblia hebraica.", "ref": "Gênesis 1:1" }
+}
+```
+
+### 10.2 u3l2 "Deixe o meu povo ir" (Êxodo 5-12)
+
+```json
+{
+  "id": "u3l2",
+  "title": "Deixe o meu povo ir",
+  "ref": "Êxodo 5:1-2; 7:14-21; 8:1-6; 12:1-33",
+  "level": "A1.2",
+  "narrator": "moises",
+  "guests": ["arao", "pharaoh", "voice"],
+  "names": [
+    { "en": "Moses", "pt": "Moisés" }, { "en": "Aaron", "pt": "Arão" }, { "en": "Pharaoh", "pt": "Faraó", "note": "o rei do Egito" },
+    { "en": "Egypt", "pt": "Egito" }, { "en": "Israel", "pt": "Israel" }, { "en": "the Lord", "pt": "o Senhor" }
+  ],
+  "hints": {
+    "asked": "perguntou", "everywhere": "por toda parte", "houses": "casas", "beds": "camas", "lamb": "cordeiro",
+    "pass": "passarei", "midnight": "meia-noite", "plagues": "pragas", "sent": "mandou", "at last": "por fim", "called": "chamou"
+  },
+  "tips": [
+    {
+      "part": 1, "id": "negation-do", "grammar": "negation-do",
+      "title": "do not / did not: dizer não",
+      "body": "Para negar, use do not (don't) antes do verbo: I do not know. No passado, use did not: The king did not let them go. O verbo fica na forma básica, sem -ed. Para perguntar no passado: Did the king know? No, he did not.",
+      "examples": [
+        { "en": "I know the Lord", "pt": "Eu conheço o Senhor" },
+        { "en": "I do not know the Lord", "pt": "Eu não conheço o Senhor" }
+      ],
+      "contrast": { "a": "The king let the people go", "b": "The king did not let the people go", "note": "did not + verbo básico (let), nunca did not + passado" }
+    },
+    {
+      "part": 2, "id": "imperative", "grammar": "imperative",
+      "title": "Put, Go, Get out: ordens e instruções",
+      "body": "O imperativo é o verbo na forma básica, sem sujeito: Put the blood on the door. Get out! Para negar: Do not go. Para pedir com educação, acrescente please.",
+      "examples": [
+        { "en": "Put the blood on the door", "pt": "Ponham o sangue na porta" },
+        { "en": "Get out of Egypt!", "pt": "Saiam do Egito!" }
+      ],
+      "contrast": { "a": "Go!", "b": "Do not go!", "note": "negativa do imperativo = Do not + verbo" }
+    }
+  ],
+  "vocab": [
+    { "en": "people", "pt": "povo", "ptAlt": ["pessoas"], "pos": "noun", "field": "people", "tier": "core", "part": 1, "icon": "👥", "image": "people.png", "example": 2 },
+    { "en": "king", "pt": "rei", "pos": "noun", "field": "people", "tier": "core", "part": 1, "icon": "👑", "image": "king.png", "example": 1 },
+    { "en": "to go", "pt": "ir", "pos": "verb", "field": "actions", "tier": "core", "part": 1, "icon": "🚶", "image": "go.png", "example": 2 },
+    { "en": "to know", "pt": "conhecer", "ptAlt": ["saber"], "pos": "verb", "field": "mind", "tier": "core", "part": 1, "icon": "💭", "example": 4 },
+    { "en": "Let my people go", "pt": "Deixe o meu povo ir", "ptAlt": ["Deixa ir o meu povo"], "pos": "chunk", "field": "speech", "tier": "core", "part": 1, "icon": "✊", "iconic": true, "example": 2 },
+    { "en": "blood", "pt": "sangue", "pos": "noun", "field": "body", "tier": "core", "part": 2, "icon": "🔴", "image": "blood.png", "example": 7 },
+    { "en": "door", "pt": "porta", "pos": "noun", "field": "objects", "tier": "core", "part": 2, "icon": "🚪", "image": "door.png", "example": 9 },
+    { "en": "to put", "pt": "pôr", "ptAlt": ["colocar"], "pos": "verb", "field": "actions", "tier": "core", "part": 2, "icon": "🤲", "image": "put.png", "example": 9 },
+    { "en": "frog", "pt": "rã", "ptAlt": ["sapo"], "pos": "noun", "field": "animals", "tier": "bible", "part": 2, "icon": "🐸", "image": "frog.png", "example": 8 },
+    { "en": "Get out!", "pt": "Saiam!", "ptAlt": ["Saia!", "Fora!"], "pos": "chunk", "field": "speech", "tier": "core", "part": 2, "icon": "🏃", "example": 12 }
+  ],
+  "beats": [
+    { "order": 1, "en": "Moses and Aaron went to the king of Egypt", "pt": "Moisés e Arão foram ao rei do Egito", "kind": "statement", "fact": true },
+    { "order": 2, "en": "Moses said, \"Let my people go\"", "pt": "Moisés disse: \"Deixe o meu povo ir\"", "altPt": ["Moisés disse: Deixa ir o meu povo"],
+      "kind": "quote", "fact": true, "iconic": true, "speaker": "moises" },
+    { "order": 3, "en": "The king asked, \"Who is the Lord?\"", "pt": "O rei perguntou: \"Quem é o Senhor?\"", "kind": "question", "fact": true, "speaker": "pharaoh" },
+    { "order": 4, "en": "\"I do not know the Lord,\" said the king", "pt": "\"Eu não conheço o Senhor\", disse o rei",
+      "kind": "negative", "fact": true, "speaker": "pharaoh", "gap": { "word": "do", "kind": "grammar", "options": ["do", "does", "did"] }, "grammar": "negation-do" },
+    { "order": 5, "en": "The king did not let the people go", "pt": "O rei não deixou o povo ir", "kind": "negative", "fact": true, "grammar": "negation-do" },
+    { "order": 6, "en": "Did the king know the Lord? No, he did not", "pt": "O rei conhecia o Senhor? Não, não conhecia", "kind": "question", "fact": false, "grammar": "negation-do" },
+    { "order": 7, "en": "The water was blood, and frogs were everywhere", "pt": "A água era sangue, e havia rãs por toda parte", "kind": "statement", "fact": true },
+    { "order": 8, "en": "There were frogs in the houses and on the beds", "pt": "Havia rãs nas casas e nas camas", "kind": "statement", "fact": true },
+    { "order": 9, "en": "Put the blood of the lamb on the door", "pt": "Ponham o sangue do cordeiro na porta", "altPt": ["Ponde o sangue do cordeiro nas ombreiras das portas"],
+      "kind": "quote", "fact": true, "speaker": "voice", "gap": { "word": "Put", "kind": "grammar", "options": ["Put", "Puts", "Putting"] }, "grammar": "imperative" },
+    { "order": 10, "en": "When I see the blood, I will pass over you", "pt": "Quando eu vir o sangue, passarei por vocês", "altPt": ["Quando eu vir o sangue, passarei por cima de vós"],
+      "kind": "quote", "fact": true, "iconic": true, "speaker": "voice", "prod": false },
+    { "order": 11, "en": "The people put the blood on their doors", "pt": "O povo pôs o sangue nas suas portas",
+      "kind": "statement", "fact": true, "gap": { "word": "doors", "kind": "lexical", "options": ["doors", "frogs", "kings"] } },
+    { "order": 12, "en": "At midnight, the king said, \"Get out of Egypt!\"", "pt": "À meia-noite, o rei disse: \"Saiam do Egito!\"",
+      "kind": "quote", "fact": true, "speaker": "pharaoh" }
+  ],
+  "contrast": [
+    { "a": "The king did not let the people go", "b": "The king let the people go", "note": "did not + verbo básico = negativa no passado" },
+    { "a": "Put the blood of the lamb on the door", "b": "Do not put the blood on the door", "note": "Do not + verbo = ordem negativa" }
+  ],
+  "verse": {
+    "text": "When I see the blood, I will pass over you.",
+    "classic": "And when I see the blood, I will pass over you.",
+    "pt": "Quando eu vir o sangue, passarei por vocês.",
+    "classicPt": "Quando eu vir o sangue, passarei por cima de vós.",
+    "ref": "Êxodo 12:13",
+    "blanks": [
+      { "word": "blood", "options": ["blood", "water", "door", "lamb"] },
+      { "word": "see", "options": ["see", "hear", "eat", "make"] },
+      { "word": "pass", "options": ["pass", "go", "run", "walk"] }
+    ]
+  },
+  "reading": {
+    "text": "Moses went to the king of Egypt and said, \"Let my people go.\" But the king said no. So the Lord sent blood and frogs on Egypt. At last, the people of Israel put the blood of a lamb on their doors. That night, the king called Moses and said, \"Get out!\"",
+    "pt": "Moisés foi ao rei do Egito e disse: \"Deixe o meu povo ir.\" Mas o rei disse não. Então o Senhor mandou sangue e rãs sobre o Egito. Por fim, o povo de Israel pôs o sangue de um cordeiro nas suas portas. Naquela noite, o rei chamou Moisés e disse: \"Saiam!\"",
+    "questions": [
+      { "kind": "literal", "q": "What did the people put on their doors?", "qPt": "O que o povo pôs nas portas?",
+        "options": ["Lamb's blood", "River water", "A green frog"], "answer": "Lamb's blood" },
+      { "kind": "inference", "q": "Why did the king let the people go in the end?", "qPt": "Por que o rei deixou o povo ir no final?",
+        "options": ["Because of the plagues on Egypt", "Because he loved Moses", "Because the people paid him"], "answer": "Because of the plagues on Egypt",
+        "explain": "Só depois da última praga Faraó chamou Moisés de noite e mandou o povo sair (Êxodo 12:29-31)." }
+    ]
+  },
+  "conversation": {
+    "with": "pharaoh",
+    "turns": [
+      { "who": "pharaoh", "en": "Moses, why are you here?", "pt": "Moisés, por que você está aqui?", "mood": "bravo" },
+      { "who": "you", "options": ["Let my people go.", "Give my people more work.", "Let my people stay here."],
+        "answer": "Let my people go.", "pt": "Deixe o meu povo ir.", "intent": "Faça o pedido do Senhor" },
+      { "who": "pharaoh", "en": "Who is the Lord? I don't know him.", "pt": "Quem é o Senhor? Eu não o conheço.", "mood": "irônico" },
+      { "who": "you", "options": ["He is the God of Israel.", "He is the king of Egypt.", "He is my brother Aaron."],
+        "answer": "He is the God of Israel.", "pt": "Ele é o Deus de Israel.", "intent": "Diga quem é o Senhor", "speak": true }
+    ]
+  },
+  "fact": { "pt": "A Páscoa judaica (Pessach) lembra até hoje a noite em que o Senhor passou por cima das casas marcadas com sangue (Êxodo 12:14).", "ref": "Êxodo 12:14" }
+}
+```
+
+### 10.3 u8l3 "Pães, peixes e o mar" (Mateus 14:13-33)
+
+```json
+{
+  "id": "u8l3",
+  "title": "Pães, peixes e o mar",
+  "ref": "Mateus 14:13-33",
+  "level": "A2.1",
+  "narrator": "pedro",
+  "guests": ["jesus", "andre"],
+  "names": [
+    { "en": "Jesus", "pt": "Jesus" }, { "en": "Peter", "pt": "Pedro" }, { "en": "disciples", "pt": "discípulos" }
+  ],
+  "hints": {
+    "late": "tarde", "loaves": "pães", "blessed": "abençoou", "left": "sobrou, sobraram", "began": "comecei, começou",
+    "cried": "gritei", "fed": "alimentou", "thousand": "mil", "doubt": "duvidar", "took": "segurou", "hand": "mão", "big": "grande", "still": "ainda"
+  },
+  "tips": [
+    {
+      "part": 1, "id": "only-howmany", "grammar": "only-howmany",
+      "title": "only e how many: quantidades",
+      "body": "only = só, apenas; vem antes do verbo principal ou do número: We only have five loaves. Para perguntar a quantidade de coisas que se contam, use how many + plural: How many loaves? Para coisas que não se contam, how much: How much bread?",
+      "examples": [
+        { "en": "We have five loaves", "pt": "Temos cinco pães" },
+        { "en": "We only have five loaves", "pt": "Temos só cinco pães" }
+      ],
+      "contrast": { "a": "How many fish?", "b": "How much bread?", "note": "how many para contáveis (fish, loaves, baskets); how much para incontáveis (bread, water)" }
+    },
+    {
+      "part": 2, "id": "past-did", "grammar": "past-did",
+      "title": "Did...? perguntas no passado",
+      "body": "Para perguntar sobre o passado, use Did + sujeito + verbo básico: Did Jesus walk on the waves? A resposta curta é Yes, he did ou No, he did not. O verbo principal fica sem -ed.",
+      "examples": [
+        { "en": "Jesus walked on the waves", "pt": "Jesus andou sobre as ondas" },
+        { "en": "Did Jesus walk on the waves?", "pt": "Jesus andou sobre as ondas?" }
+      ],
+      "contrast": { "a": "Why did you doubt?", "b": "Why do you doubt?", "note": "did = passado; do = presente" }
+    }
+  ],
+  "vocab": [
+    { "en": "fish", "pt": "peixe", "ptAlt": ["peixes"], "pos": "noun", "field": "food", "tier": "core", "part": 1, "icon": "🐟", "image": "fish.png", "example": 3 },
+    { "en": "bread", "pt": "pão", "pos": "noun", "field": "food", "tier": "core", "part": 1, "icon": "🍞", "image": "bread.png", "example": 5 },
+    { "en": "crowd", "pt": "multidão", "pos": "noun", "field": "people", "tier": "core", "part": 1, "icon": "🧑‍🤝‍🧑", "image": "crowd.png", "example": 1 },
+    { "en": "hungry", "pt": "com fome", "ptAlt": ["faminto"], "pos": "adj", "field": "feelings", "tier": "core", "part": 1, "icon": "🍴", "example": 2 },
+    { "en": "Bring them to me", "pt": "Tragam para mim", "ptAlt": ["Tragam-nos a mim", "Traga para mim"], "pos": "chunk", "field": "speech", "tier": "core", "part": 1, "icon": "🙌", "iconic": true, "example": 4 },
+    { "en": "boat", "pt": "barco", "pos": "noun", "field": "objects", "tier": "core", "part": 2, "icon": "⛵", "image": "boat.png", "example": 7 },
+    { "en": "wind", "pt": "vento", "pos": "noun", "field": "nature", "tier": "core", "part": 2, "icon": "💨", "image": "wind.png", "example": 8 },
+    { "en": "wave", "pt": "onda", "pos": "noun", "field": "nature", "tier": "core", "part": 2, "icon": "🌊", "image": "wave.png", "example": 8 },
+    { "en": "to sink", "pt": "afundar", "pos": "verb", "field": "actions", "tier": "core", "part": 2, "icon": "⬇️", "image": "sink.png", "example": 11 },
+    { "en": "Lord, save me!", "pt": "Senhor, salve-me!", "ptAlt": ["Senhor, salva-me!", "Senhor, me salve!"], "pos": "chunk", "field": "speech", "tier": "core", "part": 2, "icon": "🆘", "iconic": true, "example": 12 }
+  ],
+  "beats": [
+    { "order": 1, "en": "A big crowd followed Jesus", "pt": "Uma grande multidão seguiu Jesus", "kind": "statement", "fact": true },
+    { "order": 2, "en": "It was late, and the crowd was hungry", "pt": "Era tarde, e a multidão estava com fome", "kind": "statement", "fact": true },
+    { "order": 3, "en": "We only have five loaves and two fish", "pt": "Nós só temos cinco pães e dois peixes", "altPt": ["Temos só cinco pães e dois peixes"],
+      "kind": "first-person", "fact": true, "iconic": true, "speaker": "pedro", "gap": { "word": "only", "kind": "grammar", "options": ["only", "also", "all"] }, "grammar": "only-howmany" },
+    { "order": 4, "en": "Jesus said, \"Bring them to me\"", "pt": "Jesus disse: \"Tragam para mim\"", "altPt": ["Jesus disse: Tragam-nos a mim"],
+      "kind": "quote", "fact": true, "iconic": true, "speaker": "jesus" },
+    { "order": 5, "en": "He blessed the bread and the fish, and everyone ate", "pt": "Ele abençoou o pão e o peixe, e todos comeram",
+      "kind": "statement", "fact": true, "gap": { "word": "bread", "kind": "lexical", "options": ["bread", "crowd", "boat"] } },
+    { "order": 6, "en": "Was the crowd still hungry? No, there was bread left", "pt": "A multidão ainda estava com fome? Não, sobrou pão",
+      "kind": "question", "fact": true },
+    { "order": 7, "en": "That night, the disciples were in a boat", "pt": "Naquela noite, os discípulos estavam num barco", "kind": "statement", "fact": true },
+    { "order": 8, "en": "The wind was strong, and the waves were big", "pt": "O vento estava forte, e as ondas estavam grandes",
+      "kind": "statement", "fact": true, "gap": { "word": "wind", "kind": "lexical", "options": ["wind", "wave", "boat"] } },
+    { "order": 9, "en": "Did Jesus walk on the waves? Yes, he did", "pt": "Jesus andou sobre as ondas? Sim, andou",
+      "kind": "question", "fact": true, "gap": { "word": "Did", "kind": "grammar", "options": ["Did", "Does", "Do"] }, "grammar": "past-did" },
+    { "order": 10, "en": "Jesus came to the boat and said, \"Don't be afraid\"", "pt": "Jesus veio até o barco e disse: \"Não tenham medo\"", "altPt": ["Jesus veio até o barco e disse: Não temais"],
+      "kind": "negative", "fact": true, "iconic": true, "speaker": "jesus" },
+    { "order": 11, "en": "I saw the wind and began to sink", "pt": "Eu vi o vento e comecei a afundar", "kind": "first-person", "fact": true, "speaker": "pedro" },
+    { "order": 12, "en": "I cried, \"Lord, save me!\" and I did not sink", "pt": "Eu gritei: \"Senhor, salve-me!\" e não afundei", "altPt": ["Eu clamei: Senhor, salva-me! e não afundei"],
+      "kind": "first-person", "fact": true, "iconic": true, "speaker": "pedro", "grammar": "past-did" }
+  ],
+  "contrast": [
+    { "a": "The wind was strong, and the waves were big", "b": "The wind was not strong, and the waves were small", "note": "negativa de to be e antônimos" },
+    { "a": "Did Jesus walk on the waves? Yes, he did", "b": "Did Peter walk on the waves? Yes, but he began to sink", "note": "mesma pergunta com did, sujeito diferente" }
+  ],
+  "verse": {
+    "text": "Cheer up! It is I! Don't be afraid.",
+    "classic": "Be of good cheer; it is I; be not afraid.",
+    "pt": "Coragem! Sou eu! Não tenham medo.",
+    "classicPt": "Tende bom ânimo; sou eu, não temais.",
+    "ref": "Mateus 14:27",
+    "blanks": [
+      { "word": "afraid", "options": ["afraid", "hungry", "alone", "late"] },
+      { "word": "Cheer", "options": ["Cheer", "Hurry", "Wake", "Come"] }
+    ]
+  },
+  "reading": {
+    "text": "Jesus fed five thousand people with five loaves and two fish. That night, the disciples were in a boat, and the wind was strong. Jesus came to them, walking on the sea. Peter walked on the water too, but he saw the wind and began to sink. Jesus took his hand and said, \"Why did you doubt?\"",
+    "pt": "Jesus alimentou cinco mil pessoas com cinco pães e dois peixes. Naquela noite, os discípulos estavam num barco, e o vento estava forte. Jesus foi até eles, andando sobre o mar. Pedro também andou sobre a água, mas viu o vento e começou a afundar. Jesus segurou a mão dele e disse: \"Por que você duvidou?\"",
+    "questions": [
+      { "kind": "literal", "q": "What did Peter do when he saw the wind?", "qPt": "O que Pedro fez quando viu o vento?",
+        "options": ["He started to go down into the water", "He got back into the boat", "He swam to Jesus"], "answer": "He started to go down into the water" },
+      { "kind": "inference", "q": "Why did Peter begin to sink?", "qPt": "Por que Pedro começou a afundar?",
+        "options": ["Because he was afraid and stopped trusting", "Because the boat was too far", "Because he could not swim"], "answer": "Because he was afraid and stopped trusting",
+        "explain": "Pedro olhou para o vento, teve medo e duvidou; Jesus o segurou e perguntou por que duvidou (Mateus 14:30-31)." }
+    ]
+  },
+  "conversation": {
+    "with": "jesus",
+    "turns": [
+      { "who": "jesus", "en": "Peter, how many loaves do you have?", "pt": "Pedro, quantos pães vocês têm?", "mood": "calmo", "fact": true, "ref": "Marcos 6:38" },
+      { "who": "you", "options": ["Only five, Lord. And two fish.", "Twelve baskets, Lord.", "Five thousand, Lord."],
+        "answer": "Only five, Lord. And two fish.", "pt": "Só cinco, Senhor. E dois peixes.", "intent": "Diga quantos pães e peixes vocês têm" },
+      { "who": "jesus", "en": "Come, Peter. Walk on the water.", "pt": "Venha, Pedro. Ande sobre a água.", "mood": "solene", "fact": true, "ref": "Mateus 14:29" },
+      { "who": "you", "options": ["Lord, save me! I am sinking!", "Lord, the wind is too strong. I cannot come.", "Lord, the boat is far. Wait for me."],
+        "answer": "Lord, save me! I am sinking!", "pt": "Senhor, salve-me! Estou afundando!", "intent": "Peça socorro", "speak": true }
+    ]
+  },
+  "fact": { "pt": "Mateus conta que comeram cerca de cinco mil homens, \"além das mulheres e crianças\" (Mateus 14:21): a multidão era bem maior.", "ref": "Mateus 14:21" }
+}
+```
+
+Observações sobre os modelos: as palavras `people`, `strong`, `big`, `to follow`, `to give`, `to take`, `water` e `afraid` aparecem em beats sem estar no vocabulário destas lições porque já foram ensinadas em lições anteriores da ordem de `course.json` (regra C5-b); `Don't be afraid` em u8l3 é chunk reciclado de u3l3. Ícones de chunk (✨, 🙌, ✊, 🏃, 🆘) entram em `icons.json` como conceitos próprios.
+
+---
+
+## 11. Anexo B: ordem de execução
+
+1. **Esquema e ferramentas (S):** `course.json`, `validate.js` v2 (blocos A a E, `--scenes`, `--stories`), `merge.js` v2 com campos legados derivados, `icons.json`, `function-words.json`, `grammar-sets.json`, `ngsl.json`, `variants.mjs`. Validar os 3 modelos do Anexo A até "OK".
+2. **Conteúdo das lições (L):** reescrever u1 e u2 primeiro (nível A1.1, modelos u1l1), depois u6, u3 (modelo u3l2), u4, u5, u7, u8 (modelo u8l3), sempre com `web.mjs` aberto para os versículos e a checklist 9.4 por lição. Lotes por unidade para o áudio.
+3. **Motor (M):** ordem da seção 8.12; manter o motor atual funcionando com os campos legados até o planejador v2 passar nas asserções 9.3.
+4. **Cenas e histórias (L):** esquema v2 e validador; mover c-jesus-1..6 para u8 e escrever as 6 cenas de Gênesis 1-3 e c-moises-0; 12 cenas com heroínas; 16 histórias; `mood`, `fact`, `alt` e distratores manuais em todas.
+5. **Elenco e áudio (M):** retratos dos 12 coadjuvantes e das narradoras, tabela de vozes única, `gen-audio.mjs` com `mood`, 44,1 kHz/128 kbps, abortar em voz duplicada; regenerar por lote; `align-words.py` e `build-sprites.mjs`.
+6. **Trilha (M):** `course.json.order`, 2 cenas + 1 história por unidade, aba Cenas por tema, carrossel de histórias, checkpoint com 80%.
+7. **Verificação (M):** Playwright com as asserções 9.3 em claro e escuro, capturas revisadas, `grep` de travessão e de tokens proibidos vazio, publicação.

@@ -1,5 +1,5 @@
 // BíbliaLearn (React) — cache offline: shell na rede primeiro, mídia no cache primeiro
-const CACHE = "biblialearn-react-v1";
+const CACHE = "biblialearn-react-v2";
 
 self.addEventListener("install", (e) => { self.skipWaiting(); });
 self.addEventListener("activate", (e) => {
@@ -10,7 +10,7 @@ self.addEventListener("fetch", (e) => {
   const url = new URL(e.request.url);
   if (url.origin !== location.origin || e.request.method !== "GET") return;
   // Mapas de áudio (.json) mudam a cada geração: sempre rede primeiro
-  const media = /\/(chars|audio|icons)\//.test(url.pathname) && !/\.json$/.test(url.pathname);
+  const media = /\/(chars|audio|icons|fonts)\//.test(url.pathname) && !/\.json$/.test(url.pathname);
   const hashed = /\/assets\//.test(url.pathname);
   if (media || hashed) {
     e.respondWith(

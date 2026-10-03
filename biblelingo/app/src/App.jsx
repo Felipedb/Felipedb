@@ -3,10 +3,12 @@ import confettiFx from "canvas-confetti";
 import { useAppState } from "./core/useStore.js";
 import { useSessionVersion } from "./core/useSession.js";
 import { session } from "./core/session.js";
+import { useReducedMotion } from "motion/react";
 import { onUI } from "./core/events.js";
 import { ensureDay, state, save } from "./core/store.js";
-import { REDUCED_MOTION } from "./core/util.js";
-import { SFX } from "../../sfx.js";
+import { startLesson } from "./core/session.js";
+import { sfx } from "./core/sfx.js";
+import { haptic } from "./core/haptics.js";
 import Home from "./screens/Home.jsx";
 import Lesson from "./screens/Lesson.jsx";
 import Result from "./screens/Result.jsx";
@@ -29,6 +31,7 @@ const NAV = [
 export default function App() {
   const app = useAppState();
   useSessionVersion();
+  const reduce = useReducedMotion();
   const [screen, setScreen] = useState("home");
   const [toasts, setToasts] = useState([]);
   const [heartsOpen, setHeartsOpen] = useState(false);
@@ -39,14 +42,16 @@ export default function App() {
       const sysDark = matchMedia("(prefers-color-scheme: dark)").matches;
       const dark = app.theme === "dark" || (app.theme !== "light" && sysDark);
       document.documentElement.classList.toggle("dark", dark);
+      // Preferência "Alto contraste" (state.highContrast): o CTA claro troca o branco por #131f24 (VISUAL_SPEC 2.9)
+      if (app.highContrast) document.documentElement.dataset.contrast = "high"; else delete document.documentElement.dataset.contrast;
       const meta = document.querySelector('meta[name="theme-color"]');
-      if (meta) meta.content = dark ? "#131f24" : "#58a700";
+      if (meta) meta.content = dark ? "#131f24" : "#ffffff";
     };
     apply();
     const mq = matchMedia("(prefers-color-scheme: dark)");
     mq.addEventListener("change", apply);
     return () => mq.removeEventListener("change", apply);
-  }, [app.theme]);
+  }, [app.theme, app.highContrast]);
 
   // Eventos da lógica: navegação, toast, sons, confete, modal de corações
   useEffect(() => onUI((ev) => {
@@ -56,8 +61,8 @@ export default function App() {
       setToasts((t) => [...t.slice(-2), { id, text: ev.text, cls: ev.cls }]);
       setTimeout(() => setToasts((t) => t.filter((x) => x.id !== id)), 1600);
     }
-    if (ev.type === "sfx" && SFX[ev.name]) { try { SFX[ev.name](ev.arg); } catch (e) { /* sem som */ } }
-    if (ev.type === "confetti" && !REDUCED_MOTION) confettiFx(ev.opts);
+    if (ev.type === "sfx") { try { sfx(ev.name, ev.arg); } catch (e) { /* sem som */ } }
+    if (ev.type === "confetti" && !reduce) confettiFx(ev.opts);
     if (ev.type === "hearts-modal") setHeartsOpen(true);
   }), []);
 
@@ -68,9 +73,15 @@ export default function App() {
   const showTabs = !inLesson && screen !== "lesson";
 
   const go = useCallback((id) => {
-    SFX.tap && SFX.tap();
+    sfx("tap");
+    haptic("tap");
     setScreen(id);
   }, []);
+
+  // Em desenvolvimento, atalho dos testes de ponta a ponta: abre uma etapa da trilha sem passar pelo popover do nó
+  if (import.meta.env.DEV && typeof window !== "undefined") {
+    window.__blOpenNode = (id) => { startLesson(id); return !!session; };
+  }
 
   return (
     <div className="min-h-dvh lg:mx-auto lg:flex lg:max-w-6xl lg:gap-6 lg:px-6">

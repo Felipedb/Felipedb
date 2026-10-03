@@ -1,140 +1,162 @@
 @import "tailwindcss";
 
-/* ===== BíbliaLearn — design tokens =====
-   Paleta herdada do app clássico, exposta como tokens Tailwind (bg-brand, text-ink...). */
-@theme {
-  --font-sans: "Nunito Variable", "Nunito", ui-rounded, system-ui, sans-serif;
-  --font-display: "Baloo 2", "Nunito", system-ui, sans-serif;
+/* ===== BíbliaLearn: tokens de design (VISUAL_SPEC seção 2) =====
+   Página neutra, cor concentrada. Tudo vive em @theme e é sobrescrito no .dark.
+   Os nomes das famílias ficam em inglês para não quebrar as classes do Tailwind;
+   o apelido bíblico (Oliva, Céu, Ouro, Chama, Rubi, Púrpura, Nilo, Rosa, Galileia) é só documentação.
+   "static": todas as variáveis são emitidas mesmo sem classe gerada, porque o JS e os estilos inline as leem. */
+@theme static {
+  /* Tipografia (seção 3): uma família, pesos de verdade */
+  --font-sans: "Nunito Variable", "Nunito", "Nunito Fallback", ui-rounded, system-ui, sans-serif;
+  --font-logo: "Baloo 2", var(--font-sans);                        /* apenas no wordmark */
+  --font-display: var(--font-sans);                                /* alias de migração: Baloo 2 saiu da interface */
+  --text-display-lg: 32px; --text-display-lg--line-height: 38px; --text-display-lg--font-weight: 900;
+  --text-display: 28px;    --text-display--line-height: 34px;    --text-display--font-weight: 800;
+  --text-title: 24px;      --text-title--line-height: 30px;      --text-title--font-weight: 800;
+  --text-heading: 19px;    --text-heading--line-height: 26px;    --text-heading--font-weight: 800;
+  --text-sentence: 19px;   --text-sentence--line-height: 30px;   --text-sentence--font-weight: 500;
+  --text-body: 17px;       --text-body--line-height: 24px;       --text-body--font-weight: 500;
+  --text-secondary: 15px;  --text-secondary--line-height: 22px;  --text-secondary--font-weight: 500;
+  --text-label: 15px;      --text-label--line-height: 20px;      --text-label--font-weight: 800;   /* caixa alta, tracking 1px */
+  --text-caption: 13px;    --text-caption--line-height: 18px;    --text-caption--font-weight: 800; /* caixa alta, tracking .8px */
+  --text-numeral: 20px;    --text-numeral--line-height: 24px;    --text-numeral--font-weight: 800;
 
-  --color-brand: #58a700;
-  --color-brand-bright: #58cc02;
-  --color-brand-dark: #46a302;
-  --color-brand-shadow: #3d8c02;
-  --color-brand-soft: #e7f3d9;
-  --color-danger: #ff4b4b;
-  --color-danger-dark: #d33131;
-  --color-sky: #1cb0f6;
-  --color-sky-fg: #0f6f9f;
-  --color-sky-soft: #eaf6fd;
-  --color-sky-line: #bfe3f7;
-  --color-gold: #f5b915;
-  --color-gold-fg: #7d5c05;
-  --color-gold-soft: #fdf3d7;
+  /* Neutros (2.1) */
+  --color-page: #ffffff; --color-raised: #f7f7f7; --color-line: #e5e5e5;
+  --color-ink: #4b4b4b; --color-ink-soft: #6f6f6f; --color-muted: #6f6f6f; --color-disabled: #afafaf;
+  --color-overlay: rgba(0, 0, 0, .5);
+  --color-parchment: #fbf5e6; --color-parchment-line: #ecdfbf; --color-parchment-text: #7a5a16;
 
-  --color-page: #faf6ec;
-  --color-card: #ffffff;
-  --color-card-2: #fbf8f0;
-  --color-cream: #fdfaf2;
-  --color-ink: #4a4034;
-  --color-ink-soft: #7a6e58;
-  --color-line: #eae2cf;
-  --color-locked: #cfc8b8;
-  --color-track: #ece4d0;
-  --color-hover: #f2eddd;
+  /* Famílias semânticas (2.2): base, shadow, soft, line, text */
+  --color-green: #58cc02;  --color-green-shadow: #46a302;  --color-green-soft: #d7ffb8;  --color-green-line: #a5ed6e;  --color-green-text: #3f7d12;
+  --color-blue: #1cb0f6;   --color-blue-shadow: #1899d6;   --color-blue-soft: #ddf4ff;   --color-blue-line: #84d8ff;   --color-blue-text: #0f6f9f;
+  --color-yellow: #ffc800; --color-yellow-shadow: #e5a600; --color-yellow-soft: #fff3bf; --color-yellow-line: #ffe066; --color-yellow-text: #8a6200;
+  --color-orange: #ff9600; --color-orange-shadow: #e68a00; --color-orange-soft: #ffe0b3; --color-orange-line: #ffc27a; --color-orange-text: #8a4f00;
+  --color-red: #ff4b4b;    --color-red-shadow: #d33131;    --color-red-soft: #ffdfe0;    --color-red-line: #ffb3b3;    --color-red-text: #b32a2a;
+  --color-purple: #ce82ff; --color-purple-shadow: #a560e8; --color-purple-soft: #f3e0ff; --color-purple-line: #e3bcff; --color-purple-text: #7b3fd1;
+  --color-teal: #2bb5a3;   --color-teal-shadow: #1f8f80;   --color-teal-soft: #d6f5f0;   --color-teal-line: #9fe3d8;   --color-teal-text: #14665b;
+  --color-pink: #ff86d0;   --color-pink-shadow: #e86cb7;   --color-pink-soft: #ffe3f3;   --color-pink-line: #ffb8e4;   --color-pink-text: #b8307f;
+  --color-royal: #2f7bf6;  --color-royal-shadow: #1f5fd0;  --color-royal-soft: #dbe8ff;  --color-royal-line: #9cc0f0;  --color-royal-text: #215fcf;
 
-  --color-ok-bg: #d7ffb8;
-  --color-ok-soft: #e9f8df;
-  --color-ok-line: #b7dd8f;
-  --color-bad-bg: #ffdfe0;
-  --color-bad-line: #ffb3b3;
-  --color-bad-fg: #ea2b2b;
+  /* Derivados fixos (2.2) */
+  --color-primary: #58cc02; --color-primary-shadow: #46a302; --color-primary-text: #ffffff;
+  --color-danger: #ff4b4b;  --color-danger-shadow: #d33131;  --color-danger-text: #ffffff;
+  --color-accent: #1cb0f6;  --color-accent-shadow: #1899d6;  --color-accent-text: #ffffff;
+  --color-gold-ink: #5b4400; --color-streak-off: #afafaf; --color-heart: #ff4b4b; --color-heart-empty: #e5e5e5;
+  /* Tons de ícone (2.4 e 4.2): círculo do check/X do rodapé e arco do cadeado */
+  --color-ok-icon: #58cc02; --color-bad-icon: #ff4b4b; --color-icon-dim: #8a8a8a;
 
-  --radius-card: 16px;
-  --radius-pill: 999px;
-  --shadow-card: 0 2px 0 var(--color-line);
-  --shadow-btn: 0 4px 0 var(--color-brand-shadow);
+  /* Capítulo (2.3): injetado por style no <section> do capítulo via unitVars() */
+  --color-unit: var(--unit-color, #58cc02); --color-unit-shadow: var(--unit-shadow, #46a302);
+  --color-unit-soft: var(--unit-soft, #d7ffb8); --color-unit-text: var(--unit-text, #3f7d12); --color-unit-ink: var(--unit-ink, #ffffff);
 
-  --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* Aliases dos tokens antigos (2.10): remover no sprint seguinte à migração das telas */
+  --color-brand: var(--color-green-text); --color-brand-bright: var(--color-primary); --color-brand-dark: var(--color-green-shadow);
+  --color-brand-shadow: var(--color-primary-shadow); --color-brand-soft: var(--color-green-soft);
+  --color-danger-dark: var(--color-danger-shadow);
+  --color-sky: var(--color-accent); --color-sky-fg: var(--color-blue-text); --color-sky-soft: var(--color-blue-soft); --color-sky-line: var(--color-blue-line);
+  --color-gold: var(--color-yellow); --color-gold-fg: var(--color-yellow-text); --color-gold-soft: var(--color-yellow-soft);
+  --color-card: var(--color-page); --color-card-2: var(--color-raised); --color-cream: var(--color-parchment);
+  --color-locked: var(--color-disabled); --color-track: var(--color-line); --color-hover: var(--color-raised);
+  --color-ok-bg: var(--color-green-soft); --color-ok-soft: var(--color-green-soft); --color-ok-line: var(--color-green-line);
+  --color-bad-bg: var(--color-red-soft); --color-bad-line: var(--color-red-line); --color-bad-fg: var(--color-red-text);
+
+  /* Raios e sombras (2.6): só sombra dura; difusa é proibida fora do scrim e do glow */
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-xl: 24px; --radius-pill: 999px; --radius-card: 16px;
+  --shadow-3d: 0 4px 0 var(--btn-shadow, var(--color-primary-shadow));
+  --shadow-3d-lg: 0 7px 0 var(--color-accent-shadow);
+  --shadow-node: 0 8px 0 var(--unit-shadow, #46a302);
+  --shadow-parchment: 0 2px 0 var(--color-parchment-line);
+  --shadow-card: none; --shadow-btn: var(--shadow-3d);
+
+  /* Motivo Luz (2.5): só Result, ofensiva, troféu lendário e coroa */
+  --glow-gold: radial-gradient(closest-side, rgba(255, 200, 0, .35), rgba(255, 200, 0, 0));
+  --glow-ring: 0 0 0 8px rgba(255, 200, 0, .18), 0 0 32px rgba(255, 200, 0, .35);
+
+  /* Movimento em CSS (2.8), espelho de core/motion.js */
+  --ease-out: cubic-bezier(.22, 1, .36, 1); --ease-pop: cubic-bezier(.34, 1.56, .64, 1); --ease-in: cubic-bezier(.4, 0, 1, 1);
+  --dur-micro: 80ms; --dur-state: 180ms; --dur-panel: 250ms; --dur-screen: 320ms; --dur-complete: 400ms; --dur-celebrate: 900ms; --dur-bounce: 1200ms;
+  --animate-float: float 1.4s ease-in-out infinite;      /* balão COMEÇAR: y 0 -> -5 -> 0 */
+  --animate-halo: halo 1.6s ease-in-out infinite;        /* nó atual: pseudo-elemento scale 1 -> 1.18, opacity .45 -> 0 */
+  --animate-shimmer: shimmer 1.2s linear infinite;       /* barra dourada e faixa Perfeito */
+  --animate-wave: wavebar .9s ease-in-out infinite;      /* barras da onda sonora */
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+  @keyframes halo { 0% { transform: scale(1); opacity: .45; } 100% { transform: scale(1.18); opacity: 0; } }
+  @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+  @keyframes wavebar { 0%, 100% { transform: scaleY(.45); } 50% { transform: scaleY(1); } }
 }
 
-/* Tema escuro: mesma malha de tokens, superfícies invertidas */
+/* Tema escuro: mesma malha de tokens, superfícies invertidas (2.9) */
 @custom-variant dark (&:where(.dark, .dark *));
 .dark {
-  --color-page: #131f24;
-  --color-card: #131f24;
-  --color-card-2: #17252c;
-  --color-cream: #17252c;
-  --color-ink: #f1f7fb;
-  --color-ink-soft: #9db4bd;
-  --color-line: #37464f;
-  --color-locked: #52656d;
-  --color-track: #37464f;
-  --color-hover: #202f36;
-  --color-sky: #49c0f8;
-  --color-sky-fg: #49c0f8;
-  --color-brand: #93d333;
-  --color-gold: #ffc800;
-  --color-brand-soft: #1d3321;
-  --color-sky-soft: #14313f;
-  --color-sky-line: #1e4a5f;
-  --color-gold-soft: #33290f;
-  --color-ok-bg: #1d3a17;
-  --color-ok-soft: #1b3120;
-  --color-ok-line: #35591f;
-  --color-bad-bg: #40191c;
-  --color-bad-line: #5f2429;
-  --color-bad-fg: #ff7b7b;
-  --shadow-card: 0 2px 0 rgba(0, 0, 0, 0.35);
+  color-scheme: dark;
+  --color-page: #131f24; --color-raised: #202f36; --color-line: #37464f;
+  --color-ink: #f1f7fb; --color-ink-soft: #dce6ec; --color-muted: #8fa3ad; --color-disabled: #52656d;
+  --color-overlay: rgba(0, 0, 0, .6);
+  --color-parchment: #1e2a2c; --color-parchment-line: #3a4a4c; --color-parchment-text: #d9c89a;
+  --color-green-soft: #1d3a17;  --color-green-line: #5f8428;  --color-green-text: #93d333;
+  --color-blue-soft: #14313f;   --color-blue-line: #3f85a7;   --color-blue-text: #49c0f8;
+  --color-yellow-soft: #33290f; --color-yellow-line: #4a3c14; --color-yellow-text: #ffc800;
+  --color-orange-soft: #3a2a10; --color-orange-line: #6b4a12; --color-orange-text: #ff9600;
+  --color-red-soft: #40191c;    --color-red-line: #5f2429;    --color-red-text: #ff7b7b;
+  --color-purple-soft: #2c2140; --color-purple-line: #5b3f80; --color-purple-text: #c4a8ef;
+  --color-teal-soft: #143431;   --color-teal-line: #1f5f56;   --color-teal-text: #5fd3c2;
+  --color-pink-soft: #3b1f31;   --color-pink-line: #6b3a58;   --color-pink-text: #ff86d0;
+  --color-royal-soft: #16264a;  --color-royal-line: #2d4a80;  --color-royal-text: #6fa5ff;
+  --color-primary: #93d333; --color-primary-shadow: #79b933; --color-primary-text: #131f24;
+  --color-danger: #ee5555;  --color-danger-shadow: #c93a3a;  --color-danger-text: #131f24;
+  --color-accent: #49c0f8;  --color-accent-text: #131f24;
+  --color-streak-off: #52656d; --color-heart-empty: #37464f;
+  --color-ok-icon: #79b933; --color-bad-icon: #ee5555; --color-icon-dim: #37464f;
 }
+/* Preferência "Alto contraste" (state.highContrast): o CTA claro deixa de usar branco */
+:root[data-contrast="high"]:not(.dark) { --color-primary-text: #131f24; --color-danger-text: #131f24; --color-ink-soft: #4b4b4b; }
 
 @layer base {
+  :root { color-scheme: light; }
   html { -webkit-tap-highlight-color: transparent; }
-  body {
-    @apply bg-page text-ink font-sans antialiased;
-    overscroll-behavior-y: none;
-  }
+  body { @apply bg-page text-ink font-sans antialiased; overscroll-behavior-y: none; }
   button { @apply cursor-pointer select-none; touch-action: manipulation; }
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-  }
+  /* Foco visível consistente (teclado) */
+  :focus-visible { outline: 3px solid var(--color-accent); outline-offset: 2px; border-radius: 8px; }
+  button:focus:not(:focus-visible) { outline: none; }
+  /* Fallback métrico (3.1): evita salto de layout enquanto a Nunito carrega */
+  @font-face { font-family: "Nunito Fallback"; src: local("Arial"); size-adjust: 104%; ascent-override: 101%; descent-override: 35%; line-gap-override: 0%; }
 }
 
 @layer components {
-  /* Botão 3D no estilo Duolingo: face + sombra dura que "afunda" ao pressionar */
-  .btn-3d {
-    @apply relative rounded-2xl font-display font-bold tracking-wide transition-[transform,box-shadow] duration-100;
-    box-shadow: 0 4px 0 var(--btn-shadow, var(--color-brand-shadow));
-  }
-  .btn-3d:active:not(:disabled) { transform: translateY(4px); box-shadow: 0 0 0 var(--btn-shadow, var(--color-brand-shadow)); }
+  /* Botão 3D no estilo Duolingo: face + sombra dura. O afundamento é do Motion (whileTap y 4), sem :active no CSS (5.1) */
+  .btn-3d { @apply relative rounded-lg font-sans; box-shadow: var(--shadow-3d); }
   .btn-3d:disabled { @apply cursor-default; box-shadow: none; }
+  /* Chamada principal (usar junto com .btn-3d): face 44 + sombra 4, caixa alta por CSS */
+  .btn-cta { @apply h-11 px-6 text-label uppercase tracking-[1px]; }
+  /* Botão secundário (outline, 5.1): nunca .btn-3d, para o rodapé continuar com um só CTA (10.1) */
+  .btn-outline { @apply relative rounded-lg border-2 border-b-4 bg-transparent font-sans; }
+  .btn-outline:disabled { @apply cursor-default; }
 
-  .card { @apply bg-card rounded-(--radius-card) border-2 border-line; }
+  .card { @apply bg-page rounded-lg border-2 border-line; }
+  .card-interactive { @apply bg-page rounded-lg border-2 border-b-4 border-line; }
+  /* Motivo Pergaminho (2.5): no máximo um por tela, única sombra permitida em card estático */
+  .parchment { @apply relative rounded-lg border-2; background: var(--color-parchment); border-color: var(--color-parchment-line); box-shadow: var(--shadow-parchment); }
 
-  /* Chamada principal do rodapé (usar junto com .btn-3d): caixa alta como no alvo visual */
-  .btn-cta { @apply px-6 py-3.5 text-[15px] uppercase tracking-[0.12em] font-extrabold; }
-
-  /* Balão de fala com rabinho apontando para o personagem */
-  .bubble { @apply relative rounded-2xl border-2 border-line bg-card; }
-  .bubble::before {
-    content: "";
-    position: absolute;
-    left: -9px;
-    bottom: 18px;
-    width: 14px;
-    height: 14px;
-    transform: rotate(45deg);
-    background: var(--color-card);
-    border-left: 2px solid var(--color-line);
-    border-bottom: 2px solid var(--color-line);
-  }
+  /* Balão de fala (5.12): abraça o conteúdo, rabinho de 12 px à esquerda a 60% da altura */
+  .bubble { @apply relative rounded-lg border-2 border-line bg-page; width: fit-content; max-width: 100%; padding: 14px 16px; }
+  .bubble::before { content: ""; position: absolute; left: -8px; top: 60%; width: 12px; height: 12px; transform: translateY(-50%) rotate(45deg); background: var(--color-page); border-left: 2px solid var(--color-line); border-bottom: 2px solid var(--color-line); }
+  .bubble-bottom::before { left: 50%; top: auto; bottom: -8px; transform: translateX(-50%) rotate(-45deg); border-left: 0; border-top: 0; border-right: 2px solid var(--color-line); border-bottom: 2px solid var(--color-line); }
+  .bubble-right::before { left: auto; right: -8px; transform: translateY(-50%) rotate(-135deg); }
+  /* Palavra com dica: sublinhado pontilhado sem mudar o peso (3.2) */
+  .hint { text-decoration: underline dotted 2px var(--color-line); text-underline-offset: 6px; }
+  /* Emoji de conteúdo (vocabulário, extras) até existirem ilustrações (4.1) */
+  .emoji { font-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", "Twemoji Mozilla", sans-serif; font-style: normal; line-height: 1; }
 }
 
 /* Onda sonora do balão de escuta */
-@keyframes wavebar {
-  0%, 100% { transform: scaleY(0.45); }
-  50% { transform: scaleY(1); }
-}
 .wave-bar { transform-origin: center; border-radius: 999px; }
-.wave-playing .wave-bar { animation: wavebar 0.9s ease-in-out infinite; }
+.wave-playing .wave-bar { animation: wavebar .9s ease-in-out infinite; }
 
+/* Tremor curto (classe legada usada por Choice e Match; os componentes novos usam SHAKE do Motion) */
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   25% { transform: translateX(-6px); }
   75% { transform: translateX(6px); }
-}
-
-@layer base {
-  /* Foco visível consistente (teclado) */
-  :focus-visible { outline: 3px solid var(--color-sky); outline-offset: 2px; border-radius: 8px; }
-  button:focus:not(:focus-visible) { outline: none; }
 }

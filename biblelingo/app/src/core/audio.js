@@ -3,10 +3,10 @@ import { audioKey, normalize } from "./util.js";
 
 export const AUDIO = { manifest: null, sprites: null, cache: {}, buffers: {}, order: [], ctx: null, curSrc: null, playToken: 0, base: "audio/" };
 
-// Aviso simples para a UI ("boca mexendo" enquanto fala)
+// Aviso simples para a UI ("boca mexendo" enquanto fala): { text, durationMs, char } (char = chave do personagem ou null)
 const speakListeners = new Set();
 export function onSpeak(fn) { speakListeners.add(fn); return () => speakListeners.delete(fn); }
-function emitSpeak(text, durationMs) { speakListeners.forEach((fn) => fn({ text, durationMs })); }
+function emitSpeak(text, durationMs, char) { speakListeners.forEach((fn) => fn({ text, durationMs, char: char || null })); }
 
 function audioCtx() {
   AUDIO.ctx = AUDIO.ctx || new (window.AudioContext || window.webkitAudioContext)();
@@ -179,11 +179,11 @@ export function speak(text, opts = {}) {
   if (playClip(text, key, opts.slow, () => speakTTS(text, ch, opts))) {
     if ("speechSynthesis" in window) speechSynthesis.cancel();
     // Duração real do clipe (sprites.json) quando há; a heurística pelo tamanho do texto fica só para a reserva
-    emitSpeak(text, clip ? clip * 1000 : Math.min(4000, 400 + text.length * 70));
+    emitSpeak(text, clip ? clip * 1000 : Math.min(4000, 400 + text.length * 70), key);
     return;
   }
   speakTTS(text, ch, opts);
-  emitSpeak(text, dur);
+  emitSpeak(text, dur, key);
 }
 
 // ---------- Reconhecimento de voz ----------
