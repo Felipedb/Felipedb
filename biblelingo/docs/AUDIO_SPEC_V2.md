@@ -990,3 +990,52 @@ Fase 0: lint 0 erros, 36 vozes validadas, audição aprovada. Fase 1: 12.1 e 12.
 - [ ] `validate.js` falha sem `who`; `mood` validado; nomes sem regra de pronúncia geram aviso.
 - [ ] `tools/audio-check.mjs` e `app/scripts/e2e-audio.mjs` verdes: p95 de toque quente < 30 ms, 100% de cobertura, 0 chamadas a `speechSynthesis` em texto do curso.
 - [ ] `docs/AUDIO.md` reescrito; `CONTENT_SPEC_V2.md` 7.6 passa a remeter a este documento para IDs de voz.
+
+---
+
+## Decisões de implementação (fase 1)
+
+Registro do que o pipeline em `tools/gen-audio.mjs`, `tools/voices.json`, `tools/cut-words.mjs` e
+`.github/workflows/gen-audio.yml` adotou desta spec na fase 1 (outubro de 2026), onde divergiu por decisão do
+orquestrador e o que ficou para depois. `docs/AUDIO.md` descreve o estado que vale.
+
+**Adotado.** Casting da seção 2.3 em `tools/voices.json` (General American, 13 papéis de voz exclusiva, pools
+régio, ancião, cotidiano e mulheres; Jesus = Eric, George registrado como alternativa). `cast-lint` da 2.5 em toda
+execução (inclusive `--dry`), com os conjuntos de cena, história, unidade (`UNIT_CAST` + `cast`/`extras` de
+`course.json`) e lição v2, lidos em tempo de execução; colisão aborta a geração sem gastar créditos e é o primeiro
+passo do workflow. Perfis de `voice_settings` da 3.2 por tipo (`word`, `name`, `sentence`, `line`, `story`,
+`verse`, `question`, `divine`), com `similarity_boost` 0,85, assinatura no hash e a coluna "variante lenta" da
+tabela (perguntas e opções deixam de ter clipe lento). `seed` fixa por personagem (crc32). QA gate da 6.5
+simplificado: duração < 0,25 s, > 2,5 x (0,075 s x caracteres + 0,4 s) ou alinhamento vazio reprovam; uma repetição
+com `seed + 1`; registro no alinhamento e em `audio/qa-report.json`. Lista de pronúncia da seção 7 (só `alias`,
+~90 nomes), ainda pedida só nos textos que contêm um nome, com a versão do dicionário no hash desses textos.
+Modo `--audition` (2.1, item 6) em `audio/audition/` com `index.html`, fora do manifesto, dos sprites e da limpeza
+de órfãos; entrada `only = audition` no workflow. `retry-after` honrado no backoff. Mapeamento por token no
+`cut-words.mjs` quando o alinhamento vem normalizado (6.2).
+
+**Divergências (decisão do orquestrador; prevalecem sobre a spec).**
+
+- Masters MP3 em `mp3_44100_128` dentro do git, em `biblelingo/audio/` (não `mp3_44100_192`, não `.masters/`
+  fora do git, nem Release/artefato). O hash continua por `audioKey` (sem pontuação) mais voz, modelo, formato,
+  settings, seed e versão do dicionário.
+- `manifest.json` atual com `~slow`, `words.json` gerado por `cut-words.mjs` (recortes em arquivo, não offsets)
+  e sprites globais por bucket em `build-sprites.mjs` (não por lição); `loudnorm` por clipe continua.
+- Sem Voice Library: os slots L1 a L10 viraram vozes do catálogo, cada troca documentada em
+  `voices.json.substitutions`. Consequência: Michael atende Noé, Samuel, Jacó, Ezequiel, Abraão e Isaque (nunca dois
+  no mesmo conjunto), e Noé e Samuel deixam de ser exclusivos; Jessé fica com Paul; Judá e o `trio` ficam com Drew e
+  Ethan (GA) em vez de Callum e Jeremy; Golias fica com Patrick (Jessie não está no catálogo).
+- "O povo" numa voz só (Paul), sem a mistura da 8.4.
+- `apply_text_normalization: "auto"` (não `"on"`); sem `language_code`, como a spec pede.
+- O sorteio `castCharFor` das lições v1 continua até o conteúdo v2 declarar `who`; o versículo com "blank" continua
+  sendo gerado enquanto o app não silencia a lacuna (6.6); palavras isoladas sem recorte continuam uma a uma (sem
+  listas pontuadas).
+- O probe de voz continua por clipe mínimo (1 crédito por voz nova), com cache por apelido; a troca de voz
+  indisponível agora respeita exclusivas e conjuntos.
+
+**Fica para depois.** Sprites por lição, cena, história e `core` com índice único imutável (4.4, 4.5) e o loader
+correspondente em `audio.js` (11.6); efeitos de reverb em `voice` e `anjo` (8.3); masters a 192 kbps fora do git
+(4.1, 4.2); ganho por voz e limiter em PCM (8.2); request stitching e `mood` (3.3, 9); listas pontuadas e palavras
+por offset (6.3); QA por STT (6.5); vozes da Voice Library para os papéis que hoje dividem Michael; A/B com
+`eleven_v3`; `tools/audio-check.mjs` e o e2e de áudio (12); `validate.js` passar a ler `tools/voices.json` em vez
+de `VOICE_BY_CHAR` (hoje o regex não encontra o bloco e a checagem de duplicidade por cena fica só com
+`SCENE_EXTRAS[*].voice`, que já não é a fonte do casting).

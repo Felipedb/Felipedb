@@ -4,6 +4,7 @@
 // Por que: a síntese de uma palavra isolada sai com artefatos. O Duolingo toca a palavra recortada da
 // própria frase, na mesma voz. Para cada frase do manifesto (chave com espaço, variante normal) e cada
 // personagem que a gravou, mapeia os caracteres em palavras e grava audio/words/<hash>.mp3 por palavra.
+// Os clipes da audição (audio/audition/) não estão no manifesto e nunca entram aqui.
 //
 // Saída: audio/words.json  { "<palavra>": { "<personagem>": { f, p, d }, "default": "words/x.mp3" } }
 //          p = 1 (alinhamento nativo), d = duração do recorte em segundos
@@ -26,7 +27,7 @@ const MANIFEST = path.join(AUDIO_DIR, "manifest.json");
 const OUT = path.join(AUDIO_DIR, "words.json");
 const INDEX = path.join(AUDIO_DIR, "words-index.json");
 const MOCK = process.argv.includes("--mock");
-const ALIGN_VER = 5; // sobe quando o recorte muda: só então as frases já feitas voltam à fila
+const ALIGN_VER = 6; // sobe quando o recorte muda: só então as frases já feitas voltam à fila
 const PAD_BEFORE = 0.03, PAD_AFTER = 0.08; // margens: o ataque da consoante começa antes do timestamp; a sílaba final decai depois
 const BLEED = 0.04; // a margem pode invadir no máximo 40 ms da palavra vizinha (o fade esconde o ataque dela)
 const MIN_DUR = 0.12; // recorte mais curto que isto soa como um clique: expande simetricamente
@@ -82,10 +83,20 @@ function lcsMap(a, b) {
 // Início e fim (segundos) de cada palavra a partir do alinhamento por caractere
 function wordTimes(align) {
   const text = align.text;
-  const chars = align.characters;
+  const chars = align.characters || [];
   const direct = chars.join("") === text;
-  const map = direct ? null : lcsMap([...text], chars);
   const words = tokenize(text);
+  const valid = (w) => Number.isFinite(w.s) && Number.isFinite(w.e) && w.e > w.s;
+  if (!direct) {
+    // Texto normalizado (alias do dicionário, número por extenso): quando os dois textos têm o mesmo número de
+    // tokens, a n-ésima palavra mapeia na n-ésima palavra normalizada. Os aliases do dicionário não têm espaço
+    // ("Im-MAN-you-el"), justamente para preservar a contagem; só sem isso cai no mapeamento por caractere (LCS).
+    const normTokens = tokenize(chars.join(""));
+    if (words.length && normTokens.length === words.length) {
+      return words.map((w, i) => ({ tok: w.tok, s: align.start[normTokens[i].i0], e: align.end[normTokens[i].i1] })).filter(valid);
+    }
+  }
+  const map = direct ? null : lcsMap([...text], chars);
   const toIdx = (i) => (direct ? i : map[i]);
   return words.map((w) => {
     let j0 = -1, j1 = -1;
@@ -99,7 +110,7 @@ function wordTimes(align) {
       j0 = Math.min(before + 1, chars.length - 1); j1 = Math.max(j0, after - 1);
     }
     return { tok: w.tok, s: align.start[j0], e: align.end[j1] };
-  }).filter((w) => Number.isFinite(w.s) && Number.isFinite(w.e) && w.e > w.s);
+  }).filter(valid);
 }
 
 async function duration(file) {
