@@ -76,14 +76,25 @@ async function loadAudioManifest() {
   }
 }
 
-// Duração do clipe gravado (segundos); 0 quando não há clipe
-function clipDuration(text, charKey) {
+// Arquivo a tocar para (entrada do manifesto, personagem, devagar). Com slow, prefere a variante lenta
+// gravada (manifest[key]["~slow"], speed 0,8 na síntese: o tom não muda); sem ela, o clipe normal a 0,75x
+function clipFile(entry, charKey, slow) {
+  if (slow && entry["~slow"]) {
+    const s = entry["~slow"];
+    const f = (charKey && s[charKey]) || s.default;
+    if (f) return { file: f, rate: 1 };
+  }
+  return { file: (charKey && entry[charKey]) || entry.default, rate: slow ? 0.75 : 1 };
+}
+
+// Duração real da reprodução (segundos); 0 quando não há clipe. Com slow, considera a variante lenta
+function clipDuration(text, charKey, slow) {
   if (!AUDIO.manifest || !AUDIO.sprites) return 0;
   const entry = AUDIO.manifest[audioKey(text)];
   if (!entry) return 0;
-  const file = (charKey && entry[charKey]) || entry.default;
+  const { file, rate } = clipFile(entry, charKey, slow);
   const s = file && AUDIO.sprites[file];
-  return s ? s[2] : 0;
+  return s ? s[2] / rate : 0;
 }
 
 // Interrompe qualquer clipe em reprodução (sair da lição, trocar de tela)
@@ -98,11 +109,10 @@ function playClip(text, charKey, slow, onFail) {
   if (!AUDIO.manifest) return false;
   const entry = AUDIO.manifest[audioKey(text)];
   if (!entry) return false;
-  const file = (charKey && entry[charKey]) || entry.default;
+  const { file, rate } = clipFile(entry, charKey, slow);
   if (!file) return false;
   const fail = () => { if (typeof onFail === "function") onFail(); };
   try {
-    const rate = slow ? 0.75 : 1;
     stopClip();
     const token = AUDIO.playToken;
     const playFile = () => {

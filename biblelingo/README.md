@@ -9,7 +9,7 @@ App para estudar inglês com contexto bíblico, no estilo Duolingo, otimizado pa
 - **Cenas**: conversas reais da Bíblia vividas como situações de hoje (apresentar-se, comprar, pedir ajuda...), com transcript, resposta do herói, lacunas e produção
 - **Histórias** interativas, **hub de prática** (Match Madness, revisão rápida, escuta rápida, praticar erros), missões diárias, coroas por capítulo, conquistas e perfil
 - **Gamificação**: corações diários, XP com combo e bônus, ofensiva, estrelas e precisão; repetição espaçada por palavra
-- **Áudio** gravado por personagem (ElevenLabs, via `tools/` e o workflow `gen-audio.yml`), palavras recortadas das próprias frases, sprites com cache offline; síntese do navegador como reserva
+- **Áudio** gravado por personagem (ElevenLabs, via `tools/` e o workflow `gen-audio.yml`): clipes a 44,1 kHz com variante lenta nativa, palavras recortadas das próprias frases pelos timestamps da API, sprites com cache offline; síntese do navegador como reserva (ver `docs/AUDIO.md`)
 - **Progresso salvo** no aparelho (localStorage) e **PWA** com service worker offline
 
 ## Como rodar
@@ -34,7 +34,7 @@ biblelingo/
 ├── data.js           # capítulos e lições (gerado de content/u*.json)
 ├── scenes.js / scenes2.js / stories.js / characters.js
 ├── audio/            # manifest, sprites e recortes de palavra
-├── tools/            # gen-audio.mjs, align-words.py, build-sprites.mjs
+├── tools/            # gen-audio.mjs, cut-words.mjs, build-sprites.mjs
 └── manifest.webmanifest, sw.js
 ```
 

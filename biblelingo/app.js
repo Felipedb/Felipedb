@@ -828,9 +828,10 @@ function markPlaying(btn, text, slow) {
   document.querySelectorAll(".btn-audio.playing, .title-ico.playing").forEach((el) => el.classList.remove("playing"));
   clearTimeout(_playingTimer);
   const who = session && session.voiceChar;
-  const base = (typeof clipDuration === "function" && clipDuration(text, who && who.key)) || Math.min(4, 0.5 + String(text).length * 0.055);
+  // clipDuration já considera a variante lenta gravada (ou o 0,75x de reserva); a heurística só vale sem clipe
+  const base = (typeof clipDuration === "function" && clipDuration(text, who && who.key, slow)) || Math.min(4, 0.5 + String(text).length * 0.055) / (slow ? 0.75 : 1);
   btn.classList.add("playing");
-  _playingTimer = setTimeout(() => btn.classList.remove("playing"), (base / (slow ? 0.75 : 1)) * 1000);
+  _playingTimer = setTimeout(() => btn.classList.remove("playing"), base * 1000);
 }
 
 function audioPair(text) {

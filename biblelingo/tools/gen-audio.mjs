@@ -1,20 +1,40 @@
-// Gera os clipes de áudio do BíbliaLearn com o ElevenLabs e atualiza audio/manifest.json.
-// Uso: ELEVENLABS_API_KEY=... node tools/gen-audio.mjs [--dry] [--limit=N] [--only=names]
-// Idempotente: clipes já presentes no manifesto não são gerados de novo.
+// Gera os clipes de áudio do BíbliaLearn com o ElevenLabs (v2: timestamps, variante lenta nativa,
+// dicionário de pronúncia) e atualiza audio/manifest.json.
+// Uso: ELEVENLABS_API_KEY=... node tools/gen-audio.mjs [--dry] [--limit=N] [--only=names] [--mock]
+//   --dry   só conta e estima créditos (sem chave, sem rede)
+//   --mock  gera MP3 e alinhamento sintéticos com ffmpeg, sem API (exige AUDIO_DIR fora do repositório)
+//   AUDIO_DIR=/pasta  destino dos clipes (padrão: biblelingo/audio)
+//   ELEVENLABS_MODEL  modelo (padrão: eleven_multilingual_v2)
+// Idempotente: clipe já presente com o nome esperado (hash de texto, voz, modelo, formato e settings) não é
+// gerado de novo. Saída por clipe: audio/<hash>.mp3 (mp3_44100_128) e audio/align/<hash>.json (timestamps
+// por caractere, usados por tools/cut-words.mjs para recortar as palavras).
 import fs from "node:fs";
 import path from "node:path";
 import vm from "node:vm";
 import crypto from "node:crypto";
+import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const AUDIO_DIR = path.join(ROOT, "audio");
+const AUDIO_DIR = process.env.AUDIO_DIR ? path.resolve(process.env.AUDIO_DIR) : path.join(ROOT, "audio");
+const ALIGN_DIR = path.join(AUDIO_DIR, "align");
 const MANIFEST = path.join(AUDIO_DIR, "manifest.json");
 const API = "https://api.elevenlabs.io/v1";
 const MODEL = process.env.ELEVENLABS_MODEL || "eleven_multilingual_v2";
+// mp3_44100_128: melhor custo/qualidade para voz sem exigir plano acima do Pro; PCM/WAV ficaria enorme no git
+const OUTPUT_FORMAT = "mp3_44100_128";
+const SLOW_SPEED = 0.8; // variante "devagar" nativa (o tom não muda, ao contrário do playbackRate 0,75 do app)
+const CONCURRENCY = 4; // o plano Pro permite 10 pedidos simultâneos; 4 deixa folga para o 429
 const KEY = process.env.ELEVENLABS_API_KEY;
 const DRY = process.argv.includes("--dry");
+const MOCK = process.argv.includes("--mock");
 const LIMIT = Number((process.argv.find((a) => a.startsWith("--limit=")) || "").split("=")[1] || 0);
+const ONLY = (process.argv.find((a) => a.startsWith("--only=")) || "").split("=")[1] || "";
+
+if (MOCK && AUDIO_DIR === path.join(ROOT, "audio")) {
+  console.error("Modo --mock exige AUDIO_DIR apontando para uma pasta fora do repositório (a limpeza de órfãos apagaria os clipes reais).");
+  process.exit(1);
+}
 
 // Carrega os dados do app num sandbox
 const ctx = { window: {}, navigator: {}, document: {}, console };
@@ -59,16 +79,32 @@ const VOICE_BY_CHAR = {
   marta: "aria", lidia: "rachel", madalena: "domi",
 };
 
-const audioKey = (t) => String(t).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9 ]/g, "").replace(/\s+/g, " ").trim();
+// Dicionário de pronúncia (regras "alias" = respelling em inglês; "phoneme" não vale no multilingual_v2).
+// Só é pedido nos textos que contêm um destes nomes.
+const PRONUNCIATIONS = {
+  Potiphar: "Pot-ih-far", Goshen: "Go-shen", Elisha: "Ee-lye-sha", Isaiah: "Eye-zay-uh", Nehemiah: "Nee-uh-my-uh",
+  Zacchaeus: "Za-kee-us", Bartimaeus: "Bar-tih-may-us", Mephibosheth: "Meh-fib-oh-sheth", Ahaz: "Ay-haz",
+  Hezekiah: "Hez-uh-kye-uh", Nineveh: "Nin-uh-vuh", Jesse: "Jess-ee", Pharaoh: "Fair-oh", Ezekiel: "Ee-zee-kee-ul",
+  Immanuel: "Ih-man-you-el", Gethsemane: "Geth-sem-uh-nee", Nazareth: "Naz-uh-reth", Galilee: "Gal-ih-lee",
+  Capernaum: "Kuh-per-nay-um", Magdalene: "Mag-duh-leen",
+};
+const PRON_RULES = Object.entries(PRONUNCIATIONS).map(([w, alias]) => ({ type: "alias", string_to_replace: w, alias, case_sensitive: false, word_boundaries: true }));
+const PRON_RE = new RegExp("\\b(" + Object.keys(PRONUNCIATIONS).join("|") + ")\\b", "i");
+const PRON_CACHE = path.join(ROOT, "tools", ".pron-dict.json");
 
-// ---------- Coleta de textos: { text, char } ----------
-const jobs = new Map(); // key|char -> { text, char }
-const add = (text, char) => {
+const audioKey = (t) => String(t).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9 ]/g, "").replace(/\s+/g, " ").trim();
+const wordCount = (t) => String(t).trim().split(/\s+/).filter(Boolean).length;
+
+// ---------- Coleta de textos: { key, text, char, kind, prev, next } ----------
+// kind: "word" (vocabulário, peça do banco de palavras), "name" (nome do personagem),
+//       "sentence" (frase de lição, versículo, narração, pergunta/opção), "line" (fala de diálogo, cena ou história)
+const jobs = new Map(); // key|char -> job
+const add = (text, char, kind = "sentence", ctx = {}) => {
   if (!text) return;
   const k = audioKey(text);
   if (!k) return;
   const id = `${k}|${char}`;
-  if (!jobs.has(id)) jobs.set(id, { key: k, text, char });
+  if (!jobs.has(id)) jobs.set(id, { key: k, text, char, kind, prev: ctx.prev || "", next: ctx.next || "" });
 };
 // O personagem "dono" de cada texto: mesmo cálculo do app (currentChar),
 // para que quem aparece na cena seja sempre quem gravou o áudio
@@ -81,50 +117,73 @@ const castCharFor = (unitId, text) => {
 COURSE.forEach((u) => {
   const own = (t) => castCharFor(u.id, t);
   u.lessons.forEach((l) => {
-    (l.vocab || []).forEach((v) => add(v.en, own(v.en)));
-    (l.sentences || []).forEach((s) => add(s.en, own(s.en)));
-    if (l.verse) { const c = own(l.verse.text); add(l.verse.text, c); add(l.verse.text.replace(new RegExp("\\b" + l.verse.blank.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b"), "blank"), c); l.verse.options.forEach((o) => add(o, c)); }
-    if (l.dialogue) { const c = own(l.dialogue.line); add(l.dialogue.line, c); l.dialogue.options.forEach((o) => add(o, c)); }
-    if (l.quiz) { const c = own(l.quiz.q); add(l.quiz.q, c); l.quiz.options.forEach((o) => add(o, c)); }
-    if (l.reading) { const c = own(l.reading.q); add(l.reading.text, c); add(l.reading.q, c); l.reading.options.forEach((o) => add(o, c)); }
+    (l.vocab || []).forEach((v) => add(v.en, own(v.en), "word"));
+    (l.sentences || []).forEach((s) => add(s.en, own(s.en), "sentence"));
+    if (l.verse) {
+      const c = own(l.verse.text);
+      add(l.verse.text, c, "sentence");
+      add(l.verse.text.replace(new RegExp("\\b" + l.verse.blank.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b"), "blank"), c, "sentence");
+      l.verse.options.forEach((o) => add(o, c, "sentence"));
+    }
+    if (l.dialogue) {
+      // A fala e as respostas são um diálogo: o contexto em inglês ajuda a prosódia
+      const c = own(l.dialogue.line);
+      add(l.dialogue.line, c, "line", { next: l.dialogue.answer });
+      l.dialogue.options.forEach((o) => add(o, c, "line", { prev: l.dialogue.line }));
+    }
+    if (l.quiz) { const c = own(l.quiz.q); add(l.quiz.q, c, "sentence"); l.quiz.options.forEach((o) => add(o, c, "sentence", { prev: l.quiz.q })); }
+    if (l.reading) {
+      const c = own(l.reading.q);
+      add(l.reading.text, c, "sentence");
+      add(l.reading.q, c, "sentence", { prev: l.reading.text });
+      l.reading.options.forEach((o) => add(o, c, "sentence", { prev: l.reading.q }));
+    }
   });
 });
-STORIES.forEach((s) => s.beats.forEach((b) => {
-  const who = b.who || "narrator";
-  if (b.en) add(b.en, who);
-  if (b.q) { add(b.q, "narrator"); b.options.forEach((o) => add(o, "narrator")); }
-  if (b.gap) b.options.forEach((o) => add(o, "narrator"));
-}));
-Object.keys(CHARACTERS).forEach((k) => add(CHARACTERS[k].name.split(" (")[0], k));
-// Cenas do dia a dia: cada fala na voz de quem fala (galeria ou extras), vocabulário na voz do herói
+STORIES.forEach((s) => {
+  const spoken = s.beats.filter((b) => b.en);
+  spoken.forEach((b, i) => {
+    const who = b.who || "narrator";
+    add(b.en, who, b.who ? "line" : "sentence", { prev: spoken[i - 1]?.en, next: spoken[i + 1]?.en });
+  });
+  s.beats.forEach((b) => {
+    if (b.q) { add(b.q, "narrator", "sentence"); b.options.forEach((o) => add(o, "narrator", "sentence", { prev: b.q })); }
+    if (b.gap) b.options.forEach((o) => add(o, "narrator", "sentence"));
+  });
+});
+Object.keys(CHARACTERS).forEach((k) => add(CHARACTERS[k].name.split(" (")[0], k, "name"));
+// Cenas do dia a dia: cada fala na voz de quem fala (galeria ou extras), com a fala anterior e a seguinte
+// como contexto; vocabulário na voz do herói
 SCENES.forEach((s) => {
-  s.lines.forEach((l) => add(l.en, l.who));
-  s.vocab.forEach((v) => add(v.en, s.char));
+  s.lines.forEach((l, i) => add(l.en, l.who, "line", { prev: s.lines[i - 1]?.en, next: s.lines[i + 1]?.en }));
+  s.vocab.forEach((v) => add(v.en, s.char, "word"));
 });
 // Palavras isoladas de todas as frases (peças do banco de palavras) e "blank"
 const words = new Set();
 COURSE.forEach((u) => u.lessons.forEach((l) => (l.sentences || []).forEach((s) => s.en.split(" ").forEach((w) => words.add(w.replace(/[.,;:!?'"]/g, ""))))));
 SCENES.forEach((s) => s.lines.filter((l) => l.who === s.char).forEach((l) => l.en.split(" ").forEach((w) => words.add(w.replace(/[.,;:!?"]/g, "")))));
-// Palavra que já tem recorte de frase (tools/align-words.py) não precisa de síntese isolada, que sai com artefatos
+// Palavra que já tem recorte de frase (tools/cut-words.mjs) não precisa de síntese isolada, que sai com artefatos
 const wordsJson = path.join(AUDIO_DIR, "words.json");
 const cuts = fs.existsSync(wordsJson) ? JSON.parse(fs.readFileSync(wordsJson, "utf8")) : {};
-words.forEach((w) => { if (!cuts[audioKey(w)]) add(w, "narrator"); });
+words.forEach((w) => { if (!cuts[audioKey(w)]) add(w, "narrator", "word"); });
 
 let list = [...jobs.values()];
 // --only=names: só o nome de cada personagem na própria voz (amostra barata para ouvir todas)
-const ONLY = (process.argv.find((a) => a.startsWith("--only=")) || "").split("=")[1] || "";
 if (ONLY === "names") {
   const names = new Set(Object.keys(CHARACTERS).map((k) => `${audioKey(CHARACTERS[k].name.split(" (")[0])}|${k}`));
   list = list.filter((j) => names.has(`${j.key}|${j.char}`));
 }
 if (LIMIT) list = list.slice(0, LIMIT);
+// Variante lenta: todo texto com 2+ palavras, exceto nomes
+const hasSlow = (j) => j.kind !== "name" && wordCount(j.text) >= 2;
 const totalChars = list.reduce((n, j) => n + j.text.length, 0);
-console.log(`Textos: ${list.length} · caracteres: ${totalChars} · modelo: ${MODEL}`);
+const slowChars = list.filter(hasSlow).reduce((n, j) => n + j.text.length, 0);
+console.log(`Textos: ${list.length} · caracteres: ${totalChars} (+${slowChars} nas variantes lentas) · modelo: ${MODEL} · formato: ${OUTPUT_FORMAT}${MOCK ? " · MOCK" : ""}`);
 
 const manifest = fs.existsSync(MANIFEST) ? JSON.parse(fs.readFileSync(MANIFEST, "utf8")) : {};
 
 // ---------- Vozes ----------
-if (!DRY && !KEY) { console.error("Defina ELEVENLABS_API_KEY"); process.exit(1); }
+if (!DRY && !MOCK && !KEY) { console.error("Defina ELEVENLABS_API_KEY"); process.exit(1); }
 const assigned = { ...VOICE_BY_CHAR };
 Object.keys(SCENE_EXTRAS).forEach((k) => { if (!assigned[k]) assigned[k] = SCENE_EXTRAS[k].voice; });
 const gender = (char) => ((CHARACTERS[char]?.voice?.gender || SCENE_EXTRAS[char]?.gender) === "female" ? "f" : "m");
@@ -135,7 +194,7 @@ const voiceFor = (char) => {
 
 // Valida cada voz com um clipe mínimo (custa ~1 crédito por voz). Voz indisponível
 // nesta conta é trocada por outra livre do mesmo gênero, nunca pela voz de todo mundo.
-// No modo --dry usa só o cache de validação (tools/.voices-ok.json), sem chamar a API.
+// Em --dry e --mock usa só o cache de validação (tools/.voices-ok.json), sem chamar a API.
 {
   const cache = path.join(ROOT, "tools", ".voices-ok.json");
   const ok = fs.existsSync(cache) ? JSON.parse(fs.readFileSync(cache, "utf8")) : {};
@@ -143,7 +202,7 @@ const voiceFor = (char) => {
   // (uma falha passageira trocaria a voz do personagem e regeraria todos os clipes dele, pagos)
   const probe = async (name) => {
     if (name in ok) return ok[name];
-    if (DRY) return true;
+    if (DRY || MOCK) return true;
     for (let attempt = 1; attempt <= 3; attempt++) {
       const res = await fetch(`${API}/text-to-speech/${VOICES[name][0]}?output_format=mp3_22050_32`, {
         method: "POST", headers: { "xi-api-key": KEY, "content-type": "application/json" },
@@ -177,7 +236,7 @@ const voiceFor = (char) => {
     inUse.add(picked);
     saved[char] = picked;
   }
-  if (!DRY) { fs.writeFileSync(cache, JSON.stringify(ok, null, 1)); fs.writeFileSync(assignedCache, JSON.stringify(saved, null, 1)); }
+  if (!DRY && !MOCK) { fs.writeFileSync(cache, JSON.stringify(ok, null, 1)); fs.writeFileSync(assignedCache, JSON.stringify(saved, null, 1)); }
 }
 
 // Resumo das vozes resolvidas: se tudo cair numa voz só, algo está errado
@@ -191,79 +250,187 @@ const voiceFor = (char) => {
   used.forEach((cs, name) => console.log(`  ${name.padEnd(9)} ← ${cs.join(", ")}`));
   if (used.size < 3) { console.error("ERRO: menos de 3 vozes distintas resolvidas; abortando para não gastar créditos."); process.exit(1); }
 }
-if (!DRY) {
+if (!DRY && !MOCK) {
   try {
     const sub = await (await fetch(`${API}/user/subscription`, { headers: { "xi-api-key": KEY } })).json();
     console.log(`Créditos: ${sub.character_count}/${sub.character_limit} usados no ciclo (plano ${sub.tier})`);
   } catch (e) { /* informativo apenas */ }
 }
 
-// Um clipe só vale se o arquivo no manifesto corresponder à voz e ao modelo corretos
-const expectedFile = (j) => crypto.createHash("sha1").update(`${j.key}|${voiceFor(j.char).voice_id}|${MODEL}`).digest("hex").slice(0, 16) + ".mp3";
-const pending = list.filter((j) => (manifest[j.key] && manifest[j.key][j.char]) !== expectedFile(j));
-const pendingChars = pending.reduce((n, j) => n + j.text.length, 0);
+// ---------- voice_settings por tipo de texto ----------
+// Derivado de characters.js: pitch < 0,85 = ancião (mais estável), > 1,02 = jovem (mais expressivo).
+// Palavra/nome: muito estável (uma palavra solta não precisa de emoção, e sem estabilidade sai com artefatos).
+// Frase/versículo/narração: meio-termo. Fala de diálogo/cena: mais estilo, para soar como conversa.
+export function settingsFor(char, kind, slow) {
+  const p = CHARACTERS[char]?.voice || {};
+  const old = !!(p.pitch && p.pitch < 0.85), young = !!(p.pitch && p.pitch > 1.02);
+  let stability = 0.5, style = 0.2;
+  if (kind === "word" || kind === "name") { stability = 0.6; style = 0.1; }
+  else if (kind === "line") { stability = 0.42; style = 0.35; }
+  else { stability = old ? 0.6 : young ? 0.42 : 0.5; style = young ? 0.3 : 0.2; }
+  return { stability, similarity_boost: 0.8, style, use_speaker_boost: true, speed: slow ? SLOW_SPEED : 1.0 };
+}
+const settingsSig = (s) => [s.stability, s.similarity_boost, s.style, s.use_speaker_boost ? 1 : 0, s.speed].join(",");
+
+// Um clipe só vale se o arquivo no manifesto corresponder a texto, voz, modelo, formato e settings
+const expectedFile = (j, slow) => {
+  const sig = settingsSig(settingsFor(j.char, j.kind, slow));
+  return crypto.createHash("sha1").update(`${j.key}|${voiceFor(j.char).voice_id}|${MODEL}|${OUTPUT_FORMAT}|${sig}`).digest("hex").slice(0, 16) + ".mp3";
+};
+const alignPath = (file) => path.join(ALIGN_DIR, file.replace(/\.mp3$/, ".json"));
+const have = (file) => fs.existsSync(path.join(AUDIO_DIR, file)) && fs.existsSync(alignPath(file));
+const current = (j, slow) => (slow ? manifest[j.key]?.["~slow"]?.[j.char] : manifest[j.key]?.[j.char]);
+// Fila: cada variante (normal/lenta) é um pedido; pendente = manifesto desatualizado ou arquivo ausente
+const pending = [];
+list.forEach((j) => {
+  if (current(j, false) !== expectedFile(j, false) || !have(expectedFile(j, false))) pending.push({ ...j, slow: false });
+  if (hasSlow(j) && (current(j, true) !== expectedFile(j, true) || !have(expectedFile(j, true)))) pending.push({ ...j, slow: true });
+});
+const pendingChars = pending.filter((p) => !p.slow).reduce((n, j) => n + j.text.length, 0);
+const pendingSlowChars = pending.filter((p) => p.slow).reduce((n, j) => n + j.text.length, 0);
 const perChar = /flash|turbo/.test(MODEL) ? 0.5 : 1;
-console.log(`Já corretos: ${list.length - pending.length} · a gerar: ${pending.length} (${pendingChars} caracteres ≈ ${Math.ceil(pendingChars * perChar)} créditos)`);
+const total = list.length + list.filter(hasSlow).length;
+console.log(`Clipes: ${total} (${list.length} normais + ${list.filter(hasSlow).length} lentos) · já corretos: ${total - pending.length} · a gerar: ${pending.length}`);
+console.log(`Estimativa: ${pendingChars} caracteres normais + ${pendingSlowChars} lentos ≈ ${Math.ceil((pendingChars + pendingSlowChars) * perChar)} créditos (${perChar} por caractere)`);
 if (DRY) process.exit(0);
 
+// ---------- Dicionário de pronúncia ----------
+// Criado uma vez e cacheado em tools/.pron-dict.json { id, version_id, hash }; recriado se as regras mudarem.
+// Se a API recusar (403/4xx), segue sem dicionário: o clipe sai com a pronúncia padrão.
+async function ensureDictionary() {
+  if (MOCK) return null;
+  const hash = crypto.createHash("sha1").update(JSON.stringify(PRON_RULES)).digest("hex").slice(0, 16);
+  try {
+    const cached = fs.existsSync(PRON_CACHE) ? JSON.parse(fs.readFileSync(PRON_CACHE, "utf8")) : null;
+    if (cached && cached.hash === hash && cached.id && cached.version_id) return cached;
+  } catch (e) { /* cache inválido: recria */ }
+  try {
+    const res = await fetch(`${API}/pronunciation-dictionaries/add-from-rules`, {
+      method: "POST", headers: { "xi-api-key": KEY, "content-type": "application/json" },
+      body: JSON.stringify({ name: `biblialearn-${hash}`, description: "Nomes bíblicos (respelling)", rules: PRON_RULES }),
+    });
+    if (!res.ok) { console.log(`Dicionário de pronúncia indisponível (${res.status}): seguindo sem ele`); return null; }
+    const data = await res.json();
+    const dict = { id: data.id, version_id: data.version_id, hash };
+    fs.writeFileSync(PRON_CACHE, JSON.stringify(dict, null, 1));
+    console.log(`Dicionário de pronúncia: ${dict.id} (${PRON_RULES.length} regras)`);
+    return dict;
+  } catch (e) { console.log(`Dicionário de pronúncia falhou (${e.message}): seguindo sem ele`); return null; }
+}
+const dict = await ensureDictionary();
+
 // ---------- Geração ----------
-fs.mkdirSync(AUDIO_DIR, { recursive: true });
-// Personalidade por voz: tom baixo (anciãos) mais estável e grave; jovens mais expressivos
-const settings = (char) => {
-  const p = CHARACTERS[char]?.voice || {};
-  const old = p.pitch && p.pitch < 0.85, young = p.pitch && p.pitch > 1.02;
-  return { stability: old ? 0.65 : young ? 0.4 : 0.5, similarity_boost: 0.8, style: young ? 0.35 : 0.2, use_speaker_boost: true };
-};
+fs.mkdirSync(ALIGN_DIR, { recursive: true });
+const round3 = (xs) => xs.map((x) => Math.round(x * 1000) / 1000);
+// Guarda só o necessário para o recorte: texto enviado, origem do alinhamento, caracteres e tempos (3 casas)
+const saveAlign = (file, text, source, al) => fs.writeFileSync(alignPath(file), JSON.stringify({
+  text, source, characters: al.characters, start: round3(al.character_start_times_seconds), end: round3(al.character_end_times_seconds),
+}));
+
+// Mock: tom de 440 Hz com ≈ 0,06 s por caractere + 0,3 s e alinhamento uniforme (só para testar o fluxo)
+function mockClip(job, out) {
+  const dur = (0.06 * job.text.length + 0.3) / (job.slow ? SLOW_SPEED : 1);
+  execFileSync("ffmpeg", ["-v", "error", "-y", "-f", "lavfi", "-i", `sine=frequency=440:duration=${dur.toFixed(3)}`, "-ac", "1", "-ar", "44100", "-codec:a", "libmp3lame", "-b:a", "128k", out]);
+  const chars = [...job.text];
+  const step = dur / chars.length;
+  return { characters: chars, character_start_times_seconds: chars.map((_, i) => i * step), character_end_times_seconds: chars.map((_, i) => (i + 1) * step) };
+}
+
+async function request(job) {
+  const voice = voiceFor(job.char);
+  const body = { text: job.text, model_id: MODEL, voice_settings: settingsFor(job.char, job.kind, job.slow), apply_text_normalization: "auto" };
+  if (job.prev) body.previous_text = job.prev;
+  if (job.next) body.next_text = job.next;
+  if (dict && PRON_RE.test(job.text)) body.pronunciation_dictionary_locators = [{ pronunciation_dictionary_id: dict.id, version_id: dict.version_id }];
+  for (let attempt = 1; attempt <= 5; attempt++) {
+    const res = await fetch(`${API}/text-to-speech/${voice.voice_id}/with-timestamps?output_format=${OUTPUT_FORMAT}`, {
+      method: "POST", headers: { "xi-api-key": KEY, "content-type": "application/json" }, body: JSON.stringify(body),
+    });
+    if (res.ok) return res.json();
+    const text = await res.text();
+    // 429/5xx: espera crescente com um pouco de aleatoriedade para os 4 workers não baterem juntos
+    if (res.status === 429 || res.status >= 500) { await new Promise((r) => setTimeout(r, 1500 * attempt + Math.random() * 500)); continue; }
+    // Dicionário apagado na conta (cache velho): tenta uma vez sem ele em vez de perder o clipe
+    if (body.pronunciation_dictionary_locators && res.status < 500 && /dictionar/i.test(text)) {
+      console.log(`Dicionário recusado (${res.status}) em "${job.text}": repetindo sem ele`);
+      delete body.pronunciation_dictionary_locators;
+      continue;
+    }
+    throw new Error(`${res.status} ${text.slice(0, 200)}`);
+  }
+  throw new Error("sem resposta após 5 tentativas");
+}
+
 let done = 0, failed = 0;
 async function gen(job) {
-  const voice = voiceFor(job.char);
-  const file = expectedFile(job);
+  const file = expectedFile(job, job.slow);
   const out = path.join(AUDIO_DIR, file);
-  if (!fs.existsSync(out)) {
-    for (let attempt = 1; attempt <= 4; attempt++) {
-      const res = await fetch(`${API}/text-to-speech/${voice.voice_id}?output_format=mp3_22050_32`, {
-        method: "POST",
-        headers: { "xi-api-key": KEY, "content-type": "application/json" },
-        body: JSON.stringify({ text: job.text, model_id: MODEL, voice_settings: settings(job.char) }),
-      });
-      if (res.ok) { fs.writeFileSync(out, Buffer.from(await res.arrayBuffer())); break; }
-      const body = await res.text();
-      if (res.status === 429 || res.status >= 500) { await new Promise((r) => setTimeout(r, 1500 * attempt)); continue; }
-      throw new Error(`${res.status} ${body.slice(0, 200)}`);
+  if (!have(file)) {
+    if (MOCK) {
+      saveAlign(file, job.text, "alignment", mockClip(job, out));
+    } else {
+      const data = await request(job);
+      if (!data.audio_base64) throw new Error("resposta sem audio_base64");
+      // Com alias do dicionário, "alignment" (texto original) é o preferido; se não reconstruir o texto
+      // enviado, fica "normalized_alignment" e o recorte faz o mapeamento aproximado
+      let source = "alignment", al = data.alignment;
+      if (!al || !Array.isArray(al.characters) || al.characters.join("") !== job.text) {
+        if (data.normalized_alignment?.characters) { source = "normalized"; al = data.normalized_alignment; }
+        else if (al?.characters) source = "alignment-divergente";
+        else throw new Error("resposta sem alinhamento");
+      }
+      fs.writeFileSync(out, Buffer.from(data.audio_base64, "base64"));
+      saveAlign(file, job.text, source, al);
     }
-    if (!fs.existsSync(out)) throw new Error("sem resposta após tentativas");
   }
-  manifest[job.key] = manifest[job.key] || {};
-  manifest[job.key][job.char] = file;
+  const entry = (manifest[job.key] = manifest[job.key] || {});
+  if (job.slow) { entry["~slow"] = entry["~slow"] || {}; entry["~slow"][job.char] = file; }
+  else entry[job.char] = file;
   done++;
   if (done % 25 === 0) { fs.writeFileSync(MANIFEST, JSON.stringify(manifest, null, 1)); console.log(`${done}/${pending.length}`); }
 }
 const queue = [...pending];
-await Promise.all(Array.from({ length: 3 }, async () => {
+await Promise.all(Array.from({ length: CONCURRENCY }, async () => {
   while (queue.length) {
     const job = queue.shift();
-    try { await gen(job); } catch (e) { failed++; console.error("Falhou:", job.text, "-", e.message); }
+    try { await gen(job); } catch (e) { failed++; console.error("Falhou:", job.text, job.slow ? "(lento)" : "", "-", e.message); }
   }
 }));
+
 // Remove entradas que não correspondem mais a nenhum texto/personagem do conteúdo,
 // refaz o "default" de cada texto (voz do narrador quando houver) e limpa arquivos órfãos
 const wanted = new Set(list.map((j) => `${j.key}|${j.char}`));
-if (!LIMIT && !ONLY) {
-  for (const key of Object.keys(manifest)) {
-    for (const c of Object.keys(manifest[key])) if (c !== "default" && !wanted.has(`${key}|${c}`)) delete manifest[key][c];
-  }
-}
+const wantedSlow = new Set(list.filter(hasSlow).map((j) => `${j.key}|${j.char}`));
+const full = !LIMIT && !ONLY;
 for (const key of Object.keys(manifest)) {
   const entry = manifest[key];
-  const files = Object.keys(entry).filter((c) => c !== "default").map((c) => entry[c]);
+  if (full) {
+    for (const c of Object.keys(entry)) if (c !== "default" && c !== "~slow" && !wanted.has(`${key}|${c}`)) delete entry[c];
+    if (entry["~slow"]) for (const c of Object.keys(entry["~slow"])) if (c !== "default" && !wantedSlow.has(`${key}|${c}`)) delete entry["~slow"][c];
+  }
+  const files = Object.keys(entry).filter((c) => c !== "default" && c !== "~slow").map((c) => entry[c]);
   if (!files.length) { delete manifest[key]; continue; }
   entry.default = entry.narrator || files[0];
+  const slow = entry["~slow"];
+  if (slow) {
+    const sfiles = Object.keys(slow).filter((c) => c !== "default").map((c) => slow[c]);
+    if (!sfiles.length) delete entry["~slow"];
+    else slow.default = slow.narrator || sfiles[0];
+  }
 }
-const referenced = new Set(Object.values(manifest).flatMap((e) => Object.values(e)));
+const referenced = new Set();
+Object.values(manifest).forEach((e) => Object.values(e).forEach((v) => {
+  if (typeof v === "string") referenced.add(v); else Object.values(v).forEach((f) => referenced.add(f));
+}));
 let removed = 0;
-if (!LIMIT && !ONLY) {
+if (full) {
+  // Clipes e alinhamentos que nenhum texto cita (inclui os MP3 antigos de 22 kHz após a migração);
+  // os recortes em audio/words/ são cuidados por tools/cut-words.mjs
   for (const f of fs.readdirSync(AUDIO_DIR)) {
     if (f.endsWith(".mp3") && !referenced.has(f)) { fs.unlinkSync(path.join(AUDIO_DIR, f)); removed++; }
+  }
+  for (const f of fs.readdirSync(ALIGN_DIR)) {
+    if (f.endsWith(".json") && !referenced.has(f.replace(/\.json$/, ".mp3"))) { fs.unlinkSync(path.join(ALIGN_DIR, f)); removed++; }
   }
 }
 fs.writeFileSync(MANIFEST, JSON.stringify(manifest, null, 1));

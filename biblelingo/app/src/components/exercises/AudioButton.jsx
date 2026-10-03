@@ -9,8 +9,9 @@ function usePlaying(text, char, slow = false) {
   const start = () => {
     clearTimeout(timer.current);
     setPlaying(true);
-    const base = clipDuration(text, char && char.key) || Math.min(4, 0.5 + String(text).length * 0.055);
-    timer.current = setTimeout(() => setPlaying(false), (base / (slow ? 0.75 : 1)) * 1000);
+    // clipDuration já considera a variante lenta gravada (ou o 0,75x de reserva); a heurística só vale sem clipe
+    const base = clipDuration(text, char && char.key, slow) || Math.min(4, 0.5 + String(text).length * 0.055) / (slow ? 0.75 : 1);
+    timer.current = setTimeout(() => setPlaying(false), base * 1000);
   };
   return [playing, start];
 }

@@ -1,4 +1,4 @@
-// Áudio gravado (sprites WebAudio) com reserva na síntese do navegador — porta fiel de features.js.
+// Áudio gravado (sprites WebAudio) com reserva na síntese do navegador: porta fiel de features.js.
 import { audioKey, normalize } from "./util.js";
 
 export const AUDIO = { manifest: null, sprites: null, cache: {}, buffers: {}, order: [], ctx: null, curSrc: null, playToken: 0, base: "audio/" };
@@ -62,13 +62,26 @@ export async function loadAudioManifest() {
   }
 }
 
-export function clipDuration(text, charKey) {
+// Arquivo a tocar para (entrada do manifesto, personagem, devagar). Com slow, prefere a variante lenta
+// gravada (manifest[key]["~slow"], speed 0,8 na síntese: o tom não muda); sem ela, o clipe normal a 0,75x.
+function clipFile(entry, charKey, slow) {
+  if (slow && entry["~slow"]) {
+    const s = entry["~slow"];
+    const f = (charKey && s[charKey]) || s.default;
+    if (f) return { file: f, rate: 1 };
+  }
+  return { file: (charKey && entry[charKey]) || entry.default, rate: slow ? 0.75 : 1 };
+}
+
+// Duração real da reprodução (segundos); 0 quando não há clipe. Com slow, já considera a variante lenta
+// ou a redução de velocidade do fallback
+export function clipDuration(text, charKey, slow) {
   if (!AUDIO.manifest || !AUDIO.sprites) return 0;
   const entry = AUDIO.manifest[audioKey(text)];
   if (!entry) return 0;
-  const file = (charKey && entry[charKey]) || entry.default;
+  const { file, rate } = clipFile(entry, charKey, slow);
   const s = file && AUDIO.sprites[file];
-  return s ? s[2] : 0;
+  return s ? s[2] / rate : 0;
 }
 
 export function stopClip() {
@@ -82,11 +95,10 @@ export function playClip(text, charKey, slow, onFail) {
   if (!AUDIO.manifest) return false;
   const entry = AUDIO.manifest[audioKey(text)];
   if (!entry) return false;
-  const file = (charKey && entry[charKey]) || entry.default;
+  const { file, rate } = clipFile(entry, charKey, slow);
   if (!file) return false;
   const fail = () => { if (typeof onFail === "function") onFail(); };
   try {
-    const rate = slow ? 0.75 : 1;
     stopClip();
     const token = AUDIO.playToken;
     const playFile = () => {
@@ -161,10 +173,13 @@ function speakTTS(text, ch, opts = {}) {
 // speak(text, { char, slow }): clipe gravado primeiro; senão síntese
 export function speak(text, opts = {}) {
   const ch = opts.char || null;
-  const dur = (clipDuration(text, ch && ch.key) || Math.min(4, 0.5 + String(text).length * 0.055)) * 1000;
-  if (playClip(text, ch && ch.key, opts.slow, () => speakTTS(text, ch, opts))) {
+  const key = ch && ch.key;
+  const clip = clipDuration(text, key, opts.slow);
+  const dur = (clip || Math.min(4, 0.5 + String(text).length * 0.055)) * 1000;
+  if (playClip(text, key, opts.slow, () => speakTTS(text, ch, opts))) {
     if ("speechSynthesis" in window) speechSynthesis.cancel();
-    emitSpeak(text, Math.min(4000, 400 + text.length * 70));
+    // Duração real do clipe (sprites.json) quando há; a heurística pelo tamanho do texto fica só para a reserva
+    emitSpeak(text, clip ? clip * 1000 : Math.min(4000, 400 + text.length * 70));
     return;
   }
   speakTTS(text, ch, opts);
