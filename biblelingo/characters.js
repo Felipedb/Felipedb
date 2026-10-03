@@ -291,21 +291,22 @@ const CHARACTER_ORDER = ["jesus", "noe", "abraao", "sara", "jose", "moises", "da
   "elias", "eliseu", "isaias", "neemias", "ezequiel", "marta", "maria", "josepai", "joaobatista", "pedro", "barnabe", "timoteo",
   "lidia", "filipe", "natanael", "tome", "zaqueu", "bartimeu", "madalena"];
 
-// Elenco por unidade: personagem principal + convidados
+// Elenco por unidade (gerado de content/course.json pelo tools/content/merge.js; edite o course.json)
 const UNIT_CAST = {
-  u1: ["jesus", "adao", "eva"],
-  u2: ["noe", "jaco", "rebeca"],
+  u1: ["adao", "eva"],
+  u2: ["noe"],
+  u6: ["jose", "jaco"],
   u3: ["moises", "arao", "josue"],
-  u4: ["davi", "samuel", "salomao"],
-  u5: ["isaias", "jonas", "daniel", "elias"],
-  u6: ["jose", "jaco", "rebeca"],
-  u7: ["daniel", "ezequiel", "neemias"],
-  u8: ["jesus", "pedro", "maria", "madalena"],
+  u4: ["davi", "samuel"],
+  u5: ["isaias"],
+  u7: ["daniel", "ezequiel"],
+  u8: ["pedro", "jesus", "madalena"],
 };
 // Unidade ligada a cada personagem (para "Iniciar lições")
-const CHARACTER_UNIT = { jesus: "u1", adao: "u1", eva: "u1", noe: "u2", jaco: "u2", rebeca: "u2", moises: "u3", arao: "u3", josue: "u3",
-  davi: "u4", samuel: "u4", salomao: "u4", isaias: "u5", jonas: "u5", elias: "u5", jose: "u6", daniel: "u7", ezequiel: "u7", neemias: "u7",
-  pedro: "u8", madalena: "u8", marta: "u8", tome: "u8", zaqueu: "u8", bartimeu: "u8" };
+const CHARACTER_UNIT = {
+  adao: "u1", eva: "u1", noe: "u2", jose: "u6", jaco: "u6", moises: "u3", arao: "u3", josue: "u3", davi: "u4",
+  samuel: "u4", salomao: "u4", isaias: "u5", daniel: "u7", ezequiel: "u7", neemias: "u7", pedro: "u8", jesus: "u8", madalena: "u8",
+  marta: "u8", maria: "u8", zaqueu: "u8", bartimeu: "u8", tome: "u8" };
 
 function pickCharacter(unitId) {
   const cast = UNIT_CAST[unitId] || Object.keys(CHARACTERS);

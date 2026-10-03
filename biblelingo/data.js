@@ -1,15 +1,20 @@
-// BíbliaLearn — conteúdo das unidades e lições (gerado de content/u*.json; edite os JSON e rode merge.js)
-// Cada lição: vocab (as 4 primeiras são as palavras-base da 1ª vez), sentences (arco da passagem),
-// verse (KJV, domínio público, com lacuna), reading, dialogue e quiz.
+// BíbliaLearn — conteúdo das unidades e lições (gerado de content/course.json + content/u*.json; edite os JSON e rode tools/content/merge.js)
+// Ordem e cabeçalhos das unidades vêm de course.json. Lições v1: vocab (as 4 primeiras são as palavras-base da 1ª vez),
+// sentences (arco da passagem), verse (KJV, domínio público, com lacuna), reading, dialogue e quiz.
+// Lições v2 (campo v: 2): tips, names, hints, vocab (pos/field/tier/part/icon/example), beats (order 1..12, gap, grammar),
+// contrast, verse (WEB em text, KJV em classic, blanks), reading (questions), conversation, fact; os campos legados
+// (sentences, verse.blank/options, reading.q/options/answer, dialogue, quiz) são derivados para o motor atual.
+// A lição "Revisão" de cada unidade é o checkpoint (checkpoint: true).
 
 const COURSE = [
   {
     "id": "u1",
-    "title": "A Palavra de Deus",
-    "subtitle": "Gênesis 1–3",
-    "icon": "📖",
-    "face": "book",
+    "title": "A Criação e o Éden",
+    "subtitle": "Gênesis 1-3",
+    "icon": "🌍",
+    "face": "adao",
     "color": "#58a700",
+    "level": "A1.1",
     "lessons": [
       {
         "id": "u1l1",
@@ -440,17 +445,19 @@ const COURSE = [
       {
         "id": "u1r",
         "title": "Revisão",
-        "review": true
+        "review": true,
+        "checkpoint": true
       }
     ]
   },
   {
     "id": "u2",
     "title": "Noé e a arca",
-    "subtitle": "Gênesis 6–9",
-    "icon": "🚢",
+    "subtitle": "Gênesis 6-9",
+    "icon": "🌈",
     "face": "noe",
-    "color": "#7e57c2",
+    "color": "#1cb0f6",
+    "level": "A1.1",
     "lessons": [
       {
         "id": "u2l1",
@@ -923,17 +930,489 @@ const COURSE = [
       {
         "id": "u2r",
         "title": "Revisão",
-        "review": true
+        "review": true,
+        "checkpoint": true
+      }
+    ]
+  },
+  {
+    "id": "u6",
+    "title": "José no Egito",
+    "subtitle": "Gênesis 37-50",
+    "icon": "🌾",
+    "face": "jose",
+    "color": "#ce82ff",
+    "level": "A1.2",
+    "lessons": [
+      {
+        "id": "u6l1",
+        "title": "Os sonhos e a túnica",
+        "vocab": [
+          {
+            "en": "dream",
+            "pt": "sonho",
+            "icon": "💤"
+          },
+          {
+            "en": "coat",
+            "pt": "túnica",
+            "icon": "🧥"
+          },
+          {
+            "en": "colors",
+            "pt": "cores",
+            "icon": "🎨"
+          },
+          {
+            "en": "to sell",
+            "pt": "vender",
+            "icon": "💰"
+          },
+          {
+            "en": "to love",
+            "pt": "amar",
+            "icon": "💕"
+          },
+          {
+            "en": "sheaf",
+            "pt": "molho (feixe)",
+            "icon": "🌾"
+          },
+          {
+            "en": "to bow",
+            "pt": "inclinar-se (curvar-se)",
+            "icon": "🙇"
+          },
+          {
+            "en": "envy",
+            "pt": "inveja",
+            "icon": "😒"
+          },
+          {
+            "en": "pit",
+            "pt": "cova (poço)",
+            "icon": "🕳️"
+          },
+          {
+            "en": "silver",
+            "pt": "prata",
+            "icon": "🥈"
+          }
+        ],
+        "sentences": [
+          {
+            "en": "Jacob loved Joseph and made him a coat of many colors",
+            "pt": "Jacó amava José e lhe fez uma túnica de muitas cores"
+          },
+          {
+            "en": "Jacob loved Joseph more than all his sons",
+            "pt": "Jacó amava José mais do que todos os seus filhos"
+          },
+          {
+            "en": "Joseph had a dream",
+            "pt": "José teve um sonho"
+          },
+          {
+            "en": "Your sheaves bowed down to my sheaf",
+            "pt": "Os vossos molhos se inclinaram ao meu molho"
+          },
+          {
+            "en": "The sun, the moon and eleven stars bowed to me",
+            "pt": "O sol, a lua e onze estrelas se inclinaram a mim"
+          },
+          {
+            "en": "His brothers were full of envy",
+            "pt": "Os seus irmãos estavam cheios de inveja"
+          },
+          {
+            "en": "The brothers hated Joseph because of his dreams",
+            "pt": "Os irmãos odiavam José por causa dos seus sonhos"
+          },
+          {
+            "en": "They cast him into a pit",
+            "pt": "Eles o lançaram numa cova"
+          },
+          {
+            "en": "The pit was empty; there was no water in it",
+            "pt": "A cova estava vazia, não havia água nela"
+          },
+          {
+            "en": "His brothers sold him",
+            "pt": "Os irmãos dele o venderam"
+          },
+          {
+            "en": "They sold Joseph to the Ishmaelites for twenty pieces of silver",
+            "alt": [
+              "They sold Joseph to the Ishmeelites for twenty pieces of silver"
+            ],
+            "pt": "Venderam José aos ismaelitas por vinte moedas de prata"
+          },
+          {
+            "en": "They dipped the coat in the blood of a goat",
+            "pt": "Molharam a túnica no sangue de um cabrito"
+          }
+        ],
+        "verse": {
+          "text": "And Joseph dreamed a dream, and he told it his brethren.",
+          "pt": "Sonhou também José um sonho, que contou a seus irmãos.",
+          "ref": "Gênesis 37:5",
+          "blank": "dream",
+          "options": [
+            "dream",
+            "coat",
+            "stone",
+            "song"
+          ]
+        },
+        "reading": {
+          "text": "Joseph was seventeen years old. He kept the flock with his brothers. His father loved him and made him a coat of many colors. His brothers saw it and hated him.",
+          "pt": "José tinha dezessete anos. Ele apascentava o rebanho com os seus irmãos. O seu pai o amava e lhe fez uma túnica de muitas cores. Os irmãos viram isso e o odiaram.",
+          "q": "How old was Joseph?",
+          "options": [
+            "Seventeen",
+            "Thirty",
+            "Seven"
+          ],
+          "answer": "Seventeen"
+        },
+        "dialogue": {
+          "line": "Joseph, tell us your dream!",
+          "pt": "José, conte-nos o seu sonho!",
+          "options": [
+            "The sun and the moon bowed to me.",
+            "The sea is dry.",
+            "I see a rainbow!"
+          ],
+          "answer": "The sun and the moon bowed to me.",
+          "answerPt": "O sol e a lua se curvaram diante de mim."
+        },
+        "quiz": {
+          "q": "To whom did the brothers sell Joseph?",
+          "options": [
+            "To the Ishmaelites",
+            "To Pharaoh",
+            "To Potiphar"
+          ],
+          "answer": "To the Ishmaelites",
+          "explain": "Os irmãos venderam José por vinte moedas de prata aos ismaelitas, que o levaram ao Egito (Gênesis 37:28)."
+        }
+      },
+      {
+        "id": "u6l2",
+        "title": "Da prisão ao palácio",
+        "vocab": [
+          {
+            "en": "prison",
+            "pt": "prisão",
+            "icon": "⛓️"
+          },
+          {
+            "en": "to interpret",
+            "pt": "interpretar",
+            "icon": "🔎"
+          },
+          {
+            "en": "plenty",
+            "pt": "fartura",
+            "icon": "🌾"
+          },
+          {
+            "en": "famine",
+            "pt": "fome",
+            "icon": "🥀"
+          },
+          {
+            "en": "seven",
+            "pt": "sete",
+            "icon": "7️⃣"
+          },
+          {
+            "en": "cow",
+            "pt": "vaca",
+            "icon": "🐄"
+          },
+          {
+            "en": "butler",
+            "pt": "copeiro",
+            "icon": "🍷"
+          },
+          {
+            "en": "baker",
+            "pt": "padeiro",
+            "icon": "🥖"
+          },
+          {
+            "en": "ruler",
+            "pt": "governador",
+            "icon": "👑"
+          },
+          {
+            "en": "servant",
+            "pt": "servo",
+            "icon": "🧹"
+          }
+        ],
+        "sentences": [
+          {
+            "en": "Joseph was a servant in Potiphar's house",
+            "pt": "José era servo na casa de Potifar"
+          },
+          {
+            "en": "Potiphar was angry and put Joseph in prison",
+            "pt": "Potifar se irou e pôs José na prisão"
+          },
+          {
+            "en": "The keeper of the prison gave Joseph all the prisoners",
+            "pt": "O carcereiro entregou a José todos os presos"
+          },
+          {
+            "en": "The Lord was with Joseph in the prison",
+            "pt": "O Senhor estava com José na prisão"
+          },
+          {
+            "en": "The butler and the baker had dreams",
+            "pt": "O copeiro e o padeiro tiveram sonhos"
+          },
+          {
+            "en": "Joseph interpreted the dreams",
+            "pt": "José interpretou os sonhos"
+          },
+          {
+            "en": "Do not interpretations belong to God?",
+            "pt": "Não são de Deus as interpretações?"
+          },
+          {
+            "en": "The butler forgot Joseph for two years",
+            "pt": "O copeiro se esqueceu de José por dois anos"
+          },
+          {
+            "en": "Pharaoh dreamed of seven fat cows and seven thin cows",
+            "pt": "Faraó sonhou com sete vacas gordas e sete vacas magras"
+          },
+          {
+            "en": "Seven years of plenty",
+            "pt": "Sete anos de fartura"
+          },
+          {
+            "en": "Then seven years of famine will come",
+            "pt": "Depois virão sete anos de fome"
+          },
+          {
+            "en": "Pharaoh made Joseph ruler over all the land of Egypt",
+            "pt": "Faraó pôs José por governador sobre toda a terra do Egito"
+          }
+        ],
+        "verse": {
+          "text": "But the LORD was with Joseph, and shewed him mercy.",
+          "pt": "O Senhor, porém, estava com José e estendeu sobre ele a sua benignidade.",
+          "ref": "Gênesis 39:21",
+          "blank": "with",
+          "options": [
+            "with",
+            "against",
+            "after",
+            "under"
+          ]
+        },
+        "reading": {
+          "text": "In the prison, the butler and the baker had dreams. Joseph interpreted them. After two years, Pharaoh dreamed of seven fat cows and seven thin cows. The butler remembered Joseph, and Pharaoh called him.",
+          "pt": "Na prisão, o copeiro e o padeiro tiveram sonhos. José os interpretou. Depois de dois anos, Faraó sonhou com sete vacas gordas e sete vacas magras. O copeiro se lembrou de José, e Faraó o chamou.",
+          "q": "Who told Pharaoh about Joseph?",
+          "options": [
+            "The butler",
+            "The baker",
+            "Potiphar"
+          ],
+          "answer": "The butler"
+        },
+        "dialogue": {
+          "line": "Can you interpret my dream?",
+          "pt": "Você pode interpretar o meu sonho?",
+          "options": [
+            "God will give the answer.",
+            "I have five stones.",
+            "Let there be light."
+          ],
+          "answer": "God will give the answer.",
+          "answerPt": "Deus dará a resposta."
+        },
+        "quiz": {
+          "q": "How many years of plenty did Joseph announce?",
+          "options": [
+            "Seven",
+            "Forty",
+            "Three"
+          ],
+          "answer": "Seven",
+          "explain": "Sete anos de grande fartura e depois sete anos de fome (Gênesis 41:29-30)."
+        }
+      },
+      {
+        "id": "u6l3",
+        "title": "Eu sou José",
+        "vocab": [
+          {
+            "en": "to forgive",
+            "pt": "perdoar",
+            "icon": "🤲"
+          },
+          {
+            "en": "brother",
+            "pt": "irmão",
+            "icon": "👦"
+          },
+          {
+            "en": "to weep",
+            "pt": "chorar",
+            "icon": "😢"
+          },
+          {
+            "en": "family",
+            "pt": "família",
+            "icon": "👨‍👩‍👧‍👦"
+          },
+          {
+            "en": "evil",
+            "pt": "mal",
+            "icon": "😈"
+          },
+          {
+            "en": "grain",
+            "pt": "trigo (cereal)",
+            "icon": "🌾"
+          },
+          {
+            "en": "to buy",
+            "pt": "comprar",
+            "icon": "🛒"
+          },
+          {
+            "en": "sack",
+            "pt": "saco",
+            "icon": "👜"
+          },
+          {
+            "en": "cup",
+            "pt": "copo (taça)",
+            "icon": "🏆"
+          },
+          {
+            "en": "alive",
+            "pt": "vivo",
+            "icon": "💓"
+          }
+        ],
+        "sentences": [
+          {
+            "en": "The brothers went down to Egypt to buy grain",
+            "pt": "Os irmãos desceram ao Egito para comprar trigo"
+          },
+          {
+            "en": "Joseph put the money back in their sacks",
+            "pt": "José pôs o dinheiro de volta nos sacos deles"
+          },
+          {
+            "en": "Joseph put his silver cup in the sack of Benjamin",
+            "pt": "José pôs o seu copo de prata no saco de Benjamim"
+          },
+          {
+            "en": "Joseph wept",
+            "pt": "José chorou"
+          },
+          {
+            "en": "I am Joseph, your brother",
+            "pt": "Eu sou José, vosso irmão"
+          },
+          {
+            "en": "I am Joseph; is my father still alive?",
+            "pt": "Eu sou José; vive ainda meu pai?"
+          },
+          {
+            "en": "Joseph fell on the neck of his brother Benjamin and wept",
+            "pt": "José se lançou ao pescoço de Benjamim, seu irmão, e chorou"
+          },
+          {
+            "en": "Joseph forgave his brothers",
+            "pt": "José perdoou os seus irmãos"
+          },
+          {
+            "en": "Joseph my son is still alive; I will go and see him",
+            "pt": "José, meu filho, ainda vive; eu irei e o verei"
+          },
+          {
+            "en": "Jacob and all his family went down to Egypt",
+            "pt": "Jacó e toda a sua família desceram ao Egito"
+          },
+          {
+            "en": "You thought evil against me, but God meant it for good",
+            "pt": "Vós intentastes mal contra mim, porém Deus o tornou em bem"
+          },
+          {
+            "en": "Forgive now the trespass of your brothers",
+            "pt": "Perdoa, pois, agora a transgressão dos teus irmãos"
+          }
+        ],
+        "verse": {
+          "text": "Ye thought evil against me; but God meant it unto good.",
+          "pt": "Vós bem intentastes mal contra mim, porém Deus o tornou em bem.",
+          "ref": "Gênesis 50:20",
+          "blank": "good",
+          "options": [
+            "good",
+            "bad",
+            "nothing",
+            "war"
+          ]
+        },
+        "reading": {
+          "text": "The brothers came to Egypt and bowed down before Joseph. Joseph knew them, but they did not know him. At last he said: I am Joseph. God sent me before you to preserve life.",
+          "pt": "Os irmãos vieram ao Egito e se inclinaram diante de José. José os reconheceu, mas eles não o reconheceram. Por fim ele disse: Eu sou José. Deus me enviou adiante de vós para conservar a vida.",
+          "q": "Did the brothers know Joseph?",
+          "options": [
+            "No, they did not know him",
+            "Yes, at once",
+            "Only Benjamin knew him"
+          ],
+          "answer": "No, they did not know him"
+        },
+        "dialogue": {
+          "line": "We are your brothers. Forgive us!",
+          "pt": "Somos seus irmãos. Perdoe-nos!",
+          "options": [
+            "Do not be afraid. God meant it for good.",
+            "Go to the desert.",
+            "I see a giant!"
+          ],
+          "answer": "Do not be afraid. God meant it for good.",
+          "answerPt": "Não tenham medo. Deus o tornou em bem."
+        },
+        "quiz": {
+          "q": "What did Joseph put in Benjamin's sack?",
+          "options": [
+            "A silver cup",
+            "A coat of many colors",
+            "Five smooth stones"
+          ],
+          "answer": "A silver cup",
+          "explain": "José mandou pôr o seu copo de prata na boca do saco de Benjamim (Gênesis 44:2)."
+        }
+      },
+      {
+        "id": "u6r",
+        "title": "Revisão",
+        "review": true,
+        "checkpoint": true
       }
     ]
   },
   {
     "id": "u3",
     "title": "Moisés e o Êxodo",
-    "subtitle": "Êxodo 1–15",
+    "subtitle": "Êxodo 1-15",
     "icon": "🔥",
     "face": "moises",
-    "color": "#e6a817",
+    "color": "#ff9600",
+    "level": "A1.2",
     "lessons": [
       {
         "id": "u3l1",
@@ -1417,17 +1896,19 @@ const COURSE = [
       {
         "id": "u3r",
         "title": "Revisão",
-        "review": true
+        "review": true,
+        "checkpoint": true
       }
     ]
   },
   {
     "id": "u4",
-    "title": "Davi, um homem segundo o coração de Deus",
-    "subtitle": "1 Samuel 16 – 2 Samuel 22",
-    "icon": "👑",
+    "title": "Davi, o pastor e o rei",
+    "subtitle": "1 Samuel 16-17; 2 Samuel 22; Salmo 23",
+    "icon": "🎵",
     "face": "davi",
-    "color": "#6a4fb3",
+    "color": "#ff4b4b",
+    "level": "A1.2",
     "lessons": [
       {
         "id": "u4l1",
@@ -1887,17 +2368,19 @@ const COURSE = [
       {
         "id": "u4r",
         "title": "Revisão",
-        "review": true
+        "review": true,
+        "checkpoint": true
       }
     ]
   },
   {
     "id": "u5",
-    "title": "Os Profetas",
-    "subtitle": "Isaías 1–12",
-    "icon": "📜",
+    "title": "Isaías, o profeta",
+    "subtitle": "Isaías 6-9; 36-38",
+    "icon": "👑",
     "face": "isaias",
-    "color": "#8a8a6d",
+    "color": "#2b70c9",
+    "level": "A2.1",
     "lessons": [
       {
         "id": "u5l1",
@@ -2367,485 +2850,19 @@ const COURSE = [
       {
         "id": "u5r",
         "title": "Revisão",
-        "review": true
-      }
-    ]
-  },
-  {
-    "id": "u6",
-    "title": "José no Egito",
-    "subtitle": "Gênesis 37–50",
-    "icon": "🌾",
-    "face": "jose",
-    "color": "#2e9d8a",
-    "lessons": [
-      {
-        "id": "u6l1",
-        "title": "Os sonhos e a túnica",
-        "vocab": [
-          {
-            "en": "dream",
-            "pt": "sonho",
-            "icon": "💤"
-          },
-          {
-            "en": "coat",
-            "pt": "túnica",
-            "icon": "🧥"
-          },
-          {
-            "en": "colors",
-            "pt": "cores",
-            "icon": "🎨"
-          },
-          {
-            "en": "to sell",
-            "pt": "vender",
-            "icon": "💰"
-          },
-          {
-            "en": "to love",
-            "pt": "amar",
-            "icon": "💕"
-          },
-          {
-            "en": "sheaf",
-            "pt": "molho (feixe)",
-            "icon": "🌾"
-          },
-          {
-            "en": "to bow",
-            "pt": "inclinar-se (curvar-se)",
-            "icon": "🙇"
-          },
-          {
-            "en": "envy",
-            "pt": "inveja",
-            "icon": "😒"
-          },
-          {
-            "en": "pit",
-            "pt": "cova (poço)",
-            "icon": "🕳️"
-          },
-          {
-            "en": "silver",
-            "pt": "prata",
-            "icon": "🥈"
-          }
-        ],
-        "sentences": [
-          {
-            "en": "Jacob loved Joseph and made him a coat of many colors",
-            "pt": "Jacó amava José e lhe fez uma túnica de muitas cores"
-          },
-          {
-            "en": "Jacob loved Joseph more than all his sons",
-            "pt": "Jacó amava José mais do que todos os seus filhos"
-          },
-          {
-            "en": "Joseph had a dream",
-            "pt": "José teve um sonho"
-          },
-          {
-            "en": "Your sheaves bowed down to my sheaf",
-            "pt": "Os vossos molhos se inclinaram ao meu molho"
-          },
-          {
-            "en": "The sun, the moon and eleven stars bowed to me",
-            "pt": "O sol, a lua e onze estrelas se inclinaram a mim"
-          },
-          {
-            "en": "His brothers were full of envy",
-            "pt": "Os seus irmãos estavam cheios de inveja"
-          },
-          {
-            "en": "The brothers hated Joseph because of his dreams",
-            "pt": "Os irmãos odiavam José por causa dos seus sonhos"
-          },
-          {
-            "en": "They cast him into a pit",
-            "pt": "Eles o lançaram numa cova"
-          },
-          {
-            "en": "The pit was empty; there was no water in it",
-            "pt": "A cova estava vazia, não havia água nela"
-          },
-          {
-            "en": "His brothers sold him",
-            "pt": "Os irmãos dele o venderam"
-          },
-          {
-            "en": "They sold Joseph to the Ishmaelites for twenty pieces of silver",
-            "alt": [
-              "They sold Joseph to the Ishmeelites for twenty pieces of silver"
-            ],
-            "pt": "Venderam José aos ismaelitas por vinte moedas de prata"
-          },
-          {
-            "en": "They dipped the coat in the blood of a goat",
-            "pt": "Molharam a túnica no sangue de um cabrito"
-          }
-        ],
-        "verse": {
-          "text": "And Joseph dreamed a dream, and he told it his brethren.",
-          "pt": "Sonhou também José um sonho, que contou a seus irmãos.",
-          "ref": "Gênesis 37:5",
-          "blank": "dream",
-          "options": [
-            "dream",
-            "coat",
-            "stone",
-            "song"
-          ]
-        },
-        "reading": {
-          "text": "Joseph was seventeen years old. He kept the flock with his brothers. His father loved him and made him a coat of many colors. His brothers saw it and hated him.",
-          "pt": "José tinha dezessete anos. Ele apascentava o rebanho com os seus irmãos. O seu pai o amava e lhe fez uma túnica de muitas cores. Os irmãos viram isso e o odiaram.",
-          "q": "How old was Joseph?",
-          "options": [
-            "Seventeen",
-            "Thirty",
-            "Seven"
-          ],
-          "answer": "Seventeen"
-        },
-        "dialogue": {
-          "line": "Joseph, tell us your dream!",
-          "pt": "José, conte-nos o seu sonho!",
-          "options": [
-            "The sun and the moon bowed to me.",
-            "The sea is dry.",
-            "I see a rainbow!"
-          ],
-          "answer": "The sun and the moon bowed to me.",
-          "answerPt": "O sol e a lua se curvaram diante de mim."
-        },
-        "quiz": {
-          "q": "To whom did the brothers sell Joseph?",
-          "options": [
-            "To the Ishmaelites",
-            "To Pharaoh",
-            "To Potiphar"
-          ],
-          "answer": "To the Ishmaelites",
-          "explain": "Os irmãos venderam José por vinte moedas de prata aos ismaelitas, que o levaram ao Egito (Gênesis 37:28)."
-        }
-      },
-      {
-        "id": "u6l2",
-        "title": "Da prisão ao palácio",
-        "vocab": [
-          {
-            "en": "prison",
-            "pt": "prisão",
-            "icon": "⛓️"
-          },
-          {
-            "en": "to interpret",
-            "pt": "interpretar",
-            "icon": "🔎"
-          },
-          {
-            "en": "plenty",
-            "pt": "fartura",
-            "icon": "🌾"
-          },
-          {
-            "en": "famine",
-            "pt": "fome",
-            "icon": "🥀"
-          },
-          {
-            "en": "seven",
-            "pt": "sete",
-            "icon": "7️⃣"
-          },
-          {
-            "en": "cow",
-            "pt": "vaca",
-            "icon": "🐄"
-          },
-          {
-            "en": "butler",
-            "pt": "copeiro",
-            "icon": "🍷"
-          },
-          {
-            "en": "baker",
-            "pt": "padeiro",
-            "icon": "🥖"
-          },
-          {
-            "en": "ruler",
-            "pt": "governador",
-            "icon": "👑"
-          },
-          {
-            "en": "servant",
-            "pt": "servo",
-            "icon": "🧹"
-          }
-        ],
-        "sentences": [
-          {
-            "en": "Joseph was a servant in Potiphar's house",
-            "pt": "José era servo na casa de Potifar"
-          },
-          {
-            "en": "Potiphar was angry and put Joseph in prison",
-            "pt": "Potifar se irou e pôs José na prisão"
-          },
-          {
-            "en": "The keeper of the prison gave Joseph all the prisoners",
-            "pt": "O carcereiro entregou a José todos os presos"
-          },
-          {
-            "en": "The Lord was with Joseph in the prison",
-            "pt": "O Senhor estava com José na prisão"
-          },
-          {
-            "en": "The butler and the baker had dreams",
-            "pt": "O copeiro e o padeiro tiveram sonhos"
-          },
-          {
-            "en": "Joseph interpreted the dreams",
-            "pt": "José interpretou os sonhos"
-          },
-          {
-            "en": "Do not interpretations belong to God?",
-            "pt": "Não são de Deus as interpretações?"
-          },
-          {
-            "en": "The butler forgot Joseph for two years",
-            "pt": "O copeiro se esqueceu de José por dois anos"
-          },
-          {
-            "en": "Pharaoh dreamed of seven fat cows and seven thin cows",
-            "pt": "Faraó sonhou com sete vacas gordas e sete vacas magras"
-          },
-          {
-            "en": "Seven years of plenty",
-            "pt": "Sete anos de fartura"
-          },
-          {
-            "en": "Then seven years of famine will come",
-            "pt": "Depois virão sete anos de fome"
-          },
-          {
-            "en": "Pharaoh made Joseph ruler over all the land of Egypt",
-            "pt": "Faraó pôs José por governador sobre toda a terra do Egito"
-          }
-        ],
-        "verse": {
-          "text": "But the LORD was with Joseph, and shewed him mercy.",
-          "pt": "O Senhor, porém, estava com José e estendeu sobre ele a sua benignidade.",
-          "ref": "Gênesis 39:21",
-          "blank": "with",
-          "options": [
-            "with",
-            "against",
-            "after",
-            "under"
-          ]
-        },
-        "reading": {
-          "text": "In the prison, the butler and the baker had dreams. Joseph interpreted them. After two years, Pharaoh dreamed of seven fat cows and seven thin cows. The butler remembered Joseph, and Pharaoh called him.",
-          "pt": "Na prisão, o copeiro e o padeiro tiveram sonhos. José os interpretou. Depois de dois anos, Faraó sonhou com sete vacas gordas e sete vacas magras. O copeiro se lembrou de José, e Faraó o chamou.",
-          "q": "Who told Pharaoh about Joseph?",
-          "options": [
-            "The butler",
-            "The baker",
-            "Potiphar"
-          ],
-          "answer": "The butler"
-        },
-        "dialogue": {
-          "line": "Can you interpret my dream?",
-          "pt": "Você pode interpretar o meu sonho?",
-          "options": [
-            "God will give the answer.",
-            "I have five stones.",
-            "Let there be light."
-          ],
-          "answer": "God will give the answer.",
-          "answerPt": "Deus dará a resposta."
-        },
-        "quiz": {
-          "q": "How many years of plenty did Joseph announce?",
-          "options": [
-            "Seven",
-            "Forty",
-            "Three"
-          ],
-          "answer": "Seven",
-          "explain": "Sete anos de grande fartura e depois sete anos de fome (Gênesis 41:29-30)."
-        }
-      },
-      {
-        "id": "u6l3",
-        "title": "Eu sou José",
-        "vocab": [
-          {
-            "en": "to forgive",
-            "pt": "perdoar",
-            "icon": "🤲"
-          },
-          {
-            "en": "brother",
-            "pt": "irmão",
-            "icon": "👦"
-          },
-          {
-            "en": "to weep",
-            "pt": "chorar",
-            "icon": "😢"
-          },
-          {
-            "en": "family",
-            "pt": "família",
-            "icon": "👨‍👩‍👧‍👦"
-          },
-          {
-            "en": "evil",
-            "pt": "mal",
-            "icon": "😈"
-          },
-          {
-            "en": "grain",
-            "pt": "trigo (cereal)",
-            "icon": "🌾"
-          },
-          {
-            "en": "to buy",
-            "pt": "comprar",
-            "icon": "🛒"
-          },
-          {
-            "en": "sack",
-            "pt": "saco",
-            "icon": "👜"
-          },
-          {
-            "en": "cup",
-            "pt": "copo (taça)",
-            "icon": "🏆"
-          },
-          {
-            "en": "alive",
-            "pt": "vivo",
-            "icon": "💓"
-          }
-        ],
-        "sentences": [
-          {
-            "en": "The brothers went down to Egypt to buy grain",
-            "pt": "Os irmãos desceram ao Egito para comprar trigo"
-          },
-          {
-            "en": "Joseph put the money back in their sacks",
-            "pt": "José pôs o dinheiro de volta nos sacos deles"
-          },
-          {
-            "en": "Joseph put his silver cup in the sack of Benjamin",
-            "pt": "José pôs o seu copo de prata no saco de Benjamim"
-          },
-          {
-            "en": "Joseph wept",
-            "pt": "José chorou"
-          },
-          {
-            "en": "I am Joseph, your brother",
-            "pt": "Eu sou José, vosso irmão"
-          },
-          {
-            "en": "I am Joseph; is my father still alive?",
-            "pt": "Eu sou José; vive ainda meu pai?"
-          },
-          {
-            "en": "Joseph fell on the neck of his brother Benjamin and wept",
-            "pt": "José se lançou ao pescoço de Benjamim, seu irmão, e chorou"
-          },
-          {
-            "en": "Joseph forgave his brothers",
-            "pt": "José perdoou os seus irmãos"
-          },
-          {
-            "en": "Joseph my son is still alive; I will go and see him",
-            "pt": "José, meu filho, ainda vive; eu irei e o verei"
-          },
-          {
-            "en": "Jacob and all his family went down to Egypt",
-            "pt": "Jacó e toda a sua família desceram ao Egito"
-          },
-          {
-            "en": "You thought evil against me, but God meant it for good",
-            "pt": "Vós intentastes mal contra mim, porém Deus o tornou em bem"
-          },
-          {
-            "en": "Forgive now the trespass of your brothers",
-            "pt": "Perdoa, pois, agora a transgressão dos teus irmãos"
-          }
-        ],
-        "verse": {
-          "text": "Ye thought evil against me; but God meant it unto good.",
-          "pt": "Vós bem intentastes mal contra mim, porém Deus o tornou em bem.",
-          "ref": "Gênesis 50:20",
-          "blank": "good",
-          "options": [
-            "good",
-            "bad",
-            "nothing",
-            "war"
-          ]
-        },
-        "reading": {
-          "text": "The brothers came to Egypt and bowed down before Joseph. Joseph knew them, but they did not know him. At last he said: I am Joseph. God sent me before you to preserve life.",
-          "pt": "Os irmãos vieram ao Egito e se inclinaram diante de José. José os reconheceu, mas eles não o reconheceram. Por fim ele disse: Eu sou José. Deus me enviou adiante de vós para conservar a vida.",
-          "q": "Did the brothers know Joseph?",
-          "options": [
-            "No, they did not know him",
-            "Yes, at once",
-            "Only Benjamin knew him"
-          ],
-          "answer": "No, they did not know him"
-        },
-        "dialogue": {
-          "line": "We are your brothers. Forgive us!",
-          "pt": "Somos seus irmãos. Perdoe-nos!",
-          "options": [
-            "Do not be afraid. God meant it for good.",
-            "Go to the desert.",
-            "I see a giant!"
-          ],
-          "answer": "Do not be afraid. God meant it for good.",
-          "answerPt": "Não tenham medo. Deus o tornou em bem."
-        },
-        "quiz": {
-          "q": "What did Joseph put in Benjamin's sack?",
-          "options": [
-            "A silver cup",
-            "A coat of many colors",
-            "Five smooth stones"
-          ],
-          "answer": "A silver cup",
-          "explain": "José mandou pôr o seu copo de prata na boca do saco de Benjamim (Gênesis 44:2)."
-        }
-      },
-      {
-        "id": "u6r",
-        "title": "Revisão",
-        "review": true
+        "review": true,
+        "checkpoint": true
       }
     ]
   },
   {
     "id": "u7",
-    "title": "Daniel na cova dos leões",
-    "subtitle": "Daniel 1–6",
+    "title": "Daniel na Babilônia",
+    "subtitle": "Daniel 1-6",
     "icon": "🦁",
     "face": "daniel",
-    "color": "#c0392b",
+    "color": "#a56644",
+    "level": "A2.1",
     "lessons": [
       {
         "id": "u7l1",
@@ -3327,17 +3344,19 @@ const COURSE = [
       {
         "id": "u7r",
         "title": "Revisão",
-        "review": true
+        "review": true,
+        "checkpoint": true
       }
     ]
   },
   {
     "id": "u8",
-    "title": "Jesus e os discípulos",
-    "subtitle": "Mateus 4–14",
+    "title": "Pedro e Jesus",
+    "subtitle": "Mateus 4-16; Lucas 5; João 21",
     "icon": "🐟",
-    "face": "jesus",
-    "color": "#3f7fd6",
+    "face": "pedro",
+    "color": "#1cb0f6",
+    "level": "A2.1",
     "lessons": [
       {
         "id": "u8l1",
@@ -3825,7 +3844,8 @@ const COURSE = [
       {
         "id": "u8r",
         "title": "Revisão",
-        "review": true
+        "review": true,
+        "checkpoint": true
       }
     ]
   }

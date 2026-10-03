@@ -1,0 +1,625 @@
+{
+  "_comment": "Ícone -> conceito (regra B9 da CONTENT_SPEC_V2). icons: pares confirmados por lições v2 validadas e pela resolução da seção 4.8 (um ícone = um conceito; o validador BLOQUEIA outro en com o mesmo ícone). legacy: usos do conteúdo v1 (icon -> lista de en), só para AVISO durante a migração. Atualize com: node tools/content/validate.js --all --write-icons",
+  "icons": {
+    "😨": "afraid",
+    "⛪": "altar",
+    "♨️": "coal",
+    "💰": "coin",
+    "🤝": "covenant",
+    "🥤": "cup",
+    "📣": "decree",
+    "🧑‍🎓": "disciple",
+    "💗": "faith",
+    "💙": "faithful",
+    "🔥": "fire",
+    "🌋": "furnace",
+    "🏋️": "giant",
+    "🙏": "God",
+    "🎁": "grace",
+    "🔝": "great",
+    "👑": "king",
+    "🏰": "kingdom",
+    "⛰️": "mountain",
+    "🕸️": "net",
+    "🛐": "prayer",
+    "🗣️": "prophet",
+    "🗻": "rock",
+    "🎖️": "ruler",
+    "🎒": "sack",
+    "🛡️": "shield",
+    "🚩": "sign",
+    "🎯": "sling",
+    "⭐": "star",
+    "🗿": "statue",
+    "🔘": "stone",
+    "🍽️": "table",
+    "💺": "throne",
+    "🧴": "to anoint",
+    "🎣": "to cast",
+    "🆓": "to deliver",
+    "😰": "to fear",
+    "🏛️": "to reign",
+    "👧": "virgin",
+    "🖼️": "window",
+    "🌲": "wood",
+    "💥": "zeal"
+  },
+  "legacy": {
+    "☀️": [
+      "sun"
+    ],
+    "☁️": [
+      "cloud"
+    ],
+    "☮️": [
+      "peace"
+    ],
+    "♾️": [
+      "everlasting",
+      "forever"
+    ],
+    "⚔️": [
+      "to fight",
+      "battle"
+    ],
+    "⚖️": [
+      "justice",
+      "law"
+    ],
+    "⚡": [
+      "immediately"
+    ],
+    "⛈️": [
+      "flood"
+    ],
+    "⛓️": [
+      "prison"
+    ],
+    "⛰️": [
+      "mountain",
+      "rock"
+    ],
+    "⛵": [
+      "boat"
+    ],
+    "✂️": [
+      "to divide"
+    ],
+    "✅": [
+      "righteous",
+      "to choose"
+    ],
+    "✋": [
+      "hand"
+    ],
+    "✨": [
+      "to create",
+      "holy",
+      "hallowed"
+    ],
+    "❤️": [
+      "alive",
+      "heart"
+    ],
+    "⬇️": [
+      "to sink"
+    ],
+    "⭐": [
+      "stars",
+      "sign"
+    ],
+    "🌃": [
+      "night"
+    ],
+    "🌄": [
+      "morning"
+    ],
+    "🌅": [
+      "beginning"
+    ],
+    "🌇": [
+      "evening"
+    ],
+    "🌈": [
+      "rainbow"
+    ],
+    "🌊": [
+      "to cover",
+      "sea",
+      "Galilee"
+    ],
+    "🌍": [
+      "earth"
+    ],
+    "🌑": [
+      "darkness"
+    ],
+    "🌙": [
+      "moon"
+    ],
+    "🌟": [
+      "glory",
+      "wonderful"
+    ],
+    "🌤️": [
+      "heaven"
+    ],
+    "🌧️": [
+      "rain"
+    ],
+    "🌱": [
+      "life"
+    ],
+    "🌲": [
+      "tree",
+      "wood"
+    ],
+    "🌳": [
+      "olive"
+    ],
+    "🌷": [
+      "garden"
+    ],
+    "🌾": [
+      "sheaf",
+      "plenty",
+      "grain"
+    ],
+    "🌿": [
+      "bush",
+      "pasture"
+    ],
+    "🍂": [
+      "to fall"
+    ],
+    "🍃": [
+      "leaf"
+    ],
+    "🍎": [
+      "fruit"
+    ],
+    "🍞": [
+      "bread"
+    ],
+    "🍬": [
+      "temptation"
+    ],
+    "🍯": [
+      "honey"
+    ],
+    "🍲": [
+      "food"
+    ],
+    "🍷": [
+      "butler",
+      "wine"
+    ],
+    "🍽️": [
+      "to eat"
+    ],
+    "🎣": [
+      "fisherman"
+    ],
+    "🎤": [
+      "to sing"
+    ],
+    "🎨": [
+      "colors"
+    ],
+    "🎯": [
+      "sling",
+      "to cast"
+    ],
+    "🎵": [
+      "song"
+    ],
+    "🎶": [
+      "harp"
+    ],
+    "🎻": [
+      "to play"
+    ],
+    "🏃": [
+      "to leave"
+    ],
+    "🏆": [
+      "cup"
+    ],
+    "🏔️": [
+      "great"
+    ],
+    "🏙️": [
+      "Babylon"
+    ],
+    "🏛️": [
+      "pillar",
+      "government"
+    ],
+    "🏜️": [
+      "dry"
+    ],
+    "🏞️": [
+      "brook",
+      "valley"
+    ],
+    "🏠": [
+      "home"
+    ],
+    "🏰": [
+      "fortress",
+      "kingdom"
+    ],
+    "🏷️": [
+      "name"
+    ],
+    "🏺": [
+      "Egypt",
+      "oil"
+    ],
+    "🐄": [
+      "cow"
+    ],
+    "🐍": [
+      "serpent"
+    ],
+    "🐑": [
+      "lamb",
+      "sheep"
+    ],
+    "🐘": [
+      "animals"
+    ],
+    "🐟": [
+      "fish"
+    ],
+    "🐦": [
+      "raven"
+    ],
+    "🐸": [
+      "frogs"
+    ],
+    "🐻": [
+      "bear"
+    ],
+    "👀": [
+      "to see",
+      "to look"
+    ],
+    "👂": [
+      "to hear"
+    ],
+    "👄": [
+      "lips",
+      "mouth"
+    ],
+    "👍": [
+      "good"
+    ],
+    "👑": [
+      "ruler",
+      "Pharaoh",
+      "to anoint",
+      "to reign",
+      "throne",
+      "kingdom"
+    ],
+    "👜": [
+      "sack"
+    ],
+    "👡": [
+      "shoes"
+    ],
+    "👣": [
+      "to follow"
+    ],
+    "👤": [
+      "likeness"
+    ],
+    "👥": [
+      "people",
+      "crowd"
+    ],
+    "👦": [
+      "brother",
+      "son"
+    ],
+    "👨": [
+      "father"
+    ],
+    "👨‍👩‍👧‍👦": [
+      "family"
+    ],
+    "👩": [
+      "woman",
+      "wife"
+    ],
+    "👫": [
+      "with us"
+    ],
+    "👰": [
+      "virgin"
+    ],
+    "👶": [
+      "child"
+    ],
+    "👼": [
+      "angel"
+    ],
+    "💓": [
+      "alive"
+    ],
+    "💕": [
+      "to love"
+    ],
+    "💗": [
+      "mercy"
+    ],
+    "💚": [
+      "living"
+    ],
+    "💡": [
+      "light"
+    ],
+    "💤": [
+      "dream"
+    ],
+    "💥": [
+      "to destroy"
+    ],
+    "💧": [
+      "water"
+    ],
+    "💨": [
+      "wind"
+    ],
+    "💪": [
+      "strong",
+      "shoulder"
+    ],
+    "💬": [
+      "to speak",
+      "to say"
+    ],
+    "💭": [
+      "to remember"
+    ],
+    "💰": [
+      "to sell"
+    ],
+    "💸": [
+      "debts"
+    ],
+    "📅": [
+      "day"
+    ],
+    "📜": [
+      "covenant",
+      "prophet",
+      "decree",
+      "will"
+    ],
+    "📝": [
+      "to write"
+    ],
+    "📨": [
+      "to send"
+    ],
+    "🔆": [
+      "to shine"
+    ],
+    "🔎": [
+      "to interpret"
+    ],
+    "🔏": [
+      "to seal"
+    ],
+    "🔒": [
+      "to shut",
+      "to close"
+    ],
+    "🔓": [
+      "to open",
+      "free"
+    ],
+    "🔟": [
+      "ten"
+    ],
+    "🔢": [
+      "forty"
+    ],
+    "🔥": [
+      "altar",
+      "fire",
+      "coal",
+      "zeal",
+      "furnace"
+    ],
+    "🔨": [
+      "to make"
+    ],
+    "🔲": [
+      "window"
+    ],
+    "🔴": [
+      "blood"
+    ],
+    "🕊️": [
+      "dove"
+    ],
+    "🕳️": [
+      "pit",
+      "den"
+    ],
+    "🖼️": [
+      "image"
+    ],
+    "🗓️": [
+      "daily"
+    ],
+    "🗡️": [
+      "sword"
+    ],
+    "🗣️": [
+      "I AM",
+      "voice"
+    ],
+    "🗿": [
+      "giant",
+      "statue"
+    ],
+    "🤝": [
+      "promise",
+      "to trust"
+    ],
+    "🤲": [
+      "to forgive"
+    ],
+    "🤴": [
+      "prince"
+    ],
+    "🤾": [
+      "to throw"
+    ],
+    "🥀": [
+      "famine"
+    ],
+    "🥅": [
+      "net"
+    ],
+    "🥈": [
+      "silver"
+    ],
+    "🥌": [
+      "stone"
+    ],
+    "🥖": [
+      "baker",
+      "loaves"
+    ],
+    "🥦": [
+      "vegetables"
+    ],
+    "🦁": [
+      "mighty",
+      "lion"
+    ],
+    "🦅": [
+      "wings"
+    ],
+    "🦉": [
+      "wisdom"
+    ],
+    "🦶": [
+      "to walk"
+    ],
+    "🧍": [
+      "alone"
+    ],
+    "🧎": [
+      "to kneel"
+    ],
+    "🧑": [
+      "disciple"
+    ],
+    "🧑‍🌾": [
+      "shepherd"
+    ],
+    "🧒": [
+      "young"
+    ],
+    "🧔": [
+      "man"
+    ],
+    "🧠": [
+      "counsellor"
+    ],
+    "🧥": [
+      "coat"
+    ],
+    "🧱": [
+      "to harden",
+      "wall"
+    ],
+    "🧵": [
+      "to mend"
+    ],
+    "🧹": [
+      "servant"
+    ],
+    "🧺": [
+      "basket"
+    ],
+    "😈": [
+      "wicked",
+      "evil"
+    ],
+    "😒": [
+      "envy"
+    ],
+    "😢": [
+      "to weep"
+    ],
+    "😨": [
+      "afraid",
+      "to fear"
+    ],
+    "😴": [
+      "to rest",
+      "to sleep"
+    ],
+    "🙇": [
+      "to bow"
+    ],
+    "🙋": [
+      "to ask"
+    ],
+    "🙌": [
+      "to bless"
+    ],
+    "🙏": [
+      "God",
+      "grace",
+      "prayer",
+      "faith"
+    ],
+    "🚢": [
+      "ark"
+    ],
+    "🚪": [
+      "door"
+    ],
+    "🚫": [
+      "to defile"
+    ],
+    "🚶": [
+      "to go",
+      "to walk"
+    ],
+    "🛐": [
+      "to pray"
+    ],
+    "🛒": [
+      "to buy"
+    ],
+    "🛡️": [
+      "shield",
+      "faithful",
+      "to deliver"
+    ],
+    "🟫": [
+      "ground"
+    ],
+    "2️⃣": [
+      "two by two"
+    ],
+    "5️⃣": [
+      "five"
+    ],
+    "7️⃣": [
+      "seven"
+    ],
+    "🆘": [
+      "to save"
+    ]
+  }
+}
