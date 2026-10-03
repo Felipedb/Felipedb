@@ -40,6 +40,8 @@ const MOCK = process.argv.includes("--mock");
 const LIMIT = Number((process.argv.find((a) => a.startsWith("--limit=")) || "").split("=")[1] || 0);
 const ONLY = (process.argv.find((a) => a.startsWith("--only=")) || "").split("=")[1] || "";
 const AUDITION = ONLY === "audition" || process.argv.includes("--audition");
+// Valor desconhecido em --only (um erro de digitação no workflow) não pode virar uma geração completa paga
+if (ONLY && !["names", "audition"].includes(ONLY)) { console.error(`--only=${ONLY} desconhecido (valores: names, audition)`); process.exit(1); }
 
 if (MOCK && AUDIO_DIR === path.join(ROOT, "audio")) {
   console.error("Modo --mock exige AUDIO_DIR apontando para uma pasta fora do repositório (a limpeza de órfãos apagaria os clipes reais).");
