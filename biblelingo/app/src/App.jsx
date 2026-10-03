@@ -1,14 +1,16 @@
+// Casca do app (VISUAL_SPEC 5.7, 5.8 e 6.12): TabBar fixa no mobile; no desktop, grid de três colunas (Sidebar, centro, RightRail
+// com HUD, missões, versículo e ofensiva). Lição e Result ocupam a tela inteira, sem abas. Toasts viram Snackbar acima da tab bar.
 import { useEffect, useState, useCallback, lazy, Suspense } from "react";
 import confettiFx from "canvas-confetti";
+import { motion, useReducedMotion } from "motion/react";
 import { useAppState } from "./core/useStore.js";
 import { useSessionVersion } from "./core/useSession.js";
-import { session } from "./core/session.js";
-import { useReducedMotion } from "motion/react";
+import { session, startLesson } from "./core/session.js";
 import { onUI } from "./core/events.js";
-import { ensureDay, state, save } from "./core/store.js";
-import { startLesson } from "./core/session.js";
+import { ensureDay } from "./core/store.js";
 import { sfx } from "./core/sfx.js";
 import { haptic } from "./core/haptics.js";
+import { SPRING } from "./core/motion.js";
 import Home from "./screens/Home.jsx";
 import Lesson from "./screens/Lesson.jsx";
 import Result from "./screens/Result.jsx";
@@ -17,19 +19,24 @@ import Quests from "./screens/Quests.jsx";
 import Characters from "./screens/Characters.jsx";
 import Profile from "./screens/Profile.jsx";
 import HeartsModal from "./components/HeartsModal.jsx";
-import Toast from "./components/Toast.jsx";
-import Icon from "./components/Icon.jsx";
+import { Snackbar } from "./components/ui/index.js";
+import TabBar from "./components/shell/TabBar.jsx";
+import Sidebar from "./components/shell/Sidebar.jsx";
+import RightRail from "./components/shell/RightRail.jsx";
 // Galeria dos componentes base, só em desenvolvimento (?gallery=1)
 const Gallery = import.meta.env.DEV ? lazy(() => import("./dev/Gallery.jsx")) : null;
 const SHOW_GALLERY = import.meta.env.DEV && typeof location !== "undefined" && /[?&]gallery/.test(location.search);
 
-const NAV = [
-  { id: "home", label: "Aprender", icon: "home" },
-  { id: "hub", label: "Praticar", icon: "practice" },
-  { id: "quests", label: "Missões", icon: "quest" },
-  { id: "characters", label: "Personagens", icon: "people" },
-  { id: "profile", label: "Perfil", icon: "user" },
-];
+// Avisos da lógica ainda chegam com um emoji na frente: vira ícone SVG do Snackbar
+const EMOJI_ICON = {
+  "🔒": "lock", "🎯": "target", "🚩": "flag", "🔇": "ear-off", "✨": "sparkle", "🔥": "flame", "⚡": "bolt",
+  "❤️": "heart", "💔": "heart-broken", "📖": "book", "⭐": "star", "🌟": "star", "👑": "crown", "🏆": "trophy", "🎁": "chest",
+};
+function toSnack(text, cls) {
+  const m = /^(\p{Extended_Pictographic}(?:️)?)\s*/u.exec(text || "");
+  const fallback = cls === "combo" ? "sparkle" : null;
+  return { text: m ? String(text).slice(m[0].length) : text, icon: m ? EMOJI_ICON[m[1]] || fallback || "check-circle" : fallback };
+}
 
 export default function App() {
   const app = useAppState();
@@ -61,23 +68,22 @@ export default function App() {
     if (ev.type === "navigate") setScreen(ev.screen);
     if (ev.type === "toast") {
       const id = Math.random().toString(36).slice(2);
-      setToasts((t) => [...t.slice(-2), { id, text: ev.text, cls: ev.cls }]);
-      setTimeout(() => setToasts((t) => t.filter((x) => x.id !== id)), 1600);
+      setToasts((t) => [...t.slice(-3), { id, ...toSnack(ev.text, ev.cls) }]);
     }
     if (ev.type === "sfx") { try { sfx(ev.name, ev.arg); } catch (e) { /* sem som */ } }
     if (ev.type === "confetti" && !reduce) confettiFx(ev.opts);
     if (ev.type === "hearts-modal") setHeartsOpen(true);
-  }), []);
+  }), []); // eslint-disable-line
 
   useEffect(() => { ensureDay(); }, [screen]);
   useEffect(() => { if (screen !== "home") window.scrollTo(0, 0); }, [screen]);
 
-  const inLesson = session && screen === "lesson";
-  const showTabs = !inLesson && screen !== "lesson";
+  const inLesson = (screen === "lesson" && !!session) || screen === "result";
+  const showTabs = !inLesson;
 
   const go = useCallback((id) => {
     sfx("tap");
-    haptic("tap");
+    haptic("select");
     setScreen(id);
   }, []);
 
@@ -86,49 +92,42 @@ export default function App() {
     window.__blOpenNode = (id) => { startLesson(id); return !!session; };
   }
 
+  const badges = { hub: Object.keys(app.errors || {}).length };
+  let view = null;
+  if (SHOW_GALLERY && Gallery) view = <Suspense fallback={null}><Gallery /></Suspense>;
+  else if (screen === "home" || (screen === "lesson" && !session)) view = <Home go={go} />;
+  else if (screen === "lesson") view = <Lesson />;
+  else if (screen === "result") view = <Result />;
+  else if (screen === "hub") view = <Hub go={go} />;
+  else if (screen === "quests") view = <Quests />;
+  else if (screen === "characters") view = <Characters />;
+  else if (screen === "profile") view = <Profile />;
+
   return (
-    <div className="min-h-dvh lg:mx-auto lg:flex lg:max-w-6xl lg:gap-6 lg:px-6">
-      {/* Sidebar (desktop) */}
-      {showTabs && (
-        <aside className="hidden lg:block lg:w-56 lg:shrink-0 lg:pt-6">
-          <div className="font-display text-2xl font-extrabold text-brand">BíbliaLearn</div>
-          <nav className="mt-6 flex flex-col gap-1">
-            {NAV.map((n) => (
-              <button key={n.id} onClick={() => go(n.id)}
-                className={`flex items-center gap-3 rounded-xl px-4 py-3 text-left font-bold transition-colors ${screen === n.id ? "bg-sky-soft text-sky-fg ring-2 ring-sky-line" : "text-ink-soft hover:bg-hover"}`}>
-                <Icon name={n.icon} /> {n.label}
-              </button>
-            ))}
-          </nav>
-        </aside>
+    <div className="min-h-dvh">
+      {showTabs ? (
+        <div className="mx-auto min-h-dvh lg:grid lg:max-w-[1320px] lg:grid-cols-[224px_minmax(0,1fr)_320px] lg:gap-6 lg:px-6 xl:grid-cols-[256px_minmax(0,600px)_368px]">
+          <Sidebar screen={screen} onGo={go} badges={badges} />
+          <main className="min-h-dvh min-w-0 pb-24 lg:pb-8">
+            {/* Troca de aba: conteúdo entra com fade + y 8 em 160 ms (sem frame em branco) */}
+            <motion.div key={screen} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.16 }}>
+              {view}
+            </motion.div>
+          </main>
+          <RightRail onGo={go} />
+        </div>
+      ) : (
+        <main className="min-h-dvh">
+          <motion.div key={screen} initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={SPRING.screen}>
+            {view}
+          </motion.div>
+        </main>
       )}
 
-      <main className={`min-h-dvh flex-1 ${showTabs ? "pb-24 lg:pb-8" : ""}`}>
-        {SHOW_GALLERY && Gallery ? <Suspense fallback={null}><Gallery /></Suspense> : null}
-        {!SHOW_GALLERY && screen === "home" && <Home go={go} />}
-        {screen === "lesson" && session && <Lesson />}
-        {screen === "lesson" && !session && <Home go={go} />}
-        {screen === "result" && <Result />}
-        {screen === "hub" && <Hub go={go} />}
-        {screen === "quests" && <Quests />}
-        {screen === "characters" && <Characters />}
-        {screen === "profile" && <Profile />}
-      </main>
+      {showTabs && <TabBar screen={screen} onGo={go} badges={badges} />}
 
-      {/* Navegação inferior (mobile) */}
-      {showTabs && (
-        <nav className="fixed inset-x-0 bottom-0 z-40 flex justify-around border-t-2 border-line bg-card pb-[env(safe-area-inset-bottom)] lg:hidden">
-          {NAV.map((n) => (
-            <button key={n.id} onClick={() => go(n.id)} aria-label={n.label}
-              className={`flex flex-1 flex-col items-center gap-0.5 py-2 text-[11px] font-bold ${screen === n.id ? "text-brand" : "text-ink-soft"}`}>
-              <Icon name={n.icon} className="text-xl" /> {n.label}
-            </button>
-          ))}
-        </nav>
-      )}
-
-      <Toast toasts={toasts} />
-      {heartsOpen && <HeartsModal onClose={() => setHeartsOpen(false)} />}
+      <Snackbar queue={toasts} onDone={(id) => setToasts((t) => t.filter((x) => x.id !== id))} />
+      {heartsOpen && <HeartsModal open onClose={() => setHeartsOpen(false)} />}
     </div>
   );
 }

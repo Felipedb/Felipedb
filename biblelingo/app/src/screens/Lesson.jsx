@@ -1,29 +1,83 @@
-// Quadro da lição: progresso, corações, exercício atual e rodapé de feedback.
-// Os componentes de exercício ficam em ../components/exercises (lições) e ../components/scenes (cenas).
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
+// Casca comum da lição (VISUAL_SPEC 6.2): cabeçalho (X, barra de progresso com o rótulo de combo sobreposto,
+// corações), área do exercício com troca sem frame vazio (AnimatePresence popLayout, min-height do exercício
+// anterior), interstício de revisão e rodapé de feedback por mola (FeedbackFooter publicando --footer-h).
+// Os formatos vivem em ../components/exercises (lições) e ../components/scenes (cenas).
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useAppState } from "../core/useStore.js";
 import { useSessionVersion } from "../core/useSession.js";
-import { session, check, quitLesson, skipListening, unitCrowns } from "../core/session.js";
+import { session, check, quitLesson, skipListening, skipSpeaking, unitCrowns } from "../core/session.js";
 import { LISTEN_TYPES } from "../core/builder.js";
-import { diffWords } from "../core/checker.js";
-import { stopClip } from "../core/audio.js";
-import { toast } from "../core/events.js";
+import { stopClip, recognizeOnce } from "../core/audio.js";
+import { SPRING, DUR, EASE } from "../core/motion.js";
+import { sfx } from "../core/sfx.js";
 import Result from "./Result.jsx";
 import ExerciseView from "../components/exercises/index.jsx";
-import CharFace from "../components/CharFace.jsx";
+import { footerFeedback, pronounceTarget } from "../components/exercises/feedback.jsx";
 import Icon from "../components/Icon.jsx";
-import { SPRING } from "../core/motion.js";
+import ProgressBar, { ComboLabel } from "../components/ui/ProgressBar.jsx";
+import Badge from "../components/ui/Badge.jsx";
+import Bubble from "../components/ui/Bubble.jsx";
+import CharacterStage from "../components/ui/CharacterStage.jsx";
+import FeedbackFooter from "../components/ui/FeedbackFooter.jsx";
+import { LessonBanner } from "../components/ui/Snackbar.jsx";
 
-function FlagButton() {
+// Corações do cabeçalho: ícone SVG + número. Ao perder um coração o ícone treme e um coração fantasma sobe;
+// o número desliza. Na prática (corações infinitos) mostra o símbolo de infinito.
+function Hearts({ hearts, practice, lost }) {
+  const reduce = useReducedMotion();
+  const broken = !practice && hearts <= 0 && lost != null;
   return (
-    <button aria-label="Reportar este exercício" title="Reportar"
-      onClick={() => toast("🚩 Obrigado! Vamos revisar este exercício.")}
-      className="shrink-0 self-start p-1 text-xl text-locked transition-colors hover:text-ink-soft">
-      <svg viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6">
-        <path d="M6 3a1 1 0 0 0-1 1v17a1 1 0 1 0 2 0v-6h11.3a1 1 0 0 0 .8-1.6L16.5 10l2.6-3.4A1 1 0 0 0 18.3 5H7V4a1 1 0 0 0-1-1z" />
-      </svg>
-    </button>
+    <div className="relative flex items-center gap-1.5 text-red-text" aria-label={practice ? "Corações ilimitados" : `${hearts} corações`}>
+      <motion.span key={lost == null ? "idle" : `lost-${lost}`} className="inline-flex"
+        animate={lost != null && !reduce ? { scale: [1, 1.35, 1], x: [0, -4, 4, -2, 0] } : { scale: 1, x: 0 }}
+        transition={{ duration: 0.35, delay: 0.15 }}>
+        <Icon name={practice ? "infinity" : broken ? "heart-broken" : "heart"} size={24} />
+      </motion.span>
+      {!practice && (
+        <span className="relative inline-flex h-6 min-w-[1.25rem] items-center justify-center overflow-hidden">
+          <AnimatePresence mode="popLayout" initial={false}>
+            <motion.span key={hearts} className="text-body font-extrabold tabular-nums leading-none"
+              initial={{ y: 8, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -8, opacity: 0, transition: { duration: 0.12 } }} transition={SPRING.snap}>
+              {hearts}
+            </motion.span>
+          </AnimatePresence>
+        </span>
+      )}
+      <AnimatePresence>
+        {lost != null && !practice && !reduce && (
+          <motion.span key={`ghost-${lost}`} aria-hidden className="pointer-events-none absolute left-0 top-0 inline-flex"
+            initial={{ y: 0, opacity: 0.9 }} animate={{ y: -28, opacity: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
+            <Icon name="heart" size={24} />
+          </motion.span>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+// Interstício de revisão (6.3 #21): tela vazia com o balão à esquerda e o narrador entrando inclinado pela
+// borda direita, feliz e falando enquanto toca o som de início. O CTA "Continuar" fica no rodapé.
+function ReviewInterstitial({ ch }) {
+  const [talking, setTalking] = useState(false);
+  useEffect(() => {
+    sfx("start");
+    setTalking(true);
+    const t = setTimeout(() => setTalking(false), 900);
+    return () => clearTimeout(t);
+  }, []);
+  return (
+    <div data-interstitial className="relative flex min-h-[440px] items-center">
+      <motion.div className="relative z-10" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
+        transition={{ ...SPRING.pop, delay: 0.15 }} style={{ transformOrigin: "100% 60%" }}>
+        <Bubble variant="right" maxWidth="220px">
+          <span className="block text-sentence leading-7">Vamos corrigir os exercícios que você errou!</span>
+        </Bubble>
+      </motion.div>
+      <div className="absolute -right-20 top-1/2 -translate-y-1/2">
+        <CharacterStage ch={ch} variant="peek" pose="happy" talking={talking} />
+      </div>
+    </div>
   );
 }
 
@@ -31,12 +85,56 @@ export default function Lesson() {
   useSessionVersion();
   const app = useAppState();
   const [introSeen, setIntroSeen] = useState(null); // sessão cuja revisão de erros já foi apresentada
+  const [banner, setBanner] = useState("");
+  const [explainOpen, setExplainOpen] = useState(false);
+  const [pron, setPron] = useState(null); // prática de pronúncia: { text, busy }
+  const [minH, setMinH] = useState(0);    // altura do exercício anterior durante a transição
+  const measure = useRef(null);
+  const lastH = useRef(0);
+  const firstKey = useRef(true);
   useEffect(() => () => stopClip(), []);
 
   // Em desenvolvimento, expõe a sessão para os testes de ponta a ponta
   if (import.meta.env.DEV && typeof window !== "undefined") window.__session = session;
 
-  // Atalhos de teclado: Enter/espaço verifica ou continua; 1-9 escolhe a opção
+  const live = !!session && session.phase !== "result";
+  const ex = live ? session.exercises[session.index] : null;
+  const fb = live ? session.feedback : null;
+  const ok = !!(fb && fb.ok);
+  const checked = live ? session.checked : false;
+  const firstReviewIdx = live ? session.exercises.findIndex((e) => e.isReview) : -1;
+  const showReviewIntro = live && !!session.reviewing && firstReviewIdx === session.index && !checked && introSeen !== session;
+  const exKey = !live ? "none" : showReviewIntro ? "interstitial" : `${session.index}:${ex.type}`;
+  const canCheck = live && (ex.silent || (session.answer != null && String(session.answer) !== ""));
+
+  // Troca de exercício: guarda a altura do anterior (min-height) e toca o swoosh; o rodapé volta a "Verificar"
+  // com 120 ms de atraso para não piscar
+  useLayoutEffect(() => { setMinH(lastH.current); }, [exKey]);
+  useEffect(() => { if (measure.current) lastH.current = measure.current.offsetHeight; });
+  useEffect(() => {
+    setExplainOpen(false);
+    setPron(null);
+    if (firstKey.current) { firstKey.current = false; return; }
+    sfx("swoosh");
+    window.scrollTo({ top: 0 });
+  }, [exKey]);
+
+  // Após checar, o elemento respondido entra na área visível (nunca atrás do rodapé)
+  useEffect(() => {
+    if (!checked) return;
+    const t = setTimeout(() => {
+      const el = document.querySelector('[aria-checked="true"]') || document.querySelector("[data-answer-input]")
+        || document.querySelector("[data-opt].border-sky-line, [data-opt].border-ok-line");
+      if (el) { try { el.scrollIntoView({ block: ex && String(ex.type).startsWith("scene-") ? "end" : "nearest", behavior: "smooth" }); } catch (e) { /* sem scroll */ } }
+    }, 80);
+    return () => clearTimeout(t);
+  }, [checked]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const primary = () => { if (showReviewIntro) setIntroSeen(session); else check(); };
+
+  // Atalhos de teclado: Enter/espaço verifica ou continua; 1 a 9 escolhe a opção
+  const primaryRef = useRef(primary);
+  primaryRef.current = primary;
   useEffect(() => {
     const onKey = (e) => {
       if (!session || session.phase === "result") return;
@@ -45,14 +143,13 @@ export default function Lesson() {
       const cur = session.exercises[session.index];
       if (!cur) return;
       const has = cur.silent || (session.answer != null && String(session.answer) !== "");
-      if ((e.key === "Enter" || (e.key === " " && session.checked)) && !inInput && (has || session.checked)) {
+      if ((e.key === "Enter" || (e.key === " " && session.checked)) && !inInput && (has || session.checked || document.querySelector("[data-interstitial]"))) {
         e.preventDefault();
-        check();
+        primaryRef.current();
         return;
       }
       if (!inInput && !session.checked && /^[1-9]$/.test(e.key)) {
-        const opts = document.querySelectorAll("[data-opt]");
-        const o = opts[Number(e.key) - 1];
+        const o = document.querySelectorAll("[data-opt]")[Number(e.key) - 1];
         if (o) o.click();
       }
     };
@@ -60,142 +157,112 @@ export default function Lesson() {
     return () => document.removeEventListener("keydown", onKey);
   }, []);
 
+  // Rótulo do CTA com o atraso de 120 ms ao voltar para "Verificar"
+  const ctaLabel = !live ? "" : showReviewIntro ? "Continuar" : checked ? (ok ? "Continuar" : "Entendi") : ex.silent ? (ex.continueLabel || "Continuar") : "Verificar";
+  const [shownLabel, setShownLabel] = useState(ctaLabel);
+  useEffect(() => {
+    if (shownLabel === ctaLabel) return undefined;
+    if (checked || showReviewIntro) { setShownLabel(ctaLabel); return undefined; }
+    const t = setTimeout(() => setShownLabel(ctaLabel), 120);
+    return () => clearTimeout(t);
+  }, [ctaLabel]); // eslint-disable-line react-hooks/exhaustive-deps
+
   if (!session) return null;
   if (session.phase === "result") return <Result />;
 
-  const ex = session.exercises[session.index];
-  const fb = session.feedback;
-  const ok = fb && fb.ok;
-  const progress = (session.index / session.exercises.length) * 100;
-  const canCheck = ex.silent || session.answer != null && String(session.answer) !== "";
-  const combo = session.combo >= 2 && !fb;
+  // Prática de pronúncia (botão secundário do rodapé): reconhece a frase completa e mostra o resultado na linha 2
+  const practicePronunciation = () => {
+    if (session.practiceRec) { try { session.practiceRec.stop(); } catch (e) { /* já parou */ } return; }
+    const target = pronounceTarget(ex);
+    const s0 = session;
+    session.practiceRec = recognizeOnce(target, {
+      onStart: () => setPron({ text: `Diga: "${target}"`, busy: true }),
+      onResult: (r) => {
+        if (session !== s0) return;
+        if (r.ok) { sfx("correct"); setPron({ text: `Boa pronúncia! ${Math.round(r.score * 100)}% das palavras`, busy: false }); }
+        else setPron({ text: `Quase. Você disse: "${r.text}". Tente de novo.`, busy: false });
+      },
+      onError: (err) => setPron({
+        text: err === "unsupported" ? "Reconhecimento de voz indisponível neste navegador."
+          : err === "not-allowed" ? "Permita o uso do microfone para praticar."
+          : "Não consegui ouvir. Tente de novo.",
+        busy: false,
+      }),
+      onEnd: () => { s0.practiceRec = null; setPron((p) => (p ? { ...p, busy: false } : p)); },
+    });
+  };
 
-  // Interstício antes do primeiro erro revisitado: "vamos corrigir o que você errou"
-  const firstReviewIdx = session.exercises.findIndex((e) => e.isReview);
-  const showReviewIntro = !!session.reviewing && firstReviewIdx === session.index && !session.checked && introSeen !== session;
-
-  // Tradução mostrada no acerto, como no alvo visual (sem repetir o próprio enunciado)
-  const subtitle = ok && ex.type !== "translate-en-pt" && ex.sentence && ex.sentence.pt ? ex.sentence.pt : null;
+  const progress = (session.index + (checked && ok ? 1 : 0)) / Math.max(1, session.exercises.length);
+  const lost = fb && !ok && !session.practice ? session.index : null;
+  const data = footerFeedback(ex, session);
+  const footerFb = fb && data ? {
+    ok,
+    praise: data.praise,
+    line: pron ? pron.text : explainOpen && data.explain ? data.explain : data.line,
+    lineNode: pron || explainOpen ? null : data.lineNode,
+  } : null;
+  const secondary = footerFb && !showReviewIntro
+    ? data.explain ? { label: explainOpen ? "Ocultar explicação" : "Explique minha resposta", icon: "lightbulb", onClick: () => setExplainOpen((v) => !v) }
+      : data.pronounce ? { label: pron && pron.busy ? "Ouvindo..." : "Praticar pronúncia", icon: "mic", onClick: practicePronunciation }
+        : null
+    : null;
+  const ghost = !fb && !showReviewIntro
+    ? LISTEN_TYPES.includes(ex.type) ? { label: "Não posso ouvir agora", onClick: skipListening }
+      : ex.type === "speak" ? { label: "Não posso falar agora", onClick: skipSpeaking }
+        : null
+    : null;
+  // Na fala não há CTA até o aluno falar (ou pular pelo link)
+  const hideCta = ex.type === "speak" && !checked && !showReviewIntro;
+  const cta = hideCta ? null : { label: shownLabel || ctaLabel, onClick: primary, disabled: !showReviewIntro && !canCheck && !checked };
 
   return (
-    <div className="mx-auto flex min-h-dvh max-w-2xl flex-col px-4">
-      {/* Topo */}
-      <header className="pt-2">
-        <div className="h-6 text-center">
-          {combo && (
-            <motion.span key={session.combo} initial={{ scale: 1.25 }} animate={{ scale: 1 }}
-              className="text-sm font-extrabold uppercase tracking-[0.08em] text-gold-fg dark:text-gold">
-              Combo x{session.combo}
-            </motion.span>
-          )}
-        </div>
+    <div className="mx-auto flex min-h-dvh max-w-2xl flex-col overflow-x-clip px-4">
+      {/* Cabeçalho: X, barra (com COMBO sobreposto), corações */}
+      <header className="pt-5">
         <div className="flex items-center gap-3 pb-3">
-          <button onClick={quitLesson} aria-label="Sair da etapa" className="p-1 text-xl text-locked transition-colors hover:text-ink-soft">
-            <Icon name="close" />
+          <button type="button" onClick={quitLesson} aria-label="Sair da etapa"
+            className="-ml-2 flex h-11 w-11 shrink-0 items-center justify-center rounded-md text-disabled transition-colors hover:text-ink-soft">
+            <Icon name="close" size={24} tone="mono" />
           </button>
-          <div className="h-4 flex-1 rounded-full bg-track">
-            <motion.div layout className={`h-full overflow-hidden rounded-full ${combo ? "bg-gold" : "bg-brand-bright"}`}
-              animate={{ width: `${Math.max(progress, 4)}%` }} transition={{ type: "spring", stiffness: 160, damping: 26 }}>
-              <div className="mx-2.5 pt-1"><div className="h-1.5 rounded-full bg-white/30" /></div>
-            </motion.div>
+          <div className="relative flex-1">
+            <div className="pointer-events-none absolute inset-x-0 -top-5 flex justify-center leading-none">
+              <ComboLabel combo={showReviewIntro ? 0 : session.combo} />
+            </div>
+            <ProgressBar variant="lesson" value={progress} combo={session.combo} ariaLabel="Progresso da lição" />
           </div>
-          {session.levelUp && <span className="rounded-full bg-gold-soft px-2 py-0.5 text-xs font-extrabold text-gold-fg dark:text-gold">👑 {session.legendary ? "Lendária" : `Nível ${unitCrowns(session.lesson.unit.id) + 1}`}</span>}
-          <span className="font-display text-lg font-extrabold text-danger">{session.practice ? "💪" : <>❤️ {app.hearts}</>}</span>
+          {session.levelUp && (
+            <span className="inline-flex shrink-0 items-center gap-1 rounded-pill bg-yellow-soft px-2 py-0.5 text-caption uppercase tracking-[.8px] text-yellow-text">
+              <Icon name="crown" size={16} />
+              {session.legendary ? "Lendária" : `Nível ${unitCrowns(session.lesson.unit.id) + 1}`}
+            </span>
+          )}
+          <Hearts hearts={app.hearts} practice={!!session.practice} lost={lost} />
         </div>
+        <LessonBanner text={banner} icon="flag" onDone={() => setBanner("")} className="mb-2" />
       </header>
 
-      {/* Exercício */}
-      <div className="flex flex-1 flex-col pb-44">
-        {showReviewIntro ? (
-          <div data-interstitial className="relative flex flex-1 items-center">
-            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="relative mr-24 flex-1">
-              <div className="relative rounded-2xl border-2 border-line bg-card px-5 py-4 text-lg font-bold leading-snug">
-                Vamos corrigir os exercícios que você errou!
-                <span aria-hidden className="absolute -right-[9px] top-1/2 h-3.5 w-3.5 -translate-y-1/2 rotate-45 border-r-2 border-t-2 border-line bg-card" />
-              </div>
-            </motion.div>
-            <motion.div initial={{ x: 90 }} animate={{ x: 0 }} transition={{ type: "spring", stiffness: 160, damping: 18 }}
-              className="absolute -right-10 top-1/2 -translate-y-1/2 rotate-[-14deg]">
-              <CharFace ch={session.narrator} className="h-32 w-32 border-2 border-line text-6xl" />
-            </motion.div>
-          </div>
-        ) : (
-          <AnimatePresence mode="wait">
-            <motion.div key={session.index + ":" + ex.type}
-              initial={{ opacity: 0, x: 32 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }}
-              transition={{ duration: 0.18, ease: "easeOut" }}>
-              {ex.isReview ? (
-                <div className="mb-3 flex items-center gap-2 text-[13px] font-extrabold uppercase tracking-[0.1em] text-[#ff9600]">
-                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#ff9600] text-sm font-black text-white">↻</span>
-                  Corrija o erro de antes
-                </div>
-              ) : ex.newWord ? (
-                <div className="mb-3 flex items-center gap-2 text-[13px] font-extrabold uppercase tracking-[0.1em] text-sky">
-                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-sky text-sm font-black text-white">✦</span>
-                  Nova palavra
-                </div>
-              ) : null}
-              <ExerciseView ex={ex} />
-              {LISTEN_TYPES.includes(ex.type) && !session.checked && (
-                <div className="mt-10 text-center">
-                  <button onClick={skipListening} className="text-sm font-extrabold uppercase tracking-[0.14em] text-locked transition-colors hover:text-ink-soft">
-                    Não posso ouvir agora
-                  </button>
-                </div>
-              )}
-            </motion.div>
-          </AnimatePresence>
-        )}
+      {/* Exercício: o que sai desliza para a esquerda enquanto o novo entra pela direita (sem frame vazio) */}
+      <div className="relative flex-1 pt-2" style={{ minHeight: minH ? `calc(${minH}px + var(--footer-h, 140px) + 24px)` : undefined, paddingBottom: "calc(var(--footer-h, 140px) + 16px)" }}>
+        <AnimatePresence mode="popLayout" initial={false}>
+          <motion.div key={exKey} ref={measure} className="w-full"
+            initial={{ x: 64, opacity: 0 }} animate={{ x: 0, opacity: 1 }}
+            exit={{ x: -48, opacity: 0, transition: { duration: DUR.state, ease: EASE.out } }}
+            transition={SPRING.settle} onAnimationComplete={() => setMinH(0)}>
+            {showReviewIntro ? (
+              <ReviewInterstitial ch={session.narrator} />
+            ) : (
+              <>
+                {ex.isReview ? <div className="mb-4"><Badge kind="review" /></div> : ex.newWord ? <div className="mb-4"><Badge kind="new-word" /></div> : null}
+                <ExerciseView ex={ex} answer={session.answer} checked={checked} fb={fb} />
+              </>
+            )}
+          </motion.div>
+        </AnimatePresence>
       </div>
 
-      {/* Rodapé */}
-      <footer className={`fixed inset-x-0 bottom-0 z-40 border-t-2 px-4 pb-[calc(16px+env(safe-area-inset-bottom))] pt-4 ${
-        fb ? "border-transparent bg-card-2 shadow-[0_-6px_24px_rgba(0,0,0,0.18)]" : "border-line bg-page"}`}>
-        <div className="mx-auto max-w-2xl">
-          {fb && (
-            <div className="mb-4 flex items-start gap-3.5">
-              <span className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-2xl text-white ${ok ? "bg-brand-bright" : "bg-danger"}`}>
-                <Icon name={ok ? "check" : "close"} />
-              </span>
-              <div className="min-w-0 flex-1">
-                {ok ? (
-                  <>
-                    <div className="font-display text-2xl font-extrabold leading-tight text-brand">{fb.praise}</div>
-                    {subtitle && <div className="mt-1 text-[15px] font-bold text-brand/80">{subtitle}</div>}
-                    {fb.comboPill && <div className="mt-1.5 inline-block rounded-full bg-gold px-2.5 py-0.5 text-xs font-extrabold text-[#5b4400]">{fb.comboPill}</div>}
-                    {fb.typo && <div className="mt-1 text-sm text-ink-soft">Atenção à ortografia: <b>{ex.correctLabel || ex.correct}</b></div>}
-                  </>
-                ) : (
-                  <>
-                    <div className="font-display text-2xl font-extrabold leading-tight text-danger dark:text-bad-fg">Incorreto</div>
-                    {ex.correct !== "__matched__" && (
-                      <>
-                        <div className="mt-1 text-[13px] font-extrabold uppercase tracking-wide text-bad-fg/80">Resposta correta:</div>
-                        <div className="text-[15px] font-bold text-ink">
-                          {diffWords(String(ex.correctLabel || ex.correct), String(session.answer || "")).map((p, i) => (
-                            <span key={i} className={p.miss ? "font-extrabold text-bad-fg" : ""}>{p.w} </span>
-                          ))}
-                        </div>
-                      </>
-                    )}
-                  </>
-                )}
-                {ex.explain && session.checked && <div className="mt-1 text-xs text-ink-soft">{ex.explain}</div>}
-              </div>
-              <FlagButton />
-            </div>
-          )}
-          <motion.button whileTap={{ y: 4, boxShadow: "0 0 0 var(--btn-shadow)" }} transition={SPRING.snap}
-            onClick={() => (showReviewIntro ? setIntroSeen(session) : check())}
-            disabled={!showReviewIntro && !canCheck && !session.checked}
-            className={`btn-3d btn-cta w-full ${fb && !ok ? "bg-danger text-danger-text" : "bg-primary text-primary-text"} disabled:bg-line disabled:text-disabled`}
-            style={{ "--btn-shadow": fb && !ok ? "var(--color-danger-shadow)" : "var(--color-primary-shadow)" }}>
-            {showReviewIntro ? "Continuar"
-              : session.checked ? (fb && !ok ? "Entendi" : "Continuar")
-              : ex.silent ? (ex.continueLabel || "Continuar") : "Verificar"}
-          </motion.button>
-        </div>
-      </footer>
+      {/* Rodapé: VERIFICAR / CONTINUAR / ENTENDI, link ghost 24 px acima, feedback por mola */}
+      <FeedbackFooter fb={footerFb} cta={cta} secondary={secondary} ghost={ghost}
+        share={data && data.share} onFlag={() => setBanner("Obrigado! Vamos revisar este exercício")} />
     </div>
   );
 }

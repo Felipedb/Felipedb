@@ -24,6 +24,10 @@ const SIZE = {
   trail: { w: 140, h: 140, img: 134, shadow: [80, 20] },
 };
 
+// Entrada do "peek" (x 120 -> 0, rotate -10 -> -4) com mola própria: sem isto, x e rotate herdavam a transição
+// do estado (respiração de 3 s em loop ou fala de 0,5 s) e o personagem ficava deslizando para sempre.
+const PEEK_SPRING = { type: "spring", stiffness: 220, damping: 14 };
+
 function useMouth(ch, talking) {
   const has = useAsset(charAsset(ch, "mouth-open.webp"));
   const [open, setOpen] = useState(false);
@@ -72,7 +76,8 @@ export default function CharacterStage({ ch, variant = "side", pose = "neutral",
         <span aria-hidden className="absolute left-1/2 -translate-x-1/2 rounded-full bg-line" style={{ width: dims.shadow[0], height: dims.shadow[1], bottom: 0 }} />
       )}
       <motion.div className="absolute inset-x-0 bottom-[6px] flex items-end justify-center" style={{ transformOrigin: "50% 100%" }}
-        initial={initial} animate={{ ...anim, ...peekAnim }} transition={trans}>
+        initial={initial} animate={{ ...anim, ...peekAnim }}
+        transition={variant === "peek" ? { ...trans, x: PEEK_SPRING, rotate: PEEK_SPRING } : trans}>
         {src ? (
           <img src={src} alt={ch ? ch.name : ""} draggable="false" decoding="async" className="object-contain object-bottom" style={{ maxHeight: dims.img, maxWidth: dims.w }} />
         ) : ch && (hasBust || ch.img) ? (

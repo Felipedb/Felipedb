@@ -1,239 +1,254 @@
-// Trilha que sobe: capítulos de baixo para cima (Capítulo 1 no pé, atual centralizado), CTA fixo de continuar
-import { useEffect, useMemo, useRef, useState } from "react";
-import { motion } from "motion/react";
+// Trilha (VISUAL_SPEC 6.1 adaptada à decisão do dono: a trilha SOBE). Capítulo 1 no pé, o caminho sobe até o card
+// "Mais capítulos em breve"; o nó atual abre centralizado. data-order continua sendo a ordem verdadeira do curso.
+// Cada capítulo é uma <section> com as variáveis da paleta (unitVars), UnitHeader sticky (mostra o capítulo em vista nos
+// dois sentidos), nós em ciclo de 8 deslocamentos, baús e personagens ao lado do caminho e o troféu dourado no fim.
+// Tocar um nó abre o NodePopover (o botão com data-popover-start inicia a etapa). Sem CTA fixo: só a pílula "Retomar",
+// pequena, quando há lição em andamento e o nó atual saiu de vista.
+import { Fragment, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import { useAppState } from "../core/useStore.js";
-import { COURSE, unitSteps, unitDone, currentLessonId, CHARACTERS, castChar, testamentOf, verseOfDay, SCENE_BY_ID, flatLessons } from "../core/content.js";
+import { state, save } from "../core/store.js";
+import { COURSE, UNIT_CAST, unitSteps, unitDone, currentLessonId, castChar, testamentOf, SCENE_BY_ID } from "../core/content.js";
 import { startLesson, startLevelUp, resumable, unitCrowns, MAX_CROWN } from "../core/session.js";
-import { state } from "../core/store.js";
-import { speak } from "../core/audio.js";
-import CharFace from "../components/CharFace.jsx";
-import Icon from "../components/Icon.jsx";
+import { unitVars } from "../core/palette.js";
 import { SPRING } from "../core/motion.js";
+import { useIsDark } from "../components/shell/useIsDark.js";
+import Hud from "../components/shell/Hud.jsx";
+import PathNode, { TrophyNode, TrailChest, TrailCharacter } from "../components/trail/PathNode.jsx";
+import NodePopover from "../components/trail/NodePopover.jsx";
+import UnitHeader from "../components/trail/UnitHeader.jsx";
+import SectionDivider from "../components/trail/SectionDivider.jsx";
+import TrailEnd, { TrailStart } from "../components/trail/TrailEnd.jsx";
+import UnitGuideSheet from "../components/trail/UnitGuideSheet.jsx";
+import Icon from "../components/Icon.jsx";
 
-function StarRow({ n }) {
-  return (
-    <span className="rounded-full border border-line bg-card px-1 text-sm leading-none shadow-sm">
-      {[1, 2, 3].map((i) => (
-        <span key={i} className={i <= n ? "text-gold" : "text-locked"}>★</span>
-      ))}
-    </span>
-  );
+// Deslocamento horizontal dos nós em ciclo de 8 posições, reiniciado a cada capítulo (5.2)
+const OFFSETS = [0, 44, 70, 44, 0, -44, -70, -44];
+const sectionOf = (ui) => (ui < 7 ? 1 : 2);
+// Quem era o nó atual quando a trilha saiu de cena: ao voltar, se mudou, esse nó acabou de ser concluído e comemora
+let lastCurrentId = null;
+
+// Decoração ao lado do caminho, no lado oposto ao deslocamento do nó: personagem nas posições 2 e 8, baú na 6 e junto ao troféu
+function decorationFor(i, n, x) {
+  if (i === 2 && n > 3) return { type: "char", k: 0, side: "left" };
+  if (i === 6 && n > 7) return { type: "chest", side: "right" };
+  if (i === 8 && n > 9) return { type: "char", k: 1, side: "left" };
+  if (i === n) return { type: "chest", side: x >= 0 ? "left" : "right" };
+  return null;
 }
 
-// Caminho tracejado ligando os nós (porta de drawTrailPath do app clássico)
-function TrailNodes({ color, children }) {
-  const ref = useRef(null);
-  const [d, setD] = useState("");
-  const [size, setSize] = useState([0, 0]);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const draw = () => {
-      const nodes = [...el.querySelectorAll("[data-node] button")];
-      const box = el.getBoundingClientRect();
-      if (nodes.length < 2 || !box.height) return;
-      const cs = nodes.map((n) => {
-        const r = n.getBoundingClientRect();
-        return { x: r.left - box.left + r.width / 2, y: r.top - box.top + r.height / 2 };
-      });
-      let path = `M ${cs[0].x} ${cs[0].y}`;
-      for (let i = 1; i < cs.length; i++) {
-        const a = cs[i - 1], b = cs[i];
-        const my = (a.y + b.y) / 2;
-        path += ` C ${a.x} ${my}, ${b.x} ${my}, ${b.x} ${b.y}`;
-      }
-      setD(path);
-      setSize([box.width, box.height]);
-    };
-    draw();
-    const ro = new ResizeObserver(draw);
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
-  return (
-    <div ref={ref} className="relative mx-auto flex max-w-sm flex-col items-center gap-4">
-      {d && (
-        <svg className="pointer-events-none absolute inset-0" viewBox={`0 0 ${size[0]} ${size[1]}`} preserveAspectRatio="none" aria-hidden="true">
-          <path d={d} fill="none" stroke={color} strokeOpacity="0.25" strokeWidth="12" strokeLinecap="round" strokeDasharray="0.1 22" />
-        </svg>
-      )}
-      {children}
-    </div>
-  );
-}
-
-function nodeFace(step, { doneStep, unlocked, isCurrent }) {
-  if (step.scene) {
-    const sc = SCENE_BY_ID[step.sceneId || step.id];
-    const ch = sc ? castChar(sc.char) : null;
-    return <CharFace ch={ch} className={`h-full w-full text-3xl ${!unlocked && !doneStep ? "opacity-40 grayscale" : ""}`} />;
-  }
-  if (step.review) return "🏆";
-  if (doneStep) return "⭐";
-  if (unlocked || isCurrent) return "📖";
-  return "🔒";
-}
-
-// Um capítulo desenhado de baixo para cima: coroa no cume, lições invertidas, banner na base
-function UnitBlock({ u, ui, currentId, orderOf }) {
+function UnitSection({ u, ui, dark, currentId, orderOf, resume, popKey, onOpenNode, onOpenTrophy, onGuide, justDone }) {
   const steps = unitSteps(u);
+  const n = steps.length;
   const done = unitDone(u);
-  const doneCount = steps.filter((s) => state.completed[s.id]).length;
-  const starsGot = steps.reduce((s, l) => s + (state.stars[l.id] || 0), 0);
+  const crowns = unitCrowns(u.id);
+  const prevUnitLast = ui === 0 ? null : unitSteps(COURSE[ui - 1]).slice(-1)[0].id;
+  const cast = (UNIT_CAST[u.id] || []).map((k) => castChar(k));
+  const vars = { ...unitVars(u.id, dark), "--node-locked-shadow": dark ? "#2b3940" : "#afafaf" };
+  const rows = steps.map((step, i) => ({ step, i, x: OFFSETS[i % 8] }));
+  rows.push({ trophy: true, i: n, x: OFFSETS[n % 8] });
+  rows.reverse(); // a trilha sobe: a última etapa fica em cima e a primeira embaixo
+  const celebrating = !!justDone && steps.some((s) => s.id === justDone);
 
-  // índice verdadeiro preservado; renderiza a última etapa em cima e a primeira embaixo
-  const rows = steps.map((step, i) => ({ step, i })).reverse();
+  const chestStatus = (key, reached) => (state.chests && state.chests[key] ? "opened" : reached ? "ready" : "locked");
+  const openChest = (key) => {
+    state.chests = state.chests || {};
+    if (state.chests[key]) return;
+    state.chests[key] = 5;
+    state.xp += 5;
+    save();
+  };
 
   return (
-    <section className="mb-8">
-      {/* Cume do capítulo: recompensa ao concluir */}
-      {done && (
-        <div className="mb-2 flex justify-center">
-          <motion.button onClick={() => startLevelUp(u)} whileTap={{ y: 4, boxShadow: "0 0 0 var(--btn-shadow)" }} transition={SPRING.snap}
-            className="btn-3d bg-yellow px-5 py-2.5 text-gold-ink" style={{ "--btn-shadow": "var(--color-yellow-shadow)" }}>
-            👑 {unitCrowns(u.id) >= MAX_CROWN ? "Lendária" : `Subir de nível (${unitCrowns(u.id)}/${MAX_CROWN})`}
-          </motion.button>
-        </div>
-      )}
-
-      <TrailNodes color={u.color}>
-        {rows.map(({ step, i }) => {
-          const prevId = i === 0 ? (ui === 0 ? null : unitSteps(COURSE[ui - 1]).slice(-1)[0].id) : steps[i - 1].id;
-          const unlocked = !prevId || !!state.completed[prevId];
+    <section data-unit={u.id} style={vars} className="relative mb-8">
+      <UnitHeader section={sectionOf(ui)} chapter={ui + 1} title={u.title} done={done} onGuide={() => onGuide(u, ui)} />
+      <div className="flex flex-col gap-8" data-trail-col>
+        {rows.map((row) => {
+          const deco = decorationFor(row.i, n, row.x);
+          let decoEl = null;
+          if (deco && deco.type === "char" && cast[deco.k]) decoEl = <TrailCharacter ch={cast[deco.k]} side={deco.side} />;
+          if (deco && deco.type === "chest") {
+            const key = `${u.id}:${row.i}`;
+            const reached = row.trophy ? done : !!state.completed[steps[row.i].id];
+            decoEl = <TrailChest status={chestStatus(key, reached)} side={deco.side} onOpen={() => openChest(key)} />;
+          }
+          if (row.trophy) {
+            const label = done
+              ? (crowns >= MAX_CROWN ? `Troféu lendário do capítulo ${ui + 1}` : `Troféu do capítulo ${ui + 1}: ${crowns} de ${MAX_CROWN} coroas`)
+              : `Troféu do capítulo ${ui + 1}, bloqueado`;
+            return (
+              <div key="trophy" className="relative flex justify-center">
+                {decoEl}
+                <TrophyNode x={row.x} done={done} crowns={crowns} max={MAX_CROWN} label={label} onOpen={(el) => onOpenTrophy(el, u, ui)} />
+              </div>
+            );
+          }
+          const { step, i } = row;
           const doneStep = !!state.completed[step.id];
+          const prevId = i === 0 ? prevUnitLast : steps[i - 1].id;
+          const unlocked = !prevId || !!state.completed[prevId];
           const isCurrent = step.id === currentId;
-          const x = Math.round(Math.sin(i * 1.15) * 64);
+          const status = doneStep ? (step.scene ? "scene-done" : "done") : (isCurrent || unlocked) ? "available" : "locked";
+          const sc = step.scene ? SCENE_BY_ID[step.sceneId || step.id] : null;
+          const ch = sc ? castChar(sc.char) : null;
+          const icon = step.scene ? "speech" : step.review ? "book-open" : "star";
+          const stars = state.stars[step.id] || 0;
+          const isResume = !!(resume && resume.lesson.id === step.id);
+          const kind = step.scene ? "Cena" : step.review ? "Revisão" : "Lição";
+          const tail = doneStep ? `, concluída${step.scene ? "" : `, ${stars} de 3 estrelas`}` : isCurrent ? ", atual" : status === "locked" ? ", bloqueada" : "";
           return (
-            <motion.div key={step.id} className="relative z-[1]" style={{ x }} data-node={step.id} data-order={orderOf[step.id]} data-current={isCurrent || undefined}
-              initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-40px" }}
-              transition={{ type: "spring", stiffness: 220, damping: 24 }}>
-              {isCurrent && (
-                <span className="absolute -top-9 left-1/2 -translate-x-1/2 animate-bounce whitespace-nowrap rounded-xl border-2 border-line bg-card px-3 py-1 text-xs font-extrabold uppercase text-brand shadow-sm">
-                  {resumable() && resumable().lesson && resumable().lesson.id === step.id ? "Retomar" : "Começar"}
-                </span>
-              )}
-              <button onClick={() => startLesson(step.id)} disabled={!unlocked && !doneStep} aria-label={step.title} title={step.title}
-                className={`flex h-[72px] w-[72px] items-center justify-center overflow-hidden rounded-full border-b-4 text-3xl transition-transform active:translate-y-0.5 active:scale-95 ${
-                  doneStep ? "border-gold-fg/40 bg-gold" : isCurrent ? "border-brand-shadow bg-brand-bright ring-4 ring-brand-soft" : unlocked ? "border-line bg-card" : "border-line bg-track text-locked"
-                }`}>
-                {nodeFace(step, { doneStep, unlocked, isCurrent })}
-              </button>
-              {step.scene && <span className="absolute -right-1 -top-1 rounded-full bg-sky px-1.5 text-xs text-white shadow">💬</span>}
-              {doneStep && !step.scene && !step.review && (
-                <span className="absolute -bottom-2 left-1/2 -translate-x-1/2"><StarRow n={state.stars[step.id] || 0} /></span>
-              )}
-            </motion.div>
+            <div key={step.id} className="relative flex justify-center">
+              {decoEl}
+              <PathNode step={step} order={orderOf[step.id]} status={status} isCurrent={isCurrent} x={row.x} icon={icon} ch={ch}
+                label={`${kind} ${i + 1} de ${n}: ${step.title}${tail}`}
+                balloon={isCurrent ? (isResume ? "Retomar" : "Começar") : null} balloonHidden={popKey === step.id}
+                ringSegments={isResume ? Math.max(1, Math.ceil(resume.exercises.length / 5)) : step.scene ? 2 : 3}
+                ringValue={isResume ? resume.index / resume.exercises.length : 0}
+                celebrate={justDone === step.id} delayed={isCurrent && celebrating} stars={stars}
+                onOpen={(el) => onOpenNode(el, { step, i, n, u, ui, status, stars, isResume })} />
+            </div>
           );
         })}
-      </TrailNodes>
-
-      {/* Banner na base: porta de entrada do capítulo, já que se sobe */}
-      <div className="mt-4 rounded-2xl p-4 text-white shadow-md" style={{ background: u.color }}>
-        <div className="text-xs font-bold uppercase tracking-wide opacity-90">
-          Capítulo {ui + 1} · {doneCount}/{steps.length} etapas{done ? " · concluído" : ""}
-        </div>
-        <h2 className="font-display text-xl font-extrabold">{u.icon} {u.title}</h2>
-        <div className="text-sm opacity-90">{u.subtitle} · ⭐ {starsGot}/{steps.length * 3}</div>
       </div>
     </section>
   );
 }
 
 export default function Home() {
-  const app = useAppState();
+  useAppState();
+  const dark = useIsDark();
   const currentId = currentLessonId();
-  const r = resumable();
-  const vd = useMemo(() => verseOfDay(), []);
-  const doneUnits = COURSE.filter(unitDone).length;
-  const ctaLesson = r ? r.lesson : flatLessons().find((l) => l.id === currentId);
+  const resume = resumable();
   const colRef = useRef(null);
-  // Índice verdadeiro (ordem do curso) de cada etapa, para navegação/testes independente da direção visual
+  const [pop, setPop] = useState(null);
+  const [guide, setGuide] = useState({ open: false, u: null, ui: 0 });
+  const [showResume, setShowResume] = useState(false);
+  // Nó concluído desde a última visita (volta do Result): comemora uma vez
+  const justDone = useMemo(() => (lastCurrentId && lastCurrentId !== currentId && state.completed[lastCurrentId] ? lastCurrentId : null), []); // eslint-disable-line
+  useEffect(() => () => { lastCurrentId = currentLessonId(); }, []);
+
+  // Ordem verdadeira do curso (data-order), independente da direção visual da trilha
   const orderOf = useMemo(() => {
-    const m = {}; let n = 0;
-    COURSE.forEach((u) => unitSteps(u).forEach((s) => { m[s.id] = n++; }));
+    const m = {};
+    let k = 0;
+    COURSE.forEach((u) => unitSteps(u).forEach((s) => { m[s.id] = k++; }));
     return m;
   }, []);
 
-  // Abre no ponto em que você parou, como o Duolingo
-  useEffect(() => {
+  // Abre com o nó atual centralizado na tela (decisão do dono), sem animação
+  useLayoutEffect(() => {
     const el = colRef.current && colRef.current.querySelector("[data-current]");
-    if (el) requestAnimationFrame(() => el.scrollIntoView({ block: "center" }));
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    window.scrollTo({ top: Math.max(0, window.scrollY + r.top + r.height / 2 - window.innerHeight / 2), behavior: "auto" });
   }, [currentId]);
 
-  // Capítulos de cima para baixo na tela = do mais avançado ao Capítulo 1 (a trilha sobe)
-  const unitsRev = COURSE.map((u, ui) => ({ u, ui })).reverse();
+  // Pílula "Retomar": só com lição em andamento e com o nó atual fora da tela
+  const resumeId = resume ? resume.lesson.id : null;
+  useEffect(() => {
+    if (!resumeId) { setShowResume(false); return undefined; }
+    const el = colRef.current && colRef.current.querySelector("[data-current]");
+    if (!el || typeof IntersectionObserver === "undefined") return undefined;
+    const io = new IntersectionObserver(([e]) => setShowResume(!e.isIntersecting), { threshold: 0.1 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [resumeId, currentId]);
+
+  const openNode = (anchor, { step, u, status, stars, isResume }) => {
+    const vars = unitVars(u.id, dark);
+    const key = step.id;
+    const name = step.scene ? `Cena: ${step.title}` : step.title;
+    if (status === "locked") {
+      setPop({ key, anchor, variant: "locked", title: name, subtitle: "Conclua as etapas anteriores para desbloquear", vars });
+      return;
+    }
+    const lessons = unitSteps(u).filter((s) => !s.scene);
+    const li = lessons.findIndex((s) => s.id === step.id);
+    const title = step.scene ? name : step.review ? `Revisão · ${u.title}` : `Lição ${li + 1} de ${lessons.length} · ${step.title}`;
+    const done = status === "done" || status === "scene-done";
+    const vocab = (step.vocab || []).slice(0, 5).map((v) => v.en).join(", ");
+    const subtitle = done ? (step.scene ? "Cena concluída" : `${stars} de 3 estrelas`) : step.review ? "Revisão de todo o capítulo" : vocab ? `Vocabulário: ${vocab}` : u.subtitle;
+    const cta = done ? "Praticar +5 XP" : isResume ? `Retomar ${Math.min(resume.index + 1, resume.exercises.length)}/${resume.exercises.length}` : "Começar +10 XP";
+    setPop({ key, anchor, variant: "unit", title, subtitle, stars: done && !step.scene ? stars : null, cta, vars, onStart: () => { setPop(null); startLesson(step.id); } });
+  };
+
+  const openTrophy = (anchor, u, ui) => {
+    const key = `${u.id}:trophy`;
+    const vars = unitVars(u.id, dark);
+    if (!unitDone(u)) {
+      setPop({ key, anchor, variant: "locked", title: `Troféu do capítulo ${ui + 1}`, subtitle: "Conclua todas as etapas do capítulo para desbloquear o troféu", vars });
+      return;
+    }
+    const crowns = unitCrowns(u.id);
+    const legendary = crowns >= MAX_CROWN;
+    setPop({
+      key, anchor, variant: "unit",
+      title: legendary ? "Troféu lendário" : "Troféu do capítulo",
+      subtitle: legendary ? `${u.title} · nível lendário alcançado` : `${u.title} · ${crowns} de ${MAX_CROWN} coroas`,
+      cta: legendary ? "Praticar de novo" : `Subir de nível · ${crowns + 1}/${MAX_CROWN}`,
+      vars: { ...vars, "--unit-color": "#ffc800", "--unit-shadow": "#e5a600", "--unit-ink": "#5b4400", "--unit-text-light": "#8a6200" },
+      onStart: () => { setPop(null); startLevelUp(u); },
+    });
+  };
+
+  const closeGuide = () => setGuide((g) => ({ ...g, open: false }));
+  const guideCta = useMemo(() => {
+    const u = guide.u;
+    if (!u) return null;
+    const steps = unitSteps(u);
+    const cur = steps.find((s) => s.id === currentId);
+    if (cur) return { label: steps.some((s) => state.completed[s.id]) ? "Continuar capítulo" : "Começar capítulo", onClick: () => { closeGuide(); startLesson(cur.id); } };
+    if (unitDone(u)) return { label: unitCrowns(u.id) >= MAX_CROWN ? "Praticar capítulo" : "Subir de nível", onClick: () => { closeGuide(); startLevelUp(u); } };
+    return { label: "Capítulo bloqueado", disabled: true };
+  }, [guide.u, currentId]); // eslint-disable-line
+
+  const units = COURSE.map((u, ui) => ({ u, ui }));
+  const rev = [...units].reverse();
+  const sectionUnits = (sec) => units.filter(({ ui }) => sectionOf(ui) === sec).map(({ u, ui }) => {
+    const st = unitSteps(u);
+    return { u, ui, total: st.length, done: st.filter((s) => state.completed[s.id]).length };
+  });
+  const scrollToUnit = (u) => {
+    const el = colRef.current && colRef.current.querySelector(`[data-unit="${u.id}"]`);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   return (
-    <div className="lg:flex lg:gap-6">
-      <div ref={colRef} className="min-w-0 flex-1 px-4 pt-2 lg:px-0">
-        {/* HUD */}
-        <header className="sticky top-0 z-30 -mx-4 mb-3 flex items-center justify-between gap-3 border-b-2 border-line bg-page/95 px-4 py-2 backdrop-blur lg:mx-0 lg:rounded-2xl lg:border-2">
-          <span className="font-display text-lg font-extrabold text-brand lg:hidden">BíbliaLearn</span>
-          <div className="flex items-center gap-3 font-display font-bold">
-            <span title="Ofensiva">🔥 {app.streak}</span>
-            <span className="text-gold-fg" title="XP">⚡ {app.xp}</span>
-            <span className="text-danger" title="Corações">❤️ {app.hearts}</span>
-          </div>
-        </header>
-
-        {/* Topo da trilha: o que ainda vem pela frente */}
-        <div className="mb-6 rounded-2xl border-2 border-dashed border-line py-5 text-center">
-          <div className="text-2xl">🏁</div>
-          <div className="font-display font-extrabold">Continua em breve</div>
-          <div className="text-sm text-ink-soft">Novos capítulos a caminho</div>
-        </div>
-
-        {unitsRev.map(({ u, ui }, k) => {
-          const next = unitsRev[k + 1];
+    <div ref={colRef} className="relative mx-auto w-full max-w-[600px]">
+      <Hud className="lg:hidden" />
+      <div className="px-4 pt-4 lg:px-0 lg:pt-6">
+        <TrailEnd />
+        {rev.map(({ u, ui }, k) => {
+          const below = rev[k + 1];
           const t = testamentOf(u, ui);
-          const showSep = !next || testamentOf(next.u, next.ui) !== t;
+          const showDivider = !below || testamentOf(below.u, below.ui) !== t;
           return (
-            <div key={u.id}>
-              <UnitBlock u={u} ui={ui} currentId={currentId} orderOf={orderOf} />
-              {showSep && (
-                <div className="my-6 flex items-center gap-3 text-ink-soft">
-                  <span className="h-0.5 flex-1 bg-line" />
-                  <span className="font-display text-sm font-extrabold uppercase tracking-wide">{t}</span>
-                  <span className="h-0.5 flex-1 bg-line" />
-                </div>
-              )}
-            </div>
+            <Fragment key={u.id}>
+              <UnitSection u={u} ui={ui} dark={dark} currentId={currentId} orderOf={orderOf} resume={resume} popKey={pop ? pop.key : null}
+                onOpenNode={openNode} onOpenTrophy={openTrophy} onGuide={(uu, uui) => setGuide({ open: true, u: uu, ui: uui })} justDone={justDone} />
+              {showDivider && <SectionDivider n={sectionOf(ui)} name={t} units={sectionUnits(sectionOf(ui))} onOpenChapter={scrollToUnit} />}
+            </Fragment>
           );
         })}
-
-        {/* Pé da trilha: onde a jornada começa */}
-        <div className="mb-2 flex flex-col items-center gap-1 pb-24 text-center">
-          <div className="flex h-16 w-16 items-center justify-center rounded-full border-b-4 border-brand-shadow bg-brand-bright text-3xl shadow-md">🚩</div>
-          <div className="font-display font-extrabold">Comece aqui e suba</div>
-        </div>
+        <TrailStart title={COURSE[0] && COURSE[0].title} />
       </div>
 
-      {/* Rail direito (desktop) */}
-      <aside className="hidden w-72 shrink-0 pt-2 lg:block">
-        <div className="card p-4">
-          <h3 className="font-display font-extrabold">📈 Progresso</h3>
-          <div className="mt-2 h-3 overflow-hidden rounded-full bg-track">
-            <div className="h-full rounded-full bg-brand-bright transition-all" style={{ width: `${(doneUnits / COURSE.length) * 100}%` }} />
-          </div>
-          <p className="mt-1 text-sm text-ink-soft">{doneUnits} de {COURSE.length} capítulos concluídos</p>
-        </div>
-        <div className="card mt-4 p-4">
-          <h3 className="font-display font-extrabold">📖 Versículo do dia</h3>
-          <button className="mt-2 text-left text-sm italic text-ink-soft transition-colors hover:text-ink" onClick={() => speak(vd.text, { char: CHARACTERS.jesus })}>
-            “{vd.text}” <b className="not-italic">— {vd.ref}</b> <Icon name="speaker" />
-          </button>
-        </div>
-      </aside>
+      <NodePopover open={pop} onClose={() => setPop(null)} />
+      <UnitGuideSheet open={guide.open} unit={guide.u} chapter={guide.ui + 1} section={sectionOf(guide.ui)} cta={guideCta} onClose={closeGuide} />
 
-      {ctaLesson && (
-        <motion.button onClick={() => startLesson(ctaLesson.id)} whileTap={{ y: 4, boxShadow: "0 0 0 var(--btn-shadow)" }} transition={SPRING.snap}
-          className="btn-3d fixed inset-x-4 bottom-[calc(76px+env(safe-area-inset-bottom))] z-40 mx-auto max-w-md bg-primary px-5 py-3.5 text-primary-text lg:bottom-5"
-          style={{ "--btn-shadow": "var(--color-primary-shadow)" }}>
-          {r
-            ? `▶ Retomar: ${ctaLesson.title} (${Math.min(r.index + 1, r.exercises.length)}/${r.exercises.length})`
-            : `▶ ${ctaLesson.scene ? "Cena" : "Continuar"}: ${ctaLesson.title} (+10 XP)`}
-        </motion.button>
-      )}
+      <AnimatePresence>
+        {showResume && resume && (
+          <motion.button type="button" onClick={() => startLesson(resume.lesson.id)}
+            className="fixed bottom-[calc(74px+env(safe-area-inset-bottom))] right-4 z-40 flex h-12 items-center gap-2 rounded-pill bg-primary pl-4 pr-5 text-label uppercase tracking-[1px] text-primary-text lg:bottom-6"
+            style={{ boxShadow: "0 4px 0 var(--color-primary-shadow)" }}
+            initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8, transition: { duration: 0.15 } }}
+            transition={SPRING.footer} whileTap={{ y: 4, boxShadow: "0 0 0 var(--color-primary-shadow)" }}
+            aria-label={`Retomar ${resume.lesson.title}, exercício ${Math.min(resume.index + 1, resume.exercises.length)} de ${resume.exercises.length}`}>
+            <Icon name="play" size={20} tone="mono" />
+            Retomar · {Math.min(resume.index + 1, resume.exercises.length)}/{resume.exercises.length}
+          </motion.button>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
