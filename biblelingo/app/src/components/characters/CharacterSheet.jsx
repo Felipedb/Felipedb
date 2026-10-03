@@ -8,6 +8,7 @@ import { speak } from "../../core/audio.js";
 import { sfx } from "../../core/events.js";
 import CharFace from "../CharFace.jsx";
 import Icon from "../Icon.jsx";
+import { SPRING } from "../../core/motion.js";
 
 const LESSON_ICONS = ["🕊️", "🛡️", "🙏", "🌟", "❤️", "📖"];
 
@@ -83,11 +84,11 @@ export default function CharacterSheet({ charKey, onClose }) {
               🔊
             </button>
             {unit ? (
-              <button onClick={start} className="btn-3d flex-1 bg-brand-bright py-3 text-white">Iniciar lições</button>
+              <motion.button onClick={start} whileTap={{ y: 4, boxShadow: "0 0 0 var(--btn-shadow)" }} transition={SPRING.snap} className="btn-3d flex-1 bg-primary py-3 text-primary-text" style={{ "--btn-shadow": "var(--color-primary-shadow)" }}>Iniciar lições</motion.button>
             ) : (
-              <button onClick={practice} className="btn-3d flex-1 bg-sky py-3 text-white" style={{ "--btn-shadow": "#1899d6" }}>
+              <motion.button onClick={practice} whileTap={{ y: 4, boxShadow: "0 0 0 var(--btn-shadow)" }} transition={SPRING.snap} className="btn-3d flex-1 bg-accent py-3 text-accent-text" style={{ "--btn-shadow": "var(--color-accent-shadow)" }}>
                 Praticar com {firstName}
-              </button>
+              </motion.button>
             )}
           </div>
           <button onClick={() => { sfx("tap"); onClose(); }} className="mt-3 w-full rounded-2xl py-2.5 font-display font-bold text-ink-soft hover:bg-hover">

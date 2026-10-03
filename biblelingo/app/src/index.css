@@ -154,6 +154,15 @@
 .wave-bar { transform-origin: center; border-radius: 999px; }
 .wave-playing .wave-bar { animation: wavebar .9s ease-in-out infinite; }
 
+/* Alto-falante tocando (5.16): os dois arcos acendem em sequência a cada 180 ms, nunca animate-pulse */
+@keyframes arc1 { 0%, 33% { opacity: 1; } 34%, 100% { opacity: .2; } }
+@keyframes arc2 { 0%, 33% { opacity: .2; } 34%, 66% { opacity: 1; } 67%, 100% { opacity: .2; } }
+.speaker-playing .arc-1 { animation: arc1 .54s linear infinite; }
+.speaker-playing .arc-2 { animation: arc2 .54s linear infinite; }
+
+/* Halo do nó atual (5.2): pseudo-elemento por transform, nunca box-shadow animado */
+.node-halo::after { content: ""; position: absolute; inset: -8px; border-radius: 999px; background: var(--unit-color, #58cc02); z-index: -1; animation: var(--animate-halo); }
+
 /* Tremor curto (classe legada usada por Choice e Match; os componentes novos usam SHAKE do Motion) */
 @keyframes shake {
   0%, 100% { transform: translateX(0); }

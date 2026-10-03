@@ -8,6 +8,7 @@ import { state } from "../core/store.js";
 import { speak } from "../core/audio.js";
 import CharFace from "../components/CharFace.jsx";
 import Icon from "../components/Icon.jsx";
+import { SPRING } from "../core/motion.js";
 
 function StarRow({ n }) {
   return (
@@ -88,9 +89,10 @@ function UnitBlock({ u, ui, currentId, orderOf }) {
       {/* Cume do capítulo: recompensa ao concluir */}
       {done && (
         <div className="mb-2 flex justify-center">
-          <button onClick={() => startLevelUp(u)} className="btn-3d bg-gold px-5 py-2.5 text-gold-fg" style={{ "--btn-shadow": "#c79104" }}>
+          <motion.button onClick={() => startLevelUp(u)} whileTap={{ y: 4, boxShadow: "0 0 0 var(--btn-shadow)" }} transition={SPRING.snap}
+            className="btn-3d bg-yellow px-5 py-2.5 text-gold-ink" style={{ "--btn-shadow": "var(--color-yellow-shadow)" }}>
             👑 {unitCrowns(u.id) >= MAX_CROWN ? "Lendária" : `Subir de nível (${unitCrowns(u.id)}/${MAX_CROWN})`}
-          </button>
+          </motion.button>
         </div>
       )}
 
@@ -224,12 +226,13 @@ export default function Home() {
       </aside>
 
       {ctaLesson && (
-        <button onClick={() => startLesson(ctaLesson.id)}
-          className="btn-3d fixed inset-x-4 bottom-[calc(76px+env(safe-area-inset-bottom))] z-40 mx-auto max-w-md bg-brand-bright px-5 py-3.5 text-white lg:bottom-5">
+        <motion.button onClick={() => startLesson(ctaLesson.id)} whileTap={{ y: 4, boxShadow: "0 0 0 var(--btn-shadow)" }} transition={SPRING.snap}
+          className="btn-3d fixed inset-x-4 bottom-[calc(76px+env(safe-area-inset-bottom))] z-40 mx-auto max-w-md bg-primary px-5 py-3.5 text-primary-text lg:bottom-5"
+          style={{ "--btn-shadow": "var(--color-primary-shadow)" }}>
           {r
             ? `▶ Retomar: ${ctaLesson.title} (${Math.min(r.index + 1, r.exercises.length)}/${r.exercises.length})`
             : `▶ ${ctaLesson.scene ? "Cena" : "Continuar"}: ${ctaLesson.title} (+10 XP)`}
-        </button>
+        </motion.button>
       )}
     </div>
   );

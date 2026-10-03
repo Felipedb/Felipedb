@@ -1,7 +1,36 @@
 // Driver compartilhado dos testes de ponta a ponta: lê a sessão exposta em DEV (window.__session)
-// e responde o exercício atual (certo ou, de propósito, errado). Usado por e2e-course.mjs e shots-all.mjs.
+// e responde o exercício atual (certo ou, de propósito, errado). Usado por e2e-course.mjs, e2e-lesson.mjs,
+// shots-visual.mjs e shots-all.mjs.
+// Modo tolerante (VISUAL_SPEC 10.2): abre o nó pelo popover se [data-popover-start] existir (senão direto);
+// usa [data-answer-input] se existir (senão input[type="text"]); no resultado repete "Continuar" enquanto houver [data-ceremony].
 export const LAUNCH_ARGS = ["--no-sandbox", "--autoplay-policy=no-user-gesture-required", "--mute-audio"];
 export const PHONE = { width: 390, height: 844 };
+
+export const sessionStarted = (page) => page.evaluate(() => !!(window.__session && window.__session.exercises));
+
+// Abre uma etapa da trilha: clica [data-node="<id>"] button e, se aparecer o popover do nó, clica [data-popover-start].
+// waitSession=false serve aos casos em que a etapa não abre (ex.: modal de corações).
+export async function openNode(page, id, { timeout = 10000, waitSession = true } = {}) {
+  await page.waitForSelector(`[data-node="${id}"] button`, { timeout });
+  await page.click(`[data-node="${id}"] button`);
+  for (let i = 0; i < 15; i++) {
+    if (waitSession && await sessionStarted(page)) return "direct";
+    const pop = await page.$("[data-popover-start]");
+    if (pop) { await pop.click(); if (!waitSession) return "popover"; break; }
+    if (!waitSession && i >= 6) return "direct";
+    await page.waitForTimeout(100);
+  }
+  if (waitSession) await page.waitForFunction(() => window.__session && window.__session.exercises, null, { timeout });
+  return "popover";
+}
+
+// Nós de cena (ids começam com "c-") cujo botão está habilitado, na ordem da trilha
+export async function sceneNodeIds(page) {
+  return page.evaluate(() => [...document.querySelectorAll('[data-node^="c-"]')]
+    .filter((n) => { const b = n.querySelector("button"); return b && !b.disabled; })
+    .sort((a, b) => (+a.dataset.order) - (+b.dataset.order))
+    .map((n) => n.dataset.node));
+}
 
 export async function readState(page) {
   return page.evaluate(() => {
@@ -20,7 +49,24 @@ export async function readState(page) {
 
 export const clickFooter = (page) => page.click("footer button.btn-3d");
 
-const CHOICE_FALLBACK = true;
+// Campo de resposta: [data-answer-input] (textarea ou lacuna) com reserva em input[type="text"]
+export const ANSWER_INPUT = '[data-answer-input]:not([disabled]), input[type="text"]:not([disabled])';
+export async function fillAnswer(page, text, { timeout = 5000 } = {}) {
+  await page.waitForSelector(ANSWER_INPUT, { timeout });
+  const el = await page.$('[data-answer-input]:not([disabled])') || await page.$('input[type="text"]:not([disabled])');
+  await el.fill(String(text));
+}
+
+// Resultado -> trilha: clica "Continuar" e repete enquanto houver uma cerimônia pós-lição ([data-ceremony])
+export async function finishResult(page, { timeout = 10000, max = 8 } = {}) {
+  for (let i = 0; i < max; i++) {
+    await page.getByRole("button", { name: "Continuar" }).last().click();
+    await page.waitForSelector("[data-node], [data-ceremony]", { timeout });
+    await page.waitForTimeout(250);
+    if (!(await page.$("[data-ceremony]"))) break;
+  }
+  await page.waitForSelector("[data-node]", { timeout });
+}
 
 // Responde o exercício atual. wrong=true tenta errar (quando o formato permite); devolve o que fez.
 export async function answer(page, st, { wrong = false } = {}) {
@@ -40,8 +86,7 @@ export async function answer(page, st, { wrong = false } = {}) {
     return "skip-speak";
   }
   if (["type", "listen-type", "complete-translation", "scene-gap"].includes(st.type)) {
-    await page.waitForSelector('input[type="text"]:not([disabled])', { timeout: 5000 });
-    await page.fill('input[type="text"]', wrong ? "zzz" : String(st.correct));
+    await fillAnswer(page, wrong ? "zzz" : String(st.correct));
     await clickFooter(page);
     await page.waitForTimeout(150);
     return wrong ? "typed-wrong" : "typed";
@@ -86,10 +131,7 @@ export async function answer(page, st, { wrong = false } = {}) {
     }, { correct: st.correct, index: st.index, wrong });
     if (!picked) await page.waitForTimeout(150);
   }
-  if (!picked) {
-    if (!CHOICE_FALLBACK) throw new Error(`opção "${st.correct}" ausente (${st.type})`);
-    throw new Error(`opção "${st.correct}" ausente (${st.type})`);
-  }
+  if (!picked) throw new Error(`opção "${st.correct}" ausente (${st.type})`);
   await page.waitForTimeout(60);
   await clickFooter(page);
   await page.waitForTimeout(150);

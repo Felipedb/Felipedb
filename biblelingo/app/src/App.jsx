@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, lazy, Suspense } from "react";
 import confettiFx from "canvas-confetti";
 import { useAppState } from "./core/useStore.js";
 import { useSessionVersion } from "./core/useSession.js";
@@ -19,6 +19,9 @@ import Profile from "./screens/Profile.jsx";
 import HeartsModal from "./components/HeartsModal.jsx";
 import Toast from "./components/Toast.jsx";
 import Icon from "./components/Icon.jsx";
+// Galeria dos componentes base, só em desenvolvimento (?gallery=1)
+const Gallery = import.meta.env.DEV ? lazy(() => import("./dev/Gallery.jsx")) : null;
+const SHOW_GALLERY = import.meta.env.DEV && typeof location !== "undefined" && /[?&]gallery/.test(location.search);
 
 const NAV = [
   { id: "home", label: "Aprender", icon: "home" },
@@ -101,7 +104,8 @@ export default function App() {
       )}
 
       <main className={`min-h-dvh flex-1 ${showTabs ? "pb-24 lg:pb-8" : ""}`}>
-        {screen === "home" && <Home go={go} />}
+        {SHOW_GALLERY && Gallery ? <Suspense fallback={null}><Gallery /></Suspense> : null}
+        {!SHOW_GALLERY && screen === "home" && <Home go={go} />}
         {screen === "lesson" && session && <Lesson />}
         {screen === "lesson" && !session && <Home go={go} />}
         {screen === "result" && <Result />}

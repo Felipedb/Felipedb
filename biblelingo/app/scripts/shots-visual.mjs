@@ -1,14 +1,16 @@
 // Joga u1l1 no tema escuro tirando screenshots dos estados visuais novos.
 // Uso: node scripts/shots-visual.mjs [urlDev] [outDir]
+// Modo tolerante (VISUAL_SPEC 10.2): popover do nó, [data-answer-input] e cerimônias pós-lição são opcionais.
 import { chromium } from "playwright";
+import { mkdirSync } from "node:fs";
+import { LAUNCH_ARGS, PHONE, openNode, fillAnswer } from "./lib/driver.mjs";
 
 const URL = process.argv[2] || "http://localhost:5179/";
 const OUT = process.argv[3] || "/tmp/shots";
-import { mkdirSync } from "node:fs";
 mkdirSync(OUT, { recursive: true });
 
-const browser = await chromium.launch({ args: ["--no-sandbox", "--autoplay-policy=no-user-gesture-required", "--mute-audio"] });
-const page = await browser.newPage({ viewport: { width: 390, height: 844 }, colorScheme: "dark" });
+const browser = await chromium.launch({ args: LAUNCH_ARGS });
+const page = await browser.newPage({ viewport: PHONE, colorScheme: "dark" });
 const shots = new Set();
 const shot = async (name) => {
   if (shots.has(name)) return;
@@ -20,8 +22,7 @@ const shot = async (name) => {
 
 await page.goto(URL);
 await page.waitForSelector('[data-node="u1l1"] button');
-await page.click('[data-node="u1l1"] button');
-await page.waitForFunction(() => window.__session && window.__session.exercises, null, { timeout: 10000 });
+await openNode(page, "u1l1");
 
 const clickFooter = () => page.click("footer button.btn-3d");
 let wrongDone = false;
@@ -73,7 +74,7 @@ for (let step = 0; step < 200; step++) {
     continue;
   }
   if (["type", "listen-type", "complete-translation", "scene-gap"].includes(st.type)) {
-    await page.fill('input[type="text"]', String(st.correct));
+    await fillAnswer(page, String(st.correct));
     await clickFooter();
     await shot("footer-ok");
     await page.waitForTimeout(150);
@@ -111,6 +112,15 @@ for (let step = 0; step < 200; step++) {
   if (!wrongDone && !st.isReview) { wrongDone = true; await shot("footer-wrong"); }
   else await shot("footer-ok");
   await page.waitForTimeout(150);
+}
+
+// Cerimônias pós-lição (quando existirem): uma captura por tela
+for (let i = 0; i < 6; i++) {
+  await page.getByRole("button", { name: "Continuar" }).last().click().catch(() => {});
+  await page.waitForSelector("[data-node], [data-ceremony]", { timeout: 10000 }).catch(() => {});
+  const cer = await page.$("[data-ceremony]");
+  if (!cer) break;
+  await shot(`ceremony-${await cer.getAttribute("data-ceremony")}`);
 }
 
 console.log("VISUAL OK:", [...shots].join(", "));

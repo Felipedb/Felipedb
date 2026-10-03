@@ -1,21 +1,19 @@
 // Teste de ponta a ponta: joga a lição u1l1 inteira respondendo certo via DOM
 // até a tela de resultado. Requer o servidor dev do Vite (window.__session só
-// existe em DEV) e o Chromium do Playwright em /opt/pw-browsers.
-// Uso: PLAYWRIGHT_BROWSERS_PATH=/opt/pw-browsers node scripts/e2e-lesson.mjs [url]
+// existe em DEV) e o Chromium do Playwright.
+// Uso: node scripts/e2e-lesson.mjs [url]
+// Modo tolerante (VISUAL_SPEC 10.2): popover do nó, [data-answer-input] e interstício são opcionais.
 import { chromium } from "playwright";
+import { LAUNCH_ARGS, openNode, fillAnswer } from "./lib/driver.mjs";
 
-const URL = process.argv[2] || "http://localhost:5177/";
-const norm = (s) => String(s).toLowerCase().replace(/[.,;:!?'"]/g, "").replace(/\s+/g, " ").trim();
+const URL = process.argv[2] || "http://localhost:5179/";
 
-const browser = await chromium.launch({
-  args: ["--no-sandbox", "--autoplay-policy=no-user-gesture-required", "--mute-audio"],
-});
+const browser = await chromium.launch({ args: LAUNCH_ARGS });
 const page = await browser.newPage();
 page.on("pageerror", (e) => console.log("PAGEERROR:", e.message));
 
 await page.goto(URL);
-await page.click('[data-node="u1l1"] button');
-await page.waitForFunction(() => window.__session && window.__session.exercises);
+await openNode(page, "u1l1");
 console.log("Lição u1l1 iniciada");
 
 const seen = new Set();
@@ -26,7 +24,7 @@ for (let step = 0; step < 120; step++) {
     if (s.phase === "result") return { result: { title: s.result.title, gained: s.result.gained, accuracy: s.result.accuracy, perfect: s.result.perfect } };
     const ex = s.exercises[s.index];
     return {
-      index: s.index, total: s.exercises.length, checked: s.checked, type: ex.type,
+      index: s.index, total: s.exercises.length, checked: s.checked, type: ex.type, silent: !!ex.silent,
       correct: ex.correct, ok: s.feedback && s.feedback.ok,
       pairs: ex.pairs ? ex.pairs.map((p) => p.en) : null,
     };
@@ -37,12 +35,15 @@ for (let step = 0; step < 120; step++) {
     break;
   }
 
+  if (await page.$("[data-interstitial]")) { await page.click("footer button.btn-3d"); await page.waitForTimeout(400); continue; }
+
   if (st.checked) {
     if (!st.ok) throw new Error(`resposta errada no exercício ${st.index} (${st.type})`);
     await page.click("footer button.btn-3d"); // Continuar
     await page.waitForTimeout(500); // animação de saída/entrada do exercício
     continue;
   }
+  if (st.silent) { await page.click("footer button.btn-3d"); await page.waitForTimeout(420); continue; }
 
   seen.add(st.type);
   console.log(`#${st.index + 1}/${st.total} ${st.type}`);
@@ -57,19 +58,18 @@ for (let step = 0; step < 120; step++) {
     await page.waitForTimeout(200); // check() automático ao fechar os pares
     continue;
   }
-  if (st.type === "speak") {
+  if (st.type === "speak" || st.type === "scene-speak") {
     await page.getByText("Não posso falar agora").click(); // skipSpeaking + check()
     await page.waitForTimeout(200);
     continue;
   }
-  if (["type", "listen-type", "complete-translation"].includes(st.type)) {
-    await page.waitForSelector('input[type="text"]:not([disabled])', { timeout: 5000 });
-    await page.fill('input[type="text"]', String(st.correct));
+  if (["type", "listen-type", "complete-translation", "scene-gap"].includes(st.type)) {
+    await fillAnswer(page, String(st.correct));
     await page.click("footer button.btn-3d"); // Verificar
     await page.waitForTimeout(120);
     continue;
   }
-  if (["build", "listen-build", "translate-en-pt"].includes(st.type)) {
+  if (["build", "listen-build", "translate-en-pt", "scene-build"].includes(st.type)) {
     for (const w of String(st.correct).split(" ")) {
       let clicked = false;
       for (let tries = 0; tries < 20 && !clicked; tries++) {
@@ -93,16 +93,17 @@ for (let step = 0; step < 120; step++) {
     await page.waitForTimeout(120);
     continue;
   }
-  // Formatos de escolha: clica a opção cujo texto bate com a resposta correta
+  // Formatos de escolha: clica a opção cujo texto (ou data-value) bate com a resposta correta
   // (com repetição: a troca de exercício tem animação de saída/entrada)
   let picked = false;
   for (let tries = 0; tries < 20 && !picked; tries++) {
     picked = await page.evaluate(({ correct, index }) => {
       if (!window.__session || window.__session.index !== index) return false;
-      // Ignora ícones/emoji e pontuação: compara só letras e números
+      // Ignora ícones e pontuação: compara só letras e números
       const nrm = (s) => String(s).toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, " ").replace(/\s+/g, " ").trim();
       const opts = [...document.querySelectorAll("[data-opt]")];
-      const hit = opts.find((b) => nrm(b.textContent) === nrm(correct));
+      const c = nrm(correct);
+      const hit = opts.find((b) => b.dataset.value != null ? nrm(b.dataset.value) === c : (nrm(b.textContent) === c || nrm(b.textContent).endsWith(" " + c)));
       if (hit) hit.click();
       return !!hit;
     }, { correct: st.correct, index: st.index });

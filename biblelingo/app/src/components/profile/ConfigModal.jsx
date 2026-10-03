@@ -6,6 +6,7 @@ import { state, save } from "../../core/store.js";
 import { sfx } from "../../core/events.js";
 import { useAppState } from "../../core/useStore.js";
 import Icon from "../Icon.jsx";
+import { SPRING } from "../../core/motion.js";
 
 const THEMES = [
   { id: "light", icon: "sun", label: "Claro" },
@@ -66,9 +67,10 @@ export default function ConfigModal({ onClose }) {
             className="h-6 w-11 accent-brand-bright" />
         </label>
 
-        <button onClick={reset} className="btn-3d mt-4 w-full bg-danger py-3 text-white" style={{ "--btn-shadow": "var(--color-danger-dark)" }}>
+        <motion.button onClick={reset} whileTap={{ y: 4, boxShadow: "0 0 0 var(--btn-shadow)" }} transition={SPRING.snap}
+          className="btn-3d mt-4 w-full bg-danger py-3 text-danger-text" style={{ "--btn-shadow": "var(--color-danger-shadow)" }}>
           Apagar todo o progresso
-        </button>
+        </motion.button>
         <button onClick={() => { sfx("tap"); onClose(); }} className="mt-3 w-full rounded-2xl py-2.5 font-display font-bold text-ink-soft hover:bg-hover">
           Fechar
         </button>

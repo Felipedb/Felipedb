@@ -1,9 +1,10 @@
 // Captura todas as telas e formatos de exercício em 390x844 (tema escuro e claro) para revisão visual.
 // Uso: node scripts/shots-all.mjs [urlDev] [outDir] [dark|light|both]   (precisa do servidor dev: window.__session)
 // Saída: <outDir>/<tema>/<nome>.png e <outDir>/index.json com a lista.
+// Modo tolerante (VISUAL_SPEC 10.2): popover do nó, [data-answer-input] e cerimônias pós-lição são opcionais.
 import { chromium } from "playwright";
 import { mkdirSync, writeFileSync } from "node:fs";
-import { LAUNCH_ARGS, PHONE, playToResult, clickFooter } from "./lib/driver.mjs";
+import { LAUNCH_ARGS, PHONE, playToResult, openNode, finishResult, sceneNodeIds } from "./lib/driver.mjs";
 
 const URL = process.argv[2] || "http://localhost:5179/";
 const OUT = process.argv[3] || "/tmp/shots-all";
@@ -41,16 +42,14 @@ for (const theme of THEMES) {
   await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight)); await shot("hub-bottom");
   await tab("Missões"); await shot("quests");
   await tab("Personagens"); await shot("characters");
-  const card = page.locator("main .grid button").first();
+  const card = page.locator("main [data-char]").first();
   if (await card.count()) { await card.click(); await shot("character-sheet", 700); await page.keyboard.press("Escape"); }
   await tab("Perfil"); await shot("profile");
   await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight)); await shot("profile-bottom");
 
   // Lição 1: cada formato uma vez (antes de responder), acerto, erro, palavra nova, resultado
   await tab("Aprender");
-  await page.waitForSelector('[data-node="u1l1"] button');
-  await page.click('[data-node="u1l1"] button');
-  await page.waitForFunction(() => window.__session && window.__session.exercises, null, { timeout: 10000 });
+  await openNode(page, "u1l1");
   let missed = false, okShot = false, wrongShot = false;
   try {
     await playToResult(page, {
@@ -72,21 +71,28 @@ for (const theme of THEMES) {
       onResult: async () => { await shot("result", 1200); },
     });
   } catch (e) { errors.push(`${theme} lição: ${e.message}`); }
-  await page.getByRole("button", { name: "Continuar" }).last().click().catch(() => {});
-  await page.waitForSelector("[data-node]", { timeout: 10000 }).catch(() => {});
-
-  // Cena (nó com balão 💬)
+  // Cerimônias pós-lição (quando existirem) e volta à trilha
   try {
-    const scene = page.locator("[data-node]").filter({ hasText: "💬" }).filter({ has: page.locator("button:not([disabled])") }).last();
-    if (await scene.count()) {
-      await scene.locator("button").click();
-      await page.waitForFunction(() => window.__session && window.__session.exercises, null, { timeout: 10000 });
+    for (let i = 0; i < 6; i++) {
+      await page.getByRole("button", { name: "Continuar" }).last().click();
+      await page.waitForSelector("[data-node], [data-ceremony]", { timeout: 10000 });
+      const cer = await page.$("[data-ceremony]");
+      if (!cer) break;
+      await shot(`ceremony-${await cer.getAttribute("data-ceremony")}`, 700);
+    }
+    await page.waitForSelector("[data-node]", { timeout: 10000 });
+  } catch (e) { errors.push(`${theme} resultado: ${e.message}`); }
+
+  // Cena (último nó de cena desbloqueado)
+  try {
+    const scenes = await sceneNodeIds(page);
+    if (scenes.length) {
+      await openNode(page, scenes[scenes.length - 1]);
       await playToResult(page, {
         onState: async (st) => { if (st.type !== "interstitial") await shot(`ex-${st.type}`); },
         onResult: async () => { await shot("scene-result", 900); },
       });
-      await page.getByRole("button", { name: "Continuar" }).last().click().catch(() => {});
-      await page.waitForSelector("[data-node]", { timeout: 10000 }).catch(() => {});
+      await finishResult(page).catch(() => {});
     }
   } catch (e) { errors.push(`${theme} cena: ${e.message}`); }
 
@@ -107,7 +113,7 @@ for (const theme of THEMES) {
   try {
     await page.evaluate(() => { const k = Object.keys(localStorage).find((x) => /bibl/i.test(x)); if (k) { const s = JSON.parse(localStorage[k]); s.hearts = 0; localStorage[k] = JSON.stringify(s); } });
     await page.reload(); await page.waitForSelector("[data-node]");
-    await page.click('[data-node="u1l1"] button'); await shot("hearts-modal", 700);
+    await openNode(page, "u1l1", { waitSession: false }); await shot("hearts-modal", 700);
   } catch (e) { errors.push(`${theme} corações: ${e.message}`); }
 
   await ctx.close();

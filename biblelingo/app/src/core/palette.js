@@ -38,6 +38,7 @@ export function unitVars(unitId, dark) {
     "--unit-shadow": p.shadow,
     "--unit-soft": dark ? p.softDark : p.soft,
     "--unit-text": dark ? p.textDark : p.text,
+    "--unit-text-light": p.text, // texto do capítulo sobre face branca (botão on-unit), nos dois temas
     "--unit-ink": p.ink,
   };
 }

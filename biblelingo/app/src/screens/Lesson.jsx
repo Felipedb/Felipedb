@@ -13,6 +13,7 @@ import Result from "./Result.jsx";
 import ExerciseView from "../components/exercises/index.jsx";
 import CharFace from "../components/CharFace.jsx";
 import Icon from "../components/Icon.jsx";
+import { SPRING } from "../core/motion.js";
 
 function FlagButton() {
   return (
@@ -184,11 +185,11 @@ export default function Lesson() {
               <FlagButton />
             </div>
           )}
-          <motion.button whileTap={{ y: 3 }}
+          <motion.button whileTap={{ y: 4, boxShadow: "0 0 0 var(--btn-shadow)" }} transition={SPRING.snap}
             onClick={() => (showReviewIntro ? setIntroSeen(session) : check())}
             disabled={!showReviewIntro && !canCheck && !session.checked}
-            className={`btn-3d btn-cta w-full text-white ${fb && !ok ? "bg-danger" : "bg-brand-bright"} disabled:bg-track disabled:text-locked`}
-            style={fb && !ok ? { "--btn-shadow": "#a32222" } : undefined}>
+            className={`btn-3d btn-cta w-full ${fb && !ok ? "bg-danger text-danger-text" : "bg-primary text-primary-text"} disabled:bg-line disabled:text-disabled`}
+            style={{ "--btn-shadow": fb && !ok ? "var(--color-danger-shadow)" : "var(--color-primary-shadow)" }}>
             {showReviewIntro ? "Continuar"
               : session.checked ? (fb && !ok ? "Entendi" : "Continuar")
               : ex.silent ? (ex.continueLabel || "Continuar") : "Verificar"}

@@ -7,6 +7,7 @@ import { recordLesson, learnedVocab } from "../core/session.js";
 import { speak, stopClip } from "../core/audio.js";
 import { shuffle, buzz } from "../core/util.js";
 import { sfx } from "../core/events.js";
+import { SPRING } from "../core/motion.js";
 
 export default function Madness({ onExit }) {
   const wordsRef = useRef(null);
@@ -135,7 +136,7 @@ export default function Madness({ onExit }) {
           <p className="mt-1 font-bold"><b>{end.score}</b> pares · {end.misses} erros · <b className="text-brand">+{end.gained} XP</b></p>
           <p className="mt-1 text-sm font-bold text-ink-soft">Recorde: {(state.best && state.best.madness) || 0} pares</p>
           <div className="mx-auto mt-5 flex max-w-xs flex-col gap-2.5">
-            <button onClick={again} data-md-again className="btn-3d bg-brand-bright px-5 py-3 text-white">Jogar de novo</button>
+            <motion.button onClick={again} data-md-again whileTap={{ y: 4, boxShadow: "0 0 0 var(--btn-shadow)" }} transition={SPRING.snap} className="btn-3d bg-primary px-5 py-3 text-primary-text" style={{ "--btn-shadow": "var(--color-primary-shadow)" }}>Jogar de novo</motion.button>
             <button onClick={exit} data-md-exit className="rounded-2xl border-2 border-line bg-card px-5 py-3 font-display font-bold text-ink-soft transition-colors hover:bg-hover">Voltar</button>
           </div>
         </motion.div>

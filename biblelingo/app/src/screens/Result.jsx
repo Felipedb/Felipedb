@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import { session, openChest, finishToHome } from "../core/session.js";
 import { useSessionVersion } from "../core/useSession.js";
 import CharFace from "../components/CharFace.jsx";
+import { SPRING } from "../core/motion.js";
 
 export default function Result() {
   useSessionVersion();
@@ -65,7 +66,8 @@ export default function Result() {
         </div>
       )}
 
-      <button onClick={finishToHome} className="btn-3d mt-6 w-full bg-brand-bright px-4 py-3.5 text-white">Continuar</button>
+      <motion.button onClick={finishToHome} whileTap={{ y: 4, boxShadow: "0 0 0 var(--btn-shadow)" }} transition={SPRING.snap}
+        className="btn-3d mt-6 w-full bg-primary px-4 py-3.5 text-primary-text" style={{ "--btn-shadow": "var(--color-primary-shadow)" }}>Continuar</motion.button>
     </div>
   );
 }

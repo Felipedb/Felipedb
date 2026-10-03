@@ -1,19 +1,22 @@
 // Percorre a trilha inteira (80 etapas: lições, cenas e revisões) respondendo certo.
 // Uso: node scripts/e2e-course.mjs [urlDev]  (precisa do servidor dev: window.__session)
+// Modo tolerante (VISUAL_SPEC 10.2): popover do nó, [data-answer-input] e cerimônias pós-lição são opcionais.
 import { chromium } from "playwright";
+import { LAUNCH_ARGS, openNode, fillAnswer, finishResult } from "./lib/driver.mjs";
 
 // Opções: --only=u1l1,u1c1,u1r (só essas etapas) · --max=N (as N primeiras) · a URL pode vir em qualquer posição
 const ARGS = process.argv.slice(2);
 const URL = ARGS.find((a) => !a.startsWith("--")) || "http://localhost:5179/";
 const ONLY = (ARGS.find((a) => a.startsWith("--only=")) || "").slice(7).split(",").filter(Boolean);
 const MAX = Number((ARGS.find((a) => a.startsWith("--max=")) || "").slice(6) || 0);
-const browser = await chromium.launch({ args: ["--no-sandbox", "--autoplay-policy=no-user-gesture-required", "--mute-audio"] });
+const browser = await chromium.launch({ args: LAUNCH_ARGS });
 const page = await browser.newPage();
 const errors = [];
 page.on("pageerror", (e) => errors.push(e.message));
 
 await page.goto(URL);
 await page.waitForSelector("[data-node]");
+// data-order é a ordem verdadeira do curso, independente da direção visual da trilha
 const ids = await page.evaluate(() => [...document.querySelectorAll("[data-node]")]
   .sort((a, b) => (+a.dataset.order) - (+b.dataset.order))
   .map((n) => n.dataset.node));
@@ -40,10 +43,8 @@ async function clickFooter() {
 }
 
 for (const id of wanted) {
-  // volta para a home e abre a etapa
-  await page.waitForSelector(`[data-node="${id}"] button`, { timeout: 10000 });
-  await page.click(`[data-node="${id}"] button`);
-  await page.waitForFunction(() => window.__session && window.__session.exercises, null, { timeout: 10000 });
+  // volta para a home e abre a etapa (pelo popover do nó, quando existir)
+  await openNode(page, id);
 
   let wrongOnce = false;
   for (let step = 0; step < 160; step++) {
@@ -90,8 +91,7 @@ for (const id of wanted) {
       continue;
     }
     if (["type", "listen-type", "complete-translation", "scene-gap"].includes(st.type)) {
-      await page.waitForSelector('input[type="text"]:not([disabled])', { timeout: 5000 });
-      await page.fill('input[type="text"]', String(st.correct));
+      await fillAnswer(page, String(st.correct));
       await clickFooter();
       await page.waitForTimeout(150);
       continue;
@@ -138,9 +138,8 @@ for (const id of wanted) {
     await clickFooter();
     await page.waitForTimeout(150);
   }
-  // resultado → continuar
-  await page.getByRole("button", { name: "Continuar" }).last().click();
-  await page.waitForSelector("[data-node]", { timeout: 10000 });
+  // resultado -> continuar (repetindo enquanto houver cerimônia pós-lição) -> trilha
+  await finishResult(page);
 }
 
 console.log("tipos:", [...typesSeen].sort().join(", "));
