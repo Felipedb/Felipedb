@@ -1,9 +1,9 @@
 // Casca comum das cerimônias pós-lição (VISUAL_SPEC 6.4): tela cheia (portal no body) com data-ceremony="streak|goal|crown|mission",
-// CTA Button3D primary com texto DOM "Continuar" (caixa alta por CSS), um toque em qualquer lugar pula a animação para o estado
-// final (e, já no estado final, fecha). Nenhuma cerimônia dura mais de 2,5 s sem interação: o CTA aparece até 1,5 s.
+// CTA Button3D primary com texto DOM "Continuar" (caixa alta por CSS); um toque em qualquer lugar pula a animação para o estado
+// final e o CTA fecha. Nenhuma cerimônia dura mais de 2,5 s sem interação: o CTA aparece até 1,5 s.
 // Uso: <Ceremony kind="streak" marks={[100, 400, 700]} ctaAt={1500} onContinue={next}>{(at) => at(100) && <Flame />}</Ceremony>
 //   at(ms) é verdadeiro quando o relógio da cerimônia passou daquele instante (ou após o toque que pula a animação).
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { motion, useReducedMotion } from "motion/react";
 import { Button3D } from "../../components/ui/index.js";
@@ -24,8 +24,11 @@ export function useCeremonyClock(marks = [], ctaAt = 1500) {
 }
 
 export default function Ceremony({ kind, label, marks = [], ctaAt = 1500, onContinue, className = "", style, children }) {
-  const { at, skip, done } = useCeremonyClock(marks, ctaAt);
-  const tap = () => { if (done) onContinue && onContinue(); else skip(); };
+  const { at, skip } = useCeremonyClock(marks, ctaAt);
+  // Toque fora do CTA pula a animação para o estado final; nos primeiros 350 ms é ignorado (pode ser a cauda do toque que
+  // trouxe a cerimônia). Fechar é sempre pelo CTA, para um toque a mais nunca engolir a cerimônia seguinte.
+  const mountedAt = useRef(Date.now());
+  const tap = () => { if (Date.now() - mountedAt.current > 350) skip(); };
   const node = (
     <motion.div data-ceremony={kind} role="dialog" aria-modal="true" aria-label={label}
       className={`fixed inset-0 z-50 flex flex-col items-center overflow-y-auto bg-page text-center ${className}`} style={style}

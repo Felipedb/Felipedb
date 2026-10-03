@@ -46,7 +46,7 @@ export default function Result() {
   useEffect(() => () => { try { confettiFx.reset(); } catch (e) { /* sem canvas */ } }, []);
   if (!session || !session.result) return null;
   const r = session.result;
-  const next = () => { if (import.meta.env.DEV) console.log("DBG next step=" + step + " " + new Error().stack); if (step >= steps.length) finishToHome(); else setStep(step + 1); };
+  const next = () => { if (step >= steps.length) finishToHome(); else setStep(step + 1); };
   const cur = step > 0 ? steps[step - 1] : null;
 
   return (

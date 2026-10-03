@@ -172,8 +172,8 @@ export default function Madness({ onExit }) {
           </motion.span>
           <AnimatePresence>
             {penalties.map((pid) => (
-              <motion.span key={pid} aria-hidden className="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 text-label text-red-text"
-                initial={{ y: 0, opacity: 1 }} animate={{ y: -18, opacity: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.6, ease: "easeOut" }}>
+              <motion.span key={pid} aria-hidden className="pointer-events-none absolute left-1/2 -top-1 -translate-x-1/2 text-label text-red-text"
+                initial={{ y: -16, opacity: 1 }} animate={{ y: -34, opacity: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.6, ease: "easeOut" }}>
                 -2 s
               </motion.span>
             ))}

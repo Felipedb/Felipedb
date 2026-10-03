@@ -92,19 +92,18 @@ export default function Story({ id, onExit }) {
   const [i, setI] = useState(0);
   const [mistakes, setMistakes] = useState(0);
   const [picked, setPicked] = useState(null);
-  const [revealed, setRevealed] = useState(false); // fala atual terminou de aparecer
+  const [revealedFor, setRevealedFor] = useState(-1); // índice do beat cuja fala terminou de aparecer
   const [praise, setPraise] = useState(false);     // faixa "Isso!" por 1 s
   const [finish, setFinish] = useState(null);      // { gained }
   const endRef = useRef(null);
 
   const beat = s && s.beats[i];
-  const answered = !!finish || (beat && (beat.en ? revealed : picked != null));
+  const answered = !!finish || (beat && (beat.en ? revealedFor === i : picked != null));
   const options = useMemo(() => (beat && beat.options ? shuffle(beat.options) : null), [s, i]); // eslint-disable-line react-hooks/exhaustive-deps
   const cover = s && CHARACTERS[s.cover] ? { key: s.cover, ...CHARACTERS[s.cover] } : null;
 
   // Fala: narração automática ao entrar no beat; o texto se revela no ritmo do clipe
   useEffect(() => {
-    setRevealed(false);
     if (beat && beat.en) {
       const ch = beat.who ? castChar(beat.who) : null;
       speak(beat.en, ch ? { char: ch } : {});
@@ -185,7 +184,7 @@ export default function Story({ id, onExit }) {
 
       <div className="flex flex-col gap-4 pt-4 pb-40">
         {!finish && speeches.map((sp) => (
-          <SpeechBeat key={sp.k} beat={sp.b} ch={sp.ch} hero={sp.hero} showName={sp.showName} current={sp.k === i} onRevealed={() => setRevealed(true)} />
+          <SpeechBeat key={sp.k} beat={sp.b} ch={sp.ch} hero={sp.hero} showName={sp.showName} current={sp.k === i} onRevealed={() => setRevealedFor(sp.k)} />
         ))}
 
         <AnimatePresence mode="wait" initial={false}>
@@ -234,7 +233,8 @@ export default function Story({ id, onExit }) {
             </motion.div>
           ) : null}
         </AnimatePresence>
-        <div ref={endRef} />
+        {/* Marca de rolagem: fica acima do CTA fixo (scroll-margin) para a fala ou a pergunta nova não ficar escondida */}
+        <div ref={endRef} style={{ scrollMarginBottom: 184 }} />
       </div>
 
       {/* Faixa curta de acerto */}

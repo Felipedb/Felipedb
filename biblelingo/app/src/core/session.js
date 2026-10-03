@@ -472,7 +472,6 @@ export function openChest(bonus) {
 }
 
 export function quitLesson() {
-  console.log("DBG quitLesson " + new Error().stack);
   save();
   dropSession();
   ui("navigate", { screen: "home" });
@@ -480,7 +479,6 @@ export function quitLesson() {
 }
 
 export function finishToHome() {
-  console.log("DBG finishToHome " + new Error().stack);
   const wasHub = session && session.fromHub;
   dropSession(false);
   ui("navigate", { screen: wasHub ? "hub" : "home" });
