@@ -3,7 +3,7 @@
 /* ===== BíbliaLearn — design tokens =====
    Paleta herdada do app clássico, exposta como tokens Tailwind (bg-brand, text-ink...). */
 @theme {
-  --font-sans: "Nunito", ui-rounded, system-ui, sans-serif;
+  --font-sans: "Nunito Variable", "Nunito", ui-rounded, system-ui, sans-serif;
   --font-display: "Baloo 2", "Nunito", system-ui, sans-serif;
 
   --color-brand: #58a700;

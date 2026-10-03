@@ -2,7 +2,11 @@
 // Uso: node scripts/e2e-course.mjs [urlDev]  (precisa do servidor dev: window.__session)
 import { chromium } from "playwright";
 
-const URL = process.argv[2] || "http://localhost:5179/";
+// Opções: --only=u1l1,u1c1,u1r (só essas etapas) · --max=N (as N primeiras) · a URL pode vir em qualquer posição
+const ARGS = process.argv.slice(2);
+const URL = ARGS.find((a) => !a.startsWith("--")) || "http://localhost:5179/";
+const ONLY = (ARGS.find((a) => a.startsWith("--only=")) || "").slice(7).split(",").filter(Boolean);
+const MAX = Number((ARGS.find((a) => a.startsWith("--max=")) || "").slice(6) || 0);
 const browser = await chromium.launch({ args: ["--no-sandbox", "--autoplay-policy=no-user-gesture-required", "--mute-audio"] });
 const page = await browser.newPage();
 const errors = [];
@@ -13,14 +17,29 @@ await page.waitForSelector("[data-node]");
 const ids = await page.evaluate(() => [...document.querySelectorAll("[data-node]")]
   .sort((a, b) => (+a.dataset.order) - (+b.dataset.order))
   .map((n) => n.dataset.node));
-console.log("etapas:", ids.length);
+let wanted = ids;
+if (ONLY.length) wanted = ids.filter((id) => ONLY.includes(id));
+if (MAX) wanted = wanted.slice(0, MAX);
+// Etapas puladas são marcadas como concluídas para destravar as escolhidas (só nos testes)
+if (wanted.length !== ids.length) {
+  await page.evaluate((done) => {
+    const k = Object.keys(localStorage).find((x) => /bibl/i.test(x));
+    const s = k ? JSON.parse(localStorage[k]) : {};
+    s.completed = s.completed || {};
+    done.forEach((id) => { s.completed[id] = true; });
+    localStorage[k || "biblelearn"] = JSON.stringify(s);
+  }, ids.filter((id) => !wanted.includes(id)));
+  await page.reload();
+  await page.waitForSelector("[data-node]");
+}
+console.log("etapas:", wanted.length, "de", ids.length);
 const typesSeen = new Set();
 
 async function clickFooter() {
   await page.click("footer button.btn-3d");
 }
 
-for (const id of ids) {
+for (const id of wanted) {
   // volta para a home e abre a etapa
   await page.waitForSelector(`[data-node="${id}"] button`, { timeout: 10000 });
   await page.click(`[data-node="${id}"] button`);

@@ -1,5 +1,10 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+// Fontes servidas pelo próprio app (funcionam offline e sem Google Fonts)
+import "@fontsource-variable/nunito";
+import "@fontsource/baloo-2/600.css";
+import "@fontsource/baloo-2/700.css";
+import "@fontsource/baloo-2/800.css";
 import "./index.css";
 import App from "./App.jsx";
 import { loadAudioManifest } from "./core/audio.js";
