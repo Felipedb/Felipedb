@@ -46,12 +46,9 @@
       "hints": {
         "bad": "maus",
         "good": "bom",
-        "man": "homem",
         "walked": "andou",
         "floors": "andares",
         "father": "pai",
-        "animals": "animais",
-        "open": "aberta",
         "commanded": "mandou"
       },
       "tips": [
@@ -353,9 +350,10 @@
         {
           "order": 9,
           "en": "His three sons and their wives came too",
-          "pt": "Os seus três filhos e as esposas deles também entraram",
+          "pt": "Os seus três filhos e as esposas deles também vieram",
           "altPt": [
-            "Seus três filhos e as mulheres deles também vieram"
+            "Seus três filhos e as mulheres deles também entraram",
+            "Os seus três filhos e as mulheres deles também vieram"
           ],
           "kind": "statement",
           "fact": true
@@ -419,7 +417,7 @@
             "word": "commanded",
             "options": [
               "commanded",
-              "asked",
+              "promised",
               "showed",
               "gave"
             ]
@@ -545,10 +543,7 @@
         "covered": "cobriu",
         "remembered": "lembrou-se de",
         "rested": "parou",
-        "blew": "soprou",
-        "years": "anos",
-        "old": "de idade",
-        "animals": "animais"
+        "blew": "soprou"
       },
       "tips": [
         {
@@ -781,10 +776,13 @@
         },
         {
           "order": 6,
-          "en": "Was the flood forty days on the earth? Yes",
-          "pt": "O dilúvio ficou quarenta dias sobre a terra? Sim",
+          "en": "Was the flood on the earth for forty days? Yes",
+          "pt": "O dilúvio ficou sobre a terra por quarenta dias? Sim",
           "kind": "question",
-          "fact": true
+          "fact": true,
+          "altPt": [
+            "O dilúvio ficou quarenta dias sobre a terra? Sim"
+          ]
         },
         {
           "order": 7,
@@ -914,8 +912,8 @@
         ]
       },
       "reading": {
-        "text": "It rained for forty days and forty nights, and the water covered all the mountains. Nobody outside the ark was alive, but Noah and his sons were safe. Then God remembered Noah, and a wind came over the earth. The water went down, and the ark rested on the mountains of Ararat.",
-        "pt": "Choveu por quarenta dias e quarenta noites, e a água cobriu todas as montanhas. Ninguém fora da arca estava vivo, mas Noé e os seus filhos estavam seguros. Então Deus se lembrou de Noé, e um vento veio sobre a terra. A água baixou, e a arca parou sobre as montanhas de Ararate.",
+        "text": "It rained for forty days and forty nights, and the water covered all the mountains. Nobody outside the ark was alive, but everyone in the ark was safe. Then God remembered Noah, and a wind came over the earth. The water went down, and the ark rested on the mountains of Ararat.",
+        "pt": "Choveu por quarenta dias e quarenta noites, e a água cobriu todas as montanhas. Ninguém fora da arca estava vivo, mas todos na arca estavam seguros. Então Deus se lembrou de Noé, e um vento veio sobre a terra. A água baixou, e a arca parou sobre as montanhas de Ararate.",
         "questions": [
           {
             "kind": "literal",
@@ -947,7 +945,7 @@
         "turns": [
           {
             "who": "esposa",
-            "en": "Noah, it is raining a lot! Are we safe?",
+            "en": "Noah, it's raining a lot! Are we safe?",
             "pt": "Noé, está chovendo muito! Estamos seguros?",
             "mood": "assustado"
           },
@@ -955,7 +953,7 @@
             "who": "you",
             "options": [
               "Yes, we are safe in the ark.",
-              "No, we are not in the ark.",
+              "No, we are not safe in the ark.",
               "Yes, we are safe on the mountain."
             ],
             "answer": "Yes, we are safe in the ark.",
@@ -1019,15 +1017,13 @@
       ],
       "hints": {
         "raven": "corvo",
-        "found": "encontrou",
         "place": "lugar",
         "rest": "descansar",
         "altar": "altar",
         "made": "fez",
         "destroy": "destruir",
         "sign": "sinal",
-        "promised": "prometeu",
-        "animals": "animais"
+        "promised": "prometeu"
       },
       "tips": [
         {
@@ -1240,7 +1236,7 @@
             "options": [
               "then",
               "but",
-              "so"
+              "or"
             ]
           },
           "grammar": "connectors"
@@ -1261,7 +1257,7 @@
             "options": [
               "dove",
               "ark",
-              "cloud"
+              "wind"
             ]
           }
         },
@@ -1437,7 +1433,7 @@
         "turns": [
           {
             "who": "sem",
-            "en": "Father, look! There is something in the cloud!",
+            "en": "Father, look! There's something in the cloud!",
             "pt": "Pai, olhe! Há algo na nuvem!",
             "mood": "surpreso"
           },
