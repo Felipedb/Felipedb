@@ -31,7 +31,8 @@ export default function Chest({ size = 56, state = "ready", reward = 0, onOpen, 
     const rect = el ? el.getBoundingClientRect() : null;
     if (!reduce) await animate(el, { scaleY: 0.85 }, { duration: DUR.micro });
     animate(el, { scaleY: 1 }, { type: "spring", stiffness: 400, damping: 18 });
-    animate(".chest-lid", { y: -size * 0.12, rotate: -14 }, { type: "spring", stiffness: 400, damping: 18 });
+    // Transforms em SVG valem em unidades do viewBox (24): o salto da tampa é convertido como as moedas abaixo
+    animate(".chest-lid", { y: (-size * 0.12) / (size / 24), rotate: -14 }, { type: "spring", stiffness: 400, damping: 18 });
     animate(".chest-lock", { opacity: 0 }, { duration: 0.12 });
     sfx("sparkle");
     if (!reduce && rect) {
@@ -48,6 +49,8 @@ export default function Chest({ size = 56, state = "ready", reward = 0, onOpen, 
     }
     [0, 1, 2].forEach((i) => setTimeout(() => sfx("coin", i), 150 + i * 120));
     if (!reduce) await animate(".coin", { x: dx, y: dy, opacity: [0, 1, 1, 0], scale: [0.6, 1, 1, 0.8] }, { duration: 0.42, delay: stagger(0.04), ease: EASE.out });
+    // A arte do estado "opened" já desenha a tampa aberta: zera o transform da tampa para ela não ficar deslocada
+    animate(".chest-lid", { y: 0, rotate: 0 }, { duration: 0 });
     setBusy(false);
     onOpen && onOpen(reward);
   }

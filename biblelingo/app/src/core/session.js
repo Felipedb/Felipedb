@@ -8,7 +8,7 @@ import { EX_MAKE, exKey, capOf, buildExercises, spreadNeighbors, listenMuted, LI
 import { buildSceneExercises, sceneReplyOptions, sceneBank } from "./sceneBuilder.js";
 import { prepareExercise, evaluate } from "./checker.js";
 import { stopClip } from "./audio.js";
-import { toast, sfx, confetti, ui } from "./events.js";
+import { toast, sfx, ui } from "./events.js";
 
 export let session = null;
 
@@ -51,17 +51,26 @@ export function recordLesson({ gained, perfect, bestCombo }) {
   if (perfect) d.perfect += 1;
   d.combo = Math.max(d.combo, bestCombo || 0);
   let extra = 0;
+  const done = [];
   QUESTS.forEach((q) => {
     const target = q.target(state.dailyGoal);
     if (d[q.key] >= target && !d.claimed.includes(q.id)) {
       d.claimed.push(q.id);
       extra += q.reward;
+      done.push(q);
     }
   });
   if (extra) {
     state.xp += extra;
     d.xp += extra;
-    setTimeout(() => toast(`🎯 Missão concluída! +${extra} XP`, "combo"), 900);
+    // Dentro de uma lição, a missão concluída vira cerimônia pós-lição (MissionScreen, VISUAL_SPEC 5.24 e 6.4);
+    // fora dela (História, Match Madness) continua como aviso no Snackbar
+    if (session && session.lesson) {
+      session.pendingCelebrations = session.pendingCelebrations || [];
+      done.forEach((q) => session.pendingCelebrations.push({ type: "mission", id: q.id, label: q.label, reward: q.reward }));
+    } else {
+      setTimeout(() => toast(`🎯 Missão concluída! +${extra} XP`, "combo"), 900);
+    }
   }
   save();
   return extra;
@@ -126,6 +135,7 @@ function baseSession(lesson, exercises, opts = {}) {
     phase: "exercise", // "exercise" | "result"
     feedback: null,    // { ok, typo, praise } após checar
     result: null,
+    pendingCelebrations: [], // eventos grandes da lição (missão concluída) que viram cerimônia no pipeline pós-lição
     ...opts,
   };
 }
@@ -405,13 +415,20 @@ function finishLesson() {
   save();
 
   const ch = session.lesson.scene && session.narrator ? session.narrator : pickCharacter(session.lesson.unit.id);
-  sfx("finish");
-  buzz([40, 30, 40, 30, 80]);
-  confetti({ particleCount: 90, spread: 75, origin: { y: 0.35 }, ticks: 180 });
-  if (perfect) setTimeout(() => confetti({ particleCount: 60, spread: 100, origin: { y: 0.3 } }), 350);
+  // Som, haptic e confete do fim de lição são disparados pela tela Result ao montar (VISUAL_SPEC 7.2 regra 9 e 7.3),
+  // nunca daqui: assim nada vaza para o primeiro exercício da lição seguinte.
+
+  // O que esta lição mudou (decide as cerimônias pós-lição, VISUAL_SPEC 6.4)
+  const t0 = today();
+  const studiedBefore = state.lastStudy === t0;
+  const dailyBefore = ensureDaily().xp;
+  const goal = state.dailyGoal || 20;
 
   const secs = Math.round((Date.now() - session.startedAt) / 1000);
   recordLesson({ gained, perfect, bestCombo: session.bestCombo });
+  const dailyAfter = ensureDaily().xp;
+  const streakUp = !studiedBefore && state.lastStudy === t0;
+  const goalHit = dailyBefore < goal && dailyAfter >= goal;
   const firstPass = session.exercises.filter((e) => !e.isReview && !e.silent).length;
   const blessings = [
     { t: "I can do all things through Christ which strengtheneth me.", r: "Filipenses 4:13" },
@@ -431,23 +448,31 @@ function finishLesson() {
     log: session.log || [],
     bonus: session.bonus,
     streak: state.streak,
+    // Cerimônias: ofensiva que aumentou nesta lição, meta diária batida nesta lição (com o percentual anterior) e coroa
+    streakUp,
+    goalHit,
+    goalFrom: Math.max(0, Math.min(1, dailyBefore / goal)),
+    goalXp: Math.min(dailyAfter, goal),
+    goal,
+    crown: session.levelUp ? { n: unitCrowns(session.lesson.unit.id), max: MAX_CROWN, legendary: !!session.legendary, unitId: session.lesson.unit.id, unitTitle: session.lesson.unit.title } : null,
   };
   notify();
 }
 
-export function openChest() {
+// Abre o baú do resultado. O valor vem da tela (sorteado uma vez ao montar) para o rótulo e as moedas baterem com o XP;
+// som, haptic e confete são do componente Chest.
+export function openChest(bonus) {
   if (!session || !session.result || session.result.chest) return;
-  const bonus = [1, 2, 3, 5][Math.floor(Math.random() * 4)];
-  state.xp += bonus;
+  const b = [1, 2, 3, 5].includes(bonus) ? bonus : [1, 2, 3, 5][Math.floor(Math.random() * 4)];
+  state.xp += b;
   save();
-  session.result.chest = bonus;
-  session.result.gained += bonus;
-  sfx("sparkle");
-  confetti({ particleCount: 40, spread: 60, origin: { y: 0.6 } });
+  session.result.chest = b;
+  session.result.gained += b;
   notify();
 }
 
 export function quitLesson() {
+  console.log("DBG quitLesson " + new Error().stack);
   save();
   dropSession();
   ui("navigate", { screen: "home" });
@@ -455,6 +480,7 @@ export function quitLesson() {
 }
 
 export function finishToHome() {
+  console.log("DBG finishToHome " + new Error().stack);
   const wasHub = session && session.fromHub;
   dropSession(false);
   ui("navigate", { screen: wasHub ? "hub" : "home" });
