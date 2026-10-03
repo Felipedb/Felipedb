@@ -1,12 +1,15 @@
-// Fala do herói com uma palavra faltando e 3 opções.
-// Porta fiel de renderSceneMissing (scene-engine.js).
+// Fala do herói com uma palavra faltando (VISUAL_SPEC 6.3 #22 scene-missing): balão do herói com a lacuna
+// sublinhada (preenchida pela opção escolhida) e 3 opções em 1 coluna; ao acertar, a fala é revelada e tocada.
+import { useRef } from "react";
 import { session } from "../../core/session.js";
 import { useSessionVersion } from "../../core/useSession.js";
-import { castChar, sceneNameOf } from "../../core/content.js";
+import { castChar } from "../../core/content.js";
 import { speak } from "../../core/audio.js";
-import { SceneChat, SceneHeader, SceneMsg, SceneOptions, HeroReveal, Who, Pt, sceneOf, gapParts } from "./shared.jsx";
+import { Gap } from "../ui/TextCard.jsx";
+import { inputState } from "../exercises/shared.jsx";
+import { SceneTitle, SceneChat, ChatMsg, SceneOptions, HeroReveal, Pt, nameChanges, sceneOf, gapParts, useRevealBelow } from "./shared.jsx";
 
-export default function SceneMissing({ ex }) {
+export default function SceneMissing({ ex, checked = false, fb = null }) {
   useSessionVersion();
   const sc = sceneOf(ex);
   const line = sc.lines[ex.li];
@@ -16,31 +19,32 @@ export default function SceneMissing({ ex }) {
     if (ok) speak(line.en, { char: hero });
   };
   const [before, after] = gapParts(line.en, ex.blank);
-  const checked = session.checked;
+  const ok = !!(fb && fb.ok);
+  const zone = useRef(null);
+  useRevealBelow(zone, checked);
 
   return (
     <div>
-      <SceneHeader sc={sc} title="Selecione a palavra que falta:" />
+      <SceneTitle>Complete a fala:</SceneTitle>
       <SceneChat sc={sc} upto={ex.li}>
-        <SceneMsg sc={sc} line={line} now>
-          {checked ? (
-            <HeroReveal sc={sc} line={line} />
+        <ChatMsg sc={sc} line={line} now showName={nameChanges(sc, ex.li)}>
+          {checked && ok ? (
+            <HeroReveal line={line} />
           ) : (
             <>
-              <Who>{sceneNameOf(sc.char)} (você)</Who>
-              <div className="text-[17px] font-extrabold leading-loose">
+              <span className="leading-[34px]">
                 {before}
-                <span className="mx-1 inline-block min-w-16 rounded-lg border-b-4 border-line bg-cream px-2 text-center font-bold text-sky-fg">
-                  {session.answer || " "}
-                </span>
+                <Gap display value={session.answer || ""} blank={ex.blank} state={inputState(checked, ok)} />
                 {after}
-              </div>
+              </span>
               <Pt>{line.pt}</Pt>
             </>
           )}
-        </SceneMsg>
+        </ChatMsg>
       </SceneChat>
-      <SceneOptions ex={ex} cols={2} onSelect={(opt) => speak(opt)} />
+      <div ref={zone}>
+        <SceneOptions ex={ex} cols={1} label="Palavra que falta" onSelect={(opt) => speak(opt, { char: hero })} />
+      </div>
     </div>
   );
 }

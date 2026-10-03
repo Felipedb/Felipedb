@@ -1,4 +1,4 @@
-// Despacho dos formatos de cena (SCENE_REGISTRY[ex.type]) — porta de SCENE_RENDER.
+// Despacho dos formatos de cena (SCENE_REGISTRY[ex.type]): porta de SCENE_RENDER.
 import SceneIntro from "./SceneIntro.jsx";
 import SceneRead from "./SceneRead.jsx";
 import SceneMissing from "./SceneMissing.jsx";

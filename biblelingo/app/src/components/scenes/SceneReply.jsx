@@ -1,12 +1,13 @@
-// Sua vez: escolher a fala certa do herói (3 opções em inglês); ao checar, a fala
-// entra no transcript. Porta fiel de renderSceneReply (scene-engine.js).
+// Sua vez (VISUAL_SPEC 6.3 #22 scene-reply): o balão do herói diz em português o que ele quer falar; o aluno
+// escolhe a fala em inglês entre 3 opções em 1 coluna. Ao acertar, a fala entra no balão e é tocada.
+import { useRef } from "react";
 import { session } from "../../core/session.js";
 import { useSessionVersion } from "../../core/useSession.js";
-import { castChar, sceneNameOf } from "../../core/content.js";
+import { castChar } from "../../core/content.js";
 import { speak } from "../../core/audio.js";
-import { SceneChat, SceneHeader, SceneMsg, SceneOptions, ReplyLabel, HeroPrompt, HeroReveal, sceneOf } from "./shared.jsx";
+import { SceneTitle, SceneChat, ChatMsg, SceneLabel, SceneOptions, HeroPrompt, HeroReveal, nameChanges, sceneOf, useRevealBelow } from "./shared.jsx";
 
-export default function SceneReply({ ex }) {
+export default function SceneReply({ ex, checked = false, fb = null }) {
   useSessionVersion();
   const sc = sceneOf(ex);
   const line = sc.lines[ex.li];
@@ -15,22 +16,22 @@ export default function SceneReply({ ex }) {
   ex.onChecked = (ok) => {
     if (ok) speak(line.en, { char: hero });
   };
-  const checked = session.checked;
+  const ok = !!(fb && fb.ok);
+  const zone = useRef(null);
+  useRevealBelow(zone, checked);
 
   return (
     <div>
-      <SceneHeader sc={sc} title={`Sua vez: o que ${sceneNameOf(sc.char)} responde?`} />
+      <SceneTitle>Sua vez de responder:</SceneTitle>
       <SceneChat sc={sc} upto={ex.li}>
-        <SceneMsg sc={sc} line={line} now>
-          {checked ? (
-            <HeroReveal sc={sc} line={line} />
-          ) : (
-            <HeroPrompt sc={sc} line={line} hint="Escolha a fala em inglês que diz isto:" />
-          )}
-        </SceneMsg>
+        <ChatMsg sc={sc} line={line} now showName={nameChanges(sc, ex.li)}>
+          {checked && ok ? <HeroReveal line={line} /> : <HeroPrompt line={line} hint="Diga isto em inglês" />}
+        </ChatMsg>
       </SceneChat>
-      <ReplyLabel>Sua resposta:</ReplyLabel>
-      <SceneOptions ex={ex} cols={1} onSelect={(opt) => speak(opt, { char: hero })} />
+      <div ref={zone}>
+        <SceneLabel>Sua resposta:</SceneLabel>
+        <SceneOptions ex={ex} cols={1} label="Fala em inglês" onSelect={(opt) => speak(opt, { char: hero })} />
+      </div>
     </div>
   );
 }

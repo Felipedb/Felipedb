@@ -1,18 +1,19 @@
-// Monte a fala do herói com o banco de palavras da cena (dica = tradução na bolha).
-// Porta fiel de renderSceneBuild + wordBankUI (peça vai/volta com animação FLIP e
-// teclado alternativo). TODO: unificar com src/components/exercises/WordBank.jsx
-// quando o componente das lições existir (outro agente está criando).
-import { useState } from "react";
-import { motion } from "motion/react";
+// Monte a fala do herói (VISUAL_SPEC 6.3 #22 scene-build): WordBankCore (peças de 44 px sobre as linhas de
+// resposta, voo por layoutId) com o chat e o balão do herói como prompt; "Usar teclado" troca o banco por um
+// TextCard. Um só banco e uma só zona de resposta.
+import { useRef, useState } from "react";
 import { session, setAnswer, check } from "../../core/session.js";
 import { useSessionVersion } from "../../core/useSession.js";
 import { castChar, sceneNameOf } from "../../core/content.js";
 import { speak } from "../../core/audio.js";
-import { SceneChat, SceneHeader, SceneMsg, HeroPrompt, HeroReveal, sceneOf } from "./shared.jsx";
+import WordBankCore from "../ui/WordBankCore.jsx";
+import TextCard from "../ui/TextCard.jsx";
+import Button3D from "../ui/Button3D.jsx";
+import { HintedText } from "../exercises/Sayable.jsx";
+import { inputState } from "../exercises/shared.jsx";
+import { SceneTitle, SceneChat, ChatMsg, HeroPrompt, HeroReveal, nameChanges, sceneOf, useRevealBelow } from "./shared.jsx";
 
-const TILE = "rounded-xl border-2 border-b-4 border-line bg-card px-3.5 py-2 font-bold";
-
-export default function SceneBuild({ ex }) {
+export default function SceneBuild({ ex, checked = false, fb = null }) {
   useSessionVersion();
   const sc = sceneOf(ex);
   const line = sc.lines[ex.li];
@@ -24,7 +25,9 @@ export default function SceneBuild({ ex }) {
   const [chosen, setChosen] = useState([]); // índices do banco, na ordem escolhida
   const [keyboard, setKeyboard] = useState(false);
   const [typed, setTyped] = useState("");
-  const checked = session.checked;
+  const ok = !!(fb && fb.ok);
+  const zone = useRef(null);
+  useRevealBelow(zone, checked, { keepTop: false });
 
   const commit = (list) => {
     setChosen(list);
@@ -43,83 +46,43 @@ export default function SceneBuild({ ex }) {
     }
   };
 
+  const prompt = (
+    <SceneChat sc={sc} upto={ex.li} className="mb-6">
+      <ChatMsg sc={sc} line={line} now showName={nameChanges(sc, ex.li)}>
+        {checked && ok ? (
+          <HeroReveal line={line} />
+        ) : (
+          <HeroPrompt line={line} hint="Escreva em inglês">
+            <div className="mt-1 text-sentence text-ink"><HintedText pt={line.pt} char={hero} /></div>
+          </HeroPrompt>
+        )}
+      </ChatMsg>
+    </SceneChat>
+  );
+
+  const switcher = (
+    <Button3D variant="ghost" tone="blue" size="sm" icon={keyboard ? "puzzle" : "keyboard"} onClick={toggle} disabled={checked}>
+      {keyboard ? "Usar banco de palavras" : "Usar teclado"}
+    </Button3D>
+  );
+
   return (
     <div>
-      <SceneHeader sc={sc} title={`Monte a fala de ${sceneNameOf(sc.char)}:`} />
-      <SceneChat sc={sc} upto={ex.li}>
-        <SceneMsg sc={sc} line={line} now>
-          {checked ? <HeroReveal sc={sc} line={line} /> : <HeroPrompt sc={sc} line={line} hint="Escreva em inglês:" />}
-        </SceneMsg>
-      </SceneChat>
-
-      {!keyboard ? (
-        <>
-          {/* Zona de resposta: toque devolve a peça ao banco */}
-          <div className="mb-4 flex min-h-14 flex-wrap content-start items-start gap-2 border-b-2 border-line pb-2.5">
-            {chosen.map((bi) => (
-              <motion.button
-                key={bi}
-                layoutId={`sc-tile-${ex.li}-${bi}`}
-                whileTap={{ scale: 0.94 }}
-                onClick={() => {
-                  if (session.checked) return;
-                  speak(ex.bank[bi]);
-                  commit(chosen.filter((x) => x !== bi));
-                }}
-                className={TILE}
-              >
-                {ex.bank[bi]}
-              </motion.button>
-            ))}
-          </div>
-          {/* Banco: a peça "voa" para a resposta */}
-          <div className="flex flex-wrap justify-center gap-2">
-            {ex.bank.map((w, i) =>
-              chosen.includes(i) ? (
-                <span key={i} aria-hidden className={`${TILE} select-none border-track bg-track text-transparent`}>
-                  {w}
-                </span>
-              ) : (
-                <motion.button
-                  key={i}
-                  data-tile={w}
-                  layoutId={`sc-tile-${ex.li}-${i}`}
-                  whileTap={{ scale: 0.94 }}
-                  onClick={() => {
-                    if (session.checked) return;
-                    speak(w);
-                    commit([...chosen, i]);
-                  }}
-                  className={TILE}
-                >
-                  {w}
-                </motion.button>
-              )
-            )}
-          </div>
-        </>
+      <SceneTitle>Monte a fala de {sceneNameOf(sc.char)}:</SceneTitle>
+      {keyboard ? (
+        <div ref={zone}>
+          {prompt}
+          <TextCard value={typed} disabled={checked} state={inputState(checked, ok)} placeholder="Digite a fala em inglês"
+            onChange={(v) => { setTyped(v); setAnswer(v); }}
+            onSubmit={() => { if (session.answer && String(session.answer).trim()) check(); }} />
+          <div className="mt-4 flex justify-center">{switcher}</div>
+        </div>
       ) : (
-        <input
-          type="text"
-          value={typed}
-          placeholder="Digite a frase em inglês..."
-          autoComplete="off"
-          autoCapitalize="off"
-          spellCheck={false}
-          autoFocus
-          onChange={(e) => {
-            setTyped(e.target.value);
-            setAnswer(e.target.value);
-          }}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && session.answer && String(session.answer).trim() !== "") check();
-          }}
-          className="w-full rounded-2xl border-2 border-line bg-card px-4 py-3 font-bold outline-none focus:border-sky focus:shadow-[0_0_0_3px_rgba(28,176,246,0.15)]"
-        />
+        <div ref={zone}>
+          <WordBankCore bank={ex.bank} chosen={chosen} onChange={commit} checked={checked} ok={ok} prompt={prompt}
+            onPick={(w) => speak(w, { char: hero })} footer={switcher} />
+        </div>
       )}
-      <button onClick={toggle} className="mx-auto mt-4 block text-sm font-extrabold text-sky-fg">
-        {keyboard ? "🧩 Usar banco de palavras" : "⌨️ Usar teclado"}
-      </button>
     </div>
   );
 }
