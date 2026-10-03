@@ -1,431 +1,394 @@
 {
+  "v": 2,
   "id": "u1",
   "lessons": [
     {
       "id": "u1l1",
       "title": "No princípio",
-      "vocab": [
+      "ref": "Gênesis 1:1-19",
+      "level": "A1.1",
+      "narrator": "adao",
+      "guests": ["eva", "voice"],
+      "names": [
+        { "en": "God", "pt": "Deus", "note": "sempre com maiúscula; os pronomes (he, his) ficam em minúscula" }
+      ],
+      "hints": {
+        "beginning": "princípio",
+        "created": "criou",
+        "heavens": "céus",
+        "empty": "vazia",
+        "still": "ainda",
+        "called": "chamou",
+        "darkness": "escuridão",
+        "evening": "tarde",
+        "morning": "manhã",
+        "moon": "lua",
+        "saw": "viu, vimos"
+      },
+      "tips": [
         {
-          "en": "God",
-          "pt": "Deus",
-          "icon": "🙏"
+          "part": 1,
+          "id": "past-be",
+          "grammar": "past-be",
+          "title": "was = passado de is",
+          "body": "Para falar do que já aconteceu, is vira was e are vira were. O resto da frase não muda.",
+          "examples": [
+            { "en": "The earth is dark", "pt": "A terra está escura" },
+            { "en": "The earth was dark", "pt": "A terra estava escura" }
+          ],
+          "contrast": { "a": "The light is good", "b": "The light was good", "note": "is = agora; was = naquele momento" }
         },
         {
-          "en": "heaven",
-          "pt": "céu",
-          "icon": "🌤️"
-        },
-        {
-          "en": "earth",
-          "pt": "terra",
-          "icon": "🌍"
-        },
-        {
-          "en": "light",
-          "pt": "luz",
-          "icon": "💡"
-        },
-        {
-          "en": "darkness",
-          "pt": "trevas",
-          "icon": "🌑"
-        },
-        {
-          "en": "water",
-          "pt": "água",
-          "icon": "💧"
-        },
-        {
-          "en": "beginning",
-          "pt": "princípio",
-          "icon": "🌅"
-        },
-        {
-          "en": "to create",
-          "pt": "criar",
-          "icon": "✨"
+          "part": 2,
+          "id": "there-was",
+          "grammar": "there-was",
+          "title": "there was = havia",
+          "body": "Para dizer que algo existia, use there was (uma coisa) ou there were (várias). No presente: there is e there are.",
+          "examples": [
+            { "en": "There was light", "pt": "Havia luz" },
+            { "en": "There were two great lights", "pt": "Havia dois grandes luminares" }
+          ],
+          "contrast": { "a": "There is light", "b": "There was light", "note": "there is = há; there was = havia" }
         }
       ],
-      "sentences": [
-        {
-          "en": "God created the heaven and the earth",
-          "alt": [
-            "God created the heavens and the earth"
-          ],
-          "pt": "Deus criou o céu e a terra"
-        },
-        {
-          "en": "The earth was without form and void",
-          "pt": "A terra era sem forma e vazia"
-        },
-        {
-          "en": "The earth was empty and dark",
-          "pt": "A terra estava vazia e escura"
-        },
-        {
-          "en": "Darkness was upon the face of the deep",
-          "pt": "Havia trevas sobre a face do abismo"
-        },
-        {
-          "en": "The Spirit of God moved upon the waters",
-          "pt": "O Espírito de Deus se movia sobre as águas"
-        },
-        {
-          "en": "God said, Let there be light",
-          "pt": "Deus disse: Haja luz"
-        },
-        {
-          "en": "And there was light",
-          "pt": "E houve luz"
-        },
-        {
-          "en": "God saw that the light was good",
-          "pt": "Deus viu que a luz era boa",
-          "alt": [
-            "God saw the light that it was good"
-          ]
-        },
-        {
-          "en": "God divided the light from the darkness",
-          "pt": "Deus separou a luz das trevas"
-        },
-        {
-          "en": "The light is good",
-          "pt": "A luz é boa"
-        }
+      "vocab": [
+        { "en": "earth", "pt": "terra", "pos": "noun", "field": "creation", "tier": "core", "part": 1, "icon": "🌍", "image": "earth.png", "example": 2 },
+        { "en": "light", "pt": "luz", "pos": "noun", "field": "creation", "tier": "core", "part": 1, "icon": "💡", "image": "light.png", "example": 4 },
+        { "en": "dark", "pt": "escuro", "ptAlt": ["escura"], "pos": "adj", "field": "quality", "tier": "core", "part": 1, "icon": "🌑", "example": 2 },
+        { "en": "good", "pt": "bom", "ptAlt": ["boa"], "pos": "adj", "field": "quality", "tier": "core", "part": 1, "icon": "👍", "example": 5 },
+        { "en": "Let there be light", "pt": "Haja luz", "pos": "chunk", "field": "speech", "tier": "core", "part": 1, "icon": "✨", "iconic": true, "example": 3 },
+        { "en": "day", "pt": "dia", "pos": "noun", "field": "time", "tier": "core", "part": 2, "icon": "📅", "image": "day.png", "example": 9 },
+        { "en": "night", "pt": "noite", "pos": "noun", "field": "time", "tier": "core", "part": 2, "icon": "🌃", "image": "night.png", "example": 10 },
+        { "en": "sun", "pt": "sol", "pos": "noun", "field": "nature", "tier": "core", "part": 2, "icon": "☀️", "image": "sun.png", "example": 9 },
+        { "en": "to make", "pt": "fazer", "pos": "verb", "field": "actions", "tier": "core", "part": 2, "icon": "🔨", "image": "make.png", "example": 9 },
+        { "en": "It was good", "pt": "Era bom", "ptAlt": ["Foi bom"], "pos": "chunk", "field": "speech", "tier": "core", "part": 2, "icon": "🆗", "iconic": true, "example": 11 }
+      ],
+      "beats": [
+        { "order": 1, "en": "In the beginning, God created the heavens and the earth", "pt": "No princípio, Deus criou os céus e a terra",
+          "alt": ["In the beginning God created the heaven and the earth"], "altPt": ["No princípio, criou Deus os céus e a terra", "No princípio, Deus criou o céu e a terra"],
+          "kind": "quote", "fact": true, "iconic": true, "prod": false },
+        { "order": 2, "en": "The earth was empty and dark", "pt": "A terra estava vazia e escura",
+          "alt": ["The earth was formless and empty"], "altPt": ["A terra era sem forma e vazia"],
+          "kind": "statement", "fact": true, "gap": { "word": "was", "kind": "grammar", "options": ["was", "is", "were"] }, "grammar": "past-be" },
+        { "order": 3, "en": "God said, \"Let there be light\"", "pt": "Deus disse: \"Haja luz\"",
+          "kind": "quote", "fact": true, "iconic": true, "speaker": "voice" },
+        { "order": 4, "en": "And there was light", "pt": "E houve luz", "alt": ["There was light"],
+          "kind": "statement", "fact": true, "gap": { "word": "light", "kind": "lexical", "options": ["light", "earth", "sun"] } },
+        { "order": 5, "en": "God saw that the light was good", "pt": "Deus viu que a luz era boa",
+          "alt": ["God saw the light, and it was good"], "kind": "statement", "fact": true },
+        { "order": 6, "en": "Was the earth still dark? No, the light was good", "pt": "A terra ainda estava escura? Não, a luz era boa",
+          "kind": "question", "fact": false, "grammar": "past-be" },
+        { "order": 7, "en": "He called the light Day and the darkness Night", "pt": "Ele chamou a luz de Dia e a escuridão de Noite",
+          "altPt": ["E Deus chamou à luz Dia, e às trevas chamou Noite"], "kind": "statement", "fact": true },
+        { "order": 8, "en": "There was evening and morning: the first day", "pt": "Houve tarde e manhã: o primeiro dia",
+          "alt": ["There was evening, and there was morning, the first day"], "altPt": ["E foi a tarde e a manhã, o dia primeiro"],
+          "kind": "quote", "fact": true, "iconic": true, "prod": false,
+          "gap": { "word": "was", "kind": "grammar", "options": ["was", "were", "is"] }, "grammar": "there-was" },
+        { "order": 9, "en": "God made the sun for the day", "pt": "Deus fez o sol para o dia", "kind": "statement", "fact": false },
+        { "order": 10, "en": "God made the moon for the night", "pt": "Deus fez a lua para a noite", "kind": "statement", "fact": false },
+        { "order": 11, "en": "By day we saw the sun and it was good", "pt": "De dia vimos o sol e era bom",
+          "kind": "first-person", "fact": false, "speaker": "adao" },
+        { "order": 12, "en": "Was the sun there at night? No, only the moon", "pt": "O sol estava lá à noite? Não, só a lua",
+          "kind": "question", "fact": false, "speaker": "adao" }
+      ],
+      "contrast": [
+        { "a": "God made the sun for the day", "b": "God made the moon for the night", "note": "só mudam sun/day por moon/night" },
+        { "a": "The earth was empty and dark", "b": "The earth is empty and dark", "note": "was = passado; is = presente" }
       ],
       "verse": {
-        "text": "In the beginning God created the heaven and the earth.",
-        "pt": "No princípio, criou Deus os céus e a terra.",
+        "text": "In the beginning, God created the heavens and the earth.",
+        "classic": "In the beginning God created the heaven and the earth.",
+        "pt": "No princípio, Deus criou os céus e a terra.",
+        "classicPt": "No princípio, criou Deus os céus e a terra.",
         "ref": "Gênesis 1:1",
-        "blank": "created",
-        "options": [
-          "created",
-          "loved",
-          "said",
-          "saw"
+        "blanks": [
+          { "word": "created", "options": ["created", "saw", "said", "called"] },
+          { "word": "beginning", "options": ["beginning", "garden", "evening", "night"] },
+          { "word": "earth", "options": ["earth", "water", "sky", "light"] }
         ]
       },
       "reading": {
-        "text": "In the beginning, God created the heaven and the earth. The earth was dark. Then God said: Let there be light.",
-        "pt": "No princípio, Deus criou o céu e a terra. A terra estava escura. Então Deus disse: Haja luz.",
-        "q": "What did God say?",
-        "options": [
-          "Let there be light",
-          "Let there be rain",
-          "Let there be a king"
-        ],
-        "answer": "Let there be light"
+        "text": "At first, the earth was dark. Then God said, \"Let there be light.\" And there was light. God called the light Day and the darkness Night. Then he made the sun and the moon.",
+        "pt": "No começo, a terra estava escura. Então Deus disse: \"Haja luz.\" E houve luz. Deus chamou a luz de Dia e a escuridão de Noite. Depois ele fez o sol e a lua.",
+        "questions": [
+          { "kind": "literal", "q": "What was the earth like at first?", "qPt": "Como era a terra no começo?",
+            "options": ["Dark, with nothing in it", "Full of light", "Full of trees"], "answer": "Dark, with nothing in it" },
+          { "kind": "inference", "q": "Which came first, the light or the sun?", "qPt": "O que veio primeiro, a luz ou o sol?",
+            "options": ["The light", "The sun", "They came together"], "answer": "The light",
+            "explain": "A luz é do primeiro dia (Gênesis 1:3); o sol e a lua são do quarto dia (Gênesis 1:16)." }
+        ]
       },
-      "dialogue": {
-        "line": "Look! God created the light.",
-        "pt": "Olha! Deus criou a luz.",
-        "options": [
-          "It is good!",
-          "It is night.",
-          "Where is the ark?"
-        ],
-        "answer": "It is good!",
-        "answerPt": "É bom!"
+      "conversation": {
+        "with": "eva",
+        "turns": [
+          { "who": "eva", "en": "Adam, look at the light! What did God say?", "pt": "Adão, olhe a luz! O que Deus disse?", "mood": "surpreso" },
+          { "who": "you", "options": ["He said, \"Let there be light.\"", "He said, \"Let there be night.\"", "He said, \"Let there be earth.\""],
+            "answer": "He said, \"Let there be light.\"", "pt": "Ele disse: \"Haja luz.\"", "intent": "Diga o que Deus disse" },
+          { "who": "eva", "en": "And was the light good?", "pt": "E a luz era boa?", "mood": "animado" },
+          { "who": "you", "options": ["Yes, it was good.", "No, it was dark.", "Yes, it was the moon."],
+            "answer": "Yes, it was good.", "pt": "Sim, era boa.", "intent": "Responda se a luz era boa", "speak": true }
+        ]
       },
-      "quiz": {
-        "q": "What moved upon the face of the waters?",
-        "options": [
-          "The Spirit of God",
-          "A big fish",
-          "The wind of Egypt"
-        ],
-        "answer": "The Spirit of God",
-        "explain": "O Espírito de Deus se movia sobre a face das águas (Gênesis 1:2)."
-      }
+      "fact": { "pt": "A palavra hebraica para \"princípio\" (bereshit) é o nome do livro de Gênesis na Bíblia hebraica.", "ref": "Gênesis 1:1" }
     },
     {
       "id": "u1l2",
       "title": "Os sete dias",
-      "vocab": [
+      "ref": "Gênesis 1:20 a 2:3",
+      "level": "A1.1",
+      "narrator": "adao",
+      "guests": ["eva", "voice"],
+      "names": [
+        { "en": "God", "pt": "Deus", "note": "sempre com maiúscula; os pronomes (he, his) ficam em minúscula" }
+      ],
+      "hints": {
+        "fish": "peixes",
+        "fly": "voar",
+        "created": "criou",
+        "fill": "encham",
+        "saw": "viu",
+        "finished": "terminou"
+      },
+      "tips": [
         {
-          "en": "day",
-          "pt": "dia",
-          "icon": "📅"
+          "part": 1,
+          "id": "ordinals",
+          "grammar": "ordinals",
+          "title": "fifth, sixth, seventh: contando os dias",
+          "body": "Para dizer a ordem, o número ganha -th: fifth (quinto), sixth (sexto), seventh (sétimo). Só first (primeiro) e second (segundo) são diferentes. E para falar de mais de um, a palavra ganha -s: bird, birds; animal, animals.",
+          "examples": [
+            { "en": "On the fifth day God made the birds", "pt": "No quinto dia Deus fez os pássaros" },
+            { "en": "On the sixth day God made the animals", "pt": "No sexto dia Deus fez os animais" }
+          ],
+          "contrast": { "a": "six days", "b": "the sixth day", "note": "six = seis (quantos); sixth = sexto (qual)" }
         },
         {
-          "en": "night",
-          "pt": "noite",
-          "icon": "🌃"
-        },
-        {
-          "en": "seven",
-          "pt": "sete",
-          "icon": "7️⃣"
-        },
-        {
-          "en": "to rest",
-          "pt": "descansar",
-          "icon": "😴"
-        },
-        {
-          "en": "sun",
-          "pt": "sol",
-          "icon": "☀️"
-        },
-        {
-          "en": "moon",
-          "pt": "lua",
-          "icon": "🌙"
-        },
-        {
-          "en": "stars",
-          "pt": "estrelas",
-          "icon": "⭐"
-        },
-        {
-          "en": "to make",
-          "pt": "fazer",
-          "icon": "🔨"
-        },
-        {
-          "en": "good",
-          "pt": "bom",
-          "icon": "👍"
-        },
-        {
-          "en": "evening",
-          "pt": "tarde (entardecer)",
-          "icon": "🌇"
+          "part": 2,
+          "id": "very-adj",
+          "grammar": "very-adj",
+          "title": "very good = muito bom",
+          "body": "very vem antes do adjetivo e deixa a ideia mais forte: very good, very big, very dark. O adjetivo não muda.",
+          "examples": [
+            { "en": "The light was good", "pt": "A luz era boa" },
+            { "en": "Everything was very good", "pt": "Tudo era muito bom" }
+          ],
+          "contrast": { "a": "It was good", "b": "It was very good", "note": "very = muito; good continua igual" }
         }
       ],
-      "sentences": [
-        {
-          "en": "God called the light Day",
-          "pt": "Deus chamou a luz de Dia"
-        },
-        {
-          "en": "The darkness he called Night",
-          "pt": "Às trevas ele chamou Noite"
-        },
-        {
-          "en": "The evening and the morning were the first day",
-          "pt": "A tarde e a manhã foram o primeiro dia"
-        },
-        {
-          "en": "God made two great lights",
-          "pt": "Deus fez dois grandes luminares"
-        },
-        {
-          "en": "The sun rules the day and the moon rules the night",
-          "pt": "O sol governa o dia e a lua governa a noite"
-        },
-        {
-          "en": "He made the stars also",
-          "pt": "Ele fez também as estrelas"
-        },
-        {
-          "en": "God made the fish and the birds",
-          "pt": "Deus fez os peixes e as aves"
-        },
-        {
-          "en": "The animals were made on the sixth day",
-          "pt": "Os animais foram feitos no sexto dia"
-        },
-        {
-          "en": "In six days God made heaven and earth",
-          "pt": "Em seis dias Deus fez o céu e a terra"
-        },
-        {
-          "en": "On the seventh day God rested",
-          "pt": "No sétimo dia Deus descansou"
-        },
-        {
-          "en": "God blessed the seventh day",
-          "pt": "Deus abençoou o sétimo dia"
-        }
+      "vocab": [
+        { "en": "bird", "pt": "pássaro", "ptAlt": ["ave"], "pos": "noun", "field": "animals", "tier": "core", "part": 1, "icon": "🐦", "image": "bird.png", "example": 1 },
+        { "en": "animal", "pt": "animal", "pos": "noun", "field": "animals", "tier": "core", "part": 1, "icon": "🐾", "image": "animal.png", "example": 3 },
+        { "en": "man", "pt": "homem", "pos": "noun", "field": "people", "tier": "core", "part": 1, "icon": "🧔", "image": "man.png", "plural": "men", "example": 4 },
+        { "en": "woman", "pt": "mulher", "pos": "noun", "field": "people", "tier": "core", "part": 1, "icon": "👩", "image": "woman.png", "plural": "women", "example": 5 },
+        { "en": "in God's image", "pt": "à imagem de Deus", "pos": "chunk", "field": "faith", "tier": "core", "part": 1, "icon": "👤", "iconic": true, "example": 5 },
+        { "en": "seventh", "pt": "sétimo", "ptAlt": ["sétima"], "pos": "num", "field": "quantity", "tier": "core", "part": 2, "icon": "7️⃣", "example": 9 },
+        { "en": "to rest", "pt": "descansar", "pos": "verb", "field": "actions", "tier": "core", "part": 2, "icon": "😴", "image": "rest.png", "example": 10 },
+        { "en": "work", "pt": "trabalho", "ptAlt": ["obra"], "pos": "noun", "field": "work", "tier": "core", "part": 2, "icon": "💼", "image": "work.png", "example": 9 },
+        { "en": "to bless", "pt": "abençoar", "pos": "verb", "field": "faith", "tier": "core", "part": 2, "icon": "🙌", "example": 11 },
+        { "en": "very good", "pt": "muito bom", "ptAlt": ["muito boa"], "pos": "chunk", "field": "quality", "tier": "core", "part": 2, "icon": "💯", "iconic": true, "example": 8 }
+      ],
+      "beats": [
+        { "order": 1, "en": "On the fifth day God made fish and birds", "pt": "No quinto dia Deus fez peixes e pássaros",
+          "altPt": ["No quinto dia Deus fez peixes e aves"], "kind": "statement", "fact": true,
+          "gap": { "word": "fifth", "kind": "grammar", "options": ["fifth", "sixth", "seventh"] }, "grammar": "ordinals" },
+        { "order": 2, "en": "God said, \"Let the birds fly above the earth\"", "pt": "Deus disse: \"Que os pássaros voem sobre a terra\"",
+          "altPt": ["Deus disse: \"Que as aves voem sobre a terra\""], "kind": "quote", "fact": true, "speaker": "voice" },
+        { "order": 3, "en": "Then God made the animals on the sixth day", "pt": "Depois Deus fez os animais no sexto dia",
+          "kind": "statement", "fact": true, "gap": { "word": "animals", "kind": "lexical", "options": ["animals", "birds", "men"] } },
+        { "order": 4, "en": "God said, \"Let's make man in our image\"", "pt": "Deus disse: \"Façamos o homem à nossa imagem\"",
+          "alt": ["God said, \"Let us make man in our image\""], "kind": "quote", "fact": true, "iconic": true, "speaker": "voice" },
+        { "order": 5, "en": "So God created man and woman in God's image", "pt": "Então Deus criou o homem e a mulher à imagem de Deus",
+          "alt": ["So God created man and woman in his image"], "altPt": ["E criou Deus o homem à sua imagem; macho e fêmea os criou"], "kind": "statement", "fact": true },
+        { "order": 6, "en": "Did God make only animals? No, man and woman too", "pt": "Deus fez só animais? Não, o homem e a mulher também",
+          "kind": "question", "fact": true },
+        { "order": 7, "en": "He blessed us and said, \"Fill the earth\"", "pt": "Ele nos abençoou e disse: \"Encham a terra\"",
+          "altPt": ["Ele nos abençoou e disse: \"Enchei a terra\""], "kind": "first-person", "fact": true, "speaker": "adao" },
+        { "order": 8, "en": "God saw everything he made and it was very good", "pt": "Deus viu tudo o que fez e era muito bom",
+          "alt": ["God saw everything that he had made and it was very good"], "altPt": ["E viu Deus tudo quanto tinha feito, e eis que era muito bom"],
+          "kind": "statement", "fact": true, "gap": { "word": "very", "kind": "grammar", "options": ["very", "so", "too"] }, "grammar": "very-adj" },
+        { "order": 9, "en": "On the seventh day God finished his work", "pt": "No sétimo dia Deus terminou o seu trabalho",
+          "altPt": ["No sétimo dia Deus terminou a sua obra"], "kind": "statement", "fact": true },
+        { "order": 10, "en": "He rested on the seventh day from all his work", "pt": "Ele descansou no sétimo dia de todo o seu trabalho",
+          "altPt": ["E descansou no sétimo dia de toda a sua obra"], "kind": "statement", "fact": true },
+        { "order": 11, "en": "God blessed the seventh day", "pt": "Deus abençoou o sétimo dia",
+          "kind": "statement", "fact": true, "gap": { "word": "blessed", "kind": "lexical", "options": ["blessed", "rested", "made"] } },
+        { "order": 12, "en": "Did God work on the seventh day? No, he rested", "pt": "Deus trabalhou no sétimo dia? Não, ele descansou",
+          "kind": "question", "fact": true }
+      ],
+      "contrast": [
+        { "a": "On the fifth day God made fish and birds", "b": "Then God made the animals on the sixth day", "note": "só mudam o dia (fifth, sixth) e o que foi feito (fish and birds, the animals)" },
+        { "a": "God saw everything he made and it was very good", "b": "God saw everything he made and it was good", "note": "very = muito; sem very, good fica mais fraco" }
       ],
       "verse": {
-        "text": "And he rested on the seventh day from all his work which he had made.",
-        "pt": "E descansou no sétimo dia de toda a sua obra que tinha feito.",
-        "ref": "Gênesis 2:2",
-        "blank": "rested",
-        "options": [
-          "rested",
-          "worked",
-          "walked",
-          "sang"
+        "text": "God saw everything that he had made, and, behold, it was very good.",
+        "classic": "And God saw every thing that he had made, and, behold, it was very good.",
+        "pt": "Deus viu tudo o que tinha feito, e era muito bom.",
+        "classicPt": "E viu Deus tudo quanto tinha feito, e eis que era muito bom.",
+        "ref": "Gênesis 1:31",
+        "blanks": [
+          { "word": "good", "options": ["good", "big", "dark", "new"] },
+          { "word": "everything", "options": ["everything", "nothing", "someone", "something"] },
+          { "word": "saw", "options": ["saw", "said", "called", "heard"] }
         ]
       },
       "reading": {
-        "text": "God made the sun, the moon and the stars. He made the fish, the birds and the animals. In six days God made everything. On the seventh day he rested.",
-        "pt": "Deus fez o sol, a lua e as estrelas. Ele fez os peixes, as aves e os animais. Em seis dias Deus fez tudo. No sétimo dia ele descansou.",
-        "q": "What did God do on the seventh day?",
-        "options": [
-          "He rested",
-          "He made the sun",
-          "He planted a garden"
-        ],
-        "answer": "He rested"
+        "text": "On the fifth day, God made the fish and the birds. On the sixth day, he made the animals, and then he made man and woman in his image. God saw everything, and it was very good. On the seventh day, God finished his work and rested. He blessed the seventh day.",
+        "pt": "No quinto dia, Deus fez os peixes e os pássaros. No sexto dia, ele fez os animais e depois fez o homem e a mulher à sua imagem. Deus viu tudo, e era muito bom. No sétimo dia, Deus terminou o seu trabalho e descansou. Ele abençoou o sétimo dia.",
+        "questions": [
+          { "kind": "literal", "q": "What did God make on the sixth day?", "qPt": "O que Deus fez no sexto dia?",
+            "options": ["The animals, the man and the woman", "Fish and birds", "The sun and the moon"], "answer": "The animals, the man and the woman" },
+          { "kind": "inference", "q": "Why was the seventh day different from the other days?", "qPt": "Por que o sétimo dia foi diferente dos outros dias?",
+            "options": ["God did not work on it", "God made the birds on it", "It was the day of the animals"], "answer": "God did not work on it",
+            "explain": "Nos seis dias Deus criou; no sétimo ele descansou de toda a sua obra e abençoou esse dia (Gênesis 2:2-3)." }
+        ]
       },
-      "dialogue": {
-        "line": "What did God make on the fourth day?",
-        "pt": "O que Deus fez no quarto dia?",
-        "options": [
-          "The sun, the moon and the stars.",
-          "The tree of life.",
-          "A big ark of wood."
-        ],
-        "answer": "The sun, the moon and the stars.",
-        "answerPt": "O sol, a lua e as estrelas."
+      "conversation": {
+        "with": "eva",
+        "turns": [
+          { "who": "eva", "en": "Adam, look! What are those in the sky?", "pt": "Adão, olhe! O que são aqueles no céu?", "mood": "surpreso" },
+          { "who": "you", "options": ["They are birds. God made them on the fifth day.", "They are animals. God made them on the sixth day.", "They are stars. God made them on the fourth day."],
+            "answer": "They are birds. God made them on the fifth day.", "pt": "São pássaros. Deus os fez no quinto dia.", "intent": "Diga o que são e em que dia Deus os fez" },
+          { "who": "eva", "en": "And is everything good?", "pt": "E tudo é bom?", "mood": "animado" },
+          { "who": "you", "options": ["Yes, everything is very good.", "No, everything is very dark.", "Yes, everything is very big."],
+            "answer": "Yes, everything is very good.", "pt": "Sim, tudo é muito bom.", "intent": "Diga como é tudo o que Deus fez", "speak": true }
+        ]
       },
-      "quiz": {
-        "q": "How many days did God work?",
-        "options": [
-          "Six",
-          "Seven",
-          "Forty"
-        ],
-        "answer": "Six",
-        "explain": "Em seis dias Deus fez o céu e a terra e descansou no sétimo (Gênesis 2:2; Êxodo 20:11)."
-      }
+      "fact": { "pt": "O descanso de Deus no sétimo dia é a origem do sábado: o mandamento do descanso semanal lembra os seis dias da criação e o sétimo de descanso (Êxodo 20:11).", "ref": "Gênesis 2:2-3; Êxodo 20:11" }
     },
     {
       "id": "u1l3",
-      "title": "À imagem de Deus",
-      "vocab": [
+      "title": "O jardim e a queda",
+      "ref": "Gênesis 2:4 a 3:24",
+      "level": "A1.1",
+      "narrator": "adao",
+      "guests": ["eva", "voice"],
+      "names": [
+        { "en": "God", "pt": "Deus", "note": "sempre com maiúscula; os pronomes (he, his) ficam em minúscula" },
+        { "en": "the Lord", "pt": "o Senhor", "note": "the Lord God = o Senhor Deus (Gênesis 2:4 em diante)" },
+        { "en": "Eden", "pt": "Éden", "note": "o lugar do jardim" },
+        { "en": "Adam", "pt": "Adão", "note": "o homem; em hebraico, adam = homem" },
+        { "en": "Eve", "pt": "Eva", "note": "a mulher; o nome lembra \"vida\" (Gênesis 3:20)" }
+      ],
+      "hints": {
+        "dust": "pó",
+        "planted": "plantou",
+        "evil": "mal",
+        "really": "mesmo, de verdade",
+        "die": "morrer",
+        "saw": "viu",
+        "called": "chamou",
+        "sent": "mandou, enviou"
+      },
+      "tips": [
         {
-          "en": "man",
-          "pt": "homem",
-          "icon": "🧔"
+          "part": 1,
+          "id": "articles",
+          "grammar": "articles",
+          "title": "a garden, the garden: um e o",
+          "body": "a = um, uma (um qualquer); the = o, a (aquele que já conhecemos). Antes de som de vogal, a vira an: an animal. Para dizer de quem é, use my (meu), your (seu) e his (dele): his wife.",
+          "examples": [
+            { "en": "God planted a garden", "pt": "Deus plantou um jardim" },
+            { "en": "The garden was in Eden", "pt": "O jardim ficava no Éden" }
+          ],
+          "contrast": { "a": "a tree", "b": "the tree", "note": "a tree = uma árvore qualquer; the tree = aquela árvore" }
         },
         {
-          "en": "woman",
-          "pt": "mulher",
-          "icon": "👩"
-        },
-        {
-          "en": "image",
-          "pt": "imagem",
-          "icon": "🖼️"
-        },
-        {
-          "en": "garden",
-          "pt": "jardim",
-          "icon": "🌷"
-        },
-        {
-          "en": "tree",
-          "pt": "árvore",
-          "icon": "🌲"
-        },
-        {
-          "en": "life",
-          "pt": "vida",
-          "icon": "🌱"
-        },
-        {
-          "en": "fruit",
-          "pt": "fruto",
-          "icon": "🍎"
-        },
-        {
-          "en": "likeness",
-          "pt": "semelhança",
-          "icon": "👤"
-        },
-        {
-          "en": "alone",
-          "pt": "só (sozinho)",
-          "icon": "🧍"
-        },
-        {
-          "en": "to eat",
-          "pt": "comer",
-          "icon": "🍽️"
+          "part": 2,
+          "id": "where-questions",
+          "grammar": "where-questions",
+          "title": "Where are you? = Onde você está?",
+          "body": "Where pergunta o lugar. Depois de where vem o verbo e depois a pessoa ou a coisa: Where are you? Where is the tree? Who pergunta a pessoa e what pergunta a coisa.",
+          "examples": [
+            { "en": "Where are you?", "pt": "Onde você está?" },
+            { "en": "Where is the tree?", "pt": "Onde está a árvore?" }
+          ],
+          "contrast": { "a": "Where are you?", "b": "Who are you?", "note": "where = onde (lugar); who = quem (pessoa)" }
         }
       ],
-      "sentences": [
-        {
-          "en": "Let us make man in our image",
-          "pt": "Façamos o homem à nossa imagem"
-        },
-        {
-          "en": "God created man in his own image",
-          "pt": "Deus criou o homem à sua imagem"
-        },
-        {
-          "en": "He created them man and woman",
-          "pt": "Ele os criou homem e mulher"
-        },
-        {
-          "en": "God planted a garden in Eden",
-          "pt": "Deus plantou um jardim no Éden"
-        },
-        {
-          "en": "The tree of life",
-          "pt": "A árvore da vida"
-        },
-        {
-          "en": "You may eat of every tree of the garden",
-          "pt": "Podes comer de toda árvore do jardim"
-        },
-        {
-          "en": "It is not good that the man should be alone",
-          "pt": "Não é bom que o homem esteja só"
-        },
-        {
-          "en": "God made a woman and brought her to the man",
-          "pt": "Deus fez uma mulher e a trouxe ao homem"
-        },
-        {
-          "en": "Eve took the fruit and ate",
-          "pt": "Eva tomou o fruto e comeu"
-        },
-        {
-          "en": "The man and the woman hid from God",
-          "pt": "O homem e a mulher se esconderam de Deus"
-        }
+      "vocab": [
+        { "en": "garden", "pt": "jardim", "pos": "noun", "field": "places", "tier": "core", "part": 1, "icon": "🌷", "image": "garden.png", "example": 2 },
+        { "en": "tree", "pt": "árvore", "pos": "noun", "field": "nature", "tier": "core", "part": 1, "icon": "🌳", "image": "tree.png", "example": 3 },
+        { "en": "to eat", "pt": "comer", "pos": "verb", "field": "food", "tier": "core", "part": 1, "icon": "🍴", "image": "eat.png", "example": 3 },
+        { "en": "alone", "pt": "sozinho", "ptAlt": ["só", "sozinha"], "pos": "adj", "field": "feelings", "tier": "core", "part": 1, "icon": "🧍", "example": 5 },
+        { "en": "Do not eat", "pt": "Não coma", "ptAlt": ["Não comam"], "pos": "chunk", "field": "speech", "tier": "core", "part": 1, "icon": "⛔", "iconic": true, "example": 4 },
+        { "en": "snake", "pt": "cobra", "ptAlt": ["serpente"], "alt": ["serpent"], "pos": "noun", "field": "animals", "tier": "bible", "part": 2, "icon": "🐍", "image": "snake.png", "example": 8 },
+        { "en": "fruit", "pt": "fruto", "ptAlt": ["fruta"], "pos": "noun", "field": "food", "tier": "core", "part": 2, "icon": "🍎", "image": "fruit.png", "example": 9 },
+        { "en": "to hide", "pt": "esconder", "ptAlt": ["se esconder"], "pos": "verb", "field": "actions", "tier": "core", "part": 2, "icon": "🙈", "image": "hide.png", "example": 10 },
+        { "en": "afraid", "pt": "com medo", "pos": "adj", "field": "feelings", "tier": "core", "part": 2, "icon": "😨", "example": 12 },
+        { "en": "Where are you?", "pt": "Onde você está?", "pos": "chunk", "field": "speech", "tier": "core", "part": 2, "icon": "❓", "iconic": true, "example": 11 }
+      ],
+      "beats": [
+        { "order": 1, "en": "The Lord God made the man from the dust", "pt": "O Senhor Deus fez o homem do pó",
+          "alt": ["The Lord God formed the man from the dust", "The Lord God formed man from the dust of the ground"], "altPt": ["O SENHOR Deus formou o homem do pó da terra"],
+          "kind": "statement", "fact": true },
+        { "order": 2, "en": "He planted a garden in Eden with many trees", "pt": "Ele plantou um jardim no Éden com muitas árvores",
+          "kind": "statement", "fact": true, "gap": { "word": "a", "kind": "grammar", "options": ["a", "the", "an"] }, "grammar": "articles" },
+        { "order": 3, "en": "\"You may eat from every tree in the garden\"", "pt": "\"Você pode comer de toda árvore do jardim\"",
+          "alt": ["You may freely eat of every tree of the garden"], "altPt": ["De toda árvore do jardim comerás livremente"],
+          "kind": "quote", "fact": true, "speaker": "voice" },
+        { "order": 4, "en": "\"Do not eat from the tree of good and evil\"", "pt": "\"Não coma da árvore do bem e do mal\"",
+          "alt": ["You shall not eat of the tree of the knowledge of good and evil"], "altPt": ["Da árvore do conhecimento do bem e do mal não comerás"],
+          "kind": "negative", "fact": true, "speaker": "voice", "gap": { "word": "eat", "kind": "lexical", "options": ["eat", "hide", "rest"] } },
+        { "order": 5, "en": "God said, \"It is not good for the man to be alone\"", "pt": "Deus disse: \"Não é bom que o homem esteja sozinho\"",
+          "altPt": ["Deus disse: \"Não é bom que o homem esteja só\""], "kind": "quote", "fact": true, "iconic": true, "prod": false, "speaker": "voice" },
+        { "order": 6, "en": "God made the woman and the man was not alone", "pt": "Deus fez a mulher e o homem não ficou sozinho",
+          "kind": "negative", "fact": true },
+        { "order": 7, "en": "The snake asked the woman, \"Did God really say that?\"", "pt": "A cobra perguntou à mulher: \"Deus disse mesmo isso?\"",
+          "altPt": ["A serpente perguntou à mulher: \"Deus disse mesmo isso?\""], "kind": "question", "fact": true },
+        { "order": 8, "en": "The snake said, \"You will not die\"", "pt": "A cobra disse: \"Vocês não vão morrer\"",
+          "alt": ["The serpent said, \"You will not die\"", "The snake said, \"You won't really die\""], "altPt": ["A serpente disse: \"Certamente não morrereis\""],
+          "kind": "negative", "fact": true },
+        { "order": 9, "en": "She saw that the fruit was good", "pt": "Ela viu que o fruto era bom",
+          "altPt": ["Ela viu que a fruta era boa"], "kind": "statement", "fact": true },
+        { "order": 10, "en": "They ate the fruit and hid because they were afraid", "pt": "Eles comeram o fruto e se esconderam porque estavam com medo",
+          "kind": "statement", "fact": true },
+        { "order": 11, "en": "God called the man, \"Where are you?\"", "pt": "Deus chamou o homem: \"Onde você está?\"",
+          "alt": ["The Lord God called to the man, \"Where are you?\""], "altPt": ["Deus chamou o homem: \"Onde estás?\""],
+          "kind": "quote", "fact": true, "iconic": true, "speaker": "voice",
+          "gap": { "word": "Where", "kind": "grammar", "options": ["Where", "Who", "What"] }, "grammar": "where-questions" },
+        { "order": 12, "en": "The man said, \"I was afraid and I hid\"", "pt": "O homem disse: \"Eu estava com medo e me escondi\"",
+          "alt": ["The man said, \"I was afraid, so I hid\""], "altPt": ["O homem disse: \"Tive medo e me escondi\""],
+          "kind": "first-person", "fact": true, "speaker": "adao" }
+      ],
+      "contrast": [
+        { "a": "He planted a garden in Eden with many trees", "b": "He planted the garden in Eden with many trees", "note": "a garden = um jardim qualquer; the garden = o jardim já conhecido" },
+        { "a": "The snake said, \"You will not die\"", "b": "God said, \"You will die\"", "note": "not nega a frase; Deus avisou (Gênesis 2:17) e a cobra negou (Gênesis 3:4)" }
       ],
       "verse": {
-        "text": "And God said, Let us make man in our image, after our likeness.",
-        "pt": "E disse Deus: Façamos o homem à nossa imagem, conforme a nossa semelhança.",
-        "ref": "Gênesis 1:26",
-        "blank": "image",
-        "options": [
-          "image",
-          "garden",
-          "light",
-          "water"
+        "text": "The Lord God called to the man, and said to him, \"Where are you?\"",
+        "classic": "And the LORD God called unto Adam, and said unto him, Where art thou?",
+        "pt": "O Senhor Deus chamou o homem e lhe perguntou: \"Onde você está?\"",
+        "classicPt": "E chamou o SENHOR Deus a Adão, e disse-lhe: Onde estás?",
+        "ref": "Gênesis 3:9",
+        "blanks": [
+          { "word": "Where", "options": ["Where", "Who", "What", "When"] },
+          { "word": "man", "options": ["man", "woman", "snake", "tree"] },
+          { "word": "called", "options": ["called", "came", "looked", "walked"] }
         ]
       },
       "reading": {
-        "text": "God made man from the dust of the ground. He put the man in the garden of Eden. Then God made a woman from the rib of the man.",
-        "pt": "Deus fez o homem do pó da terra. Ele pôs o homem no jardim do Éden. Depois Deus fez uma mulher da costela do homem.",
-        "q": "What did God make from the rib of the man?",
-        "options": [
-          "A woman",
-          "A tree",
-          "An ark"
-        ],
-        "answer": "A woman"
+        "text": "In the garden of Eden, God said to the man, \"Do not eat from the tree of good and evil.\" But the snake said to the woman, \"You will not die.\" So she ate the fruit, and the man ate too. They hid from God, but he said, \"Where are you?\" At last, God sent them out of the garden.",
+        "pt": "No jardim do Éden, Deus disse ao homem: \"Não coma da árvore do bem e do mal.\" Mas a cobra disse à mulher: \"Vocês não vão morrer.\" Então ela comeu o fruto, e o homem comeu também. Eles se esconderam de Deus, mas ele disse: \"Onde você está?\" No fim, Deus os mandou para fora do jardim.",
+        "questions": [
+          { "kind": "literal", "q": "Who told the woman that she would not die?", "qPt": "Quem disse à mulher que ela não morreria?",
+            "options": ["The snake", "The man", "God"], "answer": "The snake" },
+          { "kind": "inference", "q": "Why did the man and the woman hide?", "qPt": "Por que o homem e a mulher se esconderam?",
+            "options": ["They were afraid after eating the fruit", "The snake talked to the woman", "They wanted to see God"], "answer": "They were afraid after eating the fruit",
+            "explain": "Depois de comer o fruto, eles ouviram a voz de Deus no jardim e tiveram medo; por isso se esconderam (Gênesis 3:8-10)." }
+        ]
       },
-      "dialogue": {
-        "line": "Come and see the garden!",
-        "pt": "Vem ver o jardim!",
-        "options": [
-          "The tree of life is beautiful.",
-          "The sea is dry.",
-          "I have five stones."
-        ],
-        "answer": "The tree of life is beautiful.",
-        "answerPt": "A árvore da vida é linda."
+      "conversation": {
+        "with": "eva",
+        "turns": [
+          { "who": "eva", "en": "Adam, look at this tree! Can we eat its fruit?", "pt": "Adão, olhe esta árvore! Podemos comer o fruto dela?", "mood": "animado" },
+          { "who": "you", "options": ["No. God said, \"Do not eat from that tree.\"", "Yes. God said, \"Eat from every tree.\"", "No. God said, \"Do not hide from me.\""],
+            "answer": "No. God said, \"Do not eat from that tree.\"", "pt": "Não. Deus disse: \"Não coma daquela árvore.\"", "intent": "Diga o que Deus mandou sobre essa árvore" },
+          { "who": "eva", "en": "And the other trees in the garden?", "pt": "E as outras árvores do jardim?", "mood": "calmo" },
+          { "who": "you", "options": ["We may eat from every other tree.", "We may not eat from any tree.", "We may eat only from that tree."],
+            "answer": "We may eat from every other tree.", "pt": "Podemos comer de todas as outras árvores.", "intent": "Diga de quais árvores vocês podem comer", "speak": true }
+        ]
       },
-      "quiz": {
-        "q": "In whose image did God create man?",
-        "options": [
-          "In God's image",
-          "In the image of a king",
-          "In the image of an angel"
-        ],
-        "answer": "In God's image",
-        "explain": "Deus criou o homem à sua imagem (Gênesis 1:27)."
-      }
+      "fact": { "pt": "O nome Eva (em hebraico, Havá) lembra a palavra \"vida\": Adão deu esse nome à mulher porque ela seria a mãe de todos os que vivem (Gênesis 3:20).", "ref": "Gênesis 3:20" }
     }
   ]
 }
