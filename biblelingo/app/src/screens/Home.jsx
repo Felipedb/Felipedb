@@ -24,6 +24,18 @@ import Icon from "../components/Icon.jsx";
 
 // Deslocamento horizontal dos nós em ciclo de 8 posições, reiniciado a cada capítulo (5.2)
 const OFFSETS = [0, 44, 70, 44, 0, -44, -70, -44];
+
+// Variáveis do capítulo para o <section> e para o popover: as --unit-* da paleta, os espelhos --color-unit* (lidos pelos
+// ícones notebook e book dentro do bloco) e os tons do nó bloqueado (face --color-line, sombra e glifo do cadeado)
+function unitStyle(unitId, dark, over = {}) {
+  const v = { ...unitVars(unitId, dark), ...over };
+  return {
+    ...v,
+    "--color-unit": v["--unit-color"], "--color-unit-shadow": v["--unit-shadow"], "--color-unit-soft": v["--unit-soft"],
+    "--color-unit-text": v["--unit-text"], "--color-unit-ink": v["--unit-ink"],
+    "--node-locked-shadow": dark ? "#2b3940" : "#afafaf", "--node-locked-icon": dark ? "#8fa3ad" : "#afafaf",
+  };
+}
 const sectionOf = (ui) => (ui < 7 ? 1 : 2);
 // Quem era o nó atual quando a trilha saiu de cena: ao voltar, se mudou, esse nó acabou de ser concluído e comemora
 let lastCurrentId = null;
@@ -44,7 +56,7 @@ function UnitSection({ u, ui, dark, currentId, orderOf, resume, popKey, onOpenNo
   const crowns = unitCrowns(u.id);
   const prevUnitLast = ui === 0 ? null : unitSteps(COURSE[ui - 1]).slice(-1)[0].id;
   const cast = (UNIT_CAST[u.id] || []).map((k) => castChar(k));
-  const vars = { ...unitVars(u.id, dark), "--node-locked-shadow": dark ? "#2b3940" : "#afafaf" };
+  const vars = unitStyle(u.id, dark);
   const rows = steps.map((step, i) => ({ step, i, x: OFFSETS[i % 8] }));
   rows.push({ trophy: true, i: n, x: OFFSETS[n % 8] });
   rows.reverse(); // a trilha sobe: a última etapa fica em cima e a primeira embaixo
@@ -101,10 +113,10 @@ function UnitSection({ u, ui, dark, currentId, orderOf, resume, popKey, onOpenNo
               {decoEl}
               <PathNode step={step} order={orderOf[step.id]} status={status} isCurrent={isCurrent} x={row.x} icon={icon} ch={ch}
                 label={`${kind} ${i + 1} de ${n}: ${step.title}${tail}`}
-                balloon={isCurrent ? (isResume ? "Retomar" : "Começar") : null} balloonHidden={popKey === step.id}
+                balloon={isCurrent ? (isResume ? "Retomar" : "Começar") : null} balloonHidden={!!popKey}
                 ringSegments={isResume ? Math.max(1, Math.ceil(resume.exercises.length / 5)) : step.scene ? 2 : 3}
                 ringValue={isResume ? resume.index / resume.exercises.length : 0}
-                celebrate={justDone === step.id} delayed={isCurrent && celebrating} stars={stars}
+                celebrate={justDone === step.id} delayed={isCurrent && celebrating} stars={stars} cascade={n - i}
                 onOpen={(el) => onOpenNode(el, { step, i, n, u, ui, status, stars, isResume })} />
             </div>
           );
@@ -135,13 +147,13 @@ export default function Home() {
     return m;
   }, []);
 
-  // Abre com o nó atual centralizado na tela (decisão do dono), sem animação
+  // Abre com o nó atual centralizado na tela (decisão do dono), sem animação; ao voltar do Result, rola suave (7.3)
   useLayoutEffect(() => {
     const el = colRef.current && colRef.current.querySelector("[data-current]");
     if (!el) return;
     const r = el.getBoundingClientRect();
-    window.scrollTo({ top: Math.max(0, window.scrollY + r.top + r.height / 2 - window.innerHeight / 2), behavior: "auto" });
-  }, [currentId]);
+    window.scrollTo({ top: Math.max(0, window.scrollY + r.top + r.height / 2 - window.innerHeight / 2), behavior: justDone ? "smooth" : "auto" });
+  }, [currentId]); // eslint-disable-line
 
   // Pílula "Retomar": só com lição em andamento e com o nó atual fora da tela
   const resumeId = resume ? resume.lesson.id : null;
@@ -155,7 +167,7 @@ export default function Home() {
   }, [resumeId, currentId]);
 
   const openNode = (anchor, { step, u, status, stars, isResume }) => {
-    const vars = unitVars(u.id, dark);
+    const vars = unitStyle(u.id, dark);
     const key = step.id;
     const name = step.scene ? `Cena: ${step.title}` : step.title;
     if (status === "locked") {
@@ -174,7 +186,7 @@ export default function Home() {
 
   const openTrophy = (anchor, u, ui) => {
     const key = `${u.id}:trophy`;
-    const vars = unitVars(u.id, dark);
+    const vars = unitStyle(u.id, dark);
     if (!unitDone(u)) {
       setPop({ key, anchor, variant: "locked", title: `Troféu do capítulo ${ui + 1}`, subtitle: "Conclua todas as etapas do capítulo para desbloquear o troféu", vars });
       return;
@@ -186,7 +198,7 @@ export default function Home() {
       title: legendary ? "Troféu lendário" : "Troféu do capítulo",
       subtitle: legendary ? `${u.title} · nível lendário alcançado` : `${u.title} · ${crowns} de ${MAX_CROWN} coroas`,
       cta: legendary ? "Praticar de novo" : `Subir de nível · ${crowns + 1}/${MAX_CROWN}`,
-      vars: { ...vars, "--unit-color": "#ffc800", "--unit-shadow": "#e5a600", "--unit-ink": "#5b4400", "--unit-text-light": "#8a6200" },
+      vars: unitStyle(u.id, dark, { "--unit-color": "#ffc800", "--unit-shadow": "#e5a600", "--unit-ink": "#5b4400", "--unit-text-light": "#8a6200" }),
       onStart: () => { setPop(null); startLevelUp(u); },
     });
   };

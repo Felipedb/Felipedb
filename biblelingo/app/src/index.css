@@ -46,9 +46,6 @@
   /* Tons de ícone (2.4 e 4.2): círculo do check/X do rodapé e arco do cadeado */
   --color-ok-icon: #58cc02; --color-bad-icon: #ff4b4b; --color-icon-dim: #8a8a8a;
 
-  /* Capítulo (2.3): injetado por style no <section> do capítulo via unitVars() */
-  --color-unit: var(--unit-color, #58cc02); --color-unit-shadow: var(--unit-shadow, #46a302);
-  --color-unit-soft: var(--unit-soft, #d7ffb8); --color-unit-text: var(--unit-text, #3f7d12); --color-unit-ink: var(--unit-ink, #ffffff);
 
   /* Aliases dos tokens antigos (2.10): remover no sprint seguinte à migração das telas */
   --color-brand: var(--color-green-text); --color-brand-bright: var(--color-primary); --color-brand-dark: var(--color-green-shadow);
@@ -84,6 +81,14 @@
   @keyframes halo { 0% { transform: scale(1); opacity: .45; } 100% { transform: scale(1.18); opacity: 0; } }
   @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
   @keyframes wavebar { 0%, 100% { transform: scaleY(.45); } 50% { transform: scaleY(1); } }
+}
+
+/* Capítulo (2.3): injetado por style no <section> do capítulo via unitVars(). Bloco `inline` de propósito: as utilidades
+   bg-unit, text-unit-text e border-unit recebem o próprio var(--unit-color, ...) e resolvem no elemento; declarado só em :root,
+   var(--unit-color) seria resolvido na raiz (sempre verde) e herdado assim por todos os capítulos. */
+@theme inline static {
+  --color-unit: var(--unit-color, #58cc02); --color-unit-shadow: var(--unit-shadow, #46a302);
+  --color-unit-soft: var(--unit-soft, #d7ffb8); --color-unit-text: var(--unit-text, #3f7d12); --color-unit-ink: var(--unit-ink, #ffffff);
 }
 
 /* Tema escuro: mesma malha de tokens, superfícies invertidas (2.9) */

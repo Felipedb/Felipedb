@@ -7,7 +7,7 @@
 // TrailChest e TrailCharacter: baú (56 sobre elipse 48x12) e personagem (CharacterStage trail) ao lado do caminho.
 // Props do PathNode: step, order, status, isCurrent, x, icon, ch, label, balloon (texto ou null), balloonHidden,
 //   ringSegments, ringValue, celebrate (nó recém-concluído: pulo + estrelas), delayed (nó atual novo: anel e balão
-//   entram depois da comemoração do anterior), stars, onOpen(anchorEl)
+//   entram depois da comemoração do anterior), stars, cascade (índice no capítulo: entrada em cascata de 40 ms), onOpen(anchorEl)
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import { SPRING } from "../../core/motion.js";
@@ -17,7 +17,8 @@ import Icon from "../Icon.jsx";
 import { SegmentRing, Avatar, Chest, CharacterStage } from "../ui/index.js";
 import NodeBalloon from "./NodeBalloon.jsx";
 
-const NODE = "relative flex h-[70px] w-[70px] items-center justify-center rounded-full before:absolute before:-inset-2 before:rounded-full before:content-['']";
+// 70 px no celular, 76 no desktop (lg); a área de toque de 86 vem do pseudo-elemento
+const NODE = "relative flex h-[70px] w-[70px] items-center justify-center rounded-full before:absolute before:-inset-2 before:rounded-full before:content-[''] lg:h-[76px] lg:w-[76px]";
 const ENTER = { initial: { opacity: 0, y: 12 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, margin: "-10px" }, transition: SPRING.settle };
 
 // Estrelas em cascata acima do nó recém-concluído (100 ms entre elas, scale 0 -> 1.3 -> 1, somem após 1,2 s)
@@ -46,7 +47,7 @@ function CelebrationStars({ n }) {
 
 export default function PathNode({
   step, order, status = "locked", isCurrent = false, x = 0, icon = "star", ch = null, label, balloon = null, balloonHidden = false,
-  ringSegments = 3, ringValue = 0, celebrate = false, delayed = false, stars = 0, onOpen,
+  ringSegments = 3, ringValue = 0, celebrate = false, delayed = false, stars = 0, cascade = 0, onOpen,
 }) {
   const reduce = useReducedMotion();
   const btnRef = useRef(null);
@@ -61,7 +62,8 @@ export default function PathNode({
 
   return (
     <motion.div className={`relative shrink-0 ${isCurrent ? "z-[2]" : "z-[1]"}`} style={{ x }}
-      data-node={step.id} data-order={order} data-current={isCurrent || undefined} {...ENTER}>
+      data-node={step.id} data-order={order} data-current={isCurrent || undefined} {...ENTER}
+      transition={{ ...SPRING.settle, delay: (cascade % 10) * 0.04 }}>
       <AnimatePresence>{balloon && !balloonHidden && <NodeBalloon key="balloon" label={balloon} delay={delayed ? 1.1 : 0.4} />}</AnimatePresence>
       {isCurrent && (
         <motion.span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
@@ -75,7 +77,7 @@ export default function PathNode({
           <>
             <button type="button" disabled tabIndex={-1} aria-hidden="true" className={`${NODE} bg-line`}
               style={{ boxShadow: "0 8px 0 var(--node-locked-shadow, var(--color-disabled))" }}>
-              <Icon name="lock" size={32} />
+              <Icon name="lock" size={32} tone="var(--node-locked-icon, var(--color-disabled))" />
             </button>
             <button ref={btnRef} type="button" aria-label={label} aria-haspopup="dialog" className="absolute -inset-2 rounded-full" onClick={open} />
           </>
@@ -121,7 +123,7 @@ export function TrophyNode({ x = 0, done = false, crowns = 0, max = 5, label, on
           style={{ boxShadow: done ? "0 8px 0 #e5a600" : "0 8px 0 var(--node-locked-shadow, var(--color-disabled))" }}
           whileTap={{ y: 8, boxShadow: done ? "0 0 0 #e5a600" : "0 0 0 var(--node-locked-shadow, var(--color-disabled))" }}
           transition={SPRING.snap} onClick={open}>
-          <Icon name={legendary ? "crown" : "trophy"} size={32} tone={done ? "#5b4400" : "var(--color-disabled)"} />
+          <Icon name={legendary ? "crown" : "trophy"} size={32} tone={done ? "#5b4400" : "var(--node-locked-icon, var(--color-disabled))"} />
         </motion.button>
       </span>
       {legendary && <span className="mt-4 text-caption uppercase tracking-[.8px] text-yellow-text">Lendário</span>}

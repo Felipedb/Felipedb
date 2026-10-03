@@ -23,7 +23,8 @@ export default function RightRail({ onGo }) {
 
   return (
     <aside className="hidden lg:block">
-      <div className="sticky top-6 flex flex-col gap-4">
+      {/* Em telas baixas o rail rola por dentro (sem barra visível) em vez de esconder a linha do HUD sob o topo */}
+      <div className="sticky top-6 flex max-h-[calc(100dvh-3rem)] flex-col gap-4 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         <Card padding="none" className="px-2"><Hud inline /></Card>
 
         <Card>
