@@ -1,481 +1,816 @@
 {
+  "v": 2,
   "id": "u7",
   "lessons": [
     {
       "id": "u7l1",
       "title": "Fiel na Babilônia",
-      "vocab": [
+      "ref": "Daniel 1:1-2:49",
+      "level": "A2.1",
+      "narrator": "daniel",
+      "guests": ["aspenaz", "nabucodonosor"],
+      "names": [
+        { "en": "Daniel", "pt": "Daniel", "note": "jovem de Judá levado para a Babilônia; narra a unidade" },
+        { "en": "Belteshazzar", "pt": "Beltessazar", "note": "o nome babilônico dado a Daniel" },
+        { "en": "Nebuchadnezzar", "pt": "Nabucodonosor", "note": "rei da Babilônia" },
+        { "en": "Aspenaz", "pt": "Aspenaz", "note": "chefe dos oficiais do rei, responsável pelos jovens" },
+        { "en": "Babylon", "pt": "Babilônia", "note": "a cidade e o império do rei Nabucodonosor" },
+        { "en": "Jerusalem", "pt": "Jerusalém", "note": "a cidade de Daniel, em Judá" },
+        { "en": "God", "pt": "Deus" }
+      ],
+      "hints": {
+        "name": "nome",
+        "test": "testar, teste",
+        "times": "vezes",
+        "sleep": "dormir",
+        "statue": "estátua",
+        "gold": "ouro",
+        "break": "quebrar, quebrou"
+      },
+      "tips": [
         {
-          "en": "Babylon",
-          "pt": "Babilônia",
-          "icon": "🏙️"
+          "part": 1,
+          "id": "must-cannot",
+          "grammar": "must-cannot",
+          "title": "must, must not, cannot: dever e não poder",
+          "body": "must = dever (obrigação); must not = não dever (proibição); cannot = não poder (não consigo ou não é permitido). Depois deles o verbo fica na forma básica, sem to: I must eat, I cannot eat.",
+          "examples": [
+            { "en": "We must not eat this food", "pt": "Nós não devemos comer esta comida" },
+            { "en": "I cannot eat it", "pt": "Eu não posso comer isso" }
+          ],
+          "contrast": { "a": "I must eat this", "b": "I must not eat this", "note": "must = devo; must not = não devo" }
         },
         {
-          "en": "food",
-          "pt": "comida (manjar)",
-          "icon": "🍲"
-        },
-        {
-          "en": "vegetables",
-          "pt": "legumes",
-          "icon": "🥦"
-        },
-        {
-          "en": "wisdom",
-          "pt": "sabedoria",
-          "icon": "🦉"
-        },
-        {
-          "en": "wine",
-          "pt": "vinho",
-          "icon": "🍷"
-        },
-        {
-          "en": "ten",
-          "pt": "dez",
-          "icon": "🔟"
-        },
-        {
-          "en": "home",
-          "pt": "casa (lar)",
-          "icon": "🏠"
-        },
-        {
-          "en": "to defile",
-          "pt": "contaminar(-se)",
-          "icon": "🚫"
-        },
-        {
-          "en": "statue",
-          "pt": "estátua",
-          "icon": "🗿"
-        },
-        {
-          "en": "furnace",
-          "pt": "fornalha",
-          "icon": "🔥"
+          "part": 2,
+          "id": "comparative-than",
+          "grammar": "comparative-than",
+          "title": "better than, wiser than: comparar com than",
+          "body": "Para comparar duas coisas, o adjetivo curto ganha -er (wiser, stronger) e a comparação usa than (do que): wiser than the wise men. Alguns mudam de forma: good vira better, bad vira worse.",
+          "examples": [
+            { "en": "We looked better than the other young men", "pt": "Nós parecíamos melhores do que os outros jovens" },
+            { "en": "Daniel was wiser than the wise men", "pt": "Daniel era mais sábio do que os sábios" }
+          ],
+          "contrast": { "a": "Daniel is wise", "b": "Daniel is wiser than the king", "note": "wise = sábio; wiser than = mais sábio do que" }
         }
       ],
-      "sentences": [
+      "vocab": [
+        { "en": "food", "pt": "comida", "pos": "noun", "field": "food", "tier": "core", "part": 1, "icon": "🍲", "image": "food.png", "example": 3 },
+        { "en": "wine", "pt": "vinho", "pos": "noun", "field": "food", "tier": "core", "part": 1, "icon": "🍷", "image": "wine.png", "example": 3 },
+        { "en": "vegetables", "pt": "legumes", "ptAlt": ["verduras"], "pos": "noun", "field": "food", "tier": "core", "part": 1, "icon": "🥦", "image": "vegetables.png", "example": 5 },
+        { "en": "to drink", "pt": "beber", "pos": "verb", "field": "food", "tier": "core", "part": 1, "icon": "🥛", "image": "drink.png", "example": 4 },
+        { "en": "I cannot eat this", "pt": "Eu não posso comer isto", "ptAlt": ["Eu não posso comer isso"], "pos": "chunk", "field": "speech", "tier": "core", "part": 1, "icon": "🛑", "example": 4 },
+        { "en": "wise", "pt": "sábio", "ptAlt": ["sábia"], "pos": "adj", "field": "mind", "tier": "core", "part": 2, "icon": "🎓", "example": 8 },
+        { "en": "secret", "pt": "segredo", "pos": "noun", "field": "mind", "tier": "core", "part": 2, "icon": "🤫", "example": 11 },
+        { "en": "to reveal", "pt": "revelar", "pos": "verb", "field": "speech", "tier": "core", "part": 2, "icon": "🔦", "example": 11 },
+        { "en": "heaven", "pt": "céu", "ptAlt": ["céus"], "pos": "noun", "field": "faith", "tier": "core", "part": 2, "icon": "🌤️", "example": 12 },
+        { "en": "There is a God in heaven", "pt": "Há um Deus no céu", "ptAlt": ["Existe um Deus no céu"], "pos": "chunk", "field": "speech", "tier": "core", "part": 2, "icon": "🌌", "iconic": true, "example": 12 }
+      ],
+      "beats": [
         {
-          "en": "Daniel was far from home",
-          "pt": "Daniel estava longe de casa"
+          "order": 1,
+          "en": "The king of Babylon took us from Jerusalem",
+          "pt": "O rei da Babilônia nos levou de Jerusalém",
+          "altPt": ["O rei da Babilônia nos tirou de Jerusalém"],
+          "kind": "first-person",
+          "fact": true,
+          "speaker": "daniel"
         },
         {
-          "en": "In Babylon, Daniel was called Belteshazzar",
-          "pt": "Na Babilônia, Daniel foi chamado Beltessazar"
+          "order": 2,
+          "en": "What was my name in Babylon? Belteshazzar",
+          "pt": "Qual era o meu nome na Babilônia? Beltessazar",
+          "kind": "question",
+          "fact": true,
+          "speaker": "daniel"
         },
         {
-          "en": "The king gave them his food and his wine",
-          "pt": "O rei lhes deu do seu manjar e do seu vinho"
+          "order": 3,
+          "en": "The king gave us his food and his wine",
+          "pt": "O rei nos deu a comida e o vinho dele",
+          "altPt": ["O rei nos deu do seu manjar e do seu vinho"],
+          "kind": "statement",
+          "fact": true
         },
         {
-          "en": "Daniel purposed in his heart not to defile himself",
-          "pt": "Daniel assentou no seu coração não se contaminar",
-          "alt": [
-            "Daniel decided in his heart not to defile himself"
-          ]
+          "order": 4,
+          "en": "I cannot eat this food or drink this wine",
+          "pt": "Eu não posso comer esta comida nem beber este vinho",
+          "altPt": ["Eu não posso comer esta comida ou beber este vinho"],
+          "kind": "negative",
+          "fact": true,
+          "speaker": "daniel",
+          "gap": { "word": "cannot", "kind": "grammar", "options": ["cannot", "must", "could"] },
+          "grammar": "must-cannot"
         },
         {
-          "en": "Give us vegetables to eat and water to drink",
-          "pt": "Dá-nos legumes para comer e água para beber"
+          "order": 5,
+          "en": "We will only eat vegetables and drink water",
+          "pt": "Nós vamos comer só legumes e beber água",
+          "altPt": ["Só vamos comer legumes e beber água"],
+          "kind": "first-person",
+          "fact": true,
+          "speaker": "daniel"
         },
         {
-          "en": "Test your servants for ten days",
-          "alt": [
-            "Prove your servants for ten days"
-          ],
-          "pt": "Experimenta os teus servos por dez dias"
+          "order": 6,
+          "en": "Please test us for ten days with vegetables and water",
+          "pt": "Por favor, nos teste por dez dias com legumes e água",
+          "altPt": ["Por favor, teste a gente por dez dias com legumes e água"],
+          "kind": "first-person",
+          "fact": true,
+          "speaker": "daniel"
         },
         {
-          "en": "After ten days they looked healthier than the other young men",
-          "pt": "Ao fim de dez dias, pareciam mais saudáveis que os outros jovens"
+          "order": 7,
+          "en": "We looked better than the other young men",
+          "pt": "Nós parecíamos melhores do que os outros jovens",
+          "altPt": ["Nós parecíamos melhores que os outros jovens"],
+          "kind": "first-person",
+          "fact": true,
+          "speaker": "daniel",
+          "gap": { "word": "better", "kind": "grammar", "options": ["better", "good", "best"] },
+          "grammar": "comparative-than"
         },
         {
-          "en": "God gave them knowledge and wisdom",
-          "pt": "Deus lhes deu conhecimento e sabedoria"
+          "order": 8,
+          "en": "We were ten times wiser than all his wise men",
+          "pt": "Nós éramos dez vezes mais sábios do que todos os sábios dele",
+          "altPt": ["Nós éramos dez vezes mais sábios que todos os sábios dele"],
+          "kind": "first-person",
+          "fact": true,
+          "speaker": "daniel",
+          "grammar": "comparative-than"
         },
         {
-          "en": "The king found them ten times wiser than all his magicians",
-          "alt": [
-            "The king found them ten times better than all his magicians"
-          ],
-          "pt": "O rei os achou dez vezes mais doutos que todos os seus magos"
+          "order": 9,
+          "en": "Then the king had a dream and could not sleep",
+          "pt": "Então o rei teve um sonho e não conseguia dormir",
+          "altPt": ["Então o rei teve um sonho e não podia dormir"],
+          "kind": "negative",
+          "fact": true
         },
         {
-          "en": "Nebuchadnezzar dreamed of a great statue",
-          "pt": "Nabucodonosor sonhou com uma grande estátua"
+          "order": 10,
+          "en": "Who could explain the dream? No wise man could",
+          "pt": "Quem podia explicar o sonho? Nenhum sábio podia",
+          "kind": "question",
+          "fact": true
         },
         {
-          "en": "A stone broke the statue into pieces",
-          "pt": "Uma pedra quebrou a estátua em pedaços"
+          "order": 11,
+          "en": "The God of heaven revealed the secret to me",
+          "pt": "O Deus do céu revelou o segredo para mim",
+          "altPt": ["O Deus do céu me revelou o segredo"],
+          "kind": "first-person",
+          "fact": true,
+          "speaker": "daniel"
         },
         {
-          "en": "Our God is able to deliver us from the fiery furnace",
-          "pt": "O nosso Deus nos pode livrar da fornalha de fogo ardente"
+          "order": 12,
+          "en": "There is a God in heaven who reveals secrets",
+          "pt": "Há um Deus no céu que revela segredos",
+          "alt": ["There is a God in heaven that reveals secrets"],
+          "altPt": ["Há um Deus nos céus que revela os mistérios"],
+          "kind": "quote",
+          "fact": true,
+          "iconic": true,
+          "speaker": "daniel",
+          "gap": { "word": "secrets", "kind": "lexical", "options": ["secrets", "dreams", "hearts"] }
+        }
+      ],
+      "contrast": [
+        {
+          "a": "I cannot eat this food or drink this wine",
+          "b": "I can eat this food and drink this wine",
+          "note": "cannot = não posso; can = posso"
+        },
+        {
+          "a": "We looked better than the other young men",
+          "b": "We looked worse than the other young men",
+          "note": "better than = melhor do que; worse than = pior do que"
         }
       ],
       "verse": {
-        "text": "Daniel purposed in his heart that he would not defile himself with the portion of the king's meat.",
-        "pt": "Daniel assentou no seu coração não se contaminar com a porção do manjar do rei.",
-        "ref": "Daniel 1:8",
-        "blank": "heart",
-        "options": [
-          "heart",
-          "hand",
-          "mouth",
-          "house"
+        "text": "There is a God in heaven who reveals secrets.",
+        "classic": "There is a God in heaven that revealeth secrets.",
+        "pt": "Há um Deus no céu que revela segredos.",
+        "classicPt": "Há um Deus nos céus, o qual revela os mistérios.",
+        "ref": "Daniel 2:28",
+        "blanks": [
+          { "word": "secrets", "options": ["secrets", "dreams", "names", "kings"] },
+          { "word": "heaven", "options": ["heaven", "Babylon", "Jerusalem", "Egypt"] },
+          { "word": "reveals", "options": ["reveals", "hides", "forgets", "knows"] }
         ]
       },
       "reading": {
-        "text": "Daniel was taken from Jerusalem to Babylon. King Nebuchadnezzar had a dream about a great statue of gold, silver, brass and iron. A stone broke the statue into pieces. God showed Daniel the dream and its meaning.",
-        "pt": "Daniel foi levado de Jerusalém para a Babilônia. O rei Nabucodonosor teve um sonho com uma grande estátua de ouro, prata, bronze e ferro. Uma pedra quebrou a estátua em pedaços. Deus mostrou a Daniel o sonho e o seu significado.",
-        "q": "What broke the statue into pieces?",
-        "options": [
-          "A stone",
-          "A lion",
-          "The wind"
-        ],
-        "answer": "A stone"
+        "text": "Daniel was taken from Jerusalem to Babylon with his three friends. The king gave them his food and his wine, but Daniel did not eat it. For ten days they ate only vegetables and drank water, and they looked better than the other young men. Later the king had a dream, and no wise man could explain it. But the God of heaven revealed the secret to Daniel at night.",
+        "pt": "Daniel foi levado de Jerusalém para a Babilônia com os seus três amigos. O rei deu a eles a comida e o vinho dele, mas Daniel não comeu. Por dez dias eles comeram só legumes e beberam água, e ficaram com melhor aparência do que os outros jovens. Mais tarde o rei teve um sonho, e nenhum sábio conseguiu explicá-lo. Mas o Deus do céu revelou o segredo a Daniel de noite.",
+        "questions": [
+          {
+            "kind": "literal",
+            "q": "What did Daniel and his friends eat for ten days?",
+            "qPt": "O que Daniel e os amigos comeram por dez dias?",
+            "options": [
+              "Plants and water, nothing else",
+              "The same food as the king",
+              "Grain and fruit from the garden"
+            ],
+            "answer": "Plants and water, nothing else"
+          },
+          {
+            "kind": "inference",
+            "q": "Why could Daniel explain the king's dream?",
+            "qPt": "Por que Daniel conseguiu explicar o sonho do rei?",
+            "options": [
+              "Because God revealed it to him",
+              "Because he was the wisest man in Babylon",
+              "Because the king told him the dream"
+            ],
+            "answer": "Because God revealed it to him",
+            "explain": "Nenhum sábio da Babilônia conseguiu; o segredo foi revelado a Daniel numa visão de noite, e ele deu a glória ao Deus do céu (Daniel 2:19, 27-28)."
+          }
+        ]
       },
-      "dialogue": {
-        "line": "Daniel, the king gave you his food and his wine.",
-        "pt": "Daniel, o rei lhe deu do seu manjar e do seu vinho.",
-        "options": [
-          "Please, give us vegetables and water for ten days.",
-          "Bring me a harp and a sling.",
-          "Let there be light."
-        ],
-        "answer": "Please, give us vegetables and water for ten days.",
-        "answerPt": "Por favor, dê-nos legumes e água por dez dias."
+      "conversation": {
+        "with": "aspenaz",
+        "turns": [
+          {
+            "who": "aspenaz",
+            "en": "Daniel, the king gives you his food and his wine. Why don't you eat?",
+            "pt": "Daniel, o rei dá a você a comida e o vinho dele. Por que você não come?",
+            "mood": "surpreso"
+          },
+          {
+            "who": "you",
+            "options": [
+              "I cannot eat this. Please give us vegetables and water.",
+              "I cannot eat now. We will eat later with the king.",
+              "I cannot eat this. There is too much food here."
+            ],
+            "answer": "I cannot eat this. Please give us vegetables and water.",
+            "pt": "Eu não posso comer isto. Por favor, dê legumes e água para nós.",
+            "intent": "Recuse a comida e peça outra coisa"
+          },
+          {
+            "who": "aspenaz",
+            "en": "I'm afraid of the king! You will look worse than the other young men.",
+            "pt": "Eu tenho medo do rei! Vocês vão ficar com pior aparência do que os outros jovens.",
+            "mood": "assustado"
+          },
+          {
+            "who": "you",
+            "options": [
+              "Please test us for ten days, then look at our faces.",
+              "Please tell the king, then give us his food.",
+              "Please wait for ten days, then we will drink his wine."
+            ],
+            "answer": "Please test us for ten days, then look at our faces.",
+            "pt": "Por favor, nos teste por dez dias, depois olhe para os nossos rostos.",
+            "intent": "Peça um teste e diga por quanto tempo",
+            "speak": true
+          }
+        ]
       },
-      "quiz": {
-        "q": "Who was thrown into the fiery furnace?",
-        "options": [
-          "Shadrach, Meshach and Abednego",
-          "Daniel and the king",
-          "The magicians of Babylon"
-        ],
-        "answer": "Shadrach, Meshach and Abednego",
-        "explain": "Sadraque, Mesaque e Abede-Nego não adoraram a estátua de ouro e foram lançados na fornalha, mas Deus os livrou (Daniel 3:17-27)."
+      "fact": {
+        "pt": "Os quatro jovens de Judá ganharam nomes babilônicos: Daniel virou Beltessazar, e Hananias, Misael e Azarias viraram Sadraque, Mesaque e Abede-Nego.",
+        "ref": "Daniel 1:6-7"
       }
     },
     {
       "id": "u7l2",
-      "title": "A cova dos leões",
-      "vocab": [
+      "title": "A fornalha de fogo",
+      "ref": "Daniel 3:1-30",
+      "level": "A2.1",
+      "narrator": "daniel",
+      "guests": ["nabucodonosor"],
+      "names": [
+        { "en": "Nebuchadnezzar", "pt": "Nabucodonosor", "note": "rei da Babilônia" },
+        { "en": "Shadrach, Meshach and Abednego", "pt": "Sadraque, Mesaque e Abede-Nego", "note": "os três amigos de Daniel; em Judá se chamavam Hananias, Misael e Azarias" },
+        { "en": "Babylon", "pt": "Babilônia" },
+        { "en": "God", "pt": "Deus", "note": "com minúscula (god, gods), fala dos deuses da Babilônia" }
+      ],
+      "hints": {
+        "times": "vezes",
+        "hand": "mão",
+        "soldier": "soldado",
+        "hair": "cabelo",
+        "like": "como",
+        "angry": "bravo, com raiva"
+      },
+      "tips": [
         {
-          "en": "lion",
-          "pt": "leão",
-          "icon": "🦁"
+          "part": 1,
+          "id": "will-not",
+          "grammar": "will-not",
+          "title": "will not, even if: recusa firme",
+          "body": "will not (na fala, won't) diz o que a pessoa se recusa a fazer: We will not bow. even if (mesmo que) mostra que a decisão não depende do resultado: Even if God does not save us, we will not bow.",
+          "examples": [
+            { "en": "We will not bow to the statue", "pt": "Nós não vamos nos curvar à estátua" },
+            { "en": "Even if he does not save us, we will not bow", "pt": "Mesmo que ele não nos salve, nós não vamos nos curvar" }
+          ],
+          "contrast": { "a": "We will bow", "b": "We will not bow", "note": "will = vamos; will not = não vamos (recusa)" }
         },
         {
-          "en": "to pray",
-          "pt": "orar",
-          "icon": "🛐"
-        },
-        {
-          "en": "law",
-          "pt": "lei",
-          "icon": "⚖️"
-        },
-        {
-          "en": "den",
-          "pt": "cova",
-          "icon": "🕳️"
-        },
-        {
-          "en": "to kneel",
-          "pt": "ajoelhar-se",
-          "icon": "🧎"
-        },
-        {
-          "en": "faithful",
-          "pt": "fiel",
-          "icon": "🛡️"
-        },
-        {
-          "en": "decree",
-          "pt": "decreto",
-          "icon": "📜"
-        },
-        {
-          "en": "to throw",
-          "pt": "lançar",
-          "icon": "🤾"
-        },
-        {
-          "en": "to seal",
-          "pt": "selar",
-          "icon": "🔏"
-        },
-        {
-          "en": "to sleep",
-          "pt": "dormir",
-          "icon": "😴"
+          "part": 2,
+          "id": "passive-past",
+          "grammar": "passive-past",
+          "title": "were thrown, was made: a voz passiva",
+          "body": "Quando quem sofre a ação é o foco, use was ou were + particípio (-ed ou forma irregular): The men were thrown into the furnace. Quem fez a ação pode nem aparecer na frase.",
+          "examples": [
+            { "en": "The three men were thrown into the furnace", "pt": "Os três homens foram lançados na fornalha" },
+            { "en": "The statue was made of gold", "pt": "A estátua foi feita de ouro" }
+          ],
+          "contrast": { "a": "The soldiers threw them", "b": "They were thrown", "note": "ativa: quem faz a ação; passiva: quem sofre a ação" }
         }
       ],
-      "sentences": [
+      "vocab": [
+        { "en": "statue", "pt": "estátua", "pos": "noun", "field": "objects", "tier": "core", "part": 1, "icon": "🗿", "image": "statue.png", "example": 1 },
+        { "en": "gold", "pt": "ouro", "pos": "noun", "field": "objects", "tier": "core", "part": 1, "icon": "🥇", "image": "gold.png", "example": 1 },
+        { "en": "music", "pt": "música", "pos": "noun", "field": "objects", "tier": "core", "part": 1, "icon": "🎷", "image": "music.png", "example": 2 },
+        { "en": "to bow", "pt": "curvar-se", "ptAlt": ["se curvar", "inclinar-se"], "pos": "verb", "field": "actions", "tier": "core", "part": 1, "icon": "🙇", "image": "bow.png", "example": 2, "note": "bow down = curvar-se até o chão" },
+        { "en": "We will not bow", "pt": "Nós não vamos nos curvar", "ptAlt": ["Não vamos nos curvar"], "pos": "chunk", "field": "speech", "tier": "core", "part": 1, "icon": "👊", "iconic": true, "example": 6 },
+        { "en": "hot", "pt": "quente", "pos": "adj", "field": "quality", "tier": "core", "part": 2, "icon": "🥵", "example": 8 },
+        { "en": "to burn", "pt": "queimar", "pos": "verb", "field": "actions", "tier": "core", "part": 2, "icon": "🧨", "image": "burn.png", "example": 11 },
+        { "en": "to throw", "pt": "lançar", "ptAlt": ["jogar", "atirar"], "pos": "verb", "field": "actions", "tier": "core", "part": 2, "icon": "🤾", "image": "throw.png", "example": 9 },
+        { "en": "furnace", "pt": "fornalha", "pos": "noun", "field": "objects", "tier": "bible", "part": 2, "icon": "🌋", "image": "furnace.png", "example": 8 },
+        { "en": "Look! I see four men", "pt": "Olhem! Eu vejo quatro homens", "ptAlt": ["Olha! Eu vejo quatro homens"], "pos": "chunk", "field": "speech", "tier": "core", "part": 2, "icon": "4️⃣", "iconic": true, "example": 10 }
+      ],
+      "beats": [
         {
-          "en": "Daniel was faithful to God",
-          "pt": "Daniel era fiel a Deus"
+          "order": 1,
+          "en": "King Nebuchadnezzar made a statue of gold",
+          "pt": "O rei Nabucodonosor fez uma estátua de ouro",
+          "altPt": ["O rei Nabucodonosor fez uma estátua de ouro"],
+          "kind": "statement",
+          "fact": true
         },
         {
-          "en": "The king made a law",
-          "pt": "O rei fez uma lei"
+          "order": 2,
+          "en": "Everyone must bow down when the music plays",
+          "pt": "Todos devem se curvar quando a música tocar",
+          "altPt": ["Todos devem se curvar quando a música toca"],
+          "kind": "statement",
+          "fact": true
         },
         {
-          "en": "For thirty days they could only pray to the king",
-          "pt": "Por trinta dias, só podiam orar ao rei"
+          "order": 3,
+          "en": "They heard the music and bowed to the gold statue",
+          "pt": "Eles ouviram a música e se curvaram à estátua de ouro",
+          "altPt": ["Eles ouviram a música e se curvaram diante da estátua de ouro"],
+          "kind": "statement",
+          "fact": true
         },
         {
-          "en": "Darius signed the decree",
-          "pt": "Dario assinou o decreto"
+          "order": 4,
+          "en": "My three friends did not bow to the statue",
+          "pt": "Os meus três amigos não se curvaram à estátua",
+          "altPt": ["Meus três amigos não se curvaram diante da estátua"],
+          "kind": "negative",
+          "fact": true,
+          "speaker": "daniel"
         },
         {
-          "en": "The law of the Medes and Persians cannot be changed",
-          "pt": "A lei dos medos e dos persas não se pode revogar"
+          "order": 5,
+          "en": "The king asked, \"Who can save you from my hands?\"",
+          "pt": "O rei perguntou: \"Quem pode salvar vocês das minhas mãos?\"",
+          "altPt": ["O rei perguntou: \"Quem pode livrar vocês das minhas mãos?\""],
+          "kind": "question",
+          "fact": true,
+          "speaker": "nabucodonosor"
         },
         {
-          "en": "He prayed with his window open toward Jerusalem",
-          "alt": [
-            "He prayed with his windows open toward Jerusalem"
-          ],
-          "pt": "Ele orava com a janela aberta do lado de Jerusalém"
+          "order": 6,
+          "en": "They said, \"We will not bow to your statue\"",
+          "pt": "Eles disseram: \"Nós não vamos nos curvar à sua estátua\"",
+          "altPt": ["Eles disseram: \"Não vamos nos curvar diante da sua estátua\""],
+          "kind": "negative",
+          "fact": true,
+          "iconic": true,
+          "gap": { "word": "will", "kind": "grammar", "options": ["will", "would", "must"] },
+          "grammar": "will-not"
         },
         {
-          "en": "Daniel prayed three times a day",
-          "pt": "Daniel orava três vezes ao dia"
+          "order": 7,
+          "en": "The furnace was made seven times hotter than before",
+          "pt": "A fornalha foi feita sete vezes mais quente do que antes",
+          "altPt": ["A fornalha foi aquecida sete vezes mais do que antes"],
+          "kind": "statement",
+          "fact": true,
+          "grammar": "passive-past"
         },
         {
-          "en": "He knelt, prayed and gave thanks to his God",
-          "alt": [
-            "He kneeled, prayed and gave thanks to his God"
-          ],
-          "pt": "Ele se punha de joelhos, orava e dava graças ao seu Deus"
+          "order": 8,
+          "en": "The three men were thrown into the hot burning furnace",
+          "pt": "Os três homens foram lançados na fornalha quente e ardente",
+          "altPt": ["Os três homens foram jogados na fornalha quente e ardente"],
+          "kind": "statement",
+          "fact": true,
+          "gap": { "word": "were", "kind": "grammar", "options": ["were", "was", "are"] },
+          "grammar": "passive-past"
         },
         {
-          "en": "They threw Daniel into the den",
-          "pt": "Eles lançaram Daniel na cova"
+          "order": 9,
+          "en": "The fire killed the soldiers who threw them in",
+          "pt": "O fogo matou os soldados que os lançaram lá dentro",
+          "altPt": ["O fogo matou os soldados que os jogaram lá dentro"],
+          "kind": "statement",
+          "fact": true
         },
         {
-          "en": "A stone was laid upon the mouth of the lions' den",
-          "pt": "Uma pedra foi posta sobre a boca da cova dos leões"
+          "order": 10,
+          "en": "Look! I see four men walking in the fire",
+          "pt": "Olhem! Eu vejo quatro homens andando no fogo",
+          "alt": ["Look, I see four men loose, walking in the middle of the fire"],
+          "altPt": ["Eis que eu vejo quatro homens soltos, que andam passeando dentro do fogo"],
+          "kind": "quote",
+          "fact": true,
+          "iconic": true,
+          "speaker": "nabucodonosor"
         },
         {
-          "en": "Darius sealed the stone with his own ring",
-          "alt": [
-            "Darius sealed the stone with his own signet"
-          ],
-          "pt": "Dario selou a pedra com o seu anel"
+          "order": 11,
+          "en": "Did the fire burn them? No, not even their hair",
+          "pt": "O fogo os queimou? Não, nem mesmo o cabelo deles",
+          "altPt": ["O fogo queimou eles? Não, nem o cabelo deles"],
+          "kind": "question",
+          "fact": true
         },
         {
-          "en": "The king could not sleep that night",
-          "pt": "Naquela noite, o rei não conseguiu dormir"
+          "order": 12,
+          "en": "The king said, \"No other god can save like this\"",
+          "pt": "O rei disse: \"Nenhum outro deus pode salvar assim\"",
+          "altPt": ["O rei disse: \"Nenhum outro deus pode livrar assim\""],
+          "kind": "negative",
+          "fact": true,
+          "speaker": "nabucodonosor"
+        }
+      ],
+      "contrast": [
+        {
+          "a": "They said, \"We will not bow to your statue\"",
+          "b": "They said, \"We will bow to your statue\"",
+          "note": "will not = recusa firme; will = aceitação"
+        },
+        {
+          "a": "The three men were thrown into the hot burning furnace",
+          "b": "The soldiers threw the three men into the hot burning furnace",
+          "note": "were thrown = passiva (eles sofrem a ação); threw = ativa (os soldados fazem a ação)"
         }
       ],
       "verse": {
-        "text": "He kneeled upon his knees three times a day, and prayed, and gave thanks before his God.",
-        "pt": "Três vezes no dia se punha de joelhos, e orava, e dava graças diante do seu Deus.",
-        "ref": "Daniel 6:10",
-        "blank": "prayed",
-        "options": [
-          "prayed",
-          "sang",
-          "slept",
-          "ran"
+        "text": "Our God whom we serve is able to deliver us from the burning fiery furnace.",
+        "classic": "Our God whom we serve is able to deliver us from the burning fiery furnace.",
+        "pt": "O nosso Deus, a quem servimos, pode nos livrar da fornalha de fogo ardente.",
+        "classicPt": "O nosso Deus, a quem nós servimos, é que nos pode livrar; ele nos livrará da fornalha de fogo ardente.",
+        "ref": "Daniel 3:17",
+        "blanks": [
+          { "word": "deliver", "options": ["deliver", "take", "hide", "call"] },
+          { "word": "furnace", "options": ["furnace", "prison", "river", "cave"] },
+          { "word": "serve", "options": ["serve", "love", "fear", "know"] }
         ]
       },
       "reading": {
-        "text": "King Darius set Daniel over all the princes, because an excellent spirit was in him. The princes sought to find a fault in Daniel, but they found none, because he was faithful. So they asked the king to sign a law: for thirty days, pray only to the king.",
-        "pt": "O rei Dario pôs Daniel sobre todos os príncipes, porque nele havia um espírito excelente. Os príncipes procuraram achar culpa em Daniel, mas não acharam nenhuma, porque ele era fiel. Então pediram ao rei que assinasse uma lei: por trinta dias, orar só ao rei.",
-        "q": "Why could the princes find no fault in Daniel?",
-        "options": [
-          "Because he was faithful",
-          "Because he hid in the den",
-          "Because he was the king's son"
-        ],
-        "answer": "Because he was faithful"
+        "text": "King Nebuchadnezzar made a great statue of gold, and everyone had to bow down when the music played. But Shadrach, Meshach and Abednego did not bow. They said, \"Our God can save us from the furnace, but even if he does not, we will not bow.\" The king was very angry, and the three men were thrown into the hot furnace. Then the king saw four men walking in the fire, and the fire did not burn them.",
+        "pt": "O rei Nabucodonosor fez uma grande estátua de ouro, e todos tinham de se curvar quando a música tocava. Mas Sadraque, Mesaque e Abede-Nego não se curvaram. Eles disseram: \"O nosso Deus pode nos salvar da fornalha, mas, mesmo que ele não salve, nós não vamos nos curvar.\" O rei ficou muito bravo, e os três homens foram lançados na fornalha quente. Então o rei viu quatro homens andando no fogo, e o fogo não os queimou.",
+        "questions": [
+          {
+            "kind": "literal",
+            "q": "What did the three men say to the king?",
+            "qPt": "O que os três homens disseram ao rei?",
+            "options": [
+              "They would not bow, with or without God's help",
+              "They would bow only after the music stopped",
+              "They would leave Babylon and go back home"
+            ],
+            "answer": "They would not bow, with or without God's help"
+          },
+          {
+            "kind": "inference",
+            "q": "Why did the king see four men in the fire?",
+            "qPt": "Por que o rei viu quatro homens no fogo?",
+            "options": [
+              "God sent someone to be with the three men",
+              "One soldier fell into the furnace with them",
+              "The king was angry and could not count well"
+            ],
+            "answer": "God sent someone to be with the three men",
+            "explain": "O rei viu um quarto homem no fogo, parecido com um filho dos deuses, e depois disse que Deus enviou o seu anjo para livrar os servos (Daniel 3:25, 28)."
+          }
+        ]
       },
-      "dialogue": {
-        "line": "Daniel, the king made a new law!",
-        "pt": "Daniel, o rei fez uma nova lei!",
-        "options": [
-          "I will pray to my God anyway.",
-          "Then I will pray only to the king.",
-          "Bring me the king's wine."
-        ],
-        "answer": "I will pray to my God anyway.",
-        "answerPt": "Vou orar ao meu Deus mesmo assim."
+      "conversation": {
+        "with": "nabucodonosor",
+        "turns": [
+          {
+            "who": "nabucodonosor",
+            "en": "Is it true? You don't serve my gods and you don't bow to my statue?",
+            "pt": "É verdade? Vocês não servem aos meus deuses e não se curvam à minha estátua?",
+            "mood": "bravo"
+          },
+          {
+            "who": "you",
+            "options": [
+              "It's true, my king. We will not bow to your statue.",
+              "It's true, my king. We will bow when the music plays.",
+              "No, my king. We bow to your statue every day."
+            ],
+            "answer": "It's true, my king. We will not bow to your statue.",
+            "pt": "É verdade, meu rei. Nós não vamos nos curvar à sua estátua.",
+            "intent": "Confirme e diga o que vocês não vão fazer"
+          },
+          {
+            "who": "nabucodonosor",
+            "en": "Then I will throw you into the hot furnace! Who can save you from my hands?",
+            "pt": "Então eu vou lançar vocês na fornalha quente! Quem pode salvar vocês das minhas mãos?",
+            "mood": "urgente"
+          },
+          {
+            "who": "you",
+            "options": [
+              "Our God can save us. But even if he does not, we will not bow.",
+              "Our God can save us. So please make the furnace a little hotter.",
+              "Nobody can save us. So we will bow to the statue now."
+            ],
+            "answer": "Our God can save us. But even if he does not, we will not bow.",
+            "pt": "O nosso Deus pode nos salvar. Mas, mesmo que ele não salve, nós não vamos nos curvar.",
+            "intent": "Diga quem pode salvar vocês e mantenha a decisão",
+            "speak": true
+          }
+        ]
       },
-      "quiz": {
-        "q": "What did the king do with the stone on the den?",
-        "options": [
-          "He sealed it with his signet",
-          "He broke it into pieces",
-          "He threw it into the sea"
-        ],
-        "answer": "He sealed it with his signet",
-        "explain": "Puseram uma pedra sobre a boca da cova, e o rei a selou com o seu anel (Daniel 6:17)."
+      "fact": {
+        "pt": "A estátua de ouro tinha sessenta côvados de altura e seis de largura, cerca de 27 metros por 2,7, e foi levantada no campo de Dura, na província da Babilônia.",
+        "ref": "Daniel 3:1"
       }
     },
     {
       "id": "u7l3",
-      "title": "O Deus vivo",
-      "vocab": [
+      "title": "A cova dos leões",
+      "ref": "Daniel 6:1-28",
+      "level": "A2.1",
+      "narrator": "daniel",
+      "guests": ["dario"],
+      "names": [
+        { "en": "Daniel", "pt": "Daniel", "note": "já idoso, líder no reino de Dario" },
+        { "en": "Darius", "pt": "Dario", "note": "o rei medo que governou a Babilônia depois de Belsazar" },
+        { "en": "Jerusalem", "pt": "Jerusalém", "note": "Daniel orava voltado para a cidade" },
+        { "en": "God", "pt": "Deus" }
+      ],
+      "hints": {
+        "leader": "líder",
+        "find": "achar, encontrar",
+        "new": "nova, novo",
+        "change": "mudar",
+        "hurt": "machucar, ferir",
+        "thrown": "lançado"
+      },
+      "tips": [
         {
-          "en": "angel",
-          "pt": "anjo",
-          "icon": "👼"
+          "part": 1,
+          "id": "frequency",
+          "grammar": "frequency",
+          "title": "every day, three times a day: com que frequência",
+          "body": "Para dizer com que frequência algo acontece, use every day (todo dia), once a day, three times a day (três vezes por dia), always, never. A expressão costuma ficar no fim da frase. as before = como antes.",
+          "examples": [
+            { "en": "I prayed three times a day", "pt": "Eu orava três vezes por dia" },
+            { "en": "He prayed every day, as before", "pt": "Ele orava todo dia, como antes" }
+          ],
+          "contrast": { "a": "I pray every day", "b": "I pray three times a day", "note": "every day = todo dia; three times a day = três vezes por dia" }
         },
         {
-          "en": "living",
-          "pt": "vivo (vivente)",
-          "icon": "💚"
-        },
-        {
-          "en": "kingdom",
-          "pt": "reino",
-          "icon": "🏰"
-        },
-        {
-          "en": "to deliver",
-          "pt": "livrar",
-          "icon": "🛡️"
-        },
-        {
-          "en": "mouth",
-          "pt": "boca",
-          "icon": "👄"
-        },
-        {
-          "en": "to close",
-          "pt": "fechar (cerrar)",
-          "icon": "🔒"
-        },
-        {
-          "en": "morning",
-          "pt": "manhã",
-          "icon": "🌄"
-        },
-        {
-          "en": "forever",
-          "pt": "para sempre",
-          "icon": "♾️"
-        },
-        {
-          "en": "to save",
-          "pt": "salvar",
-          "icon": "🆘"
-        },
-        {
-          "en": "to write",
-          "pt": "escrever",
-          "icon": "📝"
+          "part": 2,
+          "id": "could-not",
+          "grammar": "could-not",
+          "title": "could not, did not: negativas no passado",
+          "body": "could not (couldn't) = não podia, não conseguia: The king could not change the law. did not (didn't) nega qualquer outro verbo no passado, e o verbo volta à forma básica: They did not hurt me.",
+          "examples": [
+            { "en": "The king could not change the law", "pt": "O rei não podia mudar a lei" },
+            { "en": "The lions did not hurt me", "pt": "Os leões não me machucaram" }
+          ],
+          "contrast": { "a": "The lions could hurt me", "b": "The lions could not hurt me", "note": "could = podiam; could not = não podiam" }
         }
       ],
-      "sentences": [
+      "vocab": [
+        { "en": "kingdom", "pt": "reino", "pos": "noun", "field": "places", "tier": "core", "part": 1, "icon": "🏰", "image": "kingdom.png", "example": 1 },
+        { "en": "law", "pt": "lei", "pos": "noun", "field": "work", "tier": "core", "part": 1, "icon": "⚖️", "image": "law.png", "example": 3 },
+        { "en": "window", "pt": "janela", "pos": "noun", "field": "objects", "tier": "core", "part": 1, "icon": "🔲", "image": "window.png", "example": 5 },
+        { "en": "open", "pt": "aberto", "ptAlt": ["aberta", "abertas"], "pos": "adj", "field": "quality", "tier": "core", "part": 1, "icon": "🔓", "example": 5 },
+        { "en": "three times a day", "pt": "três vezes por dia", "ptAlt": ["três vezes ao dia"], "pos": "chunk", "field": "time", "tier": "core", "part": 1, "icon": "⏰", "example": 6 },
+        { "en": "lion", "pt": "leão", "pos": "noun", "field": "animals", "tier": "core", "part": 2, "icon": "🦁", "image": "lion.png", "example": 8 },
+        { "en": "den", "pt": "cova", "ptAlt": ["cova dos leões"], "pos": "noun", "field": "places", "tier": "bible", "part": 2, "icon": "🏚️", "image": "den.png", "example": 8, "note": "a cova dos leões; lions' den" },
+        { "en": "angel", "pt": "anjo", "pos": "noun", "field": "faith", "tier": "bible", "part": 2, "icon": "👼", "example": 11 },
+        { "en": "mouth", "pt": "boca", "pos": "noun", "field": "body", "tier": "core", "part": 2, "icon": "😮", "image": "mouth.png", "example": 12 },
+        { "en": "Good morning, my king", "pt": "Bom dia, meu rei", "pos": "chunk", "field": "speech", "tier": "core", "part": 2, "icon": "🌞", "example": 11 }
+      ],
+      "beats": [
         {
-          "en": "In the morning the king ran to the den",
-          "pt": "De manhã o rei correu para a cova"
+          "order": 1,
+          "en": "King Darius made me a leader in his kingdom",
+          "pt": "O rei Dario me fez um líder no reino dele",
+          "altPt": ["O rei Dario me fez um dos líderes do reino dele"],
+          "kind": "first-person",
+          "fact": true,
+          "speaker": "daniel"
         },
         {
-          "en": "Daniel, servant of the living God!",
-          "pt": "Daniel, servo do Deus vivo!"
+          "order": 2,
+          "en": "Did the other men find anything against me? No",
+          "pt": "Os outros homens acharam algo contra mim? Não",
+          "altPt": ["Os outros homens encontraram alguma coisa contra mim? Não"],
+          "kind": "question",
+          "fact": true,
+          "speaker": "daniel"
         },
         {
-          "en": "Is your God able to deliver you from the lions?",
-          "pt": "Pode o teu Deus livrar-te dos leões?"
+          "order": 3,
+          "en": "They asked the king for a new law in his kingdom",
+          "pt": "Eles pediram ao rei uma nova lei no reino dele",
+          "altPt": ["Eles pediram ao rei uma lei nova no reino dele"],
+          "kind": "statement",
+          "fact": true
         },
         {
-          "en": "O king, live forever",
-          "alt": [
-            "O king, live for ever"
-          ],
-          "pt": "Ó rei, vive para sempre!"
+          "order": 4,
+          "en": "The law said, \"Pray only to the king for thirty days\"",
+          "pt": "A lei dizia: \"Orem só ao rei por trinta dias\"",
+          "altPt": ["A lei dizia: \"Orem somente ao rei por trinta dias\""],
+          "kind": "quote",
+          "fact": true,
+          "prod": false
         },
         {
-          "en": "God sent his angel",
-          "pt": "Deus enviou o seu anjo"
+          "order": 5,
+          "en": "My windows were open toward Jerusalem",
+          "pt": "As minhas janelas estavam abertas para Jerusalém",
+          "altPt": ["Minhas janelas estavam abertas na direção de Jerusalém"],
+          "kind": "first-person",
+          "fact": true,
+          "speaker": "daniel"
         },
         {
-          "en": "The angel shut the lions' mouths",
-          "alt": [
-            "The angel closed the lions' mouths"
-          ],
-          "pt": "O anjo fechou a boca dos leões"
+          "order": 6,
+          "en": "I prayed three times a day with my windows open",
+          "pt": "Eu orava três vezes por dia com as janelas abertas",
+          "altPt": ["Eu orava três vezes ao dia com as minhas janelas abertas"],
+          "kind": "first-person",
+          "fact": true,
+          "speaker": "daniel",
+          "gap": { "word": "three times a day", "kind": "grammar", "options": ["three times a day", "every day", "as before"] },
+          "grammar": "frequency"
         },
         {
-          "en": "He is the living God",
-          "pt": "Ele é o Deus vivo"
+          "order": 7,
+          "en": "The king could not change the law of his kingdom",
+          "pt": "O rei não podia mudar a lei do reino dele",
+          "altPt": ["O rei não conseguia mudar a lei do reino dele"],
+          "kind": "negative",
+          "fact": true,
+          "gap": { "word": "could", "kind": "grammar", "options": ["could", "would", "must"] },
+          "grammar": "could-not"
         },
         {
-          "en": "His kingdom is forever",
-          "pt": "O seu reino é para sempre"
+          "order": 8,
+          "en": "They threw me into the den of lions",
+          "pt": "Eles me lançaram na cova dos leões",
+          "altPt": ["Eles me jogaram na cova dos leões"],
+          "kind": "first-person",
+          "fact": true,
+          "speaker": "daniel"
         },
         {
-          "en": "His kingdom shall not be destroyed",
-          "alt": [
-            "His kingdom will not be destroyed"
-          ],
-          "pt": "O seu reino não se pode destruir"
+          "order": 9,
+          "en": "A stone was put on the mouth of the den",
+          "pt": "Uma pedra foi posta na boca da cova",
+          "altPt": ["Uma pedra foi colocada na boca da cova"],
+          "kind": "statement",
+          "fact": true
         },
         {
-          "en": "He delivers and he saves",
-          "pt": "Ele livra e salva"
+          "order": 10,
+          "en": "\"Daniel, did your God save you from the lions?\"",
+          "pt": "\"Daniel, o seu Deus salvou você dos leões?\"",
+          "alt": ["Daniel, was your God able to save you from the lions?"],
+          "altPt": ["\"Daniel, o teu Deus pôde livrar-te dos leões?\""],
+          "kind": "question",
+          "fact": true,
+          "speaker": "dario"
         },
         {
-          "en": "The king wrote to all the people",
-          "pt": "O rei escreveu a todo o povo"
+          "order": 11,
+          "en": "\"Good morning, my king. God sent his angel to me\"",
+          "pt": "\"Bom dia, meu rei. Deus enviou o anjo dele para mim\"",
+          "altPt": ["\"Bom dia, meu rei. Deus me enviou o seu anjo\""],
+          "kind": "first-person",
+          "fact": true,
+          "speaker": "daniel"
         },
         {
-          "en": "He delivered Daniel from the power of the lions",
-          "pt": "Ele livrou Daniel do poder dos leões"
+          "order": 12,
+          "en": "The angel closed their mouths. They could not hurt me",
+          "pt": "O anjo fechou a boca deles. Eles não puderam me machucar",
+          "altPt": ["O anjo fechou a boca dos leões. Eles não me fizeram mal"],
+          "kind": "negative",
+          "fact": true,
+          "speaker": "daniel",
+          "grammar": "could-not"
+        }
+      ],
+      "contrast": [
+        {
+          "a": "I prayed three times a day with my windows open",
+          "b": "I prayed every day with my windows open",
+          "note": "three times a day = três vezes por dia; every day = todo dia"
+        },
+        {
+          "a": "The king could not change the law of his kingdom",
+          "b": "The king could change the law of his kingdom",
+          "note": "could not = não podia; could = podia"
         }
       ],
       "verse": {
-        "text": "He is the living God, and stedfast for ever, and his kingdom that which shall not be destroyed.",
-        "pt": "Ele é o Deus vivo e para sempre permanece; e o seu reino não se pode destruir.",
-        "ref": "Daniel 6:26",
-        "blank": "living",
-        "options": [
-          "living",
-          "little",
-          "mighty",
-          "holy"
+        "text": "My God has sent his angel, and has shut the lions' mouths, and they have not hurt me.",
+        "classic": "My God hath sent his angel, and hath shut the lions' mouths, that they have not hurt me.",
+        "pt": "O meu Deus enviou o seu anjo e fechou a boca dos leões, e eles não me machucaram.",
+        "classicPt": "O meu Deus enviou o seu anjo, e fechou a boca dos leões, para que não me fizessem dano.",
+        "ref": "Daniel 6:22",
+        "blanks": [
+          { "word": "angel", "options": ["angel", "servant", "friend", "son"] },
+          { "word": "mouths", "options": ["mouths", "eyes", "hands", "feet"] },
+          { "word": "hurt", "options": ["hurt", "seen", "killed", "heard"] }
         ]
       },
       "reading": {
-        "text": "The king rose very early and went in haste to the den. Daniel was alive! The king was very glad and took Daniel out of the den. No hurt was found on him, because he believed in his God.",
-        "pt": "O rei se levantou muito cedo e foi com pressa à cova. Daniel estava vivo! O rei ficou muito alegre e tirou Daniel da cova. Nenhum dano se achou nele, porque crera no seu Deus.",
-        "q": "Why was no hurt found on Daniel?",
-        "options": [
-          "Because he believed in his God",
-          "Because the lions were asleep",
-          "Because the den was empty"
-        ],
-        "answer": "Because he believed in his God"
+        "text": "King Darius made Daniel a leader in his kingdom. The other men could not find anything against him, so they asked the king for a law: for thirty days, pray only to the king. Daniel prayed three times a day with his windows open, as before. The king could not change the law, and Daniel was thrown into the den of lions. But God sent his angel and closed the lions' mouths.",
+        "pt": "O rei Dario fez de Daniel um líder no reino dele. Os outros homens não conseguiram achar nada contra ele, então pediram ao rei uma lei: por trinta dias, orar só ao rei. Daniel orava três vezes por dia com as janelas abertas, como antes. O rei não podia mudar a lei, e Daniel foi lançado na cova dos leões. Mas Deus enviou o seu anjo e fechou a boca dos leões.",
+        "questions": [
+          {
+            "kind": "literal",
+            "q": "What did the new law say?",
+            "qPt": "O que a nova lei dizia?",
+            "options": [
+              "Pray to no one but the king for a month",
+              "Open your windows toward Jerusalem every day",
+              "Throw every leader into the den of lions"
+            ],
+            "answer": "Pray to no one but the king for a month"
+          },
+          {
+            "kind": "inference",
+            "q": "Why did the men ask the king for this law?",
+            "qPt": "Por que os homens pediram essa lei ao rei?",
+            "options": [
+              "To find something against Daniel",
+              "Because the king wanted more prayers",
+              "Because Daniel asked them for it"
+            ],
+            "answer": "To find something against Daniel",
+            "explain": "Eles não achavam nenhuma falha em Daniel e só podiam acusá-lo por causa da lei do seu Deus; por isso pediram o decreto (Daniel 6:4-7)."
+          }
+        ]
       },
-      "dialogue": {
-        "line": "Daniel, is your God able to save you?",
-        "pt": "Daniel, o seu Deus pode salvá-lo?",
-        "options": [
-          "Yes! God sent his angel.",
-          "No, the window is closed.",
-          "Bring me five loaves."
-        ],
-        "answer": "Yes! God sent his angel.",
-        "answerPt": "Sim! Deus enviou o seu anjo."
+      "conversation": {
+        "with": "dario",
+        "turns": [
+          {
+            "who": "dario",
+            "en": "Daniel, servant of the living God! Did your God save you from the lions?",
+            "pt": "Daniel, servo do Deus vivo! O seu Deus salvou você dos leões?",
+            "mood": "urgente"
+          },
+          {
+            "who": "you",
+            "options": [
+              "Good morning, my king. God sent his angel to me.",
+              "Good morning, my king. The lions are sleeping now.",
+              "Good morning, my king. I opened the den and ran."
+            ],
+            "answer": "Good morning, my king. God sent his angel to me.",
+            "pt": "Bom dia, meu rei. Deus enviou o anjo dele para mim.",
+            "intent": "Cumprimente o rei e diga quem o salvou"
+          },
+          {
+            "who": "dario",
+            "en": "Then come out of the den! Did the lions hurt you?",
+            "pt": "Então saia da cova! Os leões machucaram você?",
+            "mood": "animado"
+          },
+          {
+            "who": "you",
+            "options": [
+              "No, my king. The lions could not hurt me.",
+              "Yes, my king. Now open the den, please.",
+              "No, my king. I closed the den with a stone."
+            ],
+            "answer": "No, my king. The lions could not hurt me.",
+            "pt": "Não, meu rei. Os leões não puderam me machucar.",
+            "intent": "Responda e diga como você está",
+            "speak": true
+          }
+        ]
       },
-      "quiz": {
-        "q": "What happened to the men who accused Daniel?",
-        "options": [
-          "They were thrown into the lions' den",
-          "They became princes",
-          "They went to Jerusalem"
-        ],
-        "answer": "They were thrown into the lions' den",
-        "explain": "Os homens que acusaram Daniel foram lançados na cova dos leões (Daniel 6:24)."
+      "fact": {
+        "pt": "Enquanto Daniel estava na cova, o rei Dario passou a noite em jejum no palácio, sem música e sem conseguir dormir.",
+        "ref": "Daniel 6:18"
       }
     }
   ]
