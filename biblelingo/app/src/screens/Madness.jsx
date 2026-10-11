@@ -154,7 +154,7 @@ export default function Madness({ onExit }) {
     <div className="mx-auto max-w-xl px-4" data-screen="madness">
       {/* Cabeçalho: voltar, placar, relógio */}
       <div className="sticky top-0 z-30 -mx-4 flex h-14 items-center gap-3 bg-page/95 px-3 backdrop-blur lg:mx-0">
-        <button type="button" onClick={exit} aria-label="Sair do Match Madness" data-md-back
+        <button type="button" onClick={() => { feel("tap"); exit(); }} aria-label="Sair do Match Madness" data-md-back
           className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md text-ink-soft hover:bg-raised">
           <Icon name="arrow-left" size={24} />
         </button>

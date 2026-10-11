@@ -12,6 +12,7 @@ import { unitVars } from "../../core/palette.js";
 import { useIsDark } from "../shell/useIsDark.js";
 import Icon from "../Icon.jsx";
 import { Sheet, Button3D, Avatar, useAsset, charAsset } from "../ui/index.js";
+import { feel } from "../../core/sfx.js";
 
 const TABS = [["about", "Sobre"], ["lessons", "Lições"], ["verses", "Versículos"]];
 // Quadrados das lições-chave: ciclo verde, azul, roxo, laranja com ícones do conjunto SVG
@@ -57,7 +58,7 @@ function Tabs({ tab, setTab }) {
       {TABS.map(([id, label]) => {
         const on = tab === id;
         return (
-          <button key={id} type="button" role="tab" aria-selected={on} onClick={() => setTab(id)}
+          <button key={id} type="button" role="tab" aria-selected={on} onClick={() => { feel("tab"); setTab(id); }}
             className={`relative flex h-12 flex-1 items-center justify-center text-label uppercase tracking-[1px] ${on ? "text-unit-text" : "text-ink-soft"}`}>
             {label}
             {on && <motion.span layoutId="char-tab" aria-hidden className="absolute inset-x-2 -bottom-[2px] h-[3px] rounded-full bg-unit" transition={SPRING.settle} />}

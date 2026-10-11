@@ -13,7 +13,7 @@ import { STORIES, CHARACTERS, castChar } from "../core/content.js";
 import { speak, stopClip, clipDuration } from "../core/audio.js";
 import { shuffle } from "../core/util.js";
 import { SPRING, SHAKE, EASE } from "../core/motion.js";
-import { sfx } from "../core/sfx.js";
+import { sfx, feel } from "../core/sfx.js";
 import { haptic } from "../core/haptics.js";
 import { Button3D, ProgressBar, Avatar, Bubble, Option, OptionGroup, Chip, Gap, StatCard, CharacterStage } from "../components/ui/index.js";
 import Icon from "../components/Icon.jsx";
@@ -175,7 +175,7 @@ export default function Story({ id, onExit }) {
     <div className="mx-auto max-w-xl px-4" data-screen="story">
       {/* Cabeçalho 56 px: voltar, progresso, título */}
       <div className="sticky top-0 z-30 -mx-4 flex h-14 items-center gap-3 bg-page/95 px-3 backdrop-blur lg:mx-0">
-        <button type="button" onClick={exit} aria-label="Sair da história" data-story-back
+        <button type="button" onClick={() => { feel("tap"); exit(); }} aria-label="Sair da história" data-story-back
           className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md text-ink-soft hover:bg-raised">
           <Icon name="arrow-left" size={24} />
         </button>
@@ -206,7 +206,7 @@ export default function Story({ id, onExit }) {
               <h2 className="mb-4 mt-2 text-title text-ink"><Sayable text={beat.q} /></h2>
               <OptionGroup cols={1} label="Opções">
                 {options.map((opt, k) => (
-                  <Option key={opt} index={k} value={opt} state={optState(opt)} onSelect={pick} data-opt={opt}>{opt}</Option>
+                  <Option key={opt} index={k} value={opt} state={optState(opt)} onSelect={pick} sound={false} data-opt={opt}>{opt}</Option>
                 ))}
               </OptionGroup>
             </motion.div>

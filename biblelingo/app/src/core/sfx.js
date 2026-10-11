@@ -249,7 +249,11 @@ function startSource(c, buf, offset, dur, rate, gain, role) {
     src.buffer = buf;
     src.playbackRate.value = rate;
     const g = c.createGain();
-    g.gain.value = gain;
+    // Rampa de 2 ms na entrada: o Vorbis espalha um pré-eco de até -36 dBFS antes do ataque, e começar o trecho
+    // num valor diferente de zero estala. currentTime é o início do próximo bloco renderizado, onde a fonte entra.
+    const t0 = c.currentTime;
+    g.gain.setValueAtTime(0, t0);
+    g.gain.linearRampToValueAtTime(gain, t0 + 0.002);
     src.connect(g);
     g.connect(master || c.destination);
     if (dur != null) src.start(0, offset, dur); else src.start();
@@ -294,7 +298,7 @@ function render(e) {
   const gain = familyGain(e.role) * e.volume;
   const shift = e.transpose + e.resid; // semitons em relação à primeira variante
   if (!c) return playHtml(FALLBACK[e.name] || [], gain * (SFX_MIX.masterGain || 0.9), clampRate(Math.pow(2, shift / 12) * e.rateMul)) ? "html" : "none";
-  if (c.state === "suspended") {
+  if (c.state !== "running") { // suspended (antes do gesto, app em segundo plano) ou interrupted (iOS)
     c.resume().catch(() => {});
     if (now() - lastGesture > 1000) return "suspended"; // fora de um gesto o som chegaria atrasado: descarta
   }

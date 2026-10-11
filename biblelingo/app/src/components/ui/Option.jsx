@@ -3,6 +3,7 @@
 //   Props: index (0-based: data-opt={index+1}), value (data-value), state "idle" | "selected" | "correct" | "wrong" | "disabled",
 //          onSelect(value), shortcut (mostra o número 1 a 4 em caixa 24x24 à direita), cols (1 ou 2: em 2 colunas a desabilitada fica a 70%),
 //          children (rótulo) · role="radio" aria-checked; toque: afunda 2 px, select + haptic (tocar a já selecionada não a desmarca, então o som é o mesmo); wrong: SHAKE; correct: PULSE
+//          sound={false} quando o próprio toque confere a resposta (História: o acerto ou o erro é o som do toque)
 // OptionGroup: role="radiogroup", 1 coluna (358) para frases, 2 colunas (174) para palavras soltas, gap 10, cascata STAGGER.options.
 // ImageCard: 174x140, raio 16, ilustração 64 a 80 (emoji de conteúdo em span.emoji até haver arte), legenda text-body 17/500.
 // Exemplo: <OptionGroup cols={1}>{opts.map((o, i) => <Option key={o.value} index={i} value={o.value} state={...} onSelect={pick}>{o.label}</Option>)}</OptionGroup>
@@ -29,11 +30,11 @@ function transFor(state) {
   return SPRING.snap;
 }
 
-export default function Option({ index = 0, value, state = "idle", onSelect, shortcut = false, cols = 1, className = "", children, ...rest }) {
+export default function Option({ index = 0, value, state = "idle", onSelect, shortcut = false, cols = 1, sound = true, className = "", children, ...rest }) {
   const interactive = state === "idle" || state === "selected";
   const click = () => {
     if (!interactive) return;
-    feel("select");
+    if (sound !== false) feel("select");
     onSelect && onSelect(value);
   };
   return (
