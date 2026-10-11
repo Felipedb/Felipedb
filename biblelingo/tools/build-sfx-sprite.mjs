@@ -285,6 +285,18 @@ function main() {
   let report = {};
   try { report = JSON.parse(fs.readFileSync(REPORT_JSON, "utf8")); } catch (e) { report = { files: {} }; }
   report.files = { ...(report.files || {}), ...extraMetrics };
+  // Catálogo resumido para a página de audição (audio/sfx/index.html), que só lê arquivos de audio/sfx
+  report.catalog = {
+    masterGain: catalog.mix?.masterGain ?? 0.9,
+    families: catalog.mix?.families ?? {},
+    aliases: catalog.aliases ?? {},
+    sounds: catalog.sounds.map((s) => ({
+      name: s.name, role: s.role, companion: !!s.companion, haptic: s.haptic ?? null,
+      description: s.description, durationMs: s.durationMs, loudness: s.loudness,
+      variants: s.variants.map((v) => ({ name: v.name, transpose: v.transpose || 0 })),
+      index: s.index ?? null,
+    })),
+  };
   report.sprite = {
     generated: "tools/build-sfx-sprite.mjs",
     files: segments.length,

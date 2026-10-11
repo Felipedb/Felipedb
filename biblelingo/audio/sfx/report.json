@@ -1267,6 +1267,926 @@
    "notes": []
   }
  },
+ "catalog": {
+  "masterGain": 0.9,
+  "families": {
+   "ui": -4,
+   "exercise": -2,
+   "feedback": 0,
+   "transition": -6,
+   "celebration": 0
+  },
+  "aliases": {
+   "pop": "pair",
+   "sparkle": "mission",
+   "card": "tap",
+   "popover-open": "sheet-open",
+   "popover-close": "sheet-close",
+   "heart-lost-all": "heart-empty",
+   "madness-pair": "pair",
+   "madness-wrong": "pair-wrong",
+   "node-done": "pair"
+  },
+  "sounds": [
+   {
+    "name": "tap",
+    "role": "ui",
+    "companion": false,
+    "haptic": 8,
+    "description": "Clique seco e macio: um 'toc' abafado, sem tom definido, que confirma o toque em qualquer botão secundário, card, aba ou popover.",
+    "durationMs": 30,
+    "loudness": {
+     "lufsShort": -22,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "tap",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "tap-soft",
+    "role": "ui",
+    "companion": false,
+    "haptic": 8,
+    "description": "Versão mais grave e redonda do tap para o CONTINUAR e os botões grandes: 'tum' macio com menos ruído, para não cansar em cada exercício.",
+    "durationMs": 45,
+    "loudness": {
+     "lufsShort": -24,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "tap-soft",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "select",
+    "role": "ui",
+    "companion": false,
+    "haptic": 8,
+    "description": "Pop claro de selecionar uma opção ou uma célula de pares: 'tok' com tom que desce rápido (E6 para A5), com um clique de ataque.",
+    "durationMs": 80,
+    "loudness": {
+     "lufsShort": -20,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "select",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "deselect",
+    "role": "ui",
+    "companion": false,
+    "haptic": 6,
+    "description": "Inverso do select, mais quieto e mais grave (A5 para E5): a opção ou célula solta.",
+    "durationMs": 70,
+    "loudness": {
+     "lufsShort": -23,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "deselect",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "toggle-on",
+    "role": "ui",
+    "companion": false,
+    "haptic": 8,
+    "description": "Interruptor ligando: clique + tom curto subindo (E5 para A5).",
+    "durationMs": 60,
+    "loudness": {
+     "lufsShort": -22,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "toggle-on",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "toggle-off",
+    "role": "ui",
+    "companion": false,
+    "haptic": 8,
+    "description": "Interruptor desligando: clique + tom curto descendo (A5 para E5), um pouco mais quieto.",
+    "durationMs": 60,
+    "loudness": {
+     "lufsShort": -23,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "toggle-off",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "tab",
+    "role": "ui",
+    "companion": false,
+    "haptic": 8,
+    "description": "Trocar de aba: tap um pouco mais agudo com um pop mínimo por cima, para a navegação soar diferente de um botão.",
+    "durationMs": 55,
+    "loudness": {
+     "lufsShort": -22,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "tab",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "node",
+    "role": "ui",
+    "companion": false,
+    "haptic": 8,
+    "description": "Tocar um nó da trilha: 'bloop' redondo e grave (400 para 250 Hz) com clique de ataque; o popover abre em seguida.",
+    "durationMs": 80,
+    "loudness": {
+     "lufsShort": -20,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "node",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "sheet-open",
+    "role": "ui",
+    "companion": true,
+    "haptic": null,
+    "description": "Sopro suave subindo, sem clique próprio: acompanha o clique do botão que abriu a sheet, o popover ou a ficha.",
+    "durationMs": 180,
+    "loudness": {
+     "lufsShort": -24,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "sheet-open",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "sheet-close",
+    "role": "ui",
+    "companion": true,
+    "haptic": null,
+    "description": "Fechar sheet, modal ou popover: sopro descendo (1600 para 400 Hz), mais quieto que o de abrir.",
+    "durationMs": 160,
+    "loudness": {
+     "lufsShort": -26,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "sheet-close",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "toast",
+    "role": "ui",
+    "companion": false,
+    "haptic": 8,
+    "description": "Snackbar entrando: dois sininhos minúsculos subindo (E6 e G6), bem quietos.",
+    "durationMs": 240,
+    "loudness": {
+     "lufsShort": -24,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "toast",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "bubble",
+    "role": "ui",
+    "companion": false,
+    "haptic": null,
+    "description": "Balão novo da História: pop macio subindo de leve (G5 para C6), como mensagem chegando.",
+    "durationMs": 120,
+    "loudness": {
+     "lufsShort": -24,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "bubble",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "tile",
+    "role": "exercise",
+    "companion": false,
+    "haptic": 8,
+    "description": "Nota de madeira (marimba/xilofone) ao pegar uma peça do banco: C5, E5 e A5 nas três variantes; a posição da peça sobe a nota pela escala pentatônica (tile(i)).",
+    "durationMs": 120,
+    "loudness": {
+     "lufsShort": -20,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "tile-1",
+      "transpose": 0
+     },
+     {
+      "name": "tile-2",
+      "transpose": 4
+     },
+     {
+      "name": "tile-3",
+      "transpose": 9
+     }
+    ],
+    "index": {
+     "ladder": [
+      "C5",
+      "D5",
+      "E5",
+      "G5",
+      "A5",
+      "C6"
+     ],
+     "base": "C5",
+     "pick": "nearest-variant",
+     "maxSemitones": 3
+    }
+   },
+   {
+    "name": "tile-return",
+    "role": "exercise",
+    "companion": false,
+    "haptic": 8,
+    "description": "Devolver a peça ao banco: a mesma madeira em C5 com leve queda de tom e volume menor.",
+    "durationMs": 95,
+    "loudness": {
+     "lufsShort": -22,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "tile-return",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "pair",
+    "role": "exercise",
+    "companion": false,
+    "haptic": 12,
+    "description": "Pop de bolha ao acertar um par (G5, C6 e E6 nas variantes): pair(i) sobe pela pentatônica a cada par, nos exercícios de pares, no Madness, nos cards do Result e nas estrelas do nó.",
+    "durationMs": 155,
+    "loudness": {
+     "lufsShort": -19,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "pair-1",
+      "transpose": 0
+     },
+     {
+      "name": "pair-2",
+      "transpose": 5
+     },
+     {
+      "name": "pair-3",
+      "transpose": 9
+     }
+    ],
+    "index": {
+     "ladder": [
+      "G5",
+      "A5",
+      "C6",
+      "D6",
+      "E6",
+      "G6",
+      "A6"
+     ],
+     "base": "G5",
+     "pick": "nearest-variant",
+     "maxSemitones": 3
+    }
+   },
+   {
+    "name": "pair-wrong",
+    "role": "exercise",
+    "companion": false,
+    "haptic": [
+     30,
+     20,
+     30
+    ],
+    "description": "Par errado (duas células que não combinam): 'buh' duplo curto e abafado (E4 e C4), bem mais leve que o erro de VERIFICAR.",
+    "durationMs": 170,
+    "loudness": {
+     "lufsShort": -20,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "pair-wrong",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "start",
+    "role": "feedback",
+    "companion": false,
+    "haptic": null,
+    "description": "Começar a lição (popover COMEÇAR, interstício de revisão): madeira C5 seguida de sino G5, com um sopro curto por baixo. Convida sem alarde.",
+    "durationMs": 350,
+    "loudness": {
+     "lufsShort": -18,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "start",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "correct",
+    "role": "feedback",
+    "companion": false,
+    "haptic": 20,
+    "description": "Acerto: 'ding' claro e alegre de duas notas subindo (G5 madeira, C6 sino) com um brilho agudo; três variações (transposta +2 e -3) sorteadas para não cansar.",
+    "durationMs": 430,
+    "loudness": {
+     "lufsShort": -18,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "correct-1",
+      "transpose": 0
+     },
+     {
+      "name": "correct-2",
+      "transpose": 2
+     },
+     {
+      "name": "correct-3",
+      "transpose": -3
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "combo",
+    "role": "feedback",
+    "companion": false,
+    "haptic": [
+     20,
+     30,
+     40
+    ],
+    "description": "Combo múltiplo de 5: arpejo de quatro sinos subindo (C6, E6, G6, C7) com cintilação por cima; substitui o correct nesse acerto.",
+    "durationMs": 600,
+    "loudness": {
+     "lufsShort": -17,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "combo",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "wrong",
+    "role": "feedback",
+    "companion": false,
+    "haptic": [
+     50,
+     30,
+     50
+    ],
+    "description": "Erro: 'bonk' grave e curto de duas notas descendo (E3 e C3), madeira abafada com um baque de fundo; firme, sem ser punitivo.",
+    "durationMs": 400,
+    "loudness": {
+     "lufsShort": -18,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "wrong",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "heart-lost",
+    "role": "feedback",
+    "companion": false,
+    "haptic": [
+     30,
+     20,
+     60
+    ],
+    "description": "Coração perdido (150 ms depois do wrong, quando o coração treme): uma nota grave que cai (A3 para E3) e some, abafada.",
+    "durationMs": 250,
+    "loudness": {
+     "lufsShort": -19,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "heart-lost",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "heart-empty",
+    "role": "feedback",
+    "companion": false,
+    "haptic": [
+     80,
+     40,
+     80
+    ],
+    "description": "Sem corações (HeartsSheet abrindo): três madeiras descendo devagar (G4, E4, C4) e um baque grave no fim.",
+    "durationMs": 700,
+    "loudness": {
+     "lufsShort": -18,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "heart-empty",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "swoosh",
+    "role": "transition",
+    "companion": true,
+    "haptic": null,
+    "description": "Troca de exercício: sopro rosa com filtro subindo (600 para 3000 Hz), muito quieto, sincronizado com a entrada do novo exercício.",
+    "durationMs": 180,
+    "loudness": {
+     "lufsShort": -24,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "swoosh",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "newword",
+    "role": "transition",
+    "companion": false,
+    "haptic": null,
+    "description": "Badge PALAVRA NOVA: dois sininhos finos (D6 e A6) com cintilação, discretos, no momento em que o card entra.",
+    "durationMs": 455,
+    "loudness": {
+     "lufsShort": -21,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "newword",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "finish",
+    "role": "celebration",
+    "companion": false,
+    "haptic": [
+     40,
+     30,
+     40,
+     30,
+     80
+    ],
+    "description": "Fim da lição: fanfarra curta e brilhante. Arpejo de madeira+sino (C5, E5, G5, C6) e acorde final de sinos (E6, G6, C7) com cintilação; termina limpo em 1,4 s.",
+    "durationMs": 1400,
+    "loudness": {
+     "lufsShort": -16,
+     "truePeakMax": -1,
+     "window": "S"
+    },
+    "variants": [
+     {
+      "name": "finish",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "star",
+    "role": "celebration",
+    "companion": false,
+    "haptic": 15,
+    "description": "Estrela do Result (450/630/810 ms): sino curto com 'ping' de ataque; star(0..2) toca C6, E6 e G6, uma por estrela.",
+    "durationMs": 365,
+    "loudness": {
+     "lufsShort": -17,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "star-1",
+      "transpose": 0
+     },
+     {
+      "name": "star-2",
+      "transpose": 4
+     },
+     {
+      "name": "star-3",
+      "transpose": 7
+     }
+    ],
+    "index": {
+     "ladder": [
+      "C6",
+      "E6",
+      "G6"
+     ],
+     "base": "C6",
+     "pick": "nearest-variant",
+     "maxSemitones": 0
+    }
+   },
+   {
+    "name": "stat",
+    "role": "celebration",
+    "companion": false,
+    "haptic": null,
+    "description": "Cards de estatística do Result entrando em cascata: pop grave e curto, stat(i) sobe C5, E5, G5 por rate.",
+    "durationMs": 80,
+    "loudness": {
+     "lufsShort": -22,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "stat",
+      "transpose": 0
+     }
+    ],
+    "index": {
+     "ladder": [
+      "C5",
+      "E5",
+      "G5"
+     ],
+     "base": "C5",
+     "pick": "rate",
+     "maxSemitones": 7
+    }
+   },
+   {
+    "name": "chest",
+    "role": "celebration",
+    "companion": false,
+    "haptic": [
+     30,
+     40,
+     60
+    ],
+    "description": "Baú abrindo: clique da tranca e um glissando de sinos subindo (C6, D6, E6, G6, A6) com brilho; as moedas vêm em seguida.",
+    "durationMs": 745,
+    "loudness": {
+     "lufsShort": -17,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "chest",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "coin",
+    "role": "celebration",
+    "companion": false,
+    "haptic": null,
+    "description": "Moeda voando até o card de XP: duas notas rápidas (A5 e D6, 40 ms entre elas) com timbre de sino metálico; três variantes transpostas.",
+    "durationMs": 235,
+    "loudness": {
+     "lufsShort": -20,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "coin-1",
+      "transpose": 0
+     },
+     {
+      "name": "coin-2",
+      "transpose": 3
+     },
+     {
+      "name": "coin-3",
+      "transpose": 5
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "bless",
+    "role": "celebration",
+    "companion": false,
+    "haptic": null,
+    "description": "Bênção aparecendo no Result: acorde suave e quente (C5, G5, C6) em senos com ataque lento e reverb leve; uma 'aura' quase inaudível antes da voz.",
+    "durationMs": 500,
+    "loudness": {
+     "lufsShort": -22,
+     "truePeakMax": -1,
+     "window": "S"
+    },
+    "variants": [
+     {
+      "name": "bless",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "streak",
+    "role": "celebration",
+    "companion": false,
+    "haptic": [
+     40,
+     30,
+     40,
+     30,
+     120
+    ],
+    "description": "Ofensiva: sopro de fogo (ruído rosa varrendo 300 para 2500 Hz com estalos) e sino G5 para C6 aos 250 ms.",
+    "durationMs": 800,
+    "loudness": {
+     "lufsShort": -16,
+     "truePeakMax": -1,
+     "window": "S"
+    },
+    "variants": [
+     {
+      "name": "streak",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "goal",
+    "role": "celebration",
+    "companion": false,
+    "haptic": [
+     30,
+     40,
+     60
+    ],
+    "description": "Meta diária batida (anel fechando aos 900 ms): glissando de seno subindo uma oitava (C5 para C6 em 200 ms), sino C6 e cintilação.",
+    "durationMs": 665,
+    "loudness": {
+     "lufsShort": -17,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "goal",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "levelup",
+    "role": "celebration",
+    "companion": false,
+    "haptic": [
+     40,
+     30,
+     40,
+     30,
+     120
+    ],
+    "description": "Coroa / subir de nível: fanfarra de metais sintéticos (G4, C5, E5, G5 em 100 ms) e acorde final C6 com sinos e cintilação; mais 'régio' que o finish.",
+    "durationMs": 900,
+    "loudness": {
+     "lufsShort": -16,
+     "truePeakMax": -1,
+     "window": "S"
+    },
+    "variants": [
+     {
+      "name": "levelup",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "mission",
+    "role": "celebration",
+    "companion": false,
+    "haptic": 8,
+    "description": "Missão concluída e cintilações em geral (substitui o antigo sparkle): três sinos rápidos subindo (E6, G6, C7) com brilho.",
+    "durationMs": 495,
+    "loudness": {
+     "lufsShort": -18,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "mission",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "unlock",
+    "role": "celebration",
+    "companion": false,
+    "haptic": 8,
+    "description": "Próximo nó desbloqueando na trilha (600 ms depois de voltar do Result): sino G5 com brilho branco e um 'clique' de cadeado.",
+    "durationMs": 505,
+    "loudness": {
+     "lufsShort": -19,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "unlock",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "madness-start",
+    "role": "celebration",
+    "companion": false,
+    "haptic": [
+     20,
+     30,
+     20
+    ],
+    "description": "Início do Match Madness: quatro pops subindo (C5, E5, G5, C6 a cada 90 ms) com sopro, 'vai!'.",
+    "durationMs": 500,
+    "loudness": {
+     "lufsShort": -17,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "madness-start",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "tick",
+    "role": "feedback",
+    "companion": false,
+    "haptic": 6,
+    "description": "Tique dos 10 s finais do Madness: bloco de madeira agudo (2000 para 1200 Hz em 15 ms) com clique; um por segundo.",
+    "durationMs": 40,
+    "loudness": {
+     "lufsShort": -22,
+     "truePeakMax": -1,
+     "window": "M"
+    },
+    "variants": [
+     {
+      "name": "tick",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   },
+   {
+    "name": "gong",
+    "role": "celebration",
+    "companion": false,
+    "haptic": [
+     40,
+     30,
+     80
+    ],
+    "description": "Fim do Madness: gongo grave (FM em C3, razão 1,41, índice caindo em 800 ms) com batida inicial e cauda de 1,4 s; o único som com cauda longa.",
+    "durationMs": 1500,
+    "loudness": {
+     "lufsShort": -16,
+     "truePeakMax": -1,
+     "window": "S"
+    },
+    "variants": [
+     {
+      "name": "gong",
+      "transpose": 0
+     }
+    ],
+    "index": null
+   }
+  ]
+ },
  "sprite": {
   "generated": "tools/build-sfx-sprite.mjs",
   "files": 48,

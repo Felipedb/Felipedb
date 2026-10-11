@@ -12,7 +12,7 @@
 //   node tools/gen-sfx.mjs --only=tap,correct  só esses (nome base ou nome da variante)
 //   node tools/gen-sfx.mjs --out=/tmp/sfx      outra pasta de saída (padrão audio/sfx/src)
 //   node tools/gen-sfx.mjs --pics=/tmp/pics    também grava espectrograma e forma de onda de cada som
-//   node tools/gen-sfx.mjs --raw               só a síntese (float32 sem pós-processamento), para depurar
+//   node tools/gen-sfx.mjs --raw               só a síntese (float32 sem pós-processamento, numa pasta temporária)
 //   node tools/gen-sfx.mjs --sprite            em seguida monta o sprite (tools/build-sfx-sprite.mjs)
 //
 // Relatório de métricas (duração, LUFS, pico real, DC) em audio/sfx/report.json.
@@ -671,7 +671,8 @@ const fmt = (x, d = 1) => (Number.isFinite(x) ? x.toFixed(d) : String(x));
 function main() {
   const args = parseArgs(process.argv.slice(2));
   const only = args.only ? new Set(String(args.only).split(",").map((s) => s.trim()).filter(Boolean)) : null;
-  const outDir = path.resolve(args.out ? String(args.out) : SRC_DIR);
+  // --raw sem --out vai para uma pasta temporária: arquivos de depuração nunca caem em audio/sfx/src
+  const outDir = path.resolve(args.out ? String(args.out) : args.raw ? path.join(os.tmpdir(), "gen-sfx-raw") : SRC_DIR);
   const catalog = loadCatalog();
   const jobs = listVariants(catalog, only);
   if (!jobs.length) { console.error("nenhum som corresponde a --only"); process.exit(1); }

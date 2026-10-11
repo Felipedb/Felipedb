@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Audição dos efeitos v2</title>
+<style>
+  :root {
+    --bg: #f7f7f5;
+    --card: #ffffff;
+    --ink: #1f2328;
+    --muted: #5f6872;
+    --line: #e3e5e8;
+    --accent: #58cc02;
+    --accent-ink: #ffffff;
+    --accent-edge: #46a302;
+    --old: #ce82ff;
+    --old-edge: #a568cc;
+    --chip: #eef1f4;
+    --warn: #b54708;
+    --playing: #fff4c2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #131f24;
+      --card: #1b2a31;
+      --ink: #eef2f4;
+      --muted: #9aa8b0;
+      --line: #2c3d45;
+      --accent: #58cc02;
+      --accent-ink: #0b1a05;
+      --accent-edge: #3f8f02;
+      --old: #ce82ff;
+      --old-edge: #9a5fc2;
+      --chip: #243740;
+      --warn: #f5a35c;
+      --playing: #3b3a1c;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #131f24; --card: #1b2a31; --ink: #eef2f4; --muted: #9aa8b0; --line: #2c3d45;
+    --accent: #58cc02; --accent-ink: #0b1a05; --accent-edge: #3f8f02; --old: #ce82ff; --old-edge: #9a5fc2;
+    --chip: #243740; --warn: #f5a35c; --playing: #3b3a1c;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 15px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  main { max-width: 1100px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1 { font-size: 26px; margin: 0 0 4px; }
+  h2 { font-size: 18px; margin: 32px 0 12px; }
+  p.lead { margin: 0 0 16px; color: var(--muted); max-width: 70ch; }
+  .panel {
+    background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+    padding: 16px; display: grid; gap: 14px;
+  }
+  .controls { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); align-items: center; }
+  label.slider { display: grid; gap: 4px; font-size: 13px; color: var(--muted); }
+  label.slider span b { color: var(--ink); font-variant-numeric: tabular-nums; }
+  input[type="range"] { width: 100%; accent-color: var(--accent); }
+  label.check { display: flex; gap: 8px; align-items: center; font-size: 14px; }
+  .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  button {
+    font: inherit; font-weight: 700; cursor: pointer; border-radius: 12px; border: 0;
+    padding: 9px 14px; color: var(--accent-ink); background: var(--accent);
+    box-shadow: 0 3px 0 var(--accent-edge); transition: transform .05s, box-shadow .05s;
+  }
+  button:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--accent-edge); }
+  button.ghost { background: var(--chip); color: var(--ink); box-shadow: 0 3px 0 var(--line); }
+  button.ghost:active { box-shadow: 0 1px 0 var(--line); }
+  button.old { background: var(--old); color: #1d0b2a; box-shadow: 0 3px 0 var(--old-edge); }
+  button.small { padding: 6px 10px; font-size: 13px; border-radius: 10px; }
+  button:disabled { opacity: .45; cursor: default; }
+  .status { font-size: 13px; color: var(--muted); }
+  .grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px;
+    display: grid; gap: 8px; align-content: start;
+  }
+  .card.playing { background: var(--playing); }
+  .card header { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 8px; align-items: baseline; }
+  .card h3 { margin: 0; font-size: 16px; white-space: nowrap; font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; }
+  .chip { font-size: 12px; background: var(--chip); border-radius: 999px; padding: 2px 8px; color: var(--muted); white-space: nowrap; }
+  .desc { font-size: 13px; color: var(--muted); margin: 0; }
+  .variant { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 10px; align-items: center; border-top: 1px dashed var(--line); padding-top: 8px; }
+  .variant .name { font-family: ui-monospace, Menlo, monospace; font-size: 13px; }
+  .variant .metrics { grid-column: 1 / -1; font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .variant .metrics .warn { color: var(--warn); }
+  .variant .btns { display: flex; gap: 6px; }
+  .oldgrid { display: flex; flex-wrap: wrap; gap: 8px; }
+  footer { margin-top: 40px; font-size: 13px; color: var(--muted); }
+  code { font-family: ui-monospace, Menlo, monospace; font-size: 12.5px; background: var(--chip); padding: 1px 5px; border-radius: 6px; }
+  @media (max-width: 420px) { .grid { grid-template-columns: 1fr; } h1 { font-size: 22px; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>Audição dos efeitos sonoros v2</h1>
+  <p class="lead">Cada som do catálogo (<code>tools/sfx/sounds.json</code>) tocado de dois jeitos: do sprite que o app usa
+    (<code>sfx-v2.ogg</code> ou <code>sfx-v2.m4a</code>, recortado pelo mapa <code>sfx-v2.json</code>) e do WAV original em
+    <code>src/</code>, para comparar. No fim, os sons antigos do <code>sfx-data.js</code> para o antes e depois.</p>
+
+  <section class="panel" aria-label="Controles">
+    <div class="controls">
+      <label class="slider"><span>Volume geral <b id="vol-master-v">80%</b></span>
+        <input id="vol-master" type="range" min="0" max="100" value="80"></label>
+      <label class="slider"><span>Volume dos sons antigos <b id="vol-old-v">80%</b></span>
+        <input id="vol-old" type="range" min="0" max="100" value="80"></label>
+      <label class="check"><input id="family-gain" type="checkbox" checked> Aplicar o ganho por família como no app (interface -4 dB, exercício -2 dB, transição -6 dB)</label>
+    </div>
+    <div class="row">
+      <button id="seq-new">Tocar sequência de lição</button>
+      <button id="seq-old" class="old">Mesma sequência com os sons antigos</button>
+      <button id="stop" class="ghost">Parar</button>
+      <span class="status" id="status">Toque em qualquer botão para ativar o áudio.</span>
+    </div>
+    <div class="status" id="sprite-info"></div>
+  </section>
+
+  <div id="families"></div>
+
+  <h2>Sons antigos (<code>old/sfx-data.js</code>)</h2>
+  <section class="panel">
+    <p class="desc">Os 9 WAV de 16 kHz que o app usava antes do v2. O app improvisava os outros eventos mudando a velocidade destes.</p>
+    <div class="oldgrid" id="old-buttons"><span class="status">Carregando...</span></div>
+  </section>
+
+  <footer>
+    Regenerar: <code>node tools/gen-sfx.mjs --sprite</code> (a partir de <code>biblelingo/</code>). Abrir esta página por um servidor
+    estático (por exemplo <code>python3 -m http.server</code> em <code>biblelingo/</code> e <code>/audio/sfx/index.html</code>),
+    porque o navegador não carrega os arquivos por <code>file://</code>.
+  </footer>
+</main>
+
+<script>
+(() => {
+  "use strict";
+  const FAMILY_LABEL = {
+    ui: "Interface",
+    exercise: "Exercício",
+    feedback: "Resposta",
+    transition: "Transição",
+    celebration: "Celebração",
+  };
+  const FAMILY_ORDER = ["ui", "exercise", "feedback", "transition", "celebration"];
+  const $ = (id) => document.getElementById(id);
+  const status = (t) => { $("status").textContent = t; };
+
+  let ctx = null, master = null;
+  let catalog = null, report = null, map = null, spriteExt = null;
+  let spriteBuf = null, spritePromise = null;
+  const wavCache = new Map();
+  const oldData = {}, oldBufs = new Map();
+  const active = new Set();
+  const timers = [];
+
+  function audio() {
+    if (!ctx) {
+      ctx = new (window.AudioContext || window.webkitAudioContext)();
+      master = ctx.createGain();
+      master.connect(ctx.destination);
+      setMaster();
+    }
+    if (ctx.state === "suspended") ctx.resume();
+    return ctx;
+  }
+  function setMaster() {
+    const v = Number($("vol-master").value) / 100;
+    $("vol-master-v").textContent = Math.round(v * 100) + "%";
+    if (master) master.gain.value = v;
+  }
+  $("vol-master").addEventListener("input", setMaster);
+  $("vol-old").addEventListener("input", () => { $("vol-old-v").textContent = $("vol-old").value + "%"; });
+
+  const decode = (ab) => new Promise((ok, err) => {
+    const p = audio().decodeAudioData(ab, ok, err);
+    if (p && p.then) p.then(ok, err);
+  });
+
+  async function getJson(url) {
+    const r = await fetch(url, { cache: "no-cache" });
+    if (!r.ok) throw new Error(url + " " + r.status);
+    return r.json();
+  }
+
+  function spriteBuffer() {
+    if (spriteBuf) return Promise.resolve(spriteBuf);
+    if (!spritePromise) {
+      spritePromise = fetch("sfx-v2." + spriteExt)
+        .then((r) => { if (!r.ok) throw new Error("sprite " + r.status); return r.arrayBuffer(); })
+        .then(decode)
+        .then((b) => { spriteBuf = b; return b; });
+    }
+    return spritePromise;
+  }
+  async function wavBuffer(name) {
+    if (!wavCache.has(name)) {
+      wavCache.set(name, fetch("src/" + name + ".wav").then((r) => r.arrayBuffer()).then(decode));
+    }
+    return wavCache.get(name);
+  }
+
+  function familyGain(sound) {
+    if (!$("family-gain").checked || !sound || !catalog) return 1;
+    const db = (catalog.families || {})[sound.role] || 0;
+    return Math.pow(10, db / 20);
+  }
+
+  function playBuf(buf, { when = 0, offset = 0, duration, gain = 1, rate = 1, card } = {}) {
+    const c = audio();
+    const src = c.createBufferSource();
+    src.buffer = buf;
+    src.playbackRate.value = rate;
+    const g = c.createGain();
+    g.gain.value = gain;
+    src.connect(g).connect(master);
+    const t = c.currentTime + when;
+    if (duration != null) src.start(t, offset, duration); else src.start(t);
+    active.add(src);
+    if (card) {
+      setTimeout(() => card.classList.add("playing"), when * 1000);
+      src.onended = () => { active.delete(src); card.classList.remove("playing"); };
+    } else src.onended = () => active.delete(src);
+    return src;
+  }
+
+  const soundOf = (variantName) => catalog.sounds.find((s) => s.variants.some((v) => v.name === variantName));
+
+  async function playSprite(variantName, opts = {}) {
+    const buf = await spriteBuffer();
+    const entry = map[variantName];
+    if (!entry) { status("Sem " + variantName + " no mapa do sprite."); return; }
+    const [, start, dur] = entry;
+    playBuf(buf, { offset: start, duration: dur, gain: familyGain(soundOf(variantName)), ...opts });
+  }
+  async function playWav(variantName, opts = {}) {
+    const buf = await wavBuffer(variantName);
+    playBuf(buf, { gain: familyGain(soundOf(variantName)), ...opts });
+  }
+  async function playOld(key, opts = {}) {
+    if (!oldData[key]) return;
+    if (!oldBufs.has(key)) oldBufs.set(key, fetch(oldData[key]).then((r) => r.arrayBuffer()).then(decode));
+    const buf = await oldBufs.get(key);
+    playBuf(buf, { gain: Number($("vol-old").value) / 100, ...opts });
+  }
+
+  function stopAll() {
+    timers.splice(0).forEach(clearTimeout);
+    for (const s of active) { try { s.stop(); } catch (e) { /* já parou */ } }
+    active.clear();
+    document.querySelectorAll(".card.playing").forEach((c) => c.classList.remove("playing"));
+  }
+
+  const fmt = (x, d = 1) => (Number.isFinite(x) ? x.toFixed(d) : "?");
+
+  function metricsLine(sound, v) {
+    const m = report && report.files ? report.files[v.name] : null;
+    if (!m) return "sem métricas";
+    const win = (sound.loudness && sound.loudness.window) || "M";
+    const lufs = win === "S" ? m.lufs : m.lufsM;
+    const label = win === "S" ? "LUFS (som inteiro)" : "LUFS-M";
+    const warn = Math.abs(lufs - m.targetLufs) > 1 ? ' class="warn"' : "";
+    return `${fmt(m.durationMs, 0)} ms · <span${warn}>${fmt(lufs)} ${label} (alvo ${m.targetLufs})</span> · pico ${fmt(m.truePeak)} dBTP` +
+      (m.limiterDb > 0 ? ` · limitador ${fmt(m.limiterDb)} dB` : "");
+  }
+
+  function render() {
+    const root = $("families");
+    root.innerHTML = "";
+    for (const fam of FAMILY_ORDER) {
+      const sounds = catalog.sounds.filter((s) => s.role === fam);
+      if (!sounds.length) continue;
+      const h = document.createElement("h2");
+      const db = (catalog.families || {})[fam] || 0;
+      h.textContent = `${FAMILY_LABEL[fam] || fam} (${sounds.length} sons, ganho no app ${db > 0 ? "+" : ""}${db} dB)`;
+      root.appendChild(h);
+      const grid = document.createElement("div");
+      grid.className = "grid";
+      for (const s of sounds) {
+        const card = document.createElement("article");
+        card.className = "card";
+        const chips = [];
+        if (s.companion) chips.push("acompanhamento");
+        chips.push(s.haptic == null ? "sem vibração" : "vibra " + (Array.isArray(s.haptic) ? s.haptic.join("-") : s.haptic) + " ms");
+        card.innerHTML = `<header><h3>${s.name}</h3><span class="chip">${chips.join(" · ")}</span></header>
+          <p class="desc"></p>`;
+        card.querySelector(".desc").textContent = s.description || "";
+        for (const v of s.variants) {
+          const row = document.createElement("div");
+          row.className = "variant";
+          const tr = v.transpose ? ` (${v.transpose > 0 ? "+" : ""}${v.transpose} st)` : "";
+          row.innerHTML = `<span class="name">${v.name}${tr}</span>
+            <span class="btns"><button class="small" data-k="sprite">Sprite</button><button class="small ghost" data-k="wav">WAV</button></span>
+            <span class="metrics">${metricsLine(s, v)}</span>`;
+          row.querySelector('[data-k="sprite"]').addEventListener("click", () => playSprite(v.name, { card }).catch((e) => status(String(e))));
+          row.querySelector('[data-k="wav"]').addEventListener("click", () => playWav(v.name, { card }).catch((e) => status(String(e))));
+          card.appendChild(row);
+        }
+        grid.appendChild(card);
+      }
+      root.appendChild(grid);
+    }
+  }
+
+  // Sequência de lição: um toque, uma escolha, acerto, três peças subindo, três pares, erro, fim, baú e moedas
+  const LESSON = [
+    [0.0, "tap"], [0.55, "select"], [1.1, "correct-1"],
+    [2.0, "tile-1"], [2.3, "tile-2"], [2.6, "tile-3"],
+    [3.3, "pair-1"], [3.65, "pair-2"], [4.0, "pair-3"],
+    [4.7, "wrong"], [5.7, "finish"], [7.4, "chest"],
+    [7.55, "coin-1"], [7.67, "coin-2"], [7.79, "coin-3"],
+  ];
+  // Os mesmos eventos com o mapa antigo (sfx.js provisório): nome antigo e velocidade
+  const LESSON_OLD = [
+    [0.0, "tap", 1], [0.55, "select", 1], [1.1, "correct", 1],
+    [2.0, "select", 1.2], [2.3, "select", 1.248], [2.6, "select", 1.296],
+    [3.3, "pop", 1], [3.65, "pop", 1.06], [4.0, "pop", 1.12],
+    [4.7, "wrong", 1], [5.7, "finish", 1], [7.4, "sparkle", 1],
+    [7.55, "pop", 1.1], [7.67, "pop", 1.2], [7.79, "pop", 1.3],
+  ];
+
+  async function playLesson(old) {
+    stopAll();
+    audio();
+    try {
+      if (old) {
+        await Promise.all(LESSON_OLD.map(([, k]) => { if (!oldBufs.has(k)) oldBufs.set(k, fetch(oldData[k]).then((r) => r.arrayBuffer()).then(decode)); return oldBufs.get(k); }));
+        for (const [t, k, rate] of LESSON_OLD) playOld(k, { when: t, rate });
+      } else {
+        await spriteBuffer();
+        for (const [t, v] of LESSON) playSprite(v, { when: t });
+      }
+      status(old ? "Tocando a sequência com os sons antigos." : "Tocando a sequência com o sprite v2.");
+    } catch (e) { status("Erro: " + e); }
+  }
+  $("seq-new").addEventListener("click", () => playLesson(false));
+  $("seq-old").addEventListener("click", () => playLesson(true));
+  $("stop").addEventListener("click", stopAll);
+  $("family-gain").addEventListener("change", () => status($("family-gain").checked ? "Ganho por família ligado." : "Ganho por família desligado: cada som no próprio alvo de loudness."));
+
+  async function loadOld() {
+    const box = $("old-buttons");
+    try {
+      const txt = await (await fetch("old/sfx-data.js", { cache: "no-cache" })).text();
+      const m = /const SFX_DATA\s*=\s*(\{[\s\S]*?\});/.exec(txt);
+      Object.assign(oldData, JSON.parse(m[1]));
+      box.innerHTML = "";
+      for (const k of Object.keys(oldData)) {
+        const b = document.createElement("button");
+        b.className = "old small";
+        b.textContent = k;
+        b.addEventListener("click", () => playOld(k).catch((e) => status(String(e))));
+        box.appendChild(b);
+      }
+    } catch (e) {
+      box.innerHTML = '<span class="status">Não carregou old/sfx-data.js.</span>';
+    }
+  }
+
+  async function init() {
+    try {
+      report = await getJson("report.json");
+      catalog = report.catalog;
+      map = await getJson("sfx-v2.json");
+      const ogg = new Audio().canPlayType('audio/ogg; codecs="vorbis"');
+      spriteExt = ogg ? "ogg" : "m4a";
+      if (spriteExt === "m4a") {
+        try { map = await getJson("sfx-v2.m4a.json"); } catch (e) { /* sem correção de offset */ }
+      }
+      const sp = report.sprite || {};
+      $("sprite-info").textContent =
+        `Sprite: sfx-v2.${spriteExt} · ${Object.keys(map).length} arquivos · ${sp.audioSeconds} s de som em ${sp.totalSeconds} s · ` +
+        `ogg ${(sp.ogg ? sp.ogg.bytes / 1024 : 0).toFixed(0)} KB, m4a ${(sp.m4a ? sp.m4a.bytes / 1024 : 0).toFixed(0)} KB`;
+      render();
+    } catch (e) {
+      $("families").innerHTML = '<p class="status">Não carregou report.json ou sfx-v2.json. Rode <code>node tools/gen-sfx.mjs --sprite</code> e abra a página por um servidor estático.</p>';
+    }
+    loadOld();
+  }
+  init();
+})();
+</script>
+</body>
+</html>
