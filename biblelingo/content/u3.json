@@ -48,11 +48,6 @@
           "en": "Joseph",
           "pt": "José",
           "note": "o José da unidade anterior; o novo rei não o conhecia"
-        },
-        {
-          "en": "Midian",
-          "pt": "Midiã",
-          "note": "a terra para onde Moisés fugiu"
         }
       ],
       "hints": {
@@ -61,9 +56,10 @@
         "hard": "duro, pesado",
         "throw": "jogar, joguem",
         "boy": "menino",
-        "mother": "mãe",
+        "put": "pôs, pôr",
         "saw": "viu",
-        "burn": "queimar, queimava",
+        "on fire": "em chamas",
+        "burn": "queimar, consumir-se",
         "called": "chamou",
         "sandals": "sandálias",
         "later": "mais tarde"
@@ -74,7 +70,7 @@
           "id": "imperative",
           "grammar": "imperative",
           "title": "Take, Throw, Do not: dar ordens",
-          "body": "Para dar uma ordem ou instrução, use o verbo na forma básica, sem sujeito: Take the baby. Throw it into the river. Para proibir, ponha Do not (don't) antes do verbo: Do not come close. A forma é a mesma para você e para vocês.",
+          "body": "Para dar uma ordem ou instrução, use o verbo na forma básica, sem sujeito: Take care of him. Take off your sandals. Para proibir, ponha Do not (don't) antes do verbo: Do not come close. A forma é a mesma para você e para vocês.",
           "examples": [
             {
               "en": "Take care of him",
@@ -95,7 +91,7 @@
           "part": 2,
           "id": "wh-questions",
           "grammar": "wh-questions",
-          "title": "Who? What?: perguntar quem e o quê",
+          "title": "Who e What: perguntar quem e o quê",
           "body": "Who pergunta por pessoas (quem); what pergunta por coisas (o quê, qual). A palavra vem no começo da pergunta, antes do verbo: Who am I? Who are you? What is his name? What is that in your hand?",
           "examples": [
             {
@@ -166,7 +162,7 @@
           "pt": "Cuide dele",
           "ptAlt": [
             "Cuida dele",
-            "Cuide dele para mim"
+            "Tome conta dele"
           ],
           "pos": "chunk",
           "field": "speech",
@@ -258,7 +254,7 @@
           "en": "The king said, \"Throw every baby boy into the river\"",
           "pt": "O rei disse: \"Joguem no rio todo menino recém-nascido\"",
           "altPt": [
-            "O rei disse: \"Joguem todo bebê menino no rio\""
+            "O rei disse: \"Joguem todo menino no rio\""
           ],
           "kind": "quote",
           "fact": true,
@@ -276,11 +272,12 @@
         },
         {
           "order": 4,
-          "en": "A mother hid her baby in a basket",
-          "pt": "Uma mãe escondeu o bebê num cesto",
+          "en": "A woman put her baby in a basket",
+          "pt": "Uma mulher pôs o bebê num cesto",
           "altPt": [
-            "Uma mãe escondeu seu bebê em um cesto",
-            "Uma mãe escondeu o seu bebê numa cesta"
+            "Uma mulher pôs o seu bebê num cesto",
+            "Uma mulher colocou o bebê num cesto",
+            "Uma mulher colocou o seu bebê em uma cesta"
           ],
           "kind": "statement",
           "fact": true
@@ -296,7 +293,7 @@
             "kind": "lexical",
             "options": [
               "basket",
-              "baby",
+              "king",
               "river"
             ]
           }
@@ -305,35 +302,39 @@
           "order": 6,
           "en": "Pharaoh's daughter said, \"Take care of him for me\"",
           "pt": "A filha de Faraó disse: \"Cuide dele para mim\"",
+          "altPt": [
+            "A filha de Faraó disse: \"Tome conta dele para mim\""
+          ],
           "kind": "quote",
           "fact": true
         },
         {
           "order": 7,
-          "en": "In Midian, Moses saw a bush on fire",
-          "pt": "Em Midiã, Moisés viu uma sarça em chamas",
+          "en": "On God's mountain, Moses saw a bush on fire",
+          "pt": "No monte de Deus, Moisés viu uma sarça em chamas",
           "altPt": [
-            "Em Midiã, Moisés viu uma sarça pegando fogo"
+            "No monte de Deus, Moisés viu uma sarça pegando fogo",
+            "No monte de Deus, Moisés viu uma sarça ardendo"
           ],
           "kind": "statement",
           "fact": true,
           "gap": {
-            "word": "fire",
+            "word": "bush",
             "kind": "lexical",
             "options": [
-              "fire",
               "bush",
-              "ground"
+              "basket",
+              "river"
             ]
           }
         },
         {
           "order": 8,
-          "en": "The bush was on fire, but it did not burn",
+          "en": "The bush was on fire but did not burn up",
           "pt": "A sarça estava em chamas, mas não se consumia",
           "altPt": [
             "A sarça ardia, mas não se consumia",
-            "A sarça estava pegando fogo, mas não queimava"
+            "A sarça pegava fogo, mas não se queimava"
           ],
           "kind": "negative",
           "fact": true
@@ -351,6 +352,8 @@
           "en": "\"Take off your sandals. This is holy ground\"",
           "pt": "\"Tire as sandálias. Este é chão santo\"",
           "altPt": [
+            "\"Tire as sandálias. Este chão é santo\"",
+            "\"Tire as sandálias. Aqui é terra santa\"",
             "\"Tira os teus sapatos. O lugar em que tu estás é terra santa\""
           ],
           "kind": "quote",
@@ -418,7 +421,7 @@
             "word": "holy",
             "options": [
               "holy",
-              "dry",
+              "good",
               "new",
               "dark"
             ]
@@ -427,8 +430,8 @@
             "word": "sandals",
             "options": [
               "sandals",
+              "coat",
               "hands",
-              "eyes",
               "feet"
             ]
           },
@@ -444,31 +447,31 @@
         ]
       },
       "reading": {
-        "text": "A new king of Egypt made Israel work very hard. A woman hid her baby in a basket by the river, and Pharaoh's daughter saw him there and called him Moses. Later, in Midian, Moses saw a bush on fire, and God called him from the bush. God said, \"Take off your sandals, for this is holy ground. Now go, I will send you to Pharaoh.\"",
-        "pt": "Um novo rei do Egito fez Israel trabalhar muito. Uma mulher escondeu o bebê num cesto junto ao rio, e a filha de Faraó o viu ali e o chamou de Moisés. Mais tarde, em Midiã, Moisés viu uma sarça em chamas, e Deus o chamou do meio da sarça. Deus disse: \"Tire as sandálias, porque este é chão santo. Agora vá, eu envio você a Faraó.\"",
+        "text": "A new king of Egypt made Israel work very hard. A woman hid her baby, and then she put him in a basket by the river. The baby was Moses, and Pharaoh's daughter took care of him. Later, God called to Moses from a bush on fire and said, \"Go to Pharaoh.\" But Moses asked, \"Who am I?\"",
+        "pt": "Um novo rei do Egito fez Israel trabalhar muito. Uma mulher escondeu o seu bebê e depois o pôs num cesto junto ao rio. O bebê era Moisés, e a filha de Faraó cuidou dele. Mais tarde, Deus chamou Moisés do meio de uma sarça em chamas e disse: \"Vá a Faraó.\" Mas Moisés perguntou: \"Quem sou eu?\"",
         "questions": [
           {
             "kind": "literal",
-            "q": "Where did the woman hide her baby?",
-            "qPt": "Onde a mulher escondeu o bebê?",
+            "q": "Where did the woman put her baby?",
+            "qPt": "Onde a mulher pôs o bebê?",
             "options": [
               "In a basket near the water",
               "In the house of the king",
-              "In a tree in the garden"
+              "On the mountain of God"
             ],
             "answer": "In a basket near the water"
           },
           {
             "kind": "inference",
-            "q": "Why did the woman hide her baby?",
-            "qPt": "Por que a mulher escondeu o bebê?",
+            "q": "Why did Moses ask, \"Who am I?\"",
+            "qPt": "Por que Moisés perguntou: \"Quem sou eu?\"",
             "options": [
-              "To keep him safe from the king",
-              "Because she did not want him",
-              "Because the water was good for him"
+              "Because he did not think he was good enough",
+              "Because God spoke to him from the fire",
+              "Because he wanted to be the new king"
             ],
-            "answer": "To keep him safe from the king",
-            "explain": "O rei mandou jogar no rio todos os meninos hebreus recém-nascidos; por isso a mãe escondeu Moisés (Êxodo 1:22; 2:2-3)."
+            "answer": "Because he did not think he was good enough",
+            "explain": "Moisés se achava incapaz de ir a Faraó: perguntou \"Quem sou eu?\" e depois pediu \"Por favor, mande outra pessoa\" (Êxodo 3:11; 4:10-13)."
           }
         ]
       },
@@ -477,26 +480,30 @@
         "turns": [
           {
             "who": "voice",
-            "en": "Moses! Moses! Do not come close.",
-            "pt": "Moisés! Moisés! Não chegue perto.",
-            "mood": "solene"
+            "en": "Moses! Moses!",
+            "pt": "Moisés! Moisés!",
+            "mood": "solene",
+            "fact": true,
+            "ref": "Êxodo 3:4"
           },
           {
             "who": "you",
             "options": [
-              "Here I am, Lord.",
-              "Who are you, Lord?",
-              "Come here, Lord."
+              "Here I am.",
+              "Who are you?",
+              "Where are you?"
             ],
-            "answer": "Here I am, Lord.",
-            "pt": "Aqui estou, Senhor.",
-            "intent": "Responda ao chamado de Deus"
+            "answer": "Here I am.",
+            "pt": "Aqui estou.",
+            "intent": "Diga que você está ali, pronto para ouvir"
           },
           {
             "who": "voice",
-            "en": "Take off your sandals. This is holy ground. Now go, I will send you to Pharaoh.",
-            "pt": "Tire as sandálias. Este é chão santo. Agora vá, eu envio você a Faraó.",
-            "mood": "solene"
+            "en": "Don't come close. Take off your sandals. I am sending you to Pharaoh.",
+            "pt": "Não chegue perto. Tire as sandálias. Eu envio você a Faraó.",
+            "mood": "solene",
+            "fact": true,
+            "ref": "Êxodo 3:5, 10"
           },
           {
             "who": "you",
@@ -507,14 +514,14 @@
             ],
             "answer": "Who am I, Lord? Please send someone else.",
             "pt": "Quem sou eu, Senhor? Por favor, mande outra pessoa.",
-            "intent": "Diga que não se sente capaz e peça para Deus mandar outro",
+            "intent": "Mostre que você não se sente capaz",
             "speak": true
           }
         ]
       },
       "fact": {
-        "pt": "Quando Moisés perguntou qual era o nome de Deus, a resposta foi: \"EU SOU O QUE SOU\" (Êxodo 3:14). E o nome Moisés lembra o verbo hebraico \"tirar\": a filha de Faraó disse \"porque das águas o tirei\" (Êxodo 2:10).",
-        "ref": "Êxodo 3:14"
+        "pt": "O nome Moisés soa como o verbo hebraico \"tirar\": a filha de Faraó lhe deu esse nome porque o tirou das águas (Êxodo 2:10). E, quando Moisés perguntou o nome de Deus, ouviu: \"EU SOU O QUE SOU\" (Êxodo 3:14).",
+        "ref": "Êxodo 2:10; 3:14"
       }
     },
     {
@@ -564,9 +571,9 @@
       "hints": {
         "hard": "duro",
         "houses": "casas",
-        "see": "vir, ver",
-        "pass": "passar, passarei",
-        "called": "chamou"
+        "turned": "virou, transformou",
+        "see": "ver",
+        "pass": "passar, passarei"
       },
       "tips": [
         {
@@ -574,7 +581,7 @@
           "id": "negation-do",
           "grammar": "negation-do",
           "title": "do not / did not: dizer não",
-          "body": "Para negar, use do not (don't) antes do verbo: I do not know. No passado, use did not: The king did not let them go. O verbo fica na forma básica, sem -ed. Para perguntar no passado: Did the king know? No, he did not.",
+          "body": "Para negar, use do not (don't) antes do verbo: I do not know. No passado, use did not: The people did not go. Depois de did not, o verbo fica na forma básica: did not go, nunca did not went. Para perguntar no passado: Did the king know? No, he did not.",
           "examples": [
             {
               "en": "I know the Lord",
@@ -586,17 +593,17 @@
             }
           ],
           "contrast": {
-            "a": "The king let the people go",
-            "b": "The king did not let the people go",
-            "note": "did not + verbo básico (let), nunca did not + passado"
+            "a": "The people went",
+            "b": "The people did not go",
+            "note": "did not + verbo básico (go), nunca did not went"
           }
         },
         {
           "part": 2,
           "id": "instructions",
           "grammar": "instructions",
-          "title": "Put, Go, Get out: ordens e instruções",
-          "body": "Uma instrução é o verbo na forma básica, sem sujeito: Put the blood on the door. Get out! Para negar: Do not go. Para uma sequência, use then: Take a lamb, then put the blood on the door. Para pedir com educação, acrescente please.",
+          "title": "Put, Get out: instruções e ordens",
+          "body": "Numa instrução, o verbo vem primeiro, na forma básica e sem sujeito; depois vem o quê e, por fim, onde: Put (verbo) the blood (o quê) on the door (onde). Uma ordem curta funciona do mesmo jeito: Get out! Para negar, ponha Do not antes do verbo: Do not go out.",
           "examples": [
             {
               "en": "Put the blood on the door",
@@ -608,8 +615,8 @@
             }
           ],
           "contrast": {
-            "a": "Go!",
-            "b": "Do not go!",
+            "a": "Go out!",
+            "b": "Do not go out!",
             "note": "negativa do imperativo = Do not + verbo"
           }
         }
@@ -784,37 +791,50 @@
             "options": [
               "do",
               "does",
-              "did"
+              "don't"
             ]
           },
           "grammar": "negation-do"
         },
         {
           "order": 5,
-          "en": "His heart was hard, and the people did not go",
-          "pt": "O coração dele era duro, e o povo não pôde ir",
+          "en": "Pharaoh's heart was hard, and the people did not go",
+          "pt": "O coração de Faraó era duro, e o povo não saiu",
           "altPt": [
-            "O coração dele era duro, e o povo não foi",
-            "O seu coração se endureceu, e o povo não saiu"
+            "O coração de Faraó estava duro, e o povo não foi",
+            "O coração de Faraó se endureceu, e o povo não saiu"
           ],
           "kind": "negative",
           "fact": true,
+          "gap": {
+            "word": "did",
+            "kind": "grammar",
+            "options": [
+              "did",
+              "do",
+              "does"
+            ]
+          },
           "grammar": "negation-do"
         },
         {
           "order": 6,
-          "en": "Did the king know God? No, his heart was hard",
-          "pt": "O rei conhecia Deus? Não, o coração dele era duro",
+          "en": "Did Pharaoh know the Lord? No, his heart was hard",
+          "pt": "Faraó conhecia o Senhor? Não, o coração dele era duro",
+          "altPt": [
+            "Faraó conhecia o Senhor? Não, o coração dele estava duro"
+          ],
           "kind": "question",
           "fact": true,
           "grammar": "negation-do"
         },
         {
           "order": 7,
-          "en": "The water was blood, and frogs were everywhere",
-          "pt": "A água era sangue, e havia rãs por toda parte",
+          "en": "The water turned to blood, and frogs were everywhere",
+          "pt": "A água virou sangue, e havia rãs por toda parte",
           "altPt": [
-            "A água virou sangue, e havia rãs em todo lugar"
+            "A água se transformou em sangue, e havia rãs em todo lugar",
+            "A água virou sangue, e as rãs estavam por toda parte"
           ],
           "kind": "statement",
           "fact": true
@@ -883,8 +903,8 @@
         },
         {
           "order": 12,
-          "en": "That night, the king said, \"Get out of Egypt!\"",
-          "pt": "Naquela noite, o rei disse: \"Saiam do Egito!\"",
+          "en": "That night, the king said to Moses, \"Get out!\"",
+          "pt": "Naquela noite, o rei disse a Moisés: \"Saiam!\"",
           "kind": "quote",
           "fact": true,
           "speaker": "pharaoh"
@@ -939,8 +959,8 @@
         ]
       },
       "reading": {
-        "text": "Moses went to the king of Egypt and said, \"Let my people go.\" But the king's heart was hard, and he said no. So the Lord sent blood and frogs on Egypt. At last, the people of Israel put the blood of a lamb on their doors. That night, the king called Moses and said, \"Get out!\"",
-        "pt": "Moisés foi ao rei do Egito e disse: \"Deixe o meu povo ir.\" Mas o coração do rei era duro, e ele disse não. Então o Senhor mandou sangue e rãs sobre o Egito. Por fim, o povo de Israel pôs o sangue de um cordeiro nas suas portas. Naquela noite, o rei chamou Moisés e disse: \"Saiam!\"",
+        "text": "Moses went to the king of Egypt and said, \"Let my people go.\" But the king's heart was hard, and he said no. So the Lord turned the river into blood and sent frogs. Later, the people of Israel put the blood of a lamb on their doors. That night, the king said to Moses, \"Get out!\"",
+        "pt": "Moisés foi ao rei do Egito e disse: \"Deixe o meu povo ir.\" Mas o coração do rei era duro, e ele disse não. Então o Senhor transformou o rio em sangue e mandou rãs. Depois, o povo de Israel pôs o sangue de um cordeiro nas suas portas. Naquela noite, o rei disse a Moisés: \"Saiam!\"",
         "questions": [
           {
             "kind": "literal",
@@ -949,7 +969,7 @@
             "options": [
               "Lamb's blood",
               "River water",
-              "A green frog"
+              "Little frogs"
             ],
             "answer": "Lamb's blood"
           },
@@ -958,12 +978,12 @@
             "q": "Why did the king let the people go in the end?",
             "qPt": "Por que o rei deixou o povo ir no final?",
             "options": [
-              "Because of the plagues on Egypt",
-              "Because he loved Moses",
-              "Because the people paid him"
+              "Because of what the Lord did to Egypt",
+              "Because Moses went to see him",
+              "Because he loved Moses and his people"
             ],
-            "answer": "Because of the plagues on Egypt",
-            "explain": "Só depois da última praga Faraó chamou Moisés de noite e mandou o povo sair (Êxodo 12:29-31)."
+            "answer": "Because of what the Lord did to Egypt",
+            "explain": "Faraó resistiu enquanto pôde; só depois da última praga mandada pelo Senhor ele chamou Moisés de noite e disse: \"Saiam\" (Êxodo 12:29-31)."
           }
         ]
       },
@@ -1008,8 +1028,8 @@
         ]
       },
       "fact": {
-        "pt": "A Páscoa judaica (Pessach) lembra até hoje a noite em que o Senhor passou por cima das casas marcadas com sangue (Êxodo 12:14).",
-        "ref": "Êxodo 12:14"
+        "pt": "A palavra Páscoa vem do hebraico Pessach, ligado ao verbo \"passar por cima\": a festa lembra até hoje a noite em que o Senhor passou por cima das casas de Israel marcadas com sangue (Êxodo 12:14, 27).",
+        "ref": "Êxodo 12:14, 27"
       }
     },
     {
@@ -1023,11 +1043,6 @@
         "povo"
       ],
       "names": [
-        {
-          "en": "God",
-          "pt": "Deus",
-          "note": "sempre com maiúscula; os pronomes (he, his) ficam em minúscula"
-        },
         {
           "en": "the Lord",
           "pt": "o Senhor"
@@ -1058,12 +1073,15 @@
       ],
       "hints": {
         "pillar": "coluna",
+        "led": "guiou, guiava",
+        "came after": "veio atrás de",
         "saw": "viu, viram",
-        "stand": "ficar, fiquem",
+        "still": "quieto, parado",
+        "tell": "mandar, dizer",
+        "put out": "estender, estenda",
         "hand": "mão",
         "covered": "cobriu",
-        "tambourine": "tamborim",
-        "walls": "muros, paredes"
+        "tambourine": "tamborim"
       },
       "tips": [
         {
@@ -1071,7 +1089,7 @@
           "id": "imperative-be",
           "grammar": "imperative-be",
           "title": "Do not be afraid: ordens com be",
-          "body": "O verbo be (ser, estar) também dá ordens: Be still (Fique quieto), Be good (Seja bom). Para proibir, use Do not be (don't be): Do not be afraid = Não tenha medo. Stand still = Fiquem parados.",
+          "body": "O verbo be (ser, estar) também dá ordens: Be still = Fique quieto; Be strong = Seja forte. Para proibir, use Do not be (don't be): Do not be afraid = Não tenha medo. Depois de Do not vem sempre be, nunca is ou are.",
           "examples": [
             {
               "en": "Be still",
@@ -1083,9 +1101,9 @@
             }
           ],
           "contrast": {
-            "a": "Be afraid",
+            "a": "You are not afraid",
             "b": "Do not be afraid",
-            "note": "Do not + be = proibição; a ordem fica negativa"
+            "note": "afirmação: are not; ordem: Do not be"
           }
         },
         {
@@ -1141,7 +1159,8 @@
           "en": "to fight",
           "pt": "lutar",
           "ptAlt": [
-            "pelejar"
+            "combater",
+            "batalhar"
           ],
           "pos": "verb",
           "field": "actions",
@@ -1253,10 +1272,11 @@
       "beats": [
         {
           "order": 1,
-          "en": "A pillar of cloud and fire went before Israel",
-          "pt": "Uma coluna de nuvem e de fogo ia adiante de Israel",
+          "en": "A pillar of cloud and fire led Israel",
+          "pt": "Uma coluna de nuvem e de fogo guiava Israel",
           "altPt": [
-            "Uma coluna de nuvem e fogo ia na frente de Israel"
+            "Uma coluna de nuvem e de fogo ia na frente de Israel",
+            "Uma coluna de nuvem e fogo guiou Israel"
           ],
           "kind": "statement",
           "fact": true
@@ -1286,7 +1306,8 @@
           "en": "Moses said, \"Do not be afraid. Stand still\"",
           "pt": "Moisés disse: \"Não tenham medo. Fiquem parados\"",
           "altPt": [
-            "Moisés disse: \"Não temais. Ficai firmes\""
+            "Moisés disse: \"Não temais; estai quietos\"",
+            "Moisés disse: \"Não tenham medo. Fiquem firmes\""
           ],
           "kind": "negative",
           "fact": true,
@@ -1314,12 +1335,17 @@
           "kind": "quote",
           "fact": true,
           "iconic": true,
-          "speaker": "moises"
+          "speaker": "moises",
+          "prod": false
         },
         {
           "order": 6,
-          "en": "Did Israel stand still? Yes, the Lord fought for them",
-          "pt": "Israel ficou parado? Sim, o Senhor lutou por eles",
+          "en": "Did Moses tell Israel to fight? No, to stand still",
+          "pt": "Moisés mandou Israel lutar? Não, mandou ficar parado",
+          "altPt": [
+            "Moisés disse a Israel para lutar? Não, para ficar parado",
+            "Moisés mandou Israel lutar? Não, mandou ficar firme"
+          ],
           "kind": "question",
           "fact": true
         },
@@ -1346,10 +1372,11 @@
         },
         {
           "order": 8,
-          "en": "All night a wind came, and the sea was dry",
-          "pt": "A noite toda veio um vento, e o mar ficou seco",
+          "en": "The Lord sent a wind, and the sea was dry",
+          "pt": "O Senhor mandou um vento, e o mar ficou seco",
           "altPt": [
-            "Um vento soprou a noite inteira, e o mar secou"
+            "O Senhor enviou um vento, e o mar secou",
+            "O Senhor mandou um vento, e o mar secou"
           ],
           "kind": "statement",
           "fact": true
@@ -1371,14 +1398,18 @@
             "options": [
               "sea",
               "army",
-              "river"
+              "fire"
             ]
           }
         },
         {
           "order": 10,
-          "en": "Did we walk through the water? No, on dry ground",
-          "pt": "Nós andamos pela água? Não, em chão seco",
+          "en": "Did we walk into the sea? Yes, on dry ground",
+          "pt": "Nós entramos no mar? Sim, em chão seco",
+          "altPt": [
+            "Nós andamos para dentro do mar? Sim, em chão seco",
+            "Entramos no mar andando? Sim, em terra seca"
+          ],
           "kind": "question",
           "fact": true,
           "speaker": "moises"
@@ -1421,7 +1452,7 @@
       "verse": {
         "text": "The Lord will fight for you, and you shall be still.",
         "classic": "The LORD shall fight for you, and ye shall hold your peace.",
-        "pt": "O Senhor lutará por vocês; vocês só precisam ficar quietos.",
+        "pt": "O Senhor lutará por vocês, e vocês ficarão quietos.",
         "classicPt": "O SENHOR pelejará por vós, e vos calareis.",
         "ref": "Êxodo 14:14",
         "blanks": [
@@ -1446,19 +1477,19 @@
         ]
       },
       "reading": {
-        "text": "The king of Egypt came after Israel with his army and chariots, and the people were very afraid. Moses said, \"Do not be afraid. The Lord will fight for you.\" Moses put out his hand, a wind came all night, and Israel walked through the sea on dry ground. Then the water came back and covered the army, and Miriam sang, \"Sing to the Lord!\"",
-        "pt": "O rei do Egito veio atrás de Israel com o seu exército e os carros de guerra, e o povo ficou com muito medo. Moisés disse: \"Não tenham medo. O Senhor lutará por vocês.\" Moisés estendeu a mão, um vento soprou a noite toda, e Israel andou pelo meio do mar em chão seco. Depois a água voltou e cobriu o exército, e Miriã cantou: \"Cantem ao Senhor!\"",
+        "text": "The king of Egypt came after Israel with his army and chariots, and the people were very afraid. Moses said, \"Do not be afraid. The Lord will fight for you.\" Moses put out his hand over the sea, the Lord sent a wind, and Israel walked through the sea on dry ground. Then the water came back and covered the army, and Miriam sang, \"Sing to the Lord!\"",
+        "pt": "O rei do Egito veio atrás de Israel com o seu exército e os carros de guerra, e o povo ficou com muito medo. Moisés disse: \"Não tenham medo. O Senhor lutará por vocês.\" Moisés estendeu a mão sobre o mar, o Senhor mandou um vento, e Israel andou pelo meio do mar em chão seco. Depois a água voltou e cobriu o exército, e Miriã cantou: \"Cantem ao Senhor!\"",
         "questions": [
           {
             "kind": "literal",
             "q": "What did Moses tell the people to do?",
             "qPt": "O que Moisés disse ao povo para fazer?",
             "options": [
-              "Not to be scared, because God would fight",
+              "Not to be afraid of the army",
               "To go back to Egypt",
               "To fight the army with chariots"
             ],
-            "answer": "Not to be scared, because God would fight"
+            "answer": "Not to be afraid of the army"
           },
           {
             "kind": "inference",
@@ -1466,11 +1497,11 @@
             "qPt": "Quem secou o mar?",
             "options": [
               "The Lord, with the wind",
-              "Moses, with his own hand",
+              "Moses, with his hand",
               "The army, with the chariots"
             ],
             "answer": "The Lord, with the wind",
-            "explain": "Moisés estendeu a mão, mas foi o Senhor quem fez o mar recuar com um forte vento leste a noite toda (Êxodo 14:21)."
+            "explain": "Moisés estendeu a mão, mas foi o Senhor quem fez o mar recuar com um forte vento oriental a noite toda e o transformou em terra seca (Êxodo 14:21)."
           }
         ]
       },
@@ -1515,7 +1546,7 @@
         ]
       },
       "fact": {
-        "pt": "Miriã, irmã de Moisés e Arão, é chamada de profetisa: ela pegou um tamborim, e todas as mulheres saíram atrás dela com tamborins e danças (Êxodo 15:20).",
+        "pt": "Miriã é a primeira mulher chamada de profetisa na Bíblia. Ela pegou um tamborim, e todas as mulheres saíram atrás dela com tamborins e danças (Êxodo 15:20).",
         "ref": "Êxodo 15:20"
       }
     }
