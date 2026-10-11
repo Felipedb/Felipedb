@@ -26,9 +26,9 @@
         "put": "pôr, puseram",
         "pit": "poço",
         "piece": "moeda, moedas",
-        "cry": "chorar, chorou",
         "kill": "matar",
-        "dreamer": "sonhador"
+        "want": "querer, queriam",
+        "time": "vez"
       },
       "tips": [
         {
@@ -36,10 +36,10 @@
           "id": "past-feeling",
           "grammar": "past-feeling",
           "title": "loved, hated: sentimentos no passado",
-          "body": "Verbos de sentimento ganham -ed no passado: love vira loved, hate vira hated, dream vira dreamed. Para comparar, use more than: loved me more than my brothers (me amava mais do que os meus irmãos).",
+          "body": "Verbos como love, hate e dream ganham -ed no passado (ou só -d, quando já terminam em e): love vira loved, hate vira hated, dream vira dreamed. Para comparar, use more than: loved me more than my brothers (me amava mais do que aos meus irmãos).",
           "examples": [
             { "en": "My father loves me", "pt": "Meu pai me ama" },
-            { "en": "My father loved me more than my brothers", "pt": "Meu pai me amava mais do que os meus irmãos" }
+            { "en": "My father loved me more than my brothers", "pt": "Meu pai me amava mais do que aos meus irmãos" }
           ],
           "contrast": { "a": "They hate me", "b": "They hated me", "note": "hate = agora; hated = naquele tempo" }
         },
@@ -65,11 +65,11 @@
         { "en": "brother", "pt": "irmão", "pos": "noun", "field": "family", "tier": "core", "part": 2, "icon": "👬", "example": 9 },
         { "en": "to sell", "pt": "vender", "pos": "verb", "field": "work", "tier": "core", "part": 2, "icon": "💵", "example": 10 },
         { "en": "silver", "pt": "prata", "pos": "noun", "field": "objects", "tier": "core", "part": 2, "icon": "🥈", "example": 10 },
-        { "en": "to take", "pt": "levar", "ptAlt": ["pegar", "tomar"], "pos": "verb", "field": "actions", "tier": "core", "part": 2, "icon": "🧳", "example": 11 },
+        { "en": "to take", "pt": "levar", "ptAlt": ["pegar", "tomar", "tirar"], "pos": "verb", "field": "actions", "tier": "core", "part": 2, "icon": "🧳", "example": 11 },
         { "en": "Let's sell him", "pt": "Vamos vendê-lo", "ptAlt": ["Vamos vender ele"], "pos": "chunk", "field": "speech", "tier": "core", "part": 2, "icon": "🐪", "iconic": true, "example": 9 }
       ],
       "beats": [
-        { "order": 1, "en": "My father Jacob loved me more than my brothers", "pt": "Meu pai Jacó me amava mais do que os meus irmãos", "altPt": ["Meu pai Jacó amava a mim mais do que aos meus irmãos"], "kind": "first-person", "fact": true, "speaker": "jose",
+        { "order": 1, "en": "My father Jacob loved me more than my brothers", "pt": "Meu pai Jacó me amava mais do que aos meus irmãos", "altPt": ["Meu pai Jacó me amava mais do que os meus irmãos", "Meu pai Jacó amava a mim mais do que aos meus irmãos"], "kind": "first-person", "fact": true, "speaker": "jose",
           "gap": { "word": "loved", "kind": "grammar", "options": ["loved", "love", "loves"] }, "grammar": "past-feeling" },
         { "order": 2, "en": "He made me a coat of many colors", "pt": "Ele me fez uma túnica de muitas cores", "alt": ["He made me a tunic of many colors"], "altPt": ["Ele fez para mim uma túnica de muitas cores"], "kind": "statement", "fact": true },
         { "order": 3, "en": "My brothers saw the coat and hated me", "pt": "Meus irmãos viram a túnica e me odiaram", "kind": "statement", "fact": true },
@@ -77,9 +77,9 @@
         { "order": 5, "en": "The sun, the moon and eleven stars bowed down to me", "pt": "O sol, a lua e onze estrelas se curvaram diante de mim", "altPt": ["O sol, e a lua, e onze estrelas se inclinavam a mim"], "kind": "quote", "fact": true, "iconic": true, "prod": false, "speaker": "jose" },
         { "order": 6, "en": "Did my brothers love my dreams? No, they hated them", "pt": "Meus irmãos amavam os meus sonhos? Não, eles os odiavam", "kind": "question", "fact": true,
           "gap": { "word": "hated", "kind": "grammar", "options": ["hated", "hate", "hates"] }, "grammar": "past-feeling" },
-        { "order": 7, "en": "One day my father sent me to my brothers", "pt": "Um dia meu pai me mandou até os meus irmãos", "kind": "first-person", "fact": true, "speaker": "jose" },
+        { "order": 7, "en": "One day my father sent me to my brothers", "pt": "Um dia meu pai me mandou ir até os meus irmãos", "altPt": ["Um dia meu pai me mandou até os meus irmãos", "Um dia meu pai me enviou aos meus irmãos"], "kind": "first-person", "fact": true, "speaker": "jose" },
         { "order": 8, "en": "They took my coat and put me in a pit", "pt": "Eles tiraram a minha túnica e me puseram num poço", "altPt": ["Eles pegaram a minha túnica e me colocaram em um poço"], "kind": "statement", "fact": true },
-        { "order": 9, "en": "Judah said, \"Let's sell him. He is our brother\"", "pt": "Judá disse: \"Vamos vendê-lo. Ele é nosso irmão\"", "altPt": ["Judá disse: \"Vamos vender ele. Ele é nosso irmão\""], "kind": "quote", "fact": true, "iconic": true, "speaker": "juda" },
+        { "order": 9, "en": "Judah said, \"Why kill our brother? Let's sell him\"", "pt": "Judá disse: \"Por que matar o nosso irmão? Vamos vendê-lo\"", "altPt": ["Judá disse: \"Para que matar o nosso irmão? Vamos vender ele\"", "Judá disse: \"Por que matar nosso irmão? Vamos vendê-lo\""], "kind": "quote", "fact": true, "iconic": true, "speaker": "juda" },
         { "order": 10, "en": "They sold me to the Ishmaelites for silver", "pt": "Eles me venderam aos ismaelitas por prata", "alt": ["They sold me to the Ishmeelites for silver"], "kind": "statement", "fact": true,
           "gap": { "word": "me", "kind": "grammar", "options": ["me", "him", "them"] }, "grammar": "object-pronouns" },
         { "order": 11, "en": "The Ishmaelites took me to Egypt", "pt": "Os ismaelitas me levaram para o Egito", "kind": "statement", "fact": true },
@@ -97,33 +97,33 @@
         "ref": "Gênesis 37:5",
         "blanks": [
           { "word": "dream", "options": ["dream", "coat", "pit", "song"] },
-          { "word": "brothers", "options": ["brothers", "father", "Ishmaelites", "animals"] },
+          { "word": "brothers", "options": ["brothers", "sons", "friends", "servants"] },
           { "word": "told", "options": ["told", "sold", "gave", "showed"] }
         ]
       },
       "reading": {
-        "text": "Jacob loved Joseph more than his other sons and made him a coat of many colors. Joseph had two dreams, and his brothers hated him for his dreams. One day they took his coat and sold him to the Ishmaelites for silver. The Ishmaelites took Joseph to Egypt, and Jacob cried for his son for many days.",
-        "pt": "Jacó amava José mais do que os seus outros filhos e lhe fez uma túnica de muitas cores. José teve dois sonhos, e os seus irmãos o odiaram por causa dos sonhos. Um dia eles tiraram a túnica dele e o venderam aos ismaelitas por prata. Os ismaelitas levaram José para o Egito, e Jacó chorou pelo seu filho por muitos dias.",
+        "text": "Jacob loved Joseph more than his other sons and made him a coat of many colors. Joseph had two dreams, and his brothers hated him for his dreams. One day the brothers said, \"Let's kill him!\" But Judah said, \"Let's sell him,\" so they sold him to the Ishmaelites for silver. Then they took his coat to Jacob, and he said, \"An animal killed my son!\"",
+        "pt": "Jacó amava José mais do que aos seus outros filhos e lhe fez uma túnica de muitas cores. José teve dois sonhos, e os seus irmãos o odiaram por causa dos sonhos. Um dia os irmãos disseram: \"Vamos matá-lo!\" Mas Judá disse: \"Vamos vendê-lo\", e então eles o venderam aos ismaelitas por prata. Depois levaram a túnica dele a Jacó, e ele disse: \"Um animal matou o meu filho!\"",
         "questions": [
           { "kind": "literal", "q": "Why did the brothers hate Joseph?", "qPt": "Por que os irmãos odiavam José?",
-            "options": ["Because of his dreams", "Because of his silver", "Because he went to Egypt"], "answer": "Because of his dreams" },
+            "options": ["Because of his dreams", "Because their father hated them", "Because he went away to Egypt"], "answer": "Because of his dreams" },
           { "kind": "inference", "q": "Why did Judah say, \"Let's sell him\"?", "qPt": "Por que Judá disse: \"Vamos vendê-lo\"?",
-            "options": ["He did not want to kill his brother", "The Ishmaelites were going to Egypt", "He wanted to have Joseph's coat"], "answer": "He did not want to kill his brother",
-            "explain": "Os irmãos queriam matar José. Judá perguntou que proveito teriam nisso e propôs vendê-lo aos ismaelitas: \"ele é nosso irmão, nossa carne\" (Gênesis 37:26-27)." }
+            "options": ["He did not want them to kill Joseph", "Joseph's coat had many colors", "He wanted to have Joseph's coat"], "answer": "He did not want them to kill Joseph",
+            "explain": "Os irmãos queriam matar José (Gênesis 37:18-20). Judá perguntou que proveito haveria em matar o irmão e propôs vendê-lo aos ismaelitas, porque \"ele é nosso irmão, nossa carne\" (Gênesis 37:26-27)." }
         ]
       },
       "conversation": {
         "with": "juda",
         "turns": [
-          { "who": "juda", "en": "Look! Here comes the dreamer. Why are you here, Joseph?", "pt": "Olhem! Lá vem o sonhador. Por que você está aqui, José?", "mood": "irônico" },
-          { "who": "you", "options": ["My father sent me to you.", "My father sent me to Egypt.", "The Ishmaelites sent me to you."],
-            "answer": "My father sent me to you.", "pt": "Meu pai me mandou até vocês.", "intent": "Diga quem mandou você" },
-          { "who": "juda", "en": "The dreamer! Tell us your dream again.", "pt": "O sonhador! Conte o seu sonho de novo.", "mood": "bravo" },
-          { "who": "you", "options": ["Listen to my dream. Eleven stars bowed down to me.", "Listen to my dream. My coat had many colors.", "Listen to my dream. I was alone in a pit."],
-            "answer": "Listen to my dream. Eleven stars bowed down to me.", "pt": "Ouçam o meu sonho. Onze estrelas se curvaram diante de mim.", "intent": "Conte o sonho das estrelas", "speak": true }
+          { "who": "juda", "en": "You again, Joseph? What do you want now?", "pt": "Você de novo, José? O que você quer agora?", "mood": "irônico" },
+          { "who": "you", "options": ["Listen to my dream, please.", "Can I go with you, please?", "Come and see my coat, please."],
+            "answer": "Listen to my dream, please.", "pt": "Ouçam o meu sonho, por favor.", "intent": "Peça que ouçam o seu sonho" },
+          { "who": "juda", "en": "Another dream? What did you see this time?", "pt": "Outro sonho? O que você viu desta vez?", "mood": "bravo" },
+          { "who": "you", "options": ["The sun, the moon and eleven stars bowed to me.", "Eleven brothers bowed down to the sun and moon.", "The sun and the moon bowed down to our father."],
+            "answer": "The sun, the moon and eleven stars bowed to me.", "pt": "O sol, a lua e onze estrelas se curvaram diante de mim.", "intent": "Conte o que você viu no sonho", "speak": true }
         ]
       },
-      "fact": { "pt": "Em hebraico a túnica de José é \"ketonet passim\". A tradução \"túnica de muitas cores\" vem das versões grega e latina antigas; outras traduções modernas dizem \"túnica longa com mangas\" (Gênesis 37:3).", "ref": "Gênesis 37:3" }
+      "fact": { "pt": "A expressão hebraica é \"ketonet passim\". \"Túnica de muitas cores\" vem das antigas versões grega e latina; algumas traduções modernas preferem \"túnica longa com mangas\" (Gênesis 37:3).", "ref": "Gênesis 37:3" }
     },
     {
       "id": "u6l2",
@@ -144,14 +144,14 @@
         "house": "casa",
         "well": "bem",
         "lie": "mentir, mentiu",
-        "put": "pôr, pôs",
         "remember": "lembrar, se lembrou",
-        "year": "ano, anos",
-        "bad": "mau, ruins",
+        "bad": "ruim, ruins",
         "ruler": "governador",
-        "river": "rio",
         "angry": "bravo",
-        "father": "pai"
+        "father": "pai",
+        "tell": "contar, falar",
+        "call": "chamar",
+        "want": "querer, queria"
       },
       "tips": [
         {
@@ -183,66 +183,66 @@
         { "en": "prison", "pt": "prisão", "ptAlt": ["cadeia"], "pos": "noun", "field": "places", "tier": "core", "part": 1, "icon": "⛓️", "example": 3 },
         { "en": "servant", "pt": "servo", "ptAlt": ["empregado", "criado"], "pos": "noun", "field": "people", "tier": "core", "part": 1, "icon": "🧹", "example": 1 },
         { "en": "to explain", "pt": "explicar", "ptAlt": ["interpretar"], "alt": ["to interpret"], "pos": "verb", "field": "speech", "tier": "core", "part": 1, "icon": "🧩", "example": 5 },
-        { "en": "to forget", "pt": "esquecer", "pos": "verb", "field": "mind", "tier": "core", "part": 1, "icon": "🌫️", "example": 6 },
+        { "en": "to forget", "pt": "esquecer", "pos": "verb", "field": "mind", "tier": "core", "part": 1, "icon": "🌫️", "example": 4 },
         { "en": "Do not forget me", "pt": "Não se esqueça de mim", "ptAlt": ["Não me esqueça", "Não esqueça de mim"], "alt": ["Don't forget me"], "pos": "chunk", "field": "speech", "tier": "core", "part": 1, "icon": "🔔", "iconic": true, "example": 6 },
         { "en": "cow", "pt": "vaca", "pos": "noun", "field": "animals", "tier": "core", "part": 2, "icon": "🐄", "example": 8 },
-        { "en": "fat", "pt": "gordo", "ptAlt": ["gorda", "gordas"], "pos": "adj", "field": "quality", "tier": "core", "part": 2, "icon": "🎈", "example": 9 },
-        { "en": "thin", "pt": "magro", "ptAlt": ["magra", "magras"], "pos": "adj", "field": "quality", "tier": "core", "part": 2, "icon": "🦴", "example": 9 },
+        { "en": "fat", "pt": "gordo", "ptAlt": ["gorda", "gordas"], "pos": "adj", "field": "quality", "tier": "core", "part": 2, "icon": "🎈", "example": 8 },
+        { "en": "thin", "pt": "magro", "ptAlt": ["magra", "magras"], "pos": "adj", "field": "quality", "tier": "core", "part": 2, "icon": "🦴", "example": 8 },
         { "en": "year", "pt": "ano", "pos": "noun", "field": "time", "tier": "core", "part": 2, "icon": "📆", "example": 7 },
-        { "en": "I cannot, but God can", "pt": "Eu não posso, mas Deus pode", "ptAlt": ["Eu não consigo, mas Deus consegue"], "alt": ["I can't, but God can"], "pos": "chunk", "field": "speech", "tier": "core", "part": 2, "icon": "🔑", "iconic": true, "example": 11 }
+        { "en": "I cannot, but God can", "pt": "Eu não posso, mas Deus pode", "ptAlt": ["Eu não consigo, mas Deus consegue"], "alt": ["I can't, but God can"], "pos": "chunk", "field": "speech", "tier": "core", "part": 2, "icon": "🔑", "iconic": true, "example": 10 }
       ],
       "beats": [
-        { "order": 1, "en": "In Egypt I was a servant in Potiphar's house", "pt": "No Egito eu era servo na casa de Potifar", "kind": "first-person", "fact": true, "speaker": "jose" },
+        { "order": 1, "en": "In Egypt I was a servant in Potiphar's house", "pt": "No Egito eu era servo na casa de Potifar", "altPt": ["No Egito eu era um servo na casa de Potifar"], "kind": "first-person", "fact": true, "speaker": "jose" },
         { "order": 2, "en": "The Lord was with me so everything went well", "pt": "O Senhor estava comigo, então tudo ia bem", "alt": ["The Lord was with me, so everything went well"], "kind": "statement", "fact": true,
           "gap": { "word": "so", "kind": "grammar", "options": ["so", "because", "but"] }, "grammar": "because-so" },
-        { "order": 3, "en": "His wife lied so he put me in prison", "pt": "A esposa dele mentiu, então ele me pôs na prisão", "alt": ["His wife lied, so he put me in prison"], "kind": "statement", "fact": true,
-          "gap": { "word": "so", "kind": "grammar", "options": ["so", "because", "and"] }, "grammar": "because-so" },
+        { "order": 3, "en": "Potiphar sent me to prison because his wife lied", "pt": "Potifar me mandou para a prisão porque a esposa dele mentiu", "alt": ["Potiphar put me in prison because his wife lied", "Potiphar sent me to prison because his wife lied about me"], "altPt": ["Potifar me pôs na prisão porque a esposa dele mentiu", "Potifar me mandou para a cadeia porque a mulher dele mentiu"], "kind": "statement", "fact": true,
+          "gap": { "word": "because", "kind": "grammar", "options": ["because", "so", "but"] }, "grammar": "because-so" },
         { "order": 4, "en": "Did God forget me in prison? No, never", "pt": "Deus se esqueceu de mim na prisão? Não, nunca", "kind": "question", "fact": true },
-        { "order": 5, "en": "A servant in prison asked, \"Can you explain my dream?\"", "pt": "Um servo na prisão perguntou: \"Você pode explicar o meu sonho?\"", "kind": "question", "fact": true, "speaker": "copeiro" },
+        { "order": 5, "en": "Pharaoh's servant said, \"No one can explain my dream\"", "pt": "O servo de Faraó disse: \"Ninguém pode explicar o meu sonho\"", "altPt": ["O servo do Faraó disse: \"Ninguém consegue explicar o meu sonho\""], "kind": "negative", "fact": true, "speaker": "copeiro" },
         { "order": 6, "en": "I explained his dream and said, \"Do not forget me\"", "pt": "Eu expliquei o sonho dele e disse: \"Não se esqueça de mim\"", "alt": ["I explained his dream and said, \"Don't forget me\""], "altPt": ["Eu interpretei o sonho dele e disse: \"Lembre-se de mim\""], "kind": "quote", "fact": true, "iconic": true, "speaker": "jose" },
         { "order": 7, "en": "But the servant forgot me for two years", "pt": "Mas o servo se esqueceu de mim por dois anos", "kind": "statement", "fact": true },
-        { "order": 8, "en": "Then Pharaoh had a dream about seven cows", "pt": "Então Faraó teve um sonho com sete vacas", "kind": "statement", "fact": true },
-        { "order": 9, "en": "Seven thin cows ate seven fat cows", "pt": "Sete vacas magras comeram sete vacas gordas", "kind": "statement", "fact": true },
-        { "order": 10, "en": "Pharaoh said, \"No one can explain my dream\"", "pt": "Faraó disse: \"Ninguém pode explicar o meu sonho\"", "kind": "negative", "fact": true, "speaker": "pharaoh",
-          "gap": { "word": "can", "kind": "grammar", "options": ["can", "cannot", "could"] }, "grammar": "can-cannot" },
-        { "order": 11, "en": "I said, \"I cannot, but God can\"", "pt": "Eu disse: \"Eu não posso, mas Deus pode\"", "alt": ["I said, \"I can't, but God can\""], "altPt": ["Eu disse: \"Eu não consigo, mas Deus consegue\""], "kind": "quote", "fact": true, "iconic": true, "speaker": "jose" },
-        { "order": 12, "en": "The fat cows were good years and the thin cows bad years", "pt": "As vacas gordas eram anos bons e as vacas magras, anos ruins", "altPt": ["As vacas gordas eram anos de fartura e as vacas magras eram anos de fome"], "kind": "statement", "fact": true, "prod": false }
+        { "order": 8, "en": "In Pharaoh's dream seven thin cows ate seven fat cows", "pt": "No sonho de Faraó, sete vacas magras comeram sete vacas gordas", "alt": ["In Pharaoh's dream, seven thin cows ate seven fat cows"], "kind": "statement", "fact": true },
+        { "order": 9, "en": "Pharaoh asked, \"Can you explain my dream?\"", "pt": "Faraó perguntou: \"Você pode explicar o meu sonho?\"", "altPt": ["Faraó perguntou: \"Você consegue explicar o meu sonho?\""], "kind": "question", "fact": true, "speaker": "pharaoh" },
+        { "order": 10, "en": "I said, \"I cannot, but God can\"", "pt": "Eu disse: \"Eu não posso, mas Deus pode\"", "alt": ["I said, \"I can't, but God can\""], "altPt": ["Eu disse: \"Eu não consigo, mas Deus consegue\""], "kind": "quote", "fact": true, "iconic": true, "speaker": "jose",
+          "gap": { "word": "cannot", "kind": "grammar", "options": ["cannot", "can", "could"] }, "grammar": "can-cannot" },
+        { "order": 11, "en": "The fat cows were good years and the thin cows bad years", "pt": "As vacas gordas eram anos bons e as vacas magras, anos ruins", "altPt": ["As vacas gordas eram anos de fartura e as vacas magras eram anos de fome"], "kind": "statement", "fact": true, "prod": false },
+        { "order": 12, "en": "Pharaoh made me ruler over all Egypt", "pt": "Faraó me fez governador de todo o Egito", "alt": ["Pharaoh made me ruler over all of Egypt", "Pharaoh made me ruler of all Egypt"], "altPt": ["Faraó me pôs sobre todo o Egito", "Faraó me fez governador sobre todo o Egito"], "kind": "first-person", "fact": true }
       ],
       "contrast": [
-        { "a": "His wife lied so he put me in prison", "b": "He put me in prison because his wife lied", "note": "so = consequência; because = causa" },
-        { "a": "Pharaoh said, \"No one can explain my dream\"", "b": "Pharaoh said, \"Joseph can explain my dream\"", "note": "No one can = ninguém pode; Joseph can = José pode" }
+        { "a": "Potiphar sent me to prison because his wife lied", "b": "Potiphar's wife lied, so he sent me to prison", "note": "because = causa (porque); so = consequência (então)" },
+        { "a": "Pharaoh asked, \"Can you explain my dream?\"", "b": "Pharaoh said, \"You can explain my dream\"", "note": "pergunta: Can vem antes de you; afirmação: you vem antes de can" }
       ],
       "verse": {
         "text": "But the Lord was with Joseph, and showed kindness to him.",
         "classic": "But the LORD was with Joseph, and shewed him mercy.",
         "pt": "Mas o Senhor estava com José e foi bondoso com ele.",
-        "classicPt": "O Senhor, porém, estava com José e estendeu sobre ele a sua benignidade.",
+        "classicPt": "O SENHOR, porém, estava com José, e estendeu sobre ele a sua benignidade.",
         "ref": "Gênesis 39:21",
         "blanks": [
           { "word": "with", "options": ["with", "against", "after", "under"] },
-          { "word": "kindness", "options": ["kindness", "silver", "water", "grain"] },
+          { "word": "kindness", "options": ["kindness", "anger", "silver", "grain"] },
           { "word": "showed", "options": ["showed", "sold", "forgot", "explained"] }
         ]
       },
       "reading": {
-        "text": "Joseph was Potiphar's servant in Egypt, and the Lord was with him. But Potiphar's wife lied about Joseph, so Potiphar put him in prison. In prison, Joseph explained the dreams of two of Pharaoh's servants, but one of them forgot him for two years. Then Pharaoh had a dream about seven fat cows and seven thin cows, and the servant remembered Joseph. Joseph said, \"I cannot explain it, but God can,\" and Pharaoh put Joseph over all Egypt.",
-        "pt": "José era servo de Potifar no Egito, e o Senhor estava com ele. Mas a esposa de Potifar mentiu sobre José, então Potifar o pôs na prisão. Na prisão, José explicou os sonhos de dois servos de Faraó, mas um deles se esqueceu dele por dois anos. Então Faraó teve um sonho com sete vacas gordas e sete vacas magras, e o servo se lembrou de José. José disse: \"Eu não posso explicar, mas Deus pode\", e Faraó pôs José sobre todo o Egito.",
+        "text": "Joseph was Potiphar's servant in Egypt, and the Lord was with him. But Potiphar's wife lied about him, and Joseph went to prison. In prison, Joseph explained the dreams of two of Pharaoh's servants, but one of them forgot him for two years. Then Pharaoh had a dream that no one could explain, and the servant remembered Joseph. Joseph said, \"I cannot, but God can,\" and Pharaoh made him ruler over all Egypt.",
+        "pt": "José era servo de Potifar no Egito, e o Senhor estava com ele. Mas a esposa de Potifar mentiu sobre ele, e José foi para a prisão. Na prisão, José explicou os sonhos de dois servos de Faraó, mas um deles se esqueceu dele por dois anos. Então Faraó teve um sonho que ninguém conseguia explicar, e o servo se lembrou de José. José disse: \"Eu não posso, mas Deus pode\", e Faraó o fez governador de todo o Egito.",
         "questions": [
           { "kind": "literal", "q": "Why was Joseph in prison?", "qPt": "Por que José estava na prisão?",
-            "options": ["Potiphar's wife told lies about him", "He forgot Pharaoh's dream", "He sold Potiphar's cows"], "answer": "Potiphar's wife told lies about him" },
+            "options": ["Potiphar's wife told lies about him", "He told lies about Potiphar's wife", "Pharaoh's servant forgot him there"], "answer": "Potiphar's wife told lies about him" },
           { "kind": "inference", "q": "Why did Pharaoh call Joseph after two years?", "qPt": "Por que Faraó chamou José depois de dois anos?",
-            "options": ["The servant remembered that Joseph explained dreams", "Joseph was a servant in Egypt before", "Pharaoh wanted to put Joseph in prison"], "answer": "The servant remembered that Joseph explained dreams",
+            "options": ["The servant remembered that Joseph explained dreams", "Joseph was a servant in Egypt before", "Pharaoh wanted to send Joseph to prison"], "answer": "The servant remembered that Joseph explained dreams",
             "explain": "O copeiro só se lembrou de José quando ninguém no Egito conseguiu explicar o sonho de Faraó (Gênesis 41:8-14)." }
         ]
       },
       "conversation": {
         "with": "copeiro",
         "turns": [
-          { "who": "copeiro", "en": "Joseph, you explained my dream! In three days I'll be with Pharaoh again.", "pt": "José, você explicou o meu sonho! Em três dias eu estarei com Faraó de novo.", "mood": "animado" },
+          { "who": "copeiro", "en": "Joseph, you explained my dream! In three days I'm going back to Pharaoh.", "pt": "José, você explicou o meu sonho! Em três dias eu volto para junto de Faraó.", "mood": "animado" },
           { "who": "you", "options": ["Do not forget me. Tell Pharaoh about me.", "Do not forget me. Tell Potiphar about me.", "Do not forget me. Tell my father about me."],
             "answer": "Do not forget me. Tell Pharaoh about me.", "pt": "Não se esqueça de mim. Fale de mim a Faraó.", "intent": "Peça para ele falar de você a Faraó" },
           { "who": "copeiro", "en": "But why are you here in prison? What did you do?", "pt": "Mas por que você está aqui na prisão? O que você fez?", "mood": "surpreso" },
-          { "who": "you", "options": ["Nothing. Potiphar's wife lied about me.", "Nothing. I was a servant in Potiphar's house.", "Nothing. I did not want to explain the dreams."],
+          { "who": "you", "options": ["Nothing. Potiphar's wife lied about me.", "Nothing. I was a servant in Potiphar's house.", "Nothing. I didn't want to explain the dreams."],
             "answer": "Nothing. Potiphar's wife lied about me.", "pt": "Nada. A esposa de Potifar mentiu sobre mim.", "intent": "Explique por que você está preso", "speak": true }
         ]
       },
@@ -263,21 +263,24 @@
         { "en": "Egypt", "pt": "Egito" },
         { "en": "Canaan", "pt": "Canaã", "note": "a terra onde Jacó morava" },
         { "en": "Pharaoh", "pt": "Faraó", "note": "o rei do Egito" },
+        { "en": "Potiphar", "pt": "Potifar", "note": "o oficial de Faraó que comprou José" },
         { "en": "God", "pt": "Deus" }
       ],
       "hints": {
         "bow": "curvar-se, se curvaram",
-        "know": "conhecer, reconheceram",
+        "recognize": "reconhecer, reconheceram",
         "put": "pôr, pôs",
         "father": "pai",
         "close": "perto, mais perto",
-        "year": "ano, anos",
-        "mean": "querer dizer, quiseram",
-        "keep": "ficar com, deixar",
+        "mean": "querer, quiseram",
+        "stay": "ficar",
         "boy": "menino",
-        "save": "salvar",
-        "people": "pessoas",
-        "still": "ainda"
+        "lord": "senhor",
+        "instead": "no lugar dele",
+        "home": "para casa",
+        "angry": "bravo",
+        "see": "ver",
+        "ruler": "governador"
       },
       "tips": [
         {
@@ -288,7 +291,7 @@
           "body": "Para dizer quem alguém é, use o verbo to be: I am Joseph (eu sou José). You are my brothers (vocês são meus irmãos). Para perguntar, o verbo vem antes do sujeito: Is my father alive? Where are you from? (De onde vocês são?)",
           "examples": [
             { "en": "I am Joseph", "pt": "Eu sou José" },
-            { "en": "Is my father alive?", "pt": "Meu pai está vivo?" }
+            { "en": "Is my father still alive?", "pt": "Meu pai ainda está vivo?" }
           ],
           "contrast": { "a": "My father is alive", "b": "Is my father alive?", "note": "afirmação: sujeito + is; pergunta: is + sujeito" }
         },
@@ -297,7 +300,7 @@
           "id": "past-irregular",
           "grammar": "past-irregular",
           "title": "sent, came, saw: passados que mudam a palavra",
-          "body": "Alguns verbos não ganham -ed no passado: a palavra inteira muda. send vira sent, come vira came, see vira saw, mean vira meant, know vira knew. São poucos, mas muito usados: aprenda cada um como uma palavra nova.",
+          "body": "Muitos verbos comuns não ganham -ed no passado: a forma muda. send vira sent, come vira came, see vira saw, mean vira meant, forgive vira forgave. Aprenda o passado junto com o verbo, como um par.",
           "examples": [
             { "en": "God sends me", "pt": "Deus me manda" },
             { "en": "God sent me here before you", "pt": "Deus me mandou aqui antes de vocês" }
@@ -313,28 +316,28 @@
         { "en": "Where are you from?", "pt": "De onde vocês são?", "ptAlt": ["De onde você é?", "De onde vocês vêm?"], "alt": ["Where did you come from?"], "pos": "chunk", "field": "speech", "tier": "core", "part": 1, "icon": "🧭", "iconic": true, "example": 3 },
         { "en": "evil", "pt": "mal", "ptAlt": ["maldade"], "pos": "noun", "field": "faith", "tier": "core", "part": 2, "icon": "😈", "example": 11 },
         { "en": "to hug", "pt": "abraçar", "pos": "verb", "field": "actions", "tier": "core", "part": 2, "icon": "👐", "example": 9 },
-        { "en": "to cry", "pt": "chorar", "pos": "verb", "field": "feelings", "tier": "core", "part": 2, "icon": "😭", "example": 7 },
-        { "en": "to forgive", "pt": "perdoar", "pos": "verb", "field": "faith", "tier": "core", "part": 2, "icon": "🤍", "example": 12 },
+        { "en": "to cry", "pt": "chorar", "pos": "verb", "field": "feelings", "tier": "core", "part": 2, "icon": "😭", "example": 9 },
+        { "en": "to forgive", "pt": "perdoar", "pos": "verb", "field": "faith", "tier": "core", "part": 2, "icon": "🤍", "example": 11 },
         { "en": "I am Joseph", "pt": "Eu sou José", "pos": "chunk", "field": "speech", "tier": "core", "part": 2, "icon": "🎭", "iconic": true, "example": 7 }
       ],
       "beats": [
         { "order": 1, "en": "My brothers came to Egypt to buy grain", "pt": "Meus irmãos vieram ao Egito para comprar trigo", "altPt": ["Meus irmãos vieram ao Egito para comprar cereal"], "kind": "first-person", "fact": true, "speaker": "jose" },
-        { "order": 2, "en": "They bowed down to me and did not know me", "pt": "Eles se curvaram diante de mim e não me reconheceram", "altPt": ["Eles se inclinaram diante de mim e não me conheceram"], "kind": "negative", "fact": true },
+        { "order": 2, "en": "They bowed down to me but did not recognize me", "pt": "Eles se curvaram diante de mim, mas não me reconheceram", "alt": ["They bowed down to me and did not recognize me", "They bowed down to me but didn't recognize me"], "altPt": ["Eles se curvaram diante de mim e não me reconheceram", "Eles se inclinaram diante de mim, mas não me conheceram"], "kind": "negative", "fact": true },
         { "order": 3, "en": "I asked them, \"Where are you from?\"", "pt": "Eu perguntei a eles: \"De onde vocês são?\"", "alt": ["I asked them, \"Where did you come from?\""], "altPt": ["Eu perguntei a eles: \"De onde vocês vêm?\""], "kind": "question", "fact": true, "iconic": true, "speaker": "jose",
           "gap": { "word": "are", "kind": "grammar", "options": ["are", "is", "am"] }, "grammar": "be-identity" },
         { "order": 4, "en": "They said, \"We came from Canaan to buy grain\"", "pt": "Eles disseram: \"Viemos de Canaã para comprar trigo\"", "kind": "quote", "fact": true, "speaker": "juda" },
-        { "order": 5, "en": "My servant put my silver cup in Benjamin's sack", "pt": "Meu servo pôs o meu copo de prata no saco de Benjamim", "altPt": ["Meu servo colocou a minha taça de prata no saco de Benjamim"], "kind": "statement", "fact": true },
+        { "order": 5, "en": "Later my servant put my silver cup in Benjamin's sack", "pt": "Depois, o meu servo pôs o meu copo de prata no saco de Benjamim", "altPt": ["Mais tarde, o meu servo colocou a minha taça de prata no saco de Benjamim", "Depois meu servo pôs meu copo de prata no saco de Benjamim"], "kind": "statement", "fact": true },
         { "order": 6, "en": "Was the cup in Judah's sack? No, in Benjamin's", "pt": "O copo estava no saco de Judá? Não, no de Benjamim", "kind": "question", "fact": true },
-        { "order": 7, "en": "I cried, \"I am Joseph! Is my father alive?\"", "pt": "Eu chorei: \"Eu sou José! Meu pai está vivo?\"", "altPt": ["Eu chorei: \"Eu sou José! Vive ainda meu pai?\""], "kind": "question", "fact": true, "iconic": true, "speaker": "jose" },
-        { "order": 8, "en": "I said, \"Come closer. God sent me here before you\"", "pt": "Eu disse: \"Cheguem mais perto. Deus me mandou aqui antes de vocês\"", "altPt": ["Eu disse: \"Cheguem-se a mim. Deus me enviou adiante de vocês\""], "kind": "quote", "fact": true, "iconic": true, "speaker": "jose",
+        { "order": 7, "en": "I said, \"I am Joseph! Is my father still alive?\"", "pt": "Eu disse: \"Eu sou José! Meu pai ainda está vivo?\"", "alt": ["I said, \"I am Joseph! Is my father alive?\"", "I said, \"I'm Joseph! Is my father still alive?\""], "altPt": ["Eu disse: \"Eu sou José! Vive ainda meu pai?\"", "Eu disse: \"Eu sou José! O meu pai ainda está vivo?\""], "kind": "question", "fact": true, "iconic": true, "speaker": "jose" },
+        { "order": 8, "en": "I said, \"Come closer. God sent me here before you\"", "pt": "Eu disse: \"Cheguem mais perto. Deus me mandou aqui antes de vocês\"", "alt": ["I said, \"Come near. God sent me here before you\""], "altPt": ["Eu disse: \"Cheguem-se a mim. Deus me enviou adiante de vocês\"", "Eu disse: \"Cheguem mais perto. Deus me enviou aqui antes de vocês\""], "kind": "quote", "fact": true, "iconic": true, "speaker": "jose",
           "gap": { "word": "sent", "kind": "grammar", "options": ["sent", "send", "sends"] }, "grammar": "past-irregular" },
         { "order": 9, "en": "Then I hugged my brother Benjamin and we cried", "pt": "Então eu abracei o meu irmão Benjamim e nós choramos", "kind": "first-person", "fact": true, "speaker": "jose" },
-        { "order": 10, "en": "My father was alive and I hugged him in Egypt", "pt": "Meu pai estava vivo e eu o abracei no Egito", "kind": "first-person", "fact": true, "speaker": "jose" },
-        { "order": 11, "en": "My brothers asked, \"Will you forgive the evil we did?\"", "pt": "Meus irmãos perguntaram: \"Você vai perdoar o mal que fizemos?\"", "kind": "question", "fact": true, "speaker": "juda" },
-        { "order": 12, "en": "I forgave them: \"You meant evil but God meant it for good\"", "pt": "Eu os perdoei: \"Vocês quiseram o mal, mas Deus transformou isso em bem\"", "altPt": ["Eu os perdoei: \"Vós intentastes mal contra mim, porém Deus o tornou em bem\""], "kind": "quote", "fact": true, "iconic": true, "prod": false, "speaker": "jose" }
+        { "order": 10, "en": "In Egypt I hugged my father and cried", "pt": "No Egito eu abracei o meu pai e chorei", "alt": ["I hugged my father in Egypt and cried"], "altPt": ["No Egito, eu abracei meu pai e chorei", "Eu abracei o meu pai no Egito e chorei"], "kind": "first-person", "fact": true, "speaker": "jose" },
+        { "order": 11, "en": "My brothers said, \"Please forgive the evil we did\"", "pt": "Meus irmãos disseram: \"Por favor, perdoe o mal que fizemos\"", "altPt": ["Meus irmãos disseram: \"Perdoe, por favor, o mal que nós fizemos\""], "kind": "quote", "fact": true, "speaker": "juda" },
+        { "order": 12, "en": "I forgave them: \"You meant evil, but God meant it for good\"", "pt": "Eu os perdoei: \"Vocês quiseram me fazer mal, mas Deus transformou isso em bem\"", "altPt": ["Eu os perdoei: \"Vocês quiseram o mal, mas Deus o transformou em bem\"", "Eu os perdoei: \"Vós bem intentastes mal contra mim, porém Deus o tornou em bem\""], "kind": "quote", "fact": true, "iconic": true, "prod": false, "speaker": "jose" }
       ],
       "contrast": [
-        { "a": "I cried, \"I am Joseph! Is my father alive?\"", "b": "I cried, \"I am Joseph! My father is alive\"", "note": "Is my father alive? = pergunta (is antes); My father is alive = afirmação" },
+        { "a": "I said, \"I am Joseph! Is my father still alive?\"", "b": "I said, \"I am Joseph! My father is still alive\"", "note": "Is my father...? = pergunta (is antes do sujeito); My father is... = afirmação" },
         { "a": "I said, \"Come closer. God sent me here before you\"", "b": "I said, \"Come closer. God sends me here before you\"", "note": "sent = passado irregular de send (mandou); sends = presente (manda)" }
       ],
       "verse": {
@@ -350,28 +353,28 @@
         ]
       },
       "reading": {
-        "text": "Jacob's sons went to Egypt to buy grain, and they bowed down to Joseph, but they did not know him. The silver cup was in Benjamin's sack, and Judah asked Joseph to let Benjamin go. Then Joseph cried and said, \"I am Joseph! Is my father still alive?\" Jacob came to Egypt with all his family, and Joseph forgave his brothers.",
-        "pt": "Os filhos de Jacó foram ao Egito comprar trigo e se curvaram diante de José, mas não o reconheceram. O copo de prata estava no saco de Benjamim, e Judá pediu a José que deixasse Benjamim ir. Então José chorou e disse: \"Eu sou José! Meu pai ainda está vivo?\" Jacó veio ao Egito com toda a sua família, e José perdoou os seus irmãos.",
+        "text": "Jacob's sons went to Egypt to buy grain, and they bowed down to Joseph, but they did not recognize him. Later a servant hid Joseph's silver cup in Benjamin's sack, and Judah said, \"Take me and let Benjamin go.\" Then Joseph cried and said, \"I am Joseph! Is my father still alive?\" Jacob came to Egypt with all his family, and Joseph forgave his brothers.",
+        "pt": "Os filhos de Jacó foram ao Egito comprar trigo e se curvaram diante de José, mas não o reconheceram. Depois um servo escondeu o copo de prata de José no saco de Benjamim, e Judá disse: \"Leve a mim e deixe Benjamim ir.\" Então José chorou e disse: \"Eu sou José! Meu pai ainda está vivo?\" Jacó veio ao Egito com toda a sua família, e José perdoou os seus irmãos.",
         "questions": [
           { "kind": "literal", "q": "Why did Jacob's sons go to Egypt?", "qPt": "Por que os filhos de Jacó foram ao Egito?",
             "options": ["To get grain for their family", "To see their brother Joseph", "To sell their silver cup"], "answer": "To get grain for their family" },
-          { "kind": "inference", "q": "Why did Joseph say, \"God sent me here before you\"?", "qPt": "Por que José disse: \"Deus me mandou aqui antes de vocês\"?",
-            "options": ["God used the evil to save many people", "His brothers sold him for silver", "Pharaoh asked for him in Egypt"], "answer": "God used the evil to save many people",
-            "explain": "José viu a mão de Deus na própria venda: \"Deus me enviou adiante de vocês para preservar a vida\" (Gênesis 45:5), e depois: \"vocês quiseram o meu mal, mas Deus transformou em bem\" (Gênesis 50:20)." }
+          { "kind": "inference", "q": "Why did the brothers bow down to Joseph?", "qPt": "Por que os irmãos se curvaram diante de José?",
+            "options": ["He was a ruler in Egypt", "He was their brother Joseph", "He was a servant of Potiphar"], "answer": "He was a ruler in Egypt",
+            "explain": "Os irmãos não reconheceram José: eles se curvaram diante do governador do Egito, que vendia o trigo (Gênesis 42:6-8). Sem saber, cumpriram o sonho de José (Gênesis 37:7-9; 42:9)." }
         ]
       },
       "conversation": {
         "with": "juda",
         "turns": [
-          { "who": "juda", "en": "My lord, please. Keep me here and let the boy go to his father.", "pt": "Meu senhor, por favor. Fique comigo aqui e deixe o menino voltar para o pai.", "mood": "urgente" },
+          { "who": "juda", "en": "My lord, please let me stay here instead. Let the boy go home to his father.", "pt": "Meu senhor, por favor, deixe que eu fique aqui no lugar dele. Deixe o menino voltar para o pai.", "mood": "urgente" },
           { "who": "you", "options": ["Come closer. I am Joseph, your brother.", "Come closer. I am a servant of Pharaoh.", "Come closer. I am a man from Canaan."],
             "answer": "Come closer. I am Joseph, your brother.", "pt": "Cheguem mais perto. Eu sou José, o irmão de vocês.", "intent": "Revele quem você é" },
           { "who": "juda", "en": "Joseph? But we sold you! Are you angry with us?", "pt": "José? Mas nós vendemos você! Você está bravo conosco?", "mood": "assustado" },
-          { "who": "you", "options": ["No. God sent me here to save many people.", "Yes. God sent me here to buy grain.", "No. I did not know you in Egypt."],
-            "answer": "No. God sent me here to save many people.", "pt": "Não. Deus me mandou aqui para salvar muitas pessoas.", "intent": "Diga por que você não está bravo", "speak": true }
+          { "who": "you", "options": ["No. It wasn't you. God sent me here.", "Yes. It was you. You sold me here.", "No. It wasn't you. Pharaoh sent me here."],
+            "answer": "No. It wasn't you. God sent me here.", "pt": "Não. Não foram vocês. Deus me mandou aqui.", "intent": "Diga por que você não está bravo", "speak": true }
         ]
       },
-      "fact": { "pt": "A família de Jacó que desceu ao Egito tinha setenta pessoas. Eles moraram na terra de Gósen, e José cuidou deles durante os anos de fome (Gênesis 46:27; 47:11-12).", "ref": "Gênesis 46:27; 47:11-12" }
+      "fact": { "pt": "A casa de Jacó no Egito somava setenta pessoas, contando José e os dois filhos dele. Eles moraram na terra de Gósen, e José sustentou todos durante a fome (Gênesis 46:26-27; 47:12, 27).", "ref": "Gênesis 46:26-27; 47:12, 27" }
     }
   ]
 }
