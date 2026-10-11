@@ -1,14 +1,25 @@
-# Gera os áudios do BíbliaLearn com o ElevenLabs e faz commit na branch escolhida.
+# Gera os áudios do BíbliaLearn com o ElevenLabs (clipes com timestamps e variante lenta), recorta as palavras
+# das frases pelos timestamps, reconstrói os sprites e faz commit na branch escolhida.
 # Requer o segredo ELEVENLABS_API_KEY (Settings → Secrets and variables → Actions).
 name: Gerar áudios (ElevenLabs)
 on:
   workflow_dispatch:
     inputs:
       limit:
-        description: "Limite de clipes (0 = todos)"
+        description: "Limite de textos (0 = todos)"
         default: "0"
+      only:
+        description: "Subconjunto: vazio = tudo, names = só o nome de cada personagem, audition = audição do elenco (audio/audition, fora do manifesto e dos sprites)"
+        default: ""
+      model:
+        description: "Modelo do ElevenLabs (eleven_multilingual_v2 = qualidade; eleven_flash_v2_5 = metade do custo)"
+        default: "eleven_multilingual_v2"
 permissions:
   contents: write
+# Duas execuções ao mesmo tempo disputariam o mesmo commit de áudio: uma espera a outra
+concurrency:
+  group: gen-audio-${{ github.ref_name }}
+  cancel-in-progress: false
 jobs:
   audio:
     runs-on: ubuntu-latest
@@ -19,16 +30,72 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-      - name: Gerar clipes
-        env:
-          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+      - name: Instalar ffmpeg
+        # O modo mock do gerador, o recorte e os sprites usam ffmpeg/ffprobe
+        run: ffmpeg -version >/dev/null 2>&1 || (sudo apt-get update && sudo apt-get -y install ffmpeg)
+      - name: Lint do elenco (sem créditos)
+        # Dois falantes da mesma cena, história, unidade ou lição v2 nunca podem dividir a mesma voz
+        # (tools/voices.json); falha aqui termina o job antes de gastar qualquer crédito
         run: |
           cd biblelingo
-          node tools/gen-audio.mjs --limit=${{ github.event.inputs.limit }}
+          node tools/gen-audio.mjs --lint
+      - name: Gerar clipes
+        id: gen
+        # Falha parcial (ex.: cota esgotada) não pode descartar o que já foi pago:
+        # os passos seguintes commitam o resultado mesmo assim e o job falha no fim
+        continue-on-error: true
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          ELEVENLABS_MODEL: ${{ github.event.inputs.model }}
+          LIMIT: ${{ github.event.inputs.limit }}
+          ONLY: ${{ github.event.inputs.only }}
+        run: |
+          cd biblelingo
+          node tools/gen-audio.mjs "--limit=$LIMIT" "--only=$ONLY"
+      - name: Recortar palavras das frases (timestamps do ElevenLabs)
+        id: cut
+        # Palavra isolada sintetizada sai com artefatos; a palavra recortada da própria frase, na
+        # mesma voz, é o que o app toca ao tocar numa palavra. Falha aqui não descarta os clipes.
+        # A audição não mexe no manifesto: recorte e sprites são pulados nesse caso.
+        if: github.event.inputs.only != 'audition'
+        continue-on-error: true
+        run: |
+          cd biblelingo
+          node tools/cut-words.mjs
+      - name: Reconstruir sprites
+        if: github.event.inputs.only != 'audition'
+        run: |
+          cd biblelingo
+          node tools/build-sprites.mjs
+      - name: Guardar o áudio como artefato do job
+        # Cópia de segurança antes de qualquer passo git: áudio pago nunca fica só no runner
+        uses: actions/upload-artifact@v4
+        with:
+          name: audio-${{ github.run_id }}
+          path: |
+            biblelingo/audio
+            biblelingo/tools/.voices-ok.json
+            biblelingo/tools/.voices-assigned.json
+            biblelingo/tools/.pron-dict.json
+          retention-days: 7
       - name: Commit dos áudios
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          # Inclui audio/audition (clipes e index.html da audição do elenco) e audio/qa-report.json
           git add biblelingo/audio
+          [ -d biblelingo/audio/audition ] && git add biblelingo/audio/audition
+          # Caches das ferramentas (vozes validadas, vozes de reserva, dicionário de pronúncia); nem todos existem sempre
+          for f in biblelingo/tools/.voices-ok.json biblelingo/tools/.voices-assigned.json biblelingo/tools/.pron-dict.json; do
+            [ -f "$f" ] && git add "$f"
+          done
           git diff --cached --quiet && echo "Nada a commitar" || git commit -m "chore: áudios gerados com ElevenLabs"
+          # A branch pode ter avançado durante a geração: rebase antes de enviar (nunca perder áudio pago).
+          # Em conflito nos arquivos gerados, a versão desta execução vence (no rebase, "theirs" é o nosso commit).
+          git pull --rebase --autostash -X theirs origin "${{ github.ref_name }}"
           git push
+      - name: Falha visível se algum passo falhou
+        if: steps.gen.outcome == 'failure' || steps.cut.outcome == 'failure'
+        run: |
+          echo "Geração: ${{ steps.gen.outcome }} · Recorte: ${{ steps.cut.outcome }}"
+          exit 1

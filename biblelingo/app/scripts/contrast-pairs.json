@@ -1,0 +1,235 @@
+[
+  {
+    "fg": "ink",
+    "bg": "page",
+    "note": "texto principal"
+  },
+  {
+    "fg": "ink-soft",
+    "bg": "page",
+    "note": "texto secundário"
+  },
+  {
+    "fg": "muted",
+    "bg": "page",
+    "note": "links em caixa alta"
+  },
+  {
+    "fg": "ink",
+    "bg": "raised",
+    "note": "texto sobre superfície elevada"
+  },
+  {
+    "fg": "ink-soft",
+    "bg": "raised"
+  },
+  {
+    "fg": "green-text",
+    "bg": "page",
+    "note": "texto verde informativo"
+  },
+  {
+    "fg": "green-text",
+    "bg": "green-soft",
+    "note": "painel de acerto"
+  },
+  {
+    "fg": "blue-text",
+    "bg": "page"
+  },
+  {
+    "fg": "blue-text",
+    "bg": "blue-soft",
+    "note": "opção selecionada"
+  },
+  {
+    "fg": "yellow-text",
+    "bg": "page",
+    "note": "XP no HUD"
+  },
+  {
+    "fg": "yellow-text",
+    "bg": "yellow-soft"
+  },
+  {
+    "fg": "orange-text",
+    "bg": "page"
+  },
+  {
+    "fg": "orange-text",
+    "bg": "orange-soft"
+  },
+  {
+    "fg": "red-text",
+    "bg": "page"
+  },
+  {
+    "fg": "red-text",
+    "bg": "red-soft",
+    "note": "painel de erro"
+  },
+  {
+    "fg": "purple-text",
+    "bg": "page"
+  },
+  {
+    "fg": "purple-text",
+    "bg": "purple-soft",
+    "note": "badge PALAVRA NOVA"
+  },
+  {
+    "fg": "teal-text",
+    "bg": "page"
+  },
+  {
+    "fg": "teal-text",
+    "bg": "teal-soft"
+  },
+  {
+    "fg": "pink-text",
+    "bg": "page"
+  },
+  {
+    "fg": "pink-text",
+    "bg": "pink-soft"
+  },
+  {
+    "fg": "royal-text",
+    "bg": "page"
+  },
+  {
+    "fg": "royal-text",
+    "bg": "royal-soft"
+  },
+  {
+    "fg": "parchment-text",
+    "bg": "parchment",
+    "note": "referência bíblica no Pergaminho"
+  },
+  {
+    "fg": "gold-ink",
+    "bg": "yellow",
+    "note": "texto sobre amarelo"
+  },
+  {
+    "fg": "primary-text",
+    "bg": "primary",
+    "large": true,
+    "themes": [
+      "dark"
+    ],
+    "note": "CTA escuro"
+  },
+  {
+    "fg": "primary-text",
+    "bg": "primary",
+    "large": true,
+    "themes": [
+      "light"
+    ],
+    "warn": true,
+    "note": "CTA claro: exceção de marca; Alto contraste troca por #131f24"
+  },
+  {
+    "fg": "danger-text",
+    "bg": "danger",
+    "large": true,
+    "themes": [
+      "dark"
+    ],
+    "note": "ENTENDI escuro"
+  },
+  {
+    "fg": "danger-text",
+    "bg": "danger",
+    "large": true,
+    "themes": [
+      "light"
+    ],
+    "note": "ENTENDI claro (caixa alta 15/800)"
+  },
+  {
+    "fg": "accent-text",
+    "bg": "accent",
+    "large": true,
+    "themes": [
+      "dark"
+    ],
+    "note": "ícone sobre o botão azul"
+  },
+  {
+    "fg": "accent-text",
+    "bg": "accent",
+    "large": true,
+    "themes": [
+      "light"
+    ],
+    "warn": true,
+    "note": "ícone branco sobre azul: decorativo"
+  },
+  {
+    "fg": "primary-shadow",
+    "bg": "raised",
+    "large": true,
+    "themes": [
+      "dark"
+    ],
+    "note": "título do painel de acerto escuro (#79b933)"
+  },
+  {
+    "fg": "green-text",
+    "bg": "raised",
+    "themes": [
+      "dark"
+    ],
+    "note": "linha do painel de acerto escuro"
+  },
+  {
+    "fg": "red-text",
+    "bg": "raised",
+    "themes": [
+      "dark"
+    ],
+    "note": "painel de erro escuro"
+  },
+  {
+    "fg": "primary-text",
+    "bg": "ok-icon",
+    "large": true,
+    "themes": [
+      "dark"
+    ],
+    "note": "check no círculo do rodapé (escuro)"
+  },
+  {
+    "fg": "primary-text",
+    "bg": "ok-icon",
+    "large": true,
+    "themes": [
+      "light"
+    ],
+    "warn": true,
+    "note": "check branco sobre verde: decorativo, mesma exceção do CTA claro"
+  },
+  {
+    "fg": "danger-text",
+    "bg": "bad-icon",
+    "large": true,
+    "note": "X no círculo do rodapé"
+  },
+  {
+    "fg": "disabled",
+    "bg": "line",
+    "large": true,
+    "note": "CTA desabilitado",
+    "warn": true
+  },
+  {
+    "fg": "unit-text",
+    "bg": "page",
+    "themes": [
+      "light"
+    ],
+    "note": "texto do capítulo padrão (u1); no escuro o valor é injetado por unitVars"
+  }
+]

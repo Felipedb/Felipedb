@@ -1,0 +1,4 @@
+{
+  "_comment": "Personagens cujo busto recortado (bust.webp) não ficou bom: o app usa o retrato redondo (chars/<chave>.jpg em círculo com anel colorido) no lugar. isaias: arte em outro estilo (rosto chapado sobre círculo azul). joaobatista: o braço erguido se mistura ao céu pintado e nenhum modelo separa sem levar o fundo.",
+  "keys": ["isaias", "joaobatista"]
+}

@@ -1,0 +1,89 @@
+{
+  "v": 2,
+  "order": ["u1", "u2", "u6", "u3", "u4", "u5", "u7", "u8"],
+  "units": {
+    "u1": {
+      "title": "A Criação e o Éden",
+      "subtitle": "Gênesis 1-3",
+      "icon": "🌍",
+      "face": "adao",
+      "color": "#58a700",
+      "cast": ["adao", "eva"],
+      "extras": ["voice"],
+      "level": "A1.1"
+    },
+    "u2": {
+      "title": "Noé e a arca",
+      "subtitle": "Gênesis 6-9",
+      "icon": "🌈",
+      "face": "noe",
+      "color": "#1cb0f6",
+      "cast": ["noe"],
+      "extras": ["sem", "esposa", "voice"],
+      "level": "A1.1"
+    },
+    "u6": {
+      "title": "José no Egito",
+      "subtitle": "Gênesis 37-50",
+      "icon": "🌾",
+      "face": "jose",
+      "color": "#ce82ff",
+      "cast": ["jose", "jaco"],
+      "extras": ["juda", "pharaoh", "copeiro", "potifar", "ismaelita"],
+      "level": "A1.2"
+    },
+    "u3": {
+      "title": "Moisés e o Êxodo",
+      "subtitle": "Êxodo 1-15",
+      "icon": "🔥",
+      "face": "moises",
+      "color": "#ff9600",
+      "cast": ["moises", "arao", "josue"],
+      "extras": ["pharaoh", "voice", "povo"],
+      "level": "A1.2"
+    },
+    "u4": {
+      "title": "Davi, o pastor e o rei",
+      "subtitle": "1 Samuel 16-17; 2 Samuel 22; Salmo 23",
+      "icon": "🎵",
+      "face": "davi",
+      "color": "#ff4b4b",
+      "cast": ["davi", "samuel"],
+      "extras": ["goliath", "saul", "jonatas", "jesse", "mefibosete"],
+      "gallery": ["salomao"],
+      "level": "A1.2"
+    },
+    "u5": {
+      "title": "Isaías, o profeta",
+      "subtitle": "Isaías 6-9; 36-38",
+      "icon": "👑",
+      "face": "isaias",
+      "color": "#2b70c9",
+      "cast": ["isaias"],
+      "extras": ["acaz", "ezequias", "anjo", "voice"],
+      "level": "A2.1"
+    },
+    "u7": {
+      "title": "Daniel na Babilônia",
+      "subtitle": "Daniel 1-6",
+      "icon": "🦁",
+      "face": "daniel",
+      "color": "#a56644",
+      "cast": ["daniel", "ezequiel"],
+      "extras": ["nabucodonosor", "dario", "aspenaz", "belsazar"],
+      "gallery": ["neemias"],
+      "level": "A2.1"
+    },
+    "u8": {
+      "title": "Pedro e Jesus",
+      "subtitle": "Mateus 4-16; Lucas 5; João 21",
+      "icon": "🐟",
+      "face": "pedro",
+      "color": "#1cb0f6",
+      "cast": ["pedro", "jesus", "madalena"],
+      "extras": ["andre", "serva", "coxo"],
+      "gallery": ["marta", "maria", "zaqueu", "bartimeu", "tome"],
+      "level": "A2.1"
+    }
+  }
+}
