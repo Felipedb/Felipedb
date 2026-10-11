@@ -1,7 +1,7 @@
 {
   "$comment": "Catálogo sonoro do BíbliaLearn (fonte da verdade, lido por tools/sfx/synth e pelo A/B). Português do Brasil, sem travessão. Ver docs/SFX_SPEC.md.",
   "version": 2,
-  "updated": "2026-10-03",
+  "updated": "2026-10-11",
   "engine": {
     "sampleRate": 44100,
     "channels": 1,
@@ -29,10 +29,12 @@
       "fadeOutMs": "rampa final obrigatória (>= 5 ms) para nunca cortar em borda",
       "trim": "silêncio abaixo de -60 dBFS é cortado no início e no fim; 1 ms de rampa de entrada"
     },
-    "variants": "cada variante aplica transpose (semitons) a todas as notas/freqHz da receita e troca os seeds (seed + índice da variante); o nome da variante é o que vai para o sprite",
+    "variants": "toda entrada tem variants (lista não vazia): cada variante aplica transpose (semitons) a todas as notas/freqHz da receita e troca os seeds (seed + índice da variante); o nome da variante é o que vai para o sprite. Som sem variação tem uma única variante com o próprio nome e transpose 0",
     "index": "regra de runtime para sfx(nome, i): ladder[min(i, len-1)] é a nota alvo; pick nearest-variant escolhe a variante cuja nota (base + transpose) é a mais próxima e corrige o resto por rate = 2^(semitons/12) (limitado por maxSemitones); pick rate usa a única amostra e só muda o rate",
     "loudness": "lufsShort = alvo medido com ffmpeg ebur128 (window M = pico momentâneo de 400 ms para sons < 1 s; S = curto prazo 3 s para os longos); truePeakMax em dBTP; o sintetizador normaliza por ganho e passa um limitador (alimiter) só se o pico passar do limite",
-    "elevenPrompt": "corpo da POST https://api.elevenlabs.io/v1/sound-generation?output_format=mp3_44100_128 { text, duration_seconds, prompt_influence }; os candidatos vão para tools/sfx/candidates/<nome>-el-<n>.mp3 e passam pelo mesmo trim/loudness"
+    "elevenPrompt": "corpo da POST https://api.elevenlabs.io/v1/sound-generation?output_format=mp3_44100_128 { text, duration_seconds, prompt_influence }; os candidatos vão para tools/sfx/candidates/<nome>-el-<n>.mp3 e passam pelo mesmo trim/loudness",
+    "durationMs": "duração alvo do arquivo final em ms = fim da camada mais longa (at + a + d + hold + r, mais as repetições do delay) antes do reverb; o checklist aceita 0,8 a 1,2 x (gong e bless até 1,3 x)",
+    "companion": "companion: true marca sons de acompanhamento (sopros sem transiente, ataque >= 30 ms, sem haptic) que podem soar junto do clique do toque que os causou (abrir sheet, trocar de exercício) sem violar a regra de um transiente por toque"
   },
   "palette": {
     "scale": "dó maior pentatônica",
@@ -93,8 +95,14 @@
   "sounds": [
     {
       "name": "tap",
+      "variants": [
+        {
+          "name": "tap",
+          "transpose": 0
+        }
+      ],
       "role": "ui",
-      "durationMs": 35,
+      "durationMs": 30,
       "haptic": 8,
       "description": "Clique seco e macio: um 'toc' abafado, sem tom definido, que confirma o toque em qualquer botão secundário, card, aba ou popover.",
       "reference": "Duolingo: clique curtíssimo (~30 ms), timbre de madeira abafada ou tampa de caneta, grave para médio, sem cauda; quase tátil, mais sentido que ouvido.",
@@ -156,6 +164,12 @@
     },
     {
       "name": "tap-soft",
+      "variants": [
+        {
+          "name": "tap-soft",
+          "transpose": 0
+        }
+      ],
       "role": "ui",
       "durationMs": 45,
       "haptic": 8,
@@ -218,8 +232,14 @@
     },
     {
       "name": "select",
+      "variants": [
+        {
+          "name": "select",
+          "transpose": 0
+        }
+      ],
       "role": "ui",
-      "durationMs": 60,
+      "durationMs": 80,
       "haptic": 8,
       "description": "Pop claro de selecionar uma opção ou uma célula de pares: 'tok' com tom que desce rápido (E6 para A5), com um clique de ataque.",
       "reference": "Duolingo: ao tocar uma opção de múltipla escolha soa um pop curto e agudo, parecido com uma bolha estourando, pitch descendente, ~60 ms.",
@@ -319,8 +339,14 @@
     },
     {
       "name": "deselect",
+      "variants": [
+        {
+          "name": "deselect",
+          "transpose": 0
+        }
+      ],
       "role": "ui",
-      "durationMs": 50,
+      "durationMs": 70,
       "haptic": 6,
       "description": "Inverso do select, mais quieto e mais grave (A5 para E5): a opção ou célula solta.",
       "reference": "Duolingo: desmarcar quase não soa; um pop menor, grave, meio tom abaixo do de marcar.",
@@ -383,6 +409,12 @@
     },
     {
       "name": "toggle-on",
+      "variants": [
+        {
+          "name": "toggle-on",
+          "transpose": 0
+        }
+      ],
       "role": "ui",
       "durationMs": 60,
       "haptic": 8,
@@ -463,6 +495,12 @@
     },
     {
       "name": "toggle-off",
+      "variants": [
+        {
+          "name": "toggle-off",
+          "transpose": 0
+        }
+      ],
       "role": "ui",
       "durationMs": 60,
       "haptic": 8,
@@ -543,8 +581,14 @@
     },
     {
       "name": "tab",
+      "variants": [
+        {
+          "name": "tab",
+          "transpose": 0
+        }
+      ],
       "role": "ui",
-      "durationMs": 40,
+      "durationMs": 55,
       "haptic": 8,
       "description": "Trocar de aba: tap um pouco mais agudo com um pop mínimo por cima, para a navegação soar diferente de um botão.",
       "reference": "Duolingo: as abas da barra inferior tocam um clique seco e leve, igual ao dos botões, mas um fio mais claro.",
@@ -644,6 +688,12 @@
     },
     {
       "name": "node",
+      "variants": [
+        {
+          "name": "node",
+          "transpose": 0
+        }
+      ],
       "role": "ui",
       "durationMs": 80,
       "haptic": 8,
@@ -745,50 +795,20 @@
     },
     {
       "name": "sheet-open",
+      "variants": [
+        {
+          "name": "sheet-open",
+          "transpose": 0
+        }
+      ],
       "role": "ui",
       "durationMs": 180,
-      "haptic": 8,
-      "description": "Abrir sheet, modal ou popover: sopro curto subindo (400 para 1800 Hz) com um tap macio no início.",
+      "companion": true,
+      "haptic": null,
+      "description": "Sopro suave subindo, sem clique próprio: acompanha o clique do botão que abriu a sheet, o popover ou a ficha.",
       "reference": "Duolingo: as folhas e modais sobem com um 'fush' discreto; mais sentido pela animação que pelo som.",
       "recipe": {
         "layers": [
-          {
-            "type": "noise",
-            "at": 0,
-            "noise": {
-              "color": "white",
-              "seed": 12
-            },
-            "filter": {
-              "type": "bandpass",
-              "cutoff": 1200,
-              "q": 1.2
-            },
-            "adsr": {
-              "a": 0.5,
-              "d": 7,
-              "s": 0,
-              "r": 4
-            },
-            "gain": 0.25
-          },
-          {
-            "type": "sine",
-            "at": 0,
-            "freqHz": 1400,
-            "glide": {
-              "toHz": 700,
-              "ms": 10,
-              "curve": "exp"
-            },
-            "adsr": {
-              "a": 1,
-              "d": 18,
-              "s": 0,
-              "r": 8
-            },
-            "gain": 0.3
-          },
           {
             "type": "noise",
             "at": 0,
@@ -830,8 +850,15 @@
     },
     {
       "name": "sheet-close",
+      "variants": [
+        {
+          "name": "sheet-close",
+          "transpose": 0
+        }
+      ],
       "role": "ui",
       "durationMs": 160,
+      "companion": true,
       "haptic": null,
       "description": "Fechar sheet, modal ou popover: sopro descendo (1600 para 400 Hz), mais quieto que o de abrir.",
       "reference": "Duolingo: fechar quase não soa; um 'fsh' curto para baixo.",
@@ -878,8 +905,14 @@
     },
     {
       "name": "toast",
+      "variants": [
+        {
+          "name": "toast",
+          "transpose": 0
+        }
+      ],
       "role": "ui",
-      "durationMs": 120,
+      "durationMs": 240,
       "haptic": 8,
       "description": "Snackbar entrando: dois sininhos minúsculos subindo (E6 e G6), bem quietos.",
       "reference": "Duolingo: os avisos de rodapé entram com um 'plim' leve de duas notas.",
@@ -1006,6 +1039,12 @@
     },
     {
       "name": "bubble",
+      "variants": [
+        {
+          "name": "bubble",
+          "transpose": 0
+        }
+      ],
       "role": "ui",
       "durationMs": 120,
       "haptic": null,
@@ -1049,9 +1088,6 @@
     },
     {
       "name": "tile",
-      "role": "exercise",
-      "durationMs": 70,
-      "haptic": 8,
       "variants": [
         {
           "name": "tile-1",
@@ -1066,6 +1102,9 @@
           "transpose": 9
         }
       ],
+      "role": "exercise",
+      "durationMs": 120,
+      "haptic": 8,
       "index": {
         "ladder": [
           "C5",
@@ -1160,8 +1199,14 @@
     },
     {
       "name": "tile-return",
+      "variants": [
+        {
+          "name": "tile-return",
+          "transpose": 0
+        }
+      ],
       "role": "exercise",
-      "durationMs": 60,
+      "durationMs": 95,
       "haptic": 8,
       "description": "Devolver a peça ao banco: a mesma madeira em C5 com leve queda de tom e volume menor.",
       "reference": "Duolingo: tirar a peça da frase soa um 'tok' mais fosco e grave que o de colocar.",
@@ -1249,9 +1294,6 @@
     },
     {
       "name": "pair",
-      "role": "exercise",
-      "durationMs": 90,
-      "haptic": 12,
       "variants": [
         {
           "name": "pair-1",
@@ -1266,6 +1308,9 @@
           "transpose": 9
         }
       ],
+      "role": "exercise",
+      "durationMs": 155,
+      "haptic": 12,
       "index": {
         "ladder": [
           "G5",
@@ -1392,8 +1437,14 @@
     },
     {
       "name": "pair-wrong",
+      "variants": [
+        {
+          "name": "pair-wrong",
+          "transpose": 0
+        }
+      ],
       "role": "exercise",
-      "durationMs": 120,
+      "durationMs": 170,
       "haptic": [
         30,
         20,
@@ -1534,6 +1585,12 @@
     },
     {
       "name": "start",
+      "variants": [
+        {
+          "name": "start",
+          "transpose": 0
+        }
+      ],
       "role": "feedback",
       "durationMs": 350,
       "haptic": null,
@@ -1691,9 +1748,6 @@
     },
     {
       "name": "correct",
-      "role": "feedback",
-      "durationMs": 350,
-      "haptic": 20,
       "variants": [
         {
           "name": "correct-1",
@@ -1708,6 +1762,9 @@
           "transpose": -3
         }
       ],
+      "role": "feedback",
+      "durationMs": 430,
+      "haptic": 20,
       "description": "Acerto: 'ding' claro e alegre de duas notas subindo (G5 madeira, C6 sino) com um brilho agudo; três variações (transposta +2 e -3) sorteadas para não cansar.",
       "reference": "Duolingo: o acerto é o som mais conhecido do app, um 'ta-ding' de duas notas subindo uma quarta, a primeira seca de xilofone e a segunda um sino que brilha ~250 ms; total ~350 ms, sem reverb longo.",
       "recipe": {
@@ -1853,6 +1910,12 @@
     },
     {
       "name": "combo",
+      "variants": [
+        {
+          "name": "combo",
+          "transpose": 0
+        }
+      ],
       "role": "feedback",
       "durationMs": 600,
       "haptic": [
@@ -2112,6 +2175,12 @@
     },
     {
       "name": "wrong",
+      "variants": [
+        {
+          "name": "wrong",
+          "transpose": 0
+        }
+      ],
       "role": "feedback",
       "durationMs": 400,
       "haptic": [
@@ -2254,6 +2323,12 @@
     },
     {
       "name": "heart-lost",
+      "variants": [
+        {
+          "name": "heart-lost",
+          "transpose": 0
+        }
+      ],
       "role": "feedback",
       "durationMs": 250,
       "haptic": [
@@ -2318,6 +2393,12 @@
     },
     {
       "name": "heart-empty",
+      "variants": [
+        {
+          "name": "heart-empty",
+          "transpose": 0
+        }
+      ],
       "role": "feedback",
       "durationMs": 700,
       "haptic": [
@@ -2578,8 +2659,15 @@
     },
     {
       "name": "swoosh",
+      "variants": [
+        {
+          "name": "swoosh",
+          "transpose": 0
+        }
+      ],
       "role": "transition",
       "durationMs": 180,
+      "companion": true,
       "haptic": null,
       "description": "Troca de exercício: sopro rosa com filtro subindo (600 para 3000 Hz), muito quieto, sincronizado com a entrada do novo exercício.",
       "reference": "Duolingo: entre exercícios há um 'swish' discreto acompanhando o deslize lateral; quase subliminar.",
@@ -2626,8 +2714,14 @@
     },
     {
       "name": "newword",
+      "variants": [
+        {
+          "name": "newword",
+          "transpose": 0
+        }
+      ],
       "role": "transition",
-      "durationMs": 300,
+      "durationMs": 455,
       "haptic": null,
       "description": "Badge PALAVRA NOVA: dois sininhos finos (D6 e A6) com cintilação, discretos, no momento em que o card entra.",
       "reference": "Duolingo: a palavra nova chega com um 'twinkle' pequeno de duas notas agudas.",
@@ -2779,6 +2873,12 @@
     },
     {
       "name": "finish",
+      "variants": [
+        {
+          "name": "finish",
+          "transpose": 0
+        }
+      ],
       "role": "celebration",
       "durationMs": 1400,
       "haptic": [
@@ -3517,9 +3617,6 @@
     },
     {
       "name": "star",
-      "role": "celebration",
-      "durationMs": 300,
-      "haptic": 15,
       "variants": [
         {
           "name": "star-1",
@@ -3534,6 +3631,9 @@
           "transpose": 7
         }
       ],
+      "role": "celebration",
+      "durationMs": 365,
+      "haptic": 15,
       "index": {
         "ladder": [
           "C6",
@@ -3655,6 +3755,12 @@
     },
     {
       "name": "stat",
+      "variants": [
+        {
+          "name": "stat",
+          "transpose": 0
+        }
+      ],
       "role": "celebration",
       "durationMs": 80,
       "haptic": null,
@@ -3729,8 +3835,14 @@
     },
     {
       "name": "chest",
+      "variants": [
+        {
+          "name": "chest",
+          "transpose": 0
+        }
+      ],
       "role": "celebration",
-      "durationMs": 600,
+      "durationMs": 745,
       "haptic": [
         30,
         40,
@@ -4076,9 +4188,6 @@
     },
     {
       "name": "coin",
-      "role": "celebration",
-      "durationMs": 120,
-      "haptic": null,
       "variants": [
         {
           "name": "coin-1",
@@ -4093,6 +4202,9 @@
           "transpose": 5
         }
       ],
+      "role": "celebration",
+      "durationMs": 235,
+      "haptic": null,
       "description": "Moeda voando até o card de XP: duas notas rápidas (A5 e D6, 40 ms entre elas) com timbre de sino metálico; três variantes transpostas.",
       "reference": "Clássico de jogo (Mario/Duolingo): 'pi-ping' de duas notas subindo uma quarta, metálico e curto.",
       "recipe": {
@@ -4241,6 +4353,12 @@
     },
     {
       "name": "bless",
+      "variants": [
+        {
+          "name": "bless",
+          "transpose": 0
+        }
+      ],
       "role": "celebration",
       "durationMs": 500,
       "haptic": null,
@@ -4331,6 +4449,12 @@
     },
     {
       "name": "streak",
+      "variants": [
+        {
+          "name": "streak",
+          "transpose": 0
+        }
+      ],
       "role": "celebration",
       "durationMs": 800,
       "haptic": [
@@ -4572,8 +4696,14 @@
     },
     {
       "name": "goal",
+      "variants": [
+        {
+          "name": "goal",
+          "transpose": 0
+        }
+      ],
       "role": "celebration",
-      "durationMs": 500,
+      "durationMs": 665,
       "haptic": [
         30,
         40,
@@ -4745,6 +4875,12 @@
     },
     {
       "name": "levelup",
+      "variants": [
+        {
+          "name": "levelup",
+          "transpose": 0
+        }
+      ],
       "role": "celebration",
       "durationMs": 900,
       "haptic": [
@@ -5179,8 +5315,14 @@
     },
     {
       "name": "mission",
+      "variants": [
+        {
+          "name": "mission",
+          "transpose": 0
+        }
+      ],
       "role": "celebration",
-      "durationMs": 300,
+      "durationMs": 495,
       "haptic": 8,
       "description": "Missão concluída e cintilações em geral (substitui o antigo sparkle): três sinos rápidos subindo (E6, G6, C7) com brilho.",
       "reference": "Duolingo: ao concluir uma missão soa um 'twinkle' de três notas rápidas, cristalino.",
@@ -5383,8 +5525,14 @@
     },
     {
       "name": "unlock",
+      "variants": [
+        {
+          "name": "unlock",
+          "transpose": 0
+        }
+      ],
       "role": "celebration",
-      "durationMs": 400,
+      "durationMs": 505,
       "haptic": 8,
       "description": "Próximo nó desbloqueando na trilha (600 ms depois de voltar do Result): sino G5 com brilho branco e um 'clique' de cadeado.",
       "reference": "Duolingo: o nó seguinte acende com um 'ding' único e um brilho.",
@@ -5573,6 +5721,12 @@
     },
     {
       "name": "madness-start",
+      "variants": [
+        {
+          "name": "madness-start",
+          "transpose": 0
+        }
+      ],
       "role": "celebration",
       "durationMs": 500,
       "haptic": [
@@ -5828,6 +5982,12 @@
     },
     {
       "name": "tick",
+      "variants": [
+        {
+          "name": "tick",
+          "transpose": 0
+        }
+      ],
       "role": "feedback",
       "durationMs": 40,
       "haptic": 6,
@@ -5889,6 +6049,12 @@
     },
     {
       "name": "gong",
+      "variants": [
+        {
+          "name": "gong",
+          "transpose": 0
+        }
+      ],
       "role": "celebration",
       "durationMs": 1500,
       "haptic": [
@@ -5966,5 +6132,6 @@
         "promptInfluence": 0.5
       }
     }
-  ]
+  ],
+  "revision": "2.1"
 }
