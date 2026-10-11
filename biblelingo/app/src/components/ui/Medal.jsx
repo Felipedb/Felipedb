@@ -4,7 +4,8 @@
 //   Props: unitId, size, locked, color, motif (nome de ícone), pop (anima a entrada), label (aria)
 // Shield: 72x80 (conquistas): escudo na cor própria (shield-1 a shield-6) com o número do nível em faixa inferior
 //   15/800 branco sobre rgba(0,0,0,.25). Props: n (1 a 6), level, size (altura, padrão 80), label
-// EmptyState: ilustração 120 (ícone da família ou personagem) + heading 19/800 + secondary 15/500 centralizados + CTA opcional.
+// EmptyState: ilustração 3D 120 (Illo: emoji ou nome como "flame-off"; SVG só se não houver 3D) ou personagem + heading 19/800 +
+//   secondary 15/500 centralizados + CTA opcional.
 //   Props: icon, iconSize, ch (personagem), title, text, action ({ label, onClick }), className
 // Exemplo: <Medal unitId="u2" />   <Shield n={2} level={3} />   <EmptyState icon="flame-off" title="Sem missões ainda" text="Faça sua primeira lição para acender a chama" action={{ label: "Começar", onClick: start }} />
 import { motion } from "motion/react";
@@ -13,6 +14,7 @@ import { unitPalette, unitMotif } from "../../core/palette.js";
 import Icon from "../Icon.jsx";
 import Button3D from "./Button3D.jsx";
 import CharacterStage from "./CharacterStage.jsx";
+import Illo, { hasIllo } from "./Illo.jsx";
 
 const HEX = "polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%)";
 
@@ -43,7 +45,7 @@ export function Shield({ n = 1, level = 1, size = 80, label, className = "", ...
 export function EmptyState({ icon, iconSize = 120, ch, title, text, action, className = "" }) {
   return (
     <div className={`flex flex-col items-center px-4 py-8 text-center ${className}`}>
-      {ch ? <CharacterStage ch={ch} variant="header" pose="happy" /> : icon ? <Icon name={icon} size={iconSize} /> : null}
+      {ch ? <CharacterStage ch={ch} variant="header" pose="happy" /> : icon ? (hasIllo(icon) ? <Illo e={icon} size={iconSize} animate="float" /> : <Icon name={icon} size={iconSize} />) : null}
       {title && <h3 className="mt-4 text-heading text-ink" style={{ textWrap: "balance" }}>{title}</h3>}
       {text && <p className="mt-1 max-w-[300px] text-secondary text-ink-soft">{text}</p>}
       {action && <Button3D variant="primary" className="mt-5" onClick={action.onClick}>{action.label}</Button3D>}

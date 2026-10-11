@@ -1,5 +1,6 @@
 // Hud (VISUAL_SPEC 5.7): barra de 56 px + safe area, fundo --color-page, borda inferior 2 px --color-line, sticky top 0, z 30.
-// Quatro itens de 44 px (curso, ofensiva, XP, corações), cada um com ícone SVG 32 + número 17/800 (tabular, contando ao mudar)
+// Quatro itens de 44 px (curso, ofensiva, XP, corações), cada um com ilustração 3D 28 (Illo) + número 17/800 na cor do ícone
+// (tabular, contando ao mudar; o ícone dá um pulinho quando o valor muda)
 // e aria-label completo; tocar um item abre o HudPopover correspondente. Sem wordmark no mobile.
 // Props: inline (linha do rail desktop: sem sticky nem borda), className
 import { useEffect, useRef, useState } from "react";
@@ -10,8 +11,7 @@ import { COURSE, flatLessons, currentLessonId, unitSteps } from "../../core/cont
 import { ensureDaily, startLesson, startQuickPractice } from "../../core/session.js";
 import { today, MAX_HEARTS } from "../../core/util.js";
 import { feel } from "../../core/sfx.js";
-import Icon from "../Icon.jsx";
-import { Button3D, ProgressBar, StreakWeek } from "../ui/index.js";
+import { Button3D, ProgressBar, StreakWeek, Illo } from "../ui/index.js";
 import HudPopover from "./HudPopover.jsx";
 
 // Número do HUD: conta do valor anterior ao novo em 400 ms quando muda (nunca de zero ao montar)
@@ -45,7 +45,7 @@ function CoursePopover() {
   return (
     <div>
       <div className="flex items-center gap-3">
-        <span className="flex h-10 w-[52px] items-center justify-center rounded-md bg-green"><Icon name="brand-mark" size={30} tone="mono" className="text-white" /></span>
+        <Illo e="📖" size={44} />
         <div className="min-w-0">
           <div className="text-heading text-ink">Inglês com a Bíblia</div>
           <div className="text-secondary text-ink-soft">Capítulo {chapter} de {COURSE.length} · {doneN} de {all.length} etapas</div>
@@ -60,7 +60,7 @@ function StreakPopover({ lit, streak }) {
   return (
     <div>
       <div className="mb-3 flex items-center gap-2">
-        <Icon name={lit ? "flame" : "flame-off"} size={32} />
+        <Illo e={lit ? "flame" : "flame-off"} size={36} />
         <div>
           <div className="text-heading text-ink">{streak} {streak === 1 ? "dia" : "dias"} de ofensiva</div>
           <div className="text-secondary text-ink-soft">{lit ? "Ofensiva garantida por hoje. Volte amanhã!" : "Pratique hoje para manter a ofensiva"}</div>
@@ -78,7 +78,7 @@ function XpPopover({ xp }) {
     <div>
       <div className="mb-2 flex items-center justify-between">
         <span className="text-heading text-ink">Hoje: {Math.min(d.xp, goal)} de {goal} XP</span>
-        <Icon name="bolt" size={28} />
+        <Illo e="bolt" size={30} />
       </div>
       <ProgressBar variant="labelled" value={Math.min(d.xp, goal)} max={goal} label={`${Math.min(d.xp, goal)}/${goal}`} done={d.xp >= goal} />
       <div className="mt-3 text-secondary text-ink-soft">Total <b className="font-extrabold text-yellow-text tabular-nums">{xp} XP</b></div>
@@ -98,7 +98,7 @@ function HeartsPopover({ hearts, onClose }) {
   return (
     <div>
       <div className="flex justify-center gap-2" role="img" aria-label={`${hearts} de ${MAX_HEARTS} corações`}>
-        {Array.from({ length: MAX_HEARTS }, (_, i) => <Icon key={i} name={i < hearts ? "heart" : "heart-empty"} size={28} />)}
+        {Array.from({ length: MAX_HEARTS }, (_, i) => <Illo key={i} e={i < hearts ? "heart" : "heart-empty"} size={30} />)}
       </div>
       <div className="mt-3 text-center text-secondary text-ink-soft">
         {full ? "Corações cheios. Cada erro na lição custa um." : <>Próximo coração em <span className="font-extrabold tabular-nums text-ink">{left}</span></>}
@@ -138,15 +138,15 @@ export default function Hud({ inline = false, className = "" }) {
 
   const items = [
     { id: "course", label: `Curso Inglês com a Bíblia`, title: "Curso",
-      icon: <span className="flex h-[27px] w-9 items-center justify-center rounded-[6px] bg-green"><Icon name="brand-mark" size={22} tone="mono" className="text-white" /></span> },
+      icon: <Illo e="📖" size={30} /> },
     { id: "streak", label: `${app.streak} ${app.streak === 1 ? "dia" : "dias"} de ofensiva${lit ? "" : ", ainda não estudou hoje"}`, title: "Ofensiva",
-      icon: <Icon name={lit ? "flame" : "flame-off"} size={32} />, value: app.streak, color: lit ? "text-orange-text" : "text-disabled" },
-    { id: "xp", label: `${app.xp} XP`, title: "XP", icon: <Icon name="bolt" size={32} />, value: app.xp, color: "text-yellow-text" },
+      icon: <Illo e={lit ? "flame" : "flame-off"} size={28} />, value: app.streak, color: lit ? "text-orange-text" : "text-disabled" },
+    { id: "xp", label: `${app.xp} XP`, title: "XP", icon: <Illo e="bolt" size={28} />, value: app.xp, color: "text-yellow-text" },
     { id: "hearts", label: `${hearts} ${hearts === 1 ? "coração" : "corações"}`, title: "Corações",
       icon: (
         <motion.span key={heartBump} className="inline-flex" initial={false}
           animate={heartBump ? { scale: [1, 1.35, 1], x: [0, -4, 4, -2, 0] } : { scale: 1, x: 0 }} transition={{ duration: 0.35 }}>
-          <Icon name={hearts > 0 ? "heart" : "heart-empty"} size={32} />
+          <Illo e={hearts > 0 ? "heart" : "heart-empty"} size={28} />
         </motion.span>
       ), value: hearts, color: "text-red-text" },
   ];

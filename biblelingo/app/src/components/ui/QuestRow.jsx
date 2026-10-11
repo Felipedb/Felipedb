@@ -1,4 +1,4 @@
-// QuestRow e QuestBar (VISUAL_SPEC 5.28): linha de 64 px com ícone ilustrado 48 (bolt, book, star, flame), título
+// QuestRow e QuestBar (VISUAL_SPEC 5.28): linha de 64 px com ilustração 3D 48 (Illo: bolt, book, star, flame ou um emoji), título
 // text-body 17/700, ProgressBar labelled 16 px "7/10" e Chest 40 no fim (cinza fechado; concluída e não resgatada:
 // dourado balançando; toque abre com confete e "+N XP"; resgatada: check-circle verde).
 // Props: icon, title, value, target, reward (XP), state "progress" | "ready" | "claimed", onClaim(reward), delay (s, cascata das barras)
@@ -6,6 +6,7 @@
 import ProgressBar from "./ProgressBar.jsx";
 import Chest from "./Chest.jsx";
 import Icon from "../Icon.jsx";
+import Illo from "./Illo.jsx";
 
 export function QuestBar({ value = 0, target = 1, done = false, delay = 0, className = "" }) {
   const v = Math.min(value, target);
@@ -16,7 +17,7 @@ export default function QuestRow({ icon = "bolt", title, value = 0, target = 1, 
   const done = state !== "progress";
   return (
     <div className={`flex min-h-16 items-center gap-3 ${className}`} {...rest}>
-      <Icon name={icon} size={48} />
+      <Illo e={icon} size={48} />
       <div className="min-w-0 flex-1">
         <div className="mb-1.5 truncate text-body font-bold text-ink">{title}</div>
         <QuestBar value={value} target={target} done={done} delay={delay} />

@@ -28,15 +28,15 @@ function contentAsModules() {
         return 'import { SFX_DATA } from "./sfx-data.js";\nimport { state } from "/src/core/store.js";\n' + code + "\nexport { SFX };";
       return null;
     },
-    // Em desenvolvimento, serve os áudios e retratos da pasta mãe
+    // Em desenvolvimento, serve os áudios, retratos (chars/ e chars/v2/) e ilustrações 3D (img/fx/) da pasta mãe
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
-        const m = /^\/(audio|chars|icons)\/(.+)$/.exec(req.url.split("?")[0]);
+        const m = /^\/(audio|chars|icons|img)\/(.+)$/.exec(req.url.split("?")[0]);
         if (!m) return next();
         const file = path.join(root, m[1], decodeURIComponent(m[2]));
         if (!fs.existsSync(file)) return next();
         const ext = path.extname(file);
-        const type = { ".mp3": "audio/mpeg", ".json": "application/json", ".jpg": "image/jpeg", ".png": "image/png" }[ext];
+        const type = { ".mp3": "audio/mpeg", ".json": "application/json", ".jpg": "image/jpeg", ".png": "image/png", ".webp": "image/webp" }[ext];
         if (type) res.setHeader("Content-Type", type);
         fs.createReadStream(file).pipe(res);
       });

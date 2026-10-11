@@ -12,8 +12,9 @@ export { default as AudioButton, SlowLink, WaveBars, usePlaying } from "./AudioB
 export { default as SpeakPrompt, MicButton } from "./MicButton.jsx";
 export { default as TextCard, Gap } from "./TextCard.jsx";
 export { default as FeedbackFooter, useFooterHeight } from "./FeedbackFooter.jsx";
-export { default as CharacterStage } from "./CharacterStage.jsx";
-export { default as Avatar, CharFace, useTalking, useAsset, charAsset } from "./Avatar.jsx";
+export { default as CharacterStage, useStageArt } from "./CharacterStage.jsx";
+export { default as Avatar, CharFace, useTalking, useAsset, charAsset, usesBust } from "./Avatar.jsx";
+export { default as Illo, IlloStat, illoOf, hasIllo, ILLO_NAMES } from "./Illo.jsx";
 export { default as StatCard, CountUp } from "./StatCard.jsx";
 export { default as Chest } from "./Chest.jsx";
 export { default as Sheet, Modal, ConfirmSheet } from "./Sheet.jsx";

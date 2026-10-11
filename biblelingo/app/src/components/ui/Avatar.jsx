@@ -1,7 +1,7 @@
-// Avatar e CharFace novo (VISUAL_SPEC 5.20): círculo 24 (inline), 40 (chat, História), 56 (listas), 72 (elenco), 96 (Perfil).
-// Imagem chars/v2/<key>/bust.webp com object-position center 40%; sem ela, o JPG atual (center 22%); sem imagem,
-// iniciais em Nunito 800 sobre --unit-soft; extras em emoji (span.emoji). O badge de reação fica em um wrapper externo
-// relative, fora do overflow-hidden rounded-full (corrige CharFace.jsx:5).
+// Avatar e CharFace (IDENTITY_V3): retrato REDONDO para avatares pequenos (lista, chat, HUD, fichas, perfil).
+// Círculo com fundo --unit-soft e o busto recortado chars/v2/<key>/bust.webp ampliado no rosto; personagens de
+// chars/v2/fallback.json (e qualquer busto que falhe ao carregar) usam o JPG chars/<key>.jpg (center 22%); sem imagem,
+// iniciais em Nunito 800 sobre --unit-soft; extras com emoji em ilustração 3D (Illo). O busto grande sem moldura é o CharacterStage.
 // Props:
 //   ch        personagem { key, name, img, emoji, svg } · size: 24 | 40 | 56 | 72 | 96 ou número
 //   ring      cor CSS do anel (3 px até 56, 4 px acima); true usa --unit-color · badge: "check" (check-circle 20 no canto) | "lock" | null
@@ -9,11 +9,17 @@
 //   reaction  "reaction-happy" | "reaction-sad" | null (badge SVG 28 px com SPRING.pop) · alt (padrão ch.name)
 // Exemplo: <Avatar ch={ch} size={56} ring badge="check" />   <CharFace ch={ch} size={72} reaction={reaction} talking="auto" />
 // useTalking(charKey): true enquanto a fala desse personagem (ou qualquer, sem charKey) está tocando.
+// usesBust(ch): true quando o personagem tem busto recortado bom (tem img e não está em fallback.json).
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { onSpeak } from "../../core/audio.js";
 import { SPRING } from "../../core/motion.js";
 import Icon from "../Icon.jsx";
+import Illo from "./Illo.jsx";
+import FALLBACK from "../../../../chars/v2/fallback.json";
+
+const FALLBACK_KEYS = new Set(FALLBACK.keys || []);
+export const usesBust = (ch) => !!(ch && ch.key && ch.img && !FALLBACK_KEYS.has(ch.key));
 
 const probes = new Map(); // url -> true | false | Promise
 
@@ -54,7 +60,8 @@ export function useTalking(charKey) {
 const initials = (name = "") => name.split(" (")[0].split(/\s+/).slice(0, 2).map((w) => w[0]).join("").toUpperCase();
 
 export default function Avatar({ ch, size = 56, ring, badge = null, locked = false, talking = false, reaction = null, alt, className = "", ...rest }) {
-  const bust = useAsset(charAsset(ch, "bust.webp"));
+  const [failed, setFailed] = useState(null); // chave cujo busto falhou ao carregar
+  const bust = usesBust(ch) && failed !== ch.key;
   const auto = useTalking(talking === "auto" ? (ch && ch.key) : "__none__");
   const isTalking = talking === "auto" ? auto : !!talking;
   const ringW = size > 56 ? 4 : 3;
@@ -64,18 +71,22 @@ export default function Avatar({ ch, size = 56, ring, badge = null, locked = fal
 
   return (
     <span className={`relative inline-block shrink-0 ${className}`} style={{ width: size, height: size }} {...rest}>
-      <motion.span className="flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-unit-soft"
+      <motion.span className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-unit-soft"
         style={ringColor ? { boxShadow: `0 0 0 ${ringW}px ${ringColor}` } : undefined}
         animate={isTalking ? { y: [0, -2, 0], scale: [1, 1.04, 1] } : { y: 0, scale: 1 }}
         transition={isTalking ? { duration: 0.5, repeat: Infinity } : SPRING.snap}>
         {locked ? (
           // Bloqueado: cadeado em currentColor (--color-disabled no claro, --color-ink-soft no escuro) sobre --color-line
           <span className="flex h-full w-full items-center justify-center bg-line text-disabled dark:text-ink-soft"><Icon name="lock" size={Math.round(size * 0.43)} tone="mono" /></span>
-        ) : ch && (bust || ch.img) ? (
-          <img src={bust ? charAsset(ch, "bust.webp") : ch.img} alt={alt != null ? alt : ch.name} draggable="false" loading="lazy" decoding="async"
-            className="h-full w-full object-cover" style={{ objectPosition: bust ? "center 40%" : "center 22%" }} />
+        ) : bust ? (
+          // Busto (512x512, figura encostada na base) ampliado 1,5x para o rosto ocupar o círculo
+          <img src={charAsset(ch, "bust.webp")} alt={alt != null ? alt : ch.name} draggable="false" loading="lazy" decoding="async" onError={() => setFailed(ch.key)}
+            className="pointer-events-none absolute max-w-none select-none" style={{ width: "150%", height: "150%", left: "-25%", top: "2%" }} />
+        ) : ch && ch.img ? (
+          <img src={ch.img} alt={alt != null ? alt : ch.name} draggable="false" loading="lazy" decoding="async"
+            className="h-full w-full object-cover" style={{ objectPosition: "center 22%" }} />
         ) : ch && ch.emoji ? (
-          <span className="emoji" role="img" aria-label={alt != null ? alt : ch.name} style={{ fontSize: Math.round(size * 0.55) }}>{ch.emoji}</span>
+          <Illo e={ch.emoji} size={Math.round(size * 0.66)} alt={alt != null ? alt : ch.name} />
         ) : ch && ch.svg ? (
           <span className="[&>svg]:h-full [&>svg]:w-full" dangerouslySetInnerHTML={{ __html: ch.svg }} />
         ) : (

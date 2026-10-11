@@ -5,11 +5,13 @@
 //          children (rótulo) · role="radio" aria-checked; toque: afunda 2 px, select + haptic (tocar a já selecionada não a desmarca, então o som é o mesmo); wrong: SHAKE; correct: PULSE
 //          sound={false} quando o próprio toque confere a resposta (História: o acerto ou o erro é o som do toque)
 // OptionGroup: role="radiogroup", 1 coluna (358) para frases, 2 colunas (174) para palavras soltas, gap 10, cascata STAGGER.options.
-// ImageCard: 174x140, raio 16, ilustração 64 a 80 (emoji de conteúdo em span.emoji até haver arte), legenda text-body 17/500.
+// ImageCard: 174x140, raio 16, ilustração 3D 76 (Illo: emoji de conteúdo vira Fluent Emoji 3D), legenda text-body 17/500;
+//   a ilustração dá um pulinho ao ser escolhida e no acerto.
 // Exemplo: <OptionGroup cols={1}>{opts.map((o, i) => <Option key={o.value} index={i} value={o.value} state={...} onSelect={pick}>{o.label}</Option>)}</OptionGroup>
 import { motion } from "motion/react";
 import { SPRING, STAGGER, SHAKE, PULSE, list, item } from "../../core/motion.js";
 import { feel } from "../../core/sfx.js";
+import Illo from "./Illo.jsx";
 
 const STATE = {
   idle: "border-line bg-page text-ink hover:bg-raised",
@@ -68,7 +70,12 @@ export function ImageCard({ index = 0, value, icon, image, state = "idle", onSel
       className={`relative flex h-[140px] w-full flex-col items-center justify-center gap-2 rounded-lg border-2 border-b-4 px-3 text-body ${STATE[state] || STATE.idle} ${state === "disabled" ? "opacity-70" : ""} ${className}`}
       animate={animFor(state)} transition={transFor(state)} whileTap={interactive ? { y: 2, borderBottomWidth: 2 } : undefined} {...rest}>
       <span aria-hidden className="absolute right-2 top-2 hidden h-6 w-6 items-center justify-center rounded-[6px] border-2 border-line text-caption text-disabled lg:inline-flex">{index + 1}</span>
-      {image ? <img src={image} alt="" className="h-16 w-16 object-contain" draggable="false" /> : icon ? <span className="emoji text-[56px] leading-none" aria-hidden>{icon}</span> : null}
+      {image ? <img src={image} alt="" className="h-16 w-16 object-contain" draggable="false" /> : icon ? (
+        <motion.span className="inline-flex" animate={state === "selected" || state === "correct" ? { scale: [1, 1.12, 1], y: [0, -6, 0] } : { scale: 1, y: 0 }}
+          transition={{ duration: 0.32, ease: "easeOut" }}>
+          <Illo e={icon} size={76} />
+        </motion.span>
+      ) : null}
       <span className="truncate">{children}</span>
     </motion.button>
   );

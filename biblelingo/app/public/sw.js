@@ -1,5 +1,5 @@
 // BíbliaLearn (React) — cache offline: shell na rede primeiro, mídia no cache primeiro
-const CACHE = "biblialearn-react-v3";
+const CACHE = "biblialearn-react-v4";
 // Pré-cache versionado: sprite dos efeitos sonoros v2 (SFX_SPEC 5.1). O .m4a serve ao Safari (sem Vorbis);
 // sfx-v2.m4a.json só existe quando o AAC precisa de offsets próprios. Um arquivo ausente não impede a instalação.
 const PRECACHE = ["audio/sfx/sfx-v2.json", "audio/sfx/sfx-v2.ogg", "audio/sfx/sfx-v2.m4a", "audio/sfx/sfx-v2.m4a.json"];
@@ -17,7 +17,7 @@ self.addEventListener("fetch", (e) => {
   if (url.origin !== location.origin || e.request.method !== "GET") return;
   // Mapas de áudio (.json) mudam a cada geração: sempre rede primeiro. O sprite de efeitos (audio/sfx/) também: o nome
   // sfx-v2 se mantém entre gerações e o áudio precisa acompanhar os offsets do mapa novo (o pré-cache cobre o offline)
-  const media = /\/(chars|audio|icons|fonts)\//.test(url.pathname) && !/\.json$/.test(url.pathname) && !/\/audio\/sfx\//.test(url.pathname);
+  const media = /\/(chars|audio|icons|fonts|img)\//.test(url.pathname) && !/\.json$/.test(url.pathname) && !/\/audio\/sfx\//.test(url.pathname);
   const hashed = /\/assets\//.test(url.pathname);
   if (media || hashed) {
     e.respondWith(

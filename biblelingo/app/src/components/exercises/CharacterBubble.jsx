@@ -9,8 +9,7 @@ import { session } from "../../core/session.js";
 import { UNIT_CAST, CHARACTERS, exKeyText, castHash, audioKey } from "../../core/content.js";
 import { AUDIO } from "../../core/audio.js";
 import Bubble from "../ui/Bubble.jsx";
-import CharacterStage from "../ui/CharacterStage.jsx";
-import { useAsset, charAsset } from "../ui/Avatar.jsx";
+import CharacterStage, { useStageArt } from "../ui/CharacterStage.jsx";
 
 export function currentChar() {
   if (!session) return null;
@@ -37,8 +36,9 @@ export function useExerciseChar(fixed) {
   return ch;
 }
 
-// true quando o personagem tem o ativo de corpo inteiro (o palco usa as medidas da spec); false no retrato redondo
-export const useHasFull = (ch) => useAsset(charAsset(ch, "full.webp"));
+// true quando o personagem tem busto grande sem moldura (o palco usa as medidas da variante: side 150, center 220,
+// result 200); false no retrato redondo de reserva (chars/v2/fallback.json)
+export const useHasFull = (ch) => useStageArt(ch);
 
 // Medidas do palco "side" conforme o ativo disponível (props extras para o CharacterStage, que aceita `style`):
 // 110x180 com corpo inteiro, 110x120 com o retrato redondo de 96

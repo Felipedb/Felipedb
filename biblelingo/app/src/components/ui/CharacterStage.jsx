@@ -1,108 +1,100 @@
-// CharacterStage (VISUAL_SPEC 5.20): personagem como ator, em pé ao lado do balão ou centralizado, sobre uma
-// elipse de sombra desenhada pelo app (--color-line, 85x24, 6 px sobrepostos aos pés). Ativos chars/v2/<key>/full.webp
-// (+ full-happy, full-sad, mouth-open); sem full.webp usa o bust.webp (recorte com alfa) em pé, sem círculo e sem elipse,
-// encostado na base do estágio; sem bust, o JPG atual em círculo de 96 com anel de 3 px (sem elipse de sombra: ela só faz
-// sentido sob pés). Sem corpo inteiro o estágio encolhe para a altura do retrato. Nunca a legenda com o nome.
+// CharacterStage (IDENTITY_V3, personagem como ator): o busto recortado chars/v2/<key>/bust.webp GRANDE, sem moldura nem
+// círculo, encostado numa elipse de sombra, respirando devagar (scale 1 a 1.02 em 3 s) e reagindo ao feedback.
+// Personagens de chars/v2/fallback.json (arte em outro estilo ou recorte ruim) e os sem busto usam o retrato redondo
+// (JPG em círculo com anel na cor do capítulo). Nunca a legenda com o nome.
+// Altura do busto por variante (px): side (lição, ao lado do balão) 150 · center (fala) 220 · result 200 · trail 120 ·
+//   header (cabeçalhos, estados vazios) 96 · peek (interstício, entra pela direita) 180 · interstitial 180.
+//   As dimensões vêm só da variante: width/height em `style` são ignorados (compatibilidade com o palco antigo).
 // Props:
-//   ch        personagem { key, name, img } · variant: "side" (110x180) | "center" (220x300) | "peek" (160x260 à direita, 40% fora) |
-//             "result" (180x300, pose happy, --glow-gold atrás) | "header" (96x160) | "trail" (140, lado oposto ao deslocamento)
-//   pose      "neutral" | "happy" | "sad" · state: "idle" (respiração 3 s) | "happy" (y -10, 380 ms) | "sad" (SHAKE) | "celebrate" (SPRING.bounce)
-//   talking   boolean ou "auto" (useTalking(ch.key)): alterna mouth-open a 8 fps; sem o ativo, y [0,-2,0] + scale [1,1.04,1] a cada 500 ms
-//   reaction  "reaction-happy" | "reaction-sad" | null (badge 28 px fora do recorte) · glow: força o --glow-gold (320 px)
+//   ch        personagem { key, name, img, emoji } · variant (acima) · size: altura do busto em px (sobrepõe a variante)
+//   pose      "neutral" | "happy" | "sad" (sem arte de pose: vira a reação do corpo)
+//   state     "idle" (respiração) | "happy" (pulinho y -8 e rotate 3) | "sad" (inclina e dessatura) | "celebrate" (entra com SPRING.bounce)
+//   talking   boolean ou "auto" (useTalking(ch.key)): balanço leve enquanto a voz toca
+//   reaction  "reaction-happy" | "reaction-sad" | null (badge 28 px no canto) · glow: força o --glow-gold atrás (padrão no result)
 // Exemplo: <CharacterStage ch={ch} variant="side" state={ok ? "happy" : "idle"} reaction={reaction} talking="auto" />
-import { useEffect, useState } from "react";
+// useStageArt(ch): true quando o personagem tem busto grande utilizável (não está em fallback.json e tem img).
+import { useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
-import { SPRING, SHAKE } from "../../core/motion.js";
+import { SPRING } from "../../core/motion.js";
 import Icon from "../Icon.jsx";
-import { useAsset, useTalking, charAsset } from "./Avatar.jsx";
+import { useTalking, charAsset, usesBust } from "./Avatar.jsx";
+import Illo from "./Illo.jsx";
 
-const SIZE = {
-  side: { w: 110, h: 180, img: 174, shadow: [85, 24] },
-  center: { w: 220, h: 300, img: 290, shadow: [170, 40] },
-  peek: { w: 160, h: 260, img: 250, shadow: [0, 0] },
-  result: { w: 180, h: 300, img: 290, shadow: [120, 30] },
-  header: { w: 96, h: 160, img: 154, shadow: [70, 20] },
-  trail: { w: 140, h: 140, img: 134, shadow: [80, 20] },
-};
+// Altura do busto por variante; o palco tem a largura do busto e +10% de altura para a sombra e o pulinho
+const BUST = { side: 150, center: 220, result: 200, trail: 120, header: 96, peek: 180, interstitial: 180 };
 
-// Entrada do "peek" (x 120 -> 0, rotate -10 -> -4) com mola própria: sem isto, x e rotate herdavam a transição
-// do estado (respiração de 3 s em loop ou fala de 0,5 s) e o personagem ficava deslizando para sempre.
+export { usesBust };
+
+// O corte reto do busto some num esfumado curto sobre a elipse de sombra (sem cara de foto recortada)
+const BASE_FADE = "linear-gradient(to bottom, #000 0%, #000 90%, transparent 100%)";
+export const useStageArt = (ch) => usesBust(ch);
+
+// Entrada do "peek" (x 120 -> 0, rotate -10 -> -4) com mola própria, separada da respiração em loop
 const PEEK_SPRING = { type: "spring", stiffness: 220, damping: 14 };
 
-function useMouth(ch, talking) {
-  const has = useAsset(charAsset(ch, "mouth-open.webp"));
-  const [open, setOpen] = useState(false);
-  useEffect(() => {
-    if (!talking || !has) { setOpen(false); return; }
-    const id = setInterval(() => setOpen((o) => !o), 125);
-    return () => clearInterval(id);
-  }, [talking, has]);
-  return has && open;
+function bodyMotion({ reduce, state, talking }) {
+  if (reduce) return { anim: { y: 0, x: 0, scale: 1, rotate: 0, filter: state === "sad" ? "saturate(.7)" : "saturate(1)" }, trans: { duration: 0.2 } };
+  if (state === "happy") return { anim: { y: [0, -8, 0, -3, 0], rotate: [0, 3, 0], scale: 1, filter: "saturate(1)" }, trans: { duration: 0.55, ease: "easeOut" } };
+  if (state === "sad") return { anim: { rotate: -4, x: [0, -3, 3, -2, 0], y: 2, scale: 0.98, filter: "saturate(.6)" }, trans: { duration: 0.45, ease: "easeOut" } };
+  if (state === "celebrate") return { anim: { y: 0, rotate: 0, scale: 1, filter: "saturate(1)" }, trans: SPRING.bounce };
+  if (talking) return { anim: { y: [0, -3, 0], rotate: [0, 1.2, 0], scale: [1, 1.015, 1], filter: "saturate(1)" }, trans: { duration: 0.5, repeat: Infinity, ease: "easeInOut" } };
+  return { anim: { scale: [1, 1.02, 1], y: 0, rotate: 0, filter: "saturate(1)" }, trans: { duration: 3, repeat: Infinity, ease: "easeInOut" } };
 }
 
-export default function CharacterStage({ ch, variant = "side", pose = "neutral", state = "idle", talking = false, reaction = null, glow, className = "", ...rest }) {
+export default function CharacterStage({ ch, variant = "side", size, pose = "neutral", state = "idle", talking = false, reaction = null, glow, className = "", style, ...rest }) {
   const reduce = useReducedMotion();
-  const dims = SIZE[variant] || SIZE.side;
-  const effPose = variant === "result" && pose === "neutral" ? "happy" : pose;
-  const fullFile = effPose === "happy" ? "full-happy.webp" : effPose === "sad" ? "full-sad.webp" : "full.webp";
-  const hasPose = useAsset(charAsset(ch, fullFile));
-  const hasFull = useAsset(charAsset(ch, "full.webp"));
-  const hasBust = useAsset(charAsset(ch, "bust.webp"));
+  const [failed, setFailed] = useState(null); // chave cujo busto falhou ao carregar
+  const H = size || BUST[variant] || BUST.side;
   const auto = useTalking(talking === "auto" ? (ch && ch.key) : "__none__");
   const isTalking = talking === "auto" ? auto : !!talking;
-  const mouthOpen = useMouth(ch, isTalking);
+  const bust = usesBust(ch) && failed !== ch.key;
+  // A pose (sem arte própria) vira o estado do corpo quando o estado é neutro
+  const effState = state !== "idle" ? state : pose === "sad" ? "sad" : "idle";
   const showGlow = glow != null ? glow : variant === "result";
+  const { anim, trans } = bodyMotion({ reduce, state: effState, talking: isTalking });
 
-  const full = hasPose ? charAsset(ch, fullFile) : hasFull ? charAsset(ch, "full.webp") : null;
-  const src = mouthOpen ? charAsset(ch, "mouth-open.webp") : full;
-  // Sem corpo inteiro: busto com alfa em pé (quadrado de até 96/134/290 px) ou círculo de 96; o estágio tem a altura do retrato
-  const bustSize = Math.min(dims.w, dims.img);
-  const circleSize = Math.min(96, dims.w - 8);
-  const stageH = src ? dims.h : hasBust ? bustSize : circleSize;
-  const showShadow = !!src && dims.shadow[0] > 0;
+  // Retrato redondo (reserva): círculo de até 120 px com anel de 4 px na cor do capítulo
+  const circle = Math.min(120, Math.round(H * 0.8));
+  const W = bust ? H : Math.max(circle + 8, Math.round(H * 0.8));
+  const stageH = bust ? Math.round(H * 1.06) : circle + 14;
+  const shadowW = Math.round((bust ? H : circle) * 0.68);
+  const shadowH = Math.max(8, Math.round((bust ? H : circle) * 0.09));
 
-  // Movimento do corpo: estado + respiração; a fala sem ativo de boca vira um leve balanço
-  let anim = { y: 0, x: 0, scale: 1, rotate: 0 }, trans = SPRING.settle;
-  if (reduce) { anim = { y: 0, x: 0, scale: 1, rotate: 0 }; }
-  else if (state === "celebrate") { anim = { y: 0, rotate: 0, scale: 1 }; trans = SPRING.bounce; }
-  else if (state === "happy") { anim = { y: [0, -10, 0] }; trans = { duration: 0.38 }; }
-  else if (state === "sad") { anim = { x: SHAKE.x }; trans = SHAKE.transition; }
-  else if (isTalking && !mouthOpen) { anim = { y: [0, -2, 0], scale: [1, 1.04, 1] }; trans = { duration: 0.5, repeat: Infinity }; }
-  else { anim = { scale: [1, 1.015, 1] }; trans = { duration: 3, repeat: Infinity, ease: "easeInOut" }; }
-  const initial = state === "celebrate" && !reduce ? { y: -16, rotate: -8 } : variant === "peek" && !reduce ? { x: 120, rotate: -10 } : false;
-  const peekAnim = variant === "peek" && !reduce ? { x: 0, rotate: -4 } : {};
+  const initial = state === "celebrate" && !reduce ? { y: -16, rotate: -8, scale: 0.9 } : (variant === "peek" || variant === "interstitial") && !reduce ? { x: 120, rotate: -10 } : false;
+  const peekAnim = (variant === "peek" || variant === "interstitial") && !reduce ? { x: 0, rotate: effState === "idle" ? -4 : anim.rotate } : {};
+  const { width: _w, height: _h, ...restStyle } = style || {};
 
   return (
-    <div className={`relative shrink-0 ${className}`} style={{ width: dims.w, height: stageH }} aria-hidden={ch ? undefined : true} {...rest}>
+    <div className={`relative shrink-0 ${className}`} style={{ ...restStyle, width: W, height: stageH }} data-char-stage={ch ? ch.key : undefined} aria-hidden={ch ? undefined : true} {...rest}>
       {showGlow && !reduce && (
         <motion.span aria-hidden className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
-          style={{ width: 320, height: 320, background: "var(--glow-gold)" }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }} />
+          style={{ width: H * 1.6, height: H * 1.6, background: "var(--glow-gold)" }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }} />
       )}
-      {showShadow && (
-        <span aria-hidden className="absolute left-1/2 -translate-x-1/2 rounded-full bg-line" style={{ width: dims.shadow[0], height: dims.shadow[1], bottom: 0 }} />
-      )}
-      <motion.div className="absolute inset-x-0 flex items-end justify-center" style={{ transformOrigin: "50% 100%", bottom: src ? 6 : 0 }}
+      {/* Elipse de sombra sob a base: o busto pisa nela */}
+      <span aria-hidden className="absolute left-1/2 -translate-x-1/2 rounded-[50%] bg-line opacity-80"
+        style={{ width: shadowW, height: shadowH, bottom: 0 }} />
+      <motion.div className="absolute inset-x-0 flex items-end justify-center" style={{ transformOrigin: "50% 100%", bottom: Math.round(shadowH / 2) }}
         initial={initial} animate={{ ...anim, ...peekAnim }}
-        transition={variant === "peek" ? { ...trans, x: PEEK_SPRING, rotate: PEEK_SPRING } : trans}>
-        {src ? (
-          <img src={src} alt={ch ? ch.name : ""} draggable="false" decoding="async" className="object-contain object-bottom" style={{ maxHeight: dims.img, maxWidth: dims.w }} />
-        ) : ch && hasBust ? (
-          <img src={charAsset(ch, "bust.webp")} alt={ch.name} draggable="false" decoding="async" className="object-contain object-bottom" style={{ width: bustSize, height: bustSize }} />
+        transition={variant === "peek" || variant === "interstitial" ? { ...trans, x: PEEK_SPRING, rotate: PEEK_SPRING } : trans}>
+        {bust ? (
+          <img src={charAsset(ch, "bust.webp")} alt={ch.name} draggable="false" decoding="async" onError={() => setFailed(ch.key)}
+            className="pointer-events-none block select-none object-contain object-bottom" style={{ width: H, height: H, WebkitMaskImage: BASE_FADE, maskImage: BASE_FADE }} />
         ) : ch && ch.img ? (
-          <span className="flex items-center justify-center overflow-hidden rounded-full ring-[3px] ring-line bg-unit-soft" style={{ width: circleSize, height: circleSize }}>
+          <span className="flex items-center justify-center overflow-hidden rounded-full bg-unit-soft"
+            style={{ width: circle, height: circle, boxShadow: "0 0 0 4px var(--unit-color, #58cc02), 0 6px 0 4px var(--unit-shadow, #46a302)" }}>
             <img src={ch.img} alt={ch.name} draggable="false" decoding="async" className="h-full w-full object-cover" style={{ objectPosition: "center 22%" }} />
           </span>
         ) : ch && ch.emoji ? (
-          <span className="emoji" role="img" aria-label={ch.name} style={{ fontSize: Math.min(72, dims.w * 0.6) }}>{ch.emoji}</span>
+          <Illo e={ch.emoji} size={Math.min(120, Math.round(H * 0.7))} alt={ch.name} />
         ) : (
-          <span className="flex items-center justify-center rounded-full bg-line" style={{ width: circleSize, height: circleSize }}>
-            <Icon name="avatar" size={Math.min(64, dims.w * 0.5)} />
+          <span className="flex items-center justify-center rounded-full bg-line" style={{ width: circle, height: circle }}>
+            <Icon name="avatar" size={Math.round(circle * 0.6)} />
           </span>
         )}
       </motion.div>
       <AnimatePresence>
         {reaction && (
-          <motion.span key={reaction} className="absolute right-0 top-2" initial={{ scale: 0, rotate: -20 }} animate={{ scale: 1, rotate: 0 }} exit={{ scale: 0, opacity: 0, transition: { duration: 0.12 } }} transition={SPRING.pop}>
+          <motion.span key={reaction} className="absolute right-0 top-1" initial={{ scale: 0, rotate: -20 }} animate={{ scale: 1, rotate: 0 }} exit={{ scale: 0, opacity: 0, transition: { duration: 0.12 } }} transition={SPRING.pop}>
             <Icon name={reaction} size={28} />
           </motion.span>
         )}

@@ -1,8 +1,8 @@
 // Flame e StreakWeek (VISUAL_SPEC 5.29).
-// Flame: chama de 48 a 160 px; com glow pulsante (--glow-gold + box-shadow 0 0 32px 8px rgba(255,150,0,.35), 1,6 s) quando
-//   a ofensiva aumentou hoje; `lit` false mostra a chama apagada (--color-streak-off); count opcional em display-lg.
+// Flame: chama 3D (Illo 🔥) de 48 a 160 px; com glow pulsante (--glow-gold + box-shadow 0 0 32px 8px rgba(255,150,0,.35), 1,6 s) quando
+//   a ofensiva aumentou hoje; `lit` false mostra a chama apagada (cinza); count opcional em display-lg.
 //   Props: size, lit, glow, count, className
-// StreakWeek: 7 colunas (S T Q Q S S D, segunda a domingo), rótulos caption 13/800; dia estudado = flame 20 em círculo 32
+// StreakWeek: 7 colunas (S T Q Q S S D, segunda a domingo), rótulos caption 13/800; dia estudado = chama 3D 22 em círculo 32
 //   --color-orange-soft; hoje não estudado = anel pontilhado 2 px #ff9600; passado não estudado = círculo --color-line;
 //   futuro = --color-line a 55%. Dias preenchem em cascata de 80 ms ao montar.
 //   Props: days ({ "AAAA-MM-DD": xp }), today (chave do dia), animate, className
@@ -10,7 +10,7 @@
 import { motion, useReducedMotion } from "motion/react";
 import { SPRING, STAGGER, list, item } from "../../core/motion.js";
 import { dateKey, today as todayKey } from "../../core/util.js";
-import Icon from "../Icon.jsx";
+import Illo from "./Illo.jsx";
 
 export function Flame({ size = 48, lit = true, glow = false, count, className = "" }) {
   const reduce = useReducedMotion();
@@ -22,7 +22,7 @@ export function Flame({ size = 48, lit = true, glow = false, count, className = 
           animate={{ opacity: [0.6, 1, 0.6], scale: [1, 1.08, 1] }} transition={{ duration: 1.6, repeat: Infinity }} />
       )}
       <motion.span className="relative" initial={glow && !reduce ? { scale: 0 } : false} animate={{ scale: 1 }} transition={SPRING.bounce}>
-        <Icon name={lit ? "flame" : "flame-off"} size={size} />
+        <Illo e={lit ? "flame" : "flame-off"} size={size} />
       </motion.span>
       {count != null && <span className={`relative text-display-lg tabular-nums ${lit ? "text-orange-text" : "text-disabled"}`}>{count}</span>}
     </span>
@@ -55,7 +55,7 @@ export default function StreakWeek({ days = {}, today = todayKey(), animate = tr
             aria-label={`${d.label}${studied ? ": estudou" : isToday ? ": hoje" : future ? ": em breve" : ": sem estudo"}`}>
             <span className="text-caption text-ink-soft">{d.label}</span>
             <span className={`flex h-8 w-8 items-center justify-center rounded-full ${cls}`}>
-              {studied && <Icon name="flame" size={20} />}
+              {studied && <Illo e="flame" size={22} />}
             </span>
           </motion.div>
         );

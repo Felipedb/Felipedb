@@ -14,7 +14,7 @@ import { speak } from "../core/audio.js";
 import { SPRING, STAGGER, EASE, list, item } from "../core/motion.js";
 import { sfx } from "../core/sfx.js";
 import { haptic } from "../core/haptics.js";
-import { Button3D, StatCard, Chest, CharacterStage, AudioButton, useAsset, charAsset } from "../components/ui/index.js";
+import { Button3D, StatCard, Chest, CharacterStage, AudioButton, useStageArt } from "../components/ui/index.js";
 import Icon from "../components/Icon.jsx";
 import StreakScreen from "./ceremonies/StreakScreen.jsx";
 import DailyGoalScreen from "./ceremonies/DailyGoalScreen.jsx";
@@ -78,7 +78,7 @@ function ResultView({ r, onContinue }) {
   const [celebrate, setCelebrate] = useState(false);
   const [chestReward] = useState(() => [1, 2, 3, 5][Math.floor(Math.random() * 4)]);
   const xpRef = useRef(null);
-  const hasFull = useAsset(charAsset(r.char, "full.webp"));
+  const hasFull = useStageArt(r.char);
   const wrong = r.log.filter((e) => !e.ok && !e.review);
   const right = r.log.filter((e) => e.ok).length;
   const glow = r.accuracy >= 80;

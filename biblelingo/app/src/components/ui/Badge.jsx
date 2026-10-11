@@ -5,13 +5,18 @@
 //   new-word toca newword (dois sininhos) 60 ms depois de entrar, logo após o swoosh da troca de exercício; sound={false} silencia.
 // Pill de contagem: 18 px, raio 9, #ff4b4b texto #ffffff 11/800 (erros no Hub e na aba Praticar). Props: count, max (padrão 99)
 // Chip de vocabulário: 44 px, raio 12, borda 2 + 4, ícone 24 + EN 17/700 + PT caption 13/500 --color-ink-soft; toque fala; whileTap y 2.
-//   Props: en, pt, icon (emoji de conteúdo em span.emoji ou nome de ícone com svgIcon), onClick, char, selected
+//   Props: en, pt, icon (emoji de conteúdo, desenhado em 3D pelo Illo) ou svgIcon (nome do conjunto SVG), onClick, char, selected
+// Os badges "new-word" (✨), "legendary" (👑) e "timer" (⏱️) usam a ilustração 3D; "review" fica no SVG de interface.
 // Exemplo: <Badge kind="review" />   <Pill count={3} />   <Chip en="ark" pt="arca" icon="🚢" onClick={() => speak("ark", { char })} />
 import { useEffect } from "react";
 import { motion } from "motion/react";
 import { SPRING } from "../../core/motion.js";
 import { sfx } from "../../core/sfx.js";
 import Icon from "../Icon.jsx";
+import Illo from "./Illo.jsx";
+
+// Ícones de badge que viram ilustração 3D (os demais continuam SVG de interface)
+const ILLO_BADGE = new Set(["sparkle", "crown", "timer"]);
 
 const KINDS = {
   review: { icon: "refresh", text: "Corrija o erro de antes", cls: "text-orange-text" },
@@ -30,7 +35,7 @@ export default function Badge({ kind = "custom", icon, className = "", children,
   return (
     <motion.span className={`inline-flex items-center gap-2 text-caption uppercase tracking-[.8px] ${k ? k.cls : ""} ${className}`}
       initial={{ x: -8, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: 0.18 }} {...rest}>
-      <Icon name={icon || (k && k.icon)} size={24} />
+      {ILLO_BADGE.has(icon || (k && k.icon)) ? <Illo e={icon || k.icon} size={24} /> : <Icon name={icon || (k && k.icon)} size={24} />}
       <span>{children || (k && k.text)}</span>
     </motion.span>
   );
@@ -50,7 +55,7 @@ export function Chip({ en, pt, icon, svgIcon, onClick, selected = false, classNa
     <motion.button type="button" onClick={onClick} aria-label={pt ? `${en}: ${pt}` : en}
       className={`inline-flex h-11 items-center gap-2 rounded-md border-2 border-b-4 px-3 text-left ${selected ? "border-blue-line bg-blue-soft dark:bg-raised" : "border-line bg-page hover:bg-raised"} ${className}`}
       whileTap={{ y: 2, borderBottomWidth: 2 }} transition={SPRING.snap} {...rest}>
-      {svgIcon ? <Icon name={svgIcon} size={24} /> : icon ? <span className="emoji text-[22px]" aria-hidden>{icon}</span> : null}
+      {svgIcon ? <Icon name={svgIcon} size={24} /> : icon ? <Illo e={icon} size={26} /> : null}
       <span className="flex flex-col leading-none">
         <span className="text-body font-bold text-ink">{en}</span>
         {pt && <span className="mt-0.5 text-caption font-medium normal-case tracking-normal text-ink-soft">{pt}</span>}
