@@ -7,7 +7,7 @@ import { SPRING } from "../../core/motion.js";
 
 export default function NodeBalloon({ label = "Começar", delay = 0.4 }) {
   return (
-    <motion.span className="pointer-events-none absolute bottom-[calc(100%+12px)] left-1/2 z-[2] block" style={{ x: "-50%" }}
+    <motion.span className="pointer-events-none absolute bottom-[calc(100%+12px)] left-1/2 z-[3] block" style={{ x: "-50%" }}
       initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, transition: { duration: 0.12 } }} transition={{ ...SPRING.pop, delay }} aria-hidden="true">
       <span className="relative block whitespace-nowrap rounded-md border-2 border-line bg-page px-3.5 py-2 text-label uppercase tracking-[1px] text-unit-text"

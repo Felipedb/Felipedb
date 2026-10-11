@@ -113,7 +113,8 @@ function Achievement({ a, n }) {
   const level = maxed ? a.tiers.length : lvl + 1; // nível em andamento (1 enquanto a primeira meta não foi batida)
   return (
     <motion.div variants={item(SPRING.settle, 12)} className="flex min-h-24 items-center gap-4 py-2">
-      <Shield n={n} level={level} label={`${a.title}, nível ${level}`} className={lvl === 0 ? "opacity-60 grayscale" : ""} />
+      {/* Cor própria do escudo desde o nível 1; conquista ainda sem progresso fica a 55% de saturação (nunca cinza) */}
+      <Shield n={n} level={level} label={`${a.title}, nível ${level}`} className={v === 0 ? "saturate-[.55] opacity-80" : ""} />
       <div className="min-w-0 flex-1">
         <div className="flex items-baseline justify-between gap-2">
           <b className="truncate text-body font-bold text-ink">{a.title}</b>
@@ -155,7 +156,7 @@ function ProfileView({ onSettings }) {
             <Icon name="gear" size={24} />
           </button>
         </div>
-        <div className="-mt-12 flex items-end gap-3 px-2">
+        <div className="relative z-[1] -mt-12 flex items-end gap-3 px-2">
           <button type="button" onClick={() => { sfx("tap"); setPicker(true); }} aria-label="Escolher avatar" className="rounded-full border-4 border-page bg-page">
             <UserAvatar size={96} />
           </button>

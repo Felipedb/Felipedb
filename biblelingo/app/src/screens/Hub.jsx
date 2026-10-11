@@ -1,6 +1,7 @@
 // Aba Praticar (VISUAL_SPEC 6.5): cabeçalho com o personagem do capítulo, cinco cards de prática de 80 px,
 // Situações do dia a dia em carrosséis por personagem e Histórias em grade de duas colunas.
-// História e Match Madness são visões locais desta tela (o App só conhece "hub").
+// História e Match Madness são visões locais desta tela (o App só conhece "hub"), renderizadas como overlay imersivo
+// fixed inset-0 acima da tab bar (mesma casca da lição), entrando com y 100% -> 0 e saindo com fade.
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useAppState } from "../core/useStore.js";
@@ -19,6 +20,8 @@ import Story from "./Story.jsx";
 import Madness from "./Madness.jsx";
 
 const VIEW_SPRING = { type: "spring", stiffness: 300, damping: 30 };
+// Casca imersiva da História e do Match Madness: cobre a tab bar (z-40) e rola por dentro
+const OVERLAY = "fixed inset-0 z-[45] overflow-y-auto bg-page";
 
 // Capítulo em andamento (o da próxima etapa não concluída) e um personagem dele para o cabeçalho
 function currentUnit() {
@@ -160,23 +163,23 @@ export default function Hub() {
   return (
     <AnimatePresence mode="wait" initial={false}>
       {view === "madness" ? (
-        <motion.div key="madness" initial={{ y: "100%" }} animate={{ y: 0 }} exit={{ opacity: 0, transition: { duration: 0.18 } }} transition={VIEW_SPRING}>
+        <motion.div key="madness" className={OVERLAY} initial={{ y: "100%" }} animate={{ y: 0 }} exit={{ opacity: 0, transition: { duration: 0.18 } }} transition={VIEW_SPRING}>
           <Madness onExit={() => setView("hub")} />
         </motion.div>
       ) : typeof view === "object" && view.story ? (
-        <motion.div key={"story-" + view.story} initial={{ y: "100%" }} animate={{ y: 0 }} exit={{ opacity: 0, transition: { duration: 0.18 } }} transition={VIEW_SPRING}>
+        <motion.div key={"story-" + view.story} className={OVERLAY} initial={{ y: "100%" }} animate={{ y: 0 }} exit={{ opacity: 0, transition: { duration: 0.18 } }} transition={VIEW_SPRING}>
           <Story id={view.story} onExit={() => setView("hub")} />
         </motion.div>
       ) : (
         <motion.div key="hub" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0.15 } }} transition={{ duration: 0.2 }}
           className="mx-auto max-w-xl px-4 pb-8 pt-4" data-screen="hub">
           {/* Cabeçalho: título e resumo à esquerda, personagem do capítulo à direita */}
-          <div className="flex items-end justify-between gap-3" style={unitVars(unit.id, dark)}>
+          <div className="flex items-start justify-between gap-3" style={unitVars(unit.id, dark)}>
             <div className="min-w-0 pb-2">
               <h2 className="text-display text-ink">Praticar</h2>
               <p className="mt-1 text-secondary text-ink-soft">{learned} {learned === 1 ? "palavra aprendida" : "palavras aprendidas"} · {nErr} para revisar</p>
             </div>
-            <CharacterStage ch={hero} variant="header" className="-mb-1" />
+            <CharacterStage ch={hero} variant="header" />
           </div>
 
           <motion.div className="mt-3 flex flex-col gap-3" variants={list(0.06)} initial="hidden" animate="show">

@@ -1,0 +1,5970 @@
+{
+  "$comment": "Catálogo sonoro do BíbliaLearn (fonte da verdade, lido por tools/sfx/synth e pelo A/B). Português do Brasil, sem travessão. Ver docs/SFX_SPEC.md.",
+  "version": 2,
+  "updated": "2026-10-03",
+  "engine": {
+    "sampleRate": 44100,
+    "channels": 1,
+    "bitDepth": 16,
+    "notes": "Notas em notação científica (C4 = 261,63 Hz, A4 = 440 Hz). Paleta: dó maior pentatônica (C D E G A). Tudo determinístico: ruído usa noise.seed; nada de Math.random no sintetizador.",
+    "layerSchema": {
+      "type": "sine | triangle | square | saw | noise | fm",
+      "at": "deslocamento em ms a partir do início do som (padrão 0)",
+      "note": "nota (ex. C6); alternativa: freqHz",
+      "ratio": "multiplicador da frequência da nota (parciais: 2.76 e 5.4 em sinos, 3.93 e 9.1 em madeira, 0.5 para suboitava)",
+      "detune": "desvio em cents (positivo = mais agudo); unison: { voices, cents } cria cópias espalhadas",
+      "glide": "{ to: nota | toHz: Hz, ms, curve: exp | lin } varredura de tom a partir da nota inicial",
+      "adsr": "{ a, d, s, r, hold } ms, s é nível 0..1, hold é o tempo em sustain (padrão 0); duração da camada = a + d + hold + r",
+      "filter": "{ type: lowpass | highpass | bandpass, cutoff Hz, q, sweepTo Hz, sweepMs } biquad; sweep é exponencial",
+      "gain": "ganho linear da camada antes do master (0..1, pode passar de 1 em somas que serão normalizadas pelo loudness)",
+      "fm": "{ ratio, index, indexDecayMs } só para type fm: portadora seno modulada por seno (freq = nota x ratio), índice decai exponencialmente",
+      "noise": "{ color: white | pink | brown, seed } só para type noise",
+      "delay": "{ ms, feedback 0..1, mix 0..1 } eco simples na camada",
+      "softClip": "0..1: drive de tanh (0 = linear)"
+    },
+    "masterSchema": {
+      "highpassHz": "passa-altas de 2ª ordem no master (tira DC e rumble)",
+      "lowpassHz": "passa-baixas opcional",
+      "reverb": "{ ms, mix } reverb curto (ruído decaindo exponencialmente, convolução ou 4 combs); só em celebrações",
+      "fadeOutMs": "rampa final obrigatória (>= 5 ms) para nunca cortar em borda",
+      "trim": "silêncio abaixo de -60 dBFS é cortado no início e no fim; 1 ms de rampa de entrada"
+    },
+    "variants": "cada variante aplica transpose (semitons) a todas as notas/freqHz da receita e troca os seeds (seed + índice da variante); o nome da variante é o que vai para o sprite",
+    "index": "regra de runtime para sfx(nome, i): ladder[min(i, len-1)] é a nota alvo; pick nearest-variant escolhe a variante cuja nota (base + transpose) é a mais próxima e corrige o resto por rate = 2^(semitons/12) (limitado por maxSemitones); pick rate usa a única amostra e só muda o rate",
+    "loudness": "lufsShort = alvo medido com ffmpeg ebur128 (window M = pico momentâneo de 400 ms para sons < 1 s; S = curto prazo 3 s para os longos); truePeakMax em dBTP; o sintetizador normaliza por ganho e passa um limitador (alimiter) só se o pico passar do limite",
+    "elevenPrompt": "corpo da POST https://api.elevenlabs.io/v1/sound-generation?output_format=mp3_44100_128 { text, duration_seconds, prompt_influence }; os candidatos vão para tools/sfx/candidates/<nome>-el-<n>.mp3 e passam pelo mesmo trim/loudness"
+  },
+  "palette": {
+    "scale": "dó maior pentatônica",
+    "notes": [
+      "C",
+      "D",
+      "E",
+      "G",
+      "A"
+    ],
+    "registers": {
+      "ui": "C5 a C6 (pops e cliques)",
+      "feedback": "G5 a C7 (acerto) e C3 a E4 (erro)",
+      "celebration": "C5 a C7 com metais sintéticos em G4 a C6"
+    },
+    "hz": {
+      "C3": 130.81,
+      "E3": 164.81,
+      "A3": 220,
+      "C4": 261.63,
+      "E4": 329.63,
+      "G4": 392,
+      "C5": 523.25,
+      "D5": 587.33,
+      "E5": 659.26,
+      "G5": 783.99,
+      "A5": 880,
+      "C6": 1046.5,
+      "D6": 1174.66,
+      "E6": 1318.51,
+      "G6": 1567.98,
+      "A6": 1760,
+      "C7": 2093
+    }
+  },
+  "mix": {
+    "masterGain": 0.9,
+    "families": {
+      "ui": -4,
+      "exercise": -2,
+      "feedback": 0,
+      "transition": -6,
+      "celebration": 0
+    },
+    "note": "ganhos relativos em dB aplicados pelo runtime (sfx.js) por role, além do loudness alvo de cada arquivo; o limitador do build garante truePeak <= -1 dBTP"
+  },
+  "aliases": {
+    "pop": "pair",
+    "sparkle": "mission",
+    "card": "tap",
+    "popover-open": "sheet-open",
+    "popover-close": "sheet-close",
+    "heart-lost-all": "heart-empty",
+    "madness-pair": "pair",
+    "madness-wrong": "pair-wrong",
+    "node-done": "pair"
+  },
+  "sounds": [
+    {
+      "name": "tap",
+      "role": "ui",
+      "durationMs": 35,
+      "haptic": 8,
+      "description": "Clique seco e macio: um 'toc' abafado, sem tom definido, que confirma o toque em qualquer botão secundário, card, aba ou popover.",
+      "reference": "Duolingo: clique curtíssimo (~30 ms), timbre de madeira abafada ou tampa de caneta, grave para médio, sem cauda; quase tátil, mais sentido que ouvido.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "noise",
+            "at": 0,
+            "noise": {
+              "color": "white",
+              "seed": 1
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 1600,
+              "q": 1.2
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 7,
+              "s": 0,
+              "r": 4
+            },
+            "gain": 0.5
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "freqHz": 1400,
+            "glide": {
+              "toHz": 700,
+              "ms": 10,
+              "curve": "exp"
+            },
+            "adsr": {
+              "a": 1,
+              "d": 18,
+              "s": 0,
+              "r": 8
+            },
+            "gain": 0.6
+          }
+        ],
+        "master": {
+          "highpassHz": 120,
+          "fadeOutMs": 6
+        }
+      },
+      "loudness": {
+        "lufsShort": -22,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Single soft dry UI button tap, short muted wooden tock, no tone, no reverb, mobile game interface click",
+        "durationSeconds": 0.5,
+        "promptInfluence": 0.5
+      }
+    },
+    {
+      "name": "tap-soft",
+      "role": "ui",
+      "durationMs": 45,
+      "haptic": 8,
+      "description": "Versão mais grave e redonda do tap para o CONTINUAR e os botões grandes: 'tum' macio com menos ruído, para não cansar em cada exercício.",
+      "reference": "Duolingo: o CONTINUAR toca um toque mais fundo e mais quieto que os botões pequenos; o tom cai de ~500 para ~350 Hz em 40 ms.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "sine",
+            "freqHz": 520,
+            "glide": {
+              "toHz": 360,
+              "ms": 30,
+              "curve": "exp"
+            },
+            "adsr": {
+              "a": 1,
+              "d": 36,
+              "s": 0,
+              "r": 12
+            },
+            "gain": 0.85,
+            "softClip": 0.15
+          },
+          {
+            "type": "noise",
+            "noise": {
+              "color": "pink",
+              "seed": 2
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 1200,
+              "q": 1
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 6,
+              "s": 0,
+              "r": 3
+            },
+            "gain": 0.2
+          }
+        ],
+        "master": {
+          "highpassHz": 100,
+          "fadeOutMs": 6
+        }
+      },
+      "loudness": {
+        "lufsShort": -24,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Very soft low rounded button tap, muted thump, short, warm, mobile app continue button, no tone, no tail",
+        "durationSeconds": 0.5,
+        "promptInfluence": 0.5
+      }
+    },
+    {
+      "name": "select",
+      "role": "ui",
+      "durationMs": 60,
+      "haptic": 8,
+      "description": "Pop claro de selecionar uma opção ou uma célula de pares: 'tok' com tom que desce rápido (E6 para A5), com um clique de ataque.",
+      "reference": "Duolingo: ao tocar uma opção de múltipla escolha soa um pop curto e agudo, parecido com uma bolha estourando, pitch descendente, ~60 ms.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "sine",
+            "at": 0,
+            "freqHz": 1318.51,
+            "glide": {
+              "toHz": 880,
+              "ms": 39,
+              "curve": "exp"
+            },
+            "adsr": {
+              "a": 1,
+              "d": 55,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.9,
+            "softClip": 0.2
+          },
+          {
+            "type": "noise",
+            "at": 0,
+            "noise": {
+              "color": "white",
+              "seed": 3
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 1800,
+              "q": 1
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 5,
+              "s": 0,
+              "r": 3
+            },
+            "gain": 0.12
+          },
+          {
+            "type": "noise",
+            "at": 0,
+            "noise": {
+              "color": "white",
+              "seed": 4
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 2200,
+              "q": 1.2
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 7,
+              "s": 0,
+              "r": 4
+            },
+            "gain": 0.25
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "freqHz": 1400,
+            "glide": {
+              "toHz": 700,
+              "ms": 10,
+              "curve": "exp"
+            },
+            "adsr": {
+              "a": 1,
+              "d": 18,
+              "s": 0,
+              "r": 8
+            },
+            "gain": 0.3
+          }
+        ],
+        "master": {
+          "highpassHz": 150,
+          "fadeOutMs": 6
+        }
+      },
+      "loudness": {
+        "lufsShort": -20,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Short bright bubble pop with a quick downward pitch, crisp attack, UI select sound for a mobile language game, no reverb",
+        "durationSeconds": 0.5,
+        "promptInfluence": 0.45
+      }
+    },
+    {
+      "name": "deselect",
+      "role": "ui",
+      "durationMs": 50,
+      "haptic": 6,
+      "description": "Inverso do select, mais quieto e mais grave (A5 para E5): a opção ou célula solta.",
+      "reference": "Duolingo: desmarcar quase não soa; um pop menor, grave, meio tom abaixo do de marcar.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "sine",
+            "at": 0,
+            "freqHz": 880,
+            "glide": {
+              "toHz": 659.26,
+              "ms": 31,
+              "curve": "exp"
+            },
+            "adsr": {
+              "a": 1,
+              "d": 45,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.72,
+            "softClip": 0.2
+          },
+          {
+            "type": "noise",
+            "at": 0,
+            "noise": {
+              "color": "white",
+              "seed": 5
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 1800,
+              "q": 1
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 5,
+              "s": 0,
+              "r": 3
+            },
+            "gain": 0.096
+          }
+        ],
+        "master": {
+          "highpassHz": 150,
+          "fadeOutMs": 6
+        }
+      },
+      "loudness": {
+        "lufsShort": -23,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Tiny soft low bubble pop, descending pitch, quiet, UI deselect sound, mobile game, no reverb",
+        "durationSeconds": 0.5,
+        "promptInfluence": 0.45
+      }
+    },
+    {
+      "name": "toggle-on",
+      "role": "ui",
+      "durationMs": 60,
+      "haptic": 8,
+      "description": "Interruptor ligando: clique + tom curto subindo (E5 para A5).",
+      "reference": "Duolingo/iOS: clique mecânico com um 'blip' leve subindo quando liga.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "noise",
+            "at": 0,
+            "noise": {
+              "color": "white",
+              "seed": 6
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 1800,
+              "q": 1.2
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 7,
+              "s": 0,
+              "r": 4
+            },
+            "gain": 0.4
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "freqHz": 1400,
+            "glide": {
+              "toHz": 700,
+              "ms": 10,
+              "curve": "exp"
+            },
+            "adsr": {
+              "a": 1,
+              "d": 18,
+              "s": 0,
+              "r": 8
+            },
+            "gain": 0.48
+          },
+          {
+            "type": "sine",
+            "at": 6,
+            "note": "E5",
+            "glide": {
+              "to": "A5",
+              "ms": 30,
+              "curve": "exp"
+            },
+            "adsr": {
+              "a": 1,
+              "d": 40,
+              "s": 0,
+              "r": 12
+            },
+            "gain": 0.6
+          }
+        ],
+        "master": {
+          "highpassHz": 150,
+          "fadeOutMs": 6
+        }
+      },
+      "loudness": {
+        "lufsShort": -22,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Mechanical toggle switch click with a tiny rising blip, short, clean, mobile settings switch turning on",
+        "durationSeconds": 0.5,
+        "promptInfluence": 0.5
+      }
+    },
+    {
+      "name": "toggle-off",
+      "role": "ui",
+      "durationMs": 60,
+      "haptic": 8,
+      "description": "Interruptor desligando: clique + tom curto descendo (A5 para E5), um pouco mais quieto.",
+      "reference": "Duolingo/iOS: o mesmo clique com o 'blip' caindo.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "noise",
+            "at": 0,
+            "noise": {
+              "color": "white",
+              "seed": 7
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 1600,
+              "q": 1.2
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 7,
+              "s": 0,
+              "r": 4
+            },
+            "gain": 0.4
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "freqHz": 1400,
+            "glide": {
+              "toHz": 700,
+              "ms": 10,
+              "curve": "exp"
+            },
+            "adsr": {
+              "a": 1,
+              "d": 18,
+              "s": 0,
+              "r": 8
+            },
+            "gain": 0.48
+          },
+          {
+            "type": "sine",
+            "at": 6,
+            "note": "A5",
+            "glide": {
+              "to": "E5",
+              "ms": 30,
+              "curve": "exp"
+            },
+            "adsr": {
+              "a": 1,
+              "d": 40,
+              "s": 0,
+              "r": 12
+            },
+            "gain": 0.5
+          }
+        ],
+        "master": {
+          "highpassHz": 150,
+          "fadeOutMs": 6
+        }
+      },
+      "loudness": {
+        "lufsShort": -23,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Mechanical toggle switch click with a tiny falling blip, short, clean, mobile settings switch turning off",
+        "durationSeconds": 0.5,
+        "promptInfluence": 0.5
+      }
+    },
+    {
+      "name": "tab",
+      "role": "ui",
+      "durationMs": 40,
+      "haptic": 8,
+      "description": "Trocar de aba: tap um pouco mais agudo com um pop mínimo por cima, para a navegação soar diferente de um botão.",
+      "reference": "Duolingo: as abas da barra inferior tocam um clique seco e leve, igual ao dos botões, mas um fio mais claro.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "noise",
+            "at": 0,
+            "noise": {
+              "color": "white",
+              "seed": 8
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 2000,
+              "q": 1.2
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 7,
+              "s": 0,
+              "r": 4
+            },
+            "gain": 0.45
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "freqHz": 1400,
+            "glide": {
+              "toHz": 700,
+              "ms": 10,
+              "curve": "exp"
+            },
+            "adsr": {
+              "a": 1,
+              "d": 18,
+              "s": 0,
+              "r": 8
+            },
+            "gain": 0.54
+          },
+          {
+            "type": "sine",
+            "at": 2,
+            "freqHz": 1046.5,
+            "glide": {
+              "toHz": 783.99,
+              "ms": 21,
+              "curve": "exp"
+            },
+            "adsr": {
+              "a": 1,
+              "d": 30,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.315,
+            "softClip": 0.2
+          },
+          {
+            "type": "noise",
+            "at": 2,
+            "noise": {
+              "color": "white",
+              "seed": 9
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 1800,
+              "q": 1
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 5,
+              "s": 0,
+              "r": 3
+            },
+            "gain": 0.042
+          }
+        ],
+        "master": {
+          "highpassHz": 150,
+          "fadeOutMs": 6
+        }
+      },
+      "loudness": {
+        "lufsShort": -22,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Light crisp tab switch click, very short, slightly bright, mobile app bottom navigation, no tail",
+        "durationSeconds": 0.5,
+        "promptInfluence": 0.5
+      }
+    },
+    {
+      "name": "node",
+      "role": "ui",
+      "durationMs": 80,
+      "haptic": 8,
+      "description": "Tocar um nó da trilha: 'bloop' redondo e grave (400 para 250 Hz) com clique de ataque; o popover abre em seguida.",
+      "reference": "Duolingo: o nó do caminho afunda com um pop fundo e gordo, mais grave que o das opções, ~80 ms.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "sine",
+            "at": 0,
+            "freqHz": 400,
+            "glide": {
+              "toHz": 250,
+              "ms": 49,
+              "curve": "exp"
+            },
+            "adsr": {
+              "a": 1,
+              "d": 70,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.9,
+            "softClip": 0.2
+          },
+          {
+            "type": "noise",
+            "at": 0,
+            "noise": {
+              "color": "white",
+              "seed": 10
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 1800,
+              "q": 1
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 5,
+              "s": 0,
+              "r": 3
+            },
+            "gain": 0.12
+          },
+          {
+            "type": "noise",
+            "at": 0,
+            "noise": {
+              "color": "white",
+              "seed": 11
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 1400,
+              "q": 1.2
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 7,
+              "s": 0,
+              "r": 4
+            },
+            "gain": 0.2
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "freqHz": 1400,
+            "glide": {
+              "toHz": 700,
+              "ms": 10,
+              "curve": "exp"
+            },
+            "adsr": {
+              "a": 1,
+              "d": 18,
+              "s": 0,
+              "r": 8
+            },
+            "gain": 0.24
+          }
+        ],
+        "master": {
+          "highpassHz": 90,
+          "fadeOutMs": 8
+        }
+      },
+      "loudness": {
+        "lufsShort": -20,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Deep round bloop pop, low pitched, short, soft attack click, pressing a big round button in a mobile game path",
+        "durationSeconds": 0.5,
+        "promptInfluence": 0.45
+      }
+    },
+    {
+      "name": "sheet-open",
+      "role": "ui",
+      "durationMs": 180,
+      "haptic": 8,
+      "description": "Abrir sheet, modal ou popover: sopro curto subindo (400 para 1800 Hz) com um tap macio no início.",
+      "reference": "Duolingo: as folhas e modais sobem com um 'fush' discreto; mais sentido pela animação que pelo som.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "noise",
+            "at": 0,
+            "noise": {
+              "color": "white",
+              "seed": 12
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 1200,
+              "q": 1.2
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 7,
+              "s": 0,
+              "r": 4
+            },
+            "gain": 0.25
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "freqHz": 1400,
+            "glide": {
+              "toHz": 700,
+              "ms": 10,
+              "curve": "exp"
+            },
+            "adsr": {
+              "a": 1,
+              "d": 18,
+              "s": 0,
+              "r": 8
+            },
+            "gain": 0.3
+          },
+          {
+            "type": "noise",
+            "at": 0,
+            "noise": {
+              "color": "pink",
+              "seed": 13
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 400,
+              "q": 0.8,
+              "sweepTo": 1800,
+              "sweepMs": 170
+            },
+            "adsr": {
+              "a": 43,
+              "d": 111,
+              "s": 0,
+              "r": 17
+            },
+            "gain": 0.4
+          }
+        ],
+        "master": {
+          "highpassHz": 200,
+          "fadeOutMs": 10
+        }
+      },
+      "loudness": {
+        "lufsShort": -24,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Soft short upward whoosh, airy, subtle, a card sliding up on a phone screen, quiet, no tone",
+        "durationSeconds": 0.6,
+        "promptInfluence": 0.4
+      }
+    },
+    {
+      "name": "sheet-close",
+      "role": "ui",
+      "durationMs": 160,
+      "haptic": null,
+      "description": "Fechar sheet, modal ou popover: sopro descendo (1600 para 400 Hz), mais quieto que o de abrir.",
+      "reference": "Duolingo: fechar quase não soa; um 'fsh' curto para baixo.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "noise",
+            "at": 0,
+            "noise": {
+              "color": "pink",
+              "seed": 14
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 1600,
+              "q": 0.8,
+              "sweepTo": 400,
+              "sweepMs": 150
+            },
+            "adsr": {
+              "a": 38,
+              "d": 98,
+              "s": 0,
+              "r": 15
+            },
+            "gain": 0.3
+          }
+        ],
+        "master": {
+          "highpassHz": 200,
+          "fadeOutMs": 10
+        }
+      },
+      "loudness": {
+        "lufsShort": -26,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Soft short downward whoosh, airy, very subtle, a card sliding down and away on a phone screen, no tone",
+        "durationSeconds": 0.6,
+        "promptInfluence": 0.4
+      }
+    },
+    {
+      "name": "toast",
+      "role": "ui",
+      "durationMs": 120,
+      "haptic": 8,
+      "description": "Snackbar entrando: dois sininhos minúsculos subindo (E6 e G6), bem quietos.",
+      "reference": "Duolingo: os avisos de rodapé entram com um 'plim' leve de duas notas.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "E6",
+            "adsr": {
+              "a": 1,
+              "d": 90,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.48
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "E6",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 90,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.18
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "E6",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 54,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.21
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "E6",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 27,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.072
+          },
+          {
+            "type": "sine",
+            "at": 45,
+            "note": "G6",
+            "adsr": {
+              "a": 1,
+              "d": 110,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.48
+          },
+          {
+            "type": "sine",
+            "at": 45,
+            "note": "G6",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 110,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.18
+          },
+          {
+            "type": "sine",
+            "at": 45,
+            "note": "G6",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 66,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.21
+          },
+          {
+            "type": "sine",
+            "at": 45,
+            "note": "G6",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 33,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.072
+          }
+        ],
+        "master": {
+          "highpassHz": 300,
+          "fadeOutMs": 10
+        }
+      },
+      "loudness": {
+        "lufsShort": -24,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Tiny two-note notification chime, quick rising, soft glockenspiel, quiet, mobile app toast, no reverb",
+        "durationSeconds": 0.5,
+        "promptInfluence": 0.45
+      }
+    },
+    {
+      "name": "bubble",
+      "role": "ui",
+      "durationMs": 120,
+      "haptic": null,
+      "description": "Balão novo da História: pop macio subindo de leve (G5 para C6), como mensagem chegando.",
+      "reference": "Duolingo (histórias): cada balão aparece com um pop suave, quase um 'plop' de mensagem, sem clique de ataque.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "sine",
+            "note": "G5",
+            "glide": {
+              "to": "C6",
+              "ms": 60,
+              "curve": "exp"
+            },
+            "adsr": {
+              "a": 4,
+              "d": 90,
+              "s": 0,
+              "r": 25
+            },
+            "gain": 0.7,
+            "softClip": 0.1
+          }
+        ],
+        "master": {
+          "highpassHz": 200,
+          "fadeOutMs": 10
+        }
+      },
+      "loudness": {
+        "lufsShort": -24,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Soft message bubble plop, gentle upward pitch, rounded, quiet, chat bubble appearing, no click",
+        "durationSeconds": 0.5,
+        "promptInfluence": 0.4
+      }
+    },
+    {
+      "name": "tile",
+      "role": "exercise",
+      "durationMs": 70,
+      "haptic": 8,
+      "variants": [
+        {
+          "name": "tile-1",
+          "transpose": 0
+        },
+        {
+          "name": "tile-2",
+          "transpose": 4
+        },
+        {
+          "name": "tile-3",
+          "transpose": 9
+        }
+      ],
+      "index": {
+        "ladder": [
+          "C5",
+          "D5",
+          "E5",
+          "G5",
+          "A5",
+          "C6"
+        ],
+        "base": "C5",
+        "pick": "nearest-variant",
+        "maxSemitones": 3
+      },
+      "description": "Nota de madeira (marimba/xilofone) ao pegar uma peça do banco: C5, E5 e A5 nas três variantes; a posição da peça sobe a nota pela escala pentatônica (tile(i)).",
+      "reference": "Duolingo: cada peça encaixada toca um 'tok' de xilofone curto (~70 ms) e cada peça seguinte soa um pouco mais aguda, montando uma escadinha.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "C5",
+            "adsr": {
+              "a": 1,
+              "d": 85,
+              "s": 0,
+              "r": 30
+            },
+            "gain": 0.9
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "C5",
+            "ratio": 3.93,
+            "adsr": {
+              "a": 1,
+              "d": 30,
+              "s": 0,
+              "r": 10
+            },
+            "gain": 0.25
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "C5",
+            "ratio": 9.1,
+            "adsr": {
+              "a": 1,
+              "d": 12,
+              "s": 0,
+              "r": 6
+            },
+            "gain": 0.08
+          },
+          {
+            "type": "noise",
+            "at": 0,
+            "noise": {
+              "color": "white",
+              "seed": 15
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 2500,
+              "q": 1.5
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 6,
+              "s": 0,
+              "r": 4
+            },
+            "gain": 0.18
+          }
+        ],
+        "master": {
+          "highpassHz": 120,
+          "fadeOutMs": 8
+        }
+      },
+      "loudness": {
+        "lufsShort": -20,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Single short xylophone marimba note, wooden mallet, dry, bright, no reverb, mobile game tile placed",
+        "durationSeconds": 0.5,
+        "promptInfluence": 0.5
+      }
+    },
+    {
+      "name": "tile-return",
+      "role": "exercise",
+      "durationMs": 60,
+      "haptic": 8,
+      "description": "Devolver a peça ao banco: a mesma madeira em C5 com leve queda de tom e volume menor.",
+      "reference": "Duolingo: tirar a peça da frase soa um 'tok' mais fosco e grave que o de colocar.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "C5",
+            "adsr": {
+              "a": 1,
+              "d": 60,
+              "s": 0,
+              "r": 30
+            },
+            "gain": 0.63,
+            "glide": {
+              "to": "A4",
+              "ms": 50,
+              "curve": "exp"
+            }
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "C5",
+            "ratio": 3.93,
+            "adsr": {
+              "a": 1,
+              "d": 30,
+              "s": 0,
+              "r": 10
+            },
+            "gain": 0.175
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "C5",
+            "ratio": 9.1,
+            "adsr": {
+              "a": 1,
+              "d": 12,
+              "s": 0,
+              "r": 6
+            },
+            "gain": 0.056
+          },
+          {
+            "type": "noise",
+            "at": 0,
+            "noise": {
+              "color": "white",
+              "seed": 16
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 2500,
+              "q": 1.5
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 6,
+              "s": 0,
+              "r": 4
+            },
+            "gain": 0.126
+          }
+        ],
+        "master": {
+          "highpassHz": 120,
+          "fadeOutMs": 8
+        }
+      },
+      "loudness": {
+        "lufsShort": -22,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Short dull wooden xylophone note with a slight downward bend, quiet, dry, tile removed",
+        "durationSeconds": 0.5,
+        "promptInfluence": 0.5
+      }
+    },
+    {
+      "name": "pair",
+      "role": "exercise",
+      "durationMs": 90,
+      "haptic": 12,
+      "variants": [
+        {
+          "name": "pair-1",
+          "transpose": 0
+        },
+        {
+          "name": "pair-2",
+          "transpose": 5
+        },
+        {
+          "name": "pair-3",
+          "transpose": 9
+        }
+      ],
+      "index": {
+        "ladder": [
+          "G5",
+          "A5",
+          "C6",
+          "D6",
+          "E6",
+          "G6",
+          "A6"
+        ],
+        "base": "G5",
+        "pick": "nearest-variant",
+        "maxSemitones": 3
+      },
+      "description": "Pop de bolha ao acertar um par (G5, C6 e E6 nas variantes): pair(i) sobe pela pentatônica a cada par, nos exercícios de pares, no Madness, nos cards do Result e nas estrelas do nó.",
+      "reference": "Duolingo (combinar pares): cada par certo estoura como uma bolha com tom, e o tom sobe a cada acerto; ~90 ms, bem redondo, sem clique.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "sine",
+            "at": 0,
+            "freqHz": 1175.9850000000001,
+            "glide": {
+              "toHz": 783.99,
+              "ms": 56,
+              "curve": "exp"
+            },
+            "adsr": {
+              "a": 1,
+              "d": 80,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.9,
+            "softClip": 0.2
+          },
+          {
+            "type": "noise",
+            "at": 0,
+            "noise": {
+              "color": "white",
+              "seed": 17
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 1800,
+              "q": 1
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 5,
+              "s": 0,
+              "r": 3
+            },
+            "gain": 0.12
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "G5",
+            "adsr": {
+              "a": 1,
+              "d": 70,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.2
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "G5",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 70,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.075
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "G5",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 42,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.087
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "G5",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 21,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.03
+          }
+        ],
+        "master": {
+          "highpassHz": 150,
+          "fadeOutMs": 8
+        }
+      },
+      "loudness": {
+        "lufsShort": -19,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Round bubble pop with a clear musical pitch, playful, short, bright, match found in a word pairing game, no reverb",
+        "durationSeconds": 0.5,
+        "promptInfluence": 0.45
+      }
+    },
+    {
+      "name": "pair-wrong",
+      "role": "exercise",
+      "durationMs": 120,
+      "haptic": [
+        30,
+        20,
+        30
+      ],
+      "description": "Par errado (duas células que não combinam): 'buh' duplo curto e abafado (E4 e C4), bem mais leve que o erro de VERIFICAR.",
+      "reference": "Duolingo (pares): o erro de par é um 'bump' grave e seco, sem drama, porque não custa coração.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "triangle",
+            "at": 0,
+            "note": "E4",
+            "glide": {
+              "toHz": 276.89,
+              "ms": 120,
+              "curve": "exp"
+            },
+            "filter": {
+              "type": "lowpass",
+              "cutoff": 900,
+              "q": 0.8
+            },
+            "adsr": {
+              "a": 2,
+              "d": 70,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.51,
+            "softClip": 0.25
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "E4",
+            "ratio": 0.5,
+            "adsr": {
+              "a": 2,
+              "d": 45,
+              "s": 0,
+              "r": 30
+            },
+            "gain": 0.24
+          },
+          {
+            "type": "noise",
+            "at": 0,
+            "noise": {
+              "color": "brown",
+              "seed": 18
+            },
+            "filter": {
+              "type": "lowpass",
+              "cutoff": 320,
+              "q": 0.7
+            },
+            "adsr": {
+              "a": 1,
+              "d": 14,
+              "s": 0,
+              "r": 10
+            },
+            "gain": 0.21
+          },
+          {
+            "type": "triangle",
+            "at": 55,
+            "note": "C4",
+            "glide": {
+              "toHz": 219.77,
+              "ms": 120,
+              "curve": "exp"
+            },
+            "filter": {
+              "type": "lowpass",
+              "cutoff": 900,
+              "q": 0.8
+            },
+            "adsr": {
+              "a": 2,
+              "d": 70,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.425,
+            "softClip": 0.25
+          },
+          {
+            "type": "sine",
+            "at": 55,
+            "note": "C4",
+            "ratio": 0.5,
+            "adsr": {
+              "a": 2,
+              "d": 45,
+              "s": 0,
+              "r": 30
+            },
+            "gain": 0.2
+          },
+          {
+            "type": "noise",
+            "at": 55,
+            "noise": {
+              "color": "brown",
+              "seed": 19
+            },
+            "filter": {
+              "type": "lowpass",
+              "cutoff": 320,
+              "q": 0.7
+            },
+            "adsr": {
+              "a": 1,
+              "d": 14,
+              "s": 0,
+              "r": 10
+            },
+            "gain": 0.175
+          }
+        ],
+        "master": {
+          "highpassHz": 60,
+          "fadeOutMs": 10
+        }
+      },
+      "loudness": {
+        "lufsShort": -20,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Short muted double bump, low wooden thud twice quickly, soft, mismatch in a pairing game, no reverb",
+        "durationSeconds": 0.6,
+        "promptInfluence": 0.45
+      }
+    },
+    {
+      "name": "start",
+      "role": "feedback",
+      "durationMs": 350,
+      "haptic": null,
+      "description": "Começar a lição (popover COMEÇAR, interstício de revisão): madeira C5 seguida de sino G5, com um sopro curto por baixo. Convida sem alarde.",
+      "reference": "Duolingo: ao iniciar uma lição soa um 'ta-dá' curto de duas notas subindo (quinta), timbre de marimba com brilho, enquanto a tela sobe.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "C5",
+            "adsr": {
+              "a": 1,
+              "d": 100,
+              "s": 0,
+              "r": 30
+            },
+            "gain": 0.81
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "C5",
+            "ratio": 3.93,
+            "adsr": {
+              "a": 1,
+              "d": 30,
+              "s": 0,
+              "r": 10
+            },
+            "gain": 0.225
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "C5",
+            "ratio": 9.1,
+            "adsr": {
+              "a": 1,
+              "d": 12,
+              "s": 0,
+              "r": 6
+            },
+            "gain": 0.072
+          },
+          {
+            "type": "noise",
+            "at": 0,
+            "noise": {
+              "color": "white",
+              "seed": 20
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 2500,
+              "q": 1.5
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 6,
+              "s": 0,
+              "r": 4
+            },
+            "gain": 0.162
+          },
+          {
+            "type": "sine",
+            "at": 110,
+            "note": "G5",
+            "adsr": {
+              "a": 1,
+              "d": 220,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.72
+          },
+          {
+            "type": "sine",
+            "at": 110,
+            "note": "G5",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 220,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.27
+          },
+          {
+            "type": "sine",
+            "at": 110,
+            "note": "G5",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 132,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.315
+          },
+          {
+            "type": "sine",
+            "at": 110,
+            "note": "G5",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 66,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.108
+          },
+          {
+            "type": "noise",
+            "at": 0,
+            "noise": {
+              "color": "pink",
+              "seed": 21
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 500,
+              "q": 0.8,
+              "sweepTo": 2500,
+              "sweepMs": 220
+            },
+            "adsr": {
+              "a": 55,
+              "d": 143,
+              "s": 0,
+              "r": 22
+            },
+            "gain": 0.175
+          }
+        ],
+        "master": {
+          "highpassHz": 100,
+          "fadeOutMs": 20
+        }
+      },
+      "loudness": {
+        "lufsShort": -18,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Short cheerful two-note start jingle, marimba then bell, rising perfect fifth, bright, mobile game lesson start, no reverb",
+        "durationSeconds": 0.8,
+        "promptInfluence": 0.45
+      }
+    },
+    {
+      "name": "correct",
+      "role": "feedback",
+      "durationMs": 350,
+      "haptic": 20,
+      "variants": [
+        {
+          "name": "correct-1",
+          "transpose": 0
+        },
+        {
+          "name": "correct-2",
+          "transpose": 2
+        },
+        {
+          "name": "correct-3",
+          "transpose": -3
+        }
+      ],
+      "description": "Acerto: 'ding' claro e alegre de duas notas subindo (G5 madeira, C6 sino) com um brilho agudo; três variações (transposta +2 e -3) sorteadas para não cansar.",
+      "reference": "Duolingo: o acerto é o som mais conhecido do app, um 'ta-ding' de duas notas subindo uma quarta, a primeira seca de xilofone e a segunda um sino que brilha ~250 ms; total ~350 ms, sem reverb longo.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "G5",
+            "adsr": {
+              "a": 1,
+              "d": 90,
+              "s": 0,
+              "r": 30
+            },
+            "gain": 0.9
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "G5",
+            "ratio": 3.93,
+            "adsr": {
+              "a": 1,
+              "d": 30,
+              "s": 0,
+              "r": 10
+            },
+            "gain": 0.25
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "G5",
+            "ratio": 9.1,
+            "adsr": {
+              "a": 1,
+              "d": 12,
+              "s": 0,
+              "r": 6
+            },
+            "gain": 0.08
+          },
+          {
+            "type": "noise",
+            "at": 0,
+            "noise": {
+              "color": "white",
+              "seed": 22
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 2500,
+              "q": 1.5
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 6,
+              "s": 0,
+              "r": 4
+            },
+            "gain": 0.18
+          },
+          {
+            "type": "sine",
+            "at": 85,
+            "note": "C6",
+            "adsr": {
+              "a": 1,
+              "d": 260,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.8
+          },
+          {
+            "type": "sine",
+            "at": 85,
+            "note": "C6",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 260,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.3
+          },
+          {
+            "type": "sine",
+            "at": 85,
+            "note": "C6",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 156,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.35
+          },
+          {
+            "type": "sine",
+            "at": 85,
+            "note": "C6",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 78,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.12
+          },
+          {
+            "type": "sine",
+            "at": 85,
+            "note": "C6",
+            "ratio": 3,
+            "adsr": {
+              "a": 1,
+              "d": 120,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.12
+          }
+        ],
+        "master": {
+          "highpassHz": 150,
+          "fadeOutMs": 20
+        }
+      },
+      "loudness": {
+        "lufsShort": -18,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Happy two-note correct answer ding, xylophone then bright bell rising a fourth, cheerful, clean, short, mobile language game, no reverb",
+        "durationSeconds": 0.7,
+        "promptInfluence": 0.5
+      }
+    },
+    {
+      "name": "combo",
+      "role": "feedback",
+      "durationMs": 600,
+      "haptic": [
+        20,
+        30,
+        40
+      ],
+      "description": "Combo múltiplo de 5: arpejo de quatro sinos subindo (C6, E6, G6, C7) com cintilação por cima; substitui o correct nesse acerto.",
+      "reference": "Duolingo: na sequência de acertos o som sobe de registro e ganha um 'twinkle' extra, como um acorde quebrado rápido.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "C6",
+            "adsr": {
+              "a": 1,
+              "d": 260,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.72
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "C6",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 260,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.27
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "C6",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 156,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.315
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "C6",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 78,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.108
+          },
+          {
+            "type": "sine",
+            "at": 80,
+            "note": "E6",
+            "adsr": {
+              "a": 1,
+              "d": 260,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.72
+          },
+          {
+            "type": "sine",
+            "at": 80,
+            "note": "E6",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 260,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.27
+          },
+          {
+            "type": "sine",
+            "at": 80,
+            "note": "E6",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 156,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.315
+          },
+          {
+            "type": "sine",
+            "at": 80,
+            "note": "E6",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 78,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.108
+          },
+          {
+            "type": "sine",
+            "at": 160,
+            "note": "G6",
+            "adsr": {
+              "a": 1,
+              "d": 280,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.72
+          },
+          {
+            "type": "sine",
+            "at": 160,
+            "note": "G6",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 280,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.27
+          },
+          {
+            "type": "sine",
+            "at": 160,
+            "note": "G6",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 168,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.315
+          },
+          {
+            "type": "sine",
+            "at": 160,
+            "note": "G6",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 84,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.108
+          },
+          {
+            "type": "sine",
+            "at": 240,
+            "note": "C7",
+            "adsr": {
+              "a": 1,
+              "d": 340,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.8
+          },
+          {
+            "type": "sine",
+            "at": 240,
+            "note": "C7",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 340,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.3
+          },
+          {
+            "type": "sine",
+            "at": 240,
+            "note": "C7",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 204,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.35
+          },
+          {
+            "type": "sine",
+            "at": 240,
+            "note": "C7",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 102,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.12
+          },
+          {
+            "type": "noise",
+            "at": 200,
+            "noise": {
+              "color": "white",
+              "seed": 23
+            },
+            "filter": {
+              "type": "highpass",
+              "cutoff": 6000,
+              "q": 0.7
+            },
+            "adsr": {
+              "a": 20,
+              "d": 300,
+              "s": 0,
+              "r": 60
+            },
+            "gain": 0.08,
+            "delay": {
+              "ms": 45,
+              "feedback": 0.35,
+              "mix": 0.4
+            }
+          }
+        ],
+        "master": {
+          "highpassHz": 200,
+          "fadeOutMs": 30
+        }
+      },
+      "loudness": {
+        "lufsShort": -17,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Fast rising four-note bell arpeggio with sparkle, triumphant and bright, short, combo streak reward in a mobile game",
+        "durationSeconds": 0.9,
+        "promptInfluence": 0.45
+      }
+    },
+    {
+      "name": "wrong",
+      "role": "feedback",
+      "durationMs": 400,
+      "haptic": [
+        50,
+        30,
+        50
+      ],
+      "description": "Erro: 'bonk' grave e curto de duas notas descendo (E3 e C3), madeira abafada com um baque de fundo; firme, sem ser punitivo.",
+      "reference": "Duolingo: o erro é um 'bonk-bonk' grave de duas notas caindo, timbre fosco, ~400 ms; dá a notícia sem assustar.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "triangle",
+            "at": 0,
+            "note": "E3",
+            "glide": {
+              "toHz": 138.44,
+              "ms": 120,
+              "curve": "exp"
+            },
+            "filter": {
+              "type": "lowpass",
+              "cutoff": 900,
+              "q": 0.8
+            },
+            "adsr": {
+              "a": 2,
+              "d": 140,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.85,
+            "softClip": 0.25
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "E3",
+            "ratio": 0.5,
+            "adsr": {
+              "a": 2,
+              "d": 90,
+              "s": 0,
+              "r": 30
+            },
+            "gain": 0.4
+          },
+          {
+            "type": "noise",
+            "at": 0,
+            "noise": {
+              "color": "brown",
+              "seed": 24
+            },
+            "filter": {
+              "type": "lowpass",
+              "cutoff": 320,
+              "q": 0.7
+            },
+            "adsr": {
+              "a": 1,
+              "d": 28,
+              "s": 0,
+              "r": 10
+            },
+            "gain": 0.35
+          },
+          {
+            "type": "triangle",
+            "at": 150,
+            "note": "C3",
+            "glide": {
+              "toHz": 109.88,
+              "ms": 120,
+              "curve": "exp"
+            },
+            "filter": {
+              "type": "lowpass",
+              "cutoff": 900,
+              "q": 0.8
+            },
+            "adsr": {
+              "a": 2,
+              "d": 140,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.765,
+            "softClip": 0.25
+          },
+          {
+            "type": "sine",
+            "at": 150,
+            "note": "C3",
+            "ratio": 0.5,
+            "adsr": {
+              "a": 2,
+              "d": 90,
+              "s": 0,
+              "r": 30
+            },
+            "gain": 0.36
+          },
+          {
+            "type": "noise",
+            "at": 150,
+            "noise": {
+              "color": "brown",
+              "seed": 25
+            },
+            "filter": {
+              "type": "lowpass",
+              "cutoff": 320,
+              "q": 0.7
+            },
+            "adsr": {
+              "a": 1,
+              "d": 28,
+              "s": 0,
+              "r": 10
+            },
+            "gain": 0.315
+          }
+        ],
+        "master": {
+          "highpassHz": 50,
+          "fadeOutMs": 20
+        }
+      },
+      "loudness": {
+        "lufsShort": -18,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Low two-note descending bonk, muted wooden thud, soft and short, wrong answer in a friendly mobile game, no reverb",
+        "durationSeconds": 0.7,
+        "promptInfluence": 0.5
+      }
+    },
+    {
+      "name": "heart-lost",
+      "role": "feedback",
+      "durationMs": 250,
+      "haptic": [
+        30,
+        20,
+        60
+      ],
+      "description": "Coração perdido (150 ms depois do wrong, quando o coração treme): uma nota grave que cai (A3 para E3) e some, abafada.",
+      "reference": "Duolingo: ao perder vida soa um 'wuum' grave descendente, bem curto, junto do coração quebrando.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "triangle",
+            "note": "A3",
+            "glide": {
+              "to": "E3",
+              "ms": 200,
+              "curve": "exp"
+            },
+            "filter": {
+              "type": "lowpass",
+              "cutoff": 700,
+              "q": 0.8
+            },
+            "adsr": {
+              "a": 3,
+              "d": 200,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.85,
+            "softClip": 0.2
+          },
+          {
+            "type": "sine",
+            "note": "A3",
+            "ratio": 0.5,
+            "adsr": {
+              "a": 3,
+              "d": 140,
+              "s": 0,
+              "r": 30
+            },
+            "gain": 0.35
+          }
+        ],
+        "master": {
+          "highpassHz": 50,
+          "fadeOutMs": 20
+        }
+      },
+      "loudness": {
+        "lufsShort": -19,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Short low descending whoomp, muted, sad but gentle, losing a life in a mobile game, no reverb",
+        "durationSeconds": 0.6,
+        "promptInfluence": 0.45
+      }
+    },
+    {
+      "name": "heart-empty",
+      "role": "feedback",
+      "durationMs": 700,
+      "haptic": [
+        80,
+        40,
+        80
+      ],
+      "description": "Sem corações (HeartsSheet abrindo): três madeiras descendo devagar (G4, E4, C4) e um baque grave no fim.",
+      "reference": "Duolingo: ao zerar as vidas soa um motivo curto descendente, grave e lento, antes do modal de corações.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "G4",
+            "adsr": {
+              "a": 1,
+              "d": 150,
+              "s": 0,
+              "r": 30
+            },
+            "gain": 0.81
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "G4",
+            "ratio": 3.93,
+            "adsr": {
+              "a": 1,
+              "d": 30,
+              "s": 0,
+              "r": 10
+            },
+            "gain": 0.225
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "G4",
+            "ratio": 9.1,
+            "adsr": {
+              "a": 1,
+              "d": 12,
+              "s": 0,
+              "r": 6
+            },
+            "gain": 0.072
+          },
+          {
+            "type": "noise",
+            "at": 0,
+            "noise": {
+              "color": "white",
+              "seed": 26
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 2500,
+              "q": 1.5
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 6,
+              "s": 0,
+              "r": 4
+            },
+            "gain": 0.162
+          },
+          {
+            "type": "sine",
+            "at": 180,
+            "note": "E4",
+            "adsr": {
+              "a": 1,
+              "d": 150,
+              "s": 0,
+              "r": 30
+            },
+            "gain": 0.81
+          },
+          {
+            "type": "sine",
+            "at": 180,
+            "note": "E4",
+            "ratio": 3.93,
+            "adsr": {
+              "a": 1,
+              "d": 30,
+              "s": 0,
+              "r": 10
+            },
+            "gain": 0.225
+          },
+          {
+            "type": "sine",
+            "at": 180,
+            "note": "E4",
+            "ratio": 9.1,
+            "adsr": {
+              "a": 1,
+              "d": 12,
+              "s": 0,
+              "r": 6
+            },
+            "gain": 0.072
+          },
+          {
+            "type": "noise",
+            "at": 180,
+            "noise": {
+              "color": "white",
+              "seed": 27
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 2500,
+              "q": 1.5
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 6,
+              "s": 0,
+              "r": 4
+            },
+            "gain": 0.162
+          },
+          {
+            "type": "sine",
+            "at": 360,
+            "note": "C4",
+            "adsr": {
+              "a": 1,
+              "d": 200,
+              "s": 0,
+              "r": 30
+            },
+            "gain": 0.81
+          },
+          {
+            "type": "sine",
+            "at": 360,
+            "note": "C4",
+            "ratio": 3.93,
+            "adsr": {
+              "a": 1,
+              "d": 30,
+              "s": 0,
+              "r": 10
+            },
+            "gain": 0.225
+          },
+          {
+            "type": "sine",
+            "at": 360,
+            "note": "C4",
+            "ratio": 9.1,
+            "adsr": {
+              "a": 1,
+              "d": 12,
+              "s": 0,
+              "r": 6
+            },
+            "gain": 0.072
+          },
+          {
+            "type": "noise",
+            "at": 360,
+            "noise": {
+              "color": "white",
+              "seed": 28
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 2500,
+              "q": 1.5
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 6,
+              "s": 0,
+              "r": 4
+            },
+            "gain": 0.162
+          },
+          {
+            "type": "triangle",
+            "at": 420,
+            "note": "C3",
+            "glide": {
+              "toHz": 109.88,
+              "ms": 120,
+              "curve": "exp"
+            },
+            "filter": {
+              "type": "lowpass",
+              "cutoff": 900,
+              "q": 0.8
+            },
+            "adsr": {
+              "a": 2,
+              "d": 140,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.51,
+            "softClip": 0.25
+          },
+          {
+            "type": "sine",
+            "at": 420,
+            "note": "C3",
+            "ratio": 0.5,
+            "adsr": {
+              "a": 2,
+              "d": 90,
+              "s": 0,
+              "r": 30
+            },
+            "gain": 0.24
+          },
+          {
+            "type": "noise",
+            "at": 420,
+            "noise": {
+              "color": "brown",
+              "seed": 29
+            },
+            "filter": {
+              "type": "lowpass",
+              "cutoff": 320,
+              "q": 0.7
+            },
+            "adsr": {
+              "a": 1,
+              "d": 28,
+              "s": 0,
+              "r": 10
+            },
+            "gain": 0.21
+          }
+        ],
+        "master": {
+          "highpassHz": 50,
+          "fadeOutMs": 30
+        }
+      },
+      "loudness": {
+        "lufsShort": -18,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Slow three-note descending wooden xylophone motif ending in a low soft thud, out of lives in a friendly mobile game",
+        "durationSeconds": 1,
+        "promptInfluence": 0.45
+      }
+    },
+    {
+      "name": "swoosh",
+      "role": "transition",
+      "durationMs": 180,
+      "haptic": null,
+      "description": "Troca de exercício: sopro rosa com filtro subindo (600 para 3000 Hz), muito quieto, sincronizado com a entrada do novo exercício.",
+      "reference": "Duolingo: entre exercícios há um 'swish' discreto acompanhando o deslize lateral; quase subliminar.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "noise",
+            "at": 0,
+            "noise": {
+              "color": "pink",
+              "seed": 30
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 600,
+              "q": 0.8,
+              "sweepTo": 3000,
+              "sweepMs": 180
+            },
+            "adsr": {
+              "a": 45,
+              "d": 117,
+              "s": 0,
+              "r": 18
+            },
+            "gain": 0.5
+          }
+        ],
+        "master": {
+          "highpassHz": 300,
+          "fadeOutMs": 12
+        }
+      },
+      "loudness": {
+        "lufsShort": -24,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Quick subtle airy swish, upward sweep, very quiet, screen sliding to the next card, no tone",
+        "durationSeconds": 0.5,
+        "promptInfluence": 0.4
+      }
+    },
+    {
+      "name": "newword",
+      "role": "transition",
+      "durationMs": 300,
+      "haptic": null,
+      "description": "Badge PALAVRA NOVA: dois sininhos finos (D6 e A6) com cintilação, discretos, no momento em que o card entra.",
+      "reference": "Duolingo: a palavra nova chega com um 'twinkle' pequeno de duas notas agudas.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "D6",
+            "adsr": {
+              "a": 1,
+              "d": 180,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.56
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "D6",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 180,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.21
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "D6",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 108,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.245
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "D6",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 54,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.084
+          },
+          {
+            "type": "sine",
+            "at": 70,
+            "note": "A6",
+            "adsr": {
+              "a": 1,
+              "d": 220,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.48
+          },
+          {
+            "type": "sine",
+            "at": 70,
+            "note": "A6",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 220,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.18
+          },
+          {
+            "type": "sine",
+            "at": 70,
+            "note": "A6",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 132,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.21
+          },
+          {
+            "type": "sine",
+            "at": 70,
+            "note": "A6",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 66,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.072
+          },
+          {
+            "type": "noise",
+            "at": 40,
+            "noise": {
+              "color": "white",
+              "seed": 31
+            },
+            "filter": {
+              "type": "highpass",
+              "cutoff": 6000,
+              "q": 0.7
+            },
+            "adsr": {
+              "a": 20,
+              "d": 200,
+              "s": 0,
+              "r": 60
+            },
+            "gain": 0.048,
+            "delay": {
+              "ms": 45,
+              "feedback": 0.35,
+              "mix": 0.4
+            }
+          }
+        ],
+        "master": {
+          "highpassHz": 300,
+          "fadeOutMs": 20
+        }
+      },
+      "loudness": {
+        "lufsShort": -21,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Small delicate two-note twinkle, high bells with a touch of sparkle, short, new word discovered, no long reverb",
+        "durationSeconds": 0.6,
+        "promptInfluence": 0.45
+      }
+    },
+    {
+      "name": "finish",
+      "role": "celebration",
+      "durationMs": 1400,
+      "haptic": [
+        40,
+        30,
+        40,
+        30,
+        80
+      ],
+      "description": "Fim da lição: fanfarra curta e brilhante. Arpejo de madeira+sino (C5, E5, G5, C6) e acorde final de sinos (E6, G6, C7) com cintilação; termina limpo em 1,4 s.",
+      "reference": "Duolingo: ao concluir a lição toca uma fanfarra alegre de ~1,5 s, arpejo rápido subindo e um acorde maior brilhante que sustenta um pouco com 'sparkles'.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "C5",
+            "adsr": {
+              "a": 1,
+              "d": 110,
+              "s": 0,
+              "r": 30
+            },
+            "gain": 0.81
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "C5",
+            "ratio": 3.93,
+            "adsr": {
+              "a": 1,
+              "d": 30,
+              "s": 0,
+              "r": 10
+            },
+            "gain": 0.225
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "C5",
+            "ratio": 9.1,
+            "adsr": {
+              "a": 1,
+              "d": 12,
+              "s": 0,
+              "r": 6
+            },
+            "gain": 0.072
+          },
+          {
+            "type": "noise",
+            "at": 0,
+            "noise": {
+              "color": "white",
+              "seed": 32
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 2500,
+              "q": 1.5
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 6,
+              "s": 0,
+              "r": 4
+            },
+            "gain": 0.162
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "C5",
+            "adsr": {
+              "a": 1,
+              "d": 200,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.32
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "C5",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 200,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.12
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "C5",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 120,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.14
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "C5",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 60,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.048
+          },
+          {
+            "type": "sine",
+            "at": 90,
+            "note": "E5",
+            "adsr": {
+              "a": 1,
+              "d": 110,
+              "s": 0,
+              "r": 30
+            },
+            "gain": 0.81
+          },
+          {
+            "type": "sine",
+            "at": 90,
+            "note": "E5",
+            "ratio": 3.93,
+            "adsr": {
+              "a": 1,
+              "d": 30,
+              "s": 0,
+              "r": 10
+            },
+            "gain": 0.225
+          },
+          {
+            "type": "sine",
+            "at": 90,
+            "note": "E5",
+            "ratio": 9.1,
+            "adsr": {
+              "a": 1,
+              "d": 12,
+              "s": 0,
+              "r": 6
+            },
+            "gain": 0.072
+          },
+          {
+            "type": "noise",
+            "at": 90,
+            "noise": {
+              "color": "white",
+              "seed": 33
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 2500,
+              "q": 1.5
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 6,
+              "s": 0,
+              "r": 4
+            },
+            "gain": 0.162
+          },
+          {
+            "type": "sine",
+            "at": 90,
+            "note": "E5",
+            "adsr": {
+              "a": 1,
+              "d": 200,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.32
+          },
+          {
+            "type": "sine",
+            "at": 90,
+            "note": "E5",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 200,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.12
+          },
+          {
+            "type": "sine",
+            "at": 90,
+            "note": "E5",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 120,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.14
+          },
+          {
+            "type": "sine",
+            "at": 90,
+            "note": "E5",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 60,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.048
+          },
+          {
+            "type": "sine",
+            "at": 180,
+            "note": "G5",
+            "adsr": {
+              "a": 1,
+              "d": 110,
+              "s": 0,
+              "r": 30
+            },
+            "gain": 0.81
+          },
+          {
+            "type": "sine",
+            "at": 180,
+            "note": "G5",
+            "ratio": 3.93,
+            "adsr": {
+              "a": 1,
+              "d": 30,
+              "s": 0,
+              "r": 10
+            },
+            "gain": 0.225
+          },
+          {
+            "type": "sine",
+            "at": 180,
+            "note": "G5",
+            "ratio": 9.1,
+            "adsr": {
+              "a": 1,
+              "d": 12,
+              "s": 0,
+              "r": 6
+            },
+            "gain": 0.072
+          },
+          {
+            "type": "noise",
+            "at": 180,
+            "noise": {
+              "color": "white",
+              "seed": 34
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 2500,
+              "q": 1.5
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 6,
+              "s": 0,
+              "r": 4
+            },
+            "gain": 0.162
+          },
+          {
+            "type": "sine",
+            "at": 180,
+            "note": "G5",
+            "adsr": {
+              "a": 1,
+              "d": 200,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.32
+          },
+          {
+            "type": "sine",
+            "at": 180,
+            "note": "G5",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 200,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.12
+          },
+          {
+            "type": "sine",
+            "at": 180,
+            "note": "G5",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 120,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.14
+          },
+          {
+            "type": "sine",
+            "at": 180,
+            "note": "G5",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 60,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.048
+          },
+          {
+            "type": "sine",
+            "at": 270,
+            "note": "C6",
+            "adsr": {
+              "a": 1,
+              "d": 120,
+              "s": 0,
+              "r": 30
+            },
+            "gain": 0.9
+          },
+          {
+            "type": "sine",
+            "at": 270,
+            "note": "C6",
+            "ratio": 3.93,
+            "adsr": {
+              "a": 1,
+              "d": 30,
+              "s": 0,
+              "r": 10
+            },
+            "gain": 0.25
+          },
+          {
+            "type": "sine",
+            "at": 270,
+            "note": "C6",
+            "ratio": 9.1,
+            "adsr": {
+              "a": 1,
+              "d": 12,
+              "s": 0,
+              "r": 6
+            },
+            "gain": 0.08
+          },
+          {
+            "type": "noise",
+            "at": 270,
+            "noise": {
+              "color": "white",
+              "seed": 35
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 2500,
+              "q": 1.5
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 6,
+              "s": 0,
+              "r": 4
+            },
+            "gain": 0.18
+          },
+          {
+            "type": "sine",
+            "at": 270,
+            "note": "C6",
+            "adsr": {
+              "a": 1,
+              "d": 300,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.48
+          },
+          {
+            "type": "sine",
+            "at": 270,
+            "note": "C6",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 300,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.18
+          },
+          {
+            "type": "sine",
+            "at": 270,
+            "note": "C6",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 180,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.21
+          },
+          {
+            "type": "sine",
+            "at": 270,
+            "note": "C6",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 90,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.072
+          },
+          {
+            "type": "sine",
+            "at": 380,
+            "note": "E6",
+            "adsr": {
+              "a": 1,
+              "d": 700,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.72
+          },
+          {
+            "type": "sine",
+            "at": 380,
+            "note": "E6",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 700,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.27
+          },
+          {
+            "type": "sine",
+            "at": 380,
+            "note": "E6",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 420,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.315
+          },
+          {
+            "type": "sine",
+            "at": 380,
+            "note": "E6",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 210,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.108
+          },
+          {
+            "type": "sine",
+            "at": 380,
+            "note": "G6",
+            "adsr": {
+              "a": 1,
+              "d": 700,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.72
+          },
+          {
+            "type": "sine",
+            "at": 380,
+            "note": "G6",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 700,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.27
+          },
+          {
+            "type": "sine",
+            "at": 380,
+            "note": "G6",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 420,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.315
+          },
+          {
+            "type": "sine",
+            "at": 380,
+            "note": "G6",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 210,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.108
+          },
+          {
+            "type": "sine",
+            "at": 400,
+            "note": "C7",
+            "adsr": {
+              "a": 1,
+              "d": 800,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.8
+          },
+          {
+            "type": "sine",
+            "at": 400,
+            "note": "C7",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 800,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.3
+          },
+          {
+            "type": "sine",
+            "at": 400,
+            "note": "C7",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 480,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.35
+          },
+          {
+            "type": "sine",
+            "at": 400,
+            "note": "C7",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 240,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.12
+          },
+          {
+            "type": "saw",
+            "at": 380,
+            "note": "C5",
+            "unison": {
+              "voices": 2,
+              "cents": 8
+            },
+            "filter": {
+              "type": "lowpass",
+              "cutoff": 2200,
+              "q": 0.9,
+              "sweepTo": 1100,
+              "sweepMs": 550
+            },
+            "adsr": {
+              "a": 8,
+              "d": 80,
+              "s": 0.6,
+              "hold": 450,
+              "r": 140
+            },
+            "gain": 0.193,
+            "softClip": 0.3
+          },
+          {
+            "type": "square",
+            "at": 380,
+            "note": "C5",
+            "ratio": 0.5,
+            "filter": {
+              "type": "lowpass",
+              "cutoff": 1200,
+              "q": 0.7
+            },
+            "adsr": {
+              "a": 8,
+              "d": 80,
+              "s": 0.5,
+              "hold": 450,
+              "r": 120
+            },
+            "gain": 0.077
+          },
+          {
+            "type": "saw",
+            "at": 380,
+            "note": "G5",
+            "unison": {
+              "voices": 2,
+              "cents": 8
+            },
+            "filter": {
+              "type": "lowpass",
+              "cutoff": 2200,
+              "q": 0.9,
+              "sweepTo": 1100,
+              "sweepMs": 550
+            },
+            "adsr": {
+              "a": 8,
+              "d": 80,
+              "s": 0.6,
+              "hold": 450,
+              "r": 140
+            },
+            "gain": 0.138,
+            "softClip": 0.3
+          },
+          {
+            "type": "square",
+            "at": 380,
+            "note": "G5",
+            "ratio": 0.5,
+            "filter": {
+              "type": "lowpass",
+              "cutoff": 1200,
+              "q": 0.7
+            },
+            "adsr": {
+              "a": 8,
+              "d": 80,
+              "s": 0.5,
+              "hold": 450,
+              "r": 120
+            },
+            "gain": 0.055
+          },
+          {
+            "type": "noise",
+            "at": 380,
+            "noise": {
+              "color": "white",
+              "seed": 36
+            },
+            "filter": {
+              "type": "highpass",
+              "cutoff": 6000,
+              "q": 0.7
+            },
+            "adsr": {
+              "a": 20,
+              "d": 700,
+              "s": 0,
+              "r": 60
+            },
+            "gain": 0.096,
+            "delay": {
+              "ms": 45,
+              "feedback": 0.35,
+              "mix": 0.4
+            }
+          }
+        ],
+        "master": {
+          "highpassHz": 90,
+          "fadeOutMs": 60,
+          "reverb": {
+            "ms": 350,
+            "mix": 0.1
+          }
+        }
+      },
+      "loudness": {
+        "lufsShort": -16,
+        "truePeakMax": -1,
+        "window": "S"
+      },
+      "elevenPrompt": {
+        "text": "Short bright victory fanfare, cheerful rising xylophone arpeggio into a sparkling major bell chord, clean, mobile language game lesson complete, about one and a half seconds",
+        "durationSeconds": 1.5,
+        "promptInfluence": 0.45
+      }
+    },
+    {
+      "name": "star",
+      "role": "celebration",
+      "durationMs": 300,
+      "haptic": 15,
+      "variants": [
+        {
+          "name": "star-1",
+          "transpose": 0
+        },
+        {
+          "name": "star-2",
+          "transpose": 4
+        },
+        {
+          "name": "star-3",
+          "transpose": 7
+        }
+      ],
+      "index": {
+        "ladder": [
+          "C6",
+          "E6",
+          "G6"
+        ],
+        "base": "C6",
+        "pick": "nearest-variant",
+        "maxSemitones": 0
+      },
+      "description": "Estrela do Result (450/630/810 ms): sino curto com 'ping' de ataque; star(0..2) toca C6, E6 e G6, uma por estrela.",
+      "reference": "Duolingo: cada estrela/medalha aparece com um 'ping' de sino cristalino, cada vez mais agudo.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "C6",
+            "adsr": {
+              "a": 1,
+              "d": 260,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.8
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "C6",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 260,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.3
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "C6",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 156,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.35
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "C6",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 78,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.12
+          },
+          {
+            "type": "sine",
+            "note": "C6",
+            "ratio": 4,
+            "adsr": {
+              "a": 0.5,
+              "d": 25,
+              "s": 0,
+              "r": 10
+            },
+            "gain": 0.3
+          },
+          {
+            "type": "noise",
+            "at": 0,
+            "noise": {
+              "color": "white",
+              "seed": 37
+            },
+            "filter": {
+              "type": "highpass",
+              "cutoff": 6000,
+              "q": 0.7
+            },
+            "adsr": {
+              "a": 20,
+              "d": 150,
+              "s": 0,
+              "r": 60
+            },
+            "gain": 0.04,
+            "delay": {
+              "ms": 45,
+              "feedback": 0.35,
+              "mix": 0.4
+            }
+          }
+        ],
+        "master": {
+          "highpassHz": 250,
+          "fadeOutMs": 20
+        }
+      },
+      "loudness": {
+        "lufsShort": -17,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Single crystal bell ping with a bright attack and a short sparkle, clean, star earned in a mobile game",
+        "durationSeconds": 0.6,
+        "promptInfluence": 0.5
+      }
+    },
+    {
+      "name": "stat",
+      "role": "celebration",
+      "durationMs": 80,
+      "haptic": null,
+      "index": {
+        "ladder": [
+          "C5",
+          "E5",
+          "G5"
+        ],
+        "base": "C5",
+        "pick": "rate",
+        "maxSemitones": 7
+      },
+      "description": "Cards de estatística do Result entrando em cascata: pop grave e curto, stat(i) sobe C5, E5, G5 por rate.",
+      "reference": "Duolingo: os cards de XP, tempo e precisão caem com pops baixos e rápidos.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "sine",
+            "at": 0,
+            "freqHz": 837.2,
+            "glide": {
+              "toHz": 523.25,
+              "ms": 49,
+              "curve": "exp"
+            },
+            "adsr": {
+              "a": 1,
+              "d": 70,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.81,
+            "softClip": 0.2
+          },
+          {
+            "type": "noise",
+            "at": 0,
+            "noise": {
+              "color": "white",
+              "seed": 38
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 1800,
+              "q": 1
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 5,
+              "s": 0,
+              "r": 3
+            },
+            "gain": 0.108
+          }
+        ],
+        "master": {
+          "highpassHz": 120,
+          "fadeOutMs": 8
+        }
+      },
+      "loudness": {
+        "lufsShort": -22,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Low soft quick pop, rounded, card landing on screen, mobile game results, no reverb",
+        "durationSeconds": 0.5,
+        "promptInfluence": 0.45
+      }
+    },
+    {
+      "name": "chest",
+      "role": "celebration",
+      "durationMs": 600,
+      "haptic": [
+        30,
+        40,
+        60
+      ],
+      "description": "Baú abrindo: clique da tranca e um glissando de sinos subindo (C6, D6, E6, G6, A6) com brilho; as moedas vêm em seguida.",
+      "reference": "Duolingo: o baú abre com um 'clack' e um brilho de sinos subindo em cascata, dourado, ~600 ms.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "noise",
+            "at": 0,
+            "noise": {
+              "color": "white",
+              "seed": 39
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 900,
+              "q": 1.2
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 7,
+              "s": 0,
+              "r": 4
+            },
+            "gain": 0.5
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "freqHz": 1400,
+            "glide": {
+              "toHz": 700,
+              "ms": 10,
+              "curve": "exp"
+            },
+            "adsr": {
+              "a": 1,
+              "d": 18,
+              "s": 0,
+              "r": 8
+            },
+            "gain": 0.6
+          },
+          {
+            "type": "sine",
+            "at": 60,
+            "note": "C6",
+            "adsr": {
+              "a": 1,
+              "d": 300,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.64
+          },
+          {
+            "type": "sine",
+            "at": 60,
+            "note": "C6",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 300,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.24
+          },
+          {
+            "type": "sine",
+            "at": 60,
+            "note": "C6",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 180,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.28
+          },
+          {
+            "type": "sine",
+            "at": 60,
+            "note": "C6",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 90,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.096
+          },
+          {
+            "type": "sine",
+            "at": 100,
+            "note": "D6",
+            "adsr": {
+              "a": 1,
+              "d": 300,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.64
+          },
+          {
+            "type": "sine",
+            "at": 100,
+            "note": "D6",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 300,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.24
+          },
+          {
+            "type": "sine",
+            "at": 100,
+            "note": "D6",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 180,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.28
+          },
+          {
+            "type": "sine",
+            "at": 100,
+            "note": "D6",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 90,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.096
+          },
+          {
+            "type": "sine",
+            "at": 140,
+            "note": "E6",
+            "adsr": {
+              "a": 1,
+              "d": 320,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.64
+          },
+          {
+            "type": "sine",
+            "at": 140,
+            "note": "E6",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 320,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.24
+          },
+          {
+            "type": "sine",
+            "at": 140,
+            "note": "E6",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 192,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.28
+          },
+          {
+            "type": "sine",
+            "at": 140,
+            "note": "E6",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 96,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.096
+          },
+          {
+            "type": "sine",
+            "at": 180,
+            "note": "G6",
+            "adsr": {
+              "a": 1,
+              "d": 340,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.72
+          },
+          {
+            "type": "sine",
+            "at": 180,
+            "note": "G6",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 340,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.27
+          },
+          {
+            "type": "sine",
+            "at": 180,
+            "note": "G6",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 204,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.315
+          },
+          {
+            "type": "sine",
+            "at": 180,
+            "note": "G6",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 102,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.108
+          },
+          {
+            "type": "sine",
+            "at": 220,
+            "note": "A6",
+            "adsr": {
+              "a": 1,
+              "d": 380,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.8
+          },
+          {
+            "type": "sine",
+            "at": 220,
+            "note": "A6",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 380,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.3
+          },
+          {
+            "type": "sine",
+            "at": 220,
+            "note": "A6",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 228,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.35
+          },
+          {
+            "type": "sine",
+            "at": 220,
+            "note": "A6",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 114,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.12
+          },
+          {
+            "type": "noise",
+            "at": 80,
+            "noise": {
+              "color": "white",
+              "seed": 40
+            },
+            "filter": {
+              "type": "highpass",
+              "cutoff": 6000,
+              "q": 0.7
+            },
+            "adsr": {
+              "a": 20,
+              "d": 450,
+              "s": 0,
+              "r": 60
+            },
+            "gain": 0.096,
+            "delay": {
+              "ms": 45,
+              "feedback": 0.35,
+              "mix": 0.4
+            }
+          }
+        ],
+        "master": {
+          "highpassHz": 150,
+          "fadeOutMs": 30
+        }
+      },
+      "loudness": {
+        "lufsShort": -17,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Treasure chest opening, latch click then a rising cascade of sparkling bells, golden shimmer, short, mobile game reward",
+        "durationSeconds": 0.8,
+        "promptInfluence": 0.45
+      }
+    },
+    {
+      "name": "coin",
+      "role": "celebration",
+      "durationMs": 120,
+      "haptic": null,
+      "variants": [
+        {
+          "name": "coin-1",
+          "transpose": 0
+        },
+        {
+          "name": "coin-2",
+          "transpose": 3
+        },
+        {
+          "name": "coin-3",
+          "transpose": 5
+        }
+      ],
+      "description": "Moeda voando até o card de XP: duas notas rápidas (A5 e D6, 40 ms entre elas) com timbre de sino metálico; três variantes transpostas.",
+      "reference": "Clássico de jogo (Mario/Duolingo): 'pi-ping' de duas notas subindo uma quarta, metálico e curto.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "A5",
+            "adsr": {
+              "a": 1,
+              "d": 70,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.64
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "A5",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 70,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.24
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "A5",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 42,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.28
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "A5",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 21,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.096
+          },
+          {
+            "type": "triangle",
+            "note": "A5",
+            "adsr": {
+              "a": 1,
+              "d": 50,
+              "s": 0,
+              "r": 10
+            },
+            "gain": 0.25
+          },
+          {
+            "type": "sine",
+            "at": 40,
+            "note": "D6",
+            "adsr": {
+              "a": 1,
+              "d": 110,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.8
+          },
+          {
+            "type": "sine",
+            "at": 40,
+            "note": "D6",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 110,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.3
+          },
+          {
+            "type": "sine",
+            "at": 40,
+            "note": "D6",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 66,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.35
+          },
+          {
+            "type": "sine",
+            "at": 40,
+            "note": "D6",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 33,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.12
+          },
+          {
+            "type": "triangle",
+            "at": 40,
+            "note": "D6",
+            "adsr": {
+              "a": 1,
+              "d": 60,
+              "s": 0,
+              "r": 10
+            },
+            "gain": 0.25
+          }
+        ],
+        "master": {
+          "highpassHz": 300,
+          "fadeOutMs": 10
+        }
+      },
+      "loudness": {
+        "lufsShort": -20,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Classic video game coin pickup, two quick rising metallic notes, bright, very short, clean",
+        "durationSeconds": 0.5,
+        "promptInfluence": 0.5
+      }
+    },
+    {
+      "name": "bless",
+      "role": "celebration",
+      "durationMs": 500,
+      "haptic": null,
+      "description": "Bênção aparecendo no Result: acorde suave e quente (C5, G5, C6) em senos com ataque lento e reverb leve; uma 'aura' quase inaudível antes da voz.",
+      "reference": "Sem equivalente no Duolingo; referência Nintendo: pad curto de 'luz' ao revelar um texto importante.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "sine",
+            "note": "C5",
+            "adsr": {
+              "a": 80,
+              "d": 380,
+              "s": 0,
+              "r": 60
+            },
+            "gain": 0.5
+          },
+          {
+            "type": "sine",
+            "note": "G5",
+            "adsr": {
+              "a": 90,
+              "d": 380,
+              "s": 0,
+              "r": 60
+            },
+            "gain": 0.4
+          },
+          {
+            "type": "sine",
+            "note": "C6",
+            "detune": 5,
+            "adsr": {
+              "a": 100,
+              "d": 360,
+              "s": 0,
+              "r": 60
+            },
+            "gain": 0.3
+          },
+          {
+            "type": "noise",
+            "at": 60,
+            "noise": {
+              "color": "white",
+              "seed": 41
+            },
+            "filter": {
+              "type": "highpass",
+              "cutoff": 6000,
+              "q": 0.7
+            },
+            "adsr": {
+              "a": 20,
+              "d": 300,
+              "s": 0,
+              "r": 60
+            },
+            "gain": 0.032,
+            "delay": {
+              "ms": 45,
+              "feedback": 0.35,
+              "mix": 0.4
+            }
+          }
+        ],
+        "master": {
+          "highpassHz": 120,
+          "fadeOutMs": 60,
+          "lowpassHz": 3200,
+          "reverb": {
+            "ms": 400,
+            "mix": 0.18
+          }
+        }
+      },
+      "loudness": {
+        "lufsShort": -22,
+        "truePeakMax": -1,
+        "window": "S"
+      },
+      "elevenPrompt": {
+        "text": "Soft warm glowing pad swell, gentle major chord, short, peaceful, light reverb, a blessing text appearing",
+        "durationSeconds": 0.8,
+        "promptInfluence": 0.4
+      }
+    },
+    {
+      "name": "streak",
+      "role": "celebration",
+      "durationMs": 800,
+      "haptic": [
+        40,
+        30,
+        40,
+        30,
+        120
+      ],
+      "description": "Ofensiva: sopro de fogo (ruído rosa varrendo 300 para 2500 Hz com estalos) e sino G5 para C6 aos 250 ms.",
+      "reference": "Duolingo: a chama da ofensiva acende com um 'whoosh' de fogo e um sino brilhante por cima.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "noise",
+            "at": 0,
+            "noise": {
+              "color": "pink",
+              "seed": 42
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 300,
+              "q": 0.8,
+              "sweepTo": 2500,
+              "sweepMs": 500
+            },
+            "adsr": {
+              "a": 125,
+              "d": 325,
+              "s": 0,
+              "r": 50
+            },
+            "gain": 0.6
+          },
+          {
+            "type": "noise",
+            "at": 120,
+            "noise": {
+              "color": "white",
+              "seed": 43
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 3500,
+              "q": 2
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 10,
+              "s": 0,
+              "r": 5
+            },
+            "gain": 0.2
+          },
+          {
+            "type": "noise",
+            "at": 210,
+            "noise": {
+              "color": "white",
+              "seed": 44
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 4200,
+              "q": 2
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 8,
+              "s": 0,
+              "r": 5
+            },
+            "gain": 0.16
+          },
+          {
+            "type": "noise",
+            "at": 330,
+            "noise": {
+              "color": "white",
+              "seed": 45
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 3000,
+              "q": 2
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 12,
+              "s": 0,
+              "r": 5
+            },
+            "gain": 0.18
+          },
+          {
+            "type": "sine",
+            "at": 250,
+            "note": "G5",
+            "adsr": {
+              "a": 1,
+              "d": 320,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.72
+          },
+          {
+            "type": "sine",
+            "at": 250,
+            "note": "G5",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 320,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.27
+          },
+          {
+            "type": "sine",
+            "at": 250,
+            "note": "G5",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 192,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.315
+          },
+          {
+            "type": "sine",
+            "at": 250,
+            "note": "G5",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 96,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.108
+          },
+          {
+            "type": "sine",
+            "at": 380,
+            "note": "C6",
+            "adsr": {
+              "a": 1,
+              "d": 420,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.8
+          },
+          {
+            "type": "sine",
+            "at": 380,
+            "note": "C6",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 420,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.3
+          },
+          {
+            "type": "sine",
+            "at": 380,
+            "note": "C6",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 252,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.35
+          },
+          {
+            "type": "sine",
+            "at": 380,
+            "note": "C6",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 126,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.12
+          },
+          {
+            "type": "noise",
+            "at": 300,
+            "noise": {
+              "color": "white",
+              "seed": 46
+            },
+            "filter": {
+              "type": "highpass",
+              "cutoff": 6000,
+              "q": 0.7
+            },
+            "adsr": {
+              "a": 20,
+              "d": 400,
+              "s": 0,
+              "r": 60
+            },
+            "gain": 0.064,
+            "delay": {
+              "ms": 45,
+              "feedback": 0.35,
+              "mix": 0.4
+            }
+          }
+        ],
+        "master": {
+          "highpassHz": 120,
+          "fadeOutMs": 40
+        }
+      },
+      "loudness": {
+        "lufsShort": -16,
+        "truePeakMax": -1,
+        "window": "S"
+      },
+      "elevenPrompt": {
+        "text": "Fire whoosh igniting with small crackles followed by a bright rising two-note bell, warm and triumphant, short, daily streak celebration",
+        "durationSeconds": 1,
+        "promptInfluence": 0.45
+      }
+    },
+    {
+      "name": "goal",
+      "role": "celebration",
+      "durationMs": 500,
+      "haptic": [
+        30,
+        40,
+        60
+      ],
+      "description": "Meta diária batida (anel fechando aos 900 ms): glissando de seno subindo uma oitava (C5 para C6 em 200 ms), sino C6 e cintilação.",
+      "reference": "Duolingo: o anel da meta completa com um 'wheee' subindo e um 'ding' no fechamento.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "sine",
+            "note": "C5",
+            "glide": {
+              "to": "C6",
+              "ms": 200,
+              "curve": "exp"
+            },
+            "adsr": {
+              "a": 10,
+              "d": 200,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.5
+          },
+          {
+            "type": "sine",
+            "at": 200,
+            "note": "C6",
+            "adsr": {
+              "a": 1,
+              "d": 280,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.8
+          },
+          {
+            "type": "sine",
+            "at": 200,
+            "note": "C6",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 280,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.3
+          },
+          {
+            "type": "sine",
+            "at": 200,
+            "note": "C6",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 168,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.35
+          },
+          {
+            "type": "sine",
+            "at": 200,
+            "note": "C6",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 84,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.12
+          },
+          {
+            "type": "sine",
+            "at": 230,
+            "note": "G6",
+            "adsr": {
+              "a": 1,
+              "d": 260,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.4
+          },
+          {
+            "type": "sine",
+            "at": 230,
+            "note": "G6",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 260,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.15
+          },
+          {
+            "type": "sine",
+            "at": 230,
+            "note": "G6",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 156,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.175
+          },
+          {
+            "type": "sine",
+            "at": 230,
+            "note": "G6",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 78,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.06
+          },
+          {
+            "type": "noise",
+            "at": 200,
+            "noise": {
+              "color": "white",
+              "seed": 47
+            },
+            "filter": {
+              "type": "highpass",
+              "cutoff": 6000,
+              "q": 0.7
+            },
+            "adsr": {
+              "a": 20,
+              "d": 250,
+              "s": 0,
+              "r": 60
+            },
+            "gain": 0.064,
+            "delay": {
+              "ms": 45,
+              "feedback": 0.35,
+              "mix": 0.4
+            }
+          }
+        ],
+        "master": {
+          "highpassHz": 150,
+          "fadeOutMs": 30
+        }
+      },
+      "loudness": {
+        "lufsShort": -17,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Quick rising slide into a bright bell ding with sparkle, satisfying completion, short, daily goal reached",
+        "durationSeconds": 0.7,
+        "promptInfluence": 0.45
+      }
+    },
+    {
+      "name": "levelup",
+      "role": "celebration",
+      "durationMs": 900,
+      "haptic": [
+        40,
+        30,
+        40,
+        30,
+        120
+      ],
+      "description": "Coroa / subir de nível: fanfarra de metais sintéticos (G4, C5, E5, G5 em 100 ms) e acorde final C6 com sinos e cintilação; mais 'régio' que o finish.",
+      "reference": "Duolingo: ganhar coroa toca uma fanfarra de trompete curta com um acorde final e brilho dourado.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "saw",
+            "at": 0,
+            "note": "G4",
+            "unison": {
+              "voices": 2,
+              "cents": 8
+            },
+            "filter": {
+              "type": "lowpass",
+              "cutoff": 2200,
+              "q": 0.9,
+              "sweepTo": 1100,
+              "sweepMs": 160
+            },
+            "adsr": {
+              "a": 8,
+              "d": 80,
+              "s": 0.6,
+              "hold": 60,
+              "r": 140
+            },
+            "gain": 0.55,
+            "softClip": 0.3
+          },
+          {
+            "type": "square",
+            "at": 0,
+            "note": "G4",
+            "ratio": 0.5,
+            "filter": {
+              "type": "lowpass",
+              "cutoff": 1200,
+              "q": 0.7
+            },
+            "adsr": {
+              "a": 8,
+              "d": 80,
+              "s": 0.5,
+              "hold": 60,
+              "r": 120
+            },
+            "gain": 0.22
+          },
+          {
+            "type": "saw",
+            "at": 100,
+            "note": "C5",
+            "unison": {
+              "voices": 2,
+              "cents": 8
+            },
+            "filter": {
+              "type": "lowpass",
+              "cutoff": 2200,
+              "q": 0.9,
+              "sweepTo": 1100,
+              "sweepMs": 160
+            },
+            "adsr": {
+              "a": 8,
+              "d": 80,
+              "s": 0.6,
+              "hold": 60,
+              "r": 140
+            },
+            "gain": 0.55,
+            "softClip": 0.3
+          },
+          {
+            "type": "square",
+            "at": 100,
+            "note": "C5",
+            "ratio": 0.5,
+            "filter": {
+              "type": "lowpass",
+              "cutoff": 1200,
+              "q": 0.7
+            },
+            "adsr": {
+              "a": 8,
+              "d": 80,
+              "s": 0.5,
+              "hold": 60,
+              "r": 120
+            },
+            "gain": 0.22
+          },
+          {
+            "type": "saw",
+            "at": 200,
+            "note": "E5",
+            "unison": {
+              "voices": 2,
+              "cents": 8
+            },
+            "filter": {
+              "type": "lowpass",
+              "cutoff": 2200,
+              "q": 0.9,
+              "sweepTo": 1100,
+              "sweepMs": 160
+            },
+            "adsr": {
+              "a": 8,
+              "d": 80,
+              "s": 0.6,
+              "hold": 60,
+              "r": 140
+            },
+            "gain": 0.55,
+            "softClip": 0.3
+          },
+          {
+            "type": "square",
+            "at": 200,
+            "note": "E5",
+            "ratio": 0.5,
+            "filter": {
+              "type": "lowpass",
+              "cutoff": 1200,
+              "q": 0.7
+            },
+            "adsr": {
+              "a": 8,
+              "d": 80,
+              "s": 0.5,
+              "hold": 60,
+              "r": 120
+            },
+            "gain": 0.22
+          },
+          {
+            "type": "saw",
+            "at": 300,
+            "note": "G5",
+            "unison": {
+              "voices": 2,
+              "cents": 8
+            },
+            "filter": {
+              "type": "lowpass",
+              "cutoff": 2200,
+              "q": 0.9,
+              "sweepTo": 1100,
+              "sweepMs": 480
+            },
+            "adsr": {
+              "a": 8,
+              "d": 80,
+              "s": 0.6,
+              "hold": 380,
+              "r": 140
+            },
+            "gain": 0.605,
+            "softClip": 0.3
+          },
+          {
+            "type": "square",
+            "at": 300,
+            "note": "G5",
+            "ratio": 0.5,
+            "filter": {
+              "type": "lowpass",
+              "cutoff": 1200,
+              "q": 0.7
+            },
+            "adsr": {
+              "a": 8,
+              "d": 80,
+              "s": 0.5,
+              "hold": 380,
+              "r": 120
+            },
+            "gain": 0.242
+          },
+          {
+            "type": "saw",
+            "at": 300,
+            "note": "C6",
+            "unison": {
+              "voices": 2,
+              "cents": 8
+            },
+            "filter": {
+              "type": "lowpass",
+              "cutoff": 2200,
+              "q": 0.9,
+              "sweepTo": 1100,
+              "sweepMs": 480
+            },
+            "adsr": {
+              "a": 8,
+              "d": 80,
+              "s": 0.6,
+              "hold": 380,
+              "r": 140
+            },
+            "gain": 0.385,
+            "softClip": 0.3
+          },
+          {
+            "type": "square",
+            "at": 300,
+            "note": "C6",
+            "ratio": 0.5,
+            "filter": {
+              "type": "lowpass",
+              "cutoff": 1200,
+              "q": 0.7
+            },
+            "adsr": {
+              "a": 8,
+              "d": 80,
+              "s": 0.5,
+              "hold": 380,
+              "r": 120
+            },
+            "gain": 0.154
+          },
+          {
+            "type": "sine",
+            "at": 300,
+            "note": "C6",
+            "adsr": {
+              "a": 1,
+              "d": 500,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.64
+          },
+          {
+            "type": "sine",
+            "at": 300,
+            "note": "C6",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 500,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.24
+          },
+          {
+            "type": "sine",
+            "at": 300,
+            "note": "C6",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 300,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.28
+          },
+          {
+            "type": "sine",
+            "at": 300,
+            "note": "C6",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 150,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.096
+          },
+          {
+            "type": "sine",
+            "at": 320,
+            "note": "E6",
+            "adsr": {
+              "a": 1,
+              "d": 500,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.56
+          },
+          {
+            "type": "sine",
+            "at": 320,
+            "note": "E6",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 500,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.21
+          },
+          {
+            "type": "sine",
+            "at": 320,
+            "note": "E6",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 300,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.245
+          },
+          {
+            "type": "sine",
+            "at": 320,
+            "note": "E6",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 150,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.084
+          },
+          {
+            "type": "sine",
+            "at": 340,
+            "note": "G6",
+            "adsr": {
+              "a": 1,
+              "d": 520,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.56
+          },
+          {
+            "type": "sine",
+            "at": 340,
+            "note": "G6",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 520,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.21
+          },
+          {
+            "type": "sine",
+            "at": 340,
+            "note": "G6",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 312,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.245
+          },
+          {
+            "type": "sine",
+            "at": 340,
+            "note": "G6",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 156,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.084
+          },
+          {
+            "type": "noise",
+            "at": 320,
+            "noise": {
+              "color": "white",
+              "seed": 48
+            },
+            "filter": {
+              "type": "highpass",
+              "cutoff": 6000,
+              "q": 0.7
+            },
+            "adsr": {
+              "a": 20,
+              "d": 450,
+              "s": 0,
+              "r": 60
+            },
+            "gain": 0.08,
+            "delay": {
+              "ms": 45,
+              "feedback": 0.35,
+              "mix": 0.4
+            }
+          }
+        ],
+        "master": {
+          "highpassHz": 80,
+          "fadeOutMs": 50,
+          "reverb": {
+            "ms": 300,
+            "mix": 0.1
+          }
+        }
+      },
+      "loudness": {
+        "lufsShort": -16,
+        "truePeakMax": -1,
+        "window": "S"
+      },
+      "elevenPrompt": {
+        "text": "Short regal trumpet fanfare, four rising notes into a bright major chord with bells and golden sparkle, level up crown, under one second",
+        "durationSeconds": 1,
+        "promptInfluence": 0.45
+      }
+    },
+    {
+      "name": "mission",
+      "role": "celebration",
+      "durationMs": 300,
+      "haptic": 8,
+      "description": "Missão concluída e cintilações em geral (substitui o antigo sparkle): três sinos rápidos subindo (E6, G6, C7) com brilho.",
+      "reference": "Duolingo: ao concluir uma missão soa um 'twinkle' de três notas rápidas, cristalino.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "E6",
+            "adsr": {
+              "a": 1,
+              "d": 200,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.64
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "E6",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 200,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.24
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "E6",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 120,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.28
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "note": "E6",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 60,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.096
+          },
+          {
+            "type": "sine",
+            "at": 50,
+            "note": "G6",
+            "adsr": {
+              "a": 1,
+              "d": 220,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.72
+          },
+          {
+            "type": "sine",
+            "at": 50,
+            "note": "G6",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 220,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.27
+          },
+          {
+            "type": "sine",
+            "at": 50,
+            "note": "G6",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 132,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.315
+          },
+          {
+            "type": "sine",
+            "at": 50,
+            "note": "G6",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 66,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.108
+          },
+          {
+            "type": "sine",
+            "at": 100,
+            "note": "C7",
+            "adsr": {
+              "a": 1,
+              "d": 260,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.8
+          },
+          {
+            "type": "sine",
+            "at": 100,
+            "note": "C7",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 260,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.3
+          },
+          {
+            "type": "sine",
+            "at": 100,
+            "note": "C7",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 156,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.35
+          },
+          {
+            "type": "sine",
+            "at": 100,
+            "note": "C7",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 78,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.12
+          },
+          {
+            "type": "noise",
+            "at": 60,
+            "noise": {
+              "color": "white",
+              "seed": 49
+            },
+            "filter": {
+              "type": "highpass",
+              "cutoff": 6000,
+              "q": 0.7
+            },
+            "adsr": {
+              "a": 20,
+              "d": 220,
+              "s": 0,
+              "r": 60
+            },
+            "gain": 0.072,
+            "delay": {
+              "ms": 45,
+              "feedback": 0.35,
+              "mix": 0.4
+            }
+          }
+        ],
+        "master": {
+          "highpassHz": 250,
+          "fadeOutMs": 20
+        }
+      },
+      "loudness": {
+        "lufsShort": -18,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Quick three-note rising crystal twinkle, bright bells with sparkle, short, quest completed in a mobile game",
+        "durationSeconds": 0.6,
+        "promptInfluence": 0.45
+      }
+    },
+    {
+      "name": "unlock",
+      "role": "celebration",
+      "durationMs": 400,
+      "haptic": 8,
+      "description": "Próximo nó desbloqueando na trilha (600 ms depois de voltar do Result): sino G5 com brilho branco e um 'clique' de cadeado.",
+      "reference": "Duolingo: o nó seguinte acende com um 'ding' único e um brilho.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "noise",
+            "at": 0,
+            "noise": {
+              "color": "white",
+              "seed": 50
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 1100,
+              "q": 1.2
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 7,
+              "s": 0,
+              "r": 4
+            },
+            "gain": 0.35
+          },
+          {
+            "type": "sine",
+            "at": 0,
+            "freqHz": 1400,
+            "glide": {
+              "toHz": 700,
+              "ms": 10,
+              "curve": "exp"
+            },
+            "adsr": {
+              "a": 1,
+              "d": 18,
+              "s": 0,
+              "r": 8
+            },
+            "gain": 0.42
+          },
+          {
+            "type": "sine",
+            "at": 30,
+            "note": "G5",
+            "adsr": {
+              "a": 1,
+              "d": 320,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.8
+          },
+          {
+            "type": "sine",
+            "at": 30,
+            "note": "G5",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 320,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.3
+          },
+          {
+            "type": "sine",
+            "at": 30,
+            "note": "G5",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 192,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.35
+          },
+          {
+            "type": "sine",
+            "at": 30,
+            "note": "G5",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 96,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.12
+          },
+          {
+            "type": "sine",
+            "at": 60,
+            "note": "D6",
+            "adsr": {
+              "a": 1,
+              "d": 280,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.32
+          },
+          {
+            "type": "sine",
+            "at": 60,
+            "note": "D6",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 280,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.12
+          },
+          {
+            "type": "sine",
+            "at": 60,
+            "note": "D6",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 168,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.14
+          },
+          {
+            "type": "sine",
+            "at": 60,
+            "note": "D6",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 84,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.048
+          },
+          {
+            "type": "noise",
+            "at": 40,
+            "noise": {
+              "color": "white",
+              "seed": 51
+            },
+            "filter": {
+              "type": "highpass",
+              "cutoff": 6000,
+              "q": 0.7
+            },
+            "adsr": {
+              "a": 20,
+              "d": 250,
+              "s": 0,
+              "r": 60
+            },
+            "gain": 0.056,
+            "delay": {
+              "ms": 45,
+              "feedback": 0.35,
+              "mix": 0.4
+            }
+          }
+        ],
+        "master": {
+          "highpassHz": 150,
+          "fadeOutMs": 20
+        }
+      },
+      "loudness": {
+        "lufsShort": -19,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Padlock click followed by a single bright bell ding with a soft sparkle, short, next level unlocked",
+        "durationSeconds": 0.6,
+        "promptInfluence": 0.45
+      }
+    },
+    {
+      "name": "madness-start",
+      "role": "celebration",
+      "durationMs": 500,
+      "haptic": [
+        20,
+        30,
+        20
+      ],
+      "description": "Início do Match Madness: quatro pops subindo (C5, E5, G5, C6 a cada 90 ms) com sopro, 'vai!'.",
+      "reference": "Duolingo (Match Madness): contagem de entrada enérgica, pops subindo e um swoosh.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "sine",
+            "at": 0,
+            "freqHz": 784.875,
+            "glide": {
+              "toHz": 523.25,
+              "ms": 49,
+              "curve": "exp"
+            },
+            "adsr": {
+              "a": 1,
+              "d": 70,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.81,
+            "softClip": 0.2
+          },
+          {
+            "type": "noise",
+            "at": 0,
+            "noise": {
+              "color": "white",
+              "seed": 52
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 1800,
+              "q": 1
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 5,
+              "s": 0,
+              "r": 3
+            },
+            "gain": 0.108
+          },
+          {
+            "type": "sine",
+            "at": 90,
+            "freqHz": 988.89,
+            "glide": {
+              "toHz": 659.26,
+              "ms": 49,
+              "curve": "exp"
+            },
+            "adsr": {
+              "a": 1,
+              "d": 70,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.81,
+            "softClip": 0.2
+          },
+          {
+            "type": "noise",
+            "at": 90,
+            "noise": {
+              "color": "white",
+              "seed": 53
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 1800,
+              "q": 1
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 5,
+              "s": 0,
+              "r": 3
+            },
+            "gain": 0.108
+          },
+          {
+            "type": "sine",
+            "at": 180,
+            "freqHz": 1175.9850000000001,
+            "glide": {
+              "toHz": 783.99,
+              "ms": 49,
+              "curve": "exp"
+            },
+            "adsr": {
+              "a": 1,
+              "d": 70,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.81,
+            "softClip": 0.2
+          },
+          {
+            "type": "noise",
+            "at": 180,
+            "noise": {
+              "color": "white",
+              "seed": 54
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 1800,
+              "q": 1
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 5,
+              "s": 0,
+              "r": 3
+            },
+            "gain": 0.108
+          },
+          {
+            "type": "sine",
+            "at": 270,
+            "freqHz": 1569.75,
+            "glide": {
+              "toHz": 1046.5,
+              "ms": 63,
+              "curve": "exp"
+            },
+            "adsr": {
+              "a": 1,
+              "d": 90,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.9,
+            "softClip": 0.2
+          },
+          {
+            "type": "noise",
+            "at": 270,
+            "noise": {
+              "color": "white",
+              "seed": 55
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 1800,
+              "q": 1
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 5,
+              "s": 0,
+              "r": 3
+            },
+            "gain": 0.12
+          },
+          {
+            "type": "sine",
+            "at": 270,
+            "note": "C6",
+            "adsr": {
+              "a": 1,
+              "d": 200,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.4
+          },
+          {
+            "type": "sine",
+            "at": 270,
+            "note": "C6",
+            "detune": 6,
+            "adsr": {
+              "a": 1,
+              "d": 200,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.15
+          },
+          {
+            "type": "sine",
+            "at": 270,
+            "note": "C6",
+            "ratio": 2.76,
+            "adsr": {
+              "a": 1,
+              "d": 120,
+              "s": 0,
+              "r": 40
+            },
+            "gain": 0.175
+          },
+          {
+            "type": "sine",
+            "at": 270,
+            "note": "C6",
+            "ratio": 5.4,
+            "adsr": {
+              "a": 1,
+              "d": 60,
+              "s": 0,
+              "r": 20
+            },
+            "gain": 0.06
+          },
+          {
+            "type": "noise",
+            "at": 200,
+            "noise": {
+              "color": "pink",
+              "seed": 56
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 500,
+              "q": 0.8,
+              "sweepTo": 3000,
+              "sweepMs": 250
+            },
+            "adsr": {
+              "a": 63,
+              "d": 163,
+              "s": 0,
+              "r": 25
+            },
+            "gain": 0.3
+          }
+        ],
+        "master": {
+          "highpassHz": 120,
+          "fadeOutMs": 20
+        }
+      },
+      "loudness": {
+        "lufsShort": -17,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Energetic four rising pops with a quick whoosh, go signal, playful, short, timed matching game start",
+        "durationSeconds": 0.7,
+        "promptInfluence": 0.45
+      }
+    },
+    {
+      "name": "tick",
+      "role": "feedback",
+      "durationMs": 40,
+      "haptic": 6,
+      "description": "Tique dos 10 s finais do Madness: bloco de madeira agudo (2000 para 1200 Hz em 15 ms) com clique; um por segundo.",
+      "reference": "Duolingo (Match Madness): tique de relógio seco de madeira nos últimos segundos.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "sine",
+            "freqHz": 2000,
+            "glide": {
+              "toHz": 1200,
+              "ms": 15,
+              "curve": "exp"
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 28,
+              "s": 0,
+              "r": 8
+            },
+            "gain": 0.8
+          },
+          {
+            "type": "noise",
+            "noise": {
+              "color": "white",
+              "seed": 57
+            },
+            "filter": {
+              "type": "bandpass",
+              "cutoff": 3000,
+              "q": 1.5
+            },
+            "adsr": {
+              "a": 0.5,
+              "d": 4,
+              "s": 0,
+              "r": 3
+            },
+            "gain": 0.35
+          }
+        ],
+        "master": {
+          "highpassHz": 300,
+          "fadeOutMs": 5
+        }
+      },
+      "loudness": {
+        "lufsShort": -22,
+        "truePeakMax": -1,
+        "window": "M"
+      },
+      "elevenPrompt": {
+        "text": "Single sharp woodblock clock tick, dry, very short, countdown timer",
+        "durationSeconds": 0.5,
+        "promptInfluence": 0.5
+      }
+    },
+    {
+      "name": "gong",
+      "role": "celebration",
+      "durationMs": 1500,
+      "haptic": [
+        40,
+        30,
+        80
+      ],
+      "description": "Fim do Madness: gongo grave (FM em C3, razão 1,41, índice caindo em 800 ms) com batida inicial e cauda de 1,4 s; o único som com cauda longa.",
+      "reference": "Duolingo (Match Madness): o tempo acaba com um gongo/sino grave que ressoa enquanto o placar aparece.",
+      "recipe": {
+        "layers": [
+          {
+            "type": "fm",
+            "note": "C3",
+            "fm": {
+              "ratio": 1.41,
+              "index": 3,
+              "indexDecayMs": 800
+            },
+            "adsr": {
+              "a": 2,
+              "d": 1400,
+              "s": 0,
+              "r": 100
+            },
+            "gain": 0.8,
+            "softClip": 0.15
+          },
+          {
+            "type": "sine",
+            "note": "C3",
+            "ratio": 2.4,
+            "adsr": {
+              "a": 2,
+              "d": 900,
+              "s": 0,
+              "r": 80
+            },
+            "gain": 0.25
+          },
+          {
+            "type": "noise",
+            "noise": {
+              "color": "brown",
+              "seed": 58
+            },
+            "filter": {
+              "type": "lowpass",
+              "cutoff": 2000,
+              "q": 0.7
+            },
+            "adsr": {
+              "a": 1,
+              "d": 40,
+              "s": 0,
+              "r": 15
+            },
+            "gain": 0.5
+          }
+        ],
+        "master": {
+          "highpassHz": 50,
+          "fadeOutMs": 80,
+          "lowpassHz": 6000
+        }
+      },
+      "loudness": {
+        "lufsShort": -16,
+        "truePeakMax": -1,
+        "window": "S"
+      },
+      "elevenPrompt": {
+        "text": "Single deep gong strike with a warm resonant tail about one and a half seconds, time is up, no music",
+        "durationSeconds": 1.6,
+        "promptInfluence": 0.5
+      }
+    }
+  ]
+}

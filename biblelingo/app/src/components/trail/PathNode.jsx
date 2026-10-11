@@ -61,7 +61,8 @@ export default function PathNode({
   const pop = celebrate && !reduce ? { scale: [0.6, 1.15, 1] } : { scale: 1 };
 
   return (
-    <motion.div className={`relative shrink-0 ${isCurrent ? "z-[2]" : "z-[1]"}`} style={{ x }}
+    // Nó atual: 40 px extras acima para o balão (36 px + 12 px de seta) não invadir o nó vizinho de cima (gap de 24 px)
+    <motion.div className={`relative shrink-0 ${isCurrent ? "z-[2] mt-10" : "z-[1]"}`} style={{ x }}
       data-node={step.id} data-order={order} data-current={isCurrent || undefined} {...ENTER}
       transition={{ ...SPRING.settle, delay: (cascade % 10) * 0.04 }}>
       <AnimatePresence>{balloon && !balloonHidden && <NodeBalloon key="balloon" label={balloon} delay={delayed ? 1.1 : 0.4} />}</AnimatePresence>

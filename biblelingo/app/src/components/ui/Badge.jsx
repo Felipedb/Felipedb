@@ -14,7 +14,7 @@ const KINDS = {
   review: { icon: "refresh", text: "Corrija o erro de antes", cls: "text-orange-text" },
   "new-word": { icon: "sparkle", text: "Palavra nova", cls: "rounded-pill bg-purple-soft px-3 py-1 text-purple-text" },
   legendary: { icon: "crown", text: "Lendário", cls: "rounded-pill bg-yellow px-3 py-1 text-gold-ink" },
-  timer: { icon: "timer", text: "60 s", cls: "rounded-pill bg-teal-soft px-3 py-1 text-teal-text" },
+  timer: { icon: "timer", text: <>60 <span className="normal-case">s</span></>, cls: "rounded-pill bg-teal-soft px-3 py-1 text-teal-text" },
 };
 
 export default function Badge({ kind = "custom", icon, className = "", children, ...rest }) {

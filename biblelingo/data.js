@@ -11170,483 +11170,1846 @@ const COURSE = [
     "face": "daniel",
     "color": "#a56644",
     "level": "A2.1",
+    "v": 2,
     "lessons": [
       {
         "id": "u7l1",
         "title": "Fiel na Babilônia",
-        "vocab": [
+        "ref": "Daniel 1:1-2:49",
+        "level": "A2.1",
+        "narrator": "daniel",
+        "guests": [
+          "aspenaz",
+          "nabucodonosor"
+        ],
+        "names": [
+          {
+            "en": "Daniel",
+            "pt": "Daniel",
+            "note": "jovem de Judá levado para a Babilônia; narra a unidade"
+          },
+          {
+            "en": "Belteshazzar",
+            "pt": "Beltessazar",
+            "note": "o nome babilônico dado a Daniel"
+          },
+          {
+            "en": "Nebuchadnezzar",
+            "pt": "Nabucodonosor",
+            "note": "rei da Babilônia"
+          },
+          {
+            "en": "Aspenaz",
+            "pt": "Aspenaz",
+            "note": "chefe dos oficiais do rei, responsável pelos jovens"
+          },
           {
             "en": "Babylon",
             "pt": "Babilônia",
-            "icon": "🏙️"
+            "note": "a cidade e o império do rei Nabucodonosor"
           },
+          {
+            "en": "Jerusalem",
+            "pt": "Jerusalém",
+            "note": "a cidade de Daniel, em Judá"
+          },
+          {
+            "en": "God",
+            "pt": "Deus"
+          }
+        ],
+        "hints": {
+          "name": "nome",
+          "test": "testar, teste",
+          "times": "vezes",
+          "sleep": "dormir",
+          "statue": "estátua",
+          "gold": "ouro",
+          "break": "quebrar, quebrou",
+          "better": "melhor"
+        },
+        "tips": [
+          {
+            "part": 1,
+            "id": "must-cannot",
+            "grammar": "must-cannot",
+            "title": "must, must not, cannot: dever e não poder",
+            "body": "must = dever (obrigação); must not = não dever (proibição); cannot = não poder (não consigo ou não é permitido). Depois deles o verbo fica na forma básica, sem to: I must eat, I cannot eat.",
+            "examples": [
+              {
+                "en": "We must not eat this food",
+                "pt": "Nós não devemos comer esta comida"
+              },
+              {
+                "en": "I cannot eat it",
+                "pt": "Eu não posso comer isso"
+              }
+            ],
+            "contrast": {
+              "a": "I must eat this",
+              "b": "I must not eat this",
+              "note": "must = devo; must not = não devo"
+            }
+          },
+          {
+            "part": 2,
+            "id": "comparative-than",
+            "grammar": "comparative-than",
+            "title": "better than, wiser than: comparar com than",
+            "body": "Para comparar duas coisas, o adjetivo curto ganha -er (wiser, stronger) e a comparação usa than (do que): wiser than the wise men. Alguns mudam de forma: good vira better, bad vira worse.",
+            "examples": [
+              {
+                "en": "We looked better than the other young men",
+                "pt": "Nós parecíamos melhores do que os outros jovens"
+              },
+              {
+                "en": "Daniel was wiser than the wise men",
+                "pt": "Daniel era mais sábio do que os sábios"
+              }
+            ],
+            "contrast": {
+              "a": "Daniel is wise",
+              "b": "Daniel is wiser than the king",
+              "note": "wise = sábio; wiser than = mais sábio do que"
+            }
+          }
+        ],
+        "vocab": [
           {
             "en": "food",
-            "pt": "comida (manjar)",
-            "icon": "🍲"
-          },
-          {
-            "en": "vegetables",
-            "pt": "legumes",
-            "icon": "🥦"
-          },
-          {
-            "en": "wisdom",
-            "pt": "sabedoria",
-            "icon": "🦉"
+            "pt": "comida",
+            "pos": "noun",
+            "field": "food",
+            "tier": "core",
+            "part": 1,
+            "icon": "🍲",
+            "image": "food.png",
+            "example": 3
           },
           {
             "en": "wine",
             "pt": "vinho",
-            "icon": "🍷"
+            "pos": "noun",
+            "field": "food",
+            "tier": "core",
+            "part": 1,
+            "icon": "🍷",
+            "image": "wine.png",
+            "example": 3
           },
           {
-            "en": "ten",
-            "pt": "dez",
-            "icon": "🔟"
+            "en": "vegetables",
+            "pt": "legumes",
+            "ptAlt": [
+              "verduras"
+            ],
+            "pos": "noun",
+            "field": "food",
+            "tier": "core",
+            "part": 1,
+            "icon": "🥦",
+            "image": "vegetables.png",
+            "example": 5
           },
           {
-            "en": "home",
-            "pt": "casa (lar)",
-            "icon": "🏠"
+            "en": "to drink",
+            "pt": "beber",
+            "pos": "verb",
+            "field": "food",
+            "tier": "core",
+            "part": 1,
+            "icon": "🥛",
+            "image": "drink.png",
+            "example": 4
           },
           {
-            "en": "to defile",
-            "pt": "contaminar(-se)",
-            "icon": "🚫"
+            "en": "I cannot eat this",
+            "pt": "Eu não posso comer isto",
+            "ptAlt": [
+              "Eu não posso comer isso"
+            ],
+            "pos": "chunk",
+            "field": "speech",
+            "tier": "core",
+            "part": 1,
+            "icon": "🛑",
+            "example": 4
           },
+          {
+            "en": "wise",
+            "pt": "sábio",
+            "ptAlt": [
+              "sábia"
+            ],
+            "pos": "adj",
+            "field": "mind",
+            "tier": "core",
+            "part": 2,
+            "icon": "🎓",
+            "example": 8
+          },
+          {
+            "en": "secret",
+            "pt": "segredo",
+            "pos": "noun",
+            "field": "mind",
+            "tier": "core",
+            "part": 2,
+            "icon": "🤫",
+            "example": 11
+          },
+          {
+            "en": "to reveal",
+            "pt": "revelar",
+            "pos": "verb",
+            "field": "speech",
+            "tier": "core",
+            "part": 2,
+            "icon": "🔦",
+            "example": 11
+          },
+          {
+            "en": "heaven",
+            "pt": "céu",
+            "ptAlt": [
+              "céus"
+            ],
+            "pos": "noun",
+            "field": "faith",
+            "tier": "core",
+            "part": 2,
+            "icon": "🌤️",
+            "example": 12
+          },
+          {
+            "en": "There is a God in heaven",
+            "pt": "Há um Deus no céu",
+            "ptAlt": [
+              "Existe um Deus no céu"
+            ],
+            "pos": "chunk",
+            "field": "speech",
+            "tier": "core",
+            "part": 2,
+            "icon": "🌌",
+            "iconic": true,
+            "example": 12
+          }
+        ],
+        "sentences": [
+          {
+            "en": "The king of Babylon took us from Jerusalem",
+            "pt": "O rei da Babilônia nos levou de Jerusalém",
+            "altPt": [
+              "O rei da Babilônia nos tirou de Jerusalém"
+            ]
+          },
+          {
+            "en": "What was my name in Babylon? Belteshazzar",
+            "pt": "Qual era o meu nome na Babilônia? Beltessazar"
+          },
+          {
+            "en": "The king gave us his food and his wine",
+            "pt": "O rei nos deu a comida e o vinho dele",
+            "altPt": [
+              "O rei nos deu do seu manjar e do seu vinho"
+            ]
+          },
+          {
+            "en": "I cannot eat this food or drink this wine",
+            "pt": "Eu não posso comer esta comida nem beber este vinho",
+            "altPt": [
+              "Eu não posso comer esta comida ou beber este vinho"
+            ]
+          },
+          {
+            "en": "We will only eat vegetables and drink water",
+            "pt": "Nós vamos comer só legumes e beber água",
+            "altPt": [
+              "Só vamos comer legumes e beber água"
+            ]
+          },
+          {
+            "en": "Please test us for ten days with vegetables and water",
+            "pt": "Por favor, nos teste por dez dias com legumes e água",
+            "altPt": [
+              "Por favor, teste a gente por dez dias com legumes e água"
+            ]
+          },
+          {
+            "en": "We looked better than the other young men",
+            "pt": "Nós parecíamos melhores do que os outros jovens",
+            "altPt": [
+              "Nós parecíamos melhores que os outros jovens"
+            ]
+          },
+          {
+            "en": "We were ten times wiser than all his wise men",
+            "pt": "Nós éramos dez vezes mais sábios do que todos os sábios dele",
+            "altPt": [
+              "Nós éramos dez vezes mais sábios que todos os sábios dele"
+            ]
+          },
+          {
+            "en": "Then the king had a dream and could not sleep",
+            "pt": "Então o rei teve um sonho e não conseguia dormir",
+            "altPt": [
+              "Então o rei teve um sonho e não podia dormir"
+            ]
+          },
+          {
+            "en": "Who could explain the dream? No wise man could",
+            "pt": "Quem podia explicar o sonho? Nenhum sábio podia"
+          },
+          {
+            "en": "The God of heaven revealed the secret to me",
+            "pt": "O Deus do céu revelou o segredo para mim",
+            "altPt": [
+              "O Deus do céu me revelou o segredo"
+            ]
+          },
+          {
+            "en": "There is a God in heaven who reveals secrets",
+            "pt": "Há um Deus no céu que revela segredos",
+            "alt": [
+              "There is a God in heaven that reveals secrets"
+            ],
+            "altPt": [
+              "Há um Deus nos céus que revela os mistérios"
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "order": 1,
+            "en": "The king of Babylon took us from Jerusalem",
+            "pt": "O rei da Babilônia nos levou de Jerusalém",
+            "altPt": [
+              "O rei da Babilônia nos tirou de Jerusalém"
+            ],
+            "kind": "first-person",
+            "fact": true,
+            "speaker": "daniel"
+          },
+          {
+            "order": 2,
+            "en": "What was my name in Babylon? Belteshazzar",
+            "pt": "Qual era o meu nome na Babilônia? Beltessazar",
+            "kind": "question",
+            "fact": true,
+            "speaker": "daniel"
+          },
+          {
+            "order": 3,
+            "en": "The king gave us his food and his wine",
+            "pt": "O rei nos deu a comida e o vinho dele",
+            "altPt": [
+              "O rei nos deu do seu manjar e do seu vinho"
+            ],
+            "kind": "statement",
+            "fact": true
+          },
+          {
+            "order": 4,
+            "en": "I cannot eat this food or drink this wine",
+            "pt": "Eu não posso comer esta comida nem beber este vinho",
+            "altPt": [
+              "Eu não posso comer esta comida ou beber este vinho"
+            ],
+            "kind": "negative",
+            "fact": true,
+            "speaker": "daniel",
+            "gap": {
+              "word": "cannot",
+              "kind": "grammar",
+              "options": [
+                "cannot",
+                "must",
+                "could"
+              ]
+            },
+            "grammar": "must-cannot"
+          },
+          {
+            "order": 5,
+            "en": "We will only eat vegetables and drink water",
+            "pt": "Nós vamos comer só legumes e beber água",
+            "altPt": [
+              "Só vamos comer legumes e beber água"
+            ],
+            "kind": "first-person",
+            "fact": true,
+            "speaker": "daniel"
+          },
+          {
+            "order": 6,
+            "en": "Please test us for ten days with vegetables and water",
+            "pt": "Por favor, nos teste por dez dias com legumes e água",
+            "altPt": [
+              "Por favor, teste a gente por dez dias com legumes e água"
+            ],
+            "kind": "first-person",
+            "fact": true,
+            "speaker": "daniel"
+          },
+          {
+            "order": 7,
+            "en": "We looked better than the other young men",
+            "pt": "Nós parecíamos melhores do que os outros jovens",
+            "altPt": [
+              "Nós parecíamos melhores que os outros jovens"
+            ],
+            "kind": "first-person",
+            "fact": true,
+            "speaker": "daniel",
+            "gap": {
+              "word": "better",
+              "kind": "grammar",
+              "options": [
+                "better",
+                "good",
+                "best"
+              ]
+            },
+            "grammar": "comparative-than"
+          },
+          {
+            "order": 8,
+            "en": "We were ten times wiser than all his wise men",
+            "pt": "Nós éramos dez vezes mais sábios do que todos os sábios dele",
+            "altPt": [
+              "Nós éramos dez vezes mais sábios que todos os sábios dele"
+            ],
+            "kind": "first-person",
+            "fact": true,
+            "speaker": "daniel",
+            "grammar": "comparative-than"
+          },
+          {
+            "order": 9,
+            "en": "Then the king had a dream and could not sleep",
+            "pt": "Então o rei teve um sonho e não conseguia dormir",
+            "altPt": [
+              "Então o rei teve um sonho e não podia dormir"
+            ],
+            "kind": "negative",
+            "fact": true
+          },
+          {
+            "order": 10,
+            "en": "Who could explain the dream? No wise man could",
+            "pt": "Quem podia explicar o sonho? Nenhum sábio podia",
+            "kind": "question",
+            "fact": true
+          },
+          {
+            "order": 11,
+            "en": "The God of heaven revealed the secret to me",
+            "pt": "O Deus do céu revelou o segredo para mim",
+            "altPt": [
+              "O Deus do céu me revelou o segredo"
+            ],
+            "kind": "first-person",
+            "fact": true,
+            "speaker": "daniel"
+          },
+          {
+            "order": 12,
+            "en": "There is a God in heaven who reveals secrets",
+            "pt": "Há um Deus no céu que revela segredos",
+            "alt": [
+              "There is a God in heaven that reveals secrets"
+            ],
+            "altPt": [
+              "Há um Deus nos céus que revela os mistérios"
+            ],
+            "kind": "quote",
+            "fact": true,
+            "iconic": true,
+            "speaker": "daniel",
+            "gap": {
+              "word": "secrets",
+              "kind": "lexical",
+              "options": [
+                "secrets",
+                "dreams",
+                "hearts"
+              ]
+            }
+          }
+        ],
+        "contrast": [
+          {
+            "a": "I cannot eat this food or drink this wine",
+            "b": "I can eat this food and drink this wine",
+            "note": "cannot = não posso; can = posso"
+          },
+          {
+            "a": "We looked better than the other young men",
+            "b": "We looked worse than the other young men",
+            "note": "better than = melhor do que; worse than = pior do que"
+          }
+        ],
+        "verse": {
+          "text": "There is a God in heaven who reveals secrets.",
+          "classic": "There is a God in heaven that revealeth secrets.",
+          "pt": "Há um Deus no céu que revela segredos.",
+          "classicPt": "Há um Deus nos céus, o qual revela os mistérios.",
+          "ref": "Daniel 2:28",
+          "blank": "secrets",
+          "options": [
+            "secrets",
+            "dreams",
+            "names",
+            "kings"
+          ],
+          "blanks": [
+            {
+              "word": "secrets",
+              "options": [
+                "secrets",
+                "dreams",
+                "names",
+                "kings"
+              ]
+            },
+            {
+              "word": "heaven",
+              "options": [
+                "heaven",
+                "Babylon",
+                "Jerusalem",
+                "Egypt"
+              ]
+            },
+            {
+              "word": "reveals",
+              "options": [
+                "reveals",
+                "hides",
+                "forgets",
+                "knows"
+              ]
+            }
+          ]
+        },
+        "reading": {
+          "text": "Daniel was taken from Jerusalem to Babylon with his three friends. The king gave them his food and his wine, but Daniel did not eat it. For ten days they ate only vegetables and drank water, and they looked better than the other young men. Later the king had a dream, and no wise man could explain it. But the God of heaven revealed the secret to Daniel at night.",
+          "pt": "Daniel foi levado de Jerusalém para a Babilônia com os seus três amigos. O rei deu a eles a comida e o vinho dele, mas Daniel não comeu. Por dez dias eles comeram só legumes e beberam água, e ficaram com melhor aparência do que os outros jovens. Mais tarde o rei teve um sonho, e nenhum sábio conseguiu explicá-lo. Mas o Deus do céu revelou o segredo a Daniel de noite.",
+          "q": "What did Daniel and his friends eat for ten days?",
+          "options": [
+            "Plants and water, nothing else",
+            "The same food as the king",
+            "Grain and fruit from the garden"
+          ],
+          "answer": "Plants and water, nothing else",
+          "questions": [
+            {
+              "kind": "literal",
+              "q": "What did Daniel and his friends eat for ten days?",
+              "qPt": "O que Daniel e os amigos comeram por dez dias?",
+              "options": [
+                "Plants and water, nothing else",
+                "The same food as the king",
+                "Grain and fruit from the garden"
+              ],
+              "answer": "Plants and water, nothing else"
+            },
+            {
+              "kind": "inference",
+              "q": "Why could Daniel explain the king's dream?",
+              "qPt": "Por que Daniel conseguiu explicar o sonho do rei?",
+              "options": [
+                "Because God revealed it to him",
+                "Because he was the wisest man in Babylon",
+                "Because the king told him the dream"
+              ],
+              "answer": "Because God revealed it to him",
+              "explain": "Nenhum sábio da Babilônia conseguiu; o segredo foi revelado a Daniel numa visão de noite, e ele deu a glória ao Deus do céu (Daniel 2:19, 27-28)."
+            }
+          ]
+        },
+        "dialogue": {
+          "line": "Daniel, the king gives you his food and his wine. Why don't you eat?",
+          "pt": "Daniel, o rei dá a você a comida e o vinho dele. Por que você não come?",
+          "options": [
+            "I cannot eat this. Please give us vegetables and water.",
+            "I cannot eat now. We will eat later with the king.",
+            "I cannot eat this. There is too much food here."
+          ],
+          "answer": "I cannot eat this. Please give us vegetables and water.",
+          "answerPt": "Eu não posso comer isto. Por favor, dê legumes e água para nós."
+        },
+        "conversation": {
+          "with": "aspenaz",
+          "turns": [
+            {
+              "who": "aspenaz",
+              "en": "Daniel, the king gives you his food and his wine. Why don't you eat?",
+              "pt": "Daniel, o rei dá a você a comida e o vinho dele. Por que você não come?",
+              "mood": "surpreso"
+            },
+            {
+              "who": "you",
+              "options": [
+                "I cannot eat this. Please give us vegetables and water.",
+                "I cannot eat now. We will eat later with the king.",
+                "I cannot eat this. There is too much food here."
+              ],
+              "answer": "I cannot eat this. Please give us vegetables and water.",
+              "pt": "Eu não posso comer isto. Por favor, dê legumes e água para nós.",
+              "intent": "Recuse a comida e peça outra coisa"
+            },
+            {
+              "who": "aspenaz",
+              "en": "I'm afraid of the king! You will look worse than the other young men.",
+              "pt": "Eu tenho medo do rei! Vocês vão ficar com pior aparência do que os outros jovens.",
+              "mood": "assustado"
+            },
+            {
+              "who": "you",
+              "options": [
+                "Please test us for ten days, then look at our faces.",
+                "Please tell the king, then give us his food.",
+                "Please wait for ten days, then we will drink his wine."
+              ],
+              "answer": "Please test us for ten days, then look at our faces.",
+              "pt": "Por favor, nos teste por dez dias, depois olhe para os nossos rostos.",
+              "intent": "Peça um teste e diga por quanto tempo",
+              "speak": true
+            }
+          ]
+        },
+        "quiz": {
+          "q": "Why could Daniel explain the king's dream?",
+          "options": [
+            "Because God revealed it to him",
+            "Because he was the wisest man in Babylon",
+            "Because the king told him the dream"
+          ],
+          "answer": "Because God revealed it to him",
+          "explain": "Nenhum sábio da Babilônia conseguiu; o segredo foi revelado a Daniel numa visão de noite, e ele deu a glória ao Deus do céu (Daniel 2:19, 27-28)."
+        },
+        "fact": {
+          "pt": "Os quatro jovens de Judá ganharam nomes babilônicos: Daniel virou Beltessazar, e Hananias, Misael e Azarias viraram Sadraque, Mesaque e Abede-Nego.",
+          "ref": "Daniel 1:6-7"
+        },
+        "v": 2
+      },
+      {
+        "id": "u7l2",
+        "title": "A fornalha de fogo",
+        "ref": "Daniel 3:1-30",
+        "level": "A2.1",
+        "narrator": "daniel",
+        "guests": [
+          "nabucodonosor"
+        ],
+        "names": [
+          {
+            "en": "Nebuchadnezzar",
+            "pt": "Nabucodonosor",
+            "note": "rei da Babilônia"
+          },
+          {
+            "en": "Shadrach, Meshach and Abednego",
+            "pt": "Sadraque, Mesaque e Abede-Nego",
+            "note": "os três amigos de Daniel; em Judá se chamavam Hananias, Misael e Azarias"
+          },
+          {
+            "en": "Babylon",
+            "pt": "Babilônia"
+          },
+          {
+            "en": "God",
+            "pt": "Deus",
+            "note": "com minúscula (god, gods), fala dos deuses da Babilônia"
+          }
+        ],
+        "hints": {
+          "times": "vezes",
+          "hand": "mão",
+          "soldier": "soldado",
+          "hair": "cabelo",
+          "like": "como",
+          "angry": "bravo, com raiva"
+        },
+        "tips": [
+          {
+            "part": 1,
+            "id": "will-not",
+            "grammar": "will-not",
+            "title": "will not, even if: recusa firme",
+            "body": "will not (na fala, won't) diz o que a pessoa se recusa a fazer: We will not bow. even if (mesmo que) mostra que a decisão não depende do resultado: Even if God does not save us, we will not bow.",
+            "examples": [
+              {
+                "en": "We will not bow to the statue",
+                "pt": "Nós não vamos nos curvar à estátua"
+              },
+              {
+                "en": "Even if he does not save us, we will not bow",
+                "pt": "Mesmo que ele não nos salve, nós não vamos nos curvar"
+              }
+            ],
+            "contrast": {
+              "a": "We will bow",
+              "b": "We will not bow",
+              "note": "will = vamos; will not = não vamos (recusa)"
+            }
+          },
+          {
+            "part": 2,
+            "id": "passive-past",
+            "grammar": "passive-past",
+            "title": "were thrown, was made: a voz passiva",
+            "body": "Quando quem sofre a ação é o foco, use was ou were + particípio (-ed ou forma irregular): The men were thrown into the furnace. Quem fez a ação pode nem aparecer na frase.",
+            "examples": [
+              {
+                "en": "The three men were thrown into the furnace",
+                "pt": "Os três homens foram lançados na fornalha"
+              },
+              {
+                "en": "The statue was made of gold",
+                "pt": "A estátua foi feita de ouro"
+              }
+            ],
+            "contrast": {
+              "a": "The soldiers threw them",
+              "b": "They were thrown",
+              "note": "ativa: quem faz a ação; passiva: quem sofre a ação"
+            }
+          }
+        ],
+        "vocab": [
           {
             "en": "statue",
             "pt": "estátua",
-            "icon": "🗿"
+            "pos": "noun",
+            "field": "objects",
+            "tier": "core",
+            "part": 1,
+            "icon": "🗿",
+            "image": "statue.png",
+            "example": 1
+          },
+          {
+            "en": "gold",
+            "pt": "ouro",
+            "pos": "noun",
+            "field": "objects",
+            "tier": "core",
+            "part": 1,
+            "icon": "🥇",
+            "image": "gold.png",
+            "example": 1
+          },
+          {
+            "en": "music",
+            "pt": "música",
+            "pos": "noun",
+            "field": "objects",
+            "tier": "core",
+            "part": 1,
+            "icon": "🎷",
+            "image": "music.png",
+            "example": 2
+          },
+          {
+            "en": "to bow",
+            "pt": "curvar-se",
+            "ptAlt": [
+              "se curvar",
+              "inclinar-se"
+            ],
+            "pos": "verb",
+            "field": "actions",
+            "tier": "core",
+            "part": 1,
+            "icon": "🙇",
+            "image": "bow.png",
+            "example": 2,
+            "note": "bow down = curvar-se até o chão"
+          },
+          {
+            "en": "We will not bow",
+            "pt": "Nós não vamos nos curvar",
+            "ptAlt": [
+              "Não vamos nos curvar"
+            ],
+            "pos": "chunk",
+            "field": "speech",
+            "tier": "core",
+            "part": 1,
+            "icon": "👊",
+            "iconic": true,
+            "example": 6
+          },
+          {
+            "en": "hot",
+            "pt": "quente",
+            "pos": "adj",
+            "field": "quality",
+            "tier": "core",
+            "part": 2,
+            "icon": "🥵",
+            "example": 8
+          },
+          {
+            "en": "to burn",
+            "pt": "queimar",
+            "pos": "verb",
+            "field": "actions",
+            "tier": "core",
+            "part": 2,
+            "icon": "🧨",
+            "image": "burn.png",
+            "example": 11
+          },
+          {
+            "en": "to throw",
+            "pt": "jogar",
+            "ptAlt": [
+              "lançar",
+              "atirar"
+            ],
+            "pos": "verb",
+            "field": "actions",
+            "tier": "core",
+            "part": 2,
+            "icon": "🤾",
+            "image": "throw.png",
+            "example": 9
           },
           {
             "en": "furnace",
             "pt": "fornalha",
-            "icon": "🔥"
+            "pos": "noun",
+            "field": "objects",
+            "tier": "bible",
+            "part": 2,
+            "icon": "🌋",
+            "image": "furnace.png",
+            "example": 8
+          },
+          {
+            "en": "Look! I see four men",
+            "pt": "Olhem! Eu vejo quatro homens",
+            "ptAlt": [
+              "Olha! Eu vejo quatro homens"
+            ],
+            "pos": "chunk",
+            "field": "speech",
+            "tier": "core",
+            "part": 2,
+            "icon": "4️⃣",
+            "iconic": true,
+            "example": 10
           }
         ],
         "sentences": [
           {
-            "en": "Daniel was far from home",
-            "pt": "Daniel estava longe de casa"
-          },
-          {
-            "en": "In Babylon, Daniel was called Belteshazzar",
-            "pt": "Na Babilônia, Daniel foi chamado Beltessazar"
-          },
-          {
-            "en": "The king gave them his food and his wine",
-            "pt": "O rei lhes deu do seu manjar e do seu vinho"
-          },
-          {
-            "en": "Daniel purposed in his heart not to defile himself",
-            "pt": "Daniel assentou no seu coração não se contaminar",
-            "alt": [
-              "Daniel decided in his heart not to defile himself"
+            "en": "King Nebuchadnezzar made a statue of gold",
+            "pt": "O rei Nabucodonosor fez uma estátua de ouro",
+            "altPt": [
+              "O rei Nabucodonosor fez uma imagem de ouro"
             ]
           },
           {
-            "en": "Give us vegetables to eat and water to drink",
-            "pt": "Dá-nos legumes para comer e água para beber"
+            "en": "Everyone must bow down when the music plays",
+            "pt": "Todos devem se curvar quando a música tocar",
+            "altPt": [
+              "Todos devem se curvar quando a música toca"
+            ]
           },
           {
-            "en": "Test your servants for ten days",
+            "en": "They heard the music and bowed to the gold statue",
+            "pt": "Eles ouviram a música e se curvaram à estátua de ouro",
+            "altPt": [
+              "Eles ouviram a música e se curvaram diante da estátua de ouro"
+            ]
+          },
+          {
+            "en": "My three friends did not bow to the statue",
+            "pt": "Os meus três amigos não se curvaram à estátua",
+            "altPt": [
+              "Meus três amigos não se curvaram diante da estátua"
+            ]
+          },
+          {
+            "en": "The king asked, \"Who can save you from my hands?\"",
+            "pt": "O rei perguntou: \"Quem pode salvar vocês das minhas mãos?\"",
+            "altPt": [
+              "O rei perguntou: \"Quem pode livrar vocês das minhas mãos?\""
+            ]
+          },
+          {
+            "en": "They said, \"We will not bow to your statue\"",
+            "pt": "Eles disseram: \"Nós não vamos nos curvar à sua estátua\"",
+            "altPt": [
+              "Eles disseram: \"Não vamos nos curvar diante da sua estátua\""
+            ]
+          },
+          {
+            "en": "So the furnace was made seven times hotter than before",
+            "pt": "Então a fornalha foi feita sete vezes mais quente do que antes",
+            "altPt": [
+              "Então a fornalha foi aquecida sete vezes mais do que antes"
+            ]
+          },
+          {
+            "en": "The three men were thrown into the hot burning furnace",
+            "pt": "Os três homens foram jogados na fornalha quente e ardente",
+            "altPt": [
+              "Os três homens foram lançados na fornalha quente e ardente"
+            ]
+          },
+          {
+            "en": "Even the soldiers who threw them in were killed",
+            "pt": "Até os soldados que os jogaram lá dentro foram mortos",
+            "altPt": [
+              "Até os soldados que os lançaram lá dentro morreram"
+            ]
+          },
+          {
+            "en": "Look! I see four men walking in the fire",
+            "pt": "Olhem! Eu vejo quatro homens andando no fogo",
             "alt": [
-              "Prove your servants for ten days"
+              "Look, I see four men loose, walking in the middle of the fire"
             ],
-            "pt": "Experimenta os teus servos por dez dias"
+            "altPt": [
+              "Eis que eu vejo quatro homens soltos, que andam passeando dentro do fogo"
+            ]
           },
           {
-            "en": "After ten days they looked healthier than the other young men",
-            "pt": "Ao fim de dez dias, pareciam mais saudáveis que os outros jovens"
+            "en": "Did the fire burn them? No, not even their hair",
+            "pt": "O fogo os queimou? Não, nem mesmo o cabelo deles",
+            "altPt": [
+              "O fogo queimou eles? Não, nem o cabelo deles"
+            ]
           },
           {
-            "en": "God gave them knowledge and wisdom",
-            "pt": "Deus lhes deu conhecimento e sabedoria"
+            "en": "The king said, \"No other god can save like this\"",
+            "pt": "O rei disse: \"Nenhum outro deus pode salvar assim\"",
+            "altPt": [
+              "O rei disse: \"Nenhum outro deus pode livrar assim\""
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "order": 1,
+            "en": "King Nebuchadnezzar made a statue of gold",
+            "pt": "O rei Nabucodonosor fez uma estátua de ouro",
+            "altPt": [
+              "O rei Nabucodonosor fez uma imagem de ouro"
+            ],
+            "kind": "statement",
+            "fact": true
           },
           {
-            "en": "The king found them ten times wiser than all his magicians",
+            "order": 2,
+            "en": "Everyone must bow down when the music plays",
+            "pt": "Todos devem se curvar quando a música tocar",
+            "altPt": [
+              "Todos devem se curvar quando a música toca"
+            ],
+            "kind": "statement",
+            "fact": true
+          },
+          {
+            "order": 3,
+            "en": "They heard the music and bowed to the gold statue",
+            "pt": "Eles ouviram a música e se curvaram à estátua de ouro",
+            "altPt": [
+              "Eles ouviram a música e se curvaram diante da estátua de ouro"
+            ],
+            "kind": "statement",
+            "fact": true
+          },
+          {
+            "order": 4,
+            "en": "My three friends did not bow to the statue",
+            "pt": "Os meus três amigos não se curvaram à estátua",
+            "altPt": [
+              "Meus três amigos não se curvaram diante da estátua"
+            ],
+            "kind": "negative",
+            "fact": true,
+            "speaker": "daniel"
+          },
+          {
+            "order": 5,
+            "en": "The king asked, \"Who can save you from my hands?\"",
+            "pt": "O rei perguntou: \"Quem pode salvar vocês das minhas mãos?\"",
+            "altPt": [
+              "O rei perguntou: \"Quem pode livrar vocês das minhas mãos?\""
+            ],
+            "kind": "question",
+            "fact": true,
+            "speaker": "nabucodonosor"
+          },
+          {
+            "order": 6,
+            "en": "They said, \"We will not bow to your statue\"",
+            "pt": "Eles disseram: \"Nós não vamos nos curvar à sua estátua\"",
+            "altPt": [
+              "Eles disseram: \"Não vamos nos curvar diante da sua estátua\""
+            ],
+            "kind": "negative",
+            "fact": true,
+            "iconic": true,
+            "gap": {
+              "word": "will",
+              "kind": "grammar",
+              "options": [
+                "will",
+                "would",
+                "must"
+              ]
+            },
+            "grammar": "will-not"
+          },
+          {
+            "order": 7,
+            "en": "So the furnace was made seven times hotter than before",
+            "pt": "Então a fornalha foi feita sete vezes mais quente do que antes",
+            "altPt": [
+              "Então a fornalha foi aquecida sete vezes mais do que antes"
+            ],
+            "kind": "statement",
+            "fact": true,
+            "grammar": "passive-past"
+          },
+          {
+            "order": 8,
+            "en": "The three men were thrown into the hot burning furnace",
+            "pt": "Os três homens foram jogados na fornalha quente e ardente",
+            "altPt": [
+              "Os três homens foram lançados na fornalha quente e ardente"
+            ],
+            "kind": "statement",
+            "fact": true,
+            "gap": {
+              "word": "were",
+              "kind": "grammar",
+              "options": [
+                "were",
+                "was",
+                "are"
+              ]
+            },
+            "grammar": "passive-past"
+          },
+          {
+            "order": 9,
+            "en": "Even the soldiers who threw them in were killed",
+            "pt": "Até os soldados que os jogaram lá dentro foram mortos",
+            "altPt": [
+              "Até os soldados que os lançaram lá dentro morreram"
+            ],
+            "kind": "statement",
+            "fact": true,
+            "grammar": "passive-past"
+          },
+          {
+            "order": 10,
+            "en": "Look! I see four men walking in the fire",
+            "pt": "Olhem! Eu vejo quatro homens andando no fogo",
             "alt": [
-              "The king found them ten times better than all his magicians"
+              "Look, I see four men loose, walking in the middle of the fire"
             ],
-            "pt": "O rei os achou dez vezes mais doutos que todos os seus magos"
+            "altPt": [
+              "Eis que eu vejo quatro homens soltos, que andam passeando dentro do fogo"
+            ],
+            "kind": "quote",
+            "fact": true,
+            "iconic": true,
+            "speaker": "nabucodonosor"
           },
           {
-            "en": "Nebuchadnezzar dreamed of a great statue",
-            "pt": "Nabucodonosor sonhou com uma grande estátua"
+            "order": 11,
+            "en": "Did the fire burn them? No, not even their hair",
+            "pt": "O fogo os queimou? Não, nem mesmo o cabelo deles",
+            "altPt": [
+              "O fogo queimou eles? Não, nem o cabelo deles"
+            ],
+            "kind": "question",
+            "fact": true
           },
           {
-            "en": "A stone broke the statue into pieces",
-            "pt": "Uma pedra quebrou a estátua em pedaços"
+            "order": 12,
+            "en": "The king said, \"No other god can save like this\"",
+            "pt": "O rei disse: \"Nenhum outro deus pode salvar assim\"",
+            "altPt": [
+              "O rei disse: \"Nenhum outro deus pode livrar assim\""
+            ],
+            "kind": "negative",
+            "fact": true,
+            "speaker": "nabucodonosor"
+          }
+        ],
+        "contrast": [
+          {
+            "a": "They said, \"We will not bow to your statue\"",
+            "b": "They said, \"We will bow to your statue\"",
+            "note": "will not = recusa firme; will = aceitação"
           },
           {
-            "en": "Our God is able to deliver us from the fiery furnace",
-            "pt": "O nosso Deus nos pode livrar da fornalha de fogo ardente"
+            "a": "The three men were thrown into the hot burning furnace",
+            "b": "The soldiers threw the three men into the hot burning furnace",
+            "note": "were thrown = passiva (eles sofrem a ação); threw = ativa (os soldados fazem a ação)"
           }
         ],
         "verse": {
-          "text": "Daniel purposed in his heart that he would not defile himself with the portion of the king's meat.",
-          "pt": "Daniel assentou no seu coração não se contaminar com a porção do manjar do rei.",
-          "ref": "Daniel 1:8",
-          "blank": "heart",
+          "text": "Our God whom we serve is able to deliver us from the burning fiery furnace.",
+          "classic": "Our God whom we serve is able to deliver us from the burning fiery furnace.",
+          "pt": "O nosso Deus, a quem servimos, pode nos livrar da fornalha de fogo ardente.",
+          "classicPt": "O nosso Deus, a quem nós servimos, é que nos pode livrar; ele nos livrará da fornalha de fogo ardente.",
+          "ref": "Daniel 3:17",
+          "blank": "deliver",
           "options": [
-            "heart",
-            "hand",
-            "mouth",
-            "house"
+            "deliver",
+            "take",
+            "hide",
+            "call"
+          ],
+          "blanks": [
+            {
+              "word": "deliver",
+              "options": [
+                "deliver",
+                "take",
+                "hide",
+                "call"
+              ]
+            },
+            {
+              "word": "furnace",
+              "options": [
+                "furnace",
+                "prison",
+                "river",
+                "cave"
+              ]
+            },
+            {
+              "word": "serve",
+              "options": [
+                "serve",
+                "love",
+                "fear",
+                "know"
+              ]
+            }
           ]
         },
         "reading": {
-          "text": "Daniel was taken from Jerusalem to Babylon. King Nebuchadnezzar had a dream about a great statue of gold, silver, brass and iron. A stone broke the statue into pieces. God showed Daniel the dream and its meaning.",
-          "pt": "Daniel foi levado de Jerusalém para a Babilônia. O rei Nabucodonosor teve um sonho com uma grande estátua de ouro, prata, bronze e ferro. Uma pedra quebrou a estátua em pedaços. Deus mostrou a Daniel o sonho e o seu significado.",
-          "q": "What broke the statue into pieces?",
+          "text": "King Nebuchadnezzar made a great statue of gold, and everyone had to bow down when the music played. But Shadrach, Meshach and Abednego did not bow. They said, \"Our God can save us from the furnace, but even if he does not, we will not bow.\" The king was very angry, and the three men were thrown into the hot furnace. Then the king saw four men walking in the fire, and the fire did not burn them.",
+          "pt": "O rei Nabucodonosor fez uma grande estátua de ouro, e todos tinham de se curvar quando a música tocava. Mas Sadraque, Mesaque e Abede-Nego não se curvaram. Eles disseram: \"O nosso Deus pode nos salvar da fornalha, mas, mesmo que ele não salve, nós não vamos nos curvar.\" O rei ficou muito bravo, e os três homens foram lançados na fornalha quente. Então o rei viu quatro homens andando no fogo, e o fogo não os queimou.",
+          "q": "What did the three men say to the king?",
           "options": [
-            "A stone",
-            "A lion",
-            "The wind"
+            "They would not bow, with or without God's help",
+            "They would bow only after the music stopped",
+            "They would leave Babylon and go back home"
           ],
-          "answer": "A stone"
+          "answer": "They would not bow, with or without God's help",
+          "questions": [
+            {
+              "kind": "literal",
+              "q": "What did the three men say to the king?",
+              "qPt": "O que os três homens disseram ao rei?",
+              "options": [
+                "They would not bow, with or without God's help",
+                "They would bow only after the music stopped",
+                "They would leave Babylon and go back home"
+              ],
+              "answer": "They would not bow, with or without God's help"
+            },
+            {
+              "kind": "inference",
+              "q": "Why did the king see four men in the fire?",
+              "qPt": "Por que o rei viu quatro homens no fogo?",
+              "options": [
+                "God sent someone to be with the three men",
+                "One soldier fell into the furnace with them",
+                "The king was angry and could not count well"
+              ],
+              "answer": "God sent someone to be with the three men",
+              "explain": "O rei viu um quarto homem no fogo, parecido com um filho dos deuses, e depois disse que Deus enviou o seu anjo para livrar os servos (Daniel 3:25, 28)."
+            }
+          ]
         },
         "dialogue": {
-          "line": "Daniel, the king gave you his food and his wine.",
-          "pt": "Daniel, o rei lhe deu do seu manjar e do seu vinho.",
+          "line": "Is it true? You don't serve my gods and you don't bow to my statue?",
+          "pt": "É verdade? Vocês não servem aos meus deuses e não se curvam à minha estátua?",
           "options": [
-            "Please, give us vegetables and water for ten days.",
-            "Bring me a harp and a sling.",
-            "Let there be light."
+            "It's true, my king. We will not bow to your statue.",
+            "It's true, my king. We will bow when the music plays.",
+            "No, my king. We bow to your statue every day."
           ],
-          "answer": "Please, give us vegetables and water for ten days.",
-          "answerPt": "Por favor, dê-nos legumes e água por dez dias."
+          "answer": "It's true, my king. We will not bow to your statue.",
+          "answerPt": "É verdade, meu rei. Nós não vamos nos curvar à sua estátua."
+        },
+        "conversation": {
+          "with": "nabucodonosor",
+          "turns": [
+            {
+              "who": "nabucodonosor",
+              "en": "Is it true? You don't serve my gods and you don't bow to my statue?",
+              "pt": "É verdade? Vocês não servem aos meus deuses e não se curvam à minha estátua?",
+              "mood": "bravo"
+            },
+            {
+              "who": "you",
+              "options": [
+                "It's true, my king. We will not bow to your statue.",
+                "It's true, my king. We will bow when the music plays.",
+                "No, my king. We bow to your statue every day."
+              ],
+              "answer": "It's true, my king. We will not bow to your statue.",
+              "pt": "É verdade, meu rei. Nós não vamos nos curvar à sua estátua.",
+              "intent": "Confirme e diga o que vocês não vão fazer"
+            },
+            {
+              "who": "nabucodonosor",
+              "en": "Then I will throw you into the hot furnace! Who can save you from my hands?",
+              "pt": "Então eu vou jogar vocês na fornalha quente! Quem pode salvar vocês das minhas mãos?",
+              "mood": "urgente"
+            },
+            {
+              "who": "you",
+              "options": [
+                "Our God can save us. But even if he does not, we will not bow.",
+                "Our God can save us. So please make the furnace a little hotter.",
+                "Nobody can save us. So we will bow to the statue now."
+              ],
+              "answer": "Our God can save us. But even if he does not, we will not bow.",
+              "pt": "O nosso Deus pode nos salvar. Mas, mesmo que ele não salve, nós não vamos nos curvar.",
+              "intent": "Diga quem pode salvar vocês e mantenha a decisão",
+              "speak": true
+            }
+          ]
         },
         "quiz": {
-          "q": "Who was thrown into the fiery furnace?",
+          "q": "Why did the king see four men in the fire?",
           "options": [
-            "Shadrach, Meshach and Abednego",
-            "Daniel and the king",
-            "The magicians of Babylon"
+            "God sent someone to be with the three men",
+            "One soldier fell into the furnace with them",
+            "The king was angry and could not count well"
           ],
-          "answer": "Shadrach, Meshach and Abednego",
-          "explain": "Sadraque, Mesaque e Abede-Nego não adoraram a estátua de ouro e foram lançados na fornalha, mas Deus os livrou (Daniel 3:17-27)."
-        }
+          "answer": "God sent someone to be with the three men",
+          "explain": "O rei viu um quarto homem no fogo, parecido com um filho dos deuses, e depois disse que Deus enviou o seu anjo para livrar os servos (Daniel 3:25, 28)."
+        },
+        "fact": {
+          "pt": "A estátua de ouro tinha sessenta côvados de altura e seis de largura, cerca de 27 metros por 2,7, e foi levantada no campo de Dura, na província da Babilônia.",
+          "ref": "Daniel 3:1"
+        },
+        "v": 2
       },
       {
-        "id": "u7l2",
+        "id": "u7l3",
         "title": "A cova dos leões",
-        "vocab": [
+        "ref": "Daniel 6:1-28",
+        "level": "A2.1",
+        "narrator": "daniel",
+        "guests": [
+          "dario"
+        ],
+        "names": [
           {
-            "en": "lion",
-            "pt": "leão",
-            "icon": "🦁"
+            "en": "Daniel",
+            "pt": "Daniel",
+            "note": "já idoso, líder no reino de Dario"
           },
           {
-            "en": "to pray",
-            "pt": "orar",
-            "icon": "🛐"
+            "en": "Darius",
+            "pt": "Dario",
+            "note": "o rei medo que governou a Babilônia depois de Belsazar"
+          },
+          {
+            "en": "Jerusalem",
+            "pt": "Jerusalém",
+            "note": "Daniel orava voltado para a cidade"
+          },
+          {
+            "en": "God",
+            "pt": "Deus"
+          }
+        ],
+        "hints": {
+          "leader": "líder",
+          "find": "achar, encontrar",
+          "new": "nova, novo",
+          "change": "mudar",
+          "hurt": "machucar, ferir",
+          "thrown": "lançado"
+        },
+        "tips": [
+          {
+            "part": 1,
+            "id": "frequency",
+            "grammar": "frequency",
+            "title": "every day, three times a day: com que frequência",
+            "body": "Para dizer com que frequência algo acontece, use every day (todo dia), once a day, three times a day (três vezes por dia), always, never. A expressão costuma ficar no fim da frase. as before = como antes.",
+            "examples": [
+              {
+                "en": "I prayed three times a day",
+                "pt": "Eu orava três vezes por dia"
+              },
+              {
+                "en": "He prayed every day, as before",
+                "pt": "Ele orava todo dia, como antes"
+              }
+            ],
+            "contrast": {
+              "a": "I pray every day",
+              "b": "I pray three times a day",
+              "note": "every day = todo dia; three times a day = três vezes por dia"
+            }
+          },
+          {
+            "part": 2,
+            "id": "could-not",
+            "grammar": "could-not",
+            "title": "could not, did not: negativas no passado",
+            "body": "could not (couldn't) = não podia, não conseguia: The king could not change the law. did not (didn't) nega qualquer outro verbo no passado, e o verbo volta à forma básica: They did not hurt me.",
+            "examples": [
+              {
+                "en": "The king could not change the law",
+                "pt": "O rei não podia mudar a lei"
+              },
+              {
+                "en": "The lions did not hurt me",
+                "pt": "Os leões não me machucaram"
+              }
+            ],
+            "contrast": {
+              "a": "The lions could hurt me",
+              "b": "The lions could not hurt me",
+              "note": "could = podiam; could not = não podiam"
+            }
+          }
+        ],
+        "vocab": [
+          {
+            "en": "kingdom",
+            "pt": "reino",
+            "pos": "noun",
+            "field": "places",
+            "tier": "core",
+            "part": 1,
+            "icon": "🏰",
+            "image": "kingdom.png",
+            "example": 1
           },
           {
             "en": "law",
             "pt": "lei",
-            "icon": "⚖️"
+            "pos": "noun",
+            "field": "work",
+            "tier": "core",
+            "part": 1,
+            "icon": "⚖️",
+            "image": "law.png",
+            "example": 3
+          },
+          {
+            "en": "window",
+            "pt": "janela",
+            "pos": "noun",
+            "field": "objects",
+            "tier": "core",
+            "part": 1,
+            "icon": "🔲",
+            "image": "window.png",
+            "example": 5
+          },
+          {
+            "en": "open",
+            "pt": "aberto",
+            "ptAlt": [
+              "aberta",
+              "abertas"
+            ],
+            "pos": "adj",
+            "field": "quality",
+            "tier": "core",
+            "part": 1,
+            "icon": "🔓",
+            "example": 5
+          },
+          {
+            "en": "three times a day",
+            "pt": "três vezes por dia",
+            "ptAlt": [
+              "três vezes ao dia"
+            ],
+            "pos": "chunk",
+            "field": "time",
+            "tier": "core",
+            "part": 1,
+            "icon": "⏰",
+            "example": 6
+          },
+          {
+            "en": "lion",
+            "pt": "leão",
+            "pos": "noun",
+            "field": "animals",
+            "tier": "core",
+            "part": 2,
+            "icon": "🦁",
+            "image": "lion.png",
+            "example": 8
           },
           {
             "en": "den",
             "pt": "cova",
-            "icon": "🕳️"
-          },
-          {
-            "en": "to kneel",
-            "pt": "ajoelhar-se",
-            "icon": "🧎"
-          },
-          {
-            "en": "faithful",
-            "pt": "fiel",
-            "icon": "🛡️"
-          },
-          {
-            "en": "decree",
-            "pt": "decreto",
-            "icon": "📜"
-          },
-          {
-            "en": "to throw",
-            "pt": "lançar",
-            "icon": "🤾"
-          },
-          {
-            "en": "to seal",
-            "pt": "selar",
-            "icon": "🔏"
-          },
-          {
-            "en": "to sleep",
-            "pt": "dormir",
-            "icon": "😴"
-          }
-        ],
-        "sentences": [
-          {
-            "en": "Daniel was faithful to God",
-            "pt": "Daniel era fiel a Deus"
-          },
-          {
-            "en": "The king made a law",
-            "pt": "O rei fez uma lei"
-          },
-          {
-            "en": "For thirty days they could only pray to the king",
-            "pt": "Por trinta dias, só podiam orar ao rei"
-          },
-          {
-            "en": "Darius signed the decree",
-            "pt": "Dario assinou o decreto"
-          },
-          {
-            "en": "The law of the Medes and Persians cannot be changed",
-            "pt": "A lei dos medos e dos persas não se pode revogar"
-          },
-          {
-            "en": "He prayed with his window open toward Jerusalem",
-            "alt": [
-              "He prayed with his windows open toward Jerusalem"
+            "ptAlt": [
+              "cova dos leões"
             ],
-            "pt": "Ele orava com a janela aberta do lado de Jerusalém"
+            "pos": "noun",
+            "field": "places",
+            "tier": "bible",
+            "part": 2,
+            "icon": "🏚️",
+            "image": "den.png",
+            "example": 8,
+            "note": "a cova dos leões; lions' den"
           },
-          {
-            "en": "Daniel prayed three times a day",
-            "pt": "Daniel orava três vezes ao dia"
-          },
-          {
-            "en": "He knelt, prayed and gave thanks to his God",
-            "alt": [
-              "He kneeled, prayed and gave thanks to his God"
-            ],
-            "pt": "Ele se punha de joelhos, orava e dava graças ao seu Deus"
-          },
-          {
-            "en": "They threw Daniel into the den",
-            "pt": "Eles lançaram Daniel na cova"
-          },
-          {
-            "en": "A stone was laid upon the mouth of the lions' den",
-            "pt": "Uma pedra foi posta sobre a boca da cova dos leões"
-          },
-          {
-            "en": "Darius sealed the stone with his own ring",
-            "alt": [
-              "Darius sealed the stone with his own signet"
-            ],
-            "pt": "Dario selou a pedra com o seu anel"
-          },
-          {
-            "en": "The king could not sleep that night",
-            "pt": "Naquela noite, o rei não conseguiu dormir"
-          }
-        ],
-        "verse": {
-          "text": "He kneeled upon his knees three times a day, and prayed, and gave thanks before his God.",
-          "pt": "Três vezes no dia se punha de joelhos, e orava, e dava graças diante do seu Deus.",
-          "ref": "Daniel 6:10",
-          "blank": "prayed",
-          "options": [
-            "prayed",
-            "sang",
-            "slept",
-            "ran"
-          ]
-        },
-        "reading": {
-          "text": "King Darius set Daniel over all the princes, because an excellent spirit was in him. The princes sought to find a fault in Daniel, but they found none, because he was faithful. So they asked the king to sign a law: for thirty days, pray only to the king.",
-          "pt": "O rei Dario pôs Daniel sobre todos os príncipes, porque nele havia um espírito excelente. Os príncipes procuraram achar culpa em Daniel, mas não acharam nenhuma, porque ele era fiel. Então pediram ao rei que assinasse uma lei: por trinta dias, orar só ao rei.",
-          "q": "Why could the princes find no fault in Daniel?",
-          "options": [
-            "Because he was faithful",
-            "Because he hid in the den",
-            "Because he was the king's son"
-          ],
-          "answer": "Because he was faithful"
-        },
-        "dialogue": {
-          "line": "Daniel, the king made a new law!",
-          "pt": "Daniel, o rei fez uma nova lei!",
-          "options": [
-            "I will pray to my God anyway.",
-            "Then I will pray only to the king.",
-            "Bring me the king's wine."
-          ],
-          "answer": "I will pray to my God anyway.",
-          "answerPt": "Vou orar ao meu Deus mesmo assim."
-        },
-        "quiz": {
-          "q": "What did the king do with the stone on the den?",
-          "options": [
-            "He sealed it with his signet",
-            "He broke it into pieces",
-            "He threw it into the sea"
-          ],
-          "answer": "He sealed it with his signet",
-          "explain": "Puseram uma pedra sobre a boca da cova, e o rei a selou com o seu anel (Daniel 6:17)."
-        }
-      },
-      {
-        "id": "u7l3",
-        "title": "O Deus vivo",
-        "vocab": [
           {
             "en": "angel",
             "pt": "anjo",
-            "icon": "👼"
-          },
-          {
-            "en": "living",
-            "pt": "vivo (vivente)",
-            "icon": "💚"
-          },
-          {
-            "en": "kingdom",
-            "pt": "reino",
-            "icon": "🏰"
-          },
-          {
-            "en": "to deliver",
-            "pt": "livrar",
-            "icon": "🛡️"
+            "pos": "noun",
+            "field": "faith",
+            "tier": "bible",
+            "part": 2,
+            "icon": "👼",
+            "example": 11
           },
           {
             "en": "mouth",
             "pt": "boca",
-            "icon": "👄"
+            "pos": "noun",
+            "field": "body",
+            "tier": "core",
+            "part": 2,
+            "icon": "😮",
+            "image": "mouth.png",
+            "example": 12
           },
           {
-            "en": "to close",
-            "pt": "fechar (cerrar)",
-            "icon": "🔒"
-          },
-          {
-            "en": "morning",
-            "pt": "manhã",
-            "icon": "🌄"
-          },
-          {
-            "en": "forever",
-            "pt": "para sempre",
-            "icon": "♾️"
-          },
-          {
-            "en": "to save",
-            "pt": "salvar",
-            "icon": "🆘"
-          },
-          {
-            "en": "to write",
-            "pt": "escrever",
-            "icon": "📝"
+            "en": "Good morning, my king",
+            "pt": "Bom dia, meu rei",
+            "pos": "chunk",
+            "field": "speech",
+            "tier": "core",
+            "part": 2,
+            "icon": "🌞",
+            "example": 11
           }
         ],
         "sentences": [
           {
-            "en": "In the morning the king ran to the den",
-            "pt": "De manhã o rei correu para a cova"
+            "en": "King Darius made me a leader in his kingdom",
+            "pt": "O rei Dario me fez um líder no reino dele",
+            "altPt": [
+              "O rei Dario me fez um dos líderes do reino dele"
+            ]
           },
           {
-            "en": "Daniel, servant of the living God!",
-            "pt": "Daniel, servo do Deus vivo!"
+            "en": "Did the other men find anything against me? No",
+            "pt": "Os outros homens acharam algo contra mim? Não",
+            "altPt": [
+              "Os outros homens encontraram alguma coisa contra mim? Não"
+            ]
           },
           {
-            "en": "Is your God able to deliver you from the lions?",
-            "pt": "Pode o teu Deus livrar-te dos leões?"
+            "en": "They asked the king for a law in his kingdom",
+            "pt": "Eles pediram ao rei uma lei no reino dele",
+            "altPt": [
+              "Eles pediram ao rei uma nova lei no reino dele"
+            ]
           },
           {
-            "en": "O king, live forever",
+            "en": "The law said, \"Pray only to the king for thirty days\"",
+            "pt": "A lei dizia: \"Orem só ao rei por trinta dias\"",
+            "altPt": [
+              "A lei dizia: \"Orem somente ao rei por trinta dias\""
+            ]
+          },
+          {
+            "en": "My windows were open toward Jerusalem",
+            "pt": "As minhas janelas estavam abertas para Jerusalém",
+            "altPt": [
+              "Minhas janelas estavam abertas na direção de Jerusalém"
+            ]
+          },
+          {
+            "en": "I prayed three times a day with my windows open",
+            "pt": "Eu orava três vezes por dia com as janelas abertas",
+            "altPt": [
+              "Eu orava três vezes ao dia com as minhas janelas abertas"
+            ]
+          },
+          {
+            "en": "The king could not change the law of his kingdom",
+            "pt": "O rei não podia mudar a lei do reino dele",
+            "altPt": [
+              "O rei não conseguia mudar a lei do reino dele"
+            ]
+          },
+          {
+            "en": "They threw me into the den of lions",
+            "pt": "Eles me jogaram na cova dos leões",
+            "altPt": [
+              "Eles me lançaram na cova dos leões"
+            ]
+          },
+          {
+            "en": "A stone was put on the mouth of the den",
+            "pt": "Uma pedra foi posta na boca da cova",
+            "altPt": [
+              "Uma pedra foi colocada na boca da cova"
+            ]
+          },
+          {
+            "en": "\"Daniel, did your God save you from the lions?\"",
+            "pt": "\"Daniel, o seu Deus salvou você dos leões?\"",
             "alt": [
-              "O king, live for ever"
+              "Daniel, was your God able to save you from the lions?"
             ],
-            "pt": "Ó rei, vive para sempre!"
+            "altPt": [
+              "\"Daniel, o teu Deus pôde livrar-te dos leões?\""
+            ]
           },
           {
-            "en": "God sent his angel",
-            "pt": "Deus enviou o seu anjo"
+            "en": "\"Good morning, my king. God sent his angel to me\"",
+            "pt": "\"Bom dia, meu rei. Deus enviou o anjo dele para mim\"",
+            "altPt": [
+              "\"Bom dia, meu rei. Deus me enviou o seu anjo\""
+            ]
           },
           {
-            "en": "The angel shut the lions' mouths",
+            "en": "The angel closed their mouths. They could not hurt me",
+            "pt": "O anjo fechou a boca deles. Eles não puderam me machucar",
+            "altPt": [
+              "O anjo fechou a boca dos leões. Eles não me fizeram mal"
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "order": 1,
+            "en": "King Darius made me a leader in his kingdom",
+            "pt": "O rei Dario me fez um líder no reino dele",
+            "altPt": [
+              "O rei Dario me fez um dos líderes do reino dele"
+            ],
+            "kind": "first-person",
+            "fact": true,
+            "speaker": "daniel"
+          },
+          {
+            "order": 2,
+            "en": "Did the other men find anything against me? No",
+            "pt": "Os outros homens acharam algo contra mim? Não",
+            "altPt": [
+              "Os outros homens encontraram alguma coisa contra mim? Não"
+            ],
+            "kind": "question",
+            "fact": true,
+            "speaker": "daniel"
+          },
+          {
+            "order": 3,
+            "en": "They asked the king for a law in his kingdom",
+            "pt": "Eles pediram ao rei uma lei no reino dele",
+            "altPt": [
+              "Eles pediram ao rei uma nova lei no reino dele"
+            ],
+            "kind": "statement",
+            "fact": true
+          },
+          {
+            "order": 4,
+            "en": "The law said, \"Pray only to the king for thirty days\"",
+            "pt": "A lei dizia: \"Orem só ao rei por trinta dias\"",
+            "altPt": [
+              "A lei dizia: \"Orem somente ao rei por trinta dias\""
+            ],
+            "kind": "quote",
+            "fact": true,
+            "prod": false
+          },
+          {
+            "order": 5,
+            "en": "My windows were open toward Jerusalem",
+            "pt": "As minhas janelas estavam abertas para Jerusalém",
+            "altPt": [
+              "Minhas janelas estavam abertas na direção de Jerusalém"
+            ],
+            "kind": "first-person",
+            "fact": true,
+            "speaker": "daniel"
+          },
+          {
+            "order": 6,
+            "en": "I prayed three times a day with my windows open",
+            "pt": "Eu orava três vezes por dia com as janelas abertas",
+            "altPt": [
+              "Eu orava três vezes ao dia com as minhas janelas abertas"
+            ],
+            "kind": "first-person",
+            "fact": true,
+            "speaker": "daniel",
+            "gap": {
+              "word": "three times a day",
+              "kind": "grammar",
+              "options": [
+                "three times a day",
+                "every day",
+                "as before"
+              ]
+            },
+            "grammar": "frequency"
+          },
+          {
+            "order": 7,
+            "en": "The king could not change the law of his kingdom",
+            "pt": "O rei não podia mudar a lei do reino dele",
+            "altPt": [
+              "O rei não conseguia mudar a lei do reino dele"
+            ],
+            "kind": "negative",
+            "fact": true,
+            "gap": {
+              "word": "could",
+              "kind": "grammar",
+              "options": [
+                "could",
+                "would",
+                "must"
+              ]
+            },
+            "grammar": "could-not"
+          },
+          {
+            "order": 8,
+            "en": "They threw me into the den of lions",
+            "pt": "Eles me jogaram na cova dos leões",
+            "altPt": [
+              "Eles me lançaram na cova dos leões"
+            ],
+            "kind": "first-person",
+            "fact": true,
+            "speaker": "daniel"
+          },
+          {
+            "order": 9,
+            "en": "A stone was put on the mouth of the den",
+            "pt": "Uma pedra foi posta na boca da cova",
+            "altPt": [
+              "Uma pedra foi colocada na boca da cova"
+            ],
+            "kind": "statement",
+            "fact": true
+          },
+          {
+            "order": 10,
+            "en": "\"Daniel, did your God save you from the lions?\"",
+            "pt": "\"Daniel, o seu Deus salvou você dos leões?\"",
             "alt": [
-              "The angel closed the lions' mouths"
+              "Daniel, was your God able to save you from the lions?"
             ],
-            "pt": "O anjo fechou a boca dos leões"
-          },
-          {
-            "en": "He is the living God",
-            "pt": "Ele é o Deus vivo"
-          },
-          {
-            "en": "His kingdom is forever",
-            "pt": "O seu reino é para sempre"
-          },
-          {
-            "en": "His kingdom shall not be destroyed",
-            "alt": [
-              "His kingdom will not be destroyed"
+            "altPt": [
+              "\"Daniel, o teu Deus pôde livrar-te dos leões?\""
             ],
-            "pt": "O seu reino não se pode destruir"
+            "kind": "question",
+            "fact": true,
+            "speaker": "dario"
           },
           {
-            "en": "He delivers and he saves",
-            "pt": "Ele livra e salva"
+            "order": 11,
+            "en": "\"Good morning, my king. God sent his angel to me\"",
+            "pt": "\"Bom dia, meu rei. Deus enviou o anjo dele para mim\"",
+            "altPt": [
+              "\"Bom dia, meu rei. Deus me enviou o seu anjo\""
+            ],
+            "kind": "first-person",
+            "fact": true,
+            "speaker": "daniel"
           },
           {
-            "en": "The king wrote to all the people",
-            "pt": "O rei escreveu a todo o povo"
+            "order": 12,
+            "en": "The angel closed their mouths. They could not hurt me",
+            "pt": "O anjo fechou a boca deles. Eles não puderam me machucar",
+            "altPt": [
+              "O anjo fechou a boca dos leões. Eles não me fizeram mal"
+            ],
+            "kind": "negative",
+            "fact": true,
+            "speaker": "daniel",
+            "grammar": "could-not"
+          }
+        ],
+        "contrast": [
+          {
+            "a": "I prayed three times a day with my windows open",
+            "b": "I prayed every day with my windows open",
+            "note": "three times a day = três vezes por dia; every day = todo dia"
           },
           {
-            "en": "He delivered Daniel from the power of the lions",
-            "pt": "Ele livrou Daniel do poder dos leões"
+            "a": "The king could not change the law of his kingdom",
+            "b": "The king could change the law of his kingdom",
+            "note": "could not = não podia; could = podia"
           }
         ],
         "verse": {
-          "text": "He is the living God, and stedfast for ever, and his kingdom that which shall not be destroyed.",
-          "pt": "Ele é o Deus vivo e para sempre permanece; e o seu reino não se pode destruir.",
-          "ref": "Daniel 6:26",
-          "blank": "living",
+          "text": "My God has sent his angel, and has shut the lions' mouths, and they have not hurt me.",
+          "classic": "My God hath sent his angel, and hath shut the lions' mouths, that they have not hurt me.",
+          "pt": "O meu Deus enviou o seu anjo e fechou a boca dos leões, e eles não me machucaram.",
+          "classicPt": "O meu Deus enviou o seu anjo, e fechou a boca dos leões, para que não me fizessem dano.",
+          "ref": "Daniel 6:22",
+          "blank": "angel",
           "options": [
-            "living",
-            "little",
-            "mighty",
-            "holy"
+            "angel",
+            "servant",
+            "friend",
+            "son"
+          ],
+          "blanks": [
+            {
+              "word": "angel",
+              "options": [
+                "angel",
+                "servant",
+                "friend",
+                "son"
+              ]
+            },
+            {
+              "word": "mouths",
+              "options": [
+                "mouths",
+                "eyes",
+                "hands",
+                "feet"
+              ]
+            },
+            {
+              "word": "hurt",
+              "options": [
+                "hurt",
+                "seen",
+                "killed",
+                "heard"
+              ]
+            }
           ]
         },
         "reading": {
-          "text": "The king rose very early and went in haste to the den. Daniel was alive! The king was very glad and took Daniel out of the den. No hurt was found on him, because he believed in his God.",
-          "pt": "O rei se levantou muito cedo e foi com pressa à cova. Daniel estava vivo! O rei ficou muito alegre e tirou Daniel da cova. Nenhum dano se achou nele, porque crera no seu Deus.",
-          "q": "Why was no hurt found on Daniel?",
+          "text": "King Darius put Daniel over many men in his kingdom. The other men could not find anything against him, so they asked the king for a law: for thirty days, pray only to the king. Daniel prayed three times a day with his windows open, as before. The king could do nothing, and Daniel was thrown into the den of lions. But God sent his angel and closed the lions' mouths.",
+          "pt": "O rei Dario pôs Daniel acima de muitos homens no reino dele. Os outros homens não conseguiram achar nada contra ele, então pediram ao rei uma lei: por trinta dias, orar só ao rei. Daniel orava três vezes por dia com as janelas abertas, como antes. O rei não pôde fazer nada, e Daniel foi jogado na cova dos leões. Mas Deus enviou o seu anjo e fechou a boca dos leões.",
+          "q": "What did the new law say?",
           "options": [
-            "Because he believed in his God",
-            "Because the lions were asleep",
-            "Because the den was empty"
+            "Pray to the king alone for a month",
+            "Open your windows toward Jerusalem every day",
+            "Throw every leader to the lions"
           ],
-          "answer": "Because he believed in his God"
+          "answer": "Pray to the king alone for a month",
+          "questions": [
+            {
+              "kind": "literal",
+              "q": "What did the new law say?",
+              "qPt": "O que a nova lei dizia?",
+              "options": [
+                "Pray to the king alone for a month",
+                "Open your windows toward Jerusalem every day",
+                "Throw every leader to the lions"
+              ],
+              "answer": "Pray to the king alone for a month"
+            },
+            {
+              "kind": "inference",
+              "q": "Why did the men ask the king for this law?",
+              "qPt": "Por que os homens pediram essa lei ao rei?",
+              "options": [
+                "To find something against Daniel",
+                "Because the king wanted more prayers",
+                "Because Daniel asked them for it"
+              ],
+              "answer": "To find something against Daniel",
+              "explain": "Eles não achavam nenhuma falha em Daniel e só podiam acusá-lo por causa da lei do seu Deus; por isso pediram o decreto (Daniel 6:4-7)."
+            }
+          ]
         },
         "dialogue": {
-          "line": "Daniel, is your God able to save you?",
-          "pt": "Daniel, o seu Deus pode salvá-lo?",
+          "line": "Daniel, servant of the living God! Did your God save you from the lions?",
+          "pt": "Daniel, servo do Deus vivo! O seu Deus salvou você dos leões?",
           "options": [
-            "Yes! God sent his angel.",
-            "No, the window is closed.",
-            "Bring me five loaves."
+            "Good morning, my king. God sent his angel to me.",
+            "Good morning, my king. The lions are sleeping now.",
+            "Good morning, my king. I opened the den and ran."
           ],
-          "answer": "Yes! God sent his angel.",
-          "answerPt": "Sim! Deus enviou o seu anjo."
+          "answer": "Good morning, my king. God sent his angel to me.",
+          "answerPt": "Bom dia, meu rei. Deus enviou o anjo dele para mim."
+        },
+        "conversation": {
+          "with": "dario",
+          "turns": [
+            {
+              "who": "dario",
+              "en": "Daniel, servant of the living God! Did your God save you from the lions?",
+              "pt": "Daniel, servo do Deus vivo! O seu Deus salvou você dos leões?",
+              "mood": "urgente"
+            },
+            {
+              "who": "you",
+              "options": [
+                "Good morning, my king. God sent his angel to me.",
+                "Good morning, my king. The lions are sleeping now.",
+                "Good morning, my king. I opened the den and ran."
+              ],
+              "answer": "Good morning, my king. God sent his angel to me.",
+              "pt": "Bom dia, meu rei. Deus enviou o anjo dele para mim.",
+              "intent": "Cumprimente o rei e diga quem o salvou"
+            },
+            {
+              "who": "dario",
+              "en": "Then come out of the den! Did the lions hurt you?",
+              "pt": "Então saia da cova! Os leões machucaram você?",
+              "mood": "animado"
+            },
+            {
+              "who": "you",
+              "options": [
+                "No, my king. The lions could not hurt me.",
+                "Yes, my king. Now open the den, please.",
+                "No, my king. I closed the den with a stone."
+              ],
+              "answer": "No, my king. The lions could not hurt me.",
+              "pt": "Não, meu rei. Os leões não puderam me machucar.",
+              "intent": "Responda e diga como você está",
+              "speak": true
+            }
+          ]
         },
         "quiz": {
-          "q": "What happened to the men who accused Daniel?",
+          "q": "Why did the men ask the king for this law?",
           "options": [
-            "They were thrown into the lions' den",
-            "They became princes",
-            "They went to Jerusalem"
+            "To find something against Daniel",
+            "Because the king wanted more prayers",
+            "Because Daniel asked them for it"
           ],
-          "answer": "They were thrown into the lions' den",
-          "explain": "Os homens que acusaram Daniel foram lançados na cova dos leões (Daniel 6:24)."
-        }
+          "answer": "To find something against Daniel",
+          "explain": "Eles não achavam nenhuma falha em Daniel e só podiam acusá-lo por causa da lei do seu Deus; por isso pediram o decreto (Daniel 6:4-7)."
+        },
+        "fact": {
+          "pt": "Enquanto Daniel estava na cova, o rei Dario passou a noite em jejum no palácio, sem música e sem conseguir dormir.",
+          "ref": "Daniel 6:18"
+        },
+        "v": 2
       },
       {
         "id": "u7r",
@@ -11664,384 +13027,1535 @@ const COURSE = [
     "face": "pedro",
     "color": "#1cb0f6",
     "level": "A2.1",
+    "v": 2,
     "lessons": [
       {
         "id": "u8l1",
         "title": "Pescadores de homens",
-        "vocab": [
+        "ref": "Mateus 4:18-23; Lucas 5:1-11",
+        "level": "A2.1",
+        "narrator": "pedro",
+        "guests": [
+          "jesus"
+        ],
+        "names": [
           {
-            "en": "fisherman",
-            "pt": "pescador",
-            "icon": "🎣"
+            "en": "Jesus",
+            "pt": "Jesus"
           },
+          {
+            "en": "Simon",
+            "pt": "Simão",
+            "note": "o nome de Pedro antes de Jesus o chamar de Pedro (João 1:42)"
+          },
+          {
+            "en": "Peter",
+            "pt": "Pedro",
+            "note": "narra a unidade"
+          },
+          {
+            "en": "Andrew",
+            "pt": "André",
+            "note": "irmão de Pedro"
+          },
+          {
+            "en": "James",
+            "pt": "Tiago",
+            "note": "filho de Zebedeu"
+          },
+          {
+            "en": "John",
+            "pt": "João",
+            "note": "irmão de Tiago"
+          },
+          {
+            "en": "Zebedee",
+            "pt": "Zebedeu",
+            "note": "pai de Tiago e João"
+          },
+          {
+            "en": "Sea of Galilee",
+            "pt": "mar da Galileia"
+          },
+          {
+            "en": "God",
+            "pt": "Deus"
+          },
+          {
+            "en": "the Lord",
+            "pt": "o Senhor"
+          }
+        ],
+        "hints": {
+          "casting": "lançando",
+          "fishers": "pescadores",
+          "immediately": "imediatamente, na hora",
+          "taught": "ensinou",
+          "full": "cheio, cheios",
+          "Master": "Mestre"
+        },
+        "tips": [
+          {
+            "part": 1,
+            "id": "imperative-will",
+            "grammar": "imperative-will",
+            "title": "Follow me, and I will...: ordem + promessa",
+            "body": "O imperativo é o verbo sem sujeito: Follow me (Siga-me), Come (Venha). Para dizer o que vai acontecer depois, use will + verbo: I will make you fishers of men. Juntos, formam um convite com promessa: faça isto, e eu farei aquilo.",
+            "examples": [
+              {
+                "en": "Follow me",
+                "pt": "Siga-me"
+              },
+              {
+                "en": "Follow me, and I will make you fishers of men",
+                "pt": "Sigam-me, e eu farei de vocês pescadores de homens"
+              }
+            ],
+            "contrast": {
+              "a": "I will make you fishers of men",
+              "b": "I make you fishers of men",
+              "note": "will = promessa para depois; sem will = agora, hábito"
+            }
+          },
+          {
+            "part": 2,
+            "id": "time-expressions",
+            "grammar": "time-expressions",
+            "title": "all night, now, immediately: quando aconteceu",
+            "body": "Expressões de tempo dizem quando algo acontece: all night (a noite toda), all day (o dia todo), now (agora), from now on (de agora em diante), immediately (imediatamente). Em geral ficam no fim ou no começo da frase: We worked all night. From now on you will catch people.",
+            "examples": [
+              {
+                "en": "We worked all night",
+                "pt": "Trabalhamos a noite toda"
+              },
+              {
+                "en": "From now on you will catch people",
+                "pt": "De agora em diante você vai pescar pessoas"
+              }
+            ],
+            "contrast": {
+              "a": "We worked all night",
+              "b": "We worked all day",
+              "note": "night/day: só muda o período do dia"
+            }
+          }
+        ],
+        "vocab": [
           {
             "en": "net",
             "pt": "rede",
-            "icon": "🥅"
+            "pos": "noun",
+            "field": "work",
+            "tier": "core",
+            "part": 1,
+            "icon": "🕸️",
+            "example": 2
+          },
+          {
+            "en": "fisherman",
+            "pt": "pescador",
+            "plural": "fishermen",
+            "forms": [
+              "fishermen"
+            ],
+            "pos": "noun",
+            "field": "work",
+            "tier": "core",
+            "part": 1,
+            "icon": "🚣",
+            "example": 3
           },
           {
             "en": "to follow",
             "pt": "seguir",
-            "icon": "👣"
-          },
-          {
-            "en": "disciple",
-            "pt": "discípulo",
-            "icon": "🧑"
-          },
-          {
-            "en": "boat",
-            "pt": "barco",
-            "icon": "⛵"
+            "pos": "verb",
+            "field": "actions",
+            "tier": "core",
+            "part": 1,
+            "icon": "👣",
+            "example": 5
           },
           {
             "en": "to leave",
             "pt": "deixar",
-            "icon": "🏃"
+            "ptAlt": [
+              "sair",
+              "partir"
+            ],
+            "pos": "verb",
+            "field": "actions",
+            "tier": "core",
+            "part": 1,
+            "icon": "🏃",
+            "example": 5
           },
           {
-            "en": "to cast",
-            "pt": "lançar (a rede)",
-            "icon": "🎯"
+            "en": "Follow me",
+            "pt": "Siga-me",
+            "ptAlt": [
+              "Sigam-me",
+              "Me siga",
+              "Venha comigo"
+            ],
+            "pos": "chunk",
+            "field": "speech",
+            "tier": "core",
+            "part": 1,
+            "icon": "➡️",
+            "iconic": true,
+            "example": 4
           },
           {
-            "en": "Galilee",
-            "pt": "Galileia",
-            "icon": "🌊"
+            "en": "boat",
+            "pt": "barco",
+            "pos": "noun",
+            "field": "objects",
+            "tier": "core",
+            "part": 2,
+            "icon": "⛵",
+            "example": 8
           },
           {
-            "en": "to mend",
-            "pt": "consertar",
-            "icon": "🧵"
+            "en": "fish",
+            "pt": "peixe",
+            "ptAlt": [
+              "peixes"
+            ],
+            "pos": "noun",
+            "field": "animals",
+            "tier": "core",
+            "part": 2,
+            "icon": "🐟",
+            "example": 7,
+            "note": "o plural também é fish"
           },
           {
-            "en": "immediately",
-            "pt": "imediatamente (logo)",
-            "icon": "⚡"
+            "en": "word",
+            "pt": "palavra",
+            "pos": "noun",
+            "field": "speech",
+            "tier": "core",
+            "part": 2,
+            "icon": "🔤",
+            "example": 10
+          },
+          {
+            "en": "to catch",
+            "pt": "pegar",
+            "ptAlt": [
+              "pescar",
+              "apanhar"
+            ],
+            "pos": "verb",
+            "field": "actions",
+            "tier": "core",
+            "part": 2,
+            "icon": "🤏",
+            "example": 7
+          },
+          {
+            "en": "We worked all night",
+            "pt": "Trabalhamos a noite toda",
+            "ptAlt": [
+              "Nós trabalhamos a noite inteira",
+              "Trabalhamos a noite inteira"
+            ],
+            "pos": "chunk",
+            "field": "speech",
+            "tier": "core",
+            "part": 2,
+            "icon": "🕛",
+            "iconic": true,
+            "example": 7
           }
         ],
         "sentences": [
           {
-            "en": "Jesus walked by the sea of Galilee",
-            "pt": "Jesus andava junto ao mar da Galileia"
+            "en": "Jesus walked by the Sea of Galilee",
+            "pt": "Jesus andava à beira do mar da Galileia",
+            "altPt": [
+              "Jesus andava junto ao mar da Galileia"
+            ]
           },
           {
-            "en": "Peter was a fisherman",
-            "pt": "Pedro era um pescador"
+            "en": "Who did he see? Two fishermen casting a net",
+            "pt": "Quem ele viu? Dois pescadores lançando uma rede"
           },
           {
-            "en": "Jesus called four fishermen to be his disciples",
-            "pt": "Jesus chamou quatro pescadores para serem seus discípulos"
+            "en": "My brother Andrew and I were fishermen",
+            "pt": "Meu irmão André e eu éramos pescadores"
           },
           {
-            "en": "Simon and Andrew were casting a net into the sea",
-            "pt": "Simão e André lançavam a rede ao mar"
-          },
-          {
-            "en": "Follow me",
-            "pt": "Vinde após mim"
-          },
-          {
-            "en": "I will make you fishers of men",
-            "pt": "Eu vos farei pescadores de homens"
-          },
-          {
-            "en": "They left their nets and followed him",
-            "pt": "Eles deixaram as redes e o seguiram"
-          },
-          {
-            "en": "James and John were in a boat with Zebedee",
+            "en": "Follow me, and I will make you fishers of men",
+            "pt": "Sigam-me, e eu farei de vocês pescadores de homens",
             "alt": [
-              "James and John were in a ship with Zebedee"
+              "Come after me, and I will make you fishers for men"
             ],
-            "pt": "Tiago e João estavam num barco com Zebedeu"
+            "altPt": [
+              "Vinde após mim, e eu vos farei pescadores de homens",
+              "Venham comigo, e eu farei de vocês pescadores de homens"
+            ]
           },
           {
-            "en": "Jesus saw them mending their nets and called them",
-            "pt": "Jesus os viu consertando as redes e chamou-os"
+            "en": "We left our nets and followed him immediately",
+            "pt": "Nós deixamos as redes e o seguimos imediatamente",
+            "altPt": [
+              "Deixamos as redes e seguimos Jesus na hora",
+              "Nós deixamos as nossas redes e o seguimos na hora"
+            ]
           },
           {
-            "en": "They immediately left the boat and their father",
+            "en": "James and John also left their boat and their father",
+            "pt": "Tiago e João também deixaram o barco e o pai deles",
+            "altPt": [
+              "Tiago e João também deixaram o barco e o seu pai"
+            ]
+          },
+          {
+            "en": "We worked all night and did not catch any fish",
+            "pt": "Trabalhamos a noite toda e não pegamos nenhum peixe",
+            "altPt": [
+              "Nós trabalhamos a noite inteira e não pescamos nada",
+              "Trabalhamos a noite toda e não pescamos nenhum peixe"
+            ]
+          },
+          {
+            "en": "Then Jesus taught the word of God from my boat",
+            "pt": "Depois Jesus ensinou a palavra de Deus do meu barco"
+          },
+          {
+            "en": "He said, \"Let down your nets for a catch\"",
+            "pt": "Ele disse: \"Lancem as redes para pescar\"",
+            "altPt": [
+              "Ele disse: \"Lançai as vossas redes para pescar\"",
+              "Ele disse: \"Soltem as redes para a pesca\""
+            ]
+          },
+          {
+            "en": "At your word I will let down the net",
+            "pt": "Pela sua palavra eu vou lançar a rede",
+            "altPt": [
+              "Sobre a tua palavra lançarei a rede",
+              "Pela sua palavra lançarei a rede"
+            ]
+          },
+          {
+            "en": "Did we catch fish? Yes, both boats were full",
+            "pt": "Nós pegamos peixes? Sim, os dois barcos ficaram cheios",
+            "altPt": [
+              "Pescamos alguma coisa? Sim, os dois barcos ficaram cheios"
+            ]
+          },
+          {
+            "en": "Don't be afraid. From now on you will catch people",
+            "pt": "Não tenha medo. De agora em diante você vai pescar pessoas",
             "alt": [
-              "They immediately left the ship and their father"
+              "Do not be afraid. From now on you will catch people"
             ],
-            "pt": "Eles deixaram imediatamente o barco e seu pai"
+            "altPt": [
+              "Não temas; de agora em diante serás pescador de homens",
+              "Não tenha medo. De agora em diante você vai pescar gente"
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "order": 1,
+            "en": "Jesus walked by the Sea of Galilee",
+            "pt": "Jesus andava à beira do mar da Galileia",
+            "altPt": [
+              "Jesus andava junto ao mar da Galileia"
+            ],
+            "kind": "statement",
+            "fact": true
           },
           {
-            "en": "The disciples followed Jesus",
-            "pt": "Os discípulos seguiram Jesus"
+            "order": 2,
+            "en": "Who did he see? Two fishermen casting a net",
+            "pt": "Quem ele viu? Dois pescadores lançando uma rede",
+            "kind": "question",
+            "fact": true
           },
           {
-            "en": "Jesus went about all Galilee, teaching and healing",
-            "pt": "Jesus percorria toda a Galileia, ensinando e curando"
+            "order": 3,
+            "en": "My brother Andrew and I were fishermen",
+            "pt": "Meu irmão André e eu éramos pescadores",
+            "kind": "first-person",
+            "fact": true,
+            "speaker": "pedro"
+          },
+          {
+            "order": 4,
+            "en": "Follow me, and I will make you fishers of men",
+            "pt": "Sigam-me, e eu farei de vocês pescadores de homens",
+            "alt": [
+              "Come after me, and I will make you fishers for men"
+            ],
+            "altPt": [
+              "Vinde após mim, e eu vos farei pescadores de homens",
+              "Venham comigo, e eu farei de vocês pescadores de homens"
+            ],
+            "kind": "quote",
+            "fact": true,
+            "iconic": true,
+            "speaker": "jesus",
+            "gap": {
+              "word": "will",
+              "kind": "grammar",
+              "options": [
+                "will",
+                "can",
+                "must"
+              ]
+            },
+            "grammar": "imperative-will"
+          },
+          {
+            "order": 5,
+            "en": "We left our nets and followed him immediately",
+            "pt": "Nós deixamos as redes e o seguimos imediatamente",
+            "altPt": [
+              "Deixamos as redes e seguimos Jesus na hora",
+              "Nós deixamos as nossas redes e o seguimos na hora"
+            ],
+            "kind": "first-person",
+            "fact": true,
+            "speaker": "pedro"
+          },
+          {
+            "order": 6,
+            "en": "James and John also left their boat and their father",
+            "pt": "Tiago e João também deixaram o barco e o pai deles",
+            "altPt": [
+              "Tiago e João também deixaram o barco e o seu pai"
+            ],
+            "kind": "statement",
+            "fact": true
+          },
+          {
+            "order": 7,
+            "en": "We worked all night and did not catch any fish",
+            "pt": "Trabalhamos a noite toda e não pegamos nenhum peixe",
+            "altPt": [
+              "Nós trabalhamos a noite inteira e não pescamos nada",
+              "Trabalhamos a noite toda e não pescamos nenhum peixe"
+            ],
+            "kind": "negative",
+            "fact": true,
+            "iconic": true,
+            "speaker": "pedro",
+            "gap": {
+              "word": "all",
+              "kind": "grammar",
+              "options": [
+                "all",
+                "only",
+                "also"
+              ]
+            },
+            "grammar": "time-expressions"
+          },
+          {
+            "order": 8,
+            "en": "Then Jesus taught the word of God from my boat",
+            "pt": "Depois Jesus ensinou a palavra de Deus do meu barco",
+            "kind": "statement",
+            "fact": true,
+            "speaker": "pedro"
+          },
+          {
+            "order": 9,
+            "en": "He said, \"Let down your nets for a catch\"",
+            "pt": "Ele disse: \"Lancem as redes para pescar\"",
+            "altPt": [
+              "Ele disse: \"Lançai as vossas redes para pescar\"",
+              "Ele disse: \"Soltem as redes para a pesca\""
+            ],
+            "kind": "quote",
+            "fact": true,
+            "speaker": "jesus"
+          },
+          {
+            "order": 10,
+            "en": "At your word I will let down the net",
+            "pt": "Pela sua palavra eu vou lançar a rede",
+            "altPt": [
+              "Sobre a tua palavra lançarei a rede",
+              "Pela sua palavra lançarei a rede"
+            ],
+            "kind": "first-person",
+            "fact": true,
+            "iconic": true,
+            "speaker": "pedro"
+          },
+          {
+            "order": 11,
+            "en": "Did we catch fish? Yes, both boats were full",
+            "pt": "Nós pegamos peixes? Sim, os dois barcos ficaram cheios",
+            "altPt": [
+              "Pescamos alguma coisa? Sim, os dois barcos ficaram cheios"
+            ],
+            "kind": "question",
+            "fact": true,
+            "speaker": "pedro"
+          },
+          {
+            "order": 12,
+            "en": "Don't be afraid. From now on you will catch people",
+            "pt": "Não tenha medo. De agora em diante você vai pescar pessoas",
+            "alt": [
+              "Do not be afraid. From now on you will catch people"
+            ],
+            "altPt": [
+              "Não temas; de agora em diante serás pescador de homens",
+              "Não tenha medo. De agora em diante você vai pescar gente"
+            ],
+            "kind": "quote",
+            "fact": true,
+            "iconic": true,
+            "speaker": "jesus"
+          }
+        ],
+        "contrast": [
+          {
+            "a": "We worked all night and did not catch any fish",
+            "b": "We worked all night and caught many fish",
+            "note": "did not catch = negativa no passado; caught = afirmativa no passado (a expressão de tempo não muda, Dica 2)"
+          },
+          {
+            "a": "Follow me, and I will make you fishers of men",
+            "b": "Come with me, and I will make you fishers of men",
+            "note": "Follow me / Come with me: dois imperativos com o mesmo convite (Dica 1)"
           }
         ],
         "verse": {
           "text": "Follow me, and I will make you fishers of men.",
-          "pt": "Vinde após mim, e eu vos farei pescadores de homens.",
+          "classic": "Follow me, and I will make you fishers of men.",
+          "pt": "Sigam-me, e eu farei de vocês pescadores de homens.",
+          "classicPt": "Vinde após mim, e eu vos farei pescadores de homens.",
           "ref": "Mateus 4:19",
           "blank": "Follow",
           "options": [
             "Follow",
             "Leave",
-            "Send",
-            "Build"
+            "Call",
+            "Send"
+          ],
+          "blanks": [
+            {
+              "word": "Follow",
+              "options": [
+                "Follow",
+                "Leave",
+                "Call",
+                "Send"
+              ]
+            },
+            {
+              "word": "fishers",
+              "options": [
+                "fishers",
+                "friends",
+                "servants",
+                "brothers"
+              ]
+            },
+            {
+              "word": "men",
+              "options": [
+                "men",
+                "fish",
+                "boats",
+                "nets"
+              ]
+            }
           ]
         },
         "reading": {
-          "text": "Jesus walked by the sea of Galilee. He saw Simon, called Peter, and Andrew his brother. Then he saw James and John in a boat with their father Zebedee. He called them, and they followed him.",
-          "pt": "Jesus andava junto ao mar da Galileia. Viu Simão, chamado Pedro, e André, seu irmão. Depois viu Tiago e João num barco com seu pai, Zebedeu. Ele os chamou, e eles o seguiram.",
-          "q": "Who was in the boat with James and John?",
+          "text": "Jesus walked by the Sea of Galilee and saw two fishermen, Simon and Andrew. He said, \"Follow me, and I will make you fishers of men.\" They left their nets and followed him. Later, Simon worked all night and caught nothing, but at the word of Jesus he let down the net again. He caught so many fish that two boats were full.",
+          "pt": "Jesus andava à beira do mar da Galileia e viu dois pescadores, Simão e André. Ele disse: \"Sigam-me, e eu farei de vocês pescadores de homens.\" Eles deixaram as redes e o seguiram. Mais tarde, Simão trabalhou a noite toda e não pegou nada, mas pela palavra de Jesus ele lançou a rede de novo. Ele pegou tantos peixes que dois barcos ficaram cheios.",
+          "q": "What did Simon and Andrew do when Jesus called them?",
           "options": [
-            "Zebedee, their father",
-            "Peter and Andrew",
-            "Their mother"
+            "They stopped fishing and went with him",
+            "They finished their work and went home",
+            "They asked him to get into their boat"
           ],
-          "answer": "Zebedee, their father"
+          "answer": "They stopped fishing and went with him",
+          "questions": [
+            {
+              "kind": "literal",
+              "q": "What did Simon and Andrew do when Jesus called them?",
+              "qPt": "O que Simão e André fizeram quando Jesus os chamou?",
+              "options": [
+                "They stopped fishing and went with him",
+                "They finished their work and went home",
+                "They asked him to get into their boat"
+              ],
+              "answer": "They stopped fishing and went with him"
+            },
+            {
+              "kind": "inference",
+              "q": "Why did Simon let down the net again?",
+              "qPt": "Por que Simão lançou a rede de novo?",
+              "options": [
+                "Because he trusted what Jesus said",
+                "Because he saw many fish in the water",
+                "Because the night was over and it was day"
+              ],
+              "answer": "Because he trusted what Jesus said",
+              "explain": "Simão disse que tinham trabalhado a noite toda sem pegar nada, mas que lançaria a rede pela palavra de Jesus (Lucas 5:5)."
+            }
+          ]
         },
         "dialogue": {
-          "line": "Peter, leave your nets and follow me.",
-          "pt": "Pedro, deixe as redes e siga-me.",
+          "line": "Simon, follow me, and I will make you fishers of men.",
+          "pt": "Simão, siga-me, e eu farei de vocês pescadores de homens.",
           "options": [
-            "Yes, Lord! I will follow you.",
-            "No, I must mend my net first.",
-            "The lions are hungry."
+            "Yes, Lord. I will leave my net and follow you.",
+            "Yes, Lord. I will catch more fish for you.",
+            "Not now, Lord. I will finish my work first."
           ],
-          "answer": "Yes, Lord! I will follow you.",
-          "answerPt": "Sim, Senhor! Eu te seguirei."
+          "answer": "Yes, Lord. I will leave my net and follow you.",
+          "answerPt": "Sim, Senhor. Vou deixar a minha rede e seguir você."
+        },
+        "conversation": {
+          "with": "jesus",
+          "turns": [
+            {
+              "who": "jesus",
+              "en": "Simon, follow me, and I will make you fishers of men.",
+              "pt": "Simão, siga-me, e eu farei de vocês pescadores de homens.",
+              "mood": "calmo",
+              "fact": true,
+              "ref": "Mateus 4:19"
+            },
+            {
+              "who": "you",
+              "options": [
+                "Yes, Lord. I will leave my net and follow you.",
+                "Yes, Lord. I will catch more fish for you.",
+                "Not now, Lord. I will finish my work first."
+              ],
+              "answer": "Yes, Lord. I will leave my net and follow you.",
+              "pt": "Sim, Senhor. Vou deixar a minha rede e seguir você.",
+              "intent": "Aceite o convite e diga o que vai deixar"
+            },
+            {
+              "who": "jesus",
+              "en": "Let down your nets for a catch.",
+              "pt": "Lancem as redes para pescar.",
+              "mood": "calmo",
+              "fact": true,
+              "ref": "Lucas 5:4"
+            },
+            {
+              "who": "you",
+              "options": [
+                "We worked all night and caught nothing. But at your word, I will.",
+                "We worked all night and caught many fish. The boats are full.",
+                "We worked all night, Master. Now we need to sleep."
+              ],
+              "answer": "We worked all night and caught nothing. But at your word, I will.",
+              "pt": "Trabalhamos a noite toda e não pegamos nada. Mas pela sua palavra, eu vou lançar.",
+              "intent": "Conte como foi a noite e obedeça mesmo assim",
+              "speak": true
+            }
+          ]
         },
         "quiz": {
-          "q": "What were Peter and Andrew doing when Jesus saw them?",
+          "q": "Why did Simon let down the net again?",
           "options": [
-            "Casting a net into the sea",
-            "Building a boat",
-            "Selling bread"
+            "Because he trusted what Jesus said",
+            "Because he saw many fish in the water",
+            "Because the night was over and it was day"
           ],
-          "answer": "Casting a net into the sea",
-          "explain": "Simão e André lançavam as redes ao mar, porque eram pescadores (Mateus 4:18)."
-        }
+          "answer": "Because he trusted what Jesus said",
+          "explain": "Simão disse que tinham trabalhado a noite toda sem pegar nada, mas que lançaria a rede pela palavra de Jesus (Lucas 5:5)."
+        },
+        "fact": {
+          "pt": "Foi Jesus quem deu a Simão o nome Pedro, que quer dizer \"pedra\" (João 1:42). Na pesca que Lucas conta, a rede começou a se romper e os dois barcos ficaram tão cheios que começaram a afundar (Lucas 5:6-7).",
+          "ref": "Lucas 5:6-7"
+        },
+        "v": 2
       },
       {
         "id": "u8l2",
         "title": "O Pai Nosso",
+        "ref": "Mateus 6:5-15; Lucas 11:1",
+        "level": "A2.1",
+        "narrator": "pedro",
+        "guests": [
+          "jesus"
+        ],
+        "names": [
+          {
+            "en": "Jesus",
+            "pt": "Jesus"
+          },
+          {
+            "en": "Peter",
+            "pt": "Pedro",
+            "note": "narra a unidade; aqui fala por todos os discípulos"
+          },
+          {
+            "en": "Our Father",
+            "pt": "Pai nosso",
+            "note": "Deus, o Pai que está no céu"
+          },
+          {
+            "en": "God",
+            "pt": "Deus"
+          },
+          {
+            "en": "the Lord",
+            "pt": "o Senhor"
+          }
+        ],
+        "hints": {
+          "heaven": "céu",
+          "secret": "segredo",
+          "empty": "vazias, vazio",
+          "lead": "levar, conduzir",
+          "temptation": "tentação",
+          "deliver": "livrar"
+        },
+        "tips": [
+          {
+            "part": 1,
+            "id": "possessive-our-your",
+            "grammar": "possessive-our-your",
+            "title": "our e your: nosso e seu",
+            "body": "Os possessivos vêm antes do substantivo e não mudam no plural: our Father (nosso Pai), our debts (nossas dívidas), your room (seu quarto), your Father (o Pai de vocês). Repare que your serve para você e para vocês.",
+            "examples": [
+              {
+                "en": "Our Father in heaven",
+                "pt": "Pai nosso que está no céu"
+              },
+              {
+                "en": "Go into your room",
+                "pt": "Entre no seu quarto"
+              }
+            ],
+            "contrast": {
+              "a": "Our Father knows what we need",
+              "b": "Your Father knows what you need",
+              "note": "our/we (nós) e your/you (você, vocês) mudam juntos"
+            }
+          },
+          {
+            "part": 2,
+            "id": "object-pronoun-request",
+            "grammar": "object-pronoun-request",
+            "title": "Give us, forgive us: pedidos com pronome objeto",
+            "body": "Depois do verbo, quem recebe a ação aparece como pronome objeto: me, you, him, her, us, them. Nos pedidos da oração, o verbo vem primeiro e o pronome logo depois: Give us (Dê-nos), Forgive us (Perdoe-nos), Deliver us (Livre-nos). Em português, o pronome pode vir antes ou depois do verbo; em inglês, sempre depois.",
+            "examples": [
+              {
+                "en": "Give us today our daily bread",
+                "pt": "Dê-nos hoje o nosso pão de cada dia"
+              },
+              {
+                "en": "Forgive us our debts",
+                "pt": "Perdoe-nos as nossas dívidas"
+              }
+            ],
+            "contrast": {
+              "a": "Forgive us",
+              "b": "Forgive them",
+              "note": "us = nós (quem pede); them = eles (os outros)"
+            }
+          }
+        ],
         "vocab": [
           {
-            "en": "father",
-            "pt": "pai",
-            "icon": "👨"
+            "en": "room",
+            "pt": "quarto",
+            "ptAlt": [
+              "sala",
+              "cômodo"
+            ],
+            "pos": "noun",
+            "field": "places",
+            "tier": "core",
+            "part": 1,
+            "icon": "🛋️",
+            "example": 3
+          },
+          {
+            "en": "street",
+            "pt": "rua",
+            "pos": "noun",
+            "field": "places",
+            "tier": "core",
+            "part": 1,
+            "icon": "🛣️",
+            "example": 2
+          },
+          {
+            "en": "to need",
+            "pt": "precisar",
+            "pos": "verb",
+            "field": "mind",
+            "tier": "core",
+            "part": 1,
+            "icon": "🥺",
+            "example": 4
+          },
+          {
+            "en": "to teach",
+            "pt": "ensinar",
+            "pos": "verb",
+            "field": "mind",
+            "tier": "core",
+            "part": 1,
+            "icon": "👨‍🏫",
+            "example": 1
+          },
+          {
+            "en": "Lord, teach us to pray",
+            "pt": "Senhor, ensine-nos a orar",
+            "ptAlt": [
+              "Senhor, nos ensine a orar",
+              "Senhor, ensina-nos a orar"
+            ],
+            "pos": "chunk",
+            "field": "speech",
+            "tier": "core",
+            "part": 1,
+            "icon": "📖",
+            "iconic": true,
+            "example": 1
+          },
+          {
+            "en": "daily",
+            "pt": "diário",
+            "ptAlt": [
+              "de cada dia"
+            ],
+            "pos": "adj",
+            "field": "time",
+            "tier": "core",
+            "part": 2,
+            "icon": "🗓️",
+            "example": 8
+          },
+          {
+            "en": "debt",
+            "pt": "dívida",
+            "pos": "noun",
+            "field": "work",
+            "tier": "core",
+            "part": 2,
+            "icon": "💳",
+            "example": 10
+          },
+          {
+            "en": "debtor",
+            "pt": "devedor",
+            "pos": "noun",
+            "field": "people",
+            "tier": "bible",
+            "part": 2,
+            "icon": "🧾",
+            "example": 10,
+            "note": "quem deve algo a alguém"
           },
           {
             "en": "bread",
             "pt": "pão",
-            "icon": "🍞"
+            "pos": "noun",
+            "field": "food",
+            "tier": "core",
+            "part": 2,
+            "icon": "🍞",
+            "example": 8
           },
           {
-            "en": "to forgive",
-            "pt": "perdoar",
-            "icon": "🤲"
-          },
-          {
-            "en": "daily",
-            "pt": "diário (de cada dia)",
-            "icon": "🗓️"
-          },
-          {
-            "en": "debts",
-            "pt": "dívidas",
-            "icon": "💸"
-          },
-          {
-            "en": "will",
-            "pt": "vontade",
-            "icon": "📜"
-          },
-          {
-            "en": "hallowed",
-            "pt": "santificado",
-            "icon": "✨"
-          },
-          {
-            "en": "temptation",
-            "pt": "tentação",
-            "icon": "🍬"
-          },
-          {
-            "en": "kingdom",
-            "pt": "reino",
-            "icon": "👑"
-          },
-          {
-            "en": "prayer",
-            "pt": "oração",
-            "icon": "🙏"
+            "en": "Give us today our daily bread",
+            "pt": "Dê-nos hoje o nosso pão de cada dia",
+            "ptAlt": [
+              "O pão nosso de cada dia nos dá hoje",
+              "Nos dê hoje o nosso pão de cada dia"
+            ],
+            "pos": "chunk",
+            "field": "speech",
+            "tier": "core",
+            "part": 2,
+            "icon": "🥐",
+            "iconic": true,
+            "example": 8
           }
         ],
         "sentences": [
           {
-            "en": "Jesus taught his disciples to pray",
-            "pt": "Jesus ensinou os seus discípulos a orar"
-          },
-          {
-            "en": "When you pray, go into your room and shut the door",
-            "alt": [
-              "When you pray, enter into your room and shut the door"
-            ],
-            "pt": "Quando orares, entra no teu aposento e fecha a tua porta"
-          },
-          {
-            "en": "Our Father in heaven",
-            "pt": "Pai nosso que estás nos céus"
-          },
-          {
-            "en": "Hallowed be thy name",
-            "alt": [
-              "Hallowed be your name"
-            ],
-            "pt": "Santificado seja o teu nome"
-          },
-          {
-            "en": "Thy kingdom come",
-            "pt": "Venha o teu Reino",
-            "alt": [
-              "Your kingdom come"
+            "en": "We asked Jesus, \"Lord, teach us to pray\"",
+            "pt": "Nós pedimos a Jesus: \"Senhor, ensine-nos a orar\"",
+            "altPt": [
+              "Pedimos a Jesus: \"Senhor, ensina-nos a orar\"",
+              "Nós pedimos a Jesus: \"Senhor, nos ensine a orar\""
             ]
           },
           {
-            "en": "Thy will be done",
+            "en": "He taught us not to pray in the street",
+            "pt": "Ele nos ensinou a não orar na rua",
+            "altPt": [
+              "Ele nos ensinou a não orar nas ruas"
+            ]
+          },
+          {
+            "en": "Go into your room and close the door",
+            "pt": "Entre no seu quarto e feche a porta",
+            "altPt": [
+              "Entra no teu aposento e fecha a tua porta",
+              "Entre no seu quarto e feche a sua porta"
+            ]
+          },
+          {
+            "en": "Your Father sees in secret and knows what you need",
+            "pt": "O seu Pai vê em segredo e sabe do que você precisa",
+            "altPt": [
+              "O Pai de vocês vê em segredo e sabe do que vocês precisam"
+            ]
+          },
+          {
+            "en": "Do we pray in the street? No, in our room",
+            "pt": "Nós oramos na rua? Não, no nosso quarto"
+          },
+          {
+            "en": "Who knows what we need? Our Father in heaven",
+            "pt": "Quem sabe do que precisamos? O nosso Pai que está no céu",
+            "altPt": [
+              "Quem sabe do que nós precisamos? Nosso Pai no céu"
+            ]
+          },
+          {
+            "en": "Let your Kingdom come, let your will be done",
+            "pt": "Venha o seu Reino, seja feita a sua vontade",
             "alt": [
-              "Your will be done"
+              "Your Kingdom come, your will be done"
             ],
-            "pt": "Seja feita a tua vontade"
+            "altPt": [
+              "Venha o teu Reino, seja feita a tua vontade",
+              "Venha o seu Reino, seja feita a sua vontade"
+            ]
           },
           {
-            "en": "Give us this day our daily bread",
-            "pt": "O pão nosso de cada dia nos dá hoje"
-          },
-          {
-            "en": "Forgive us our debts",
-            "pt": "Perdoa-nos as nossas dívidas"
-          },
-          {
-            "en": "As we forgive our debtors",
-            "pt": "Assim como nós perdoamos aos nossos devedores"
-          },
-          {
-            "en": "Lead us not into temptation, but deliver us from evil",
+            "en": "Give us today our daily bread",
+            "pt": "Dê-nos hoje o nosso pão de cada dia",
             "alt": [
-              "Do not lead us into temptation, but deliver us from evil"
+              "Give us this day our daily bread"
             ],
-            "pt": "Não nos induzas à tentação, mas livra-nos do mal"
+            "altPt": [
+              "O pão nosso de cada dia nos dá hoje",
+              "Nos dê hoje o nosso pão de cada dia"
+            ]
           },
           {
-            "en": "For thine is the kingdom, the power, and the glory",
+            "en": "What do we ask for? Our daily bread",
+            "pt": "O que nós pedimos? O nosso pão de cada dia"
+          },
+          {
+            "en": "Forgive us our debts, as we forgive our debtors",
+            "pt": "Perdoe-nos as nossas dívidas, assim como perdoamos os nossos devedores",
             "alt": [
-              "For yours is the kingdom, the power, and the glory"
+              "Forgive us our debts, as we also forgive our debtors"
             ],
-            "pt": "Porque teu é o Reino, e o poder, e a glória"
+            "altPt": [
+              "Perdoa-nos as nossas dívidas, assim como nós perdoamos aos nossos devedores",
+              "Perdoe as nossas dívidas, assim como nós perdoamos os nossos devedores"
+            ]
           },
           {
-            "en": "If you forgive men, your Father will also forgive you",
-            "pt": "Se perdoardes aos homens, vosso Pai também vos perdoará"
+            "en": "Do not lead us into temptation, but deliver us from evil",
+            "pt": "Não nos deixe cair em tentação, mas livre-nos do mal",
+            "alt": [
+              "Bring us not into temptation, but deliver us from the evil one",
+              "Lead us not into temptation, but deliver us from evil"
+            ],
+            "altPt": [
+              "Não nos induzas à tentação, mas livra-nos do mal",
+              "Não nos leve à tentação, mas livre-nos do mal"
+            ]
+          },
+          {
+            "en": "Our Father forgives our debts if we forgive our debtors",
+            "pt": "O nosso Pai perdoa as nossas dívidas se perdoamos os nossos devedores",
+            "altPt": [
+              "Nosso Pai perdoa as nossas dívidas se nós perdoamos os nossos devedores"
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "order": 1,
+            "en": "We asked Jesus, \"Lord, teach us to pray\"",
+            "pt": "Nós pedimos a Jesus: \"Senhor, ensine-nos a orar\"",
+            "altPt": [
+              "Pedimos a Jesus: \"Senhor, ensina-nos a orar\"",
+              "Nós pedimos a Jesus: \"Senhor, nos ensine a orar\""
+            ],
+            "kind": "first-person",
+            "fact": true,
+            "iconic": true,
+            "speaker": "pedro"
+          },
+          {
+            "order": 2,
+            "en": "He taught us not to pray in the street",
+            "pt": "Ele nos ensinou a não orar na rua",
+            "altPt": [
+              "Ele nos ensinou a não orar nas ruas"
+            ],
+            "kind": "negative",
+            "fact": true,
+            "speaker": "pedro"
+          },
+          {
+            "order": 3,
+            "en": "Go into your room and close the door",
+            "pt": "Entre no seu quarto e feche a porta",
+            "altPt": [
+              "Entra no teu aposento e fecha a tua porta",
+              "Entre no seu quarto e feche a sua porta"
+            ],
+            "kind": "quote",
+            "fact": true,
+            "speaker": "jesus",
+            "gap": {
+              "word": "room",
+              "kind": "lexical",
+              "options": [
+                "room",
+                "boat",
+                "city"
+              ]
+            }
+          },
+          {
+            "order": 4,
+            "en": "Your Father sees in secret and knows what you need",
+            "pt": "O seu Pai vê em segredo e sabe do que você precisa",
+            "altPt": [
+              "O Pai de vocês vê em segredo e sabe do que vocês precisam"
+            ],
+            "kind": "quote",
+            "fact": true,
+            "speaker": "jesus",
+            "gap": {
+              "word": "Your",
+              "kind": "grammar",
+              "options": [
+                "Your",
+                "Our",
+                "Their"
+              ]
+            },
+            "grammar": "possessive-our-your"
+          },
+          {
+            "order": 5,
+            "en": "Do we pray in the street? No, in our room",
+            "pt": "Nós oramos na rua? Não, no nosso quarto",
+            "kind": "question",
+            "fact": true,
+            "speaker": "pedro"
+          },
+          {
+            "order": 6,
+            "en": "Who knows what we need? Our Father in heaven",
+            "pt": "Quem sabe do que precisamos? O nosso Pai que está no céu",
+            "altPt": [
+              "Quem sabe do que nós precisamos? Nosso Pai no céu"
+            ],
+            "kind": "question",
+            "fact": true,
+            "speaker": "pedro",
+            "gap": {
+              "word": "Our",
+              "kind": "grammar",
+              "options": [
+                "Our",
+                "Your",
+                "Their"
+              ]
+            },
+            "grammar": "possessive-our-your"
+          },
+          {
+            "order": 7,
+            "en": "Let your Kingdom come, let your will be done",
+            "pt": "Venha o seu Reino, seja feita a sua vontade",
+            "altPt": [
+              "Venha o teu Reino, seja feita a tua vontade",
+              "Venha o seu Reino, seja feita a sua vontade"
+            ],
+            "alt": [
+              "Your Kingdom come, your will be done"
+            ],
+            "kind": "quote",
+            "fact": true,
+            "iconic": true,
+            "speaker": "jesus"
+          },
+          {
+            "order": 8,
+            "en": "Give us today our daily bread",
+            "pt": "Dê-nos hoje o nosso pão de cada dia",
+            "altPt": [
+              "O pão nosso de cada dia nos dá hoje",
+              "Nos dê hoje o nosso pão de cada dia"
+            ],
+            "alt": [
+              "Give us this day our daily bread"
+            ],
+            "kind": "quote",
+            "fact": true,
+            "iconic": true,
+            "gap": {
+              "word": "us",
+              "kind": "grammar",
+              "options": [
+                "us",
+                "me",
+                "them"
+              ]
+            },
+            "grammar": "object-pronoun-request"
+          },
+          {
+            "order": 9,
+            "en": "What do we ask for? Our daily bread",
+            "pt": "O que nós pedimos? O nosso pão de cada dia",
+            "kind": "question",
+            "fact": true,
+            "speaker": "pedro"
+          },
+          {
+            "order": 10,
+            "en": "Forgive us our debts, as we forgive our debtors",
+            "pt": "Perdoe-nos as nossas dívidas, assim como perdoamos os nossos devedores",
+            "altPt": [
+              "Perdoa-nos as nossas dívidas, assim como nós perdoamos aos nossos devedores",
+              "Perdoe as nossas dívidas, assim como nós perdoamos os nossos devedores"
+            ],
+            "alt": [
+              "Forgive us our debts, as we also forgive our debtors"
+            ],
+            "kind": "quote",
+            "fact": true,
+            "iconic": true,
+            "gap": {
+              "word": "us",
+              "kind": "grammar",
+              "options": [
+                "us",
+                "me",
+                "him"
+              ]
+            },
+            "grammar": "object-pronoun-request"
+          },
+          {
+            "order": 11,
+            "en": "Do not lead us into temptation, but deliver us from evil",
+            "pt": "Não nos deixe cair em tentação, mas livre-nos do mal",
+            "altPt": [
+              "Não nos induzas à tentação, mas livra-nos do mal",
+              "Não nos leve à tentação, mas livre-nos do mal"
+            ],
+            "alt": [
+              "Bring us not into temptation, but deliver us from the evil one",
+              "Lead us not into temptation, but deliver us from evil"
+            ],
+            "kind": "negative",
+            "fact": true,
+            "iconic": true,
+            "prod": false
+          },
+          {
+            "order": 12,
+            "en": "Our Father forgives our debts if we forgive our debtors",
+            "pt": "O nosso Pai perdoa as nossas dívidas se perdoamos os nossos devedores",
+            "altPt": [
+              "Nosso Pai perdoa as nossas dívidas se nós perdoamos os nossos devedores"
+            ],
+            "kind": "first-person",
+            "fact": true,
+            "speaker": "pedro"
+          }
+        ],
+        "contrast": [
+          {
+            "a": "Who knows what we need? Our Father in heaven",
+            "b": "Who knows what you need? Your Father in heaven",
+            "note": "we/our (nós) viram you/your (vocês): o possessivo acompanha o pronome (Dica 1)"
+          },
+          {
+            "a": "Give us today our daily bread",
+            "b": "Give me today my daily bread",
+            "note": "us/our (nós) viram me/my (eu): o pedido muda de pessoa (Dica 2)"
           }
         ],
         "verse": {
-          "text": "Our Father which art in heaven, Hallowed be thy name.",
-          "pt": "Pai nosso que estás nos céus, santificado seja o teu nome.",
+          "text": "Our Father in heaven, may your name be kept holy.",
+          "classic": "Our Father which art in heaven, Hallowed be thy name.",
+          "pt": "Pai nosso, que está no céu, santificado seja o seu nome.",
+          "classicPt": "Pai nosso, que estás nos céus, santificado seja o teu nome.",
           "ref": "Mateus 6:9",
           "blank": "Father",
           "options": [
             "Father",
             "Brother",
             "King",
-            "Servant"
+            "Friend"
+          ],
+          "blanks": [
+            {
+              "word": "Father",
+              "options": [
+                "Father",
+                "Brother",
+                "King",
+                "Friend"
+              ]
+            },
+            {
+              "word": "holy",
+              "options": [
+                "holy",
+                "good",
+                "great",
+                "true"
+              ]
+            },
+            {
+              "word": "name",
+              "options": [
+                "name",
+                "word",
+                "house",
+                "love"
+              ]
+            }
           ]
         },
         "reading": {
-          "text": "Jesus said: When you pray, do not use many vain words. Your Father knows what you need before you ask him. Then he taught them: Our Father which art in heaven, hallowed be thy name.",
-          "pt": "Jesus disse: Quando orardes, não useis de vãs repetições. Vosso Pai sabe o que vos é necessário antes de vós lho pedirdes. Depois ele os ensinou: Pai nosso, que estás nos céus, santificado seja o teu nome.",
-          "q": "What does the Father know before we ask him?",
+          "text": "Jesus taught us how to pray. He said, \"Go into your room, close the door, and pray to your Father in secret. Your Father knows what you need before you ask him.\" Then he taught us the Lord's Prayer: \"Our Father in heaven, give us today our daily bread, and forgive us our debts.\"",
+          "pt": "Jesus nos ensinou a orar. Ele disse: \"Entre no seu quarto, feche a porta e ore ao seu Pai em segredo. O seu Pai sabe do que você precisa antes de você pedir.\" Depois ele nos ensinou a oração do Pai Nosso: \"Pai nosso que está no céu, dê-nos hoje o nosso pão de cada dia, e perdoe-nos as nossas dívidas.\"",
+          "q": "Where did Jesus say we should pray?",
           "options": [
-            "What we need",
-            "The name of the king",
-            "How many fish we have"
+            "Alone, in a closed room",
+            "In the city, in front of many people",
+            "By the sea, in a boat"
           ],
-          "answer": "What we need"
+          "answer": "Alone, in a closed room",
+          "questions": [
+            {
+              "kind": "literal",
+              "q": "Where did Jesus say we should pray?",
+              "qPt": "Onde Jesus disse que devemos orar?",
+              "options": [
+                "Alone, in a closed room",
+                "In the city, in front of many people",
+                "By the sea, in a boat"
+              ],
+              "answer": "Alone, in a closed room"
+            },
+            {
+              "kind": "inference",
+              "q": "Why do we not need many words when we pray?",
+              "qPt": "Por que não precisamos de muitas palavras quando oramos?",
+              "options": [
+                "Because our Father already knows what we need",
+                "Because we pray in secret, and nobody hears us",
+                "Because the Lord's Prayer is very short"
+              ],
+              "answer": "Because our Father already knows what we need",
+              "explain": "Jesus mandou não usar repetições vazias, porque o Pai sabe do que precisamos antes de pedirmos (Mateus 6:7-8)."
+            }
+          ]
         },
         "dialogue": {
-          "line": "Lord, teach us to pray.",
-          "pt": "Senhor, ensina-nos a orar.",
+          "line": "Peter, do you know how to pray?",
+          "pt": "Pedro, você sabe orar?",
           "options": [
-            "Our Father which art in heaven...",
-            "Give me five loaves and two fishes.",
-            "Follow me to Galilee."
+            "Lord, teach us to pray.",
+            "Lord, we already pray every day.",
+            "Lord, I pray with many words."
           ],
-          "answer": "Our Father which art in heaven...",
-          "answerPt": "Pai nosso que estás nos céus..."
+          "answer": "Lord, teach us to pray.",
+          "answerPt": "Senhor, ensine-nos a orar."
+        },
+        "conversation": {
+          "with": "jesus",
+          "turns": [
+            {
+              "who": "jesus",
+              "en": "Peter, do you know how to pray?",
+              "pt": "Pedro, você sabe orar?",
+              "mood": "carinhoso",
+              "fact": false
+            },
+            {
+              "who": "you",
+              "options": [
+                "Lord, teach us to pray.",
+                "Lord, we already pray every day.",
+                "Lord, I pray with many words."
+              ],
+              "answer": "Lord, teach us to pray.",
+              "pt": "Senhor, ensine-nos a orar.",
+              "intent": "Peça para aprender"
+            },
+            {
+              "who": "jesus",
+              "en": "Go into your room and pray to your Father in secret. He knows what you need.",
+              "pt": "Entre no seu quarto e ore ao seu Pai em segredo. Ele sabe do que você precisa.",
+              "mood": "calmo",
+              "fact": true,
+              "ref": "Mateus 6:6-8"
+            },
+            {
+              "who": "you",
+              "options": [
+                "Our Father in heaven, give us today our daily bread.",
+                "Our Father in heaven, give us a big boat today.",
+                "Our Father in heaven, send us many fish today."
+              ],
+              "answer": "Our Father in heaven, give us today our daily bread.",
+              "pt": "Pai nosso que está no céu, dê-nos hoje o nosso pão de cada dia.",
+              "intent": "Ore como Jesus ensinou",
+              "speak": true
+            }
+          ]
         },
         "quiz": {
-          "q": "What do we ask God to give us this day?",
+          "q": "Why do we not need many words when we pray?",
           "options": [
-            "Our daily bread",
-            "A new boat",
-            "Silver and gold"
+            "Because our Father already knows what we need",
+            "Because we pray in secret, and nobody hears us",
+            "Because the Lord's Prayer is very short"
           ],
-          "answer": "Our daily bread",
-          "explain": "O pão nosso de cada dia nos dá hoje (Mateus 6:11)."
-        }
+          "answer": "Because our Father already knows what we need",
+          "explain": "Jesus mandou não usar repetições vazias, porque o Pai sabe do que precisamos antes de pedirmos (Mateus 6:7-8)."
+        },
+        "fact": {
+          "pt": "A frase final \"Porque seu é o Reino, o poder e a glória para sempre. Amém\" (Mateus 6:13) não aparece nos manuscritos mais antigos de Mateus; por isso muitas Bíblias modernas a trazem em nota de rodapé. Lucas registra uma versão mais curta da mesma oração (Lucas 11:2-4).",
+          "ref": "Mateus 6:13"
+        },
+        "v": 2
       },
       {
         "id": "u8l3",
-        "title": "Pães e peixes",
+        "title": "Pães, peixes e o mar",
+        "ref": "Mateus 14:13-33",
+        "level": "A2.1",
+        "narrator": "pedro",
+        "guests": [
+          "jesus"
+        ],
+        "names": [
+          {
+            "en": "Jesus",
+            "pt": "Jesus"
+          },
+          {
+            "en": "Peter",
+            "pt": "Pedro",
+            "note": "narra a unidade"
+          },
+          {
+            "en": "disciples",
+            "pt": "discípulos",
+            "note": "os seguidores de Jesus"
+          },
+          {
+            "en": "the Lord",
+            "pt": "o Senhor"
+          },
+          {
+            "en": "God",
+            "pt": "Deus"
+          }
+        ],
+        "hints": {
+          "late": "tarde",
+          "left": "sobrou, sobraram",
+          "big": "grande, grandes",
+          "doubt": "duvidar, duvidou"
+        },
+        "tips": [
+          {
+            "part": 1,
+            "id": "only-howmany",
+            "grammar": "only-howmany",
+            "title": "only e how many: quantidades",
+            "body": "only = só, apenas; vem antes do verbo principal ou do número: We only have five loaves. Para perguntar a quantidade de coisas que se contam, use how many + plural: How many loaves? Para coisas que não se contam, how much: How much bread?",
+            "examples": [
+              {
+                "en": "We have five loaves",
+                "pt": "Temos cinco pães"
+              },
+              {
+                "en": "We only have five loaves",
+                "pt": "Temos só cinco pães"
+              }
+            ],
+            "contrast": {
+              "a": "How many fish?",
+              "b": "How much bread?",
+              "note": "how many para contáveis (fish, loaves, baskets); how much para incontáveis (bread, water)"
+            }
+          },
+          {
+            "part": 2,
+            "id": "past-did",
+            "grammar": "past-did",
+            "title": "Did...? perguntas no passado",
+            "body": "Para perguntar sobre o passado, use Did + sujeito + verbo básico: Did Jesus walk on the waves? A resposta curta é Yes, he did ou No, he did not. O verbo principal fica sem -ed.",
+            "examples": [
+              {
+                "en": "Jesus walked on the waves",
+                "pt": "Jesus andou sobre as ondas"
+              },
+              {
+                "en": "Did Jesus walk on the waves?",
+                "pt": "Jesus andou sobre as ondas?"
+              }
+            ],
+            "contrast": {
+              "a": "Why did you doubt?",
+              "b": "Why do you doubt?",
+              "note": "did = passado; do = presente"
+            }
+          }
+        ],
         "vocab": [
-          {
-            "en": "fish",
-            "pt": "peixe",
-            "icon": "🐟"
-          },
-          {
-            "en": "five",
-            "pt": "cinco",
-            "icon": "5️⃣"
-          },
           {
             "en": "crowd",
             "pt": "multidão",
-            "icon": "👥"
+            "pos": "noun",
+            "field": "people",
+            "tier": "core",
+            "part": 1,
+            "icon": "👭",
+            "example": 1
           },
           {
-            "en": "to bless",
-            "pt": "abençoar",
-            "icon": "🙌"
+            "en": "hungry",
+            "pt": "com fome",
+            "ptAlt": [
+              "faminto",
+              "faminta"
+            ],
+            "pos": "adj",
+            "field": "feelings",
+            "tier": "core",
+            "part": 1,
+            "icon": "🤤",
+            "example": 2
           },
           {
-            "en": "loaves",
-            "pt": "pães",
-            "icon": "🥖"
+            "en": "loaf",
+            "pt": "um pão",
+            "ptAlt": [
+              "pão",
+              "pães"
+            ],
+            "plural": "loaves",
+            "forms": [
+              "loaves"
+            ],
+            "pos": "noun",
+            "field": "food",
+            "tier": "core",
+            "part": 1,
+            "icon": "🥯",
+            "example": 3,
+            "note": "um pão inteiro; plural loaves"
           },
           {
-            "en": "basket",
-            "pt": "cesto",
-            "icon": "🧺"
+            "en": "to feed",
+            "pt": "alimentar",
+            "ptAlt": [
+              "dar de comer"
+            ],
+            "pos": "verb",
+            "field": "actions",
+            "tier": "core",
+            "part": 1,
+            "icon": "🥄",
+            "example": 5
           },
           {
-            "en": "faith",
-            "pt": "fé",
-            "icon": "🙏"
+            "en": "Bring them to me",
+            "pt": "Tragam para mim",
+            "ptAlt": [
+              "Tragam-nos a mim",
+              "Traga para mim",
+              "Tragam eles para mim"
+            ],
+            "pos": "chunk",
+            "field": "speech",
+            "tier": "core",
+            "part": 1,
+            "icon": "🥡",
+            "iconic": true,
+            "example": 4
+          },
+          {
+            "en": "wave",
+            "pt": "onda",
+            "pos": "noun",
+            "field": "nature",
+            "tier": "core",
+            "part": 2,
+            "icon": "🏄",
+            "example": 8
+          },
+          {
+            "en": "hand",
+            "pt": "mão",
+            "pos": "noun",
+            "field": "body",
+            "tier": "core",
+            "part": 2,
+            "icon": "✋",
+            "example": 11
           },
           {
             "en": "to sink",
             "pt": "afundar",
-            "icon": "⬇️"
+            "pos": "verb",
+            "field": "actions",
+            "tier": "core",
+            "part": 2,
+            "icon": "⬇️",
+            "example": 10
           },
           {
-            "en": "afraid",
-            "pt": "com medo",
-            "icon": "😨"
+            "en": "to begin",
+            "pt": "começar",
+            "pos": "verb",
+            "field": "time",
+            "tier": "core",
+            "part": 2,
+            "icon": "▶️",
+            "example": 10
           },
           {
-            "en": "to walk",
-            "pt": "andar",
-            "icon": "🚶"
+            "en": "Lord, save me!",
+            "pt": "Senhor, salve-me!",
+            "ptAlt": [
+              "Senhor, salva-me!",
+              "Senhor, me salve!"
+            ],
+            "pos": "chunk",
+            "field": "speech",
+            "tier": "core",
+            "part": 2,
+            "icon": "😱",
+            "iconic": true,
+            "example": 11
           }
         ],
         "sentences": [
@@ -12050,103 +14564,385 @@ const COURSE = [
             "pt": "Uma grande multidão seguiu Jesus"
           },
           {
-            "en": "Jesus told the disciples to feed the crowd",
-            "pt": "Jesus mandou os discípulos dar de comer à multidão"
+            "en": "It was late and the crowd was hungry",
+            "pt": "Era tarde e a multidão estava com fome"
           },
           {
-            "en": "Five loaves and two fishes",
+            "en": "We only have five loaves and two fish",
+            "pt": "Nós só temos cinco pães e dois peixes",
+            "altPt": [
+              "Temos só cinco pães e dois peixes",
+              "Não temos aqui senão cinco pães e dois peixes"
+            ]
+          },
+          {
+            "en": "Jesus said, \"Bring them to me\"",
+            "pt": "Jesus disse: \"Tragam para mim\"",
             "alt": [
-              "Five loaves and two fish"
+              "Jesus said, \"Bring them here to me\""
             ],
-            "pt": "Cinco pães e dois peixes"
+            "altPt": [
+              "Jesus disse: \"Trazei-mos aqui\"",
+              "Jesus disse: \"Tragam-nos a mim\""
+            ]
           },
           {
-            "en": "He commanded the crowd to sit down on the grass",
-            "pt": "Mandou que a multidão se assentasse sobre a erva"
+            "en": "He blessed the loaves and fed the hungry crowd",
+            "pt": "Ele abençoou os pães e alimentou a multidão faminta",
+            "altPt": [
+              "Ele abençoou os pães e deu de comer à multidão com fome"
+            ]
           },
           {
-            "en": "Jesus blessed the bread and the fish",
-            "pt": "Jesus abençoou o pão e o peixe"
+            "en": "Did he feed everyone? Yes, and there was bread left",
+            "pt": "Ele alimentou todos? Sim, e ainda sobrou pão"
           },
           {
-            "en": "About five thousand men ate and were filled",
-            "pt": "Quase cinco mil homens comeram e ficaram saciados"
+            "en": "That night we began to go across the sea",
+            "pt": "Naquela noite começamos a atravessar o mar",
+            "altPt": [
+              "Naquela noite nós começamos a cruzar o mar de barco"
+            ]
           },
           {
-            "en": "Twelve baskets were left",
-            "pt": "Sobraram doze cestos"
+            "en": "The wind was against us and the waves were big",
+            "pt": "O vento estava contra nós e as ondas eram grandes",
+            "altPt": [
+              "O vento era contrário e as ondas eram grandes"
+            ]
           },
           {
-            "en": "Jesus came to them, walking on the sea",
-            "pt": "Jesus foi ter com eles, andando por cima do mar"
+            "en": "Did Jesus walk on the waves? Yes, he did",
+            "pt": "Jesus andou sobre as ondas? Sim, andou"
           },
           {
-            "en": "Be of good cheer, it is I, be not afraid",
+            "en": "I walked on the water but began to sink",
+            "pt": "Eu andei sobre a água, mas comecei a afundar",
+            "altPt": [
+              "Andei sobre as águas, mas comecei a afundar"
+            ]
+          },
+          {
+            "en": "I cried, \"Lord, save me!\" and he took my hand",
+            "pt": "Eu gritei: \"Senhor, salve-me!\" e ele segurou a minha mão",
+            "altPt": [
+              "Eu clamei: \"Senhor, salva-me!\" e ele me segurou pela mão"
+            ]
+          },
+          {
+            "en": "His hand saved me and I did not sink",
+            "pt": "A mão dele me salvou e eu não afundei",
+            "altPt": [
+              "Ele me salvou com a mão e eu não afundei"
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "order": 1,
+            "en": "A great crowd followed Jesus",
+            "pt": "Uma grande multidão seguiu Jesus",
+            "kind": "statement",
+            "fact": true
+          },
+          {
+            "order": 2,
+            "en": "It was late and the crowd was hungry",
+            "pt": "Era tarde e a multidão estava com fome",
+            "kind": "statement",
+            "fact": true
+          },
+          {
+            "order": 3,
+            "en": "We only have five loaves and two fish",
+            "pt": "Nós só temos cinco pães e dois peixes",
+            "altPt": [
+              "Temos só cinco pães e dois peixes",
+              "Não temos aqui senão cinco pães e dois peixes"
+            ],
+            "kind": "first-person",
+            "fact": true,
+            "iconic": true,
+            "speaker": "pedro",
+            "gap": {
+              "word": "only",
+              "kind": "grammar",
+              "options": [
+                "only",
+                "also",
+                "all"
+              ]
+            },
+            "grammar": "only-howmany"
+          },
+          {
+            "order": 4,
+            "en": "Jesus said, \"Bring them to me\"",
+            "pt": "Jesus disse: \"Tragam para mim\"",
+            "altPt": [
+              "Jesus disse: \"Trazei-mos aqui\"",
+              "Jesus disse: \"Tragam-nos a mim\""
+            ],
             "alt": [
-              "Be of good cheer, it is I, do not be afraid"
+              "Jesus said, \"Bring them here to me\""
             ],
-            "pt": "Tende bom ânimo, sou eu, não temais"
+            "kind": "quote",
+            "fact": true,
+            "iconic": true,
+            "speaker": "jesus"
           },
           {
-            "en": "Peter walked on the water to go to Jesus",
-            "pt": "Pedro andou sobre as águas para ir ter com Jesus"
-          },
-          {
-            "en": "Peter began to sink and cried, Lord, save me",
-            "pt": "Pedro começou a afundar e clamou: Senhor, salva-me!"
-          },
-          {
-            "en": "O you of little faith, why did you doubt?",
-            "alt": [
-              "You of little faith, why did you doubt?"
+            "order": 5,
+            "en": "He blessed the loaves and fed the hungry crowd",
+            "pt": "Ele abençoou os pães e alimentou a multidão faminta",
+            "altPt": [
+              "Ele abençoou os pães e deu de comer à multidão com fome"
             ],
-            "pt": "Homem de pequena fé, por que duvidaste?"
+            "kind": "statement",
+            "fact": true,
+            "gap": {
+              "word": "loaves",
+              "kind": "lexical",
+              "options": [
+                "loaves",
+                "fish",
+                "crowd"
+              ]
+            }
+          },
+          {
+            "order": 6,
+            "en": "Did he feed everyone? Yes, and there was bread left",
+            "pt": "Ele alimentou todos? Sim, e ainda sobrou pão",
+            "kind": "question",
+            "fact": true
+          },
+          {
+            "order": 7,
+            "en": "That night we began to go across the sea",
+            "pt": "Naquela noite começamos a atravessar o mar",
+            "altPt": [
+              "Naquela noite nós começamos a cruzar o mar de barco"
+            ],
+            "kind": "first-person",
+            "fact": true,
+            "speaker": "pedro"
+          },
+          {
+            "order": 8,
+            "en": "The wind was against us and the waves were big",
+            "pt": "O vento estava contra nós e as ondas eram grandes",
+            "altPt": [
+              "O vento era contrário e as ondas eram grandes"
+            ],
+            "kind": "statement",
+            "fact": true
+          },
+          {
+            "order": 9,
+            "en": "Did Jesus walk on the waves? Yes, he did",
+            "pt": "Jesus andou sobre as ondas? Sim, andou",
+            "kind": "question",
+            "fact": true,
+            "gap": {
+              "word": "Did",
+              "kind": "grammar",
+              "options": [
+                "Did",
+                "Does",
+                "Do"
+              ]
+            },
+            "grammar": "past-did"
+          },
+          {
+            "order": 10,
+            "en": "I walked on the water but began to sink",
+            "pt": "Eu andei sobre a água, mas comecei a afundar",
+            "altPt": [
+              "Andei sobre as águas, mas comecei a afundar"
+            ],
+            "kind": "first-person",
+            "fact": true,
+            "speaker": "pedro"
+          },
+          {
+            "order": 11,
+            "en": "I cried, \"Lord, save me!\" and he took my hand",
+            "pt": "Eu gritei: \"Senhor, salve-me!\" e ele segurou a minha mão",
+            "altPt": [
+              "Eu clamei: \"Senhor, salva-me!\" e ele me segurou pela mão"
+            ],
+            "kind": "first-person",
+            "fact": true,
+            "iconic": true,
+            "speaker": "pedro"
+          },
+          {
+            "order": 12,
+            "en": "His hand saved me and I did not sink",
+            "pt": "A mão dele me salvou e eu não afundei",
+            "altPt": [
+              "Ele me salvou com a mão e eu não afundei"
+            ],
+            "kind": "negative",
+            "fact": true,
+            "speaker": "pedro",
+            "grammar": "past-did"
+          }
+        ],
+        "contrast": [
+          {
+            "a": "We only have five loaves and two fish",
+            "b": "We have five loaves and two fish",
+            "note": "only = só; sem only a frase perde a ideia de pouco (Dica 1)"
+          },
+          {
+            "a": "Did Jesus walk on the waves? Yes, he did",
+            "b": "Did Peter walk on the waves? Yes, but he began to sink",
+            "note": "mesma pergunta com did, sujeito diferente (Dica 2)"
           }
         ],
         "verse": {
-          "text": "He took the five loaves, and the two fishes, and looking up to heaven, he blessed.",
-          "pt": "Tomou os cinco pães e os dois peixes e, olhando para o céu, abençoou.",
-          "ref": "Mateus 14:19",
-          "blank": "blessed",
+          "text": "Cheer up! It is I! Don't be afraid.",
+          "classic": "Be of good cheer; it is I; be not afraid.",
+          "pt": "Coragem! Sou eu! Não tenham medo.",
+          "classicPt": "Tende bom ânimo; sou eu, não temais.",
+          "ref": "Mateus 14:27",
+          "blank": "afraid",
           "options": [
-            "blessed",
-            "sold",
-            "hid",
-            "cut"
+            "afraid",
+            "hungry",
+            "alone",
+            "sick"
+          ],
+          "blanks": [
+            {
+              "word": "afraid",
+              "options": [
+                "afraid",
+                "hungry",
+                "alone",
+                "sick"
+              ]
+            },
+            {
+              "word": "Cheer",
+              "options": [
+                "Cheer",
+                "Wake",
+                "Hurry",
+                "Come"
+              ]
+            }
           ]
         },
         "reading": {
-          "text": "In the night, the disciples were in a boat, and the wind was contrary. Jesus came to them, walking on the sea. Peter walked on the water, but he was afraid and began to sink. Jesus stretched out his hand and caught him.",
-          "pt": "De noite, os discípulos estavam num barco, e o vento era contrário. Jesus foi ter com eles, andando sobre o mar. Pedro andou sobre as águas, mas teve medo e começou a afundar. Jesus estendeu a mão e o segurou.",
-          "q": "What did Jesus do when Peter began to sink?",
+          "text": "Jesus fed five thousand people with five loaves and two fish. That night, the disciples were in a boat, and the wind was against them. Jesus came to them, walking on the sea. Peter walked on the water too, but he saw the wind and began to sink. Jesus took his hand and said, \"Why did you doubt?\"",
+          "pt": "Jesus alimentou cinco mil pessoas com cinco pães e dois peixes. Naquela noite, os discípulos estavam num barco, e o vento estava contra eles. Jesus foi até eles, andando sobre o mar. Pedro também andou sobre a água, mas viu o vento e começou a afundar. Jesus segurou a mão dele e disse: \"Por que você duvidou?\"",
+          "q": "What did Peter do when he saw the wind?",
           "options": [
-            "He stretched out his hand and caught him",
-            "He sent an angel",
-            "He went back to the boat"
+            "He started to go down into the water",
+            "He got back into the boat",
+            "He swam to Jesus"
           ],
-          "answer": "He stretched out his hand and caught him"
+          "answer": "He started to go down into the water",
+          "questions": [
+            {
+              "kind": "literal",
+              "q": "What did Peter do when he saw the wind?",
+              "qPt": "O que Pedro fez quando viu o vento?",
+              "options": [
+                "He started to go down into the water",
+                "He got back into the boat",
+                "He swam to Jesus"
+              ],
+              "answer": "He started to go down into the water"
+            },
+            {
+              "kind": "inference",
+              "q": "Why did Peter begin to sink?",
+              "qPt": "Por que Pedro começou a afundar?",
+              "options": [
+                "Because he was afraid and stopped trusting",
+                "Because the boat was too far away",
+                "Because he could not swim"
+              ],
+              "answer": "Because he was afraid and stopped trusting",
+              "explain": "Pedro olhou para o vento, teve medo e duvidou; Jesus o segurou e perguntou por que ele duvidou (Mateus 14:30-31)."
+            }
+          ]
         },
         "dialogue": {
-          "line": "Lord, we have only five loaves and two fishes.",
-          "pt": "Senhor, temos só cinco pães e dois peixes.",
+          "line": "Peter, how many loaves do you have?",
+          "pt": "Pedro, quantos pães vocês têm?",
           "options": [
-            "Bring them to me.",
-            "Send the crowd to Egypt.",
-            "Close the window."
+            "Only five, Lord. And two fish.",
+            "Twelve baskets, Lord.",
+            "Five thousand, Lord."
           ],
-          "answer": "Bring them to me.",
-          "answerPt": "Tragam-nos a mim."
+          "answer": "Only five, Lord. And two fish.",
+          "answerPt": "Só cinco, Senhor. E dois peixes."
+        },
+        "conversation": {
+          "with": "jesus",
+          "turns": [
+            {
+              "who": "jesus",
+              "en": "Peter, how many loaves do you have?",
+              "pt": "Pedro, quantos pães vocês têm?",
+              "mood": "calmo",
+              "fact": true,
+              "ref": "Marcos 6:38"
+            },
+            {
+              "who": "you",
+              "options": [
+                "Only five, Lord. And two fish.",
+                "Twelve baskets, Lord.",
+                "Five thousand, Lord."
+              ],
+              "answer": "Only five, Lord. And two fish.",
+              "pt": "Só cinco, Senhor. E dois peixes.",
+              "intent": "Diga quantos pães e peixes vocês têm"
+            },
+            {
+              "who": "jesus",
+              "en": "Come, Peter. Walk on the water.",
+              "pt": "Venha, Pedro. Ande sobre a água.",
+              "mood": "solene",
+              "fact": true,
+              "ref": "Mateus 14:29"
+            },
+            {
+              "who": "you",
+              "options": [
+                "Lord, save me! I am sinking!",
+                "Lord, the wind is too strong. I cannot come.",
+                "Lord, the boat is far. Wait for me."
+              ],
+              "answer": "Lord, save me! I am sinking!",
+              "pt": "Senhor, salve-me! Estou afundando!",
+              "intent": "Peça socorro",
+              "speak": true
+            }
+          ]
         },
         "quiz": {
-          "q": "How many men ate of the loaves and fishes?",
+          "q": "Why did Peter begin to sink?",
           "options": [
-            "About five thousand",
-            "Twelve",
-            "Forty"
+            "Because he was afraid and stopped trusting",
+            "Because the boat was too far away",
+            "Because he could not swim"
           ],
-          "answer": "About five thousand",
-          "explain": "Os que comeram foram quase cinco mil homens, além das mulheres e crianças (Mateus 14:21)."
-        }
+          "answer": "Because he was afraid and stopped trusting",
+          "explain": "Pedro olhou para o vento, teve medo e duvidou; Jesus o segurou e perguntou por que ele duvidou (Mateus 14:30-31)."
+        },
+        "fact": {
+          "pt": "Mateus conta que comeram cerca de cinco mil homens, \"além das mulheres e crianças\" (Mateus 14:21): a multidão era bem maior. Depois que Jesus e Pedro subiram no barco, o vento parou, e os discípulos disseram: \"Você é mesmo o Filho de Deus\" (Mateus 14:32-33).",
+          "ref": "Mateus 14:21"
+        },
+        "v": 2
       },
       {
         "id": "u8r",

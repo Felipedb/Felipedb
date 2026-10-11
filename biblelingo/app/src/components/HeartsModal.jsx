@@ -57,8 +57,8 @@ export default function HeartsModal({ open = true, onClose }) {
     <Sheet open={open} onClose={onClose} label="Você ficou sem corações" className="hearts-sheet"
       footer={
         <div className="flex flex-col gap-2.5">
-          <Button3D variant="primary" block onClick={practice} data-autofocus className="h-auto! min-h-12 whitespace-normal! py-3 leading-5">
-            Praticar para recuperar 1 coração
+          <Button3D variant="primary" block onClick={practice} data-autofocus className="px-3!">
+            Praticar e recuperar 1 coração
           </Button3D>
           <div className="flex min-h-10 items-center justify-center gap-2 text-secondary text-ink-soft">
             <Icon name="clock" size={20} />

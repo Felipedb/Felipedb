@@ -1,7 +1,8 @@
 // CharacterStage (VISUAL_SPEC 5.20): personagem como ator, em pé ao lado do balão ou centralizado, sobre uma
 // elipse de sombra desenhada pelo app (--color-line, 85x24, 6 px sobrepostos aos pés). Ativos chars/v2/<key>/full.webp
-// (+ full-happy, full-sad, mouth-open); sem full.webp usa bust.webp em círculo de 96 com borda 2 px; sem bust, o JPG atual
-// com object-position center 22% e anel de 3 px. Nunca a legenda com o nome.
+// (+ full-happy, full-sad, mouth-open); sem full.webp usa o bust.webp (recorte com alfa) em pé, sem círculo e sem elipse,
+// encostado na base do estágio; sem bust, o JPG atual em círculo de 96 com anel de 3 px (sem elipse de sombra: ela só faz
+// sentido sob pés). Sem corpo inteiro o estágio encolhe para a altura do retrato. Nunca a legenda com o nome.
 // Props:
 //   ch        personagem { key, name, img } · variant: "side" (110x180) | "center" (220x300) | "peek" (160x260 à direita, 40% fora) |
 //             "result" (180x300, pose happy, --glow-gold atrás) | "header" (96x160) | "trail" (140, lado oposto ao deslocamento)
@@ -54,6 +55,11 @@ export default function CharacterStage({ ch, variant = "side", pose = "neutral",
 
   const full = hasPose ? charAsset(ch, fullFile) : hasFull ? charAsset(ch, "full.webp") : null;
   const src = mouthOpen ? charAsset(ch, "mouth-open.webp") : full;
+  // Sem corpo inteiro: busto com alfa em pé (quadrado de até 96/134/290 px) ou círculo de 96; o estágio tem a altura do retrato
+  const bustSize = Math.min(dims.w, dims.img);
+  const circleSize = Math.min(96, dims.w - 8);
+  const stageH = src ? dims.h : hasBust ? bustSize : circleSize;
+  const showShadow = !!src && dims.shadow[0] > 0;
 
   // Movimento do corpo: estado + respiração; a fala sem ativo de boca vira um leve balanço
   let anim = { y: 0, x: 0, scale: 1, rotate: 0 }, trans = SPRING.settle;
@@ -67,28 +73,29 @@ export default function CharacterStage({ ch, variant = "side", pose = "neutral",
   const peekAnim = variant === "peek" && !reduce ? { x: 0, rotate: -4 } : {};
 
   return (
-    <div className={`relative shrink-0 ${className}`} style={{ width: dims.w, height: dims.h }} aria-hidden={ch ? undefined : true} {...rest}>
+    <div className={`relative shrink-0 ${className}`} style={{ width: dims.w, height: stageH }} aria-hidden={ch ? undefined : true} {...rest}>
       {showGlow && !reduce && (
         <motion.span aria-hidden className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
           style={{ width: 320, height: 320, background: "var(--glow-gold)" }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }} />
       )}
-      {dims.shadow[0] > 0 && (
+      {showShadow && (
         <span aria-hidden className="absolute left-1/2 -translate-x-1/2 rounded-full bg-line" style={{ width: dims.shadow[0], height: dims.shadow[1], bottom: 0 }} />
       )}
-      <motion.div className="absolute inset-x-0 bottom-[6px] flex items-end justify-center" style={{ transformOrigin: "50% 100%" }}
+      <motion.div className="absolute inset-x-0 flex items-end justify-center" style={{ transformOrigin: "50% 100%", bottom: src ? 6 : 0 }}
         initial={initial} animate={{ ...anim, ...peekAnim }}
         transition={variant === "peek" ? { ...trans, x: PEEK_SPRING, rotate: PEEK_SPRING } : trans}>
         {src ? (
           <img src={src} alt={ch ? ch.name : ""} draggable="false" decoding="async" className="object-contain object-bottom" style={{ maxHeight: dims.img, maxWidth: dims.w }} />
-        ) : ch && (hasBust || ch.img) ? (
-          <span className={`flex items-center justify-center overflow-hidden rounded-full ${hasBust ? "border-2 border-line" : "ring-[3px] ring-line"} bg-unit-soft`}
-            style={{ width: Math.min(96, dims.w - 8), height: Math.min(96, dims.w - 8) }}>
-            <img src={hasBust ? charAsset(ch, "bust.webp") : ch.img} alt={ch.name} draggable="false" decoding="async" className="h-full w-full object-cover" style={{ objectPosition: hasBust ? "center 40%" : "center 22%" }} />
+        ) : ch && hasBust ? (
+          <img src={charAsset(ch, "bust.webp")} alt={ch.name} draggable="false" decoding="async" className="object-contain object-bottom" style={{ width: bustSize, height: bustSize }} />
+        ) : ch && ch.img ? (
+          <span className="flex items-center justify-center overflow-hidden rounded-full ring-[3px] ring-line bg-unit-soft" style={{ width: circleSize, height: circleSize }}>
+            <img src={ch.img} alt={ch.name} draggable="false" decoding="async" className="h-full w-full object-cover" style={{ objectPosition: "center 22%" }} />
           </span>
         ) : ch && ch.emoji ? (
           <span className="emoji" role="img" aria-label={ch.name} style={{ fontSize: Math.min(72, dims.w * 0.6) }}>{ch.emoji}</span>
         ) : (
-          <span className="flex items-center justify-center rounded-full bg-line" style={{ width: Math.min(96, dims.w - 8), height: Math.min(96, dims.w - 8) }}>
+          <span className="flex items-center justify-center rounded-full bg-line" style={{ width: circleSize, height: circleSize }}>
             <Icon name="avatar" size={Math.min(64, dims.w * 0.5)} />
           </span>
         )}

@@ -3,7 +3,9 @@
 //   padding 24 16 calc(16px + safe area), max-height 92dvh com rolagem; entra y 48 -> 0 (SPRING.sheet), sai y 32 + fade 160 ms;
 //   drag="y" fecha além de 120 px ou com velocidade > 600; Escape fecha; role="dialog" aria-modal; foco no painel; CTA fixo no rodapé.
 //   Em lg (>= 1024) vira Modal centralizado 480, raio 24, scale .88 -> 1 + y 24 -> 0 (SPRING 320/24), saída 120 ms.
-// Props: open, onClose, title (text-title), children, footer (slot fixo), label (aria-label), closeButton (X 36 no canto), className
+// Props: open, onClose, title (text-title), children, footer (slot fixo), label (aria-label), closeButton (X 36 no canto), className,
+//   handle: "light" quando o conteúdo começa com um hero (alça branca a 70% sobre a imagem; padrão --color-line / #52656d)
+//   A alça fica absoluta a 8 px do topo do painel, acima do conteúdo, para um hero poder encostar no raio superior (-mt-6).
 // ConfirmSheet: title, text, confirmLabel, cancelLabel, onConfirm, onCancel, danger (CTA vermelho).
 // Exemplo: <Sheet open={open} onClose={close} title="Você ficou sem corações" footer={<Button3D block>...</Button3D>}>...</Sheet>
 import { useEffect, useRef, useState } from "react";
@@ -55,7 +57,7 @@ function useDialog(open, onClose, panelRef) {
   }, [open]); // eslint-disable-line
 }
 
-export default function Sheet({ open, onClose, title, children, footer, label, closeButton = false, className = "" }) {
+export default function Sheet({ open, onClose, title, children, footer, label, closeButton = false, handle = "default", className = "" }) {
   const lg = useLarge();
   const panelRef = useRef(null);
   useDialog(open, onClose, panelRef);
@@ -65,7 +67,7 @@ export default function Sheet({ open, onClose, title, children, footer, label, c
       {open && (
         <div className="fixed inset-0 z-60 flex items-end justify-center lg:items-center" role="presentation">
           <motion.div className="absolute inset-0 bg-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0.15 } }} transition={{ duration: 0.15 }} onClick={onClose} />
-          <Panel panelRef={panelRef} onClose={onClose} title={title} footer={footer} label={label} closeButton={closeButton} className={className}>{children}</Panel>
+          <Panel panelRef={panelRef} onClose={onClose} title={title} footer={footer} label={label} closeButton={closeButton} handle={handle} className={className}>{children}</Panel>
         </div>
       )}
     </AnimatePresence>
@@ -86,15 +88,15 @@ function Header({ title, closeButton, onClose }) {
   );
 }
 
-function BottomSheet({ panelRef, onClose, title, footer, label, closeButton, className, children }) {
+function BottomSheet({ panelRef, onClose, title, footer, label, closeButton, handle, className, children }) {
   return (
     <motion.div ref={panelRef} role="dialog" aria-modal="true" aria-label={label || title} tabIndex={-1}
-      className={`relative flex max-h-[92dvh] w-full max-w-[600px] flex-col rounded-t-xl bg-page pt-2 outline-none ${className}`}
+      className={`relative flex max-h-[92dvh] w-full max-w-[600px] flex-col overflow-hidden rounded-t-xl bg-page outline-none ${className}`}
       initial={{ y: 48, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 32, opacity: 0, transition: { duration: 0.16 } }} transition={SPRING.sheet}
       drag="y" dragConstraints={{ top: 0, bottom: 0 }} dragElastic={{ top: 0, bottom: 0.6 }}
       onDragEnd={(e, info) => { if (info.offset.y > 120 || info.velocity.y > 600) onClose && onClose(); }}>
-      <span aria-hidden className="mx-auto mb-4 block h-1 w-9 rounded-[2px] bg-line dark:bg-disabled" />
-      <div className="min-h-0 flex-1 overflow-y-auto px-4 pt-2">
+      <span aria-hidden className={`absolute left-1/2 top-2 z-10 block h-1 w-9 -translate-x-1/2 rounded-[2px] ${handle === "light" ? "bg-white/70" : "bg-line dark:bg-disabled"}`} />
+      <div className="min-h-0 flex-1 overflow-y-auto px-4 pt-6">
         <Header title={title} closeButton={closeButton} onClose={onClose} />
         {children}
         {!footer && <div className="h-[calc(16px+env(safe-area-inset-bottom))]" />}
@@ -107,7 +109,7 @@ function BottomSheet({ panelRef, onClose, title, footer, label, closeButton, cla
 export function Modal({ panelRef, onClose, title, footer, label, closeButton, className, children }) {
   return (
     <motion.div ref={panelRef} role="dialog" aria-modal="true" aria-label={label || title} tabIndex={-1}
-      className={`relative flex max-h-[88dvh] w-[480px] max-w-[calc(100vw-32px)] flex-col rounded-xl bg-page outline-none ${className}`}
+      className={`relative flex max-h-[88dvh] w-[480px] max-w-[calc(100vw-32px)] flex-col overflow-hidden rounded-xl bg-page outline-none ${className}`}
       initial={{ scale: 0.88, y: 24, opacity: 0 }} animate={{ scale: 1, y: 0, opacity: 1 }} exit={{ scale: 0.95, opacity: 0, transition: { duration: 0.12 } }}
       transition={{ type: "spring", stiffness: 320, damping: 24 }}>
       <div className="min-h-0 flex-1 overflow-y-auto p-6">

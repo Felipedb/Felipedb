@@ -69,7 +69,8 @@ export default function Avatar({ ch, size = 56, ring, badge = null, locked = fal
         animate={isTalking ? { y: [0, -2, 0], scale: [1, 1.04, 1] } : { y: 0, scale: 1 }}
         transition={isTalking ? { duration: 0.5, repeat: Infinity } : SPRING.snap}>
         {locked ? (
-          <span className="flex h-full w-full items-center justify-center bg-line"><Icon name="lock" size={Math.round(size * 0.45)} /></span>
+          // Bloqueado: cadeado em currentColor (--color-disabled no claro, --color-ink-soft no escuro) sobre --color-line
+          <span className="flex h-full w-full items-center justify-center bg-line text-disabled dark:text-ink-soft"><Icon name="lock" size={Math.round(size * 0.43)} tone="mono" /></span>
         ) : ch && (bust || ch.img) ? (
           <img src={bust ? charAsset(ch, "bust.webp") : ch.img} alt={alt != null ? alt : ch.name} draggable="false" loading="lazy" decoding="async"
             className="h-full w-full object-cover" style={{ objectPosition: bust ? "center 40%" : "center 22%" }} />

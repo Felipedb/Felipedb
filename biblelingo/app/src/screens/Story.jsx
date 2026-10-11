@@ -182,7 +182,7 @@ export default function Story({ id, onExit }) {
         <span className="max-w-[40%] truncate text-[15px] font-bold text-ink">{s.title}</span>
       </div>
 
-      <div className="flex flex-col gap-4 pt-4 pb-40">
+      <div className="flex flex-col gap-4 pt-4 pb-28">
         {!finish && speeches.map((sp) => (
           <SpeechBeat key={sp.k} beat={sp.b} ch={sp.ch} hero={sp.hero} showName={sp.showName} current={sp.k === i} onRevealed={() => setRevealedFor(sp.k)} />
         ))}
@@ -234,20 +234,21 @@ export default function Story({ id, onExit }) {
           ) : null}
         </AnimatePresence>
         {/* Marca de rolagem: fica acima do CTA fixo (scroll-margin) para a fala ou a pergunta nova não ficar escondida */}
-        <div ref={endRef} style={{ scrollMarginBottom: 184 }} />
+        <div ref={endRef} style={{ scrollMarginBottom: 120 }} />
       </div>
 
       {/* Faixa curta de acerto */}
       <AnimatePresence>
         {praise && (
-          <motion.div key="praise" className="pointer-events-none fixed inset-x-4 bottom-[calc(140px+env(safe-area-inset-bottom))] z-30 mx-auto flex max-w-md items-center justify-center gap-2 rounded-md bg-green px-4 py-2 text-label uppercase tracking-[1px] text-white lg:bottom-20"
+          <motion.div key="praise" className="pointer-events-none fixed inset-x-4 bottom-[calc(84px+env(safe-area-inset-bottom))] z-30 mx-auto flex max-w-md items-center justify-center gap-2 rounded-md bg-green px-4 py-2 text-label uppercase tracking-[1px] text-white"
             initial={{ y: 16, opacity: 0, scale: 0.9 }} animate={{ y: 0, opacity: 1, scale: 1 }} exit={{ y: 8, opacity: 0, transition: { duration: 0.15 } }} transition={SPRING.footer} role="status">
             <Icon name="check-circle" size={22} tone="mono" /> Isso!
           </motion.div>
         )}
       </AnimatePresence>
 
-      <div className="fixed inset-x-4 bottom-[calc(76px+env(safe-area-inset-bottom))] z-30 mx-auto max-w-md lg:bottom-5">
+      {/* CTA fixo no pé da tela imersiva (a tab bar fica coberta pelo overlay do Hub) */}
+      <div className="fixed inset-x-4 bottom-[calc(16px+env(safe-area-inset-bottom))] z-30 mx-auto max-w-md">
         <Button3D variant="primary" size="cta" block disabled={!answered} onClick={next} data-story-next>Continuar</Button3D>
       </div>
     </div>

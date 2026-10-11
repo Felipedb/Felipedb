@@ -104,6 +104,8 @@ for (const theme of THEMES) {
       await story.click(); await shot("story-beat", 800);
       const btn = page.locator("button", { hasText: "Continuar" }).first();
       for (let k = 0; k < 4; k++) { if (await btn.count()) { await btn.click().catch(() => {}); await page.waitForTimeout(350); } if (await page.locator("[data-opt]").count()) { await shot("story-question"); break; } }
+      // A História é um overlay sobre a tab bar: sai pelo botão voltar antes de trocar de aba
+      await page.click("[data-story-back]").catch(() => {}); await page.waitForTimeout(400);
     }
     await tab("Aprender"); await tab("Praticar");
     await page.click('[data-hub="madness"]'); await shot("madness", 700);
@@ -111,7 +113,16 @@ for (const theme of THEMES) {
 
   // Modal de corações (sem corações)
   try {
-    await page.evaluate(() => { const k = Object.keys(localStorage).find((x) => /bibl/i.test(x)); if (k) { const s = JSON.parse(localStorage[k]); s.hearts = 0; localStorage[k] = JSON.stringify(s); } });
+    // Zera os corações e marca o dia (store.js restaura 5 corações ao recarregar quando heartsDay não é hoje)
+    await page.evaluate(() => {
+      const k = Object.keys(localStorage).find((x) => /bibl/i.test(x));
+      if (!k) return;
+      const s = JSON.parse(localStorage[k]);
+      const d = new Date();
+      s.hearts = 0;
+      s.heartsDay = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+      localStorage[k] = JSON.stringify(s);
+    });
     await page.reload(); await page.waitForSelector("[data-node]");
     await openNode(page, "u1l1", { waitSession: false }); await shot("hearts-modal", 700);
   } catch (e) { errors.push(`${theme} corações: ${e.message}`); }

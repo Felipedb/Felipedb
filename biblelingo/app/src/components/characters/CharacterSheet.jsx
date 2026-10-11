@@ -26,7 +26,7 @@ function Hero({ ch, subtitle, onSpeak, onClose }) {
   const hero = useAsset(charAsset(ch, "hero.webp"));
   const src = hero ? charAsset(ch, "hero.webp") : ch.img;
   return (
-    <div className="relative -mx-4 -mt-2 aspect-[4/3] overflow-hidden bg-parchment">
+    <div className="relative -mx-4 -mt-6 aspect-[4/3] overflow-hidden bg-parchment lg:-mx-6">
       {src ? (
         <img src={src} alt="" draggable="false" decoding="async" className="h-full w-full object-cover" style={{ objectPosition: hero ? "top" : "center 22%" }} />
       ) : (
@@ -97,7 +97,7 @@ export default function CharacterSheet({ charKey, open = true, onClose }) {
   );
 
   return (
-    <Sheet open={open} onClose={onClose} label={ch.name} footer={footer}>
+    <Sheet open={open} onClose={onClose} label={ch.name} footer={footer} handle="light">
       <div style={unitVars(unitId || "u1", dark)}>
         <Hero ch={voice} subtitle={ch.title} onClose={onClose} onSpeak={() => speak(ch.name.split(" (")[0], { char: voice })} />
         <Tabs tab={tab} setTab={setTab} />
