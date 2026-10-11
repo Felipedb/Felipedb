@@ -8,8 +8,7 @@ import { useSessionVersion } from "./core/useSession.js";
 import { session, startLesson } from "./core/session.js";
 import { onUI } from "./core/events.js";
 import { ensureDay } from "./core/store.js";
-import { sfx } from "./core/sfx.js";
-import { haptic } from "./core/haptics.js";
+import { sfx, feel } from "./core/sfx.js";
 import { SPRING } from "./core/motion.js";
 import Home from "./screens/Home.jsx";
 import Lesson from "./screens/Lesson.jsx";
@@ -68,9 +67,9 @@ export default function App() {
     if (ev.type === "navigate") setScreen(ev.screen);
     if (ev.type === "toast") {
       const id = Math.random().toString(36).slice(2);
-      setToasts((t) => [...t.slice(-3), { id, ...toSnack(ev.text, ev.cls) }]);
+      setToasts((t) => [...t.slice(-3), { id, cls: ev.cls, ...toSnack(ev.text, ev.cls) }]);
     }
-    if (ev.type === "sfx") { try { sfx(ev.name, ev.arg); } catch (e) { /* sem som */ } }
+    if (ev.type === "sfx") { try { if (ev.haptic) feel(ev.name, ev.arg); else sfx(ev.name, ev.arg); } catch (e) { /* sem som */ } }
     if (ev.type === "confetti" && !reduce) confettiFx(ev.opts);
     if (ev.type === "hearts-modal") setHeartsOpen(true);
   }), []); // eslint-disable-line
@@ -82,8 +81,7 @@ export default function App() {
   const showTabs = !inLesson;
 
   const go = useCallback((id) => {
-    sfx("tap");
-    haptic("select");
+    feel("tab");
     setScreen(id);
   }, []);
 

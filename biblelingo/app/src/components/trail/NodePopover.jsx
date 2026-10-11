@@ -5,10 +5,12 @@
 // Entra scale .9 -> 1 + fade (SPRING.pop), sai em 120 ms; fecha ao tocar fora, em Escape ou ao rolar 40 px; um aberto por vez.
 // Renderizado em portal (document.body) para ficar acima das seções e dos cabeçalhos sticky; recebe as variáveis do capítulo em `vars`.
 // Props: open ({ anchor, variant, title, subtitle, stars, cta, onStart, vars }) ou null, onClose
+// Som: sheet-open a 0,7 ao abrir (acompanhamento do node que o nó já tocou); COMEÇAR não toca clique (o start da sessão é o som).
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "motion/react";
 import { SPRING } from "../../core/motion.js";
+import { sfx } from "../../core/sfx.js";
 import Icon from "../Icon.jsx";
 import { Button3D } from "../ui/index.js";
 
@@ -79,13 +81,15 @@ function Panel({ data, onClose }) {
         </div>
       )}
       {!locked && data.cta && (
-        <Button3D variant="on-unit" block className="relative mt-4" data-popover-start onClick={data.onStart}>{data.cta}</Button3D>
+        <Button3D variant="on-unit" block className="relative mt-4" data-popover-start sound={false} onClick={data.onStart}>{data.cta}</Button3D>
       )}
     </motion.div>
   );
 }
 
 export default function NodePopover({ open, onClose }) {
+  const shown = !!open;
+  useEffect(() => { if (shown) sfx("sheet-open", { volume: 0.7 }); }, [shown]);
   if (typeof document === "undefined") return null;
   return createPortal(
     <AnimatePresence>{open && <Panel key={open.key || "popover"} data={open} onClose={onClose} />}</AnimatePresence>,

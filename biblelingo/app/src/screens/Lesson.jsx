@@ -10,7 +10,7 @@ import { session, check, quitLesson, skipListening, skipSpeaking, unitCrowns } f
 import { LISTEN_TYPES } from "../core/builder.js";
 import { stopClip, recognizeOnce } from "../core/audio.js";
 import { SPRING, DUR, EASE } from "../core/motion.js";
-import { sfx } from "../core/sfx.js";
+import { sfx, feel } from "../core/sfx.js";
 import Result from "./Result.jsx";
 import ExerciseView from "../components/exercises/index.jsx";
 import { footerFeedback, pronounceTarget } from "../components/exercises/feedback.jsx";
@@ -61,7 +61,7 @@ function Hearts({ hearts, practice, lost }) {
 function ReviewInterstitial({ ch }) {
   const [talking, setTalking] = useState(false);
   useEffect(() => {
-    sfx("start");
+    sfx("start", { volume: 0.8 });
     setTalking(true);
     const t = setTimeout(() => setTalking(false), 900);
     return () => clearTimeout(t);
@@ -220,7 +220,7 @@ export default function Lesson() {
       {/* Cabeçalho: X, barra (com COMBO sobreposto), corações */}
       <header className="pt-5">
         <div className="flex items-center gap-3 pb-3">
-          <button type="button" onClick={quitLesson} aria-label="Sair da etapa"
+          <button type="button" onClick={() => { feel("tap"); quitLesson(); }} aria-label="Sair da etapa"
             className="-ml-2 flex h-11 w-11 shrink-0 items-center justify-center rounded-md text-disabled transition-colors hover:text-ink-soft">
             <Icon name="close" size={24} tone="mono" />
           </button>

@@ -4,13 +4,14 @@
 //          | "opening" (sequência: squash 80 ms, tampa salta, moedas voam até targetRef em 420 ms EASE.out) | "opened" (tampa aberta, rótulo "+N XP")
 // Props:
 //   size, state, reward (XP), onOpen(reward) chamado ao fim da sequência, targetRef (ref do StatCard XP para as moedas),
-//   label (texto sob o baú, padrão "+N XP" quando aberto), className · Som sparkle + coin; haptic("chest"); confete pequeno no centro do baú.
+//   label (texto sob o baú, padrão "+N XP" quando aberto), className · Som chest + haptic (tranca e sinos), coin em 3 notas subindo
+//   (150 ms, passo 120), pair(6) quando as moedas chegam ao card de XP; confete pequeno no centro do baú. Bloqueado: deselect.
 // Exemplo: <Chest size={96} state={r.chest ? "opened" : "ready"} reward={5} onOpen={openChest} targetRef={xpRef} />
 import { useState } from "react";
 import { motion, useAnimate, stagger, useReducedMotion } from "motion/react";
 import confettiFx from "canvas-confetti";
 import { DUR, EASE } from "../../core/motion.js";
-import { sfx } from "../../core/sfx.js";
+import { sfx, feel } from "../../core/sfx.js";
 import { haptic } from "../../core/haptics.js";
 import { chestParts } from "../../icons/index.js";
 import { renderParts } from "../Icon.jsx";
@@ -24,6 +25,7 @@ export default function Chest({ size = 56, state = "ready", reward = 0, onOpen, 
   const ready = state === "ready" && !busy;
 
   async function open() {
+    if (locked) { feel("deselect"); return; } // "ainda não"
     if (!ready || busy) return;
     setBusy(true);
     haptic("chest");
@@ -34,7 +36,7 @@ export default function Chest({ size = 56, state = "ready", reward = 0, onOpen, 
     // Transforms em SVG valem em unidades do viewBox (24): o salto da tampa é convertido como as moedas abaixo
     animate(".chest-lid", { y: (-size * 0.12) / (size / 24), rotate: -14 }, { type: "spring", stiffness: 400, damping: 18 });
     animate(".chest-lock", { opacity: 0 }, { duration: 0.12 });
-    sfx("sparkle");
+    sfx("chest"); // tranca + sinos no frame em que a tampa salta
     if (!reduce && rect) {
       try {
         confettiFx({ particleCount: 30, spread: 60, startVelocity: 25, scalar: 0.8, ticks: 120, origin: { x: (rect.left + rect.width / 2) / window.innerWidth, y: (rect.top + rect.height / 2) / window.innerHeight } });
@@ -52,6 +54,7 @@ export default function Chest({ size = 56, state = "ready", reward = 0, onOpen, 
     // A arte do estado "opened" já desenha a tampa aberta: zera o transform da tampa para ela não ficar deslocada
     animate(".chest-lid", { y: 0, rotate: 0 }, { duration: 0 });
     setBusy(false);
+    if (targetRef && targetRef.current) sfx("pair", 6); // o card de XP recebe as moedas e pulsa
     onOpen && onOpen(reward);
   }
 
@@ -65,7 +68,7 @@ export default function Chest({ size = 56, state = "ready", reward = 0, onOpen, 
           style={{ width: size * 1.6, height: size * 1.6, background: "radial-gradient(closest-side, #fff3bf, rgba(255,243,191,0))" }}
           animate={{ opacity: [0.4, 0.9, 0.4] }} transition={{ duration: 1.6, repeat: Infinity }} />
       )}
-      <motion.button type="button" ref={scope} onClick={open} disabled={!ready} aria-label={locked ? "Baú bloqueado" : opened ? `Baú aberto: ${reward} XP` : "Abrir baú"}
+      <motion.button type="button" ref={scope} onClick={open} disabled={!ready && !locked} aria-disabled={locked || undefined} aria-label={locked ? "Baú bloqueado" : opened ? `Baú aberto: ${reward} XP` : "Abrir baú"}
         className="relative block" style={{ width: size, height: size, transformOrigin: "50% 100%" }}
         animate={ready && !reduce ? { rotate: [0, -6, 6, -4, 4, 0] } : { rotate: 0 }}
         transition={ready && !reduce ? { duration: 0.6, repeat: Infinity, repeatDelay: 1.6 } : { duration: 0.2 }}>

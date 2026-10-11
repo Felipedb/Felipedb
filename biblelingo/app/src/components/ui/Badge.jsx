@@ -2,12 +2,15 @@
 // Badge de estado (acima do título do exercício): ícone circular 24 + caption 13/800; entra x -8 -> 0 + fade 180 ms.
 //   kind: "review" (refresh laranja, "CORRIJA O ERRO DE ANTES") | "new-word" (sparkle, fundo --color-purple-soft, "PALAVRA NOVA")
 //         | "legendary" (#ffc800 com #5b4400) | "timer" (--color-teal, "60 s") | "custom" (icon + children + className)
+//   new-word toca newword (dois sininhos) 60 ms depois de entrar, logo após o swoosh da troca de exercício; sound={false} silencia.
 // Pill de contagem: 18 px, raio 9, #ff4b4b texto #ffffff 11/800 (erros no Hub e na aba Praticar). Props: count, max (padrão 99)
 // Chip de vocabulário: 44 px, raio 12, borda 2 + 4, ícone 24 + EN 17/700 + PT caption 13/500 --color-ink-soft; toque fala; whileTap y 2.
 //   Props: en, pt, icon (emoji de conteúdo em span.emoji ou nome de ícone com svgIcon), onClick, char, selected
 // Exemplo: <Badge kind="review" />   <Pill count={3} />   <Chip en="ark" pt="arca" icon="🚢" onClick={() => speak("ark", { char })} />
+import { useEffect } from "react";
 import { motion } from "motion/react";
 import { SPRING } from "../../core/motion.js";
+import { sfx } from "../../core/sfx.js";
 import Icon from "../Icon.jsx";
 
 const KINDS = {
@@ -17,8 +20,13 @@ const KINDS = {
   timer: { icon: "timer", text: <>60 <span className="normal-case">s</span></>, cls: "rounded-pill bg-teal-soft px-3 py-1 text-teal-text" },
 };
 
-export default function Badge({ kind = "custom", icon, className = "", children, ...rest }) {
+export default function Badge({ kind = "custom", icon, className = "", children, sound = true, ...rest }) {
   const k = KINDS[kind];
+  useEffect(() => {
+    if (kind !== "new-word" || sound === false) return undefined;
+    const t = setTimeout(() => sfx("newword"), 60);
+    return () => clearTimeout(t);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <motion.span className={`inline-flex items-center gap-2 text-caption uppercase tracking-[.8px] ${k ? k.cls : ""} ${className}`}
       initial={{ x: -8, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: 0.18 }} {...rest}>

@@ -49,7 +49,7 @@ export default function SceneTruth({ ex }) {
       </motion.div>
 
       <motion.div variants={item(SPRING.settle, 14)} className="mt-6">
-        <Button3D variant="secondary" tone="blue" block icon="speaker" onClick={replay} disabled={playing} aria-live="polite">
+        <Button3D variant="secondary" tone="blue" block icon="speaker" onClick={replay} disabled={playing} sound={false} aria-live="polite">
           Ouvir a conversa inteira
         </Button3D>
         <div className="mt-3 flex min-h-10 items-center justify-center gap-2.5 text-secondary text-ink-soft" aria-live="polite">

@@ -1,6 +1,6 @@
 // HeartsSheet (VISUAL_SPEC 6.11 e 11.9): Sheet com alça, coração partido SVG de 96 px (duas metades que se separam x ±6, rotate ±8),
 // título 22/800 "Você ficou sem corações", cinco heart-empty de 28, e três ações em lista: praticar para recuperar 1 coração,
-// esperar (contador até a meia-noite, quando os corações renovam em store.js) e "Não, obrigado". haptic("heart-lost-all") ao abrir.
+// esperar (contador até a meia-noite, quando os corações renovam em store.js) e "Não, obrigado". Ao abrir: heart-empty + haptic (o Sheet fica mudo: um som só).
 // O pai deve manter o componente montado e controlar `open` para a saída animar (hoje o App monta sob condição; ver relatório).
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
@@ -8,8 +8,7 @@ import { state } from "../core/store.js";
 import { flatLessons } from "../core/content.js";
 import { startLesson, startQuickPractice } from "../core/session.js";
 import { SPRING } from "../core/motion.js";
-import { sfx } from "../core/sfx.js";
-import { haptic } from "../core/haptics.js";
+import { feel } from "../core/sfx.js";
 import { Sheet, Button3D } from "./ui/index.js";
 import Icon from "./Icon.jsx";
 
@@ -41,8 +40,7 @@ export default function HeartsModal({ open = true, onClose }) {
   const [left, setLeft] = useState(untilMidnight);
   useEffect(() => {
     if (!open) return;
-    haptic("heart-lost-all");
-    sfx("heart-lost");
+    feel("heart-empty");
     const t = setInterval(() => setLeft(untilMidnight()), 1000);
     return () => clearInterval(t);
   }, [open]);
@@ -54,7 +52,7 @@ export default function HeartsModal({ open = true, onClose }) {
   };
 
   return (
-    <Sheet open={open} onClose={onClose} label="Você ficou sem corações" className="hearts-sheet"
+    <Sheet open={open} onClose={onClose} label="Você ficou sem corações" className="hearts-sheet" sound={false}
       footer={
         <div className="flex flex-col gap-2.5">
           <Button3D variant="primary" block onClick={practice} data-autofocus className="px-3!">

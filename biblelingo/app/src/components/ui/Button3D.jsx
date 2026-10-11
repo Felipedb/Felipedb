@@ -6,13 +6,15 @@
 //   size     "cta" (face 44, classe .btn-cta) | "lg" (48) | "md" (40) | "sm" (36)   (padrão "lg")
 //   icon     nome de ícone (24) à esquerda do texto, gap 8 · iconOnly: só o ícone, 48x48 ou 40x40, raio 12
 //   block    largura 100% · loading: três pontos de 6 px pulsando · disabled: face --color-line, texto --color-disabled, sem sombra
-//   sound    toca sfx("tap") ao clicar (padrão: só secondary, neutral, ghost e icon; VERIFICAR/CONTINUAR nunca tocam)
+//   sound    clique ao tocar, com haptic 8 (SFX_SPEC 6.3): true (padrão) | false | "tap" | "tap-soft". Padrão: "tap-soft" nos
+//            botões grandes (primary, danger, accent, on-unit em cta ou lg: CONTINUAR, cerimônias) e "tap" nos demais.
+//            sound={false} quando a resposta é o som (VERIFICAR, COMEÇAR do popover) e em botões de áudio ou microfone.
 //   as       "button" (padrão) | "a"; demais props vão para o elemento (onClick, aria-label, data-popover-start...)
 // Exemplo: <Button3D variant="primary" size="cta" block onClick={check}>Verificar</Button3D>
 //          <Button3D variant="secondary" tone="green" block>Explique minha resposta</Button3D>
 import { motion } from "motion/react";
 import { SPRING } from "../../core/motion.js";
-import { sfx } from "../../core/sfx.js";
+import { feel } from "../../core/sfx.js";
 import Icon from "../Icon.jsx";
 
 const RAISED = {
@@ -51,7 +53,8 @@ export default function Button3D({
   const outline = variant === "secondary" || variant === "neutral";
   const ghost = variant === "ghost";
   const squareSize = size === "md" || size === "sm" ? "h-10 w-10" : "h-12 w-12";
-  const playTap = sound != null ? sound : (outline || ghost || variant === "icon");
+  const big = !!RAISED[variant] && variant !== "icon" && (size === "cta" || size === "lg");
+  const click = sound === false ? null : typeof sound === "string" ? sound : big ? "tap-soft" : "tap";
   const Tag = motion[as] || motion.button;
   const off = disabled || loading;
 
@@ -75,7 +78,7 @@ export default function Button3D({
 
   const handleClick = (e) => {
     if (off) return;
-    if (playTap) sfx("tap");
+    if (click) feel(click);
     if (onClick) onClick(e);
   };
 

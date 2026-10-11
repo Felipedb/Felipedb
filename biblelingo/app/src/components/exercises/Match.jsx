@@ -6,8 +6,7 @@ import { session, setAnswer, check, registerMistakeSoft } from "../../core/sessi
 import { useSessionVersion } from "../../core/useSession.js";
 import { shuffle } from "../../core/util.js";
 import { speak, clipDuration } from "../../core/audio.js";
-import { sfx } from "../../core/sfx.js";
-import { haptic } from "../../core/haptics.js";
+import { feel } from "../../core/sfx.js";
 import MatchCell, { MatchGrid } from "../ui/MatchCell.jsx";
 import { useExerciseChar } from "./CharacterBubble.jsx";
 import { TITLES, Title } from "./shared.jsx";
@@ -39,20 +38,19 @@ export default function Match({ ex }) {
 
   const onCell = (item, id) => {
     if (session.checked || matched.includes(item.key)) return;
-    sfx("select");
-    haptic("select");
     if (item.side === "en") play(item, id);
-    if (!selected) { setSelected({ ...item, id }); return; }
-    if (selected.id === id) { setSelected(null); return; }
-    if (selected.side === item.side) { setSelected({ ...item, id }); return; }
+    // Um som por toque (SFX_SPEC 2.2): select ao marcar, deselect na mesma célula, pair(i) no par certo, pair-wrong no errado;
+    // o último par fecha o exercício e o acerto da sessão (correct) é o som desse toque
+    if (!selected) { feel("select"); setSelected({ ...item, id }); return; }
+    if (selected.id === id) { feel("deselect"); setSelected(null); return; }
+    if (selected.side === item.side) { feel("select"); setSelected({ ...item, id }); return; }
     if (selected.key === item.key) {
       const m = [...matched, item.key];
       setMatched(m);
       setSelected(null);
       setFlash((f) => [...f, item.key]);
       later(() => setFlash((f) => f.filter((k) => k !== item.key)), 300);
-      sfx("pop", m.length);
-      haptic("pair");
+      if (m.length < ex.pairs.length) feel("pair", m.length - 1);
       if (m.length === ex.pairs.length) {
         setAnswer("__matched__");
         check();
@@ -60,7 +58,7 @@ export default function Match({ ex }) {
     } else {
       setWrong([selected.id, id]);
       setSelected(null);
-      haptic("wrong");
+      feel("pair-wrong");
       registerMistakeSoft();
       later(() => setWrong([]), 400);
     }

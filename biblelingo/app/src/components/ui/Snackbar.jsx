@@ -1,15 +1,16 @@
 // Snackbar e LessonBanner (VISUAL_SPEC 5.24).
 // Snackbar: fixed bottom calc(80px + safe area), centrado, largura máx. 360, raio 12, fundo --color-ink texto --color-page
 //   (claro #4b4b4b/#fff, escuro #f1f7fb/#131f24), padding 12 16, ícone SVG 20 + text-secondary 700; entra y 16 -> 0 + scale .9 -> 1
-//   (SPRING.footer), fica 1600 + 40 ms por caractere (máx. 3200), sai y 8 + fade 150 ms; uma visível por vez (fila); haptic("toast").
-//   Props: queue [{ id, text, icon }], onDone(id) chamado quando o item sai (o pai remove da fila)
+//   (SPRING.footer), fica 1600 + 40 ms por caractere (máx. 3200), sai y 8 + fade 150 ms; uma visível por vez (fila).
+//   Som e haptic ao entrar (SFX_SPEC 2.1): toast; missão concluída (cls "combo") toca mission a 0,7.
+//   Props: queue [{ id, text, icon, cls }], onDone(id) chamado quando o item sai (o pai remove da fila)
 // LessonBanner: faixa de 32 px abaixo do cabeçalho da lição (fundo --color-raised, caption 13/800, 1,6 s, sem emoji).
 //   Props: text, icon, onDone, duration (ms)
 // Exemplo: <Snackbar queue={toasts} onDone={(id) => setToasts((t) => t.filter((x) => x.id !== id))} />
 import { useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { SPRING } from "../../core/motion.js";
-import { haptic } from "../../core/haptics.js";
+import { feel } from "../../core/sfx.js";
 import Icon from "../Icon.jsx";
 
 const ttl = (text) => Math.min(3200, 1600 + 40 * String(text || "").length);
@@ -18,7 +19,7 @@ export default function Snackbar({ queue = [], onDone }) {
   const cur = queue[0] || null;
   useEffect(() => {
     if (!cur) return;
-    haptic("toast");
+    if (cur.cls === "combo") feel("mission", { volume: 0.7 }); else feel("toast");
     const t = setTimeout(() => onDone && onDone(cur.id), ttl(cur.text));
     return () => clearTimeout(t);
   }, [cur && cur.id]); // eslint-disable-line

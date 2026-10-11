@@ -44,7 +44,7 @@ export default function WordBank({ ex, answer = null, checked = false, fb = null
     <CharacterBubble ch={ch} audio={ex.sentence.en} checked={checked} ok={ok}><Sayable text={ex.sentence.en} char={ch} hints /></CharacterBubble>
   );
   const footer = (
-    <Button3D variant="ghost" tone="blue" size="sm" icon={keyboard ? "puzzle" : "keyboard"} onClick={toggleKeyboard} disabled={checked} sound={false}>
+    <Button3D variant="ghost" tone="blue" size="sm" icon={keyboard ? "puzzle" : "keyboard"} onClick={toggleKeyboard} disabled={checked}>
       {keyboard ? "Usar banco de palavras" : "Usar teclado"}
     </Button3D>
   );

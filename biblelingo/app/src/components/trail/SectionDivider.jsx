@@ -4,6 +4,7 @@
 // Props: n (número da seção), name, units ([{ u, ui, done, total }]), onOpenChapter(u, ui)
 import { useState } from "react";
 import { SECTION_GRADIENT, unitPalette } from "../../core/palette.js";
+import { feel } from "../../core/sfx.js";
 import Icon from "../Icon.jsx";
 import { Button3D, Sheet } from "../ui/index.js";
 
@@ -30,7 +31,7 @@ export default function SectionDivider({ n = 1, name = "Antigo Testamento", unit
             const complete = done === total;
             return (
               <li key={u.id}>
-                <button type="button" onClick={() => { setOpen(false); onOpenChapter && onOpenChapter(u, ui); }}
+                <button type="button" onClick={() => { feel("tap"); setOpen(false); onOpenChapter && onOpenChapter(u, ui); }}
                   className="card-interactive flex w-full items-center gap-3 p-3 text-left hover:bg-raised">
                   <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-white" style={{ background: p.base, boxShadow: `0 3px 0 ${p.shadow}` }}>
                     <Icon name={complete ? "check" : "star"} size={22} tone="mono" />

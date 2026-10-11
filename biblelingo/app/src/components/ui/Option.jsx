@@ -2,14 +2,13 @@
 // Option: altura mínima 56 (52 + 4), raio 12, borda 2 + 4 --color-line, padding 0 16, text-sentence 19/500 à esquerda.
 //   Props: index (0-based: data-opt={index+1}), value (data-value), state "idle" | "selected" | "correct" | "wrong" | "disabled",
 //          onSelect(value), shortcut (mostra o número 1 a 4 em caixa 24x24 à direita), cols (1 ou 2: em 2 colunas a desabilitada fica a 70%),
-//          children (rótulo) · role="radio" aria-checked; toque: afunda 2 px, sfx("select"), haptic("select"); wrong: SHAKE; correct: PULSE
+//          children (rótulo) · role="radio" aria-checked; toque: afunda 2 px, select + haptic (tocar a já selecionada não a desmarca, então o som é o mesmo); wrong: SHAKE; correct: PULSE
 // OptionGroup: role="radiogroup", 1 coluna (358) para frases, 2 colunas (174) para palavras soltas, gap 10, cascata STAGGER.options.
 // ImageCard: 174x140, raio 16, ilustração 64 a 80 (emoji de conteúdo em span.emoji até haver arte), legenda text-body 17/500.
 // Exemplo: <OptionGroup cols={1}>{opts.map((o, i) => <Option key={o.value} index={i} value={o.value} state={...} onSelect={pick}>{o.label}</Option>)}</OptionGroup>
 import { motion } from "motion/react";
 import { SPRING, STAGGER, SHAKE, PULSE, list, item } from "../../core/motion.js";
-import { sfx } from "../../core/sfx.js";
-import { haptic } from "../../core/haptics.js";
+import { feel } from "../../core/sfx.js";
 
 const STATE = {
   idle: "border-line bg-page text-ink hover:bg-raised",
@@ -34,8 +33,7 @@ export default function Option({ index = 0, value, state = "idle", onSelect, sho
   const interactive = state === "idle" || state === "selected";
   const click = () => {
     if (!interactive) return;
-    sfx("select");
-    haptic("select");
+    feel("select");
     onSelect && onSelect(value);
   };
   return (
@@ -62,7 +60,7 @@ export function OptionGroup({ cols = 1, label, className = "", children, ...rest
 
 export function ImageCard({ index = 0, value, icon, image, state = "idle", onSelect, className = "", children, ...rest }) {
   const interactive = state === "idle" || state === "selected";
-  const click = () => { if (!interactive) return; sfx("select"); haptic("select"); onSelect && onSelect(value); };
+  const click = () => { if (!interactive) return; feel("select"); onSelect && onSelect(value); };
   return (
     <motion.button type="button" role="radio" aria-checked={state === "selected" || state === "correct"} aria-disabled={!interactive || undefined}
       data-opt={index + 1} data-value={value} onClick={click} variants={item(SPRING.settle, 10)}

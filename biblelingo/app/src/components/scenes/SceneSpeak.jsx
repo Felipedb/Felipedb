@@ -71,7 +71,7 @@ export default function SceneSpeak({ ex, checked = false, fb = null }) {
         <MicButton recording={listening} onClick={onMic} disabled={checked} error={error} className="mt-6" />
         <p className="sr-only">{line.pt}</p>
         {!checked && (
-          <Button3D variant="ghost" tone="muted" size="md" sound={false} className="mt-6" onClick={() => { if (!session.checked) skipSpeaking(); }}>
+          <Button3D variant="ghost" tone="muted" size="md" className="mt-6" onClick={() => { if (!session.checked) skipSpeaking(); }}>
             Não posso falar agora
           </Button3D>
         )}

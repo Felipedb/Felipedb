@@ -57,6 +57,7 @@ function RevealText({ text, char, durationMs, instant = false, onDone }) {
 
 function SpeechBeat({ beat, ch, hero, showName, current, onRevealed }) {
   const [revealed, setRevealed] = useState(!current);
+  useEffect(() => { if (current) sfx("bubble"); }, []); // eslint-disable-line react-hooks/exhaustive-deps
   const dur = useMemo(() => {
     const clip = clipDuration(beat.en, ch && ch.key);
     return clip ? clip * 1000 : 60 * words(beat.en).length;

@@ -12,7 +12,7 @@ import { recordLesson, learnedVocab } from "../core/session.js";
 import { speak, stopClip } from "../core/audio.js";
 import { shuffle } from "../core/util.js";
 import { SPRING, list, item } from "../core/motion.js";
-import { sfx } from "../core/sfx.js";
+import { sfx, feel } from "../core/sfx.js";
 import { haptic } from "../core/haptics.js";
 import { Button3D, MatchCell, CountUp } from "../components/ui/index.js";
 import Icon from "../components/Icon.jsx";
@@ -56,6 +56,8 @@ export default function Madness({ onExit }) {
     const t = setInterval(() => setTimeLeft((v) => v - 1), 1000);
     return () => clearInterval(t);
   }, [end, game]);
+  // Abertura (e "Jogar de novo"): quatro pops subindo (SFX_SPEC 2.4); absorve o clique do card que abriu o jogo
+  useEffect(() => { feel("madness-start"); }, [game]); // eslint-disable-line
   // Últimos 10 s: tick e haptic por segundo
   useEffect(() => {
     if (end || timeLeft > 10 || timeLeft <= 0) return;
@@ -79,7 +81,7 @@ export default function Madness({ onExit }) {
   }, [timeLeft]); // eslint-disable-line
   useEffect(() => {
     if (!end || !end.record || reduce) return;
-    const t = setTimeout(() => { try { confettiFx({ particleCount: 90, spread: 80, origin: { y: 0.4 }, ticks: 200 }); } catch (e) { /* sem confete */ } }, 300);
+    const t = setTimeout(() => { sfx("mission"); try { confettiFx({ particleCount: 90, spread: 80, origin: { y: 0.4 }, ticks: 200 }); } catch (e) { /* sem confete */ } }, 300);
     return () => clearTimeout(t);
   }, [end]); // eslint-disable-line
   useEffect(() => () => stopClip(), []);
@@ -88,13 +90,12 @@ export default function Madness({ onExit }) {
 
   const click = (cell) => {
     if (end || endedRef.current || matched.has(cell.id)) return;
-    sfx("select");
-    haptic("select");
     if (cell.side === "en") speak(cell.label);
-    if (!selected) { setSelected(cell.id); return; }
-    if (selected === cell.id) { setSelected(null); return; }
+    // Um som por toque: select, deselect na mesma célula, pair(i) no par certo, pair-wrong no errado
+    if (!selected) { feel("select"); setSelected(cell.id); return; }
+    if (selected === cell.id) { feel("deselect"); setSelected(null); return; }
     const sel = cells.find((c) => c.id === selected);
-    if (sel.side === cell.side) { setSelected(cell.id); return; }
+    if (sel.side === cell.side) { feel("select"); setSelected(cell.id); return; }
     if (sel.key === cell.key) {
       const m = new Set(matched); m.add(sel.id); m.add(cell.id);
       setMatched(m);
@@ -102,8 +103,7 @@ export default function Madness({ onExit }) {
       setTimeout(() => setFresh((f) => { const n = new Set(f); n.delete(sel.id); n.delete(cell.id); return n; }), 300);
       const ns = scoreRef.current + 1;
       scoreRef.current = ns; setScore(ns);
-      sfx("pop", ns % 8);
-      haptic("pair");
+      feel("pair", (ns - 1) % 7);
       if (m.size === cells.length) setTimeout(() => {
         if (endedRef.current) return;
         setMatched(new Set()); setFresh(new Set()); setRound((r) => r + 1);
@@ -113,8 +113,7 @@ export default function Madness({ onExit }) {
       setTimeout(() => setWrongPair([]), 400);
       missesRef.current++; setMisses(missesRef.current);
       setTimeLeft((t) => Math.max(1, t - 2));
-      sfx("wrong");
-      haptic("wrong");
+      feel("pair-wrong");
       setFlash(true); setTimeout(() => setFlash(false), 120);
       const pid = Date.now() + Math.random();
       setPenalties((p) => [...p, pid]);

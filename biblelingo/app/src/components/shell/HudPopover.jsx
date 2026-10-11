@@ -1,12 +1,19 @@
 // HudPopover (VISUAL_SPEC 5.7): painel de 358 sob o item do HUD, raio 16, borda 2 px --color-line, fundo --color-page,
 // seta de 10 px sob o item, padding 16; entra com SPRING.pop (origem na seta), sai em 120 ms; fecha ao tocar fora ou com Escape.
 // Props: open (bool), arrowX (px, centro do item em relação à borda esquerda do painel), onClose, label (aria-label), children
+// Som: sheet-open / sheet-close a 0,7, sopros de acompanhamento do tap do item do HUD (sem haptic).
 import { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { SPRING } from "../../core/motion.js";
+import { sfx } from "../../core/sfx.js";
 
 export default function HudPopover({ open, arrowX = 0, onClose, label, children }) {
   const ref = useRef(null);
+  const wasOpen = useRef(false);
+  useEffect(() => {
+    if (!!open !== wasOpen.current) sfx(open ? "sheet-open" : "sheet-close", { volume: 0.7 });
+    wasOpen.current = !!open;
+  }, [open]);
   useEffect(() => {
     if (!open) return undefined;
     const onKey = (e) => { if (e.key === "Escape") onClose && onClose(); };

@@ -1,38 +1,38 @@
-// Haptics do React (VISUAL_SPEC 8.1 e 8.2): um evento, um padrão.
+// Haptics do React (SFX_SPEC 2 e 6.2; VISUAL_SPEC 8): um evento, um padrão.
+// O mapa vem do catálogo sonoro (tools/sfx/sounds.json via core/sfxCatalog.js): cada som com `haptic` vira uma entrada,
+// então som e vibração nunca divergem. Acompanhamentos (sheet-open, sheet-close, swoosh) e sons sem toque (start, coin,
+// stat, bless, newword, bubble) não vibram. Nomes legados e aliases do catálogo continuam aceitos.
 // Preferência própria `state.haptics` (ligada por padrão), independente de reduced motion.
 // No-op seguro onde navigator.vibrate não existe (iOS Safari): o visual nunca depende do haptic.
+// Para tocar som e haptic juntos use feel(name, arg) de core/sfx.js.
 import { state } from "./store.js";
+import { SFX_SOUNDS, SFX_ALIASES } from "./sfxCatalog.js";
+
+const FROM_CATALOG = Object.fromEntries(
+  Object.entries(SFX_SOUNDS).filter(([, s]) => s.haptic != null).map(([name, s]) => [name, s.haptic])
+);
 
 export const HAPTICS = {
-  tap: 8,                         // navegar aba, abrir card, popover, sheet, tocar nó
-  select: 8,                      // selecionar opção, célula de pares
-  tile: 8,                        // pegar ou devolver peça
-  correct: 20,                    // verificar certo
-  combo: [20, 30, 40],            // combo múltiplo de 5
-  wrong: [50, 30, 50],            // verificar errado
-  "heart-lost": [30, 20, 60],     // perder coração
-  "heart-lost-all": [80, 40, 80], // sem corações (HeartsSheet)
-  pair: 12,                       // par certo (match, madness)
-  star: 15,                       // estrela do Result
-  finish: [40, 30, 40, 30, 80],   // fim de lição
-  chest: [30, 40, 60],            // baú / moeda
-  streak: [40, 30, 40, 30, 120],  // ofensiva
-  levelup: [40, 30, 40, 30, 120], // coroa / nível
-  tick: 6,                        // últimos 10 s do Madness
-  gong: [40, 30, 80],             // fim do Madness
-  mission: 8,                     // missão concluída
-  toast: 8,                       // snackbar
-  toggle: 8,                      // toggle
+  ...FROM_CATALOG,
+  toggle: 8,    // legado: toggle sem direção (o catálogo tem toggle-on / toggle-off)
 };
 
 export function hapticsEnabled() {
   return state.haptics !== false;
 }
 
+// Padrão de um nome (aceita aliases do catálogo: heart-lost-all, pop, sparkle...); undefined quando o evento não vibra
+export function hapticPattern(name) {
+  if (Array.isArray(name) || typeof name === "number") return name;
+  if (Object.prototype.hasOwnProperty.call(HAPTICS, name)) return HAPTICS[name];
+  const alias = SFX_ALIASES[name];
+  return alias != null ? HAPTICS[alias] : undefined;
+}
+
 // haptic("correct") · haptic([10, 20]) também é aceito para padrões pontuais
 export function haptic(name) {
   if (!hapticsEnabled()) return false;
-  const pattern = Array.isArray(name) || typeof name === "number" ? name : HAPTICS[name];
+  const pattern = hapticPattern(name);
   if (pattern == null) return false;
   try {
     if (typeof navigator !== "undefined" && typeof navigator.vibrate === "function") return navigator.vibrate(pattern);

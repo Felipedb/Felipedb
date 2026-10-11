@@ -11,8 +11,7 @@
 import { useMemo, useState } from "react";
 import { motion } from "motion/react";
 import { SPRING } from "../../core/motion.js";
-import { sfx } from "../../core/sfx.js";
-import { haptic } from "../../core/haptics.js";
+import { feel } from "../../core/sfx.js";
 
 const TILE = "inline-flex h-11 items-center rounded-md border-2 border-b-4 px-4 text-sentence leading-none whitespace-nowrap";
 const STATE = {
@@ -58,15 +57,13 @@ export default function WordBankCore({ bank = [], chosen = [], onChange, checked
   const uid = useMemo(() => ++seq, []);
   const pick = (i) => {
     if (checked || chosen.includes(i)) return;
-    sfx("tile", chosen.length);
-    haptic("tile");
+    feel("tile", chosen.length); // nota de madeira que sobe com a posição na frase
     onPick && onPick(bank[i]);
     onChange && onChange([...chosen, i]);
   };
   const unpick = (i) => {
     if (checked) return;
-    sfx("tile", 0);
-    haptic("tile");
+    feel("tile-return");
     onUnpick && onUnpick(bank[i]);
     onChange && onChange(chosen.filter((j) => j !== i));
   };

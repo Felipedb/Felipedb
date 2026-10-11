@@ -6,13 +6,14 @@
 // Props: open, onClose, title (text-title), children, footer (slot fixo), label (aria-label), closeButton (X 36 no canto), className,
 //   handle: "light" quando o conteúdo começa com um hero (alça branca a 70% sobre a imagem; padrão --color-line / #52656d)
 //   A alça fica absoluta a 8 px do topo do painel, acima do conteúdo, para um hero poder encostar no raio superior (-mt-6).
+//   sound: true (padrão) toca sheet-open ao abrir e sheet-close ao fechar (overlay, alça, arrasto, Escape, X), sopros de
+//   acompanhamento sem clique nem haptic (o botão que abriu já tocou); false deixa mudo (quem abre sem toque toca o próprio som).
 // ConfirmSheet: title, text, confirmLabel, cancelLabel, onConfirm, onCancel, danger (CTA vermelho).
 // Exemplo: <Sheet open={open} onClose={close} title="Você ficou sem corações" footer={<Button3D block>...</Button3D>}>...</Sheet>
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { SPRING } from "../../core/motion.js";
 import { sfx } from "../../core/sfx.js";
-import { haptic } from "../../core/haptics.js";
 import Icon from "../Icon.jsx";
 import Button3D from "./Button3D.jsx";
 
@@ -31,8 +32,6 @@ function useLarge() {
 function useDialog(open, onClose, panelRef) {
   useEffect(() => {
     if (!open) return;
-    sfx("tap");
-    haptic("tap");
     const prevFocus = document.activeElement;
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -57,10 +56,16 @@ function useDialog(open, onClose, panelRef) {
   }, [open]); // eslint-disable-line
 }
 
-export default function Sheet({ open, onClose, title, children, footer, label, closeButton = false, handle = "default", className = "" }) {
+export default function Sheet({ open, onClose, title, children, footer, label, closeButton = false, handle = "default", className = "", sound = true }) {
   const lg = useLarge();
   const panelRef = useRef(null);
   useDialog(open, onClose, panelRef);
+  // Sopro de acompanhamento ao abrir e ao fechar (SFX_SPEC 6.3), no frame em que a animação começa
+  const wasOpen = useRef(false);
+  useEffect(() => {
+    if (sound !== false && !!open !== wasOpen.current) sfx(open ? "sheet-open" : "sheet-close");
+    wasOpen.current = !!open;
+  }, [open]); // eslint-disable-line react-hooks/exhaustive-deps
   const Panel = lg ? Modal : BottomSheet;
   return (
     <AnimatePresence>

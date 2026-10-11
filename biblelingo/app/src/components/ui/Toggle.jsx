@@ -1,17 +1,15 @@
 // Toggle (VISUAL_SPEC 5.27): 50x30, raio 15; trilho --color-line -> --color-primary; knob 26 px branco com sombra
-// 0 2px 0 rgba(0,0,0,.15), deslocamento por layout com SPRING.snap; role="switch" aria-checked; sfx("tap") + haptic("select").
+// 0 2px 0 rgba(0,0,0,.15), deslocamento por layout com SPRING.snap; role="switch" aria-checked; toggle-on / toggle-off + haptic 8 (feel).
 // Props: checked, onChange(bool), label (aria-label), disabled, className
 // Exemplo: <Toggle checked={app.sound !== false} onChange={(v) => { state.sound = v; save(); }} label="Efeitos sonoros" />
 import { motion } from "motion/react";
 import { SPRING } from "../../core/motion.js";
-import { sfx } from "../../core/sfx.js";
-import { haptic } from "../../core/haptics.js";
+import { feel } from "../../core/sfx.js";
 
 export default function Toggle({ checked = false, onChange, label, disabled = false, className = "", ...rest }) {
   const flip = () => {
     if (disabled) return;
-    sfx("tap");
-    haptic("select");
+    feel(checked ? "toggle-off" : "toggle-on");
     onChange && onChange(!checked);
   };
   return (

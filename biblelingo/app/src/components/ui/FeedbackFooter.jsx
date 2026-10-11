@@ -7,7 +7,9 @@
 // Contratos (10.1): o CTA é o PRIMEIRO button.btn-3d dentro de <footer>; o secundário usa .btn-outline; texto do CTA em caixa normal.
 // Props:
 //   fb        null | { ok, praise, line, lineNode?, explain? } · line: tradução (acerto) ou frase correta (erro); lineNode sobrepõe line
-//   cta       { label, onClick, disabled, loading }   (label "Verificar" | "Continuar" | "Entendi" em caixa normal; uppercase por CSS)
+//   cta       { label, onClick, disabled, loading, sound }   (label "Verificar" | "Continuar" | "Entendi" em caixa normal; uppercase por CSS)
+//             Som (SFX_SPEC 2.1): VERIFICAR é mudo (o acerto ou o erro é a resposta, no mesmo frame); CONTINUAR, ENTENDI e os
+//             demais rótulos tocam tap-soft. `sound` sobrepõe a regra (false | "tap" | "tap-soft").
 //   secondary { label, onClick, icon }  botão outline 8 px acima do CTA (EXPLIQUE MINHA RESPOSTA, PRATICAR PRONÚNCIA)
 //   ghost     { label, onClick }        link ghost no slot de 36 px (NÃO POSSO OUVIR AGORA), só sem feedback
 //   share     { text, pt } ou função   compartilha pela Web Share API; onFlag: reportar exercício
@@ -16,6 +18,7 @@
 import { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { SPRING } from "../../core/motion.js";
+import { feel } from "../../core/sfx.js";
 import Icon from "../Icon.jsx";
 import Button3D from "./Button3D.jsx";
 
@@ -45,6 +48,8 @@ export default function FeedbackFooter({ fb = null, cta, secondary = null, ghost
   const ok = !!(fb && fb.ok);
   const tone = fb ? (ok ? "text-green-text" : "text-red-text") : "";
   const bg = fb ? (ok ? "bg-green-soft dark:bg-raised" : "bg-red-soft dark:bg-raised") : "bg-page";
+  // VERIFICAR (sem feedback) não toca clique; com feedback ou em outros rótulos (CONTINUAR de palavra nova, interstício) toca tap-soft
+  const ctaSound = cta && cta.sound !== undefined ? cta.sound : (fb || !/^\s*verificar\s*$/i.test(String((cta && cta.label) || ""))) ? "tap-soft" : false;
 
   return (
     <footer ref={ref} className={`fixed inset-x-0 bottom-0 z-40 px-4 pb-[calc(16px+env(safe-area-inset-bottom))] pt-4 ${bg} ${className}`}>
@@ -63,12 +68,12 @@ export default function FeedbackFooter({ fb = null, cta, secondary = null, ghost
                 </motion.h2>
                 <div className="flex shrink-0 items-center gap-1">
                   {share && (
-                    <button type="button" aria-label="Compartilhar frase" onClick={() => doShare(share, fb)} className="flex h-11 w-11 items-center justify-center rounded-md hover:bg-black/5">
+                    <button type="button" aria-label="Compartilhar frase" onClick={() => { feel("tap"); doShare(share, fb); }} className="flex h-11 w-11 items-center justify-center rounded-md hover:bg-black/5">
                       <Icon name="share" size={24} />
                     </button>
                   )}
                   {onFlag && (
-                    <button type="button" aria-label="Reportar este exercício" onClick={onFlag} className="flex h-11 w-11 items-center justify-center rounded-md hover:bg-black/5">
+                    <button type="button" aria-label="Reportar este exercício" onClick={() => { feel("tap"); onFlag(); }} className="flex h-11 w-11 items-center justify-center rounded-md hover:bg-black/5">
                       <Icon name="flag" size={24} />
                     </button>
                   )}
@@ -82,7 +87,7 @@ export default function FeedbackFooter({ fb = null, cta, secondary = null, ghost
             </motion.div>
           ) : ghost ? (
             <motion.div key="ghost" className="mb-6 flex h-9 items-center justify-center" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0.12 } }}>
-              <Button3D variant="ghost" tone="muted" size="md" onClick={ghost.onClick} sound={false}>{ghost.label}</Button3D>
+              <Button3D variant="ghost" tone="muted" size="md" onClick={ghost.onClick}>{ghost.label}</Button3D>
             </motion.div>
           ) : null}
         </AnimatePresence>
@@ -93,7 +98,7 @@ export default function FeedbackFooter({ fb = null, cta, secondary = null, ghost
           </Button3D>
         )}
         {cta && (
-          <Button3D variant={fb && !ok ? "danger" : "primary"} size="cta" block onClick={cta.onClick} disabled={cta.disabled} loading={cta.loading} sound={false}>
+          <Button3D variant={fb && !ok ? "danger" : "primary"} size="cta" block onClick={cta.onClick} disabled={cta.disabled} loading={cta.loading} sound={ctaSound}>
             {cta.label}
           </Button3D>
         )}

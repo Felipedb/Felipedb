@@ -58,7 +58,7 @@ export default function SpeakPrompt({ text, pt, char, recording = false, onMic, 
       {pt && <p className="sr-only">{pt}</p>}
       {children}
       {onSkip && (
-        <Button3D variant="ghost" tone="muted" size="md" onClick={onSkip} className="mt-6" sound={false}>Não posso falar agora</Button3D>
+        <Button3D variant="ghost" tone="muted" size="md" onClick={onSkip} className="mt-6">Não posso falar agora</Button3D>
       )}
     </div>
   );

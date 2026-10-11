@@ -8,8 +8,7 @@ import { useSessionVersion } from "../../core/useSession.js";
 import { blankRegex } from "../../core/util.js";
 import { speak } from "../../core/audio.js";
 import { SPRING, SHAKE, PULSE } from "../../core/motion.js";
-import { sfx } from "../../core/sfx.js";
-import { haptic } from "../../core/haptics.js";
+import { feel } from "../../core/sfx.js";
 import Option, { OptionGroup, ImageCard } from "../ui/Option.jsx";
 import Card from "../ui/Card.jsx";
 import { Gap } from "../ui/TextCard.jsx";
@@ -54,7 +53,7 @@ function Reading({ r, ch }) {
         )}
       </AnimatePresence>
       <div className="-ml-3 mt-1">
-        <Button3D variant="ghost" tone="blue" size="sm" onClick={() => setPt((v) => !v)} sound={false} aria-expanded={pt}>
+        <Button3D variant="ghost" tone="blue" size="sm" onClick={() => setPt((v) => !v)} aria-expanded={pt}>
           {pt ? "Ocultar tradução" : "Ver em português"}
         </Button3D>
       </div>
@@ -76,7 +75,7 @@ function WordChip({ index, value, state, onSelect, children }) {
   return (
     <motion.button type="button" role="radio" aria-checked={state === "selected" || state === "correct"} aria-disabled={!interactive || undefined}
       data-opt={index + 1} data-value={value}
-      onClick={() => { if (!interactive) return; sfx("select"); haptic("select"); onSelect(value); }}
+      onClick={() => { if (!interactive) return; feel("select"); onSelect(value); }}
       className={`inline-flex h-11 items-center rounded-md border-2 border-b-4 px-4 text-body font-bold ${CHIP[state] || CHIP.idle}`}
       animate={state === "wrong" ? { x: SHAKE.x } : state === "correct" ? { scale: PULSE.scale } : { x: 0, scale: 1 }}
       transition={state === "wrong" ? SHAKE.transition : state === "correct" ? PULSE.transition : SPRING.snap}

@@ -1,6 +1,7 @@
 // PathNode (VISUAL_SPEC 5.2): botão circular de 70 px, face --unit-color, sombra dura 0 8px 0 --unit-shadow, ícone SVG 32 em
 // --unit-ink; área de toque 86x86. Estados: locked (cinza, cadeado, popover cinza) | available (atual: anel segmentado, halo
-// e balão) | done (check) | scene-done (retrato 62 com anel do capítulo e badge check). Press: afunda 8 px, sfx tap, haptic select.
+// e balão) | done (check) | scene-done (retrato 62 com anel do capítulo e badge check). Press: afunda 8 px, som node + haptic
+// (bloqueado: deselect, "ainda não"); estrelas do nó concluído: pair(0..2); nó recém-desbloqueado: unlock aos 600 ms.
 // O wrapper mantém data-node / data-order / data-current e o primeiro <button> do wrapper é o nó (contrato 10.1). No nó
 // bloqueado o botão visual fica disabled (os drivers o ignoram) e um segundo botão transparente abre o popover cinza.
 // TrophyNode: nó dourado do fim do capítulo (anel de 5 coroas; 5/5 vira coroa com --glow-ring e selo "Lendário").
@@ -11,8 +12,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import { SPRING } from "../../core/motion.js";
-import { sfx } from "../../core/sfx.js";
-import { haptic } from "../../core/haptics.js";
+import { sfx, feel } from "../../core/sfx.js";
 import Icon from "../Icon.jsx";
 import { SegmentRing, Avatar, Chest, CharacterStage } from "../ui/index.js";
 import NodeBalloon from "./NodeBalloon.jsx";
@@ -25,7 +25,7 @@ const ENTER = { initial: { opacity: 0, y: 12 }, whileInView: { opacity: 1, y: 0 
 function CelebrationStars({ n }) {
   const [show, setShow] = useState(true);
   useEffect(() => {
-    const ts = [0, 1, 2].map((i) => setTimeout(() => sfx("pop", i), 300 + i * 100));
+    const ts = [0, 1, 2].map((i) => setTimeout(() => sfx("pair", i), 300 + i * 100));
     const t = setTimeout(() => setShow(false), 1700);
     return () => { clearTimeout(t); ts.forEach(clearTimeout); };
   }, []);
@@ -54,10 +54,15 @@ export default function PathNode({
   const locked = status === "locked";
   const sceneDone = status === "scene-done";
   const open = () => {
-    sfx("tap");
-    haptic("select");
+    feel(locked ? "deselect" : "node");
     onOpen && onOpen(btnRef.current);
   };
+  // Nó atual novo (o anterior acabou de ser concluído): o cadeado abre quando o anel entra
+  useEffect(() => {
+    if (!isCurrent || !delayed) return undefined;
+    const t = setTimeout(() => feel("unlock"), 600);
+    return () => clearTimeout(t);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   const pop = celebrate && !reduce ? { scale: [0.6, 1.15, 1] } : { scale: 1 };
 
   return (
@@ -106,8 +111,7 @@ export function TrophyNode({ x = 0, done = false, crowns = 0, max = 5, label, on
   const btnRef = useRef(null);
   const legendary = done && crowns >= max;
   const open = () => {
-    sfx("tap");
-    haptic("select");
+    feel(done ? "node" : "deselect");
     onOpen && onOpen(btnRef.current);
   };
   return (

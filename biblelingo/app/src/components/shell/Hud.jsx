@@ -9,8 +9,7 @@ import { state } from "../../core/store.js";
 import { COURSE, flatLessons, currentLessonId, unitSteps } from "../../core/content.js";
 import { ensureDaily, startLesson, startQuickPractice } from "../../core/session.js";
 import { today, MAX_HEARTS } from "../../core/util.js";
-import { sfx } from "../../core/sfx.js";
-import { haptic } from "../../core/haptics.js";
+import { feel } from "../../core/sfx.js";
 import Icon from "../Icon.jsx";
 import { Button3D, ProgressBar, StreakWeek } from "../ui/index.js";
 import HudPopover from "./HudPopover.jsx";
@@ -125,8 +124,7 @@ export default function Hud({ inline = false, className = "" }) {
   }, [hearts]);
 
   const toggle = (id) => {
-    sfx("tap");
-    haptic("tap");
+    feel("tap");
     if (open === id) { setOpen(null); return; }
     const el = refs.current[id], box = wrap.current;
     if (el && box) {

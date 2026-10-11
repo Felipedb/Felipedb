@@ -99,6 +99,7 @@ function ResultView({ r, onContinue }) {
       if (r.earned === 3) ts.push(setTimeout(() => { try { confettiFx({ particleCount: 80, spread: 90, startVelocity: 40, origin: { y: 0.4 }, colors: ["#ffc800", "#ffe066", "#ffffff"] }); } catch (e) { /* sem confete */ } }, 600));
       STAR_AT.forEach((ms, i) => { if (i < r.earned) ts.push(setTimeout(() => { sfx("star", i); haptic("star"); }, ms)); });
     }
+    ts.push(setTimeout(() => sfx("bless"), reduce ? 0 : 1600)); // pad quente 300 ms antes da bênção falada
     ts.push(setTimeout(() => speak(r.blessing.t, { char: r.char }), reduce ? 300 : 1900));
     return () => ts.forEach(clearTimeout);
   }, []); // eslint-disable-line
@@ -161,7 +162,7 @@ function ResultView({ r, onContinue }) {
         {stage >= 2 && (
           <motion.div className="flex gap-3.5" variants={list(STAGGER.cards)} initial="hidden" animate="show">
             {cards.map((c, i) => (
-              <motion.div key={c.key} variants={item(SPRING.settle, 24)} onAnimationStart={() => sfx("pop", i)}>
+              <motion.div key={c.key} variants={item(SPRING.settle, 24)} onAnimationStart={() => setTimeout(() => sfx("stat", i), i * STAGGER.cards * 1000)}>
                 {/* O pulso do XP ao abrir o baú fica em um wrapper próprio, para não sobrepor a variante de entrada do card */}
                 <motion.div animate={c.key === "xp" && r.chest ? { scale: [1, 1.15, 1] } : { scale: 1 }} transition={{ duration: 0.3 }}>
                   <StatCard ref={c.ref} label={c.label} value={c.value} format={c.format} icon={c.icon} color={c.color} duration={c.key === "xp" && r.chest ? 0.3 : 0.8} />

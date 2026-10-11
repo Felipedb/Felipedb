@@ -1,0 +1,47 @@
+// GERADO por app/scripts/gen-sfx-catalog.mjs a partir de tools/sfx/sounds.json (não editar à mão; rode o script).
+// Catálogo de runtime da camada sonora v2 (SFX_SPEC 3 e 6.1): família de mixagem (role), acompanhamento (companion),
+// variantes [nome no sprite, transposição em semitons], regra de índice em semitons a partir da nota base
+// (steps; pick nearest-variant ou rate; max = correção máxima por playbackRate), haptic e duração do arquivo (ms).
+export const SFX_VERSION = "2.1";
+export const SFX_MIX = {"masterGain":0.9,"families":{"ui":-4,"exercise":-2,"feedback":0,"transition":-6,"celebration":0}};
+export const SFX_ALIASES = {"pop":"pair","sparkle":"mission","card":"tap","popover-open":"sheet-open","popover-close":"sheet-close","heart-lost-all":"heart-empty","madness-pair":"pair","madness-wrong":"pair-wrong","node-done":"pair"};
+export const SFX_SOUNDS = {
+  "tap": {"role":"ui","variants":[["tap",0]],"haptic":8,"ms":30},
+  "tap-soft": {"role":"ui","variants":[["tap-soft",0]],"haptic":8,"ms":45},
+  "select": {"role":"ui","variants":[["select",0]],"haptic":8,"ms":80},
+  "deselect": {"role":"ui","variants":[["deselect",0]],"haptic":6,"ms":70},
+  "toggle-on": {"role":"ui","variants":[["toggle-on",0]],"haptic":8,"ms":60},
+  "toggle-off": {"role":"ui","variants":[["toggle-off",0]],"haptic":8,"ms":60},
+  "tab": {"role":"ui","variants":[["tab",0]],"haptic":8,"ms":55},
+  "node": {"role":"ui","variants":[["node",0]],"haptic":8,"ms":80},
+  "sheet-open": {"role":"ui","companion":true,"variants":[["sheet-open",0]],"haptic":null,"ms":180},
+  "sheet-close": {"role":"ui","companion":true,"variants":[["sheet-close",0]],"haptic":null,"ms":160},
+  "toast": {"role":"ui","variants":[["toast",0]],"haptic":8,"ms":240},
+  "bubble": {"role":"ui","variants":[["bubble",0]],"haptic":null,"ms":120},
+  "tile": {"role":"exercise","variants":[["tile-1",0],["tile-2",4],["tile-3",9]],"index":{"steps":[0,2,4,7,9,12],"pick":"nearest-variant","max":3},"haptic":8,"ms":120},
+  "tile-return": {"role":"exercise","variants":[["tile-return",0]],"haptic":8,"ms":95},
+  "pair": {"role":"exercise","variants":[["pair-1",0],["pair-2",5],["pair-3",9]],"index":{"steps":[0,2,5,7,9,12,14],"pick":"nearest-variant","max":3},"haptic":12,"ms":155},
+  "pair-wrong": {"role":"exercise","variants":[["pair-wrong",0]],"haptic":[30,20,30],"ms":170},
+  "start": {"role":"feedback","variants":[["start",0]],"haptic":null,"ms":350},
+  "correct": {"role":"feedback","variants":[["correct-1",0],["correct-2",2],["correct-3",-3]],"haptic":20,"ms":430},
+  "combo": {"role":"feedback","variants":[["combo",0]],"haptic":[20,30,40],"ms":600},
+  "wrong": {"role":"feedback","variants":[["wrong",0]],"haptic":[50,30,50],"ms":400},
+  "heart-lost": {"role":"feedback","variants":[["heart-lost",0]],"haptic":[30,20,60],"ms":250},
+  "heart-empty": {"role":"feedback","variants":[["heart-empty",0]],"haptic":[80,40,80],"ms":700},
+  "swoosh": {"role":"transition","companion":true,"variants":[["swoosh",0]],"haptic":null,"ms":180},
+  "newword": {"role":"transition","variants":[["newword",0]],"haptic":null,"ms":455},
+  "finish": {"role":"celebration","variants":[["finish",0]],"haptic":[40,30,40,30,80],"ms":1400},
+  "star": {"role":"celebration","variants":[["star-1",0],["star-2",4],["star-3",7]],"index":{"steps":[0,4,7],"pick":"nearest-variant","max":0},"haptic":15,"ms":365},
+  "stat": {"role":"celebration","variants":[["stat",0]],"index":{"steps":[0,4,7],"pick":"rate","max":7},"haptic":null,"ms":80},
+  "chest": {"role":"celebration","variants":[["chest",0]],"haptic":[30,40,60],"ms":745},
+  "coin": {"role":"celebration","variants":[["coin-1",0],["coin-2",3],["coin-3",5]],"haptic":null,"ms":235},
+  "bless": {"role":"celebration","variants":[["bless",0]],"haptic":null,"ms":500},
+  "streak": {"role":"celebration","variants":[["streak",0]],"haptic":[40,30,40,30,120],"ms":800},
+  "goal": {"role":"celebration","variants":[["goal",0]],"haptic":[30,40,60],"ms":665},
+  "levelup": {"role":"celebration","variants":[["levelup",0]],"haptic":[40,30,40,30,120],"ms":900},
+  "mission": {"role":"celebration","variants":[["mission",0]],"haptic":8,"ms":495},
+  "unlock": {"role":"celebration","variants":[["unlock",0]],"haptic":8,"ms":505},
+  "madness-start": {"role":"celebration","variants":[["madness-start",0]],"haptic":[20,30,20],"ms":500},
+  "tick": {"role":"feedback","variants":[["tick",0]],"haptic":6,"ms":40},
+  "gong": {"role":"celebration","variants":[["gong",0]],"haptic":[40,30,80],"ms":1500},
+};

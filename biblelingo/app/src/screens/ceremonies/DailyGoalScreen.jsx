@@ -1,5 +1,5 @@
 // DailyGoalScreen (VISUAL_SPEC 6.4 e 7.3 "Meta diária"): SegmentRing 160 de 10 px #ffc800 indo do percentual anterior a 100%
-// (0 a 900 ms), check pop + sfx sparkle (900 ms), "Meta diária batida!", "20 de 20 XP", missões concluídas nesta lição em lista
+// (0 a 900 ms), check pop + sfx goal (900 ms), "Meta diária batida!", "20 de 20 XP", missões concluídas nesta lição em lista
 // com check pop e pílula "+5 XP" subindo (1000 ms+), CTA (1500 ms). Aparece só quando a meta foi batida nesta lição.
 import { useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
@@ -14,7 +14,7 @@ const QUEST_ICON = { xp: "bolt", lessons: "book", perfect: "star", combo: "flame
 
 export default function DailyGoalScreen({ from = 0, goal = 20, xp = 20, missions = [], onContinue }) {
   useEffect(() => {
-    const t = setTimeout(() => { sfx("sparkle"); haptic("mission"); }, 900);
+    const t = setTimeout(() => { sfx("goal"); haptic("goal"); }, 900);
     return () => clearTimeout(t);
   }, []);
   return (

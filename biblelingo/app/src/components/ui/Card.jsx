@@ -1,6 +1,6 @@
 // Card (VISUAL_SPEC 5.9): fundo --color-page, borda 2 px --color-line, raio 16, sem sombra.
 // Props:
-//   variant  "static" (.card) | "interactive" (.card-interactive: borda inferior 4, afunda 2 px, sfx tap)
+//   variant  "static" (.card) | "interactive" (.card-interactive: borda inferior 4, afunda 2 px, tap + haptic)
 //            | "parchment" (motivo Pergaminho, no máximo um por tela) | "unit" (fundo --unit-soft, borda --unit-color a 40%)
 //            | "hero" (imagem com gradiente inferior para a página)
 //   padding  "md" (16) | "lg" (24) | "none"   · stripe: faixa esquerda de 8 px na cor do capítulo (variant unit)
@@ -10,7 +10,7 @@
 //          <CardList><CardItem>...</CardItem></CardList>  (cascata com STAGGER.cards)
 import { motion } from "motion/react";
 import { SPRING, STAGGER, list, item } from "../../core/motion.js";
-import { sfx } from "../../core/sfx.js";
+import { feel } from "../../core/sfx.js";
 
 const PAD = { md: "p-4 lg:p-6", lg: "p-6", none: "" };
 
@@ -19,7 +19,7 @@ export default function Card({ variant = "static", padding = "md", stripe = fals
   if (variant === "interactive") {
     const Tag = motion[as || "button"];
     return (
-      <Tag type={!as || as === "button" ? "button" : undefined} onClick={(e) => { sfx("tap"); onClick && onClick(e); }}
+      <Tag type={!as || as === "button" ? "button" : undefined} onClick={(e) => { feel("tap"); onClick && onClick(e); }}
         className={`card-interactive text-left hover:bg-raised ${pad} ${className}`}
         whileTap={{ y: 2, borderBottomWidth: 2 }} transition={SPRING.snap} {...rest}>
         {children}

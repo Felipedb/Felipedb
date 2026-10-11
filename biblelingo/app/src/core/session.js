@@ -1,14 +1,14 @@
 // Máquina de estados da lição — porta fiel do fluxo de app.js (checkAnswer, adaptNext,
 // finishLesson, retomada, práticas). A UI (React) só lê `session` e chama as ações.
 import { state, save, ensureDay } from "./store.js";
-import { shuffle, buzz, MAX_HEARTS, XP_PER_LESSON, XP_PERFECT_BONUS, today, daysBetween, PRAISES } from "./util.js";
+import { shuffle, MAX_HEARTS, XP_PER_LESSON, XP_PERFECT_BONUS, today, daysBetween, PRAISES } from "./util.js";
 import { flatLessons, lessonUnlocked, SCENE_BY_ID, castChar, pickCharacter, buildCast, sentenceVocab, allVocab, SCENES, COURSE, unitVocab } from "./content.js";
 import { recordWord, weakestWords } from "./sr.js";
 import { EX_MAKE, exKey, capOf, buildExercises, spreadNeighbors, listenMuted, LISTEN_TYPES, exNearWords, EX_RANK, setDistractUnit } from "./builder.js";
 import { buildSceneExercises, sceneReplyOptions, sceneBank } from "./sceneBuilder.js";
 import { prepareExercise, evaluate } from "./checker.js";
 import { stopClip } from "./audio.js";
-import { toast, sfx, ui } from "./events.js";
+import { toast, sfx, feel, ui } from "./events.js";
 
 export let session = null;
 
@@ -293,11 +293,10 @@ export function check() {
         if (session.combo >= 3) {
           if (session.bonus < 5) session.bonus++;
           if (session.combo % 5 === 0) {
-            sfx("combo");
+            feel("combo");
             session.feedback.comboPill = `🔥 ${session.combo} seguidas · +${session.bonus} XP de bônus`;
-          } else sfx("correct");
-        } else sfx("correct");
-        buzz(25);
+          } else feel("correct");
+        } else feel("correct");
       }
     } else {
       session.mistakes++;
@@ -306,11 +305,13 @@ export function check() {
       if (!session.reviewing) session.reviewQueue.push(cloneExercise(ex));
       saveResume();
       if (ex.word) { state.errors = state.errors || {}; state.errors[ex.word.en] = (state.errors[ex.word.en] || 0) + 1; }
-      sfx("wrong");
-      buzz([60, 40, 60]);
+      feel("wrong");
       if (!session.practice) {
+        const had = state.hearts;
         state.hearts = Math.max(0, state.hearts - 1);
         save();
+        // O coração do cabeçalho treme 150 ms depois do erro (Lesson.jsx): o som acompanha a animação
+        if (state.hearts < had) setTimeout(() => feel("heart-lost"), 150);
       }
       if (!session.practice && state.hearts <= 0) {
         session.locked = true;
